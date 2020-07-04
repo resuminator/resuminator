@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Resuminator",
+  "name": "Resuminator - Build Beautiful Single Page Resumes",
   "icons": [
     {
       "src": "favicon.ico",
