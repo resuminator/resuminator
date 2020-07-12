@@ -4,6 +4,7 @@ import Title from "./Title/Title";
 import ColoredLine from "../Line";
 import Contact from "./Title/Contact";
 import Experience from "./Experience";
+import Education from "./Education";
 
 const resumeStyle = {
   root: {
@@ -36,6 +37,7 @@ function Resume() {
       <ColoredLine color="#44318D" />
       <div style={resumeStyle.left}>
         <Experience />
+        <Education />
       </div>
     </div>
   );
