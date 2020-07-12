@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     fontSize: 12,
     color: "#44318D",
     fontWeight: 600,
-    marginBottom: 2
+    marginBottom: 2,
   },
   subtitle: {
     opacity: 0.6,
@@ -38,7 +38,8 @@ function EducationTitle(props) {
           {props.institute}
         </div>
         <div id="stream" className={classes.subtitle}>
-          {props.stream} {props.grade ? `, ${props.grade}` : null}
+          {props.degree} {props.stream}{" "}
+          {props.grade ? `, ${props.grade}` : null}
         </div>
       </div>
       <div id="right" className={classes.right}>
@@ -52,4 +53,4 @@ function EducationTitle(props) {
     </div>
   );
 }
-export default EducationTitle
+export default EducationTitle;

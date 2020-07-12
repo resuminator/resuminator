@@ -4,6 +4,7 @@ import experienceInfo from "../Data/ExperienceInfo";
 import JobTitle from "./Experience/JobTitle";
 import JobDescription from "./Experience/JobDescription";
 import Tags from "./Experience/Tags";
+import ColoredLine from "../Line";
 
 const useStyles = makeStyles({
   root: {
@@ -29,6 +30,7 @@ function Experience() {
       <div id="title" className={classes.title}>
         Experience
       </div>
+      <ColoredLine color="#44318D" opacity="0.5"/>
       <div>
         {experienceInfo.map((item) => (
           <React.Fragment key={item.id}>
