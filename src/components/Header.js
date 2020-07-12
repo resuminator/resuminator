@@ -5,7 +5,7 @@ const headerStyle = {
     fontFamily: "Karla",
     fontWeight: 200,
     width: "100%",
-    height: 50,
+    height: 80,
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
@@ -14,7 +14,6 @@ const headerStyle = {
   title: {
     fontSize: 18,
     marginLeft: 50,
-    marginTop: 20,
     color: "#000000",
   },
   subtitle: {
