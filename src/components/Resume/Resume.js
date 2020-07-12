@@ -11,6 +11,7 @@ const resumeStyle = {
     display: "flex",
     flexDirection: "column",
     //alignItems: "center",
+    zoom: 1.35,
     width: 595,
     height: 842,
     backgroundColor: "#fffffe",
