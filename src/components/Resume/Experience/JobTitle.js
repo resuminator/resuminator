@@ -35,10 +35,10 @@ function JobTitle(props) {
     <div className={classes.root}>
       <div id="left" className={classes.left}>
         <div id="title" className={classes.title}>
-          {props.title}
+          {props.company}
         </div>
         <div id="company" className={classes.subtitle}>
-          {props.company} {props.addInfo ? `(${props.addInfo})` : null}
+          {props.title} {props.addInfo ? `(${props.addInfo})` : null}
         </div>
       </div>
       <div id="right" className={classes.right}>

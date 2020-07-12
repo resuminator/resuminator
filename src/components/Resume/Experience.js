@@ -12,6 +12,7 @@ const useStyles = makeStyles({
     alignItems: "flex-start",
     justifyItems: "flex-start",
     margin: 20,
+    marginBottom: 0
   },
   title: {
     color: "#44318D",

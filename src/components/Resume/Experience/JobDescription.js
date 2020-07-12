@@ -20,7 +20,7 @@ const classes = useStyles();
 let desc = props.desc;
   return (
     <div className={classes.root}>
-      {desc.map((item, i) => {i++; return <div className={classes.item} key={i}> - {item}</div>})}
+      {desc.map((item, i) => {i++; return <li className={classes.item} key={i}>{item}</li>})}
     </div>
   );
 }
