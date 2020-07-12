@@ -1,8 +1,8 @@
 import React from "react";
 import "./Resume.css";
-import Title from "./Title";
+import Title from "./Title/Title";
 import ColoredLine from "../Line";
-import Contact from "./Contact";
+import Contact from "./Title/Contact";
 import Experience from "./Experience";
 
 const resumeStyle = {
