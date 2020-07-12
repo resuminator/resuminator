@@ -1,5 +1,5 @@
 import React from "react";
-import contactInfo from "../Data/ContactInfo";
+import contactInfo from "../../Data/ContactInfo";
 import ContactAt from "./ContactAt";
 import { makeStyles } from "@material-ui/core";
 
