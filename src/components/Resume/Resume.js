@@ -5,8 +5,12 @@ import ColoredLine from "../Line";
 import Contact from "./Title/Contact";
 import Experience from "./Experience";
 import Education from "./Education";
+import Certifications from "./Certifications";
+import { makeStyles } from "@material-ui/core";
+import Projects from "./Projects";
+import Skills from "./Skills";
 
-const resumeStyle = {
+const useStyles = makeStyles({
   root: {
     position: "relative",
     display: "flex",
@@ -21,23 +25,45 @@ const resumeStyle = {
     right: 0,
   },
   left: {
-    width: "60%",
+    //width: "60%",
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
     justifyItems: "flex-start",
   },
-};
+  right: {
+    width: "50%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyItems: "flex-start",
+  },
+  inside: {
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "space-between"
+  }
+});
 
-function Resume() {
+function Resume(props) {
+  const classes = useStyles();
+  const defaultConfig = `${classes.root} shadow`
+
   return (
-    <div style={resumeStyle.root} className="shadow">
+    <div className={props.config ? props.config : defaultConfig}>
       <Title name="Vivek Nigam" jobTitle="Software Developer | ML Engineer" />
       <Contact />
       <ColoredLine color="#44318D" />
-      <div style={resumeStyle.left}>
-        <Experience />
-        <Education />
+      <div id="resume-insider" className={classes.inside}>
+        <div className={classes.left}>
+          <Experience />
+          <Education />
+          <Certifications />
+        </div>
+        <div className={classes.right}>
+          <Skills />
+          <Projects />
+        </div>
       </div>
     </div>
   );
