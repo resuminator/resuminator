@@ -3,6 +3,7 @@ const educationInfo = [
     id: 1,
     institute: "Birla Institute of Technology, Mesra",
     location: "Ranchi, Jharkhand",
+    degree: "IMSc",
     stream: "Mathematics and Computing",
     grade: 8.13,
     start: "2017",
