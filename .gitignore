@@ -9,6 +9,9 @@
 #keys
 keys
 
+#env
+/server/.env
+
 # testing
 /coverage
 
