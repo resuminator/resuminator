@@ -11,8 +11,8 @@ const skillsInfo = [
     },
     {
         id: 2,
-        title: "Big Data",
-        skillList: ["Distributed Computing", "HDFS and Map-Reduce"]
+        title: "Designing",
+        skillList: ["Adobe XD", "Adobe Photoshop", "Adobe Illustrator"]
     },
     {
         id: 3,
