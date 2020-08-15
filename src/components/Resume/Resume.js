@@ -42,6 +42,19 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "space-between"
+  },
+  watermark: {
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    position: "relative",
+    padding: 5,
+    fontSize: 7.5,
+    opacity: 0.5
+  },
+  logo: {
+    paddingLeft: 2,
+    fontWeight: 600
   }
 });
 
@@ -50,7 +63,7 @@ function Resume(props) {
   const defaultConfig = `${classes.root} shadow`
 
   return (
-    <div className={props.config ? props.config : defaultConfig}>
+    <div id="resume-paper" className={props.config ? props.config : defaultConfig}>
       <Title name="Vivek Nigam" jobTitle="Software Developer | ML Engineer" />
       <Contact />
       <ColoredLine color="#44318D" />
@@ -64,6 +77,9 @@ function Resume(props) {
           <Skills />
           <Projects />
         </div>
+      </div>
+      <div id="watermark" className={classes.watermark}>
+        Built using <span className={classes.logo}>Resuminator</span>
       </div>
     </div>
   );
