@@ -9,20 +9,19 @@ const useStyles = makeStyles({
     flexDirection: "column",
     paddingTop: 10,
     marginRight: 18,
-    width: 240,
+    width: "100%"
   },
   heading: {
     color: "#44318D",
-    fontSize: 12,
+    fontSize: "1em",
     fontWeight: 600,
     opacity: 0.8,
+    paddingTop: 5
   },
   list: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
+    textAlign: "left",
     fontFamily: "Roboto",
-    fontSize: 10,
+    fontSize: "0.9em",
     paddingTop: 5,
     opacity: 0.8,
   },
@@ -32,15 +31,21 @@ function SkillSet(props) {
   const classes = useStyles();
   const skillList = props.skillList;
   //let key = 0;
+
+  const renderListStr = (skillList) => {
+    let str = "";
+    for (let i = 0; i < skillList.length; i++){
+      str = str.concat(skillList[i], ", ")
+    }
+
+    return str
+  }
+
   return (
     <div className={classes.root}>
       <div className={classes.heading}>{props.title}</div>
       <div className={classes.list}>
-        {skillList.map((item, i) => (
-          <span style={{ paddingRight: 3 }} key={i}>
-            {item + (i !== skillList.length - 1 ? "," : "")}
-          </span>
-        ))}
+        {renderListStr(skillList)}
       </div>
     </div>
   );

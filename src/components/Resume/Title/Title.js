@@ -10,12 +10,13 @@ const useStyles = makeStyles({
   },
   name: {
     color: "#121212",
-    fontSize: 35,
-    padding: 5,
+    fontSize: "3em",
+    padding: 10,
   },
   jobtitle: {
     color: "#44318D",
-    fontSize: 14,
+    fontSize: "1.1em",
+    marginBottom: 10
   },
 });
 

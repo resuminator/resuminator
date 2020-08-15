@@ -10,25 +10,32 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "flex-start",
     justifyItems: "flex-start",
-    margin: 20,
-    marginBottom: 0
+    width:"100%",
+    marginTop: 20,
+    marginBottom: 20
   },
   title: {
     color: "#44318D",
-    fontSize: 16,
+    fontSize: "1.5em",
     fontWeight: 400,
   },
   desc: {
     textAlign: "justify",
     paddingTop: 5,
-    width: 300,
     fontFamily: "Roboto",
-    fontSize: 10,
+    fontSize: "0.9em",
     opacity: 0.8,
     marginBottom: 5,
+    width:"100%"
   },
   span: {
     fontWeight: 600
+  },
+  box: {
+    width: "100%"
+  },
+  exp: {
+    width: "100%"
   }
 });
 
@@ -41,9 +48,9 @@ function Education() {
         Education
       </div>
       <ColoredLine color="#44318D" opacity="0.5"/>
-      <div>
+      <div id="edu-boxes" className={classes.box}>
         {educationInfo.map((item) => (
-          <React.Fragment key={item.id}>
+          <div id={`${item.institute}-edu`} className={classes.exp} key={item.id}>
             <EducationTitle
               institute={item.institute}
               location={item.location}
@@ -56,7 +63,7 @@ function Education() {
               <span className={classes.span}>Activities & Societies: </span>
               {item.description}
             </div>
-          </React.Fragment>
+          </div>
         ))}
       </div>
     </div>

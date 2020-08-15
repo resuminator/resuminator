@@ -12,14 +12,19 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "flex-start",
     justifyItems: "flex-start",
-    margin: 20,
-    marginBottom: 0
+    width: "100%"
   },
   title: {
     color: "#44318D",
-    fontSize: 16,
+    fontSize: "1.5em",
     fontWeight: 400,
   },
+  box: {
+    width: "100%"
+  },
+  exp: {
+    width: "100%"
+  }
 });
 
 function Experience() {
@@ -31,9 +36,9 @@ function Experience() {
         Experience
       </div>
       <ColoredLine color="#44318D" opacity="0.5"/>
-      <div>
+      <div id="exp-boxes" className={classes.box}>
         {experienceInfo.map((item) => (
-          <React.Fragment key={item.id}>
+          <div id={`${item.company}-exp`} className={classes.exp} key={item.id}>
             <JobTitle
               title={item.jobTitle}
               company={item.company}
@@ -43,7 +48,7 @@ function Experience() {
             />
             <JobDescription desc={item.description} />
             <Tags tags={item.tags}/>
-          </React.Fragment>
+          </div>
         ))}
       </div>
     </div>

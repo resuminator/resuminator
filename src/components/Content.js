@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Resume from "./Resume/Resume";
-import { Button, makeStyles, Tooltip } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import NewWindow from "react-new-window";
 import ResumeForm from "./ResumeForm/FormMain";
 
@@ -12,12 +12,18 @@ const useStyles = makeStyles({
   },
   left: {
     width: "100%",
-    height: "100vh",
+    height: "inherit",
     display: "flex",
     flexDirection: "column",
     justifyContent: "start",
     alignItems: "start",
     margin: 50,
+  },
+  btn: {
+    position: "relative",
+    bottom: 20,
+    margin: 20,
+    padding: 10,
   },
 });
 
@@ -26,9 +32,9 @@ const printConfig = makeStyles({
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    zoom: 1.35,
-    width: 595,
-    height: 842,
+    // zoom: 1.35,
+    width: "100%",
+    height: "141%",
     backgroundColor: "#fffffe",
     fontFamily: "Karla",
     margin: 0,
@@ -45,9 +51,13 @@ function Content() {
     <div id="main" className={classes.root}>
       <div id="left" className={classes.left}>
         <ResumeForm />
-        <Tooltip title="Click to see printable resume">
-          <Button onClick={() => showPrint(!print)}>Print Resume</Button>
-        </Tooltip>
+        <Button
+          id="print-btn"
+          className={classes.btn}
+          onClick={() => showPrint(!print)}
+        >
+          Print Resume
+        </Button>
       </div>
       {print ? (
         <NewWindow title="Your Resume">

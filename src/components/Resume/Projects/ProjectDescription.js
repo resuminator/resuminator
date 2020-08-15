@@ -5,9 +5,9 @@ const useStyles = makeStyles({
     root: {
         textAlign: "left",
         paddingTop: 5,
-        width: 240,
+        width: "100%",
         fontFamily: "Roboto",
-        fontSize: 10,
+        fontSize: "0.9em",
         opacity: 0.8,
         marginBottom: 5
     },

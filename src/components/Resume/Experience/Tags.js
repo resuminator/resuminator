@@ -6,13 +6,12 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "flex-start",
+    paddingBottom: 10 
   },
   root: {
     backgroundColor: "#44318D",
     color: "#fffefa",
-    marginRight: 5,
-    marginTop: 5,
-    zoom: 0.75,
+    margin: 2,
     opacity: 0.5,
   },
 });

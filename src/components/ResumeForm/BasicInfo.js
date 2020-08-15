@@ -9,7 +9,6 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "flex-start",
-    height: "5em",
     width: "80%",
     padding: 10,
     margin: 10

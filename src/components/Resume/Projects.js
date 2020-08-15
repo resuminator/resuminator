@@ -12,24 +12,14 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "flex-start",
     justifyItems: "flex-start",
-    margin: 20,
-    marginBottom: 0,
-    marginLeft: 0,
-    marginRight: "auto"
+    width: "100%",
+    marginTop: 20,
+    marginBottom: 20
   },
   title: {
     color: "#44318D",
-    fontSize: 16,
+    fontSize: "1.5em",
     fontWeight: 400,
-  },
-  desc: {
-    textAlign: "justify",
-    paddingTop: 5,
-    width: 300,
-    fontFamily: "Roboto",
-    fontSize: 10,
-    opacity: 0.8,
-    marginBottom: 5,
   },
   span: {
     fontWeight: 600,

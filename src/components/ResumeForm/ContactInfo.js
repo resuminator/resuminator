@@ -15,8 +15,7 @@ const useStyles = makeStyles({
     width: "50%",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    marginTop: 30,
-    margin: 20,
+    margin: 10,
     padding: 10,
     flexDirection: "column",
   },
@@ -31,10 +30,10 @@ function ContactInfo(props) {
 
   return (
     <div id="contact-info" className={classes.contact}>
-      <div style={{ fontSize: 18 }}>Where can people reach you?</div>
-      <div style={{ display: "flex", width: "100%" }}>
+      <div style={{ fontSize: 18, padding: 10 }}>Where can people reach you?</div>
+      <div style={{ display: "flex", width: "100%", margin: 20, marginLeft: 10 }}>
         <FormControl
-          style={{ width: "30%", marginTop: 20 }}
+          style={{ width: "30%" }}
           variant="outlined"
           className={classes.formControl}
         >
@@ -58,10 +57,10 @@ function ContactInfo(props) {
         <TextField
           variant="outlined"
           label="Handle"
-          style={{ width: "60%", margin: 20 }}
+          style={{ width: "60%", marginLeft: 20 }}
         />
       </div>
-      <div style={{ color: "#44318D" }}>Add More</div>
+      <div style={{ color: "#44318D", padding: 10 }}>Add More</div>
     </div>
   );
 }

@@ -4,14 +4,13 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles({
     root: {
         textAlign: "justify",
-        paddingTop: 5,
-        width: 300,
+        paddingTop: 2,
     },
     item:{
         fontFamily: "Roboto",
-        fontSize: 10,
+        fontSize: "0.9em",
         opacity: 0.8,
-        marginBottom: 2
+        marginBottom: 8
     }
 })
 

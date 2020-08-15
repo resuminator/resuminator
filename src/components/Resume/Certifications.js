@@ -10,21 +10,12 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "flex-start",
     justifyItems: "flex-start",
-    margin: 20,
+    width: "100%"
   },
   title: {
     color: "#44318D",
-    fontSize: 16,
+    fontSize: "1.5em",
     fontWeight: 400,
-  },
-  desc: {
-    textAlign: "justify",
-    paddingTop: 5,
-    width: 300,
-    fontFamily: "Roboto",
-    fontSize: 10,
-    opacity: 0.8,
-    marginBottom: 5,
   },
   span: {
     fontWeight: 600,
@@ -41,14 +32,14 @@ function Certifications() {
       </div>
       <ColoredLine color="#44318D" opacity="0.5" />
       {certificationInfo.map((item) => (
-        <React.Fragment key={item.id}>
+        <div key={item.id}>
           <CertificationTitle
             name={item.name}
             authority={item.authority}
             number={item.number}
             duration={{ start: item.obtained, end: item.expires }}
           />
-        </React.Fragment>
+        </div>
       ))}
     </div>
   );

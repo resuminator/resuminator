@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
-    width: 300,
+    width: "100%",
     paddingTop: 10,
     display: "flex",
     paddingBottom: 5,
@@ -12,14 +12,14 @@ const useStyles = makeStyles({
   },
   title: {
     opacity: 0.8,
-    fontSize: 12,
+    fontSize: "1em",
     color: "#44318D",
     fontWeight: 600,
     marginBottom: 2
   },
   subtitle: {
     opacity: 0.6,
-    fontSize: 10,
+    fontSize: "0.9em",
   },
   left: {
     textAlign: "left",

@@ -10,10 +10,10 @@ const useStyles = makeStyles({
     display: "flex",
     justifyItems: "space-between",
     padding: 10,
-    fontSize: 10,
+    fontSize: "0.9em",
   },
   icon: {
-    fontSize: 12,
+    fontSize: "1.2em",
     marginRight: 5,
   },
 });
