@@ -11,7 +11,7 @@ const useStyles = makeStyles({
         fontFamily: "Roboto",
         fontSize: 10,
         opacity: 0.8,
-        marginBottom: 5
+        marginBottom: 2
     }
 })
 
@@ -20,7 +20,7 @@ const classes = useStyles();
 let desc = props.desc;
   return (
     <div className={classes.root}>
-      {desc.map((item, i) => {i++; return <li className={classes.item} key={i}>{item}</li>})}
+      {desc.map((item, i) => {i++; return <div className={classes.item} key={i}>• {item}</div>})}
     </div>
   );
 }
