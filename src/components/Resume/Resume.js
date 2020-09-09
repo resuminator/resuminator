@@ -56,10 +56,13 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignContent: "center",
     position: "relative",
+    bottom: 0,
+    right: 0,
     padding: 10,
     fontSize: "0.7em",
     opacity: 0.5,
-    backgroundColor: "green",
+    width: "97.5%"
+    // backgroundColor: "green",
   },
   logo: {
     paddingLeft: 2,
@@ -76,7 +79,7 @@ function Resume(props) {
       id="resume-paper"
       className={props.config ? props.config : `${defaultConfig} page`}
     >
-      <Title name="Vivek Nigam" jobTitle="Software Developer | ML Engineer" />
+      <Title name="Vivek Nigam" jobTitle="Full-Stack Software Developer" />
       <Contact />
       <ColoredLine color="#44318D" />
       <div id="resume-insider" className={classes.inside}>
