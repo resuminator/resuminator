@@ -6,6 +6,7 @@ const educationInfo = [
     degree: "IMSc",
     stream: "Mathematics and Computing",
     grade: 8.13,
+    total: 10.0,
     start: "2017",
     end: "Present",
     description:
