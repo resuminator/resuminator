@@ -2,18 +2,18 @@ const skillsInfo = [
     {   
         id: 0,
         title: "Programming Languages",
-        skillList: ["Python 3.6+", "JavaScript", "C++", "C", "SQL", "LaTeX", "Dart", "MATLAB"]
+        skillList: ["Python 3.6+", "JavaScript", "C++", "SQL", "Dart"]
     }, 
     {
         id: 1,
         title: "Machine Learning & AI",
         skillList: ["Regression", "Classification", "Clustering", "Artificial Neural Networks (CNN, RCNN, LSTM)", "NLP (NLTK, BERT)"]
     },
-    {
-        id: 2,
-        title: "Designing",
-        skillList: ["Adobe XD", "Adobe Photoshop", "Adobe Illustrator"]
-    },
+    // {
+    //     id: 2,
+    //     title: "Designing",
+    //     skillList: ["Adobe XD", "Adobe Photoshop", "Adobe Illustrator"]
+    // },
     {
         id: 3,
         title: "Front-end Development",
@@ -27,7 +27,7 @@ const skillsInfo = [
     {
         id: 5,
         title: "DevOps",
-        skillList: ["Redhat Ansible", "Docker", "Docker-Compose", "Git and Github"]
+        skillList: ["Docker", "Docker-Compose", "Git and Github"]
     }
 ]
 

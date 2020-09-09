@@ -6,7 +6,7 @@ const projectsInfo = [
     additionalInfo: "Won Special Mention Award",
     description:
       "An app to pool in food orders, hence saving money and resources. Built in 36 hours, from scratch to MVP.",
-    tags: ["Flutter", "Dart", "Native-App Dev"],
+    tags: ["Flutter", "Dart", "Firebase", "Flask"],
   },
   {
     id: 2,
@@ -14,8 +14,8 @@ const projectsInfo = [
     company: "Kaggle Competition",
     additionalInfo: "Top 25% on Public Leaderboard",
     description:
-      "A Natural Language model to classify Tweets (in English) into Disaster and Non-Disaster Tweets using Google BERT with 83.026% accuracy. Also trained using Google AutoML with 81.234% accuracy (Benchmark: 81.083%)",
-    tags: ["Google BERT", "NLP", "AutoML"],
+      "A Natural Language model to classify Tweets (in English) into Disaster and Non-Disaster Tweets using Google BERT (83.026% accuracy) and Google AutoML (81.234% accuracy) where Benchmark was 81.083%",
+    tags: ["Google BERT", "NLP", "GCP AutoML"],
   },
 ];
 
