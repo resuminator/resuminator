@@ -39,7 +39,7 @@ function EducationTitle(props) {
         </div>
         <div id="stream" className={classes.subtitle}>
           {props.degree} {props.stream}{" "}
-          {props.grade ? `, ${props.grade}` : null}
+          {props.grade ? `, ${props.grade}/${props.total}` : null}
         </div>
       </div>
       <div id="right" className={classes.right}>
