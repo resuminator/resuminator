@@ -20,6 +20,7 @@ const useStyles = makeStyles({
   subtitle: {
     opacity: 0.6,
     fontSize: "0.9em",
+    color: "#000000"
   },
   left: {
     textAlign: "left",

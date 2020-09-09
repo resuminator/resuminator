@@ -5,6 +5,7 @@ const useStyles = makeStyles({
     root: {
         textAlign: "justify",
         paddingTop: 2,
+        lineHeight: 1.3
     },
     item:{
         fontFamily: "Roboto",
