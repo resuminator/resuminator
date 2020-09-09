@@ -58,6 +58,7 @@ function Education() {
               duration={{ start: item.start, end: item.end }}
               grade={item.grade}
               degree={item.degree}
+              total={item.total}
             />
             <div className={classes.desc}>
               <span className={classes.span}>Activities & Societies: </span>
