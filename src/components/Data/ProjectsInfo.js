@@ -29,6 +29,16 @@ const projectsInfo = [
     tags: ["Python", "ML", "Networking"],
     projectLink: "https://github.com/viveknigam3003/auto-cluster/blob/master/project.ipynb"
   },
+  // {
+  //   id: 3,
+  //   projectTitle: "Resuminator",
+  //   company: "Personal",
+  //   additionalInfo: "",
+  //   description:
+  //     "Build beauttiful single page resumes, without the hassle!",
+  //   tags: ["ReactJS", "MongoDB", "NodeJS", "Express"],
+  //   projectLink: "https://github.com/viveknigam3003/resuminator"
+  // },
 ];
 
 export default projectsInfo;
