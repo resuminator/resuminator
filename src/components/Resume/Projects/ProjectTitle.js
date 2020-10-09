@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 10,
     display: "flex",
@@ -11,14 +11,14 @@ const useStyles = makeStyles({
   },
   title: {
     opacity: 0.8,
-    fontSize: "1em",
+    fontSize: theme.typography.pxToRem(16),
     color: "#44318D",
     fontWeight: 600,
     marginBottom: 2,
   },
   subtitle: {
     opacity: 0.6,
-    fontSize: "0,9em",
+    fontSize: theme.typography.pxToRem(14),
   },
   left: {
     textAlign: "left",
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   right: {
     textAlign: "right",
   },
-});
+}));
 
 function ProjectTitle(props) {
   const classes = useStyles();
