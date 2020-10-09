@@ -33,15 +33,15 @@ function ContactAt(props) {
 
     if (service === "linkedin"){
       const linkedinLink = `https://www.${service}.com/in/${handle}`
-      return <Link href={linkedinLink} color="inherit">{handle}</Link>
+      return <Link href={linkedinLink} color="inherit" target="_blank">{handle}</Link>
     }
 
     if (service === "email"){
       const mailHandle = `mailto:${handle}`
-      return <Link href={mailHandle} color="inherit">{handle}</Link>
+      return <Link href={mailHandle} color="inherit" target="_blank">{handle}</Link>
     }
 
-    return <Link href={handleLink} color="inherit">{handle}</Link>
+    return <Link href={handleLink} color="inherit" target="_blank">{handle}</Link>
   }  
 
   return (
