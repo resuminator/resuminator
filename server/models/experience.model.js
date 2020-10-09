@@ -13,6 +13,7 @@ const experienceSchema = new Schema(
     location: { type: String },
     description: { type: [String], required: true },
     tags: { type: [String] },
+    workLink: {type: String}
   },
   { timestamps: true }
 );

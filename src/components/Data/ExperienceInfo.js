@@ -14,6 +14,7 @@ const experienceInfo = [
       "Wrote unit tests for Rucio FUSE-POSIX using GoogleTest",
       "Wrote developer and user documentation for both Rucio Notifier and Desktop.",
     ],
+    workLink: "https://medium.com/@viveknigam3003/how-i-improved-scientific-data-management-during-gsoc-20-ffdf995266e6",
     tags: ["React", "NodeJS", "ElectronJS", "Redux", "Dockers", "UI/UX"],
   },
   {
@@ -29,6 +30,7 @@ const experienceInfo = [
       "Read research papers and text material on Statistics and Game Theory. Report to my guide through weekly group presentations and discussions.",
       "Published a 24-page research report titled 'Strategic Aspects of Linear Regression' about perceiving Linear Regression as a non-cooperative game",
     ],
+    workLink: "http://reports.ias.ac.in/report/19345/strategic-aspects-of-linear-regression",
     tags: ["Game Theory", "Linear Regression", "Research"],
   },
   // {
@@ -42,6 +44,7 @@ const experienceInfo = [
   //   description: [
   //     "Worked under the direct guidance of Mr Vimal Daga. Learned and gained hands-on experience of several technologies. Developed a speech-assisted Hadoop cluster setup tool for enterprises using Python.",
   //   ],
+  //   workLink: "",
   //   tags: ["Python", "Big Data", "Hadoop", "Linux"]
   // },
 ];
