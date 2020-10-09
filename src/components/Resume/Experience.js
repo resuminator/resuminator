@@ -46,7 +46,7 @@ function Experience() {
               duration={{ start: item.start, end: item.end }}
               location={item.location}
             />
-            <JobDescription desc={item.description} />
+            <JobDescription desc={item.description} workLink={item.workLink}/>
             <Tags tags={item.tags}/>
           </div>
         ))}
