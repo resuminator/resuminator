@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { Link, makeStyles, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,12 +33,11 @@ function ProjectTitle(props) {
   return (
     <div className={classes.root}>
       <div id="left" className={classes.left}>
-        <div id="title" className={classes.title}>
-          {props.title}
-        </div>
+        <Typography id="title" variant="div" className={classes.title}>
+          <Link href={props.projectLink} target="_blank">{props.title}</Link>
+        </Typography>
         <div id="company" className={classes.subtitle}>
-          {props.company}{" "}
-          {props.addInfo ? `, ${props.addInfo}` : null}
+          {props.company} {props.addInfo ? `, ${props.addInfo}` : null}
         </div>
       </div>
     </div>

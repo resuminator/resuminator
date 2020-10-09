@@ -41,6 +41,7 @@ function Projects() {
             title={item.projectTitle}
             company={item.company}
             addInfo={item.additionalInfo}
+            projectLink={item.projectLink}
           />
           <ProjectDescription desc={item.description}/>
           <Tags tags={item.tags}/>

@@ -7,6 +7,7 @@ const projectsInfo = [
     description:
       "An app to pool in food orders, hence saving money and resources. Built in 36 hours, from scratch to MVP.",
     tags: ["Flutter", "Dart", "Firebase", "Flask"],
+    projectLink: "https://github.com/viveknigam3003/gromnom"
   },
   {
     id: 3,
@@ -16,6 +17,7 @@ const projectsInfo = [
     description:
       "A Natural Language model to classify Tweets (in English) into Disaster and Non-Disaster Tweets using Google BERT (83.026% accuracy) and Google AutoML (81.234% accuracy) where Benchmark was 81.083%",
     tags: ["Google BERT", "NLP", "GCP AutoML"],
+    projectLink: ""
   },
   {
     id: 2,
@@ -25,6 +27,7 @@ const projectsInfo = [
     description:
       "Enterprise scale, secure, and speech-assisted Hadoop HDFS and Map-Reduce cluster setup CLI utility.",
     tags: ["Python", "ML", "Networking"],
+    projectLink: "https://github.com/viveknigam3003/auto-cluster/blob/master/project.ipynb"
   },
 ];
 
