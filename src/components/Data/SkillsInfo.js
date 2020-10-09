@@ -2,12 +2,12 @@ const skillsInfo = [
     {   
         id: 0,
         title: "Programming Languages",
-        skillList: ["Python 3.6+", "JavaScript", "C++", "SQL", "Dart"]
+        skillList: ["Python 3.6+", "JavaScript", "C++", "JAVA", "SQL", "Dart"]
     }, 
     {
         id: 1,
         title: "Machine Learning & AI",
-        skillList: ["Regression", "Classification", "Clustering", "Artificial Neural Networks (CNN, RCNN, LSTM)", "NLP (NLTK, BERT)"]
+        skillList: ["Regression", "Classification", "Clustering", "NLP (NLTK, BERT)"]
     },
     // {
     //     id: 2,
