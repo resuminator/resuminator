@@ -34,8 +34,8 @@ function Resume() {
   const classes = useStyles();
   const NAME = "Vivek Nigam";
   const JOBTITLE = "Full-Stack Software Developer";
-  const leftWide = `${60}%`
-  const rightWide = `${100-leftWide}%`
+  const leftWide = "60%"
+  const rightWide = "40%"
 
   return (
     <Box
