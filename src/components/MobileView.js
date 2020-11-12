@@ -43,8 +43,7 @@ function MobileView() {
         Resuminator
       </Typography>
       <Typography variant="h3" color="textSecondary" className={classes.h3}>
-        We notice that you're trying use access this application on a mobile
-        device :/
+        We notice that you're trying use this application on a mobile device :/
       </Typography>
       <Typography
         variant="body1"
