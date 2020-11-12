@@ -1,56 +1,55 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core";
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
 
-const useStyles = makeStyles({
-  root: {
-    paddingTop: 10,
-    display: "flex",
-    paddingBottom: 5,
-    alignItems: "center",
-    justifyContent: "space-between",
-    width:"100%"
-  },
+import React from "react";
+import { Box, makeStyles, Typography } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
   title: {
-    opacity: 0.8,
+    color: theme.palette.primary.light,
     fontSize: "1em",
-    color: "#44318D",
-    fontWeight: 600,
-    marginBottom: 2,
+    fontWeight: 700,
   },
   subtitle: {
-    opacity: 0.6,
+    color: theme.palette.grey[600],
     fontSize: "0.9em",
   },
-  left: {
-    textAlign: "left",
-  },
-  right: {
-    textAlign: "right",
-  },
-});
+}));
 
 function EducationTitle(props) {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <div id="left" className={classes.left}>
-        <div id="title" className={classes.title}>
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+      pb={2}
+    >
+      <Box textAlign="left">
+        <Typography id="title" variant="h2" className={classes.title}>
           {props.institute}
-        </div>
-        <div id="stream" className={classes.subtitle}>
+        </Typography>
+        <Typography id="stream" variant="subtitle1" className={classes.subtitle}>
           {props.degree} {props.stream}{" "}
           {props.grade ? `, ${props.grade}/${props.total}` : null}
-        </div>
-      </div>
-      <div id="right" className={classes.right}>
-        <div id="duration" className={classes.title}>
+        </Typography>
+      </Box>
+      <Box textAlign="right">
+        <Typography id="duration" className={classes.title}>
           {props.duration.start} - {props.duration.end}
-        </div>
-        <div id="location" className={classes.subtitle}>
+        </Typography>
+        <Typography id="location" className={classes.subtitle}>
           {props.location}
-        </div>
-      </div>
-    </div>
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 export default EducationTitle;

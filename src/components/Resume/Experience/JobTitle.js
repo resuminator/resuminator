@@ -1,56 +1,49 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core";
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
 
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-    paddingTop: 10,
-    display: "flex",
-    paddingBottom: 5,
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
+import React from "react";
+import { Box, makeStyles, Typography } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
   title: {
-    opacity: 0.8,
-    fontSize: "1em",
-    color: "#44318D",
+    color: theme.palette.primary.light,
+    fontSize: "1rem",
     fontWeight: 600,
     marginBottom: 2
   },
   subtitle: {
-    opacity: 0.6,
-    fontSize: "0.9em",
-    color: "#000000"
+    fontSize: "0.9rem",
   },
-  left: {
-    textAlign: "left",
-  },
-  right: {
-    textAlign: "right",
-  },
-});
+}));
 
 function JobTitle(props) {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <div id="left" className={classes.left}>
-        <div id="title" className={classes.title}>
+    <Box display="flex" alignItems="center" justifyContent="space-between" pb={1}>
+      <Box id="left" textAlign="left">
+        <Typography id="title" variant="h2" className={classes.title}>
           {props.company}
-        </div>
-        <div id="company" className={classes.subtitle}>
+        </Typography>
+        <Typography id="company" variant="subtitle1" color="textPrimary" className={classes.subtitle}>
           {props.title} {props.addInfo ? `(${props.addInfo})` : null}
-        </div>
-      </div>
-      <div id="right" className={classes.right}>
-        <div id="duration" className={classes.title}>
+        </Typography>
+      </Box>
+      <Box id="right" textAlign="right">
+        <Typography id="duration" variant="h2" color="primary" className={classes.title}>
           {props.duration.start} - {props.duration.end}
-        </div>
-        <div id="location" className={classes.subtitle}>
+        </Typography>
+        <Typography id="location" variant="subtitle1" color="textPrimary" className={classes.subtitle}>
           {props.location}
-        </div>
-      </div>
-    </div>
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 

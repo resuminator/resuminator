@@ -1,53 +1,58 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core";
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
 
-const useStyles = makeStyles({
+import React from "react";
+import { Box, makeStyles, Typography } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
-    alignItems: "flex-start",
-    justifyItems: "flex-start",
-    flexDirection: "column",
-    paddingTop: 10,
-    marginRight: 18,
-    width: "100%"
+    width: "100%",
   },
   heading: {
-    color: "#44318D",
-    fontSize: "1em",
+    color: theme.palette.primary.light,
     fontWeight: 600,
-    opacity: 0.8,
-    paddingTop: 5
+    paddingBottom: "0.1rem"
   },
   list: {
-    textAlign: "left",
-    fontFamily: "Roboto",
-    fontSize: "0.9em",
-    paddingTop: 5,
-    opacity: 0.8,
+    fontFamily: theme.typography.fontFamily.secondary,
+    paddingBottom: "0.6rem",
   },
-});
+}));
 
 function SkillSet(props) {
   const classes = useStyles();
   const skillList = props.skillList;
-  //let key = 0;
 
   const renderListStr = (skillList) => {
     let str = "";
-    for (let i = 0; i < skillList.length; i++){
-      str = str.concat(skillList[i], ", ")
+    for (let i = 0; i < skillList.length; i++) {
+      str =
+        i !== skillList.length - 1
+          ? str.concat(skillList[i], ", ")
+          : str.concat(skillList[i], ".");
     }
 
-    return str
-  }
+    return str;
+  };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.heading}>{props.title}</div>
-      <div className={classes.list}>
-        {renderListStr(skillList)}
-      </div>
-    </div>
+    <Box
+      display="flex"
+      alignItems="flex-start"
+      justifyContent="flex-start"
+      flexDirection="column"
+      className={classes.root}
+    >
+      <Typography variant="body1" className={classes.heading}>{props.title}</Typography>
+      <Typography variant="body2" color="textPrimary" className={classes.list}>{renderListStr(skillList)}</Typography>
+    </Box>
   );
 }
 

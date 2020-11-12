@@ -1,31 +1,39 @@
-import React from "react";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import EmailIcon from "@material-ui/icons/Email";
-import { Link, makeStyles } from "@material-ui/core";
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
 
-const useStyles = makeStyles({
+import React from "react";
+import {FiGithub, FiLinkedin, FiMail, FiTwitter} from "react-icons/fi";
+import { Box, Link, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
-    justifyItems: "space-between",
-    padding: 10,
     fontSize: "0.9em",
   },
   icon: {
     fontSize: "1.2em",
     marginRight: 5,
   },
-});
+  links: {
+    textDecoration: "none",
+    fontFamily: theme.typography.fontFamily.primary
+  }
+}));
 
 function ContactAt(props) {
   const classes = useStyles();
 
   function setIcon(name) {
-    if (name === "github") return <GitHubIcon className={classes.icon} />;
-    if (name === "linkedin") return <LinkedInIcon className={classes.icon} />;
-    if (name === "twitter") return <TwitterIcon className={classes.icon} />;
-    if (name === "email") return <EmailIcon className={classes.icon} />;
+    if (name === "github") return <FiGithub className={classes.icon} />;
+    if (name === "linkedin") return <FiLinkedin className={classes.icon} />;
+    if (name === "twitter") return <FiTwitter className={classes.icon} />;
+    if (name === "email") return <FiMail className={classes.icon} />;
   }
 
   const linkHandle = (handle, service) => {
@@ -33,22 +41,22 @@ function ContactAt(props) {
 
     if (service === "linkedin"){
       const linkedinLink = `https://www.${service}.com/in/${handle}`
-      return <Link href={linkedinLink} color="inherit" target="_blank">{handle}</Link>
+      return <Link href={linkedinLink} color="inherit" target="_blank" className={classes.links}>{handle}</Link>
     }
 
     if (service === "email"){
       const mailHandle = `mailto:${handle}`
-      return <Link href={mailHandle} color="inherit" target="_blank">{handle}</Link>
+      return <Link href={mailHandle} color="inherit" target="_blank" className={classes.links}>{handle}</Link>
     }
 
-    return <Link href={handleLink} color="inherit" target="_blank">{handle}</Link>
+    return <Link href={handleLink} color="inherit" target="_blank" className={classes.links}>{handle}</Link>
   }  
 
   return (
-    <div className={classes.root}>
+    <Box display="flex" justifyItems="space-between" p={2} className={classes.root}>
       {setIcon(props.name)}
       {linkHandle(props.handle, props.name)}
-    </div>
+    </Box>
   );
 }
 

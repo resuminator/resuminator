@@ -1,47 +1,50 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core";
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
 
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-    display: "flex",
-    paddingBottom: 5,
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
+import React from "react";
+import { Box, makeStyles, Typography } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
   title: {
-    opacity: 0.8,
     fontSize: "1em",
-    color: "#44318D",
-    fontWeight: 600,
-    marginBottom: 2,
-  },
-  subtitle: {
-    opacity: 0.6,
-    fontSize: "0.9em"
-  },
-  left: {
+    color: theme.palette.primary.light,
+    fontWeight: 700,
     textAlign: "left",
   },
-  right: {
-    textAlign: "right",
+  subtitle: {
+    color: theme.palette.grey[800],
+    fontSize: "0.9em",
+    textAlign: "left",
   },
-});
+}));
 
 function CertificationTitle(props) {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <div id="left" className={classes.left}>
-        <div id="name" className={classes.title}>
-          {props.name}
-        </div>
-        <div id="authority" className={classes.subtitle}>
-          {props.authority} {props.number ? ` | ${props.number}` : null}{" "}
-          {props.duration ? ` | Expires: ${props.duration.end}` : null}
-        </div>
-      </div>
-    </div>
+    <Box
+      display="flex"
+      alignItems="start"
+      flexDirection="column"
+    >
+      <Typography id="name" variant="h2" className={classes.title}>
+        {props.name}
+      </Typography>
+      <Typography
+        id="authority"
+        variant="subtitle1"
+        className={classes.subtitle}
+      >
+        {props.authority} {props.number ? ` | ${props.number}` : null}{" "}
+        {props.duration ? ` | Expires: ${props.duration.end}` : null}
+      </Typography>
+    </Box>
   );
 }
 

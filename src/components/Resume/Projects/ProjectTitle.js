@@ -1,46 +1,46 @@
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
+
 import React from "react";
-import { Link, makeStyles, Typography } from "@material-ui/core";
+import { Box, Link, makeStyles, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    paddingTop: 10,
-    display: "flex",
-    paddingBottom: 5,
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
   title: {
-    opacity: 0.8,
-    fontSize: theme.typography.pxToRem(16),
-    color: "#44318D",
+    color: theme.palette.primary.light,
     fontWeight: 600,
-    marginBottom: 2,
+    paddingBottom: "0.1rem",
+    lineHeight: 1.2
   },
   subtitle: {
-    opacity: 0.6,
-    fontSize: theme.typography.pxToRem(14),
-  },
-  left: {
-    textAlign: "left",
-  },
-  right: {
-    textAlign: "right",
+    color: theme.palette.grey[600]
   },
 }));
 
 function ProjectTitle(props) {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <div id="left" className={classes.left}>
-        <Typography id="title" variant="div" className={classes.title}>
-          <Link href={props.projectLink} target="_blank">{props.title}</Link>
-        </Typography>
-        <div id="company" className={classes.subtitle}>
-          {props.company} {props.addInfo ? `, ${props.addInfo}` : null}
-        </div>
-      </div>
-    </div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyContent="flex-start"
+    >
+      <Typography id="title" variant="body1" className={classes.title}>
+        <Link href={props.projectLink} target="_blank">
+          {props.title}
+        </Link>
+      </Typography>
+      <Typography id="company" variant="body2" className={classes.subtitle}>
+        {props.company} {props.addInfo ? `, ${props.addInfo}` : null}
+      </Typography>
+    </Box>
   );
 }
 export default ProjectTitle;

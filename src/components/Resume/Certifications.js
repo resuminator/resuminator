@@ -1,47 +1,51 @@
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
+
 import React from "react";
-import { makeStyles } from "@material-ui/core";
-import certificationInfo from "../Data/CertificationInfo";
-import ColoredLine from "../Line";
+import { Box, makeStyles, Typography } from "@material-ui/core";
+import certificationInfo from "../../Data/CertificationInfo";
+import ColoredLine from "../utils/Line";
 import CertificationTitle from "./Certifications/CertificationTitle";
 
-const useStyles = makeStyles({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyItems: "flex-start",
-    width: "100%"
-  },
+const useStyles = makeStyles(theme => ({
   title: {
-    color: "#44318D",
-    fontSize: "1.5em",
-    fontWeight: 400,
+    fontSize: "1.5rem",
   },
-  span: {
-    fontWeight: 600,
-  },
-});
+}));
 
 function Certifications() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <div id="title" className={classes.title}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyContent="flex-start"
+      pt={3}
+      flexGrow={1}
+    >
+      <Typography id="title" variant="h1" color="primary" className={classes.title}>
         Certifications
-      </div>
+      </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
       {certificationInfo.map((item) => (
-        <div key={item.id}>
-          <CertificationTitle
-            name={item.name}
-            authority={item.authority}
-            number={item.number}
-            duration={{ start: item.obtained, end: item.expires }}
-          />
-        </div>
+        <CertificationTitle
+          key={item.id}
+          name={item.name}
+          authority={item.authority}
+          number={item.number}
+          duration={{ start: item.obtained, end: item.expires }}
+        />
       ))}
-    </div>
+    </Box>
   );
 }
 

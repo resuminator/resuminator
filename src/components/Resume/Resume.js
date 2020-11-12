@@ -1,7 +1,17 @@
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
+
 import React from "react";
 import "./Resume.css";
 import Title from "./Title/Title";
-import ColoredLine from "../Line";
+import ColoredLine from "../utils/Line";
 import Contact from "./Title/Contact";
 import Experience from "./Experience";
 import Education from "./Education";
@@ -10,38 +20,38 @@ import { makeStyles } from "@material-ui/core";
 import Projects from "./Projects";
 import Skills from "./Skills";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
     display: "flex",
     flexDirection: "column",
     backgroundColor: "#fffffe",
     fontFamily: "Karla",
-    margin: 25,
-    right: 0,
+    margin: theme.typography.pxToRem(25),
+    right: theme.typography.pxToRem(0),
     float: "right",
-    flex: "1 0 48em"
+    flex: "1 0 48rem"
   },
   left: {
     width: "60%",
-    height: 1024,
+    height: theme.typography.pxToRem(1024),
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "start",
-    padding: 10,
-    paddingRight: 0,
-    margin: 10,
+    padding: theme.typography.pxToRem(10),
+    paddingRight: theme.typography.pxToRem(0),
+    margin: theme.typography.pxToRem(10),
   },
   right: {
     width: "40%",
-    height: 1024,
+    height: theme.typography.pxToRem(1024),
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
     justifyItems: "flex-start",
-    padding: 10,
-    margin: 10,
+    padding: theme.typography.pxToRem(10),
+    margin: theme.typography.pxToRem(10),
     paddingLeft: 0,
     overflow: "hidden",
   },
@@ -58,8 +68,8 @@ const useStyles = makeStyles({
     position: "relative",
     bottom: 0,
     right: 0,
-    padding: 10,
-    fontSize: "0.7em",
+    padding: theme.typography.pxToRem(10),
+    fontSize: theme.typography.pxToRem(11),
     opacity: 0.5,
     width: "97.5%"
     // backgroundColor: "green",
@@ -68,7 +78,7 @@ const useStyles = makeStyles({
     paddingLeft: 2,
     fontWeight: 600,
   },
-});
+}));
 
 function Resume(props) {
   const classes = useStyles();

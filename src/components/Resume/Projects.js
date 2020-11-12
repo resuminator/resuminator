@@ -1,53 +1,60 @@
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
+
 import React from "react";
-import { makeStyles } from "@material-ui/core";
-import ColoredLine from "../Line";
-import projectsInfo from "../Data/ProjectsInfo";
+import { Box, makeStyles, Typography } from "@material-ui/core";
+import ColoredLine from "../utils/Line";
+import projectsInfo from "../../Data/ProjectsInfo";
 import ProjectTitle from "./Projects/ProjectTitle";
 import ProjectDescription from "./Projects/ProjectDescription";
 import Tags from "./Experience/Tags";
 
-const useStyles = makeStyles({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyItems: "flex-start",
-    width: "100%",
-    marginTop: 20,
-    marginBottom: 20
-  },
+const useStyles = makeStyles((theme) => ({
   title: {
-    color: "#44318D",
-    fontSize: "1.5em",
-    fontWeight: 400,
+    fontSize: "1.5rem",
   },
-  span: {
-    fontWeight: 600,
-  },
-});
+}));
 
 function Projects() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <div id="title" className={classes.title}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyItems="flex-start"
+      pt={3}
+    >
+      <Typography
+        variant="h1"
+        id="title"
+        color="primary"
+        className={classes.title}
+      >
         Projects
-      </div>
+      </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
       {projectsInfo.map((item) => (
-        <React.Fragment key={item.id}>
+        <Box key={item.id}>
           <ProjectTitle
             title={item.projectTitle}
             company={item.company}
             addInfo={item.additionalInfo}
             projectLink={item.projectLink}
           />
-          <ProjectDescription desc={item.description}/>
-          <Tags tags={item.tags}/>
-        </React.Fragment>
+          <ProjectDescription desc={item.description} />
+          <Tags tags={item.tags} />
+        </Box>
       ))}
-    </div>
+    </Box>
   );
 }
 

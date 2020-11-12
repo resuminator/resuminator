@@ -1,32 +1,48 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core";
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
 
-const useStyles = makeStyles({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center" 
+import React from "react";
+import { Box, makeStyles, Typography } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  title: {
+    fontFamily: theme.typography.fontFamily.primary,
+    color: theme.palette.text.primary,
+    fontSize: "3rem",
+    padding: "0.5rem",
+    letterSpacing: "-0.2rem",
   },
-  name: {
-    color: "#121212",
-    fontSize: "3em",
-    padding: 10,
+  subtitle: {
+    fontFamily: theme.typography.fontFamily.primary,
+    fontSize: "1.5rem",
+    fontWeight: 700,
   },
-  jobtitle: {
-    color: "#44318D",
-    fontSize: "1.1em",
-    marginBottom: 10
-  },
-});
+}));
 
 function Title(props) {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <div className={classes.name}>{props.name}</div>
-      <div className={classes.jobtitle}>{props.jobTitle}</div>
-    </div>
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      flexDirection="column"
+      className={classes.root}
+    >
+      <Typography variant="h1" className={classes.title}>
+        {props.name}
+      </Typography>
+      <Typography variant="h2" color="primary" className={classes.subtitle}>
+        {props.jobTitle}
+      </Typography>
+    </Box>
   );
 }
 

@@ -1,39 +1,54 @@
+import { Avatar, Box, IconButton, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 
-const headerStyle = {
-  box: {
+const useStyles = makeStyles((theme) => ({
+  root: {
     fontFamily: "Karla",
-    fontWeight: 200,
-    width: "100%",
-    height: 80,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "start",
-    justifyContent: "center",
+    backgroundColor: theme.palette.contrast.main,
+    color: theme.palette.text.primary,
+    "@media (min-width:1280px)": {
+      margin: "4.2rem",
+      marginTop: "1rem",
+      marginBottom: 0,
+    },
   },
-  title: {
-    fontSize: 18,
-    marginLeft: 50,
-    color: "#000000",
+  logo: {
+    fontWeight: 700,
+    paddingRight: "0.5rem",
+    letterSpacing: "-0.25rem",
+    fontFamily: "Karla",
+    border: "solid",
+    borderColor: theme.palette.contrast.main,
+    borderWidth: "0.1rem",
   },
-  subtitle: {
-    marginLeft: 50,
-    color: "#000000",
-    fontSize: 11,
-    opacity: 0.5,
-  },
-};
+}));
 
 function Header() {
+  const classes = useStyles();
   return (
-    <header id="header" style={headerStyle.box}>
-      <div id="header-title" style={headerStyle.title}>
-        Resuminator
-      </div>
-      <div id="header-subtitle" style={headerStyle.subtitle}>
-        Create beautiful single page resumes
-      </div>
-    </header>
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      className={classes.root}
+      p={1}
+      m={1}
+      mt={2}
+      mb={0}
+    >
+      <Typography
+        id="logo"
+        variant="h4"
+        className={classes.logo}
+        color="primary"
+      >
+        Re
+      </Typography>
+      <Box>
+        <IconButton></IconButton>
+        <Avatar>VN</Avatar>
+      </Box>
+    </Box>
   );
 }
 

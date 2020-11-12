@@ -1,73 +1,76 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core";
-import educationInfo from "../Data/EducationInfo";
-import EducationTitle from "./Education/EducationTitle";
-import ColoredLine from "../Line";
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
 
-const useStyles = makeStyles({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyItems: "flex-start",
-    width:"100%",
-    marginTop: 20,
-    marginBottom: 20
-  },
+import React from "react";
+import { Box, makeStyles, Typography } from "@material-ui/core";
+import educationInfo from "../../Data/EducationInfo";
+import EducationTitle from "./Education/EducationTitle";
+import ColoredLine from "../utils/Line";
+
+const useStyles = makeStyles((theme) => ({
   title: {
-    color: "#44318D",
-    fontSize: "1.5em",
-    fontWeight: 400,
+    color: theme.palette.primary.main,
+    fontSize: "1.5rem",
   },
   desc: {
+    fontFamily: theme.typography.fontFamily.secondary,
+    fontSize: "0.8rem",
     textAlign: "justify",
-    paddingTop: 5,
-    fontFamily: "Roboto",
-    fontSize: "0.9em",
-    opacity: 0.8,
-    marginBottom: 5,
-    width:"100%"
+    color: theme.palette.grey[800],
   },
   span: {
-    fontWeight: 600
+    fontWeight: 600,
+    fontSize: "0.8rem",
   },
-  box: {
-    width: "100%"
-  },
-  exp: {
-    width: "100%"
-  }
-});
+}));
 
 function Education() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <div id="title" className={classes.title}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyItems="flex-start"
+      className={classes.root}
+      pt={2}
+    >
+      <Typography id="title" variant="h1" className={classes.title}>
         Education
-      </div>
-      <ColoredLine color="#44318D" opacity="0.5"/>
-      <div id="edu-boxes" className={classes.box}>
-        {educationInfo.map((item) => (
-          <div id={`${item.institute}-edu`} className={classes.exp} key={item.id}>
-            <EducationTitle
-              institute={item.institute}
-              location={item.location}
-              stream={item.stream}
-              duration={{ start: item.start, end: item.end }}
-              grade={item.grade}
-              degree={item.degree}
-              total={item.total}
-            />
-            <div className={classes.desc}>
-              <span className={classes.span}>Activities & Societies: </span>
-              {item.description}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+      </Typography>
+      <ColoredLine color="#44318D" opacity="0.5" />
+      {educationInfo.map((item) => (
+        <Box id={`${item.institute}-edu`} key={item.id}>
+          <EducationTitle
+            institute={item.institute}
+            location={item.location}
+            stream={item.stream}
+            duration={{ start: item.start, end: item.end }}
+            grade={item.grade}
+            degree={item.degree}
+            total={item.total}
+          />
+          <Typography variant="body2" className={classes.desc}>
+            <Typography
+              variant="body2"
+              component="span"
+              className={classes.span}
+            >
+              Activities & Societies:{" "}
+            </Typography>
+            {item.description}
+          </Typography>
+        </Box>
+      ))}
+    </Box>
   );
 }
 
