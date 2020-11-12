@@ -8,7 +8,13 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Box, IconButton, makeStyles, Typography } from "@material-ui/core";
+import {
+  Box,
+  Chip,
+  IconButton,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 import { FiGithub } from "react-icons/fi";
 import React from "react";
 import { OWNER_PROFILE, RESUMINATOR_REPO_LINK } from "./utils/Constants";
@@ -50,6 +56,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "1.5rem",
     marginBottom: "0rem",
   },
+  chip: {
+    opacity: 0.5,
+    marginLeft: "0.2rem",
+    color: theme.palette.contrast.main,
+    borderColor: theme.palette.contrast.main,
+  },
 }));
 
 function Footer() {
@@ -63,7 +75,13 @@ function Footer() {
         bgcolor="primary.main"
       >
         <Typography variant="h6" className={classes.text} color="secondary">
-          Resuminator v{packageJSON.version}
+          Resuminator v{packageJSON.version}{" "}
+          <Chip
+            size="small"
+            variant="outlined"
+            className={classes.chip}
+            label="dev"
+          />
         </Typography>
         <Box
           display="flex"
