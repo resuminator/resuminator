@@ -29,7 +29,6 @@ function Skills() {
       flexDirection="column"
       alignItems="flex-start"
       justifyContent="flex-start"
-      className={classes.root}
     >
       <Typography color="primary" variant="h1" id="title" className={classes.title}>
         Skills
