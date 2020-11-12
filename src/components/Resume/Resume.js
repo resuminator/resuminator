@@ -10,6 +10,7 @@
 
 import React from "react";
 import "../../styles/shadow.css";
+import "../../styles/page.css";
 import Title from "./Title/Title";
 import ColoredLine from "../utils/Line";
 import Contact from "./Title/Contact";
@@ -25,8 +26,7 @@ const useStyles = makeStyles({
     padding: "0.5rem",
   },
   logo: {
-    paddingLeft: 2,
-    fontWeight: 600,
+    fontWeight: 700,
   },
 });
 
@@ -34,6 +34,8 @@ function Resume() {
   const classes = useStyles();
   const NAME = "Vivek Nigam";
   const JOBTITLE = "Full-Stack Software Developer";
+  const leftWide = `${60}%`
+  const rightWide = `${100-leftWide}%`
 
   return (
     <Box
@@ -41,26 +43,21 @@ function Resume() {
       display="flex"
       flexDirection="column"
       bgcolor="contrast.light"
-      m={4}
-      flexGrow={1}
-      flexShrink={1}
       className={`shadow`}
+      width="21cm"
+      minHeight="29.7cm"
     >
       <Title name={NAME} jobTitle={JOBTITLE} />
       <Contact />
       <ColoredLine color="#44318D" />
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        id="resume-insider"
-      >
+      <Box display="flex" justifyContent="space-between" id="resume-insider">
         <Box
           display="flex"
           flexDirection="column"
           p={1}
           m={1}
           pr={0}
-          width="60%"
+          width={leftWide}
         >
           <Experience />
           <Education />
@@ -72,7 +69,7 @@ function Resume() {
           p={1}
           m={1}
           pl={0}
-          width="40%"
+          width={rightWide}
           className={classes.right}
         >
           <Skills />

@@ -1,10 +1,16 @@
-import { Avatar, Box, IconButton, makeStyles, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     fontFamily: "Karla",
-    backgroundColor: theme.palette.contrast.main,
+    // backgroundColor: theme.palette.contrast.main,
     color: theme.palette.text.primary,
     "@media (min-width:1280px)": {
       margin: "4.2rem",
@@ -44,10 +50,9 @@ function Header() {
       >
         Re
       </Typography>
-      <Box>
-        <IconButton></IconButton>
+      <IconButton>
         <Avatar>VN</Avatar>
-      </Box>
+      </IconButton>
     </Box>
   );
 }
