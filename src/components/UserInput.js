@@ -12,12 +12,14 @@ import { Box } from "@material-ui/core";
 import React from "react";
 import BasicInfo from "./UserInput/BasicInfo";
 import ContactInfo from "./UserInput/ContactInfo";
+import ExperienceInfo from "./UserInput/ExperienceInfo";
 
 function UserInput() {
   return (
     <Box display="flex" flexDirection="column">
       <BasicInfo />
       <ContactInfo />
+      <ExperienceInfo />
     </Box>
   );
 }
