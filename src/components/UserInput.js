@@ -12,6 +12,7 @@ import { Box } from "@material-ui/core";
 import React from "react";
 import BasicInfo from "./UserInput/BasicInfo";
 import ContactInfo from "./UserInput/ContactInfo";
+import EducationInfo from "./UserInput/EducationInfo";
 import ExperienceInfo from "./UserInput/ExperienceInfo";
 
 function UserInput() {
@@ -20,6 +21,7 @@ function UserInput() {
       <BasicInfo />
       <ContactInfo />
       <ExperienceInfo />
+      <EducationInfo />
     </Box>
   );
 }
