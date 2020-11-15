@@ -11,6 +11,7 @@
 import { Box } from "@material-ui/core";
 import React from "react";
 import BasicInfo from "./UserInput/BasicInfo";
+import CertificationInfo from "./UserInput/CertificationInfo";
 import ContactInfo from "./UserInput/ContactInfo";
 import EducationInfo from "./UserInput/EducationInfo";
 import ExperienceInfo from "./UserInput/ExperienceInfo";
@@ -24,6 +25,7 @@ function UserInput() {
       <ExperienceInfo />
       <EducationInfo />
       <ProjectInfo />
+      <CertificationInfo />
     </Box>
   );
 }
