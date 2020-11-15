@@ -14,6 +14,7 @@ import BasicInfo from "./UserInput/BasicInfo";
 import ContactInfo from "./UserInput/ContactInfo";
 import EducationInfo from "./UserInput/EducationInfo";
 import ExperienceInfo from "./UserInput/ExperienceInfo";
+import ProjectInfo from "./UserInput/ProjectInfo";
 
 function UserInput() {
   return (
@@ -22,6 +23,7 @@ function UserInput() {
       <ContactInfo />
       <ExperienceInfo />
       <EducationInfo />
+      <ProjectInfo />
     </Box>
   );
 }
