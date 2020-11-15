@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
   desc: {
     minHeight: "2rem",
   },
+  grade: {
+    marginTop: "1rem",
+    marginRight: "0.5rem"
+  },
 }));
 
 function EducationInfo() {
@@ -47,6 +51,23 @@ function EducationInfo() {
         placeholder="Degree and Majors"
         className={classes.TextField}
       />
+      <Box display="flex" alignItems="center">
+        <TextField
+          variant="outlined"
+          size="small"
+          label="Grade"
+          color="secondary"
+          placeholder="Your CGPA"
+          className={classes.grade}
+        />
+        <TextField
+          variant="outlined"
+          size="small"
+          label="Max Grade"
+          color="secondary"
+          className={classes.grade}
+        />
+      </Box>
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <TextField
           type="month"
