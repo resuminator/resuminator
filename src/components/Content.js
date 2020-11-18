@@ -11,7 +11,7 @@
 import React from "react";
 import Resume from "./Resume/Resume";
 import { Box } from "@material-ui/core";
-import UserInput from "./UserInput";
+import InputLayout from "./UserInput/_InputLayout";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import MobileView from "./MobileView";
 
@@ -28,7 +28,7 @@ function Content() {
           id="main"
           m={5}
         >
-          <UserInput />
+          <InputLayout />
           <Resume />
         </Box>
       ) : (

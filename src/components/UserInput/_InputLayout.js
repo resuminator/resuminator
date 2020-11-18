@@ -10,14 +10,14 @@
 
 import { Box } from "@material-ui/core";
 import React from "react";
-import BasicInfo from "./UserInput/BasicInfo";
-import CertificationInfo from "./UserInput/CertificationInfo";
-import ContactInfo from "./UserInput/ContactInfo";
-import EducationInfo from "./UserInput/EducationInfo";
-import ExperienceInfo from "./UserInput/ExperienceInfo";
-import ProjectInfo from "./UserInput/ProjectInfo";
+import BasicInfo from "./BasicInfo";
+import CertificationInfo from "./CertificationInfo";
+import ContactInfo from "./ContactInfo";
+import EducationInfo from "./components/Education/EducationInfo";
+import ExperienceInfo from "./components/Experience/ExperienceInfo";
+import ProjectInfo from "./components/Projects/ProjectInfo";
 
-function UserInput() {
+function InputLayout() {
   return (
     <Box display="flex" flexDirection="column">
       <BasicInfo />
@@ -30,4 +30,4 @@ function UserInput() {
   );
 }
 
-export default UserInput;
+export default InputLayout;
