@@ -26,8 +26,18 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "2.5rem",
     padding: "2rem",
     "@media (min-width:1280px)": {
-      paddingLeft: "8rem",
+      padding: "8rem",
       paddingTop: "2rem",
+    },
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    backgroundColor: theme.palette.primary.main,
+  },
+  col1: {
+    "@media (min-width:768px)": {
+      width: "40%",
     },
   },
   text: {
@@ -37,11 +47,9 @@ const useStyles = makeStyles((theme) => ({
   subtext: {
     fontFamily: "Roboto",
     fontWeight: 400,
-    marginTop: "2rem",
-    color: theme.palette.contrast.main,
-    "@media (min-width:1280px)": {
-      width: "30%",
-    },
+    margin: "2rem",
+    marginLeft: "0rem",
+    maxWidth: "24rem",
   },
   links: {
     color: theme.palette.secondary.light,
@@ -53,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "1rem",
   },
   copyright: {
-    marginTop: "1.5rem",
+    marginTop: "0.5rem",
     marginBottom: "0rem",
   },
   chip: {
@@ -67,52 +75,49 @@ const useStyles = makeStyles((theme) => ({
 function Footer() {
   const classes = useStyles();
   return (
-    <footer>
+    <footer className={classes.root}>
       <Box
+        id="col-1"
         display="flex"
         flexDirection="column"
-        className={classes.root}
-        bgcolor="primary.main"
+        className={classes.col1}
+        flexGrow={1}
+        flexShrink={1}
       >
         <Typography variant="h6" className={classes.text} color="secondary">
-          Resuminator v{packageJSON.version}{" "}
+          Resuminator v{packageJSON.version}
           <Chip
-            size="small"
-            variant="outlined"
-            className={classes.chip}
             label="dev"
+            className={classes.chip}
+            variant="outlined"
+            size="small"
           />
         </Typography>
-        <Box
-          display="flex"
-          flexGrow={1}
-          flexShrink={1}
-          justifyContent="space-between"
-          alignItems="stretch"
-        >
-          <Typography
-            component="div"
-            variant="body2"
-            className={classes.subtext}
-          >
-            Resuminator a project by{" "}
-            <a className={classes.links} href={OWNER_PROFILE}>
-              Vivek Nigam
-            </a>{" "}
-            and maintained by the Bitshift Open Community.
-          </Typography>
-          <IconButton className={classes.button} href={RESUMINATOR_REPO_LINK}>
-            <FiGithub />
-          </IconButton>
-        </Box>
         <Typography
           color="textSecondary"
           variant="caption"
           align="left"
           className={classes.copyright}
         >
-          Copyright &copy; {new Date().getFullYear()} Vivek Nigam
+          Copyright &copy; {new Date().getFullYear()}{" "}
+          <a className={classes.links} href={OWNER_PROFILE}>
+            Vivek Nigam
+          </a>{" "}
         </Typography>
+        <Typography
+          component="div"
+          variant="body1"
+          color="textSecondary"
+          className={classes.subtext}
+        >
+          Resuminator is a project by Vivek Nigam and is maintained by The
+          Bitshift Community
+        </Typography>
+      </Box>
+      <Box id="col-3" display="flex" flexDirection="column" flexShrink={1}>
+        <IconButton className={classes.button} href={RESUMINATOR_REPO_LINK}>
+          <FiGithub />
+        </IconButton>
       </Box>
     </footer>
   );
