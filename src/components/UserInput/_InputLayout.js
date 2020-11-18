@@ -11,7 +11,7 @@
 import { Box } from "@material-ui/core";
 import React from "react";
 import BasicInfo from "./BasicInfo";
-import CertificationInfo from "./CertificationInfo";
+import CertificationInfo from "./components/Certification/CertificationInfo";
 import ContactInfo from "./ContactInfo";
 import EducationInfo from "./components/Education/EducationInfo";
 import ExperienceInfo from "./components/Experience/ExperienceInfo";
