@@ -1,0 +1,1 @@
+export const USERINFO = { ADD: "ADD_USERINFO", REMOVE: "REMOVE_USERINFO" };

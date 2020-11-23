@@ -10,6 +10,7 @@
 
 import React from "react";
 import { Box, makeStyles, Typography } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -26,8 +27,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Title(props) {
+function Title() {
   const classes = useStyles();
+  const userInfo = useSelector(state => state.userInfo);
+
   return (
     <Box
       display="flex"
@@ -37,10 +40,10 @@ function Title(props) {
       className={classes.root}
     >
       <Typography variant="h1" className={classes.title}>
-        {props.name}
+        {userInfo.name}
       </Typography>
       <Typography variant="h2" color="primary" className={classes.subtitle}>
-        {props.jobTitle}
+        {userInfo.jobtitle}
       </Typography>
     </Box>
   );
