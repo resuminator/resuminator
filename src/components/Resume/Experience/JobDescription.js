@@ -11,6 +11,7 @@
 import React from "react";
 import { Box, Link, makeStyles, Typography } from "@material-ui/core";
 import {FiExternalLink} from 'react-icons/fi'
+import ReactMarkdown from 'react-markdown'
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -32,14 +33,7 @@ function JobDescription(props) {
   let desc = props.desc;
   return (
     <Box textAlign="justify">
-      {desc.map((item, i) => {
-        i++;
-        return (
-          <Typography variant="body2" className={classes.item} key={i}>
-            • {item}
-          </Typography>
-        );
-      })}
+      <ReactMarkdown children={desc} />
       <Link href={props.workLink} target="_blank">
         <Typography variant="subtitle2" className={classes.link}>Work Link <FiExternalLink/></Typography>
       </Link>
