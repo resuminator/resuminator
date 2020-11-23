@@ -1,5 +1,14 @@
-import { Box, Chip, makeStyles, TextField, Typography } from "@material-ui/core";
+import {
+  Box,
+  Chip,
+  Fab,
+  makeStyles,
+  Paper,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import React from "react";
+import { FiPlus } from "react-icons/fi";
 const useStyles = makeStyles((theme) => ({
   TextField: {
     marginTop: "1rem",
@@ -17,11 +26,24 @@ const useStyles = makeStyles((theme) => ({
   tags: {
     marginRight: "0.2rem",
   },
+  paper: {
+    display: "flex",
+    minWidth: "25rem",
+    flexDirection: "column",
+    padding: "1rem",
+    margin: "1rem",
+    marginLeft: "0rem",
+    borderRadius: "1rem",
+    backgroundColor: theme.palette.contrast.light,
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
 }));
 
 function ProjectInfo() {
   const classes = useStyles();
-  const tags = ["Demo_1", "Demo_2", "Demo_3"]; 
+  const tags = ["Demo_1", "Demo_2", "Demo_3"];
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
@@ -36,42 +58,54 @@ function ProjectInfo() {
         Add details about your top 2/3 projects which align with your job
         profile!
       </Typography>
-      <TextField
-        label="Project Name"
-        variant="outlined"
-        color="secondary"
-        className={classes.TextField}
-        required
-      />
-      <TextField
-        InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
-        variant="outlined"
-        color="secondary"
-        label="What it is about?"
-        placeholder="Write a short description about your role in the project"
-        multiline
-        className={classes.TextField}
-      />
-      <TextField
-        variant="outlined"
-        size="small"
-        label="Where to find it?"
-        type="link"
-        color="secondary"
-        placeholder="Github/Website/Blog link"
-        className={classes.TextField}
-      />
-       <Box display="flex" justifyItems="space-between" pt={1}>
-        {tags.map((item) => (
-          <Chip
-            key={item}
-            variant="default"
+      <Box display="flex" alignItems="center" justifyItems="space-evenly">
+        <Paper elevation={2} className={classes.paper}>
+          <TextField
+            label="Project Name"
+            variant="outlined"
             color="secondary"
-            label={item}
-            size="small"
-            className={classes.tags}
+            className={classes.TextField}
+            required
           />
-        ))}
+          <TextField
+            InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
+            variant="outlined"
+            color="secondary"
+            label="What it is about?"
+            placeholder="Write a short description about your role in the project"
+            multiline
+            className={classes.TextField}
+          />
+          <TextField
+            variant="outlined"
+            size="small"
+            label="Where to find it?"
+            type="link"
+            color="secondary"
+            placeholder="Github/Website/Blog link"
+            className={classes.TextField}
+          />
+          <Box display="flex" justifyItems="space-between" pt={1}>
+            {tags.map((item) => (
+              <Chip
+                key={item}
+                variant="default"
+                color="secondary"
+                label={item}
+                size="small"
+                className={classes.tags}
+              />
+            ))}
+          </Box>
+        </Paper>
+        <Fab
+          size="small"
+          color="primary"
+          aria-label="add"
+          className={classes.margin}
+        >
+          <FiPlus />
+        </Fab>
       </Box>
     </Box>
   );

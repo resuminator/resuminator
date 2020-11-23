@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     display: "flex",
     flexDirection: "column",
+    minWidth: "25rem",
     padding: "1rem",
     margin: "1rem",
     marginLeft: "0rem",
