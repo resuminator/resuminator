@@ -10,11 +10,10 @@
 
 import React from "react";
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import experienceInfo from "../../Data/ExperienceInfo";
 import JobTitle from "./Experience/JobTitle";
 import JobDescription from "./Experience/JobDescription";
-import Tags from "./Experience/Tags";
 import ColoredLine from "../utils/Line";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   title: {
@@ -32,7 +31,7 @@ const useStyles = makeStyles({
 
 function Experience() {
   const classes = useStyles();
-
+  const experiences = useSelector(state => state.experienceInfo)
   return (
     <Box
       display="flex"
@@ -44,7 +43,7 @@ function Experience() {
         Experience
       </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
-      {experienceInfo.map((item) => (
+      {experiences.map((item) => (
         <Box id={`${item.company}-exp`} className={classes.exp} key={item.id}>
           <JobTitle
             title={item.jobTitle}
@@ -54,7 +53,6 @@ function Experience() {
             location={item.location}
           />
           <JobDescription desc={item.description} workLink={item.workLink} />
-          <Tags tags={item.tags} />
         </Box>
       ))}
     </Box>

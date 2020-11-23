@@ -46,6 +46,7 @@ function Resume() {
       className={`shadow`}
       width="21cm"
       minHeight="29.7cm"
+      zIndex="100"
     >
       <Title name={NAME} jobTitle={JOBTITLE} />
       <Contact />

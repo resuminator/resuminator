@@ -7,8 +7,10 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { EXPERIENCE_INFO } from "../../../../redux/actionTypes";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
@@ -48,7 +50,34 @@ const useStyles = makeStyles((theme) => ({
 
 function ExperienceInfo() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const tags = ["React", "UI/UX", "Testing"]; //Will be generated from Description Text's Topic Classification
+  const [experience, setExperience] = useState({description: ``});
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const experiences = useSelector((state) => state.experienceInfo);
+
+  const handleChange = (e, index) => {
+    e.preventDefault();
+    const field = e.target.name;
+    const value = e.target.value;
+
+    setExperience({ ...experience, [field]: value });
+    setCurrentIndex(index);
+  };
+
+  React.useEffect(() => {
+    dispatch({
+      type: EXPERIENCE_INFO.UPDATE,
+      payload: experience,
+      index: currentIndex,
+    });
+  }, [dispatch, experience, currentIndex]);
+
+  
+  // React.useEffect(()=> {
+  //   const index = experiences.length - 1;
+  //   dispatch({ type: EXPERIENCE_INFO.ADD, index: index });
+  // },[dispatch, experiences]);
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
@@ -63,85 +92,105 @@ function ExperienceInfo() {
         Don't worry, add anything which you feel relevant for your job
         application
       </Typography>
-      <Box display="flex" alignItems="center" justifyItems="space-evenly">
-        <Paper elevation={2} className={classes.paper}>
-          <TextField
-            label="Company/Institution"
-            variant="outlined"
-            color="secondary"
-            className={classes.TextField}
-            required
-          />
-          <TextField
-            variant="outlined"
-            size="small"
-            label="Location"
-            color="secondary"
-            placeholder="City name or 'Remote'"
-            className={classes.TextField}
-          />
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-          >
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyItems="space-evenly"
+        maxWidth="35rem"
+        overflow="auto"
+      >
+        {experiences.map((item, index) => (
+          <Paper elevation={2} className={classes.paper} key={item.id}>
             <TextField
-              type="date"
+              label="Company/Institution"
+              name="company"
+              variant="outlined"
               color="secondary"
               className={classes.TextField}
-              label="Started"
-              variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              required
+              onChange={(e) => handleChange(e, index)}
             />
             <TextField
-              type="date"
-              color="secondary"
-              className={classes.TextField}
-              label="Ended"
               variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              size="small"
+              label="Location"
+              name="location"
+              color="secondary"
+              placeholder="City name or 'Remote'"
+              className={classes.TextField}
+              onChange={(e) => handleChange(e, index)}
             />
-          </Box>
-          <TextField
-            InputProps={{ classes: { input: classes.desc }, rowsMax: 5 }}
-            variant="outlined"
-            color="secondary"
-            label="Description"
-            placeholder="* Start writing in bullet points..."
-            multiline
-            required
-            className={classes.TextField}
-            helperText="Markdown is supported :)"
-          />
-          <TextField
-            type="link"
-            label="Work link"
-            variant="outlined"
-            color="secondary"
-            size="small"
-            placeholder="Copy/Paste work link here"
-            className={classes.TextField}
-          />
-          <Typography
-            variant="caption"
-            className={classes.hints}
-            color="textSecondary"
-          >
-            Suggested Tags
-          </Typography>
-          <Box display="flex" justifyItems="space-between" pt={1}>
-            {tags.map((item) => (
-              <Chip
-                key={item}
-                variant="default"
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <TextField
+                type="date"
+                name="start"
                 color="secondary"
-                label={item}
-                size="small"
-                className={classes.tags}
+                className={classes.TextField}
+                label="Started"
+                variant="outlined"
+                InputLabelProps={{ shrink: true }}
+                onChange={(e) => handleChange(e, index)}
               />
-            ))}
-          </Box>
-        </Paper>
+              <TextField
+                type="date"
+                name="end"
+                color="secondary"
+                className={classes.TextField}
+                label="Ended"
+                variant="outlined"
+                InputLabelProps={{ shrink: true }}
+                onChange={(e) => handleChange(e, index)}
+              />
+            </Box>
+            <TextField
+              InputProps={{ classes: { input: classes.desc }, rowsMax: 5 }}
+              variant="outlined"
+              color="secondary"
+              label="Description"
+              name="description"
+              placeholder="* Start writing in bullet points..."
+              multiline
+              required
+              className={classes.TextField}
+              helperText="Markdown is supported :)"
+              onChange={(e) => handleChange(e, index)}
+            />
+            <TextField
+              type="link"
+              label="Work link"
+              name="workLink"
+              variant="outlined"
+              color="secondary"
+              size="small"
+              placeholder="Copy/Paste work link here"
+              className={classes.TextField}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <Typography
+              variant="caption"
+              className={classes.hints}
+              color="textSecondary"
+            >
+              Suggested Tags
+            </Typography>
+            <Box display="flex" justifyItems="space-between" pt={1}>
+              {tags.map((item) => (
+                <Chip
+                  key={item}
+                  variant="default"
+                  color="secondary"
+                  label={item}
+                  size="small"
+                  className={classes.tags}
+                />
+              ))}
+            </Box>
+          </Paper>
+        ))}
         <Fab
           size="small"
           color="primary"
