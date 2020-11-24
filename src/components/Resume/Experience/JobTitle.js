@@ -27,7 +27,7 @@ function JobTitle(props) {
   const classes = useStyles();
   return (
     <Box display="flex" alignItems="center" justifyContent="space-between" pb={1}>
-      <Box id="left" textAlign="left">
+      <Box id="left" textAlign="left" display="flex" flexDirection="column" justifyContent="flex-start">
         <Typography id="title" variant="h2" className={classes.title}>
           {props.company}
         </Typography>

@@ -111,6 +111,15 @@ function ExperienceInfo() {
               onChange={(e) => handleChange(e, index)}
             />
             <TextField
+              label="Position/Job Title"
+              name="jobTitle"
+              variant="outlined"
+              color="secondary"
+              className={classes.TextField}
+              required
+              onChange={(e) => handleChange(e, index)}
+            />
+            <TextField
               variant="outlined"
               size="small"
               label="Location"
