@@ -29,3 +29,7 @@ ul {
 li {
   margin: 0 0 4px 0;
 }
+
+p {
+  margin-block-start: 0em;
+}

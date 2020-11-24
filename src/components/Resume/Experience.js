@@ -15,19 +15,15 @@ import JobDescription from "./Experience/JobDescription";
 import ColoredLine from "../utils/Line";
 import { useSelector } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   title: {
-    color: "#44318D",
+    color: theme.palette.primary.main,
     fontSize: "1.5em",
-    fontWeight: 400,
-  },
-  box: {
-    width: "100%",
   },
   exp: {
     width: "100%",
   },
-});
+}));
 
 function Experience() {
   const classes = useStyles();
