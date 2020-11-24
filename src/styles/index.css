@@ -19,3 +19,13 @@ html, body #root {
   background-color: #fffafa;
   justify-content: space-between
 }
+
+ul {
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  padding-inline-start: 1rem;
+}
+
+li {
+  margin: 0 0 4px 0;
+}

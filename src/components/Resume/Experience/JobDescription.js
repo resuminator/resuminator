@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     fontFamily: theme.typography.fontFamily.secondar,
-    paddingBottom: "0.5rem",
+    paddingLeft: "1rem",
     fontWeight: 400
   },
 }));
@@ -32,8 +32,8 @@ function JobDescription(props) {
   const classes = useStyles();
   let desc = props.desc;
   return (
-    <Box textAlign="justify">
-      <ReactMarkdown children={desc} />
+    <Box textAlign="justify" p={1} pt={0}>
+      <ReactMarkdown children={desc} className={classes.item} skipHtml={true}/>
       <Link href={props.workLink} target="_blank">
         <Typography variant="subtitle2" className={classes.link}>Work Link <FiExternalLink/></Typography>
       </Link>
