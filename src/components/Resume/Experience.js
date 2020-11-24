@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 
 function Experience() {
   const classes = useStyles();
-  const experiences = useSelector(state => state.experienceInfo)
+  const experiences = useSelector((state) => state.experienceInfo);
   return (
     <Box
       display="flex"
@@ -43,18 +43,24 @@ function Experience() {
         Experience
       </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
-      {experiences.map((item) => (
-        <Box id={`${item.company}-exp`} className={classes.exp} key={item.id}>
-          <JobTitle
-            title={item.jobTitle}
-            company={item.company}
-            addInfo={item.additionalInfo}
-            duration={{ start: item.start, end: item.end }}
-            location={item.location}
-          />
-          <JobDescription desc={item.description} workLink={item.workLink} />
-        </Box>
-      ))}
+      {experiences.length === 0 ? (
+        <Typography variant="caption">
+          Looks empty here. Add an experience by clicking '+' on the left.
+        </Typography>
+      ) : (
+        experiences.map((item) => (
+          <Box id={`${item.company}-exp`} className={classes.exp} key={item.id}>
+            <JobTitle
+              title={item.jobTitle}
+              company={item.company}
+              addInfo={item.additionalInfo}
+              duration={{ start: item.start, end: item.end }}
+              location={item.location}
+            />
+            <JobDescription desc={item.description} workLink={item.workLink} />
+          </Box>
+        ))
+      )}
     </Box>
   );
 }
