@@ -10,14 +10,18 @@
 
 import React from "react";
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import educationInfo from "../../Data/EducationInfo";
 import EducationTitle from "./Education/EducationTitle";
 import ColoredLine from "../utils/Line";
+import { useSelector } from "react-redux";
+import ReactMarkdown from "react-markdown";
 
 const useStyles = makeStyles((theme) => ({
   title: {
     color: theme.palette.primary.main,
     fontSize: "1.5rem",
+  },
+  box: {
+    width: "100%",
   },
   desc: {
     fontFamily: theme.typography.fontFamily.secondary,
@@ -33,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Education() {
   const classes = useStyles();
+  const allEducation = useSelector((state) => state.educationInfo);
 
   return (
     <Box
@@ -47,8 +52,8 @@ function Education() {
         Education
       </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
-      {educationInfo.map((item) => (
-        <Box id={`${item.institute}-edu`} key={item.id}>
+      {allEducation.map((item) => (
+        <Box id={`${item.institute}-edu`} className={classes.box} key={item.id}>
           <EducationTitle
             institute={item.institute}
             location={item.location}
@@ -58,16 +63,7 @@ function Education() {
             degree={item.degree}
             total={item.total}
           />
-          <Typography variant="body2" className={classes.desc}>
-            <Typography
-              variant="body2"
-              component="span"
-              className={classes.span}
-            >
-              Activities & Societies:{" "}
-            </Typography>
-            {item.description}
-          </Typography>
+          <ReactMarkdown className={classes.desc} children={item.description}/>
         </Box>
       ))}
     </Box>

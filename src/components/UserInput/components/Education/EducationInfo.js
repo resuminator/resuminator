@@ -1,6 +1,16 @@
-import { Box, Fab, makeStyles, Paper, TextField, Typography } from "@material-ui/core";
-import React from "react";
+import {
+  Box,
+  Fab,
+  makeStyles,
+  Paper,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { EDUCATION_INFO } from "../../../../redux/actionTypes";
+import { parseYear } from "../../../utils/Helpers";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
@@ -34,6 +44,28 @@ const useStyles = makeStyles((theme) => ({
 
 function EducationInfo() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [education, setEducation] = useState({ description: `` });
+  const allEducation = useSelector((state) => state.educationInfo);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleChange = (e, index) => {
+    e.preventDefault();
+    const field = e.target.name;
+    const value = parseYear(e.target.type, e.target.value);
+
+    setEducation({ ...education, [field]: value });
+    setCurrentIndex(index);
+  };
+
+  React.useEffect(() => {
+    dispatch({
+      type: EDUCATION_INFO.UPDATE,
+      payload: education,
+      index: currentIndex,
+    });
+  }, [dispatch, education, currentIndex]);
+
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
       <Typography color="primary" variant="body1" className={classes.heading}>
@@ -48,71 +80,107 @@ function EducationInfo() {
         it.
       </Typography>
       <Box display="flex" alignItems="center" justifyItems="space-evenly">
-        <Paper elevation={2} className={classes.paper}>
-          <TextField
-            label="College/School"
-            variant="outlined"
-            color="secondary"
-            className={classes.TextField}
-            required
-          />
-          <TextField
-            variant="outlined"
-            size="small"
-            label="Degree"
-            color="secondary"
-            placeholder="Degree and Majors"
-            className={classes.TextField}
-          />
-          <Box display="flex" alignItems="center">
+        {allEducation.map((item, index) => (
+          <Paper elevation={2} className={classes.paper} key={item.id}>
             <TextField
+              label="College/School"
+              variant="outlined"
+              name="institute"
+              color="secondary"
+              className={classes.TextField}
+              required
+              onChange={(e) => handleChange(e, index)}
+            />
+             <TextField
               variant="outlined"
               size="small"
-              label="Grade"
+              label="Location"
+              name="location"
               color="secondary"
-              placeholder="Your CGPA"
-              className={classes.grade}
+              placeholder="City, State"
+              className={classes.TextField}
+              onChange={(e) => handleChange(e, index)}
             />
             <TextField
               variant="outlined"
               size="small"
-              label="Max Grade"
+              label="Degree"
+              name="degree"
               color="secondary"
-              className={classes.grade}
-            />
-          </Box>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <TextField
-              type="month"
-              color="secondary"
+              placeholder="Degree/High School/10th/12th etc."
               className={classes.TextField}
-              label="Started"
-              variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              onChange={(e) => handleChange(e, index)}
             />
             <TextField
-              type="month"
-              color="secondary"
-              className={classes.TextField}
-              label="Graduated"
               variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              size="small"
+              label="Majors/Stream"
+              name="stream"
+              color="secondary"
+              placeholder="Majors for your degree, if any?"
+              className={classes.TextField}
+              onChange={(e) => handleChange(e, index)}
             />
-          </Box>
-          <TextField
-            InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
-            variant="outlined"
-            color="secondary"
-            label="Activities & Societies"
-            placeholder="Add relevant club names or positions of responsibility separated by commas..."
-            multiline
-            className={classes.TextField}
-          />
-        </Paper>
+            <Box display="flex" alignItems="center">
+              <TextField
+                variant="outlined"
+                size="small"
+                label="Grade"
+                name="grade"
+                color="secondary"
+                placeholder="Your CGPA"
+                className={classes.grade}
+                onChange={(e) => handleChange(e, index)}
+              />
+              <TextField
+                variant="outlined"
+                size="small"
+                label="Max Grade"
+                name="total"
+                color="secondary"
+                className={classes.grade}
+                onChange={(e) => handleChange(e, index)}
+              />
+            </Box>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <TextField
+                type="date"
+                color="secondary"
+                className={classes.TextField}
+                label="Started"
+                name="start"
+                variant="outlined"
+                InputLabelProps={{ shrink: true }}
+                onChange={(e) => handleChange(e, index)}
+              />
+              <TextField
+                type="date"
+                color="secondary"
+                className={classes.TextField}
+                label="Graduated"
+                name="end"
+                variant="outlined"
+                InputLabelProps={{ shrink: true }}
+                onChange={(e) => handleChange(e, index)}
+              />
+            </Box>
+            <TextField
+              InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
+              variant="outlined"
+              color="secondary"
+              label="Activities & Societies"
+              name="description"
+              placeholder="Add relevant club names or positions of responsibility separated by commas..."
+              multiline
+              className={classes.TextField}
+              onChange={(e) => handleChange(e, index)}
+            />
+          </Paper>
+        ))}
         <Fab
           size="small"
           color="primary"
