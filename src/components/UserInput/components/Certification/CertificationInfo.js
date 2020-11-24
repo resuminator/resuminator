@@ -6,8 +6,11 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { CERTIFICATION_INFO } from "../../../../redux/actionTypes";
+import { parseDate } from "../../../utils/Helpers";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
@@ -40,6 +43,27 @@ const useStyles = makeStyles((theme) => ({
 
 function CertificationInfo() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [certificate, setCertificate] = useState({});
+  const certifications = useSelector((state) => state.certificationInfo);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleChange = (e, index) => {
+    e.preventDefault();
+    const field = e.target.name;
+    const value = parseDate(e.target.type, e.target.value);
+
+    setCertificate({ ...certificate, [field]: value });
+    setCurrentIndex(index);
+  };
+
+  React.useEffect(() => {
+    dispatch({
+      type: CERTIFICATION_INFO.UPDATE,
+      payload: certificate,
+      index: currentIndex,
+    });
+  }, [dispatch, certificate, currentIndex]);
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
@@ -54,59 +78,73 @@ function CertificationInfo() {
         Add your professional certifications with certification ID and/or Link
       </Typography>
       <Box display="flex" alignItems="center" justifyItems="space-evenly">
-        <Paper elevation={2} className={classes.paper}>
-          <TextField
-            label="Name"
-            variant="outlined"
-            color="secondary"
-            className={classes.TextField}
-            required
-          />
-          <TextField
-            variant="outlined"
-            size="small"
-            label="Issuing Authority"
-            color="secondary"
-            placeholder="company name"
-            className={classes.TextField}
-          />
-          <TextField
-            variant="outlined"
-            size="small"
-            label="Unique Certification ID"
-            color="secondary"
-            className={classes.TextField}
-          />
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-          >
+        {certifications.map((item, index) => (
+          <Paper elevation={2} className={classes.paper} key={item.id}>
             <TextField
-              type="month"
+              label="Name"
+              name="name"
+              variant="outlined"
               color="secondary"
               className={classes.TextField}
-              label="Obtained"
-              variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              required
+              onChange={(e) => handleChange(e, index)}
             />
             <TextField
-              type="month"
+              variant="outlined"
+              size="small"
+              label="Issuing Authority"
+              name="authority"
+              color="secondary"
+              placeholder="company name"
+              className={classes.TextField}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <TextField
+              variant="outlined"
+              size="small"
+              label="Unique Certification ID"
+              name="number"
               color="secondary"
               className={classes.TextField}
-              label="Expires"
-              variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              onChange={(e) => handleChange(e, index)}
             />
-          </Box>
-          <TextField
-            variant="outlined"
-            size="small"
-            label="Link"
-            color="secondary"
-            className={classes.TextField}
-          />
-        </Paper>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <TextField
+                type="date"
+                color="secondary"
+                className={classes.TextField}
+                label="Obtained"
+                name="obtained"
+                variant="outlined"
+                InputLabelProps={{ shrink: true }}
+                onChange={(e) => handleChange(e, index)}
+              />
+              <TextField
+                type="date"
+                color="secondary"
+                className={classes.TextField}
+                label="Expires"
+                name="expires"
+                variant="outlined"
+                InputLabelProps={{ shrink: true }}
+                onChange={(e) => handleChange(e, index)}
+              />
+            </Box>
+            <TextField
+              variant="outlined"
+              size="small"
+              label="Link"
+              name="link"
+              color="secondary"
+              className={classes.TextField}
+              onChange={(e) => handleChange(e, index)}
+            />
+          </Paper>
+        ))}
         <Fab
           size="small"
           color="primary"

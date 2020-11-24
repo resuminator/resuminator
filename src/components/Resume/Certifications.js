@@ -13,8 +13,9 @@ import { Box, makeStyles, Typography } from "@material-ui/core";
 import certificationInfo from "../../Data/CertificationInfo";
 import ColoredLine from "../utils/Line";
 import CertificationTitle from "./Certifications/CertificationTitle";
+import { useSelector } from "react-redux";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: "1.5rem",
   },
@@ -22,6 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 function Certifications() {
   const classes = useStyles();
+  const certifications = useSelector((state) => state.certificationInfo);
 
   return (
     <Box
@@ -32,11 +34,16 @@ function Certifications() {
       pt={3}
       flexGrow={1}
     >
-      <Typography id="title" variant="h1" color="primary" className={classes.title}>
+      <Typography
+        id="title"
+        variant="h1"
+        color="primary"
+        className={classes.title}
+      >
         Certifications
       </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
-      {certificationInfo.map((item) => (
+      {certifications.map((item) => (
         <CertificationTitle
           key={item.id}
           name={item.name}
