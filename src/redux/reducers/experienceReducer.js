@@ -1,3 +1,5 @@
+import { updateField } from "../actions";
+
 const { EXPERIENCE_INFO } = require("../actionTypes");
 
 const initialState = [
@@ -14,17 +16,6 @@ const initialState = [
   },
 ];
 
-function updateField(array, action) {
-  return array.map((item, index) => {
-    if (index === action.index) {
-      return {
-        ...item,
-        ...action.payload,
-      };
-    }
-    return item;
-  });
-}
 const experienceReducer = (state = initialState, action) => {
   switch (action.type) {
     case EXPERIENCE_INFO.ADD: {
