@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ProjectInfo() {
   const classes = useStyles();
-  const tags = ["Demo_1", "Demo_2", "Demo_3"];
+  const tags = [];
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>

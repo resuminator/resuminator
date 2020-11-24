@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 function ExperienceInfo() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const tags = ["React", "UI/UX", "Testing"]; //Will be generated from Description Text's Topic Classification
+  const tags = []; //Will be generated from Description Text's Topic Classification
   const [experience, setExperience] = useState({description: ``});
   const [currentIndex, setCurrentIndex] = useState(0);
   const experiences = useSelector((state) => state.experienceInfo);
