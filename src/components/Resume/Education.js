@@ -46,7 +46,7 @@ function Education() {
       alignItems="flex-start"
       justifyItems="flex-start"
       className={classes.root}
-      pt={2}
+      pb={2}
     >
       <Typography id="title" variant="h1" className={classes.title}>
         Education

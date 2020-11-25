@@ -34,6 +34,7 @@ function Experience() {
       flexDirection="column"
       alignItems="flex-start"
       justifyItems="flex-start"
+      pb={2}
     >
       <Typography id="title" variant="h1" className={classes.title}>
         Experience

@@ -31,7 +31,7 @@ function Projects() {
       flexDirection="column"
       alignItems="flex-start"
       justifyItems="flex-start"
-      pt={3}
+      pb={2}
     >
       <Typography
         variant="h1"

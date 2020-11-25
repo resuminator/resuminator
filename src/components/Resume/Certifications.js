@@ -30,7 +30,7 @@ function Certifications() {
       flexDirection="column"
       alignItems="flex-start"
       justifyContent="flex-start"
-      pt={3}
+      pb={2}
       flexGrow={1}
     >
       <Typography
