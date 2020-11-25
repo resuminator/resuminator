@@ -8,7 +8,7 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/shadow.css";
 import "../../styles/page.css";
 import Title from "./Title/Title";
@@ -17,9 +17,10 @@ import Contact from "./Title/Contact";
 import Experience from "./Experience";
 import Education from "./Education";
 import Certifications from "./Certifications";
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
 import Projects from "./Projects";
 import Skills from "./Skills";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const useStyles = makeStyles({
   watermark: {
@@ -34,9 +35,43 @@ const useStyles = makeStyles({
 });
 
 function Resume() {
+  const userLayout = {
+    left: [
+      <Experience key="exp" />,
+      <Education key="edu" />,
+      <Certifications key="certs" />,
+    ],
+    right: [<Projects key="proj" />, <Skills key="skill" />],
+  };
+
   const classes = useStyles();
-  const leftWide = "60%"
-  const rightWide = "40%"
+  const [children, setChildren] = useState(userLayout);
+  const leftWide = "60%";
+  const rightWide = "40%";
+
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) return;
+    const sourceId = result.source.droppableId;
+    const destinationId = result.destination.droppableId;
+
+    if (sourceId === destinationId) {
+      const parts = Array.from(children[sourceId]);
+      const [reorderedPart] = parts.splice(result.source.index, 1);
+      parts.splice(result.destination.index, 0, reorderedPart);
+
+      setChildren({ ...children, [sourceId]: parts });
+    } else {
+      const sourceParts = Array.from(children[sourceId]);
+      const destinationParts = Array.from(children[destinationId]);
+      const [reorderedPart] = sourceParts.splice(result.source.index, 1);
+      destinationParts.splice(result.destination.index, 0, reorderedPart);
+
+      setChildren({
+        [sourceId]: sourceParts,
+        [destinationId]: destinationParts,
+      });
+    }
+  };
 
   return (
     <Box
@@ -50,34 +85,81 @@ function Resume() {
       zIndex="100"
       position="relative"
     >
-      <Title/>
+      <Title />
       <Contact />
       <ColoredLine color="#44318D" />
       <Box display="flex" justifyContent="space-between" id="resume-insider">
-        <Box
-          display="flex"
-          flexDirection="column"
-          p={1}
-          m={1}
-          pr={0}
-          width={leftWide}
-        >
-          <Experience />
-          <Education />
-          <Certifications />
-        </Box>
-        <Box
-          display="flex"
-          flexDirection="column"
-          p={1}
-          m={1}
-          pl={0}
-          width={rightWide}
-          className={classes.right}
-        >
-          <Skills />
-          <Projects />
-        </Box>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="left">
+            {(provided) => (
+              <Box
+                display="flex"
+                flexDirection="column"
+                p={1}
+                m={1}
+                pr={0}
+                width={leftWide}
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {children.left.map((item, index) => (
+                  <Draggable
+                    key={item.key}
+                    draggableId={item.key}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <Paper
+                        elevation={0}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        {item}
+                      </Paper>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </Box>
+            )}
+          </Droppable>
+          <Droppable droppableId="right">
+            {(provided) => (
+              <Box
+                display="flex"
+                flexDirection="column"
+                p={1}
+                m={1}
+                pl={0}
+                width={rightWide}
+                className={classes.right}
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {children.right.map((item, index) => (
+                  <Draggable
+                    key={item.key}
+                    draggableId={item.key}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <Paper
+                        elevation={0}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        {item}
+                      </Paper>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </Box>
+            )}
+          </Droppable>
+        </DragDropContext>
       </Box>
       <Typography
         color="textSecondary"
