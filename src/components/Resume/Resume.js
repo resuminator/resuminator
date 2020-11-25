@@ -24,6 +24,9 @@ import Skills from "./Skills";
 const useStyles = makeStyles({
   watermark: {
     padding: "0.5rem",
+    bottom: 0,
+    position: "absolute",
+    width: "100%",
   },
   logo: {
     fontWeight: 700,
@@ -32,8 +35,6 @@ const useStyles = makeStyles({
 
 function Resume() {
   const classes = useStyles();
-  const NAME = "Vivek Nigam";
-  const JOBTITLE = "Full-Stack Software Developer";
   const leftWide = "60%"
   const rightWide = "40%"
 
@@ -47,8 +48,9 @@ function Resume() {
       width="21cm"
       minHeight="29.7cm"
       zIndex="100"
+      position="relative"
     >
-      <Title name={NAME} jobTitle={JOBTITLE} />
+      <Title/>
       <Contact />
       <ColoredLine color="#44318D" />
       <Box display="flex" justifyContent="space-between" id="resume-insider">
@@ -80,6 +82,7 @@ function Resume() {
       <Typography
         color="textSecondary"
         variant="caption"
+        component="footer"
         align="center"
         id="watermark"
         className={classes.watermark}
