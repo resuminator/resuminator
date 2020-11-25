@@ -9,24 +9,23 @@
  */
 
 import React from "react";
-import { makeStyles, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
+import ReactMarkdown from "react-markdown";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingBottom: "0.5rem",
     paddingTop: "0.5rem",
     fontFamily: theme.typography.fontFamily.secondary,
+    color: theme.palette.text.primary,
+    fontSize: "0.9rem",
   },
 }));
 
 function ProjectDescription(props) {
   const classes = useStyles();
 
-  return (
-    <Typography color="textPrimary" variant="body2" className={classes.root}>
-      {props.desc}
-    </Typography>
-  );
+  return <ReactMarkdown className={classes.root} children={props.desc} />;
 }
 
 export default ProjectDescription;

@@ -10,15 +10,16 @@
 
 import {
   Box,
-  Chip,
   Fab,
   makeStyles,
   Paper,
   TextField,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { PROJECT_INFO } from "../../../../redux/actionTypes";
 const useStyles = makeStyles((theme) => ({
   TextField: {
     marginTop: "1rem",
@@ -53,7 +54,27 @@ const useStyles = makeStyles((theme) => ({
 
 function ProjectInfo() {
   const classes = useStyles();
-  const tags = [];
+  const dispatch = useDispatch();
+  const projects = useSelector((state) => state.projectInfo);
+  const [project, setProject] = useState({ description: `` });
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleChange = (e, index) => {
+    e.preventDefault();
+    const field = e.target.name;
+    const value = e.target.value;
+
+    setProject({ ...project, [field]: value });
+    setCurrentIndex(index);
+  };
+
+  React.useEffect(() => {
+    dispatch({
+      type: PROJECT_INFO.UPDATE,
+      payload: project,
+      index: currentIndex,
+    });
+  }, [dispatch, project, currentIndex]);
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
@@ -69,45 +90,41 @@ function ProjectInfo() {
         profile!
       </Typography>
       <Box display="flex" alignItems="center" justifyItems="space-evenly">
-        <Paper elevation={2} className={classes.paper}>
-          <TextField
-            label="Project Name"
-            variant="outlined"
-            color="secondary"
-            className={classes.TextField}
-            required
-          />
-          <TextField
-            InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
-            variant="outlined"
-            color="secondary"
-            label="What it is about?"
-            placeholder="Write a short description about your role in the project"
-            multiline
-            className={classes.TextField}
-          />
-          <TextField
-            variant="outlined"
-            size="small"
-            label="Where to find it?"
-            type="link"
-            color="secondary"
-            placeholder="Github/Website/Blog link"
-            className={classes.TextField}
-          />
-          <Box display="flex" justifyItems="space-between" pt={1}>
-            {tags.map((item) => (
-              <Chip
-                key={item}
-                variant="default"
-                color="secondary"
-                label={item}
-                size="small"
-                className={classes.tags}
-              />
-            ))}
-          </Box>
-        </Paper>
+        {projects.map((item, index) => (
+          <Paper elevation={2} className={classes.paper} key={item.id}>
+            <TextField
+              label="Project Name"
+              name="projectTitle"
+              variant="outlined"
+              color="secondary"
+              className={classes.TextField}
+              required
+              onChange={(e) => handleChange(e, index)}
+            />
+            <TextField
+              InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
+              variant="outlined"
+              color="secondary"
+              label="What it is about?"
+              name="description"
+              placeholder="Write a short description about your role in the project"
+              multiline
+              className={classes.TextField}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <TextField
+              variant="outlined"
+              size="small"
+              label="Where to find it?"
+              name="projectLink"
+              type="link"
+              color="secondary"
+              placeholder="Github/Website/Blog link"
+              className={classes.TextField}
+              onChange={(e) => handleChange(e, index)}
+            />
+          </Paper>
+        ))}
         <Fab
           size="small"
           color="primary"

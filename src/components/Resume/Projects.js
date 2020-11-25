@@ -15,6 +15,7 @@ import projectsInfo from "../../Data/ProjectsInfo";
 import ProjectTitle from "./Projects/ProjectTitle";
 import ProjectDescription from "./Projects/ProjectDescription";
 import Tags from "./Experience/Tags";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Projects() {
   const classes = useStyles();
+  const projects = useSelector(state => state.projectInfo);
 
   return (
     <Box
@@ -42,7 +44,7 @@ function Projects() {
         Projects
       </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
-      {projectsInfo.map((item) => (
+      {projects.map((item) => (
         <Box key={item.id}>
           <ProjectTitle
             title={item.projectTitle}
@@ -51,7 +53,6 @@ function Projects() {
             projectLink={item.projectLink}
           />
           <ProjectDescription desc={item.description} />
-          <Tags tags={item.tags} />
         </Box>
       ))}
     </Box>
