@@ -10,7 +10,6 @@
 
 import React from "react";
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import certificationInfo from "../../Data/CertificationInfo";
 import ColoredLine from "../utils/Line";
 import CertificationTitle from "./Certifications/CertificationTitle";
 import { useSelector } from "react-redux";
