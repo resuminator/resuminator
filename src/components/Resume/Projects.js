@@ -11,10 +11,8 @@
 import React from "react";
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import ColoredLine from "../utils/Line";
-import projectsInfo from "../../Data/ProjectsInfo";
 import ProjectTitle from "./Projects/ProjectTitle";
 import ProjectDescription from "./Projects/ProjectDescription";
-import Tags from "./Experience/Tags";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
