@@ -22,7 +22,7 @@ import Projects from "./Projects";
 import Skills from "./Skills";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   watermark: {
     padding: "0.5rem",
     bottom: 0,
@@ -32,7 +32,18 @@ const useStyles = makeStyles({
   logo: {
     fontWeight: 700,
   },
-});
+  paper: {
+    backgroundColor: "inherit",
+    marginBottom: "0.1rem",
+    
+    '&:hover, &:active': {
+      border: "solid",
+      borderWidth: "0.1rem",
+      padding: "0.5rem",
+      borderColor: theme.palette.secondary.light,
+    }
+  }
+}));
 
 function Resume() {
   const userLayout = {
@@ -110,6 +121,8 @@ function Resume() {
                   >
                     {(provided) => (
                       <Paper
+                      className={classes.paper}
+                      color="inherit"
                         elevation={0}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
@@ -145,6 +158,7 @@ function Resume() {
                   >
                     {(provided) => (
                       <Paper
+                        className={classes.paper}
                         elevation={0}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
