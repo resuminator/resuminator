@@ -23,6 +23,7 @@ import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { EXPERIENCE_INFO } from "../../../../redux/actionTypes";
+import FloatingAddButton from "../../../FloatingAddButton";
 import { parseDate } from "../../../utils/Helpers";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,22 +56,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "0rem",
     borderRadius: "1rem",
     backgroundColor: theme.palette.contrast.light,
-  },
-  fab: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.contrast.light,
-    color: theme.palette.primary.main,
-    border: "dashed",
-    borderWidth: "0.1rem",
-    '&:hover, &:active': {
-      border: "solid",
-      borderWidth: "0.1rem",
-      color: theme.palette.contrast.light,
-      backgroundColor: theme.palette.primary.main,
-    }
-  },
-  checkbox: {
-    float: "right",
   },
 }));
 
@@ -190,7 +175,6 @@ function ExperienceInfo() {
               />
             </Box>
             <FormControlLabel
-              className={classes.checkbox}
               control={
                 <Checkbox
                   checked={present.state}
@@ -247,9 +231,7 @@ function ExperienceInfo() {
             </Box>
           </Paper>
         ))}
-        <IconButton className={classes.fab} onClick={handleAdd}>
-          <FiPlus />
-        </IconButton>
+        <FloatingAddButton onClick={handleAdd}/>
       </Box>
     </Box>
   );

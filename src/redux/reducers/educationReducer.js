@@ -29,21 +29,18 @@ const initialState = [
 const educationReducer = (state = initialState, action) => {
   switch (action.type) {
     case EDUCATION_INFO.ADD: {
-      return [
-        ...state,
-        {
-          id: action.id,
-          institute: "",
-          location: "",
-          degree: "",
-          stream: "",
-          grade: "",
-          total: "",
-          start: "",
-          end: "",
-          description: ``,
-        },
-      ];
+      return state.concat({
+        id: action.id,
+        institute: "",
+        location: "",
+        degree: "",
+        stream: "",
+        grade: "",
+        total: "",
+        start: "",
+        end: "",
+        description: ``,
+      });
     }
     case EDUCATION_INFO.UPDATE: {
       return updateField(state, action);

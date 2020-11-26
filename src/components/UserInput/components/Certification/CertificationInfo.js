@@ -22,6 +22,7 @@ import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { CERTIFICATION_INFO } from "../../../../redux/actionTypes";
+import FloatingAddButton from "../../../FloatingAddButton";
 import { parseDate } from "../../../utils/Helpers";
 
 const useStyles = makeStyles((theme) => ({
@@ -56,14 +57,19 @@ const useStyles = makeStyles((theme) => ({
 function CertificationInfo() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [expires, setExpires] = useState({state: false, date: ''});
+  const [expires, setExpires] = useState({ state: false, date: "" });
   const [certificate, setCertificate] = useState({});
   const certifications = useSelector((state) => state.certificationInfo);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const handleAdd = () => {
+    const id = certifications[certifications.length - 1].id + 1;
+    dispatch({ type: CERTIFICATION_INFO.ADD, id });
+  };
+
   const handleChange = (e, index) => {
-    if(e.target.id === "expires"){
-      setExpires({state: !expires.state, date: certificate.expires});
+    if (e.target.id === "expires") {
+      setExpires({ state: !expires.state, date: certificate.expires });
       const endValue = expires.state ? expires.date : "Never";
       setCertificate({ ...certificate, expires: endValue });
       return;
@@ -97,7 +103,13 @@ function CertificationInfo() {
       >
         Add your professional certifications with certification ID and/or Link
       </Typography>
-      <Box display="flex" alignItems="center" justifyItems="space-evenly">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyItems="space-evenly"
+        width="35rem"
+        overflow="auto"
+      >
         {certifications.map((item, index) => (
           <Paper elevation={2} className={classes.paper} key={item.id}>
             <TextField
@@ -156,7 +168,7 @@ function CertificationInfo() {
               />
             </Box>
             <FormControlLabel
-            className={classes.checkbox}
+              className={classes.checkbox}
               control={
                 <Checkbox
                   checked={expires.state}
@@ -179,14 +191,7 @@ function CertificationInfo() {
             />
           </Paper>
         ))}
-        <Fab
-          size="small"
-          color="primary"
-          aria-label="add"
-          className={classes.margin}
-        >
-          <FiPlus />
-        </Fab>
+        <FloatingAddButton onClick={handleAdd} />
       </Box>
     </Box>
   );

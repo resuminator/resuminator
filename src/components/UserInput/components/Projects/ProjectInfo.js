@@ -11,6 +11,7 @@
 import {
   Box,
   Fab,
+  IconButton,
   makeStyles,
   Paper,
   TextField,
@@ -20,6 +21,7 @@ import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { PROJECT_INFO } from "../../../../redux/actionTypes";
+import FloatingAddButton from "../../../FloatingAddButton";
 const useStyles = makeStyles((theme) => ({
   TextField: {
     marginTop: "1rem",
@@ -47,9 +49,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "1rem",
     backgroundColor: theme.palette.contrast.light,
   },
-  margin: {
-    margin: theme.spacing(1),
-  },
 }));
 
 function ProjectInfo() {
@@ -58,6 +57,11 @@ function ProjectInfo() {
   const projects = useSelector((state) => state.projectInfo);
   const [project, setProject] = useState({ description: `` });
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleAdd = () => {
+    const id = projects[projects.length - 1].id + 1;
+    dispatch({ type: PROJECT_INFO.ADD, id });
+  };
 
   const handleChange = (e, index) => {
     e.preventDefault();
@@ -89,7 +93,13 @@ function ProjectInfo() {
         Add details about your top 2/3 projects which align with your job
         profile!
       </Typography>
-      <Box display="flex" alignItems="center" justifyItems="space-evenly">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyItems="space-evenly"
+        width="35rem"
+        overflow="auto"
+      >
         {projects.map((item, index) => (
           <Paper elevation={2} className={classes.paper} key={item.id}>
             <TextField
@@ -125,14 +135,7 @@ function ProjectInfo() {
             />
           </Paper>
         ))}
-        <Fab
-          size="small"
-          color="primary"
-          aria-label="add"
-          className={classes.margin}
-        >
-          <FiPlus />
-        </Fab>
+        <FloatingAddButton onClick={handleAdd}/>
       </Box>
     </Box>
   );

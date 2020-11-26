@@ -22,6 +22,7 @@ import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { EDUCATION_INFO } from "../../../../redux/actionTypes";
+import FloatingAddButton from "../../../FloatingAddButton";
 import { parseYear } from "../../../utils/Helpers";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,14 +58,19 @@ const useStyles = makeStyles((theme) => ({
 function EducationInfo() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [present, setPresent] = useState({state: false, date: ''});
+  const [present, setPresent] = useState({ state: false, date: "" });
   const [education, setEducation] = useState({ description: `` });
   const allEducation = useSelector((state) => state.educationInfo);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const handleAdd = () => {
+    const id = allEducation[allEducation.length - 1].id + 1;
+    dispatch({ type: EDUCATION_INFO.ADD, id });
+  };
+
   const handleChange = (e, index) => {
-    if(e.target.id === "present"){
-      setPresent({state: !present.state, date: education.end});
+    if (e.target.id === "present") {
+      setPresent({ state: !present.state, date: education.end });
       const endValue = present.state ? present.date : "Present";
       setEducation({ ...education, end: endValue });
       return;
@@ -99,7 +105,13 @@ function EducationInfo() {
         Add your college/school details along with any other information about
         it.
       </Typography>
-      <Box display="flex" alignItems="center" justifyItems="space-evenly">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyItems="space-evenly"
+        width="35rem"
+        overflow="auto"
+      >
         {allEducation.map((item, index) => (
           <Paper elevation={2} className={classes.paper} key={item.id}>
             <TextField
@@ -111,7 +123,7 @@ function EducationInfo() {
               required
               onChange={(e) => handleChange(e, index)}
             />
-             <TextField
+            <TextField
               variant="outlined"
               size="small"
               label="Location"
@@ -190,7 +202,7 @@ function EducationInfo() {
               />
             </Box>
             <FormControlLabel
-            className={classes.checkbox}
+              className={classes.checkbox}
               control={
                 <Checkbox
                   checked={present.state}
@@ -215,14 +227,7 @@ function EducationInfo() {
             />
           </Paper>
         ))}
-        <Fab
-          size="small"
-          color="primary"
-          aria-label="add"
-          className={classes.margin}
-        >
-          <FiPlus />
-        </Fab>
+        <FloatingAddButton onClick={handleAdd} />
       </Box>
     </Box>
   );

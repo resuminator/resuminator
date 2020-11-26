@@ -23,15 +23,12 @@ const initialState = [
 const projectReducer = (state = initialState, action) => {
   switch (action.type) {
     case PROJECT_INFO.ADD: {
-      return [
-        ...state,
-        {
-          id: action.id,
-          projectTitle: "",
-          description: ``,
-          projectLink: "",
-        },
-      ];
+      return state.concat({
+        id: action.id,
+        projectTitle: "",
+        description: ``,
+        projectLink: "",
+      });
     }
     case PROJECT_INFO.UPDATE: {
       return updateField(state, action);

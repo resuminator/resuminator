@@ -19,25 +19,22 @@ const initialState = [
     number: "",
     obtained: "",
     expires: "",
-    link: ""
+    link: "",
   },
 ];
 
 const certificationReducer = (state = initialState, action) => {
   switch (action.type) {
     case CERTIFICATION_INFO.ADD: {
-      return [
-        ...state,
-        {
-          id: action.id,
-          name: "",
-          authority: "",
-          number: "",
-          obtained: "",
-          expires: "",
-          link: ""
-        },
-      ];
+      return state.concat({
+        id: action.id,
+        name: "",
+        authority: "",
+        number: "",
+        obtained: "",
+        expires: "",
+        link: "",
+      });
     }
     case CERTIFICATION_INFO.UPDATE: {
       return updateField(state, action);
