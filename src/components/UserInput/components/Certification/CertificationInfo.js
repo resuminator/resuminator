@@ -11,7 +11,6 @@
 import {
   Box,
   Checkbox,
-  Fab,
   FormControlLabel,
   makeStyles,
   Paper,
@@ -19,7 +18,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
-import { FiPlus } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { CERTIFICATION_INFO } from "../../../../redux/actionTypes";
 import FloatingAddButton from "../../../FloatingAddButton";
