@@ -57,12 +57,14 @@ function ProjectInfo() {
   const [currId, setCurrId] = useState(0);
 
   const handleAdd = () => {
+    setProject({});
     const len = projects.length;
     const id = len ? projects[len - 1].id + 1 : 0;
     dispatch({ type: PROJECT_INFO.ADD, id });
   };
 
   const handleDelete = (id) => {
+    setProject({});
     dispatch({ type: PROJECT_INFO.DELETE, id });
   };
 
@@ -115,6 +117,7 @@ function ProjectInfo() {
               color="secondary"
               className={classes.TextField}
               required
+              value={item.projectTitle}
               onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
@@ -125,6 +128,7 @@ function ProjectInfo() {
               name="description"
               placeholder="Write a short description about your role in the project"
               multiline
+              value={item.description}
               className={classes.TextField}
               onChange={(e) => handleChange(e, item.id)}
             />
@@ -135,6 +139,7 @@ function ProjectInfo() {
               name="projectLink"
               type="link"
               color="secondary"
+              value={item.link}
               placeholder="Github/Website/Blog link"
               className={classes.TextField}
               onChange={(e) => handleChange(e, item.id)}

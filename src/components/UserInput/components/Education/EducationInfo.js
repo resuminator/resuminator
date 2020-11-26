@@ -63,20 +63,25 @@ function EducationInfo() {
   const [currId, setCurrId] = useState(0);
 
   const handleAdd = () => {
+    setEducation({});
     const len = allEducation.length;
     const id = len ? allEducation[len - 1].id + 1 : 0;
     dispatch({ type: EDUCATION_INFO.ADD, id });
   };
 
-  const handleDelete = (index) => {
-    dispatch({ type: EDUCATION_INFO.DELETE, index });
+  const handleDelete = (id) => {
+    setEducation({});
+    dispatch({ type: EDUCATION_INFO.DELETE, id });
   };
 
   const handleChange = (e, id) => {
     setCurrId(id);
 
     if (e.target.id === "present") {
-      setPresent({ state: !present.state, date: education.end });
+      setPresent({
+        state: !present.state,
+        date: parseYear(e.target.type, e.target.value),
+      });
       const endValue = present.state ? present.date : "Present";
       setEducation({ end: endValue });
       return;
@@ -128,6 +133,7 @@ function EducationInfo() {
               color="secondary"
               className={classes.TextField}
               required
+              value={item.institute}
               onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
@@ -137,6 +143,7 @@ function EducationInfo() {
               name="location"
               color="secondary"
               placeholder="City, State"
+              value={item.location}
               className={classes.TextField}
               onChange={(e) => handleChange(e, item.id)}
             />
@@ -147,6 +154,7 @@ function EducationInfo() {
               name="degree"
               color="secondary"
               placeholder="Degree/High School/10th/12th etc."
+              value={item.degree}
               className={classes.TextField}
               onChange={(e) => handleChange(e, item.id)}
             />
@@ -157,6 +165,7 @@ function EducationInfo() {
               name="stream"
               color="secondary"
               placeholder="Majors for your degree, if any?"
+              value={item.degree}
               className={classes.TextField}
               onChange={(e) => handleChange(e, item.id)}
             />
@@ -168,6 +177,7 @@ function EducationInfo() {
                 name="grade"
                 color="secondary"
                 placeholder="Your CGPA"
+                value={item.grade}
                 className={classes.grade}
                 onChange={(e) => handleChange(e, item.id)}
               />
@@ -177,6 +187,7 @@ function EducationInfo() {
                 label="Max Grade"
                 name="total"
                 color="secondary"
+                value={item.total}
                 className={classes.grade}
                 onChange={(e) => handleChange(e, item.id)}
               />
@@ -203,7 +214,7 @@ function EducationInfo() {
                 label="Graduated"
                 name="end"
                 variant="outlined"
-                disabled={present.state}
+                disabled={item.end === "Present"}
                 InputLabelProps={{ shrink: true }}
                 onChange={(e) => handleChange(e, item.id)}
               />
@@ -212,7 +223,7 @@ function EducationInfo() {
               className={classes.checkbox}
               control={
                 <Checkbox
-                  checked={present.state}
+                  checked={item.end === "Present"}
                   onChange={(e) => handleChange(e, item.id)}
                   name="end"
                   color="primary"
@@ -229,6 +240,7 @@ function EducationInfo() {
               name="description"
               placeholder="Add relevant club names or positions of responsibility separated by commas..."
               multiline
+              value={item.description}
               className={classes.TextField}
               onChange={(e) => handleChange(e, item.id)}
             />

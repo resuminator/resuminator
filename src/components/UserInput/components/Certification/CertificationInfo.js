@@ -21,6 +21,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CERTIFICATION_INFO } from "../../../../redux/actionTypes";
 import FloatingAddButton from "../../../FloatingAddButton";
+import RemoveButton from "../../../RemoveButton";
 import { parseDate } from "../../../utils/Helpers";
 
 const useStyles = makeStyles((theme) => ({
@@ -58,16 +59,28 @@ function CertificationInfo() {
   const [expires, setExpires] = useState({ state: false, date: "" });
   const [certificate, setCertificate] = useState({});
   const certifications = useSelector((state) => state.certificationInfo);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currId, setCurrId] = useState(0);
 
   const handleAdd = () => {
-    const id = certifications[certifications.length - 1].id + 1;
+    setCertificate({});
+    const len = certifications.length;
+    const id = len ? certifications[len - 1].id + 1 : 0;
     dispatch({ type: CERTIFICATION_INFO.ADD, id });
   };
 
-  const handleChange = (e, index) => {
+  const handleDelete = (id) => {
+    setCertificate({});
+    dispatch({ type: CERTIFICATION_INFO.DELETE, id });
+  };
+
+  const handleChange = (e, id) => {
+    setCurrId(id);
+
     if (e.target.id === "expires") {
-      setExpires({ state: !expires.state, date: certificate.expires });
+      setExpires({
+        state: !expires.state,
+        date: parseDate(e.target.type, e.target.value),
+      });
       const endValue = expires.state ? expires.date : "Never";
       setCertificate({ expires: endValue });
       return;
@@ -78,16 +91,19 @@ function CertificationInfo() {
     const value = parseDate(e.target.type, e.target.value);
 
     setCertificate({ [field]: value });
-    setCurrentIndex(index);
   };
+
+  React.useEffect(() => {
+    setCertificate({});
+  }, [currId]);
 
   React.useEffect(() => {
     dispatch({
       type: CERTIFICATION_INFO.UPDATE,
       payload: certificate,
-      index: currentIndex,
+      id: currId,
     });
-  }, [dispatch, certificate, currentIndex]);
+  }, [dispatch, certificate, currId]);
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
@@ -108,7 +124,7 @@ function CertificationInfo() {
         width="35rem"
         overflow="auto"
       >
-        {certifications.map((item, index) => (
+        {certifications.map((item) => (
           <Paper elevation={2} className={classes.paper} key={item.id}>
             <TextField
               label="Name"
@@ -116,8 +132,9 @@ function CertificationInfo() {
               variant="outlined"
               color="secondary"
               className={classes.TextField}
+              value={item.name}
               required
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
               variant="outlined"
@@ -126,8 +143,9 @@ function CertificationInfo() {
               name="authority"
               color="secondary"
               placeholder="company name"
+              value={item.authority}
               className={classes.TextField}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
               variant="outlined"
@@ -135,8 +153,9 @@ function CertificationInfo() {
               label="Unique Certification ID"
               name="number"
               color="secondary"
+              value={item.number}
               className={classes.TextField}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <Box
               display="flex"
@@ -151,7 +170,7 @@ function CertificationInfo() {
                 name="obtained"
                 variant="outlined"
                 InputLabelProps={{ shrink: true }}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, item.id)}
               />
               <TextField
                 type="date"
@@ -160,17 +179,17 @@ function CertificationInfo() {
                 label="Expires"
                 name="expires"
                 variant="outlined"
-                disabled={expires.state}
+                disabled={item.expires === 'Never'}
                 InputLabelProps={{ shrink: true }}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, item.id)}
               />
             </Box>
             <FormControlLabel
               className={classes.checkbox}
               control={
                 <Checkbox
-                  checked={expires.state}
-                  onChange={(e) => handleChange(e, index)}
+                  checked={item.expires === 'Never'}
+                  onChange={(e) => handleChange(e, item.id)}
                   name="end"
                   color="primary"
                   id="expires"
@@ -184,9 +203,11 @@ function CertificationInfo() {
               label="Link"
               name="link"
               color="secondary"
+              value={item.link}
               className={classes.TextField}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
+            <RemoveButton onClick={() => handleDelete(item.id)} />
           </Paper>
         ))}
         <FloatingAddButton onClick={handleAdd} />
