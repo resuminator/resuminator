@@ -8,7 +8,7 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { updateField } from "../actions";
+import { deleteItem, updateField } from "../actions";
 const { EDUCATION_INFO } = require("../actionTypes");
 
 const initialState = [
@@ -44,6 +44,9 @@ const educationReducer = (state = initialState, action) => {
     }
     case EDUCATION_INFO.UPDATE: {
       return updateField(state, action);
+    }
+    case EDUCATION_INFO.DELETE: {
+      return deleteItem(state, action);
     }
     default: {
       return state;

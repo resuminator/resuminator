@@ -71,7 +71,7 @@ function CertificationInfo() {
     if (e.target.id === "expires") {
       setExpires({ state: !expires.state, date: certificate.expires });
       const endValue = expires.state ? expires.date : "Never";
-      setCertificate({ ...certificate, expires: endValue });
+      setCertificate({ expires: endValue });
       return;
     }
 
@@ -79,7 +79,7 @@ function CertificationInfo() {
     const field = e.target.name;
     const value = parseDate(e.target.type, e.target.value);
 
-    setCertificate({ ...certificate, [field]: value });
+    setCertificate({ [field]: value });
     setCurrentIndex(index);
   };
 

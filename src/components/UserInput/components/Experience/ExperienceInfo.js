@@ -13,17 +13,16 @@ import {
   Checkbox,
   Chip,
   FormControlLabel,
-  IconButton,
   makeStyles,
   Paper,
   TextField,
   Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
-import { FiPlus } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { EXPERIENCE_INFO } from "../../../../redux/actionTypes";
 import FloatingAddButton from "../../../FloatingAddButton";
+import RemoveButton from "../../../RemoveButton";
 import { parseDate } from "../../../utils/Helpers";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,20 +63,32 @@ function ExperienceInfo() {
   const dispatch = useDispatch();
   const tags = []; //Will be generated from Description Text's Topic Classification
   const [present, setPresent] = useState({ state: false, date: "" });
-  const [experience, setExperience] = useState({ description: `` });
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [experience, setExperience] = useState({});
+  const [currId, setCurrId] = useState(0);
   const experiences = useSelector((state) => state.experienceInfo);
 
   const handleAdd = () => {
-    const id = experiences[experiences.length - 1].id + 1;
-    dispatch({ type: EXPERIENCE_INFO.ADD, id});
+    setExperience({});
+    const len = experiences.length;
+    const id = len ? experiences[len - 1].id + 1 : 0;
+    dispatch({ type: EXPERIENCE_INFO.ADD, id });
   };
 
-  const handleChange = (e, index) => {
+  const handleDelete = (id) => {
+    setExperience({});
+    dispatch({ type: EXPERIENCE_INFO.DELETE, id });
+  };
+
+  const handleChange = (e, id) => {
+    setCurrId(id);
+
     if (e.target.id === "present") {
-      setPresent({ state: !present.state, date: experience.end });
+      setPresent({
+        state: !present.state,
+        date: parseDate(e.target.type, e.target.value),
+      });
       const endValue = present.state ? present.date : "Present";
-      setExperience({ ...experience, end: endValue });
+      setExperience({ end: endValue });
       return;
     }
 
@@ -85,17 +96,20 @@ function ExperienceInfo() {
     const field = e.target.name;
     const value = parseDate(e.target.type, e.target.value);
 
-    setExperience({ ...experience, [field]: value });
-    setCurrentIndex(index);
+    setExperience({ [field]: value });
   };
+
+  React.useEffect(() => {
+    setExperience({});
+  }, [currId]);
 
   React.useEffect(() => {
     dispatch({
       type: EXPERIENCE_INFO.UPDATE,
       payload: experience,
-      index: currentIndex,
+      id: currId,
     });
-  }, [dispatch, experience, currentIndex]);
+  }, [dispatch, experience, currId]);
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
@@ -117,7 +131,7 @@ function ExperienceInfo() {
         width="35rem"
         overflow="auto"
       >
-        {experiences.map((item, index) => (
+        {experiences.map((item) => (
           <Paper elevation={2} className={classes.paper} key={item.id}>
             <TextField
               label="Company/Institution"
@@ -126,7 +140,8 @@ function ExperienceInfo() {
               color="secondary"
               className={classes.TextField}
               required
-              onChange={(e) => handleChange(e, index)}
+              value={item.company}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
               label="Position/Job Title"
@@ -135,7 +150,8 @@ function ExperienceInfo() {
               color="secondary"
               className={classes.TextField}
               required
-              onChange={(e) => handleChange(e, index)}
+              value={item.jobTitle}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
               variant="outlined"
@@ -143,9 +159,10 @@ function ExperienceInfo() {
               label="Location"
               name="location"
               color="secondary"
+              value={item.location}
               placeholder="City name or 'Remote'"
               className={classes.TextField}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <Box
               display="flex"
@@ -160,7 +177,7 @@ function ExperienceInfo() {
                 label="Started"
                 variant="outlined"
                 InputLabelProps={{ shrink: true }}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, item.id)}
               />
               <TextField
                 type="date"
@@ -169,16 +186,16 @@ function ExperienceInfo() {
                 className={classes.TextField}
                 label="Ended"
                 variant="outlined"
-                disabled={present.state}
+                disabled={item.end === "Present"}
                 InputLabelProps={{ shrink: true }}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, item.id)}
               />
             </Box>
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={present.state}
-                  onChange={(e) => handleChange(e, index)}
+                  checked={item.end === "Present"}
+                  onChange={(e) => handleChange(e, item.id)}
                   name="end"
                   color="primary"
                   id="present"
@@ -195,9 +212,10 @@ function ExperienceInfo() {
               placeholder="* Start writing in bullet points..."
               multiline
               required
+              value={item.description}
               className={classes.TextField}
               helperText="Markdown is supported :)"
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
               type="link"
@@ -206,9 +224,10 @@ function ExperienceInfo() {
               variant="outlined"
               color="secondary"
               size="small"
+              value={item.workLink}
               placeholder="Copy/Paste work link here"
               className={classes.TextField}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <Typography
               variant="caption"
@@ -229,9 +248,10 @@ function ExperienceInfo() {
                 />
               ))}
             </Box>
+            <RemoveButton onClick={() => handleDelete(item.id)} />
           </Paper>
         ))}
-        <FloatingAddButton onClick={handleAdd}/>
+        <FloatingAddButton onClick={handleAdd} />
       </Box>
     </Box>
   );

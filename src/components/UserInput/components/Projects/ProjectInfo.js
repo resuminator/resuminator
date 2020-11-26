@@ -10,18 +10,16 @@
 
 import {
   Box,
-  Fab,
-  IconButton,
   makeStyles,
   Paper,
   TextField,
   Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
-import { FiPlus } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { PROJECT_INFO } from "../../../../redux/actionTypes";
 import FloatingAddButton from "../../../FloatingAddButton";
+import RemoveButton from "../../../RemoveButton";
 const useStyles = makeStyles((theme) => ({
   TextField: {
     marginTop: "1rem",
@@ -56,29 +54,37 @@ function ProjectInfo() {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.projectInfo);
   const [project, setProject] = useState({ description: `` });
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currId, setCurrId] = useState(0);
 
   const handleAdd = () => {
-    const id = projects[projects.length - 1].id + 1;
+    const len = projects.length;
+    const id = len ? projects[len - 1].id + 1 : 0;
     dispatch({ type: PROJECT_INFO.ADD, id });
   };
 
-  const handleChange = (e, index) => {
+  const handleDelete = (id) => {
+    dispatch({ type: PROJECT_INFO.DELETE, id });
+  };
+
+  const handleChange = (e, id) => {
+    setCurrId(id);
+
     e.preventDefault();
     const field = e.target.name;
     const value = e.target.value;
 
-    setProject({ ...project, [field]: value });
-    setCurrentIndex(index);
+    setProject({ [field]: value });
   };
+
+  React.useEffect(() => setProject({}), [currId]);
 
   React.useEffect(() => {
     dispatch({
       type: PROJECT_INFO.UPDATE,
       payload: project,
-      index: currentIndex,
+      id: currId,
     });
-  }, [dispatch, project, currentIndex]);
+  }, [dispatch, project, currId]);
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
@@ -100,7 +106,7 @@ function ProjectInfo() {
         width="35rem"
         overflow="auto"
       >
-        {projects.map((item, index) => (
+        {projects.map((item) => (
           <Paper elevation={2} className={classes.paper} key={item.id}>
             <TextField
               label="Project Name"
@@ -109,7 +115,7 @@ function ProjectInfo() {
               color="secondary"
               className={classes.TextField}
               required
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
               InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
@@ -120,7 +126,7 @@ function ProjectInfo() {
               placeholder="Write a short description about your role in the project"
               multiline
               className={classes.TextField}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
               variant="outlined"
@@ -131,11 +137,12 @@ function ProjectInfo() {
               color="secondary"
               placeholder="Github/Website/Blog link"
               className={classes.TextField}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
+            <RemoveButton onClick={() => handleDelete(item.id)} />
           </Paper>
         ))}
-        <FloatingAddButton onClick={handleAdd}/>
+        <FloatingAddButton onClick={handleAdd} />
       </Box>
     </Box>
   );

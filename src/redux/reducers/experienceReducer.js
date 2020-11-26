@@ -8,7 +8,7 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { updateField } from "../actions";
+import { deleteItem, updateField } from "../actions";
 const { EXPERIENCE_INFO } = require("../actionTypes");
 
 const initialState = [
@@ -42,6 +42,9 @@ const experienceReducer = (state = initialState, action) => {
     }
     case EXPERIENCE_INFO.UPDATE: {
       return updateField(state, action);
+    }
+    case EXPERIENCE_INFO.DELETE: {
+      return deleteItem(state, action)
     }
     default: {
       return state;

@@ -11,7 +11,6 @@
 import {
   Box,
   Checkbox,
-  Fab,
   FormControlLabel,
   makeStyles,
   Paper,
@@ -19,10 +18,10 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
-import { FiPlus } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { EDUCATION_INFO } from "../../../../redux/actionTypes";
 import FloatingAddButton from "../../../FloatingAddButton";
+import RemoveButton from "../../../RemoveButton";
 import { parseYear } from "../../../utils/Helpers";
 
 const useStyles = makeStyles((theme) => ({
@@ -61,18 +60,25 @@ function EducationInfo() {
   const [present, setPresent] = useState({ state: false, date: "" });
   const [education, setEducation] = useState({ description: `` });
   const allEducation = useSelector((state) => state.educationInfo);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currId, setCurrId] = useState(0);
 
   const handleAdd = () => {
-    const id = allEducation[allEducation.length - 1].id + 1;
+    const len = allEducation.length;
+    const id = len ? allEducation[len - 1].id + 1 : 0;
     dispatch({ type: EDUCATION_INFO.ADD, id });
   };
 
-  const handleChange = (e, index) => {
+  const handleDelete = (index) => {
+    dispatch({ type: EDUCATION_INFO.DELETE, index });
+  };
+
+  const handleChange = (e, id) => {
+    setCurrId(id);
+
     if (e.target.id === "present") {
       setPresent({ state: !present.state, date: education.end });
       const endValue = present.state ? present.date : "Present";
-      setEducation({ ...education, end: endValue });
+      setEducation({ end: endValue });
       return;
     }
 
@@ -80,17 +86,18 @@ function EducationInfo() {
     const field = e.target.name;
     const value = parseYear(e.target.type, e.target.value);
 
-    setEducation({ ...education, [field]: value });
-    setCurrentIndex(index);
+    setEducation({ [field]: value });
   };
+
+  React.useEffect(() => setEducation({}), [currId]);
 
   React.useEffect(() => {
     dispatch({
       type: EDUCATION_INFO.UPDATE,
       payload: education,
-      index: currentIndex,
+      id: currId,
     });
-  }, [dispatch, education, currentIndex]);
+  }, [dispatch, education, currId]);
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
@@ -112,7 +119,7 @@ function EducationInfo() {
         width="35rem"
         overflow="auto"
       >
-        {allEducation.map((item, index) => (
+        {allEducation.map((item) => (
           <Paper elevation={2} className={classes.paper} key={item.id}>
             <TextField
               label="College/School"
@@ -121,7 +128,7 @@ function EducationInfo() {
               color="secondary"
               className={classes.TextField}
               required
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
               variant="outlined"
@@ -131,7 +138,7 @@ function EducationInfo() {
               color="secondary"
               placeholder="City, State"
               className={classes.TextField}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
               variant="outlined"
@@ -141,7 +148,7 @@ function EducationInfo() {
               color="secondary"
               placeholder="Degree/High School/10th/12th etc."
               className={classes.TextField}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <TextField
               variant="outlined"
@@ -151,7 +158,7 @@ function EducationInfo() {
               color="secondary"
               placeholder="Majors for your degree, if any?"
               className={classes.TextField}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
             <Box display="flex" alignItems="center">
               <TextField
@@ -162,7 +169,7 @@ function EducationInfo() {
                 color="secondary"
                 placeholder="Your CGPA"
                 className={classes.grade}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, item.id)}
               />
               <TextField
                 variant="outlined"
@@ -171,7 +178,7 @@ function EducationInfo() {
                 name="total"
                 color="secondary"
                 className={classes.grade}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, item.id)}
               />
             </Box>
             <Box
@@ -187,7 +194,7 @@ function EducationInfo() {
                 name="start"
                 variant="outlined"
                 InputLabelProps={{ shrink: true }}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, item.id)}
               />
               <TextField
                 type="date"
@@ -198,7 +205,7 @@ function EducationInfo() {
                 variant="outlined"
                 disabled={present.state}
                 InputLabelProps={{ shrink: true }}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, item.id)}
               />
             </Box>
             <FormControlLabel
@@ -206,7 +213,7 @@ function EducationInfo() {
               control={
                 <Checkbox
                   checked={present.state}
-                  onChange={(e) => handleChange(e, index)}
+                  onChange={(e) => handleChange(e, item.id)}
                   name="end"
                   color="primary"
                   id="present"
@@ -223,8 +230,9 @@ function EducationInfo() {
               placeholder="Add relevant club names or positions of responsibility separated by commas..."
               multiline
               className={classes.TextField}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, item.id)}
             />
+            <RemoveButton onClick={() => handleDelete(item.id)} />
           </Paper>
         ))}
         <FloatingAddButton onClick={handleAdd} />

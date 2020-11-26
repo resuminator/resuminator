@@ -8,9 +8,9 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-export function updateField(array, action) {
-  return array.map((item, index) => {
-    if (index === action.index) {
+export const updateField = (array, action) => {
+  return array.map((item) => {
+    if (item.id === action.id) {
       return {
         ...item,
         ...action.payload,
@@ -18,4 +18,7 @@ export function updateField(array, action) {
     }
     return item;
   });
-}
+};
+
+export const deleteItem = (state, action) =>
+  state.filter((item) => item.id !== action.id);

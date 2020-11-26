@@ -8,7 +8,7 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { updateField } from "../actions";
+import { deleteItem, updateField } from "../actions";
 const { CERTIFICATION_INFO } = require("../actionTypes");
 
 const initialState = [
@@ -38,6 +38,9 @@ const certificationReducer = (state = initialState, action) => {
     }
     case CERTIFICATION_INFO.UPDATE: {
       return updateField(state, action);
+    }
+    case CERTIFICATION_INFO.DELETE: {
+      return deleteItem(state, action)
     }
     default: {
       return state;

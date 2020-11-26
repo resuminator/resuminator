@@ -8,7 +8,7 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { updateField } from "../actions";
+import { deleteItem, updateField } from "../actions";
 const { PROJECT_INFO } = require("../actionTypes");
 
 const initialState = [
@@ -32,6 +32,9 @@ const projectReducer = (state = initialState, action) => {
     }
     case PROJECT_INFO.UPDATE: {
       return updateField(state, action);
+    }
+    case PROJECT_INFO.DELETE: {
+      return deleteItem(state, action);
     }
     default: {
       return state;
