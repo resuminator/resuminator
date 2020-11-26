@@ -10,7 +10,9 @@
 
 import {
   Box,
+  Checkbox,
   Fab,
+  FormControlLabel,
   makeStyles,
   Paper,
   TextField,
@@ -54,11 +56,19 @@ const useStyles = makeStyles((theme) => ({
 function CertificationInfo() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [expires, setExpires] = useState({state: false, date: ''});
   const [certificate, setCertificate] = useState({});
   const certifications = useSelector((state) => state.certificationInfo);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleChange = (e, index) => {
+    if(e.target.id === "expires"){
+      setExpires({state: !expires.state, date: certificate.expires});
+      const endValue = expires.state ? expires.date : "Never";
+      setCertificate({ ...certificate, expires: endValue });
+      return;
+    }
+
     e.preventDefault();
     const field = e.target.name;
     const value = parseDate(e.target.type, e.target.value);
@@ -140,10 +150,24 @@ function CertificationInfo() {
                 label="Expires"
                 name="expires"
                 variant="outlined"
+                disabled={expires.state}
                 InputLabelProps={{ shrink: true }}
                 onChange={(e) => handleChange(e, index)}
               />
             </Box>
+            <FormControlLabel
+            className={classes.checkbox}
+              control={
+                <Checkbox
+                  checked={expires.state}
+                  onChange={(e) => handleChange(e, index)}
+                  name="end"
+                  color="primary"
+                  id="expires"
+                />
+              }
+              label="Never Expires"
+            />
             <TextField
               variant="outlined"
               size="small"

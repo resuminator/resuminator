@@ -10,7 +10,9 @@
 
 import {
   Box,
+  Checkbox,
   Fab,
+  FormControlLabel,
   makeStyles,
   Paper,
   TextField,
@@ -55,11 +57,19 @@ const useStyles = makeStyles((theme) => ({
 function EducationInfo() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [present, setPresent] = useState({state: false, date: ''});
   const [education, setEducation] = useState({ description: `` });
   const allEducation = useSelector((state) => state.educationInfo);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleChange = (e, index) => {
+    if(e.target.id === "present"){
+      setPresent({state: !present.state, date: education.end});
+      const endValue = present.state ? present.date : "Present";
+      setEducation({ ...education, end: endValue });
+      return;
+    }
+
     e.preventDefault();
     const field = e.target.name;
     const value = parseYear(e.target.type, e.target.value);
@@ -174,10 +184,24 @@ function EducationInfo() {
                 label="Graduated"
                 name="end"
                 variant="outlined"
+                disabled={present.state}
                 InputLabelProps={{ shrink: true }}
                 onChange={(e) => handleChange(e, index)}
               />
             </Box>
+            <FormControlLabel
+            className={classes.checkbox}
+              control={
+                <Checkbox
+                  checked={present.state}
+                  onChange={(e) => handleChange(e, index)}
+                  name="end"
+                  color="primary"
+                  id="present"
+                />
+              }
+              label="Currently Studying"
+            />
             <TextField
               InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
               variant="outlined"

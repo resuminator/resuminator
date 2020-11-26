@@ -10,8 +10,10 @@
 
 import {
   Box,
+  Checkbox,
   Chip,
   Fab,
+  FormControlLabel,
   makeStyles,
   Paper,
   TextField,
@@ -57,17 +59,28 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
   },
+  checkbox: {
+    float: "right"
+  }
 }));
 
 function ExperienceInfo() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const tags = []; //Will be generated from Description Text's Topic Classification
-  const [experience, setExperience] = useState({description: ``});
+  const [present, setPresent] = useState({state: false, date: ''});
+  const [experience, setExperience] = useState({ description: `` });
   const [currentIndex, setCurrentIndex] = useState(0);
   const experiences = useSelector((state) => state.experienceInfo);
 
   const handleChange = (e, index) => {
+    if(e.target.id === "present"){
+      setPresent({state: !present.state, date: experience.end});
+      const endValue = present.state ? present.date : "Present";
+      setExperience({ ...experience, end: endValue });
+      return;
+    }
+
     e.preventDefault();
     const field = e.target.name;
     const value = parseDate(e.target.type, e.target.value);
@@ -156,10 +169,24 @@ function ExperienceInfo() {
                 className={classes.TextField}
                 label="Ended"
                 variant="outlined"
+                disabled={present.state}
                 InputLabelProps={{ shrink: true }}
                 onChange={(e) => handleChange(e, index)}
               />
             </Box>
+            <FormControlLabel
+            className={classes.checkbox}
+              control={
+                <Checkbox
+                  checked={present.state}
+                  onChange={(e) => handleChange(e, index)}
+                  name="end"
+                  color="primary"
+                  id="present"
+                />
+              }
+              label="Present"
+            />
             <TextField
               InputProps={{ classes: { input: classes.desc }, rowsMax: 5 }}
               variant="outlined"
