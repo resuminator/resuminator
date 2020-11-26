@@ -28,20 +28,17 @@ const initialState = [
 const experienceReducer = (state = initialState, action) => {
   switch (action.type) {
     case EXPERIENCE_INFO.ADD: {
-      return [
-        ...state,
-        {
-          id: action.id,
-          jobTitle: "",
-          company: "",
-          additionalInfo: "",
-          start: "",
-          end: "",
-          location: "",
-          description: ``,
-          workLink: "",
-        },
-      ];
+      return state.concat({
+        id: action.id,
+        jobTitle: "",
+        company: "",
+        additionalInfo: "",
+        start: "",
+        end: "",
+        location: "",
+        description: ``,
+        workLink: "",
+      });
     }
     case EXPERIENCE_INFO.UPDATE: {
       return updateField(state, action);

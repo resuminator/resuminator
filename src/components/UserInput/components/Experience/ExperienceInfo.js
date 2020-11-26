@@ -12,8 +12,8 @@ import {
   Box,
   Checkbox,
   Chip,
-  Fab,
   FormControlLabel,
+  IconButton,
   makeStyles,
   Paper,
   TextField,
@@ -56,26 +56,41 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "1rem",
     backgroundColor: theme.palette.contrast.light,
   },
-  margin: {
+  fab: {
     margin: theme.spacing(1),
+    backgroundColor: theme.palette.contrast.light,
+    color: theme.palette.primary.main,
+    border: "dashed",
+    borderWidth: "0.1rem",
+    '&:hover, &:active': {
+      border: "solid",
+      borderWidth: "0.1rem",
+      color: theme.palette.contrast.light,
+      backgroundColor: theme.palette.primary.main,
+    }
   },
   checkbox: {
-    float: "right"
-  }
+    float: "right",
+  },
 }));
 
 function ExperienceInfo() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const tags = []; //Will be generated from Description Text's Topic Classification
-  const [present, setPresent] = useState({state: false, date: ''});
+  const [present, setPresent] = useState({ state: false, date: "" });
   const [experience, setExperience] = useState({ description: `` });
   const [currentIndex, setCurrentIndex] = useState(0);
   const experiences = useSelector((state) => state.experienceInfo);
 
+  const handleAdd = () => {
+    const id = experiences[experiences.length - 1].id + 1;
+    dispatch({ type: EXPERIENCE_INFO.ADD, id});
+  };
+
   const handleChange = (e, index) => {
-    if(e.target.id === "present"){
-      setPresent({state: !present.state, date: experience.end});
+    if (e.target.id === "present") {
+      setPresent({ state: !present.state, date: experience.end });
       const endValue = present.state ? present.date : "Present";
       setExperience({ ...experience, end: endValue });
       return;
@@ -114,7 +129,7 @@ function ExperienceInfo() {
         display="flex"
         alignItems="center"
         justifyItems="space-evenly"
-        maxWidth="35rem"
+        width="35rem"
         overflow="auto"
       >
         {experiences.map((item, index) => (
@@ -175,7 +190,7 @@ function ExperienceInfo() {
               />
             </Box>
             <FormControlLabel
-            className={classes.checkbox}
+              className={classes.checkbox}
               control={
                 <Checkbox
                   checked={present.state}
@@ -232,14 +247,9 @@ function ExperienceInfo() {
             </Box>
           </Paper>
         ))}
-        <Fab
-          size="small"
-          color="primary"
-          aria-label="add"
-          className={classes.margin}
-        >
+        <IconButton className={classes.fab} onClick={handleAdd}>
           <FiPlus />
-        </Fab>
+        </IconButton>
       </Box>
     </Box>
   );
