@@ -13,6 +13,7 @@ import { Box, makeStyles, Typography } from "@material-ui/core";
 import ColoredLine from "../utils/Line";
 import CertificationTitle from "./Certifications/CertificationTitle";
 import { useSelector } from "react-redux";
+import { checkEmptyState } from "../utils/Helpers";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -42,15 +43,21 @@ function Certifications() {
         Certifications
       </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
-      {certifications.map((item) => (
-        <CertificationTitle
-          key={item.id}
-          name={item.name}
-          authority={item.authority}
-          number={item.number}
-          duration={{ start: item.obtained, end: item.expires }}
-        />
-      ))}
+      {checkEmptyState(certifications) ? (
+        <Typography variant="caption">
+          Looks empty here. Add some certificates by clicking '+' on the left.
+        </Typography>
+      ) : (
+        certifications.map((item) => (
+          <CertificationTitle
+            key={item.id}
+            name={item.name}
+            authority={item.authority}
+            number={item.number}
+            duration={{ start: item.obtained, end: item.expires }}
+          />
+        ))
+      )}
     </Box>
   );
 }

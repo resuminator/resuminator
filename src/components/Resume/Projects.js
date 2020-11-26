@@ -14,6 +14,7 @@ import ColoredLine from "../utils/Line";
 import ProjectTitle from "./Projects/ProjectTitle";
 import ProjectDescription from "./Projects/ProjectDescription";
 import { useSelector } from "react-redux";
+import { checkEmptyState } from "../utils/Helpers";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Projects() {
   const classes = useStyles();
-  const projects = useSelector(state => state.projectInfo);
+  const projects = useSelector((state) => state.projectInfo);
 
   return (
     <Box
@@ -42,17 +43,23 @@ function Projects() {
         Projects
       </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
-      {projects.map((item) => (
-        <Box key={item.id}>
-          <ProjectTitle
-            title={item.projectTitle}
-            company={item.company}
-            addInfo={item.additionalInfo}
-            projectLink={item.projectLink}
-          />
-          <ProjectDescription desc={item.description} />
-        </Box>
-      ))}
+      {checkEmptyState(projects) ? (
+        <Typography variant="caption">
+          Looks empty here. Add some project info by clicking '+' on the left.
+        </Typography>
+      ) : (
+        projects.map((item) => (
+          <Box key={item.id}>
+            <ProjectTitle
+              title={item.projectTitle}
+              company={item.company}
+              addInfo={item.additionalInfo}
+              projectLink={item.projectLink}
+            />
+            <ProjectDescription desc={item.description} />
+          </Box>
+        ))
+      )}
     </Box>
   );
 }

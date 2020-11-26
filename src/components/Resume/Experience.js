@@ -14,6 +14,7 @@ import JobTitle from "./Experience/JobTitle";
 import JobDescription from "./Experience/JobDescription";
 import ColoredLine from "../utils/Line";
 import { useSelector } from "react-redux";
+import { checkEmptyState } from "../utils/Helpers";
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -40,7 +41,7 @@ function Experience() {
         Experience
       </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
-      {experiences.length === 0 ? (
+      {checkEmptyState(experiences) ? (
         <Typography variant="caption">
           Looks empty here. Add an experience by clicking '+' on the left.
         </Typography>

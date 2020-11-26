@@ -14,6 +14,7 @@ import EducationTitle from "./Education/EducationTitle";
 import ColoredLine from "../utils/Line";
 import { useSelector } from "react-redux";
 import ReactMarkdown from "react-markdown";
+import { checkEmptyState } from "../utils/Helpers";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -52,20 +53,33 @@ function Education() {
         Education
       </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
-      {allEducation.map((item) => (
-        <Box id={`${item.institute}-edu`} className={classes.box} key={item.id}>
-          <EducationTitle
-            institute={item.institute}
-            location={item.location}
-            stream={item.stream}
-            duration={{ start: item.start, end: item.end }}
-            grade={item.grade}
-            degree={item.degree}
-            total={item.total}
-          />
-          <ReactMarkdown className={classes.desc} children={item.description}/>
-        </Box>
-      ))}
+      {checkEmptyState(allEducation) ? (
+        <Typography variant="caption">
+          Looks empty here. Add your education info by clicking '+' on the left.
+        </Typography>
+      ) : (
+        allEducation.map((item) => (
+          <Box
+            id={`${item.institute}-edu`}
+            className={classes.box}
+            key={item.id}
+          >
+            <EducationTitle
+              institute={item.institute}
+              location={item.location}
+              stream={item.stream}
+              duration={{ start: item.start, end: item.end }}
+              grade={item.grade}
+              degree={item.degree}
+              total={item.total}
+            />
+            <ReactMarkdown
+              className={classes.desc}
+              children={item.description}
+            />
+          </Box>
+        ))
+      )}
     </Box>
   );
 }

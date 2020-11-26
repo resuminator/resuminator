@@ -46,3 +46,19 @@ export const parseYear = (type, value) => {
 
   return value;
 };
+
+export const checkEmptyState = (state) => {
+  let flag1 = true;
+  let flag2 = true;
+  if (state.length === 0) flag1 = false;
+  for(let i = 0; i < state.length; i++){
+    for(const pair of Object.entries(state[i])){
+      if(pair[1]) {
+        flag2 = false;
+        break;
+      };
+    }
+  }
+
+  return flag1 && flag2;
+}
