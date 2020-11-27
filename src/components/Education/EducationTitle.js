@@ -10,8 +10,9 @@
 
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { TitleBox } from "../common/PreviewBox";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   title: {
     color: theme.palette.primary.light,
     fontSize: "1em",
@@ -26,17 +27,16 @@ const useStyles = makeStyles(theme => ({
 function EducationTitle(props) {
   const classes = useStyles();
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent="space-between"
-      pb={2}
-    >
+    <TitleBox id="Education-Title">
       <Box textAlign="left">
         <Typography id="title" variant="h2" className={classes.title}>
           {props.institute}
         </Typography>
-        <Typography id="stream" variant="subtitle1" className={classes.subtitle}>
+        <Typography
+          id="stream"
+          variant="subtitle1"
+          className={classes.subtitle}
+        >
           {props.degree} {props.stream}{" "}
           {props.grade ? `, ${props.grade}/${props.total}` : null}
         </Typography>
@@ -49,7 +49,7 @@ function EducationTitle(props) {
           {props.location}
         </Typography>
       </Box>
-    </Box>
+    </TitleBox>
   );
 }
 export default EducationTitle;

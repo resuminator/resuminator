@@ -12,6 +12,7 @@ import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import skillsInfo from "../../Data/SkillsData";
 import ColoredLine from "../common/Line";
+import { TitleBox } from "../common/PreviewBox";
 import SkillSet from "./SkillSet";
 
 const useStyles = makeStyles({
@@ -24,21 +25,20 @@ function Skills() {
   const classes = useStyles();
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="flex-start"
-      justifyContent="flex-start"
-      pb={2}
-    >
-      <Typography color="primary" variant="h1" id="title" className={classes.title}>
+    <TitleBox flexDirection="column">
+      <Typography
+        color="primary"
+        variant="h1"
+        id="title"
+        className={classes.title}
+      >
         Skills
       </Typography>
       <ColoredLine color="#44318D" opacity="0.5" />
       {skillsInfo.map((item) => (
         <SkillSet key={item.id} title={item.title} skillList={item.skillList} />
       ))}
-    </Box>
+    </TitleBox>
   );
 }
 

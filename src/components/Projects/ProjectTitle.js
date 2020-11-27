@@ -10,28 +10,24 @@
 
 import { Box, Link, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { TitleBox } from "../common/PreviewBox";
 
 const useStyles = makeStyles((theme) => ({
   title: {
     color: theme.palette.primary.light,
     fontWeight: 600,
     paddingBottom: "0.1rem",
-    lineHeight: 1.2
+    lineHeight: 1.2,
   },
   subtitle: {
-    color: theme.palette.grey[600]
+    color: theme.palette.grey[600],
   },
 }));
 
 function ProjectTitle(props) {
   const classes = useStyles();
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="flex-start"
-      justifyContent="flex-start"
-    >
+    <TitleBox flexDirection="column">
       <Typography id="title" variant="body1" className={classes.title}>
         <Link href={props.projectLink} target="_blank">
           {props.title}
@@ -40,7 +36,7 @@ function ProjectTitle(props) {
       <Typography id="company" variant="body2" className={classes.subtitle}>
         {props.company} {props.addInfo ? `, ${props.addInfo}` : null}
       </Typography>
-    </Box>
+    </TitleBox>
   );
 }
 export default ProjectTitle;

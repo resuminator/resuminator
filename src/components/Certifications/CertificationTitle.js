@@ -10,6 +10,7 @@
 
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { TitleBox } from "../common/PreviewBox";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -28,11 +29,7 @@ const useStyles = makeStyles((theme) => ({
 function CertificationTitle(props) {
   const classes = useStyles();
   return (
-    <Box
-      display="flex"
-      alignItems="start"
-      flexDirection="column"
-    >
+    <TitleBox id="Certification-Title" flexDirection="column">
       <Typography id="name" variant="h2" className={classes.title}>
         {props.name}
       </Typography>
@@ -44,7 +41,7 @@ function CertificationTitle(props) {
         {props.authority} {props.number ? ` | ${props.number}` : null}{" "}
         {props.duration ? ` | Expires: ${props.duration.end}` : null}
       </Typography>
-    </Box>
+    </TitleBox>
   );
 }
 

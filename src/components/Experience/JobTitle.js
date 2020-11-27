@@ -10,6 +10,7 @@
 
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { TitleBox } from "../common/PreviewBox";
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 function JobTitle(props) {
   const classes = useStyles();
   return (
-    <Box display="flex" alignItems="center" justifyContent="space-between" pb={1}>
+    <TitleBox id="Job-Title-Box">
       <Box id="left" textAlign="left" display="flex" flexDirection="column" justifyContent="flex-start">
         <Typography id="title" variant="h2" className={classes.title}>
           {props.company}
@@ -43,7 +44,7 @@ function JobTitle(props) {
           {props.location}
         </Typography>
       </Box>
-    </Box>
+    </TitleBox>
   );
 }
 
