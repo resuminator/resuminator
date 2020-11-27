@@ -16,7 +16,7 @@ import ColoredLine from "../common/Line";
 import JobDescription from "./JobDescription";
 import JobTitle from "./JobTitle";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   title: {
     color: theme.palette.primary.main,
     fontSize: "1.5em",
@@ -29,37 +29,50 @@ const useStyles = makeStyles(theme => ({
 function Experience() {
   const classes = useStyles();
   const experiences = useSelector((state) => state.experienceInfo);
+  const view = useSelector((state) => state.view);
+
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="flex-start"
-      justifyItems="flex-start"
-      pb={2}
-    >
-      <Typography id="title" variant="h1" className={classes.title}>
-        Experience
-      </Typography>
-      <ColoredLine opacity={0.5}/>
-      {checkEmptyState(experiences) ? (
-        <Typography variant="caption">
-          Looks empty here. Add an experience by clicking '+' on the left.
-        </Typography>
-      ) : (
-        experiences.map((item) => (
-          <Box id={`${item.company}-exp`} className={classes.exp} key={item.id}>
-            <JobTitle
-              title={item.jobTitle}
-              company={item.company}
-              addInfo={item.additionalInfo}
-              duration={{ start: item.start, end: item.end }}
-              location={item.location}
-            />
-            <JobDescription desc={item.description} workLink={item.workLink} />
-          </Box>
-        ))
-      )}
-    </Box>
+    <React.Fragment>
+      {view.experience ? (
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="flex-start"
+          justifyItems="flex-start"
+          pb={2}
+        >
+          <Typography id="title" variant="h1" className={classes.title}>
+            Experience
+          </Typography>
+          <ColoredLine opacity={0.5} />
+          {checkEmptyState(experiences) ? (
+            <Typography variant="caption">
+              Looks empty here. Add an experience by clicking '+' on the left.
+            </Typography>
+          ) : (
+            experiences.map((item) => (
+              <Box
+                id={`${item.company}-exp`}
+                className={classes.exp}
+                key={item.id}
+              >
+                <JobTitle
+                  title={item.jobTitle}
+                  company={item.company}
+                  addInfo={item.additionalInfo}
+                  duration={{ start: item.start, end: item.end }}
+                  location={item.location}
+                />
+                <JobDescription
+                  desc={item.description}
+                  workLink={item.workLink}
+                />
+              </Box>
+            ))
+          )}
+        </Box>
+      ) : null}
+    </React.Fragment>
   );
 }
 
