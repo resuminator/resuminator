@@ -10,9 +10,9 @@
 
 import React from "react";
 import "./styles/App.css";
-import Header from "./components/Header";
-import Content from "./components/Content";
-import Footer from "./components/Footer";
+import Header from "./components/Header/Header";
+import Content from "./layout/Content";
+import Footer from "./components/Footer/Footer";
 import { MuiThemeProvider } from "@material-ui/core";
 import { resuminator } from "./themes/resuminator";
 
