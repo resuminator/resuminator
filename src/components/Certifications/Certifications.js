@@ -42,7 +42,7 @@ function Certifications() {
       >
         Certifications
       </Typography>
-      <ColoredLine color="#44318D" opacity="0.5" />
+      <ColoredLine opacity="0.5" />
       {checkEmptyState(certifications) ? (
         <Typography variant="caption">
           Looks empty here. Add some certificates by clicking '+' on the left.

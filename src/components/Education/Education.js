@@ -52,7 +52,7 @@ function Education() {
       <Typography id="title" variant="h1" className={classes.title}>
         Education
       </Typography>
-      <ColoredLine color="#44318D" opacity="0.5" />
+      <ColoredLine opacity={0.5} />
       {checkEmptyState(allEducation) ? (
         <Typography variant="caption">
           Looks empty here. Add your education info by clicking '+' on the left.

@@ -42,7 +42,7 @@ function Projects() {
       >
         Projects
       </Typography>
-      <ColoredLine color="#44318D" opacity="0.5" />
+      <ColoredLine opacity={0.5} />
       {checkEmptyState(projects) ? (
         <Typography variant="caption">
           Looks empty here. Add some project info by clicking '+' on the left.

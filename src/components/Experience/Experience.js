@@ -40,7 +40,7 @@ function Experience() {
       <Typography id="title" variant="h1" className={classes.title}>
         Experience
       </Typography>
-      <ColoredLine color="#44318D" opacity="0.5" />
+      <ColoredLine opacity={0.5}/>
       {checkEmptyState(experiences) ? (
         <Typography variant="caption">
           Looks empty here. Add an experience by clicking '+' on the left.
