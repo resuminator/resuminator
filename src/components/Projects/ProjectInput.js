@@ -11,6 +11,7 @@
 import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
 import { PROJECT_INFO } from "../../redux/actionTypes";
 import FloatingAddButton from "../common/FloatingAddButton";
 import { InputCard } from "../common/InputCard";
@@ -35,6 +36,7 @@ function ProjectInput() {
   const projects = useSelector((state) => state.projectInfo);
   const [project, setProject] = useState({ description: `` });
   const [currId, setCurrId] = useState(0);
+  const scrollRef = useHorizontalScroll();
 
   const handleAdd = () => {
     setProject({});
@@ -81,6 +83,7 @@ function ProjectInput() {
         justifyItems="space-evenly"
         width="35rem"
         overflow="auto"
+        ref={scrollRef}
       >
         {projects.map((item) => (
           <InputCard key={item.id}>

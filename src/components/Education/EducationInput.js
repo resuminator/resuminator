@@ -11,6 +11,7 @@
 import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
 import { EDUCATION_INFO } from "../../redux/actionTypes";
 import { parseYear } from "../../utils/Helpers";
 import { CustomCheckbox } from "../common/CustomCheckbox";
@@ -39,6 +40,7 @@ function EducationInput() {
   const [education, setEducation] = useState({ description: `` });
   const allEducation = useSelector((state) => state.educationInfo);
   const [currId, setCurrId] = useState(0);
+  const scrollRef = useHorizontalScroll();
 
   const handleAdd = () => {
     setEducation({});
@@ -89,133 +91,135 @@ function EducationInput() {
         subtitle="Add your college/school details along with any other information about
         it."
       />
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyItems="space-evenly"
-        width="35rem"
-        overflow="auto"
-      >
-        {allEducation.map((item) => (
-          <InputCard key={item.id}>
-            <TextField
-              label="College/School"
-              variant="outlined"
-              name="institute"
-              color="secondary"
-              className={classes.TextField}
-              required
-              value={item.institute}
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <TextField
-              variant="outlined"
-              size="small"
-              label="Location"
-              name="location"
-              color="secondary"
-              placeholder="City, State"
-              value={item.location}
-              className={classes.TextField}
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <TextField
-              variant="outlined"
-              size="small"
-              label="Degree"
-              name="degree"
-              color="secondary"
-              placeholder="Degree/High School/10th/12th etc."
-              value={item.degree}
-              className={classes.TextField}
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <TextField
-              variant="outlined"
-              size="small"
-              label="Majors/Stream"
-              name="stream"
-              color="secondary"
-              placeholder="Majors for your degree, if any?"
-              value={item.stream}
-              className={classes.TextField}
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <Box display="flex" alignItems="center">
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyItems="space-evenly"
+          width="35rem"
+          height="100%"
+          overflow="auto"
+          ref={scrollRef}
+        >
+          {allEducation.map((item) => (
+            <InputCard key={item.id}>
               <TextField
+                label="College/School"
                 variant="outlined"
-                size="small"
-                label="Grade"
-                name="grade"
+                name="institute"
                 color="secondary"
-                placeholder="Your CGPA"
-                value={item.grade}
-                className={classes.grade}
+                className={classes.TextField}
+                required
+                value={item.institute}
                 onChange={(e) => handleChange(e, item.id)}
               />
               <TextField
                 variant="outlined"
                 size="small"
-                label="Max Grade"
-                name="total"
+                label="Location"
+                name="location"
                 color="secondary"
-                value={item.total}
-                className={classes.grade}
+                placeholder="City, State"
+                value={item.location}
+                className={classes.TextField}
                 onChange={(e) => handleChange(e, item.id)}
               />
-            </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-            >
               <TextField
-                type="date"
-                color="secondary"
-                className={classes.TextField}
-                label="Started"
-                name="start"
                 variant="outlined"
-                InputLabelProps={{ shrink: true }}
+                size="small"
+                label="Degree"
+                name="degree"
+                color="secondary"
+                placeholder="Degree/High School/10th/12th etc."
+                value={item.degree}
+                className={classes.TextField}
                 onChange={(e) => handleChange(e, item.id)}
               />
               <TextField
-                type="date"
+                variant="outlined"
+                size="small"
+                label="Majors/Stream"
+                name="stream"
                 color="secondary"
+                placeholder="Majors for your degree, if any?"
+                value={item.stream}
                 className={classes.TextField}
-                label="Graduated"
+                onChange={(e) => handleChange(e, item.id)}
+              />
+              <Box display="flex" alignItems="center">
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  label="Grade"
+                  name="grade"
+                  color="secondary"
+                  placeholder="Your CGPA"
+                  value={item.grade}
+                  className={classes.grade}
+                  onChange={(e) => handleChange(e, item.id)}
+                />
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  label="Max Grade"
+                  name="total"
+                  color="secondary"
+                  value={item.total}
+                  className={classes.grade}
+                  onChange={(e) => handleChange(e, item.id)}
+                />
+              </Box>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <TextField
+                  type="date"
+                  color="secondary"
+                  className={classes.TextField}
+                  label="Started"
+                  name="start"
+                  variant="outlined"
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(e) => handleChange(e, item.id)}
+                />
+                <TextField
+                  type="date"
+                  color="secondary"
+                  className={classes.TextField}
+                  label="Graduated"
+                  name="end"
+                  variant="outlined"
+                  disabled={item.end === "Present"}
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(e) => handleChange(e, item.id)}
+                />
+              </Box>
+              <CustomCheckbox
+                checked={item.end === "Present"}
+                onChange={(e) => handleChange(e, item.id)}
                 name="end"
+                color="primary"
+                id="present"
+                label="Currently Studying"
+              />
+              <TextField
+                InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
                 variant="outlined"
-                disabled={item.end === "Present"}
-                InputLabelProps={{ shrink: true }}
+                color="secondary"
+                label="Activities & Societies"
+                name="description"
+                placeholder="Add relevant club names or positions of responsibility separated by commas..."
+                multiline
+                value={item.description}
+                className={classes.TextField}
                 onChange={(e) => handleChange(e, item.id)}
               />
-            </Box>
-            <CustomCheckbox
-              checked={item.end === "Present"}
-              onChange={(e) => handleChange(e, item.id)}
-              name="end"
-              color="primary"
-              id="present"
-              label="Currently Studying"
-            />
-            <TextField
-              InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
-              variant="outlined"
-              color="secondary"
-              label="Activities & Societies"
-              name="description"
-              placeholder="Add relevant club names or positions of responsibility separated by commas..."
-              multiline
-              value={item.description}
-              className={classes.TextField}
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <RemoveButton onClick={() => handleDelete(item.id)} />
-          </InputCard>
-        ))}
-        <FloatingAddButton onClick={handleAdd} />
-      </Box>
+              <RemoveButton onClick={() => handleDelete(item.id)} />
+            </InputCard>
+          ))}
+          <FloatingAddButton onClick={handleAdd} />
+        </Box>
     </Box>
   );
 }

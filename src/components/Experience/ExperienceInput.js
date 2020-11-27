@@ -11,6 +11,7 @@
 import { Box, makeStyles, TextField, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
 import { EXPERIENCE_INFO } from "../../redux/actionTypes";
 import { parseDate } from "../../utils/Helpers";
 import { CustomCheckbox } from "../common/CustomCheckbox";
@@ -41,6 +42,7 @@ function ExperienceInput() {
   const [experience, setExperience] = useState({});
   const [currId, setCurrId] = useState(0);
   const experiences = useSelector((state) => state.experienceInfo);
+  const scrollRef = useHorizontalScroll();
 
   const handleAdd = () => {
     setExperience({});
@@ -98,7 +100,9 @@ function ExperienceInput() {
         alignItems="center"
         justifyItems="space-evenly"
         width="35rem"
+        height="100%"
         overflow="auto"
+        ref={scrollRef}
       >
         {experiences.map((item) => (
           <InputCard key={item.id}>

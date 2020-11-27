@@ -11,6 +11,7 @@
 import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
 import { CERTIFICATION_INFO } from "../../redux/actionTypes";
 import { parseDate } from "../../utils/Helpers";
 import { CustomCheckbox } from "../common/CustomCheckbox";
@@ -38,6 +39,7 @@ function CertificationInput() {
   const [certificate, setCertificate] = useState({});
   const certifications = useSelector((state) => state.certificationInfo);
   const [currId, setCurrId] = useState(0);
+  const scrollRef = useHorizontalScroll();
 
   const handleAdd = () => {
     setCertificate({});
@@ -95,6 +97,7 @@ function CertificationInput() {
         justifyItems="space-evenly"
         width="35rem"
         overflow="auto"
+        ref={scrollRef}
       >
         {certifications.map((item) => (
           <InputCard key={item.id}>
