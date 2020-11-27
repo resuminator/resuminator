@@ -8,11 +8,11 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import skillsInfo from "../../Data/SkillsData";
 import ColoredLine from "../common/Line";
-import { TitleBox } from "../common/PreviewBox";
+import { TitleBox } from "../common/TitleBox";
 import SkillSet from "./SkillSet";
 
 const useStyles = makeStyles({
@@ -34,7 +34,7 @@ function Skills() {
       >
         Skills
       </Typography>
-      <ColoredLine color="#44318D" opacity="0.5" />
+      <ColoredLine opacity={0.5} />
       {skillsInfo.map((item) => (
         <SkillSet key={item.id} title={item.title} skillList={item.skillList} />
       ))}

@@ -8,9 +8,9 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Box, Link, makeStyles, Typography } from "@material-ui/core";
+import { Link, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { TitleBox } from "../common/PreviewBox";
+import { TitleBox } from "../common/TitleBox";
 
 const useStyles = makeStyles((theme) => ({
   title: {

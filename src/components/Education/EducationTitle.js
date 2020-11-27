@@ -10,7 +10,7 @@
 
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { TitleBox } from "../common/PreviewBox";
+import { TitleBox } from "../common/TitleBox";
 
 const useStyles = makeStyles((theme) => ({
   title: {
