@@ -15,25 +15,19 @@ import {
   makeStyles,
   Paper,
   TextField,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EDUCATION_INFO } from "../../redux/actionTypes";
 import { parseYear } from "../../utils/Helpers";
 import FloatingAddButton from "../common/FloatingAddButton";
+import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
     marginTop: "1rem",
-  },
-  heading: {
-    fontFamily: "Roboto",
-    fontWeight: 400,
-  },
-  subtitle: {
-    fontSize: "0.8rem",
   },
   desc: {
     minHeight: "2rem",
@@ -106,17 +100,11 @@ function EducationInput() {
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
-      <Typography color="primary" variant="body1" className={classes.heading}>
-        Where did you get your recent degree from?
-      </Typography>
-      <Typography
-        color="textSecondary"
-        variant="subtitle1"
-        className={classes.subtitle}
-      >
-        Add your college/school details along with any other information about
-        it.
-      </Typography>
+      <InputHeader
+        heading="Where did you get your recent degree from?"
+        subtitle="Add your college/school details along with any other information about
+        it."
+      />
       <Box
         display="flex"
         alignItems="center"

@@ -13,24 +13,18 @@ import {
   makeStyles,
   Paper,
   TextField,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PROJECT_INFO } from "../../redux/actionTypes";
 import FloatingAddButton from "../common/FloatingAddButton";
+import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
     marginTop: "1rem",
-  },
-  heading: {
-    fontFamily: "Roboto",
-    fontWeight: 400,
-  },
-  subtitle: {
-    fontSize: "0.8rem",
   },
   desc: {
     minHeight: "3rem",
@@ -91,17 +85,11 @@ function ProjectInput() {
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
-      <Typography color="primary" variant="body1" className={classes.heading}>
-        Showcase your best work!
-      </Typography>
-      <Typography
-        color="textSecondary"
-        variant="subtitle1"
-        className={classes.subtitle}
-      >
-        Add details about your top 2/3 projects which align with your job
-        profile!
-      </Typography>
+      <InputHeader
+        heading=" Showcase your best work!"
+        subtitle="Add details about your top 2/3 projects which align with your job
+        profile!"
+      />
       <Box
         display="flex"
         alignItems="center"

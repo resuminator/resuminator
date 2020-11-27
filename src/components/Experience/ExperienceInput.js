@@ -16,26 +16,20 @@ import {
   makeStyles,
   Paper,
   TextField,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EXPERIENCE_INFO } from "../../redux/actionTypes";
 import { parseDate } from "../../utils/Helpers";
 import FloatingAddButton from "../common/FloatingAddButton";
+import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
     marginTop: "1rem",
     borderColor: theme.palette.contrast.light,
-  },
-  heading: {
-    fontFamily: "Roboto",
-    fontWeight: 400,
-  },
-  subtitle: {
-    fontSize: "0.8rem",
   },
   desc: {
     minHeight: "5rem",
@@ -113,17 +107,11 @@ function ExperienceInput() {
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
-      <Typography color="primary" variant="body1" className={classes.heading}>
-        Tell us about your work experience
-      </Typography>
-      <Typography
-        color="textSecondary"
-        variant="subtitle1"
-        className={classes.subtitle}
-      >
-        Don't worry, add anything which you feel relevant for your job
-        application
-      </Typography>
+      <InputHeader
+        heading="Tell us about your work experience"
+        subtitle="Don't worry, add anything which you feel relevant for your job
+        application"
+      />
       <Box
         display="flex"
         alignItems="center"

@@ -15,25 +15,19 @@ import {
   makeStyles,
   Paper,
   TextField,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CERTIFICATION_INFO } from "../../redux/actionTypes";
 import { parseDate } from "../../utils/Helpers";
 import FloatingAddButton from "../common/FloatingAddButton";
+import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
     marginTop: "1rem",
-  },
-  heading: {
-    fontFamily: "Roboto",
-    fontWeight: 400,
-  },
-  subtitle: {
-    fontSize: "0.8rem",
   },
   desc: {
     minHeight: "2rem",
@@ -107,16 +101,10 @@ function CertificationInput() {
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
-      <Typography color="primary" variant="body1" className={classes.heading}>
-        Got any certifications?
-      </Typography>
-      <Typography
-        color="textSecondary"
-        variant="subtitle1"
-        className={classes.subtitle}
-      >
-        Add your professional certifications with certification ID and/or Link
-      </Typography>
+      <InputHeader
+        heading="Got any certifications?"
+        subtitle="Add your professional certifications with certification ID and/or Link"
+      />
       <Box
         display="flex"
         alignItems="center"
@@ -179,7 +167,7 @@ function CertificationInput() {
                 label="Expires"
                 name="expires"
                 variant="outlined"
-                disabled={item.expires === 'Never'}
+                disabled={item.expires === "Never"}
                 InputLabelProps={{ shrink: true }}
                 onChange={(e) => handleChange(e, item.id)}
               />
@@ -188,7 +176,7 @@ function CertificationInput() {
               className={classes.checkbox}
               control={
                 <Checkbox
-                  checked={item.expires === 'Never'}
+                  checked={item.expires === "Never"}
                   onChange={(e) => handleChange(e, item.id)}
                   name="end"
                   color="primary"
