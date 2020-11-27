@@ -8,20 +8,14 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  makeStyles,
-  Paper,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EDUCATION_INFO } from "../../redux/actionTypes";
 import { parseYear } from "../../utils/Helpers";
+import { CustomCheckbox } from "../common/CustomCheckbox";
 import FloatingAddButton from "../common/FloatingAddButton";
+import { InputCard } from "../common/InputCard";
 import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
 
@@ -35,16 +29,6 @@ const useStyles = makeStyles((theme) => ({
   grade: {
     marginTop: "1rem",
     marginRight: "0.5rem",
-  },
-  paper: {
-    display: "flex",
-    minWidth: "25rem",
-    flexDirection: "column",
-    padding: "1rem",
-    margin: "1rem",
-    marginLeft: "0rem",
-    borderRadius: "1rem",
-    backgroundColor: theme.palette.contrast.light,
   },
 }));
 
@@ -113,7 +97,7 @@ function EducationInput() {
         overflow="auto"
       >
         {allEducation.map((item) => (
-          <Paper elevation={2} className={classes.paper} key={item.id}>
+          <InputCard key={item.id}>
             <TextField
               label="College/School"
               variant="outlined"
@@ -153,7 +137,7 @@ function EducationInput() {
               name="stream"
               color="secondary"
               placeholder="Majors for your degree, if any?"
-              value={item.degree}
+              value={item.stream}
               className={classes.TextField}
               onChange={(e) => handleChange(e, item.id)}
             />
@@ -207,17 +191,12 @@ function EducationInput() {
                 onChange={(e) => handleChange(e, item.id)}
               />
             </Box>
-            <FormControlLabel
-              className={classes.checkbox}
-              control={
-                <Checkbox
-                  checked={item.end === "Present"}
-                  onChange={(e) => handleChange(e, item.id)}
-                  name="end"
-                  color="primary"
-                  id="present"
-                />
-              }
+            <CustomCheckbox
+              checked={item.end === "Present"}
+              onChange={(e) => handleChange(e, item.id)}
+              name="end"
+              color="primary"
+              id="present"
               label="Currently Studying"
             />
             <TextField
@@ -233,7 +212,7 @@ function EducationInput() {
               onChange={(e) => handleChange(e, item.id)}
             />
             <RemoveButton onClick={() => handleDelete(item.id)} />
-          </Paper>
+          </InputCard>
         ))}
         <FloatingAddButton onClick={handleAdd} />
       </Box>

@@ -8,20 +8,14 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  makeStyles,
-  Paper,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CERTIFICATION_INFO } from "../../redux/actionTypes";
 import { parseDate } from "../../utils/Helpers";
+import { CustomCheckbox } from "../common/CustomCheckbox";
 import FloatingAddButton from "../common/FloatingAddButton";
+import { InputCard } from "../common/InputCard";
 import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
 
@@ -31,16 +25,6 @@ const useStyles = makeStyles((theme) => ({
   },
   desc: {
     minHeight: "2rem",
-  },
-  paper: {
-    display: "flex",
-    minWidth: "25rem",
-    flexDirection: "column",
-    padding: "1rem",
-    margin: "1rem",
-    marginLeft: "0rem",
-    borderRadius: "1rem",
-    backgroundColor: theme.palette.contrast.light,
   },
   margin: {
     margin: theme.spacing(1),
@@ -113,7 +97,7 @@ function CertificationInput() {
         overflow="auto"
       >
         {certifications.map((item) => (
-          <Paper elevation={2} className={classes.paper} key={item.id}>
+          <InputCard key={item.id}>
             <TextField
               label="Name"
               name="name"
@@ -172,17 +156,12 @@ function CertificationInput() {
                 onChange={(e) => handleChange(e, item.id)}
               />
             </Box>
-            <FormControlLabel
-              className={classes.checkbox}
-              control={
-                <Checkbox
-                  checked={item.expires === "Never"}
-                  onChange={(e) => handleChange(e, item.id)}
-                  name="end"
-                  color="primary"
-                  id="expires"
-                />
-              }
+            <CustomCheckbox
+              checked={item.expires === "Never"}
+              onChange={(e) => handleChange(e, item.id)}
+              name="end"
+              color="primary"
+              id="expires"
               label="Never Expires"
             />
             <TextField
@@ -196,7 +175,7 @@ function CertificationInput() {
               onChange={(e) => handleChange(e, item.id)}
             />
             <RemoveButton onClick={() => handleDelete(item.id)} />
-          </Paper>
+          </InputCard>
         ))}
         <FloatingAddButton onClick={handleAdd} />
       </Box>

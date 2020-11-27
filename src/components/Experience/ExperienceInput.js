@@ -8,23 +8,17 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import {
-  Box,
-  Checkbox,
-  Chip,
-  FormControlLabel,
-  makeStyles,
-  Paper,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { Box, makeStyles, TextField, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EXPERIENCE_INFO } from "../../redux/actionTypes";
 import { parseDate } from "../../utils/Helpers";
+import { CustomCheckbox } from "../common/CustomCheckbox";
 import FloatingAddButton from "../common/FloatingAddButton";
+import { InputCard } from "../common/InputCard";
 import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
+import { TagChips } from "../common/TagChips";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
@@ -34,21 +28,8 @@ const useStyles = makeStyles((theme) => ({
   desc: {
     minHeight: "5rem",
   },
-  tags: {
-    marginRight: "0.2rem",
-  },
   hints: {
     paddingTop: "0.5rem",
-  },
-  paper: {
-    display: "flex",
-    flexDirection: "column",
-    minWidth: "25rem",
-    padding: "1rem",
-    margin: "1rem",
-    marginLeft: "0rem",
-    borderRadius: "1rem",
-    backgroundColor: theme.palette.contrast.light,
   },
 }));
 
@@ -120,7 +101,7 @@ function ExperienceInput() {
         overflow="auto"
       >
         {experiences.map((item) => (
-          <Paper elevation={2} className={classes.paper} key={item.id}>
+          <InputCard key={item.id}>
             <TextField
               label="Company/Institution"
               name="company"
@@ -179,16 +160,12 @@ function ExperienceInput() {
                 onChange={(e) => handleChange(e, item.id)}
               />
             </Box>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={item.end === "Present"}
-                  onChange={(e) => handleChange(e, item.id)}
-                  name="end"
-                  color="primary"
-                  id="present"
-                />
-              }
+            <CustomCheckbox
+              checked={item.end === "Present"}
+              onChange={(e) => handleChange(e, item.id)}
+              name="end"
+              color="primary"
+              id="present"
               label="Present"
             />
             <TextField
@@ -224,20 +201,9 @@ function ExperienceInput() {
             >
               Suggested Tags
             </Typography>
-            <Box display="flex" justifyItems="space-between" pt={1}>
-              {tags.map((item) => (
-                <Chip
-                  key={item}
-                  variant="default"
-                  color="secondary"
-                  label={item}
-                  size="small"
-                  className={classes.tags}
-                />
-              ))}
-            </Box>
+            <TagChips tags={tags} />
             <RemoveButton onClick={() => handleDelete(item.id)} />
-          </Paper>
+          </InputCard>
         ))}
         <FloatingAddButton onClick={handleAdd} />
       </Box>

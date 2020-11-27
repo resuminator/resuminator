@@ -8,17 +8,12 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import {
-  Box,
-  makeStyles,
-  Paper,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PROJECT_INFO } from "../../redux/actionTypes";
 import FloatingAddButton from "../common/FloatingAddButton";
+import { InputCard } from "../common/InputCard";
 import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
 
@@ -31,16 +26,6 @@ const useStyles = makeStyles((theme) => ({
   },
   tags: {
     marginRight: "0.2rem",
-  },
-  paper: {
-    display: "flex",
-    minWidth: "25rem",
-    flexDirection: "column",
-    padding: "1rem",
-    margin: "1rem",
-    marginLeft: "0rem",
-    borderRadius: "1rem",
-    backgroundColor: theme.palette.contrast.light,
   },
 }));
 
@@ -98,7 +83,7 @@ function ProjectInput() {
         overflow="auto"
       >
         {projects.map((item) => (
-          <Paper elevation={2} className={classes.paper} key={item.id}>
+          <InputCard key={item.id}>
             <TextField
               label="Project Name"
               name="projectTitle"
@@ -134,7 +119,7 @@ function ProjectInput() {
               onChange={(e) => handleChange(e, item.id)}
             />
             <RemoveButton onClick={() => handleDelete(item.id)} />
-          </Paper>
+          </InputCard>
         ))}
         <FloatingAddButton onClick={handleAdd} />
       </Box>

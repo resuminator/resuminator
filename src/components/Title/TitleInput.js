@@ -8,17 +8,17 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Box, makeStyles, TextField, Typography } from "@material-ui/core";
+import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { USERINFO } from "../../redux/actionTypes";
 import { InputHeader } from "../common/InputHeader";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   TextField: {
     marginTop: "1rem",
   },
-}));
+});
 
 function TitleInput() {
   const classes = useStyles();
