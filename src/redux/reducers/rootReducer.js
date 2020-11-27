@@ -14,13 +14,15 @@ import educationReducer from "./educationReducer";
 import experienceReducer from "./experienceReducer";
 import projectReducer from "./projectReducer";
 import userReducer from "./userReducer";
+import { viewReducer } from "./viewReducer";
 
 const rootReducer = combineReducers({
   userInfo: userReducer,
   experienceInfo: experienceReducer,
   educationInfo: educationReducer,
   certificationInfo: certificationReducer,
-  projectInfo: projectReducer
+  projectInfo: projectReducer,
+  view: viewReducer
 });
 
 export default rootReducer;
