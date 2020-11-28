@@ -62,3 +62,8 @@ export const checkEmptyState = (state) => {
 
   return flag1 && flag2;
 }
+
+export const findNextId = (array) => {
+  const len = array.length;
+  return array[len - 1].id + 1 || 0;
+}
