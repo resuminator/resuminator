@@ -13,6 +13,7 @@ import certificationReducer from "./certificationReducer";
 import educationReducer from "./educationReducer";
 import experienceReducer from "./experienceReducer";
 import projectReducer from "./projectReducer";
+import { skillsReducer } from "./skillReducer";
 import userReducer from "./userReducer";
 import { viewReducer } from "./viewReducer";
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   educationInfo: educationReducer,
   certificationInfo: certificationReducer,
   projectInfo: projectReducer,
+  skillInfo: skillsReducer,
   view: viewReducer
 });
 

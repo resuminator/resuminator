@@ -15,6 +15,7 @@ import ContactInput from "../Contact/ContactInput";
 import EducationInput from "../Education/EducationInput";
 import ExperienceInput from "../Experience/ExperienceInput";
 import ProjectInput from "../Projects/ProjectInput";
+import SkillsInput from "../Skills/SkillsInput";
 import TitleInput from "../Title/TitleInput";
 
 function InputLayout() {
@@ -26,6 +27,7 @@ function InputLayout() {
       <EducationInput />
       <ProjectInput />
       <CertificationInput />
+      <SkillsInput />
     </Box>
   );
 }

@@ -26,9 +26,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function SkillSet(props) {
+function SkillSet({skillList, title}) {
   const classes = useStyles();
-  const skillList = props.skillList;
 
   const renderListStr = (skillList) => {
     let str = "";
@@ -50,7 +49,7 @@ function SkillSet(props) {
       flexDirection="column"
       className={classes.root}
     >
-      <Typography variant="body1" className={classes.heading}>{props.title}</Typography>
+      <Typography variant="body1" className={classes.heading}>{title}</Typography>
       <Typography variant="body2" color="textPrimary" className={classes.list}>{renderListStr(skillList)}</Typography>
     </Box>
   );
