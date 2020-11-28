@@ -23,7 +23,7 @@ export const CustomSwitch = ({ checked, onChange, label }) => {
   return (
     <FormControlLabel
       className={classes.root}
-      control={<Switch size="normal" checked={checked} onChange={onChange} />}
+      control={<Switch size="medium" checked={checked} onChange={onChange} />}
       label={
         <Typography
           variant="subtitle1"
