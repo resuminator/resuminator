@@ -12,6 +12,7 @@ import { makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
 import ColoredLine from "../common/Line";
+import { TagChips } from "../common/TagChips";
 import { TitleBox } from "../common/TitleBox";
 import SkillSet from "./SkillSet";
 
@@ -34,13 +35,22 @@ const sortByKey = (array, key, value) => {
   return res;
 };
 
+const extractNames = (array) => {
+  return array.map((item) => item.name);
+};
+
 function Skills() {
   const classes = useStyles();
-  const skills = sortByKey(
+  const displayType = useSelector(
+    (state) => state.properties.skill_display_type
+  );
+  const skillsByCategories = sortByKey(
     useSelector((state) => state.skillInfo),
     "category",
     "name"
   );
+
+  const skillsByName = extractNames(useSelector((state) => state.skillInfo));
 
   return (
     <TitleBox flexDirection="column">
@@ -53,10 +63,13 @@ function Skills() {
         Skills
       </Typography>
       <ColoredLine opacity={0.5} />
-      {console.log(skills)}
-      {Object.keys(skills).map((item) => (
-        <SkillSet skillList={skills[item]} title={item} />
-      ))}
+      {displayType === "tags" ? (
+        <TagChips tags={skillsByName} color="primary" />
+      ) : (
+        Object.keys(skillsByCategories).map((item) => (
+          <SkillSet skillList={skillsByCategories[item]} title={item} />
+        ))
+      )}
     </TitleBox>
   );
 }

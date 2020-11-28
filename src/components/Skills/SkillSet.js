@@ -40,7 +40,7 @@ function SkillSet({skillList, title}) {
 
     return str;
   };
-
+  
   return (
     <Box
       display="flex"
