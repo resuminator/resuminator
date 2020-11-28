@@ -16,7 +16,6 @@ import projectReducer from "./projectReducer";
 import { propertiesReducer } from "./propertiesReducer";
 import { skillsReducer } from "./skillReducer";
 import userReducer from "./userReducer";
-import { viewReducer } from "./viewReducer";
 
 const rootReducer = combineReducers({
   userInfo: userReducer,
@@ -26,7 +25,6 @@ const rootReducer = combineReducers({
   projectInfo: projectReducer,
   skillInfo: skillsReducer,
   properties: propertiesReducer,
-  view: viewReducer
 });
 
 export default rootReducer;

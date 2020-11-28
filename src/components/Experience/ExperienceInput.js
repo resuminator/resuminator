@@ -12,10 +12,8 @@ import { Box, makeStyles, TextField, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
-import { VIEW } from "../../redux/actionTypes";
 import { parseDate } from "../../utils/Helpers";
 import { CustomCheckbox } from "../common/CustomCheckbox";
-import { CustomSwitch } from "../common/CustomSwitch";
 import FloatingAddButton from "../common/FloatingAddButton";
 import { InputCard } from "../common/InputCard";
 import { InputHeader } from "../common/InputHeader";
@@ -48,7 +46,6 @@ function ExperienceInput() {
   const [experience, setExperience] = useState({});
   const [currId, setCurrId] = useState(0);
   const experiences = useSelector((state) => state.experienceInfo);
-  const view = useSelector((state) => state.view);
   const scrollRef = useHorizontalScroll();
 
   const handleAdd = () => {
@@ -95,11 +92,6 @@ function ExperienceInput() {
         heading="Tell us about your work experience"
         subtitle="Don't worry, add anything which you feel relevant for your job
         application"
-      />
-      <CustomSwitch
-        checked={view.experience}
-        onChange={() => dispatch({ type: VIEW.TOGGLE, payload: "experience" })}
-        label="Show on Resume"
       />
       <Box
         display="flex"
