@@ -41,16 +41,16 @@ function ContactInput() {
       </Typography>
       <Box display="flex" justifyItems="space-between" pt={1}>
         <IconButton>
+          <FiMail />
+        </IconButton>
+        <IconButton disabled>
           <FiGithub />
         </IconButton>
-        <IconButton>
+        <IconButton disabled>
           <FiLinkedin />
         </IconButton>
-        <IconButton>
+        <IconButton disabled>
           <FiTwitter />
-        </IconButton>
-        <IconButton>
-          <FiMail />
         </IconButton>
       </Box>
     </Box>

@@ -11,7 +11,6 @@
 import { Box } from "@material-ui/core";
 import React from "react";
 import CertificationInput from "../Certifications/CertificationInput";
-import ContactInput from "../Contact/ContactInput";
 import EducationInput from "../Education/EducationInput";
 import ExperienceInput from "../Experience/ExperienceInput";
 import ProjectInput from "../Projects/ProjectInput";
@@ -22,7 +21,6 @@ function InputLayout() {
   return (
     <Box display="flex" flexDirection="column">
       <TitleInput />
-      <ContactInput />
       <ExperienceInput />
       <EducationInput />
       <ProjectInput />

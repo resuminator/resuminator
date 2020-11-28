@@ -14,7 +14,6 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "../../styles/page.css";
 import "../../styles/shadow.css";
 import Certifications from "../Certifications/Certifications";
-import Contact from "../Contact/Contact";
 import Education from "../Education/Education";
 import Experience from "../Experience/Experience";
 import Projects from "../Projects/Projects";
@@ -97,7 +96,6 @@ function Resume() {
       position="relative"
     >
       <Title />
-      <Contact />
       <ColoredLine color="#44318D" />
       <Box display="flex" justifyContent="space-between" id="resume-insider">
         <DragDropContext onDragEnd={handleOnDragEnd}>
