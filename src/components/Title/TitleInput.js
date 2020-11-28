@@ -11,8 +11,8 @@
 import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { USERINFO } from "../../redux/actionTypes";
 import { InputHeader } from "../common/InputHeader";
+import { addUserInfo } from "./titleAction";
 
 const useStyles = makeStyles({
   TextField: {
@@ -34,7 +34,7 @@ function TitleInput() {
   };
 
   React.useEffect(() => {
-    dispatch({ type: USERINFO.ADD, payload: userInfo });
+    dispatch(addUserInfo(userInfo));
   }, [dispatch, userInfo]);
 
   return (

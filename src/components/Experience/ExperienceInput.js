@@ -12,7 +12,7 @@ import { Box, makeStyles, TextField, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
-import { EXPERIENCE_INFO, VIEW } from "../../redux/actionTypes";
+import { VIEW } from "../../redux/actionTypes";
 import { parseDate } from "../../utils/Helpers";
 import { CustomCheckbox } from "../common/CustomCheckbox";
 import { CustomSwitch } from "../common/CustomSwitch";
@@ -21,6 +21,11 @@ import { InputCard } from "../common/InputCard";
 import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
 import { TagChips } from "../common/TagChips";
+import {
+  addExperience,
+  deleteExperienceById,
+  updateExperienceById,
+} from "./experienceActions";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
@@ -48,14 +53,12 @@ function ExperienceInput() {
 
   const handleAdd = () => {
     setExperience({});
-    const len = experiences.length;
-    const id = len ? experiences[len - 1].id + 1 : 0;
-    dispatch({ type: EXPERIENCE_INFO.ADD, id });
+    dispatch(addExperience(experiences));
   };
 
   const handleDelete = (id) => {
     setExperience({});
-    dispatch({ type: EXPERIENCE_INFO.DELETE, id });
+    dispatch(deleteExperienceById(id));
   };
 
   const handleChange = (e, id) => {
@@ -83,11 +86,7 @@ function ExperienceInput() {
   }, [currId]);
 
   React.useEffect(() => {
-    dispatch({
-      type: EXPERIENCE_INFO.UPDATE,
-      payload: experience,
-      id: currId,
-    });
+    dispatch(updateExperienceById(currId, experience));
   }, [dispatch, experience, currId]);
 
   return (

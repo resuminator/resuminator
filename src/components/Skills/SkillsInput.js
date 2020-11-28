@@ -2,8 +2,8 @@ import { Box, Chip, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
-import { SKILL_INFO } from "../../redux/actionTypes";
 import { InputHeader } from "../common/InputHeader";
+import { addSkill, deleteSkillById } from "./skillActions";
 import { SkillClassification } from "./SkillClassification";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,10 +57,7 @@ function SkillsInput() {
   };
 
   React.useEffect(() => {
-    dispatch({
-      type: SKILL_INFO.ADD,
-      payload,
-    });
+    dispatch(addSkill(payload));
   }, [dispatch, payload]);
 
   return (
@@ -98,7 +95,7 @@ function SkillsInput() {
                 className={classes.tags}
                 deleteIcon={<TiDelete />}
                 onDelete={() =>
-                  dispatch({ type: SKILL_INFO.DELETE, id: item.id })
+                  dispatch(deleteSkillById(item.id))
                 }
               />
             ))

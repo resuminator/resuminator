@@ -12,13 +12,17 @@ import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
-import { CERTIFICATION_INFO } from "../../redux/actionTypes";
 import { parseDate } from "../../utils/Helpers";
 import { CustomCheckbox } from "../common/CustomCheckbox";
 import FloatingAddButton from "../common/FloatingAddButton";
 import { InputCard } from "../common/InputCard";
 import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
+import {
+  addCertificate,
+  deleteCertificateById,
+  updateCertificateById
+} from "./certificationActions";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
@@ -43,14 +47,12 @@ function CertificationInput() {
 
   const handleAdd = () => {
     setCertificate({});
-    const len = certifications.length;
-    const id = len ? certifications[len - 1].id + 1 : 0;
-    dispatch({ type: CERTIFICATION_INFO.ADD, id });
+    dispatch(addCertificate(certifications));
   };
 
   const handleDelete = (id) => {
     setCertificate({});
-    dispatch({ type: CERTIFICATION_INFO.DELETE, id });
+    dispatch(deleteCertificateById(id));
   };
 
   const handleChange = (e, id) => {
@@ -78,11 +80,7 @@ function CertificationInput() {
   }, [currId]);
 
   React.useEffect(() => {
-    dispatch({
-      type: CERTIFICATION_INFO.UPDATE,
-      payload: certificate,
-      id: currId,
-    });
+    dispatch(updateCertificateById(currId, certificate));
   }, [dispatch, certificate, currId]);
 
   return (

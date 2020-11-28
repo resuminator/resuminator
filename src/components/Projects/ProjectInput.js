@@ -12,11 +12,15 @@ import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
-import { PROJECT_INFO } from "../../redux/actionTypes";
 import FloatingAddButton from "../common/FloatingAddButton";
 import { InputCard } from "../common/InputCard";
 import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
+import {
+  addProject,
+  deleteProjectById,
+  updateProjectById,
+} from "./projectActions";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
@@ -40,14 +44,12 @@ function ProjectInput() {
 
   const handleAdd = () => {
     setProject({});
-    const len = projects.length;
-    const id = len ? projects[len - 1].id + 1 : 0;
-    dispatch({ type: PROJECT_INFO.ADD, id });
+    dispatch(addProject(projects));
   };
 
   const handleDelete = (id) => {
     setProject({});
-    dispatch({ type: PROJECT_INFO.DELETE, id });
+    dispatch(deleteProjectById(id));
   };
 
   const handleChange = (e, id) => {
@@ -63,11 +65,7 @@ function ProjectInput() {
   React.useEffect(() => setProject({}), [currId]);
 
   React.useEffect(() => {
-    dispatch({
-      type: PROJECT_INFO.UPDATE,
-      payload: project,
-      id: currId,
-    });
+    dispatch(updateProjectById(currId, project));
   }, [dispatch, project, currId]);
 
   return (
