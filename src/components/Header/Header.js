@@ -8,13 +8,7 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import {
-  Avatar,
-  Box,
-  IconButton,
-  makeStyles,
-  Typography
-} from "@material-ui/core";
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,9 +54,6 @@ function Header() {
       >
         Re
       </Typography>
-      <IconButton>
-        <Avatar>VN</Avatar>
-      </IconButton>
     </Box>
   );
 }
