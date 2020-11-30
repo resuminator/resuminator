@@ -12,7 +12,7 @@ import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { InputHeader } from "../common/InputHeader";
-import { addUserInfo } from "./titleAction";
+import { addUserInfo } from "./title.actions";
 
 const useStyles = makeStyles({
   TextField: {
