@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.21.0",
     "react": "^17.0.0",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^17.0.0",
@@ -16,7 +17,9 @@
     "react-new-window": "^0.1.2",
     "react-redux": "^7.2.2",
     "react-scripts": "^4.0.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
