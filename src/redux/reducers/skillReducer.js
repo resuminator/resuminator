@@ -1,4 +1,4 @@
-import { deleteItem } from "../actions";
+import { deleteItem } from "../utils";
 import { SKILL_INFO } from "../actionTypes";
 
 const initialState = [];

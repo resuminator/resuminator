@@ -8,7 +8,7 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { deleteItem, updateField } from "../actions";
+import { deleteItem, updateField } from "../utils";
 const { PROJECT_INFO } = require("../actionTypes");
 
 const initialState = [

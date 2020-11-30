@@ -13,6 +13,8 @@ import { USERINFO } from "../actionTypes";
 const initialState = {
     name: "",
     jobtitle: "",
+    loading: false,
+    username: ""
 };
 
 const userReducer = (state = initialState, action) => {
