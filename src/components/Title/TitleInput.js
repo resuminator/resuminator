@@ -10,7 +10,7 @@
 
 import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { InputHeader } from "../common/InputHeader";
 import { addUserInfo } from "./title.actions";
 
@@ -23,7 +23,8 @@ const useStyles = makeStyles({
 function TitleInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [userInfo, setUserInfo] = useState({ name: "", jobtitle: "" });
+  const storeState = useSelector((state) => state.userInfo);
+  const [userInfo, setUserInfo] = useState(storeState);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -55,16 +56,18 @@ function TitleInput() {
           name="name"
           variant="outlined"
           color="secondary"
+          value={userInfo.name}
           className={classes.TextField}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e)}
         />
         <TextField
           label="Job Title"
-          name="jobtitle"
+          name="jobTitle"
           variant="outlined"
           color="secondary"
+          value={userInfo.jobTitle}
           className={classes.TextField}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e)}
         />
       </Box>
     </Box>

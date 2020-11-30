@@ -43,7 +43,7 @@ function Title() {
         {userInfo.name}
       </Typography>
       <Typography variant="h2" color="primary" className={classes.subtitle}>
-        {userInfo.jobtitle}
+        {userInfo.jobTitle}
       </Typography>
     </Box>
   );

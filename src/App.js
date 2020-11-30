@@ -8,15 +8,23 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import React from "react";
-import "./styles/App.css";
-import Header from "./components/Header/Header";
-import Content from "./layout/Content";
-import Footer from "./components/Footer/Footer";
 import { MuiThemeProvider } from "@material-ui/core";
+import React from "react";
+import { useDispatch } from "react-redux";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
+import { fetchUser } from "./components/Title/title.actions";
+import Content from "./layout/Content";
+import "./styles/App.css";
 import { resuminator } from "./themes/resuminator";
 
 function App() {
+  const dispatch = useDispatch();
+  
+  React.useEffect(() => {
+    dispatch(fetchUser("viveknigam3003"));
+  }, [dispatch]);
+
   return (
     <MuiThemeProvider theme={resuminator}>
       <Header />

@@ -7,7 +7,7 @@
  * Authors:
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
-
+export const SERVER = 'http://localhost:4001'
 export const RESUMINATOR_REPO_LINK =
   "https://github.com/viveknigam3003/resuminator"
 export const RESUMINATOR_LANDING_REPO_LINK =

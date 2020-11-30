@@ -11,21 +11,37 @@
 import { USERINFO } from "../actionTypes";
 
 const initialState = {
-    name: "",
-    jobtitle: "",
-    loading: false,
-    username: ""
+  name: "",
+  jobTitle: "",
+  loading: false,
+  username: "",
+  error: "",
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case USERINFO.ADD: {
-      const { name, jobtitle } = action.payload;
+      const { name, jobTitle } = action.payload;
       return {
         ...state,
-        name, 
-        jobtitle,
+        name,
+        jobTitle,
       };
+    }
+    case USERINFO.FETCH_REQUEST: {
+      return { ...state, loading: true };
+    }
+    case USERINFO.FETCH_SUCCESS: {
+      return {
+        error: '',
+        name: action.payload.name,
+        jobTitle: action.payload.jobTitle,
+        username: action.payload.username,
+        loading: false,
+      };
+    }
+    case USERINFO.FETCH_ERROR: {
+      return { ...state, username: "", error: action.payload, loading: false };
     }
     default: {
       return state;
