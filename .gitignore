@@ -10,7 +10,7 @@
 keys
 
 #env
-/server/.env
+/.env
 
 # testing
 /coverage

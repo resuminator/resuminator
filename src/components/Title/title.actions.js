@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SERVER } from "../../utils/Constants";
+import { SERVER } from "../../utils/Server";
 
 export const addUserInfo = (payload) => {
   return {
