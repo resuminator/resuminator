@@ -16,7 +16,6 @@ const initialState = [
     id: 0,
     jobTitle: "",
     company: "",
-    additionalInfo: "",
     start: "",
     end: "",
     location: "",
