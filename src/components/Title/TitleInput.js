@@ -24,19 +24,19 @@ function TitleInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const storeState = useSelector((state) => state.userInfo);
-  const [userInfo, setUserInfo] = useState(storeState);
+  const [payload, setPayload] = useState({});
 
   const handleChange = (e) => {
     e.preventDefault();
     const field = e.target.name;
     const value = e.target.value;
 
-    setUserInfo({ ...userInfo, [field]: value });
+    setPayload({ [field]: value });
   };
 
   React.useEffect(() => {
-    dispatch(addUserInfo(userInfo));
-  }, [dispatch, userInfo]);
+    dispatch(addUserInfo(payload));
+  }, [dispatch, payload]);
 
   return (
     <Box display="flex" flexDirection="column" p={2}>
@@ -56,7 +56,7 @@ function TitleInput() {
           name="name"
           variant="outlined"
           color="secondary"
-          value={userInfo.name}
+          value={storeState.name}
           className={classes.TextField}
           onChange={(e) => handleChange(e)}
         />
@@ -65,7 +65,7 @@ function TitleInput() {
           name="jobTitle"
           variant="outlined"
           color="secondary"
-          value={userInfo.jobTitle}
+          value={storeState.jobTitle}
           className={classes.TextField}
           onChange={(e) => handleChange(e)}
         />

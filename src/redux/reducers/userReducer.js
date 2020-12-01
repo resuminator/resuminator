@@ -21,11 +21,9 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case USERINFO.ADD: {
-      const { name, jobTitle } = action.payload;
       return {
         ...state,
-        name,
-        jobTitle,
+        ...action.payload,
       };
     }
     case USERINFO.FETCH_REQUEST: {
@@ -33,7 +31,8 @@ const userReducer = (state = initialState, action) => {
     }
     case USERINFO.FETCH_SUCCESS: {
       return {
-        error: '',
+        ...state,
+        error: "",
         name: action.payload.name,
         jobTitle: action.payload.jobTitle,
         username: action.payload.username,
