@@ -14,17 +14,17 @@ import { useDispatch } from "react-redux";
 import { AlertDialog } from "./components/common/AlertDialog";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import { fetchUser } from "./components/Title/title.actions";
 import Content from "./layout/Content";
+import { initApp } from "./redux/app.actions";
 import "./styles/App.css";
 import { resuminator } from "./themes/resuminator";
 
 function App() {
-  const [openAlert, setOpenAlert] = useState(true);
+  const [openAlert, setOpenAlert] = useState(false);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(fetchUser("viveknigam3003"));
+    dispatch(initApp("viveknigam3003"));
   }, [dispatch]);
 
   const handleClose = () => setOpenAlert(false);

@@ -9,6 +9,7 @@
  */
 
 import { combineReducers } from "redux";
+import { appReducer } from "./appReducer";
 import certificationReducer from "./certificationReducer";
 import educationReducer from "./educationReducer";
 import experienceReducer from "./experienceReducer";
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   projectInfo: projectReducer,
   skillInfo: skillsReducer,
   properties: propertiesReducer,
+  app: appReducer,
 });
 
 export default rootReducer;
