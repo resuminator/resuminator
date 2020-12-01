@@ -20,7 +20,7 @@ import "./styles/App.css";
 import { resuminator } from "./themes/resuminator";
 
 function App() {
-  const [openAlert, setOpenAlert] = useState(false);
+  const [openAlert, setOpenAlert] = useState(process.env.NODE_ENV === 'production');
   const dispatch = useDispatch();
 
   React.useEffect(() => {
