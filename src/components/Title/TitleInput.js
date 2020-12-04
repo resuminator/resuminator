@@ -24,6 +24,8 @@ function TitleInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const storeState = useSelector((state) => state.userInfo);
+  const app = useSelector((state) => state.app);
+  const [state, setState] = useState(storeState);
   const [payload, setPayload] = useState({});
 
   const handleChange = (e) => {
@@ -32,7 +34,12 @@ function TitleInput() {
     const value = e.target.value;
 
     setPayload({ [field]: value });
+    setState({...state, [field]: value})
   };
+
+  React.useEffect(() => {
+    if(!app.init) setState(storeState)
+  }, [app, storeState])
 
   React.useEffect(() => {
     dispatch(addUserInfo(payload));
@@ -56,7 +63,7 @@ function TitleInput() {
           name="name"
           variant="outlined"
           color="secondary"
-          value={storeState.name}
+          value={state.name}
           className={classes.TextField}
           onChange={(e) => handleChange(e)}
         />
@@ -65,7 +72,7 @@ function TitleInput() {
           name="jobTitle"
           variant="outlined"
           color="secondary"
-          value={storeState.jobTitle}
+          value={state.jobTitle}
           className={classes.TextField}
           onChange={(e) => handleChange(e)}
         />

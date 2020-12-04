@@ -21,6 +21,8 @@ export const appInitFailure = (error) => {
 
 export const initApp = (username) => async (dispatch) => {
   await Promise.all([dispatch(appInitRequest()), dispatch(fetchUser(username))])
-    .then(dispatch(appInitSuccess()))
+    .then(() => {
+      dispatch(appInitSuccess());
+    })
     .catch((err) => dispatch(appInitFailure(err)));
 };
