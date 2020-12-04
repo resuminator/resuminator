@@ -12,6 +12,7 @@ import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputHeader } from "../common/InputHeader";
+import Loader from "../common/Loader";
 import { addUserInfo } from "./title.actions";
 
 const useStyles = makeStyles({
@@ -34,12 +35,12 @@ function TitleInput() {
     const value = e.target.value;
 
     setPayload({ [field]: value });
-    setState({...state, [field]: value})
+    setState({ ...state, [field]: value });
   };
 
   React.useEffect(() => {
-    if(!app.init) setState(storeState)
-  }, [app, storeState])
+    if (!app.init) setState(storeState);
+  }, [app, storeState]);
 
   React.useEffect(() => {
     dispatch(addUserInfo(payload));
@@ -51,32 +52,36 @@ function TitleInput() {
         heading="Let's go over some basic info"
         subtitle=" We pulled in some information from your profile, you can edit it below."
       />
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="flex-start"
-        width="75%"
-      >
-        <TextField
-          label="Full Name"
-          type="Name"
-          name="name"
-          variant="outlined"
-          color="secondary"
-          value={state.name}
-          className={classes.TextField}
-          onChange={(e) => handleChange(e)}
-        />
-        <TextField
-          label="Job Title"
-          name="jobTitle"
-          variant="outlined"
-          color="secondary"
-          value={state.jobTitle}
-          className={classes.TextField}
-          onChange={(e) => handleChange(e)}
-        />
-      </Box>
+      {app.loading ? (
+        <Loader />
+      ) : (
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="flex-start"
+          width="75%"
+        >
+          <TextField
+            label="Full Name"
+            type="Name"
+            name="name"
+            variant="outlined"
+            color="secondary"
+            value={state.name}
+            className={classes.TextField}
+            onChange={(e) => handleChange(e)}
+          />
+          <TextField
+            label="Job Title"
+            name="jobTitle"
+            variant="outlined"
+            color="secondary"
+            value={state.jobTitle}
+            className={classes.TextField}
+            onChange={(e) => handleChange(e)}
+          />
+        </Box>
+      )}
     </Box>
   );
 }
