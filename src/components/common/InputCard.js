@@ -15,11 +15,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const InputCard = (props) => {
+export const InputCard = ({id, children}) => {
   const classes = useStyles();
   return (
-    <Paper elevation={2} className={classes.root}>
-      {props.children}
+    <Paper elevation={2} className={classes.root} key={id}>
+      {children}
     </Paper>
   );
 };
