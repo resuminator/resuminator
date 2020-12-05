@@ -12,6 +12,7 @@ import { deleteItem } from "../utils";
 const { EXPERIENCE_INFO } = require("../actionTypes");
 
 const initialState = {
+  showTags: true,
   loading: false,
   experiences: [
     {

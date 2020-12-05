@@ -11,12 +11,12 @@ const useStyles = makeStyles({
 export const TagChips = ({ tags, variant, color, size, className }) => {
   const classes = useStyles();
   return (
-    <Box display="flex" justifyItems="space-between" pt={1}>
+    <Box display="flex" justifyItems="space-between" mb={2}>
       {tags.map((item) => (
         <Chip
           key={item}
           variant={variant || "default"}
-          color={color || "secondary"}
+          color={color || "primary"}
           label={item}
           size={size || "small"}
           className={className || classes.root}

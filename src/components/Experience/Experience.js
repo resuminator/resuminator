@@ -13,6 +13,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { checkEmptyState } from "../../utils/Helpers";
 import ColoredLine from "../common/Line";
+import { TagChips } from "../common/TagChips";
 import JobDescription from "./JobDescription";
 import JobTitle from "./JobTitle";
 
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 function Experience() {
   const classes = useStyles();
   const experiences = useSelector((state) => state.experienceInfo.experiences);
+  const showTags = useSelector((state) => state.experienceInfo.showTags);
 
   return (
     <Box
@@ -60,6 +62,7 @@ function Experience() {
               location={item.location}
             />
             <JobDescription desc={item.description} workLink={item.workLink} />
+            {showTags ? <TagChips tags={item.tags}/> : null}
           </Box>
         ))
       )}
