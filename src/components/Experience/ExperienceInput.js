@@ -21,7 +21,7 @@ import RemoveButton from "../common/RemoveButton";
 import {
   addExperience,
   deleteExperienceById,
-  updateExperienceById
+  updateExperienceById,
 } from "./experience.actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +36,16 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "0.5rem",
   },
 }));
+
+const currentDate = () => {
+  const currentDate = new Date();
+
+  const currentDayOfMonth = currentDate.getDate();
+  const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+  const currentYear = currentDate.getFullYear();
+
+  return (currentMonth + 1) + "-" + currentDayOfMonth + "-"  + currentYear; // MM/DD/YYYY
+};
 
 function ExperienceInput() {
   const classes = useStyles();
@@ -56,6 +66,20 @@ function ExperienceInput() {
 
   const handleDelete = (id) => {
     dispatch(deleteExperienceById(id));
+  };
+
+  const handleCheckbox = (resetDate) => {
+    setState((prevState) => [
+      ...prevState.slice(0, currIndex),
+      {
+        ...prevState[currIndex],
+        end:
+          prevState[currIndex].end === currentDate()
+            ? resetDate
+            : currentDate(),
+      },
+      ...prevState.slice(currIndex + 1),
+    ]);
   };
 
   const handleDateChange = (key) => (date) => {
@@ -169,16 +193,17 @@ function ExperienceInput() {
                 label="Ended"
                 value={item.end}
                 inputVariant="outlined"
-                minDate={new Date("1980-01-01")}
+                minDate={item.start}
                 maxDate={new Date("2100-01-01")}
                 key={"end"}
+                disabled={item.end === currentDate()}
                 onChange={handleDateChange("end")}
                 className={classes.TextField}
               />
             </Box>
             <CustomCheckbox
-              checked={item.end === "Present"}
-              onChange={handleChange}
+              checked={item.end === currentDate()}
+              onChange={() => handleCheckbox(item.start)}
               name="end"
               color="primary"
               label="Present"
