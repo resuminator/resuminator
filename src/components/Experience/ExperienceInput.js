@@ -181,7 +181,6 @@ function ExperienceInput() {
               onChange={handleChange}
               name="end"
               color="primary"
-              id="present"
               label="Present"
             />
             <TextField
