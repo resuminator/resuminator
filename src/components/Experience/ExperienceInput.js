@@ -8,7 +8,7 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Box, makeStyles, TextField, Typography } from "@material-ui/core";
+import { Box, makeStyles, TextField } from "@material-ui/core";
 import { DatePicker } from "@material-ui/pickers";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,11 +18,10 @@ import FloatingAddButton from "../common/FloatingAddButton";
 import { InputCard } from "../common/InputCard";
 import { InputHeader } from "../common/InputHeader";
 import RemoveButton from "../common/RemoveButton";
-import { TagChips } from "../common/TagChips";
 import {
   addExperience,
   deleteExperienceById,
-  updateExperienceById,
+  updateExperienceById
 } from "./experience.actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -41,8 +40,6 @@ const useStyles = makeStyles((theme) => ({
 function ExperienceInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const tags = []; //Will be generated from Description Text's Topic Classification
-  // const [payload, setPayload] = useState({ field: "", value: "" });
   const [currIndex, setCurrIndex] = useState(0);
   const storeState = useSelector((state) => state.experienceInfo.experiences);
   const [state, setState] = useState(storeState);
@@ -66,7 +63,6 @@ function ExperienceInput() {
     const field = key;
     const value = date.toString();
 
-    /// setPayload({ field, value });
     setState((prevState) => [
       ...prevState.slice(0, currIndex),
       { ...prevState[currIndex], [field]: value },
@@ -78,7 +74,6 @@ function ExperienceInput() {
     e.preventDefault();
     const field = e.target.name;
     const value = e.target.value;
-    // setPayload({ field, value });
 
     //DEBUG: THIS WORKS WELL! DON'T TOUCH!
     setState((prevState) => [
@@ -114,7 +109,6 @@ function ExperienceInput() {
             id={item._id}
             onClick={() => {
               setCurrIndex(index);
-              // setPayload({ field: "", value: "" });
             }}
           >
             <TextField
@@ -216,14 +210,6 @@ function ExperienceInput() {
               className={classes.TextField}
               onChange={handleChange}
             />
-            <Typography
-              variant="caption"
-              className={classes.hints}
-              color="textSecondary"
-            >
-              Suggested Tags
-            </Typography>
-            <TagChips tags={tags} />
             <RemoveButton onClick={() => handleDelete(item._id)} />
           </InputCard>
         ))}

@@ -8,7 +8,7 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { deleteItem, updateField } from "../utils";
+import { deleteItem } from "../utils";
 const { EXPERIENCE_INFO } = require("../actionTypes");
 
 const initialState = {
