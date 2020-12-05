@@ -16,11 +16,10 @@ export const deleteExperienceById = (id) => {
   };
 };
 
-export const updateExperienceById = (index, payload) => {
+export const updateExperienceById = (payload) => {
   return {
     type: "UPDATE_EXPERIENCE_INFO",
     payload,
-    index,
   };
 };
 

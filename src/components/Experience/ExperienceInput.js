@@ -9,10 +9,10 @@
  */
 
 import { Box, makeStyles, TextField, Typography } from "@material-ui/core";
+import { DatePicker } from "@material-ui/pickers";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
-import { parseDate } from "../../utils/Helpers";
 import { CustomCheckbox } from "../common/CustomCheckbox";
 import FloatingAddButton from "../common/FloatingAddButton";
 import { InputCard } from "../common/InputCard";
@@ -42,8 +42,7 @@ function ExperienceInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const tags = []; //Will be generated from Description Text's Topic Classification
-  const [present, setPresent] = useState({ state: false, date: "" });
-  const [payload, setPayload] = useState({ field: "", value: "" });
+  // const [payload, setPayload] = useState({ field: "", value: "" });
   const [currIndex, setCurrIndex] = useState(0);
   const storeState = useSelector((state) => state.experienceInfo.experiences);
   const [state, setState] = useState(storeState);
@@ -55,31 +54,32 @@ function ExperienceInput() {
   }, [app, storeState]);
 
   const handleAdd = () => {
-    setPayload({});
     dispatch(addExperience(storeState));
   };
 
   const handleDelete = (id) => {
-    setPayload({});
     dispatch(deleteExperienceById(id));
   };
 
-  const handleChange = (e) => {
-    if (e.target.id === "present") {
-      setPresent({
-        state: !present.state,
-        date: parseDate(e.target.type, e.target.value),
-      });
-      const endValue = present.state ? present.date : "Present";
-      setPayload({ f: "end", v: endValue });
-      return;
-    }
+  const handleDateChange = (key) => (date) => {
+    console.log(key, date);
+    const field = key;
+    const value = date.toString();
 
+    /// setPayload({ field, value });
+    setState((prevState) => [
+      ...prevState.slice(0, currIndex),
+      { ...prevState[currIndex], [field]: value },
+      ...prevState.slice(currIndex + 1),
+    ]);
+  };
+
+  const handleChange = (e) => {
     e.preventDefault();
     const field = e.target.name;
-    const value = parseDate(e.target.type, e.target.value);
+    const value = e.target.value;
+    // setPayload({ field, value });
 
-    setPayload({ field, value });
     //DEBUG: THIS WORKS WELL! DON'T TOUCH!
     setState((prevState) => [
       ...prevState.slice(0, currIndex),
@@ -88,17 +88,9 @@ function ExperienceInput() {
     ]);
   };
 
-  // React.useEffect(() => {
-  //   setPayload({ field: "", value: "" });
-  // }, [currIndex]);
-
   React.useEffect(() => {
-    console.log(state);
-  }, [state]);
-
-  React.useEffect(() => {
-    dispatch(updateExperienceById(currIndex, payload));
-  }, [dispatch, payload, currIndex]);
+    dispatch(updateExperienceById(state));
+  }, [dispatch, state]);
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
@@ -122,7 +114,7 @@ function ExperienceInput() {
             id={item._id}
             onClick={() => {
               setCurrIndex(index);
-              setPayload({ field: "", value: "" });
+              // setPayload({ field: "", value: "" });
             }}
           >
             <TextField
@@ -161,26 +153,33 @@ function ExperienceInput() {
               alignItems="center"
               justifyContent="space-between"
             >
-              <TextField
-                type="date"
+              <DatePicker
+                variant="inline"
+                openTo="year"
                 name="start"
-                color="secondary"
-                className={classes.TextField}
+                views={["year", "month"]}
                 label="Started"
-                variant="outlined"
-                InputLabelProps={{ shrink: true }}
-                onChange={handleChange}
-              />
-              <TextField
-                type="date"
-                name="end"
-                color="secondary"
+                value={item.start}
+                inputVariant="outlined"
+                minDate={new Date("1980-01-01")}
+                maxDate={new Date("2100-01-01")}
+                key={"start"}
+                onChange={handleDateChange("start")}
                 className={classes.TextField}
+              />
+              <DatePicker
+                variant="inline"
+                openTo="year"
+                name="end"
+                views={["year", "month"]}
                 label="Ended"
-                variant="outlined"
-                disabled={item.end === "Present"}
-                InputLabelProps={{ shrink: true }}
-                onChange={handleChange}
+                value={item.end}
+                inputVariant="outlined"
+                minDate={new Date("1980-01-01")}
+                maxDate={new Date("2100-01-01")}
+                key={"end"}
+                onChange={handleDateChange("end")}
+                className={classes.TextField}
               />
             </Box>
             <CustomCheckbox

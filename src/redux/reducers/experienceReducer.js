@@ -43,14 +43,7 @@ const experienceReducer = (state = initialState, action) => {
       });
     }
     case EXPERIENCE_INFO.UPDATE: {
-      const objArray = state.experiences
-      const objIndex = action.index;
-      const nextState = [
-        ...objArray.slice(0, objIndex),
-        { ...objArray[objIndex], [action.payload.field]: action.payload.value },
-        ...objArray.slice(objIndex + 1),
-      ];
-      return {...state, experiences: nextState};
+      return {...state, experiences: action.payload};
     }
     case EXPERIENCE_INFO.DELETE: {
       return deleteItem(state, action);

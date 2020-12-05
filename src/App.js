@@ -8,7 +8,9 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
+import DateFnsUtils from "@date-io/date-fns"; // choose your lib
 import { MuiThemeProvider } from "@material-ui/core";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { AlertDialog } from "./components/common/AlertDialog";
@@ -20,7 +22,9 @@ import "./styles/App.css";
 import { resuminator } from "./themes/resuminator";
 
 function App() {
-  const [openAlert, setOpenAlert] = useState(process.env.NODE_ENV === 'production');
+  const [openAlert, setOpenAlert] = useState(
+    process.env.NODE_ENV === "production"
+  );
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -31,17 +35,19 @@ function App() {
 
   return (
     <MuiThemeProvider theme={resuminator}>
-      <AlertDialog
-        title="Resuminator : Preview 🎉"
-        message="Thanks for joining Resuminator Early Access Programme! Currently, Resuminator is in preview mode - this means that you may play around the app but your data shall not persist after you leave the app."
-        open={openAlert}
-        onClick={handleClose}
-        onClose={handleClose}
-        buttonText="Got it! 👍🏻"
-      />
-      <Header />
-      <Content />
-      <Footer />
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <AlertDialog
+          title="Resuminator : Preview 🎉"
+          message="Thanks for joining Resuminator Early Access Programme! Currently, Resuminator is in preview mode - this means that you may play around the app but your data shall not persist after you leave the app."
+          open={openAlert}
+          onClick={handleClose}
+          onClose={handleClose}
+          buttonText="Got it! 👍🏻"
+        />
+        <Header />
+        <Content />
+        <Footer />
+      </MuiPickersUtilsProvider>
     </MuiThemeProvider>
   );
 }

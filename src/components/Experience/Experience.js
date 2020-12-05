@@ -53,7 +53,10 @@ function Experience() {
               title={item.jobTitle}
               company={item.company}
               addInfo={item.additionalInfo}
-              duration={{ start: item.start, end: item.end }}
+              duration={{
+                start: item.start,
+                end: item.end,
+              }}
               location={item.location}
             />
             <JobDescription desc={item.description} workLink={item.workLink} />
