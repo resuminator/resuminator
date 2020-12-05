@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 export const InputCard = ({id, children}) => {
   const classes = useStyles();
   return (
-    <Paper elevation={2} className={classes.root} key={id}>
+    <Paper component="form" elevation={2} className={classes.root} key={id}>
       {children}
     </Paper>
   );
