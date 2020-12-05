@@ -17,6 +17,7 @@ import { CustomCheckbox } from "../common/CustomCheckbox";
 import FloatingAddButton from "../common/FloatingAddButton";
 import { InputCard } from "../common/InputCard";
 import { InputHeader } from "../common/InputHeader";
+import Loader from "../common/Loader";
 import RemoveButton from "../common/RemoveButton";
 import {
   addExperience,
@@ -44,7 +45,7 @@ const currentDate = () => {
   const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
   const currentYear = currentDate.getFullYear();
 
-  return (currentMonth + 1) + "-" + currentDayOfMonth + "-"  + currentYear; // MM/DD/YYYY
+  return currentMonth + 1 + "-" + currentDayOfMonth + "-" + currentYear; // MM/DD/YYYY
 };
 
 function ExperienceInput() {
@@ -118,127 +119,131 @@ function ExperienceInput() {
         subtitle="Don't worry, add anything which you feel relevant for your job
         application"
       />
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyItems="space-evenly"
-        width="35rem"
-        height="100%"
-        overflow="auto"
-        ref={scrollRef}
-      >
-        {state.map((item, index) => (
-          <InputCard
-            key={item._id}
-            id={item._id}
-            onClick={() => {
-              setCurrIndex(index);
-            }}
-          >
-            <TextField
-              label="Company/Institution"
-              name="company"
-              variant="outlined"
-              color="secondary"
-              className={classes.TextField}
-              required
-              value={item.company}
-              onChange={handleChange}
-            />
-            <TextField
-              label="Position/Job Title"
-              name="jobTitle"
-              variant="outlined"
-              color="secondary"
-              className={classes.TextField}
-              required
-              value={item.jobTitle}
-              onChange={handleChange}
-            />
-            <TextField
-              variant="outlined"
-              size="small"
-              label="Location"
-              name="location"
-              color="secondary"
-              value={item.location}
-              placeholder="City name or 'Remote'"
-              className={classes.TextField}
-              onChange={handleChange}
-            />
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
+      {app.loading ? (
+        <Loader />
+      ) : (
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyItems="space-evenly"
+          width="35rem"
+          height="100%"
+          overflow="auto"
+          ref={scrollRef}
+        >
+          {state.map((item, index) => (
+            <InputCard
+              key={item._id}
+              id={item._id}
+              onClick={() => {
+                setCurrIndex(index);
+              }}
             >
-              <DatePicker
-                variant="inline"
-                openTo="year"
-                name="start"
-                views={["year", "month"]}
-                label="Started"
-                value={item.start}
-                inputVariant="outlined"
-                minDate={new Date("1980-01-01")}
-                maxDate={new Date("2100-01-01")}
-                key={"start"}
-                onChange={handleDateChange("start")}
+              <TextField
+                label="Company/Institution"
+                name="company"
+                variant="outlined"
+                color="secondary"
                 className={classes.TextField}
+                required
+                value={item.company}
+                onChange={handleChange}
               />
-              <DatePicker
-                variant="inline"
-                openTo="year"
+              <TextField
+                label="Position/Job Title"
+                name="jobTitle"
+                variant="outlined"
+                color="secondary"
+                className={classes.TextField}
+                required
+                value={item.jobTitle}
+                onChange={handleChange}
+              />
+              <TextField
+                variant="outlined"
+                size="small"
+                label="Location"
+                name="location"
+                color="secondary"
+                value={item.location}
+                placeholder="City name or 'Remote'"
+                className={classes.TextField}
+                onChange={handleChange}
+              />
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <DatePicker
+                  variant="inline"
+                  openTo="year"
+                  name="start"
+                  views={["year", "month"]}
+                  label="Started"
+                  value={item.start}
+                  inputVariant="outlined"
+                  minDate={new Date("1980-01-01")}
+                  maxDate={new Date("2100-01-01")}
+                  key={"start"}
+                  onChange={handleDateChange("start")}
+                  className={classes.TextField}
+                />
+                <DatePicker
+                  variant="inline"
+                  openTo="year"
+                  name="end"
+                  views={["year", "month"]}
+                  label="Ended"
+                  value={item.end}
+                  inputVariant="outlined"
+                  minDate={item.start}
+                  maxDate={new Date("2100-01-01")}
+                  key={"end"}
+                  disabled={item.end === currentDate()}
+                  onChange={handleDateChange("end")}
+                  className={classes.TextField}
+                />
+              </Box>
+              <CustomCheckbox
+                checked={item.end === currentDate()}
+                onChange={() => handleCheckbox(item.start)}
                 name="end"
-                views={["year", "month"]}
-                label="Ended"
-                value={item.end}
-                inputVariant="outlined"
-                minDate={item.start}
-                maxDate={new Date("2100-01-01")}
-                key={"end"}
-                disabled={item.end === currentDate()}
-                onChange={handleDateChange("end")}
-                className={classes.TextField}
+                color="primary"
+                label="Present"
               />
-            </Box>
-            <CustomCheckbox
-              checked={item.end === currentDate()}
-              onChange={() => handleCheckbox(item.start)}
-              name="end"
-              color="primary"
-              label="Present"
-            />
-            <TextField
-              InputProps={{ classes: { input: classes.desc }, rowsMax: 5 }}
-              variant="outlined"
-              color="secondary"
-              label="Description"
-              name="description"
-              placeholder="* Start writing in bullet points..."
-              multiline
-              required
-              value={item.description}
-              className={classes.TextField}
-              helperText="Markdown is supported :)"
-              onChange={handleChange}
-            />
-            <TextField
-              type="link"
-              label="Work link"
-              name="workLink"
-              variant="outlined"
-              color="secondary"
-              size="small"
-              value={item.workLink}
-              placeholder="Copy/Paste work link here"
-              className={classes.TextField}
-              onChange={handleChange}
-            />
-            <RemoveButton onClick={() => handleDelete(item._id)} />
-          </InputCard>
-        ))}
-        <FloatingAddButton onClick={handleAdd} />
-      </Box>
+              <TextField
+                InputProps={{ classes: { input: classes.desc }, rowsMax: 5 }}
+                variant="outlined"
+                color="secondary"
+                label="Description"
+                name="description"
+                placeholder="* Start writing in bullet points..."
+                multiline
+                required
+                value={item.description}
+                className={classes.TextField}
+                helperText="Markdown is supported :)"
+                onChange={handleChange}
+              />
+              <TextField
+                type="link"
+                label="Work link"
+                name="workLink"
+                variant="outlined"
+                color="secondary"
+                size="small"
+                value={item.workLink}
+                placeholder="Copy/Paste work link here"
+                className={classes.TextField}
+                onChange={handleChange}
+              />
+              <RemoveButton onClick={() => handleDelete(item._id)} />
+            </InputCard>
+          ))}
+          <FloatingAddButton onClick={handleAdd} />
+        </Box>
+      )}
     </Box>
   );
 }
