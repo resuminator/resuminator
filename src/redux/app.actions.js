@@ -1,3 +1,4 @@
+import { fetchExperience } from "../components/Experience/experience.actions";
 import { fetchUser } from "../components/Title/title.actions";
 
 export const appInitRequest = () => {
@@ -20,7 +21,11 @@ export const appInitFailure = (error) => {
 };
 
 export const initApp = (username) => async (dispatch) => {
-  await Promise.all([dispatch(appInitRequest()), dispatch(fetchUser(username))])
+  await Promise.all([
+    dispatch(appInitRequest()),
+    dispatch(fetchUser(username)),
+    dispatch(fetchExperience(username)),
+  ])
     .then(() => {
       dispatch(appInitSuccess());
     })

@@ -11,23 +11,26 @@
 import { deleteItem, updateField } from "../utils";
 const { EXPERIENCE_INFO } = require("../actionTypes");
 
-const initialState = [
-  {
-    id: 0,
-    jobTitle: "",
-    company: "",
-    start: "",
-    end: "",
-    location: "",
-    description: ``,
-    workLink: "",
-  },
-];
+const initialState = {
+  loading: false,
+  experiences: [
+    {
+      _id: 0,
+      jobTitle: "",
+      company: "",
+      start: "",
+      end: "",
+      location: "",
+      description: ``,
+      workLink: "",
+    },
+  ],
+};
 
 const experienceReducer = (state = initialState, action) => {
   switch (action.type) {
     case EXPERIENCE_INFO.ADD: {
-      return state.concat({
+      return state.experiences.concat({
         id: action.id,
         jobTitle: "",
         company: "",
@@ -40,10 +43,30 @@ const experienceReducer = (state = initialState, action) => {
       });
     }
     case EXPERIENCE_INFO.UPDATE: {
-      return updateField(state, action);
+      const objArray = state.experiences
+      const objIndex = action.index;
+      const nextState = [
+        ...objArray.slice(0, objIndex),
+        { ...objArray[objIndex], [action.payload.field]: action.payload.value },
+        ...objArray.slice(objIndex + 1),
+      ];
+      return {...state, experiences: nextState};
     }
     case EXPERIENCE_INFO.DELETE: {
-      return deleteItem(state, action)
+      return deleteItem(state, action);
+    }
+    case EXPERIENCE_INFO.FETCH_REQUEST: {
+      return { ...state, loading: true };
+    }
+    case EXPERIENCE_INFO.FETCH_SUCCESS: {
+      return {
+        ...state,
+        experiences: action.payload,
+        loading: false,
+      };
+    }
+    case EXPERIENCE_INFO.FETCH_ERROR: {
+      return { ...state, username: "", error: action.payload, loading: false };
     }
     default: {
       return state;

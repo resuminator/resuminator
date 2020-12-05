@@ -43,31 +43,35 @@ function ExperienceInput() {
   const dispatch = useDispatch();
   const tags = []; //Will be generated from Description Text's Topic Classification
   const [present, setPresent] = useState({ state: false, date: "" });
-  const [experience, setExperience] = useState({});
-  const [currId, setCurrId] = useState(0);
-  const experiences = useSelector((state) => state.experienceInfo);
+  const [payload, setPayload] = useState({ field: "", value: "" });
+  const [currIndex, setCurrIndex] = useState(0);
+  const storeState = useSelector((state) => state.experienceInfo.experiences);
+  const [state, setState] = useState(storeState);
   const scrollRef = useHorizontalScroll();
+  const app = useSelector((state) => state.app);
+
+  React.useEffect(() => {
+    if (!app.init) setState(storeState);
+  }, [app, storeState]);
 
   const handleAdd = () => {
-    setExperience({});
-    dispatch(addExperience(experiences));
+    setPayload({});
+    dispatch(addExperience(storeState));
   };
 
   const handleDelete = (id) => {
-    setExperience({});
+    setPayload({});
     dispatch(deleteExperienceById(id));
   };
 
-  const handleChange = (e, id) => {
-    setCurrId(id);
-
+  const handleChange = (e) => {
     if (e.target.id === "present") {
       setPresent({
         state: !present.state,
         date: parseDate(e.target.type, e.target.value),
       });
       const endValue = present.state ? present.date : "Present";
-      setExperience({ end: endValue });
+      setPayload({ f: "end", v: endValue });
       return;
     }
 
@@ -75,16 +79,26 @@ function ExperienceInput() {
     const field = e.target.name;
     const value = parseDate(e.target.type, e.target.value);
 
-    setExperience({ [field]: value });
+    setPayload({ field, value });
+    //DEBUG: THIS WORKS WELL! DON'T TOUCH!
+    setState((prevState) => [
+      ...prevState.slice(0, currIndex),
+      { ...prevState[currIndex], [field]: value },
+      ...prevState.slice(currIndex + 1),
+    ]);
   };
 
-  React.useEffect(() => {
-    setExperience({});
-  }, [currId]);
+  // React.useEffect(() => {
+  //   setPayload({ field: "", value: "" });
+  // }, [currIndex]);
 
   React.useEffect(() => {
-    dispatch(updateExperienceById(currId, experience));
-  }, [dispatch, experience, currId]);
+    console.log(state);
+  }, [state]);
+
+  React.useEffect(() => {
+    dispatch(updateExperienceById(currIndex, payload));
+  }, [dispatch, payload, currIndex]);
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
@@ -102,8 +116,15 @@ function ExperienceInput() {
         overflow="auto"
         ref={scrollRef}
       >
-        {experiences.map((item) => (
-          <InputCard key={item.id}>
+        {state.map((item, index) => (
+          <InputCard
+            key={item._id}
+            id={item._id}
+            onClick={() => {
+              setCurrIndex(index);
+              setPayload({ field: "", value: "" });
+            }}
+          >
             <TextField
               label="Company/Institution"
               name="company"
@@ -112,7 +133,7 @@ function ExperienceInput() {
               className={classes.TextField}
               required
               value={item.company}
-              onChange={(e) => handleChange(e, item.id)}
+              onChange={handleChange}
             />
             <TextField
               label="Position/Job Title"
@@ -122,7 +143,7 @@ function ExperienceInput() {
               className={classes.TextField}
               required
               value={item.jobTitle}
-              onChange={(e) => handleChange(e, item.id)}
+              onChange={handleChange}
             />
             <TextField
               variant="outlined"
@@ -133,7 +154,7 @@ function ExperienceInput() {
               value={item.location}
               placeholder="City name or 'Remote'"
               className={classes.TextField}
-              onChange={(e) => handleChange(e, item.id)}
+              onChange={handleChange}
             />
             <Box
               display="flex"
@@ -148,7 +169,7 @@ function ExperienceInput() {
                 label="Started"
                 variant="outlined"
                 InputLabelProps={{ shrink: true }}
-                onChange={(e) => handleChange(e, item.id)}
+                onChange={handleChange}
               />
               <TextField
                 type="date"
@@ -159,12 +180,12 @@ function ExperienceInput() {
                 variant="outlined"
                 disabled={item.end === "Present"}
                 InputLabelProps={{ shrink: true }}
-                onChange={(e) => handleChange(e, item.id)}
+                onChange={handleChange}
               />
             </Box>
             <CustomCheckbox
               checked={item.end === "Present"}
-              onChange={(e) => handleChange(e, item.id)}
+              onChange={handleChange}
               name="end"
               color="primary"
               id="present"
@@ -182,7 +203,7 @@ function ExperienceInput() {
               value={item.description}
               className={classes.TextField}
               helperText="Markdown is supported :)"
-              onChange={(e) => handleChange(e, item.id)}
+              onChange={handleChange}
             />
             <TextField
               type="link"
@@ -194,7 +215,7 @@ function ExperienceInput() {
               value={item.workLink}
               placeholder="Copy/Paste work link here"
               className={classes.TextField}
-              onChange={(e) => handleChange(e, item.id)}
+              onChange={handleChange}
             />
             <Typography
               variant="caption"
@@ -204,7 +225,7 @@ function ExperienceInput() {
               Suggested Tags
             </Typography>
             <TagChips tags={tags} />
-            <RemoveButton onClick={() => handleDelete(item.id)} />
+            <RemoveButton onClick={() => handleDelete(item._id)} />
           </InputCard>
         ))}
         <FloatingAddButton onClick={handleAdd} />

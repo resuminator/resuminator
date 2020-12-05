@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const InputCard = ({id, children}) => {
+export const InputCard = ({id, children, onClick}) => {
   const classes = useStyles();
   return (
-    <Paper component="form" elevation={2} className={classes.root} key={id}>
+    <Paper component="form" elevation={2} className={classes.root} key={id} onClick={onClick}>
       {children}
     </Paper>
   );

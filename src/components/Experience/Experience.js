@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Experience() {
   const classes = useStyles();
-  const experiences = useSelector((state) => state.experienceInfo);
+  const experiences = useSelector((state) => state.experienceInfo.experiences);
 
   return (
     <Box
