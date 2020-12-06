@@ -4,8 +4,7 @@ import React from "react";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    minWidth: "25rem",
-    height: "100%",
+    width: "26rem",
     flexDirection: "column",
     padding: "1rem",
     margin: "1rem",

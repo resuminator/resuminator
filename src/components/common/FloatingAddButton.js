@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
     border: "dashed",
     borderWidth: "0.1rem",
+    width: "3.2rem",
     "&:hover, &:active": {
       border: "solid",
       borderWidth: "0.1rem",

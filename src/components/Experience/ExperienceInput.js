@@ -12,17 +12,16 @@ import { Box, makeStyles, TextField } from "@material-ui/core";
 import { DatePicker } from "@material-ui/pickers";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
 import { CustomCheckbox } from "../common/CustomCheckbox";
+import ExpandCard from "../common/ExpandCard";
 import FloatingAddButton from "../common/FloatingAddButton";
-import { InputCard } from "../common/InputCard";
 import { InputHeader } from "../common/InputHeader";
 import Loader from "../common/Loader";
 import RemoveButton from "../common/RemoveButton";
 import {
   addExperience,
   deleteExperienceById,
-  updateExperienceById,
+  updateExperienceById
 } from "./experience.actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   desc: {
     minHeight: "5rem",
+    whiteSpace: "preLine"
   },
   hints: {
     paddingTop: "0.5rem",
@@ -54,7 +54,7 @@ function ExperienceInput() {
   const [currIndex, setCurrIndex] = useState(0);
   const storeState = useSelector((state) => state.experienceInfo.experiences);
   const [state, setState] = useState(storeState);
-  const scrollRef = useHorizontalScroll();
+  const [open, setOpen] = useState(false)
   const app = useSelector((state) => state.app);
 
   React.useEffect(() => {
@@ -99,7 +99,6 @@ function ExperienceInput() {
     e.preventDefault();
     const field = e.target.name;
     const value = e.target.value;
-
     //DEBUG: THIS WORKS WELL! DON'T TOUCH!
     setState((prevState) => [
       ...prevState.slice(0, currIndex),
@@ -122,22 +121,17 @@ function ExperienceInput() {
       {app.loading ? (
         <Loader />
       ) : (
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyItems="space-evenly"
-          width="35rem"
-          height="100%"
-          overflow="auto"
-          ref={scrollRef}
-        >
+        <React.Fragment>
           {state.map((item, index) => (
-            <InputCard
+            <ExpandCard
               key={item._id}
               id={item._id}
-              onClick={() => {
-                setCurrIndex(index);
-              }}
+              item={item}
+              open={open}
+              currIndex={currIndex}
+              index={index}
+              expand={() => {setCurrIndex(index); setOpen(true)}}
+              collapse={() => setOpen(false)}
             >
               <TextField
                 label="Company/Institution"
@@ -213,7 +207,7 @@ function ExperienceInput() {
                 label="Present"
               />
               <TextField
-                InputProps={{ classes: { input: classes.desc }, rowsMax: 5 }}
+                InputProps={{ classes: { input: classes.desc } }}
                 variant="outlined"
                 color="secondary"
                 label="Description"
@@ -221,7 +215,8 @@ function ExperienceInput() {
                 placeholder="* Start writing in bullet points..."
                 multiline
                 required
-                value={item.description}
+                type="text"
+                value={`${item.description}`}
                 className={classes.TextField}
                 helperText="Markdown is supported :)"
                 onChange={handleChange}
@@ -239,10 +234,10 @@ function ExperienceInput() {
                 onChange={handleChange}
               />
               <RemoveButton onClick={() => handleDelete(item._id)} />
-            </InputCard>
+            </ExpandCard>
           ))}
           <FloatingAddButton onClick={handleAdd} />
-        </Box>
+        </React.Fragment>
       )}
     </Box>
   );
