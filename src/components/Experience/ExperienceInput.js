@@ -121,7 +121,7 @@ function ExperienceInput() {
       {app.loading ? (
         <Loader />
       ) : (
-        <React.Fragment>
+        <Box mt={2}>
           {state.map((item, index) => (
             <ExpandCard
               key={item._id}
@@ -237,7 +237,7 @@ function ExperienceInput() {
             </ExpandCard>
           ))}
           <FloatingAddButton onClick={handleAdd} />
-        </React.Fragment>
+        </Box>
       )}
     </Box>
   );
