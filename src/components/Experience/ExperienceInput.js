@@ -12,6 +12,7 @@ import { Box, makeStyles, TextField } from "@material-ui/core";
 import { DatePicker } from "@material-ui/pickers";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ConfirmButton from "../common/ConfirmButton";
 import { CustomCheckbox } from "../common/CustomCheckbox";
 import ExpandCard from "../common/ExpandCard";
 import FloatingAddButton from "../common/FloatingAddButton";
@@ -21,7 +22,7 @@ import RemoveButton from "../common/RemoveButton";
 import {
   addExperience,
   deleteExperienceById,
-  updateExperienceById
+  updateExperienceById,
 } from "./experience.actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   desc: {
     minHeight: "5rem",
-    whiteSpace: "preLine"
+    whiteSpace: "preLine",
   },
   hints: {
     paddingTop: "0.5rem",
@@ -54,8 +55,9 @@ function ExperienceInput() {
   const [currIndex, setCurrIndex] = useState(0);
   const storeState = useSelector((state) => state.experienceInfo.experiences);
   const [state, setState] = useState(storeState);
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const app = useSelector((state) => state.app);
+  const [change, setChanged] = useState(false);
 
   React.useEffect(() => {
     if (!app.init) setState(storeState);
@@ -84,7 +86,7 @@ function ExperienceInput() {
   };
 
   const handleDateChange = (key) => (date) => {
-    console.log(key, date);
+    setChanged(true);
     const field = key;
     const value = date.toString();
 
@@ -96,6 +98,7 @@ function ExperienceInput() {
   };
 
   const handleChange = (e) => {
+    setChanged(true);
     e.preventDefault();
     const field = e.target.name;
     const value = e.target.value;
@@ -130,7 +133,10 @@ function ExperienceInput() {
               open={open}
               currIndex={currIndex}
               index={index}
-              expand={() => {setCurrIndex(index); setOpen(true)}}
+              expand={() => {
+                setCurrIndex(index);
+                setOpen(true);
+              }}
               collapse={() => setOpen(false)}
             >
               <TextField
@@ -233,7 +239,22 @@ function ExperienceInput() {
                 className={classes.TextField}
                 onChange={handleChange}
               />
-              <RemoveButton onClick={() => handleDelete(item._id)} />
+              <Box
+                width="26rem"
+                display="flex"
+                alignItems="center"
+                justifyItems="center"
+                justifyContent="space-between"
+              >
+                <RemoveButton onClick={() => handleDelete(item._id)} />
+                <ConfirmButton
+                  onClick={() => {
+                    setOpen(false);
+                    setChanged(false);
+                  }}
+                  changed={change}
+                />
+              </Box>
             </ExpandCard>
           ))}
           <FloatingAddButton onClick={handleAdd} />
