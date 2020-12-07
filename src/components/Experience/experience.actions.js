@@ -1,13 +1,5 @@
 import axios from "axios";
 import { SERVER } from "../../utils/Server";
-import { findNextId } from "../../utils/Helpers";
-
-export const addExperience = (array) => {
-  return {
-    type: "ADD_EXPERIENCE_INFO",
-    id: findNextId(array),
-  };
-};
 
 export const deleteExperienceById = (id) => {
   return {
@@ -43,14 +35,41 @@ export const fetchExperienceInfoFailure = (error) => {
   };
 };
 
+export const addExperienceInfoRequest = () => {
+  return {
+    type: "ADD_EXPERIENCE_INFO_REQUEST",
+  };
+};
+
+export const addExperienceInfoSuccess = () => {
+  return {
+    type: "ADD_EXPERIENCE_INFO_SUCCESS",
+  };
+};
+
+export const addExperienceInfoFailure = (error) => {
+  return {
+    type: "ADD_EXPERIENCE_INFO_FAILURE",
+    payload: error,
+  };
+};
+
 export const fetchExperience = (username) => {
   return (dispatch) => {
     dispatch(fetchExperienceInfoRequest());
     return axios
       .get(`${SERVER}/experience/user/${username}`)
-      .then((response) =>
-        dispatch(fetchExperienceInfoSuccess(response.data))
-      )
+      .then((response) => dispatch(fetchExperienceInfoSuccess(response.data)))
       .catch((error) => dispatch(fetchExperienceInfoFailure(error.message)));
+  };
+};
+
+export const addExperience = (username) => {
+  return (dispatch) => {
+    dispatch(addExperienceInfoRequest());
+    return axios
+      .post(`${SERVER}/experience/add`, { username })
+      .then(() => dispatch(fetchExperience(username)))
+      .catch((error) => dispatch(addExperienceInfoFailure(error)));
   };
 };

@@ -30,19 +30,6 @@ const initialState = {
 
 const experienceReducer = (state = initialState, action) => {
   switch (action.type) {
-    case EXPERIENCE_INFO.ADD: {
-      return state.experiences.concat({
-        id: action.id,
-        jobTitle: "",
-        company: "",
-        additionalInfo: "",
-        start: "",
-        end: "",
-        location: "",
-        description: ``,
-        workLink: "",
-      });
-    }
     case EXPERIENCE_INFO.UPDATE: {
       return {...state, experiences: action.payload};
     }
@@ -61,6 +48,12 @@ const experienceReducer = (state = initialState, action) => {
     }
     case EXPERIENCE_INFO.FETCH_ERROR: {
       return { ...state, username: "", error: action.payload, loading: false };
+    }
+    case EXPERIENCE_INFO.ADD_REQUEST: {
+      return {...state, loading: true}
+    }
+    case EXPERIENCE_INFO.ADD_ERROR: {
+      return { ...state, loading: false, error: action.payload }
     }
     default: {
       return state;

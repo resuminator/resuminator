@@ -49,13 +49,15 @@ const currentDate = () => {
   return currentMonth + 1 + "-" + currentDayOfMonth + "-" + currentYear; // MM/DD/YYYY
 };
 
-const parseLines = (value) => value.replace(/(\\n|\\n\*)/g, "\n");
+const parseLines = (value) =>
+  value.replace(/\\'/g, "'").replace(/(\\n)/g, "\n");
 
 function ExperienceInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [currIndex, setCurrIndex] = useState(0);
   const storeState = useSelector((state) => state.experienceInfo.experiences);
+  const loading = useSelector((state) => state.experienceInfo.loading);
   const [state, setState] = useState(storeState);
   const [open, setOpen] = useState(false);
   const app = useSelector((state) => state.app);
@@ -65,8 +67,12 @@ function ExperienceInput() {
     if (!app.init) setState(storeState);
   }, [app, storeState]);
 
+  React.useEffect(() => {
+    setState(storeState);
+  }, [loading, storeState]);
+
   const handleAdd = () => {
-    dispatch(addExperience(storeState));
+    dispatch(addExperience("viveknigam3003"));
   };
 
   const handleDelete = (id) => {
@@ -132,6 +138,7 @@ function ExperienceInput() {
           alignItems="center"
           justifyItems="center"
           mt={2}
+          key="experience-card-box"
         >
           {state.map((item, index) => (
             <ExpandCard
@@ -147,7 +154,6 @@ function ExperienceInput() {
               }}
               collapse={() => setOpen(false)}
             >
-              {console.log(item.description)}
               <TextField
                 label="Company/Institution"
                 name="company"
