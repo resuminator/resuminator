@@ -1,13 +1,6 @@
 import axios from "axios";
 import { SERVER } from "../../utils/Server";
 
-export const deleteExperienceById = (id) => {
-  return {
-    type: "DELETE_EXPERIENCE_INFO",
-    id,
-  };
-};
-
 export const updateExperienceById = (payload) => {
   return {
     type: "UPDATE_EXPERIENCE_INFO",
@@ -73,6 +66,25 @@ export const deleteExperienceInfoFailure = (error) => {
   };
 };
 
+export const updateExperienceInfoRequest = () => {
+  return {
+    type: "UPDATE_EXPERIENCE_INFO_REQUEST",
+  };
+};
+
+export const updateExperienceInfoSuccess = () => {
+  return {
+    type: "UPDATE_EXPERIENCE_INFO_SUCCESS",
+  };
+};
+
+export const updateExperienceInfoFailure = (error) => {
+  return {
+    type: "UPDATE_EXPERIENCE_INFO_FAILURE",
+    payload: error,
+  };
+};
+
 export const fetchExperience = (username) => {
   return (dispatch) => {
     dispatch(fetchExperienceInfoRequest());
@@ -100,5 +112,15 @@ export const deleteExperience = (username, id) => {
       .delete(`${SERVER}/experience/delete/${id}`)
       .then(() => dispatch(fetchExperience(username)))
       .catch((error) => dispatch(deleteExperienceInfoFailure(error)));
+  };
+};
+
+export const updateExperience = (username, id, payload) => {
+  return (dispatch) => {
+    dispatch(updateExperienceInfoRequest());
+    return axios
+      .put(`${SERVER}/experience/update/${id}`, { payload })
+      .then(() => dispatch(fetchExperience(username)))
+      .catch((error) => dispatch(updateExperienceInfoFailure(error)));
   };
 };

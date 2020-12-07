@@ -22,6 +22,7 @@ import RemoveButton from "../common/RemoveButton";
 import {
   addExperience,
   deleteExperience,
+  updateExperience,
   updateExperienceById,
 } from "./experience.actions";
 
@@ -78,6 +79,10 @@ function ExperienceInput() {
   const handleDelete = (id) => {
     dispatch(deleteExperience("viveknigam3003", id));
   };
+
+  const handleUpdate = (id, payload) => {
+    dispatch(updateExperience("viveknigam3003", id, payload))
+  }
 
   const handleCheckbox = (resetDate) => {
     setState((prevState) => [
@@ -264,6 +269,7 @@ function ExperienceInput() {
                 <RemoveButton onClick={() => handleDelete(item._id)} />
                 <ConfirmButton
                   onClick={() => {
+                    handleUpdate(item._id, item);
                     setOpen(false);
                     setChanged(false);
                   }}

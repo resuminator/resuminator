@@ -57,6 +57,12 @@ const experienceReducer = (state = initialState, action) => {
     case EXPERIENCE_INFO.DELETE_ERROR: {
       return {...state, loading: false, error: action.payload}
     }
+    case EXPERIENCE_INFO.UPDATE_REQUEST: {
+      return {...state, loading: true};
+    }
+    case EXPERIENCE_INFO.UPDATE_ERROR: {
+      return {...state, loading: false, error: action.payload}
+    }
     default: {
       return state;
     }
