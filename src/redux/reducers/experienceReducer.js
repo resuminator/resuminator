@@ -8,7 +8,6 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { deleteItem } from "../utils";
 const { EXPERIENCE_INFO } = require("../actionTypes");
 
 const initialState = {
@@ -33,9 +32,6 @@ const experienceReducer = (state = initialState, action) => {
     case EXPERIENCE_INFO.UPDATE: {
       return {...state, experiences: action.payload};
     }
-    case EXPERIENCE_INFO.DELETE: {
-      return deleteItem(state, action);
-    }
     case EXPERIENCE_INFO.FETCH_REQUEST: {
       return { ...state, loading: true };
     }
@@ -54,6 +50,12 @@ const experienceReducer = (state = initialState, action) => {
     }
     case EXPERIENCE_INFO.ADD_ERROR: {
       return { ...state, loading: false, error: action.payload }
+    }
+    case EXPERIENCE_INFO.DELETE_REQUEST: {
+      return {...state, loading: true};
+    }
+    case EXPERIENCE_INFO.DELETE_ERROR: {
+      return {...state, loading: false, error: action.payload}
     }
     default: {
       return state;

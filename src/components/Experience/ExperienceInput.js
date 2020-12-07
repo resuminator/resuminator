@@ -21,7 +21,7 @@ import Loader from "../common/Loader";
 import RemoveButton from "../common/RemoveButton";
 import {
   addExperience,
-  deleteExperienceById,
+  deleteExperience,
   updateExperienceById,
 } from "./experience.actions";
 
@@ -76,7 +76,7 @@ function ExperienceInput() {
   };
 
   const handleDelete = (id) => {
-    dispatch(deleteExperienceById(id));
+    dispatch(deleteExperience("viveknigam3003", id));
   };
 
   const handleCheckbox = (resetDate) => {

@@ -54,6 +54,25 @@ export const addExperienceInfoFailure = (error) => {
   };
 };
 
+export const deleteExperienceInfoRequest = () => {
+  return {
+    type: "DELETE_EXPERIENCE_INFO_REQUEST",
+  };
+};
+
+export const deleteExperienceInfoSuccess = () => {
+  return {
+    type: "DELETE_EXPERIENCE_INFO_SUCCESS",
+  };
+};
+
+export const deleteExperienceInfoFailure = (error) => {
+  return {
+    type: "DELETE_EXPERIENCE_INFO_FAILURE",
+    payload: error,
+  };
+};
+
 export const fetchExperience = (username) => {
   return (dispatch) => {
     dispatch(fetchExperienceInfoRequest());
@@ -71,5 +90,15 @@ export const addExperience = (username) => {
       .post(`${SERVER}/experience/add`, { username })
       .then(() => dispatch(fetchExperience(username)))
       .catch((error) => dispatch(addExperienceInfoFailure(error)));
+  };
+};
+
+export const deleteExperience = (username, id) => {
+  return (dispatch) => {
+    dispatch(deleteExperienceInfoRequest());
+    return axios
+      .delete(`${SERVER}/experience/delete/${id}`)
+      .then(() => dispatch(fetchExperience(username)))
+      .catch((error) => dispatch(deleteExperienceInfoFailure(error)));
   };
 };
