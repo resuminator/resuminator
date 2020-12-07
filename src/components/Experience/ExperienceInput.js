@@ -49,6 +49,8 @@ const currentDate = () => {
   return currentMonth + 1 + "-" + currentDayOfMonth + "-" + currentYear; // MM/DD/YYYY
 };
 
+const parseLines = (value) => value.replace(/(\\n|\\n\*)/g, "\n");
+
 function ExperienceInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -115,7 +117,7 @@ function ExperienceInput() {
   }, [dispatch, state]);
 
   return (
-    <Box display="flex" flexDirection="column" mt={1} p={2}>
+    <Box display="flex" alignItems="start" flexDirection="column" mt={1} p={2}>
       <InputHeader
         heading="Tell us about your work experience"
         subtitle="Don't worry, add anything which you feel relevant for your job
@@ -124,7 +126,13 @@ function ExperienceInput() {
       {app.loading ? (
         <Loader />
       ) : (
-        <Box mt={2}>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyItems="center"
+          mt={2}
+        >
           {state.map((item, index) => (
             <ExpandCard
               key={item._id}
@@ -139,6 +147,7 @@ function ExperienceInput() {
               }}
               collapse={() => setOpen(false)}
             >
+              {console.log(item.description)}
               <TextField
                 label="Company/Institution"
                 name="company"
@@ -222,7 +231,7 @@ function ExperienceInput() {
                 multiline
                 required
                 type="text"
-                value={`${item.description}`}
+                value={parseLines(item.description)}
                 className={classes.TextField}
                 helperText="Markdown is supported :)"
                 onChange={handleChange}
