@@ -3,7 +3,15 @@ import React from "react";
 import DetailCard from "./DetailCard";
 import { InputCard } from "./InputCard";
 
-const ExpandCard = ({ children, item, id, currIndex, index, open, expand, collapse }) => {
+const ExpandCard = ({
+  children,
+  item,
+  id,
+  currIndex,
+  index,
+  open,
+  expand,
+}) => {
   return (
     <AnimateSharedLayout>
       {open && currIndex === index ? (
@@ -14,7 +22,7 @@ const ExpandCard = ({ children, item, id, currIndex, index, open, expand, collap
         </motion.div>
       ) : (
         <motion.div layoutId="expandable-card">
-          <DetailCard item={item} onClick={expand}/>
+          <DetailCard item={item} onClick={expand} />
         </motion.div>
       )}
     </AnimateSharedLayout>

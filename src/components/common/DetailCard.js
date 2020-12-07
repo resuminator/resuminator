@@ -26,8 +26,8 @@ const DetailCard = ({item, onClick}) => {
     const classes = useStyles();
     return (
         <Paper elevation={2} onClick={onClick} className={classes.root}>
-            <Typography variant="body1" className={classes.title}>{item.company}</Typography>
-            <Typography variant="subtitle1" className={classes.subtitle}>{item.jobTitle}</Typography>
+            <Typography variant="body1" className={classes.title}>{item.company || "Click to add company info"}</Typography>
+            <Typography variant="subtitle1" className={classes.subtitle}>{item.jobTitle || "Add Job Title"}</Typography>
         </Paper>
     )
 }
