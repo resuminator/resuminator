@@ -7,17 +7,17 @@ function ConfirmButton({ onClick, changed }) {
   return (
     <AnimateSharedLayout>
       {changed ? (
-        <IconButton color="primary" onClick={onClick}>
-          <motion.div layoutId="confirm-button">
+        <motion.div layoutId="confirm-button">
+          <IconButton color="primary" onClick={onClick}>
             <FiCheck />
-          </motion.div>
-        </IconButton>
+          </IconButton>
+        </motion.div>
       ) : (
-        <IconButton onClick={onClick}>
-          <motion.div layoutId="confirm-button">
+        <motion.div layoutId="confirm-button">
+          <IconButton onClick={onClick}>
             <FiArrowUp color="primary" />
-          </motion.div>
-        </IconButton>
+          </IconButton>
+        </motion.div>
       )}
     </AnimateSharedLayout>
   );
