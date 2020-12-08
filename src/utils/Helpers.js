@@ -1,3 +1,13 @@
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
+
 export const getMonth = (month) => {
   switch (month) {
     case "01":
@@ -67,3 +77,16 @@ export const findNextId = (array) => {
   const len = array.length;
   return array[len - 1].id + 1 || 0;
 }
+
+export const currentDate = () => {
+  const currentDate = new Date();
+
+  const currentDayOfMonth = currentDate.getDate();
+  const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+  const currentYear = currentDate.getFullYear();
+
+  return currentMonth + 1 + "-" + currentDayOfMonth + "-" + currentYear; // MM/DD/YYYY
+};
+
+export const parseLines = (value) =>
+  value.replace(/\\'/g, "'").replace(/(\\n)/g, "\n");
