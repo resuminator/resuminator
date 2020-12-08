@@ -16,7 +16,7 @@ import ReactMarkdown from "react-markdown";
 const useStyles = makeStyles((theme) => ({
   item: {
     fontFamily: theme.typography.fontFamily.secondary,
-    fontSize: "0.9em",
+    fontSize: "0.9rem",
     marginBottom: "0.5rem",
     color: theme.palette.grey[800],
     lineHeight: 1.3,

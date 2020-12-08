@@ -50,7 +50,7 @@ function Experience() {
         </Typography>
       ) : (
         experiences.map((item) => (
-          <Box id={`${item.company}-exp`} className={classes.exp} key={item._id}>
+          <Box id={`${item.company}-exp`} className={classes.exp} key={item._id} pb={0}>
             <JobTitle
               title={item.jobTitle}
               company={item.company}
@@ -62,7 +62,7 @@ function Experience() {
               location={item.location}
             />
             <JobDescription desc={item.description} workLink={item.workLink} />
-            {showTags ? <TagChips tags={item.tags}/> : null}
+            {showTags && item.tags.length ? <TagChips tags={item.tags}/> : null}
           </Box>
         ))
       )}
