@@ -13,6 +13,7 @@ const { EXPERIENCE_INFO } = require("../actionTypes");
 const initialState = {
   showTags: true,
   loading: false,
+  error: "",
   experiences: [
     {
       _id: 0,
@@ -29,10 +30,10 @@ const initialState = {
 
 const experienceReducer = (state = initialState, action) => {
   switch (action.type) {
-    case EXPERIENCE_INFO.UPDATE: {
+    case EXPERIENCE_INFO.UPDATE_STATE: {
       return {...state, experiences: action.payload};
     }
-    case EXPERIENCE_INFO.FETCH_REQUEST: {
+    case EXPERIENCE_INFO.SERVER_REQUEST: {
       return { ...state, loading: true };
     }
     case EXPERIENCE_INFO.FETCH_SUCCESS: {
@@ -43,22 +44,13 @@ const experienceReducer = (state = initialState, action) => {
       };
     }
     case EXPERIENCE_INFO.FETCH_ERROR: {
-      return { ...state, username: "", error: action.payload, loading: false };
-    }
-    case EXPERIENCE_INFO.ADD_REQUEST: {
-      return {...state, loading: true}
+      return { ...state, error: action.payload, loading: false };
     }
     case EXPERIENCE_INFO.ADD_ERROR: {
       return { ...state, loading: false, error: action.payload }
     }
-    case EXPERIENCE_INFO.DELETE_REQUEST: {
-      return {...state, loading: true};
-    }
     case EXPERIENCE_INFO.DELETE_ERROR: {
       return {...state, loading: false, error: action.payload}
-    }
-    case EXPERIENCE_INFO.UPDATE_REQUEST: {
-      return {...state, loading: true};
     }
     case EXPERIENCE_INFO.UPDATE_ERROR: {
       return {...state, loading: false, error: action.payload}

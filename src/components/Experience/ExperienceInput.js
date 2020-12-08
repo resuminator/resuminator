@@ -9,13 +9,16 @@
  */
 
 import { Box, makeStyles, TextField } from "@material-ui/core";
-import { DatePicker } from "@material-ui/pickers";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { currentDate, parseLines } from "../../utils/Helpers";
+import CardControls from "../common/CardControls";
 import ConfirmButton from "../common/ConfirmButton";
 import { CustomCheckbox } from "../common/CustomCheckbox";
+import CustomDatePicker from "../common/CustomDatePicker";
 import ExpandCard from "../common/ExpandCard";
 import FloatingAddButton from "../common/FloatingAddButton";
+import InputCardContent from "../common/InputCardContent";
 import { InputHeader } from "../common/InputHeader";
 import Loader from "../common/Loader";
 import RemoveButton from "../common/RemoveButton";
@@ -40,28 +43,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const currentDate = () => {
-  const currentDate = new Date();
-
-  const currentDayOfMonth = currentDate.getDate();
-  const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
-  const currentYear = currentDate.getFullYear();
-
-  return currentMonth + 1 + "-" + currentDayOfMonth + "-" + currentYear; // MM/DD/YYYY
-};
-
-const parseLines = (value) =>
-  value.replace(/\\'/g, "'").replace(/(\\n)/g, "\n");
-
 function ExperienceInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [currIndex, setCurrIndex] = useState(0);
+  const app = useSelector((state) => state.app);
+  const username = useSelector((state) => state.userInfo.username);
   const storeState = useSelector((state) => state.experienceInfo.experiences);
   const loading = useSelector((state) => state.experienceInfo.loading);
+  const [currIndex, setCurrIndex] = useState(0);
   const [state, setState] = useState(storeState);
   const [open, setOpen] = useState(false);
-  const app = useSelector((state) => state.app);
   const [change, setChanged] = useState(false);
 
   React.useEffect(() => {
@@ -73,16 +64,18 @@ function ExperienceInput() {
   }, [loading, storeState]);
 
   const handleAdd = () => {
-    dispatch(addExperience("viveknigam3003"));
+    dispatch(addExperience(username));
   };
 
   const handleDelete = (id) => {
-    dispatch(deleteExperience("viveknigam3003", id));
+    setCurrIndex(-1);
+    setOpen(false);
+    dispatch(deleteExperience(username, id));
   };
 
   const handleUpdate = (id, payload) => {
-    dispatch(updateExperience("viveknigam3003", id, payload))
-  }
+    dispatch(updateExperience(username, id, payload));
+  };
 
   const handleCheckbox = (resetDate) => {
     setState((prevState) => [
@@ -137,14 +130,7 @@ function ExperienceInput() {
       {app.loading ? (
         <Loader />
       ) : (
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyItems="center"
-          mt={2}
-          key="experience-card-box"
-        >
+        <InputCardContent label="experience-card-box">
           {state.map((item, index) => (
             <ExpandCard
               key={item._id}
@@ -195,32 +181,17 @@ function ExperienceInput() {
                 alignItems="center"
                 justifyContent="space-between"
               >
-                <DatePicker
-                  variant="inline"
-                  openTo="year"
-                  name="start"
-                  views={["year", "month"]}
+                <CustomDatePicker
                   label="Started"
-                  value={item.start}
-                  inputVariant="outlined"
-                  minDate={new Date("1980-01-01")}
-                  maxDate={new Date("2100-01-01")}
-                  key={"start"}
+                  name="start"
                   onChange={handleDateChange("start")}
                   className={classes.TextField}
+                  value={item.start}
                 />
-                <DatePicker
-                  variant="inline"
-                  openTo="year"
+                <CustomDatePicker
+                  label="End"
                   name="end"
-                  views={["year", "month"]}
-                  label="Ended"
                   value={item.end}
-                  inputVariant="outlined"
-                  minDate={item.start}
-                  maxDate={new Date("2100-01-01")}
-                  key={"end"}
-                  disabled={item.end === currentDate()}
                   onChange={handleDateChange("end")}
                   className={classes.TextField}
                 />
@@ -259,13 +230,7 @@ function ExperienceInput() {
                 className={classes.TextField}
                 onChange={handleChange}
               />
-              <Box
-                width="26rem"
-                display="flex"
-                alignItems="center"
-                justifyItems="center"
-                justifyContent="space-between"
-              >
+              <CardControls>
                 <RemoveButton onClick={() => handleDelete(item._id)} />
                 <ConfirmButton
                   onClick={() => {
@@ -275,11 +240,11 @@ function ExperienceInput() {
                   }}
                   changed={change}
                 />
-              </Box>
+              </CardControls>
             </ExpandCard>
           ))}
           <FloatingAddButton onClick={handleAdd} />
-        </Box>
+        </InputCardContent>
       )}
     </Box>
   );
