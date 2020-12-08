@@ -32,15 +32,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DetailCard = ({ item, onClick }) => {
+const DetailCard = ({ title, subtitle, titleAlt, subtitleAlt, onClick }) => {
   const classes = useStyles();
   return (
     <Paper elevation={2} onClick={onClick} className={classes.root}>
       <Typography variant="body1" className={classes.title}>
-        {item.company || "Click to add company info"}
+        {title || titleAlt}
       </Typography>
       <Typography variant="subtitle1" className={classes.subtitle}>
-        {item.jobTitle || "Add Job Title"}
+        {subtitle || subtitleAlt}
       </Typography>
     </Paper>
   );

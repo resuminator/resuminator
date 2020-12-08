@@ -15,7 +15,7 @@ import { InputCard } from "./InputCard";
 
 const ExpandCard = ({
   children,
-  item,
+  displayProps,
   id,
   currIndex,
   index,
@@ -32,7 +32,13 @@ const ExpandCard = ({
         </motion.div>
       ) : (
         <motion.div layoutId="expandable-card">
-          <DetailCard item={item} onClick={expand} />
+          <DetailCard
+            title={displayProps.title}
+            subtitle={displayProps.subtitle}
+            titleAlt={displayProps.titleAlt}
+            subtitleAlt={displayProps.subtitleAlt}
+            onClick={expand}
+          />
         </motion.div>
       )}
     </AnimateSharedLayout>
