@@ -8,45 +8,53 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { deleteItem, updateField } from "../utils";
 const { EDUCATION_INFO } = require("../actionTypes");
 
-const initialState = [
-  {
-    id: 0,
-    institute: "",
-    location: "",
-    degree: "",
-    stream: "",
-    grade: 0.0,
-    total: 0.0,
-    start: "",
-    end: "",
-    description: ``,
-  },
-];
+const initialState = {
+  loading: false,
+  error: "",
+  education: [
+    {
+      _id: 0,
+      institute: "",
+      location: "",
+      degree: "",
+      stream: "",
+      grade: 0.0,
+      total: 0.0,
+      start: "",
+      end: "",
+      description: ``,
+    },
+  ],
+};
 
 const educationReducer = (state = initialState, action) => {
   switch (action.type) {
-    case EDUCATION_INFO.ADD: {
-      return state.concat({
-        id: action.id,
-        institute: "",
-        location: "",
-        degree: "",
-        stream: "",
-        grade: "",
-        total: "",
-        start: "",
-        end: "",
-        description: ``,
-      });
+    case EDUCATION_INFO.UPDATE_STATE: {
+      return {...state, education: action.payload};
     }
-    case EDUCATION_INFO.UPDATE: {
-      return updateField(state, action);
+    case EDUCATION_INFO.SERVER_REQUEST: {
+      return { ...state, loading: true };
     }
-    case EDUCATION_INFO.DELETE: {
-      return deleteItem(state, action);
+    case EDUCATION_INFO.FETCH_SUCCESS: {
+      return {
+        ...state,
+        education: action.payload,
+        loading: false,
+      };
+    }
+    case EDUCATION_INFO.FETCH_ERROR: {
+      return { ...state, error: action.payload, loading: false };
+    }
+    case EDUCATION_INFO.ADD_ERROR: {
+      return { ...state, loading: false, error: action.payload }
+    }
+    case EDUCATION_INFO.DELETE_ERROR: {
+      return {...state, loading: false, error: action.payload}
+    }
+    case EDUCATION_INFO.UPDATE_ERROR: {
+      return {...state, loading: false, error: action.payload}
     }
     default: {
       return state;

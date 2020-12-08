@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Education() {
   const classes = useStyles();
-  const allEducation = useSelector((state) => state.educationInfo);
+  const allEducation = useSelector((state) => state.educationInfo.education);
 
   return (
     <Box
@@ -46,7 +46,6 @@ function Education() {
       flexDirection="column"
       alignItems="flex-start"
       justifyItems="flex-start"
-      className={classes.root}
       pb={2}
     >
       <Typography id="title" variant="h1" className={classes.title}>
@@ -62,7 +61,8 @@ function Education() {
           <Box
             id={`${item.institute}-edu`}
             className={classes.box}
-            key={item.id}
+            key={item._id}
+            pb={0}
           >
             <EducationTitle
               institute={item.institute}
