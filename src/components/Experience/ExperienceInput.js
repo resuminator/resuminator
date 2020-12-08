@@ -135,7 +135,12 @@ function ExperienceInput() {
             <ExpandCard
               key={item._id}
               id={item._id}
-              item={item}
+              displayProps={{
+                title: item.company,
+                subtitle: item.jobTitle,
+                titleAlt: "Click to add experience info.",
+                subtitleAlt: "Add job title."
+              }}
               open={open}
               currIndex={currIndex}
               index={index}
