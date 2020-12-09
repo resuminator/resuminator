@@ -11,7 +11,7 @@
 import { DatePicker } from "@material-ui/pickers";
 import React from "react";
 
-const CustomDatePicker = ({ value, label, name, views, onChange, className }) => {
+const CustomDatePicker = ({ value, label, name, views, onChange, disabled, className }) => {
   return (
     <DatePicker
       variant="inline"
@@ -24,6 +24,7 @@ const CustomDatePicker = ({ value, label, name, views, onChange, className }) =>
       minDate={new Date("1980-01-01")}
       maxDate={new Date("2100-01-01")}
       key={name}
+      disabled={disabled}
       onChange={onChange}
       className={className}
     />

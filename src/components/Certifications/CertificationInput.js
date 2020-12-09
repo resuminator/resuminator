@@ -82,8 +82,8 @@ function CertificationInput() {
       ...prevState.slice(0, currIndex),
       {
         ...prevState[currIndex],
-        end:
-          prevState[currIndex].end === "Never"
+        expires:
+          prevState[currIndex].expires === currentDate()
             ? resetDate
             : currentDate(),
       },
@@ -190,6 +190,7 @@ function CertificationInput() {
                   name="obtained"
                   views={["year", "month"]}
                   onChange={handleDateChange("obtained")}
+                  disabled={item.expires === currentDate()}
                   className={classes.TextField}
                   value={item.start}
                 />
@@ -198,14 +199,15 @@ function CertificationInput() {
                   name="expires"
                   value={item.expires}
                   views={["year", "month"]}
+                  disabled={item.expires === currentDate()}
                   onChange={handleDateChange("expires")}
                   className={classes.TextField}
                 />
               </Box>
               <CustomCheckbox
-                checked={item.expires === "Never"}
-                onChange={() => handleCheckbox()}
-                name="end"
+                checked={item.expires === currentDate()}
+                onChange={() => handleCheckbox(item.obtained)} //TODO: Fix this, it might break.
+                name="expires"
                 color="primary"
                 label="Never Expires"
               />

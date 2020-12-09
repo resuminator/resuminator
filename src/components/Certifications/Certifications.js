@@ -54,7 +54,7 @@ function Certifications() {
             name={item.name}
             authority={item.authority}
             number={item.number}
-            duration={{ start: item.obtained, end: item.expires }}
+            duration={{ obtained: item.obtained, expires: item.expires }}
           />
         ))
       )}

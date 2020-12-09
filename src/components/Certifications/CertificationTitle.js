@@ -10,7 +10,7 @@
 
 import { makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { parseDateView } from "../../utils/Helpers";
+import { currentDate, parseDateView } from "../../utils/Helpers";
 import { TitleBox } from "../common/TitleBox";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,8 +39,9 @@ function CertificationTitle(props) {
         variant="subtitle1"
         className={classes.subtitle}
       >
+        {console.log(props)}
         {props.authority} {props.number ? ` | ${props.number}` : null}{" "}
-        {props.duration ? ` | Expires: ${parseDateView(props.duration.end)}` : null}
+        {props.duration.expires !== currentDate() ? ` | Expires: ${parseDateView(props.duration.expires)}` : null}
       </Typography>
     </TitleBox>
   );

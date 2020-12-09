@@ -8,6 +8,7 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
+import { fetchCertification } from "../components/Certifications/certification.actions";
 import { fetchEducation } from "../components/Education/education.actions";
 import { fetchExperience } from "../components/Experience/experience.actions";
 import { fetchProject } from "../components/Projects/project.actions";
@@ -38,7 +39,8 @@ export const initApp = (username) => async (dispatch) => {
     dispatch(fetchUser(username)),
     dispatch(fetchExperience(username)),
     dispatch(fetchEducation(username)),
-    dispatch(fetchProject(username))
+    dispatch(fetchProject(username)),
+    dispatch(fetchCertification(username))
   ])
     .then(() => {
       dispatch(appInitSuccess());
