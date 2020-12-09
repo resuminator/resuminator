@@ -59,7 +59,7 @@ function TitleInput() {
           display="flex"
           justifyContent="space-between"
           alignItems="flex-start"
-          width="75%"
+          width="26rem"
         >
           <TextField
             label="Full Name"

@@ -99,7 +99,7 @@ function ProjectInput() {
       {app.loading ? (
         <Loader />
       ) : (
-        <InputCardContent>
+        <InputCardContent label="project-card-box">
           {state.map((item, index) => (
             <ExpandCard
               key={item._id}

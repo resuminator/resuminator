@@ -129,7 +129,7 @@ function CertificationInput() {
       {app.loading ? (
         <Loader />
       ) : (
-        <InputCardContent>
+        <InputCardContent label="certification-card-box">
           {state.map((item, index) => (
             <ExpandCard
               key={item._id}

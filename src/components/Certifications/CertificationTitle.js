@@ -39,7 +39,6 @@ function CertificationTitle(props) {
         variant="subtitle1"
         className={classes.subtitle}
       >
-        {console.log(props)}
         {props.authority} {props.number ? ` | ${props.number}` : null}{" "}
         {props.duration.expires !== currentDate() ? ` | Expires: ${parseDateView(props.duration.expires)}` : null}
       </Typography>

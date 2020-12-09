@@ -50,7 +50,7 @@ function Certifications() {
       ) : (
         certifications.map((item) => (
           <CertificationTitle
-            key={item.id}
+            key={item._id}
             name={item.name}
             authority={item.authority}
             number={item.number}

@@ -49,7 +49,7 @@ function Projects() {
         </Typography>
       ) : (
         projects.map((item) => (
-          <Box key={item.id}>
+          <Box key={item._id}>
             <ProjectTitle
               title={item.projectTitle}
               company={item.company}

@@ -129,7 +129,7 @@ function EducationInput() {
       {app.loading ? (
         <Loader />
       ) : (
-        <InputCardContent label="experience-card-box">
+        <InputCardContent label="education-card-box">
           {state.map((item, index) => (
             <ExpandCard
               key={item._id}
