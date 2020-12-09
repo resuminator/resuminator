@@ -189,6 +189,7 @@ function ExperienceInput() {
                 <CustomDatePicker
                   label="Started"
                   name="start"
+                  views={["year", "month"]}
                   onChange={handleDateChange("start")}
                   className={classes.TextField}
                   value={item.start}
@@ -197,6 +198,7 @@ function ExperienceInput() {
                   label="End"
                   name="end"
                   value={item.end}
+                  views={["year", "month"]}
                   onChange={handleDateChange("end")}
                   className={classes.TextField}
                 />

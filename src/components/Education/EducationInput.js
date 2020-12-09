@@ -223,6 +223,7 @@ function EducationInput() {
                 <CustomDatePicker
                   label="Started"
                   name="start"
+                  views={["year"]}
                   onChange={handleDateChange("start")}
                   className={classes.TextField}
                   value={item.start}
@@ -231,6 +232,7 @@ function EducationInput() {
                   label="Graduated"
                   name="end"
                   value={item.end}
+                  views={["year"]}
                   onChange={handleDateChange("end")}
                   className={classes.TextField}
                 />
