@@ -16,10 +16,11 @@ import ExperienceInput from "../Experience/ExperienceInput";
 import ProjectInput from "../Projects/ProjectInput";
 import SkillsInput from "../Skills/SkillsInput";
 import TitleInput from "../Title/TitleInput";
+import "../../styles/noscroll.css"
 
 function InputLayout() {
   return (
-    <Box display="flex" flexDirection="column">
+    <Box display="flex" flexDirection="column" height="29.7cm" overflow="auto" className="no-scroll">
       <TitleInput />
       <ExperienceInput />
       <EducationInput />
