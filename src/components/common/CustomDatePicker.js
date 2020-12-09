@@ -11,13 +11,13 @@
 import { DatePicker } from "@material-ui/pickers";
 import React from "react";
 
-const CustomDatePicker = ({ value, label, name, onChange, className }) => {
+const CustomDatePicker = ({ value, label, name, views, onChange, className }) => {
   return (
     <DatePicker
       variant="inline"
       openTo="year"
       name={name}
-      views={["year", "month"]}
+      views={views}
       label={label}
       value={value}
       inputVariant="outlined"
