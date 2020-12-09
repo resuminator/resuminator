@@ -48,7 +48,7 @@ function EducationInput() {
   const app = useSelector((state) => state.app);
   const username = useSelector((state) => state.userInfo.username);
   const storeState = useSelector((state) => state.educationInfo.education);
-  const loading = useSelector((state) => state.experienceInfo.loading);
+  const loading = useSelector((state) => state.educationInfo.loading);
   const [state, setState] = useState(storeState);
   const [currIndex, setCurrIndex] = useState(0);
   const [open, setOpen] = useState(false);
