@@ -9,20 +9,25 @@
  */
 
 import { Box } from "@material-ui/core";
+import { AnimateSharedLayout, motion } from "framer-motion";
 import React from "react";
 
 const InputCardContent = ({ label, children }) => {
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyItems="center"
-      mt={2}
-      key={label}
-    >
-      {children}
-    </Box>
+    <AnimateSharedLayout>
+      <motion.div layout>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyItems="center"
+          mt={2}
+          key={label}
+        >
+          {children}
+        </Box>
+      </motion.div>
+    </AnimateSharedLayout>
   );
 };
 
