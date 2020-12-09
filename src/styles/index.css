@@ -30,9 +30,14 @@ li {
   margin: 0 0 4px 0;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
   margin-block-start: 0em;
   margin-block-end: 1rem;
+}
+
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 @media (max-width: 1280px){
