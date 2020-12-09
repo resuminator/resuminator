@@ -10,6 +10,8 @@
 
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import ActionButton from "../common/ActionButton";
+import { FiArrowRight } from "react-icons/fi";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,6 +56,11 @@ function Header() {
       >
         Re
       </Typography>
+      <ActionButton
+        buttonText="💡 Have any suggestions/ideas?"
+        link="https://github.com/viveknigam3003/resuminator/discussions/5"
+        endIcon={<FiArrowRight />}
+      />
     </Box>
   );
 }
