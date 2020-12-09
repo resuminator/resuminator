@@ -201,6 +201,7 @@ function ExperienceInput() {
                   views={["year", "month"]}
                   onChange={handleDateChange("end")}
                   className={classes.TextField}
+                  disabled={item.end === currentDate()}
                 />
               </Box>
               <CustomCheckbox

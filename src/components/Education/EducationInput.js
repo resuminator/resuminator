@@ -234,6 +234,7 @@ function EducationInput() {
                   value={item.end}
                   views={["year"]}
                   onChange={handleDateChange("end")}
+                  disabled={item.end === currentDate()}
                   className={classes.TextField}
                 />
               </Box>
