@@ -61,22 +61,22 @@ export const checkEmptyState = (state) => {
   let flag1 = true;
   let flag2 = true;
   if (state.length === 0) flag1 = false;
-  for(let i = 0; i < state.length; i++){
-    for(const pair of Object.entries(state[i])){
-      if(pair[1]) {
+  for (let i = 0; i < state.length; i++) {
+    for (const pair of Object.entries(state[i])) {
+      if (pair[1]) {
         flag2 = false;
         break;
-      };
+      }
     }
   }
 
   return flag1 && flag2;
-}
+};
 
 export const findNextId = (array) => {
   const len = array.length;
   return array[len - 1].id + 1 || 0;
-}
+};
 
 export const currentDate = () => {
   const currentDate = new Date();
@@ -90,3 +90,20 @@ export const currentDate = () => {
 
 export const parseLines = (value) =>
   value.replace(/\\'/g, "'").replace(/(\\n)/g, "\n");
+
+export const parseDateView = (date, year) => {
+  const obj = new Date(date);
+  const currYear = currentDate().split("-")[2];
+  const currMonth = currentDate().split("-")[0];
+  
+  if (
+    currMonth === (obj.getMonth() + 1).toString() &&
+    currYear === obj.getFullYear().toString()
+  )
+    return "Present";
+
+  if (year && obj.getFullYear().toString() === currYear) return "Present";
+  if (year) return obj.toLocaleString([], { year: "numeric" });
+
+  return obj.toLocaleString([], { month: "short", year: "numeric" });
+};

@@ -10,6 +10,7 @@
 
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { parseDateView } from "../../utils/Helpers";
 import { TitleBox } from "../common/TitleBox";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,10 +27,6 @@ const useStyles = makeStyles((theme) => ({
 
 function JobTitle(props) {
   const classes = useStyles();
-
-  const parseDateView = (date) =>{
-    const obj = new Date(date);
-    return obj.toLocaleString([], { month: "short", year: "numeric" });}
 
   return (
     <TitleBox id="Job-Title-Box">

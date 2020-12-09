@@ -10,6 +10,7 @@
 
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { parseDateView } from "../../utils/Helpers";
 import { TitleBox } from "../common/TitleBox";
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +44,7 @@ function EducationTitle(props) {
       </Box>
       <Box textAlign="right">
         <Typography id="duration" className={classes.title}>
-          {props.duration.start} - {props.duration.end}
+          {parseDateView(props.duration.start, "year")} - {parseDateView(props.duration.end, "year")}
         </Typography>
         <Typography id="location" className={classes.subtitle}>
           {props.location}
