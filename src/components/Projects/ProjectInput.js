@@ -11,16 +11,20 @@
 import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
+import CardControls from "../common/CardControls";
+import ConfirmButton from "../common/ConfirmButton";
+import ExpandCard from "../common/ExpandCard";
 import FloatingAddButton from "../common/FloatingAddButton";
-import { InputCard } from "../common/InputCard";
+import InputCardContent from "../common/InputCardContent";
 import { InputHeader } from "../common/InputHeader";
+import Loader from "../common/Loader";
 import RemoveButton from "../common/RemoveButton";
 import {
   addProject,
-  deleteProjectById,
-  updateProjectById,
-} from "./projectActions";
+  deleteProject,
+  updateProject,
+  updateProjectState,
+} from "./project.actions";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
@@ -37,93 +41,134 @@ const useStyles = makeStyles((theme) => ({
 function ProjectInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const projects = useSelector((state) => state.projectInfo);
-  const [project, setProject] = useState({ description: `` });
-  const [currId, setCurrId] = useState(0);
-  const scrollRef = useHorizontalScroll();
+  const app = useSelector((state) => state.app);
+  const username = useSelector((state) => state.userInfo.username);
+  const storeState = useSelector((state) => state.projectInfo.projects);
+  const loading = useSelector((state) => state.projectInfo.loading);
+  const [state, setState] = useState(storeState);
+  const [currIndex, setCurrIndex] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [change, setChanged] = useState(false);
+
+  React.useEffect(() => {
+    if (!app.init) setState(storeState);
+  }, [app, storeState]);
+
+  React.useEffect(() => {
+    setState(storeState);
+  }, [loading, storeState]);
 
   const handleAdd = () => {
-    setProject({});
-    dispatch(addProject(projects));
+    dispatch(addProject(username));
   };
 
   const handleDelete = (id) => {
-    setProject({});
-    dispatch(deleteProjectById(id));
+    setCurrIndex(-1);
+    setOpen(false);
+    dispatch(deleteProject(username, id));
   };
 
-  const handleChange = (e, id) => {
-    setCurrId(id);
+  const handleUpdate = (id, payload) => {
+    dispatch(updateProject(username, id, payload));
+  };
 
+  const handleChange = (e) => {
+    setChanged(true);
     e.preventDefault();
     const field = e.target.name;
     const value = e.target.value;
 
-    setProject({ [field]: value });
+    setState((prevState) => [
+      ...prevState.slice(0, currIndex),
+      { ...prevState[currIndex], [field]: value },
+      ...prevState.slice(currIndex + 1),
+    ]);
   };
 
-  React.useEffect(() => setProject({}), [currId]);
-
   React.useEffect(() => {
-    dispatch(updateProjectById(currId, project));
-  }, [dispatch, project, currId]);
+    dispatch(updateProjectState(state));
+  }, [dispatch, state]);
 
   return (
-    <Box display="flex" flexDirection="column" mt={1} p={2}>
+    <Box display="flex" alignItems="start" flexDirection="column" mt={1} p={2}>
       <InputHeader
         heading=" Showcase your best work!"
         subtitle="Add details about your top 2/3 projects which align with your job
         profile!"
       />
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyItems="space-evenly"
-        width="35rem"
-        overflow="auto"
-        ref={scrollRef}
-      >
-        {projects.map((item) => (
-          <InputCard key={item.id}>
-            <TextField
-              label="Project Name"
-              name="projectTitle"
-              variant="outlined"
-              color="secondary"
-              className={classes.TextField}
-              required
-              value={item.projectTitle}
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <TextField
-              InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
-              variant="outlined"
-              color="secondary"
-              label="What it is about?"
-              name="description"
-              placeholder="Write a short description about your role in the project"
-              multiline
-              value={item.description}
-              className={classes.TextField}
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <TextField
-              variant="outlined"
-              size="small"
-              label="Where to find it?"
-              name="projectLink"
-              type="link"
-              color="secondary"
-              value={item.link}
-              placeholder="Github/Website/Blog link"
-              className={classes.TextField}
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <RemoveButton onClick={() => handleDelete(item.id)} />
-          </InputCard>
-        ))}
-        <FloatingAddButton onClick={handleAdd} />
-      </Box>
+      {app.loading ? (
+        <Loader />
+      ) : (
+        <InputCardContent>
+          {state.map((item, index) => (
+            <ExpandCard
+              key={item._id}
+              id={item._id}
+              displayProps={{
+                title: item.projectTitle,
+                subtitle: item.projectLink,
+                titleAlt: "Click to add projects info",
+                subtitleAlt: "Add project link",
+              }}
+              open={open}
+              currIndex={currIndex}
+              index={index}
+              expand={() => {
+                setCurrIndex(index);
+                setOpen(true);
+              }}
+              collapse={() => setOpen(false)}
+            >
+              <TextField
+                label="Project Name"
+                name="projectTitle"
+                variant="outlined"
+                color="secondary"
+                className={classes.TextField}
+                required
+                value={item.projectTitle}
+                onChange={handleChange}
+              />
+              <TextField
+                InputProps={{ classes: { input: classes.desc }, rowsMax: 2 }}
+                variant="outlined"
+                color="secondary"
+                label="What it is about?"
+                name="description"
+                placeholder="Write a short description about your role in the project"
+                multiline
+                value={item.description}
+                className={classes.TextField}
+                onChange={handleChange}
+              />
+              <TextField
+                variant="outlined"
+                size="small"
+                label="Where to find it?"
+                name="projectLink"
+                type="link"
+                color="secondary"
+                value={item.projectLink}
+                placeholder="Github/Website/Blog link"
+                className={classes.TextField}
+                onChange={handleChange}
+              />
+              <CardControls>
+                <RemoveButton onClick={() => handleDelete(item._id)} />
+                <ConfirmButton
+                  onClick={() => {
+                    handleUpdate(item._id, item);
+                    setOpen(false);
+                    setChanged(false);
+                  }}
+                  changed={change}
+                />
+              </CardControls>
+            </ExpandCard>
+          ))}
+          <FloatingAddButton onClick={handleAdd} />
+        </InputCardContent>
+      )}
     </Box>
   );
 }

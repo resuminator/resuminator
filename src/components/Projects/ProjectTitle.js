@@ -33,9 +33,6 @@ function ProjectTitle(props) {
           {props.title}
         </Link>
       </Typography>
-      <Typography id="company" variant="body2" className={classes.subtitle}>
-        {props.company} {props.addInfo ? `, ${props.addInfo}` : null}
-      </Typography>
     </TitleBox>
   );
 }

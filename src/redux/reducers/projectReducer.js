@@ -8,33 +8,27 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { deleteItem, updateField } from "../utils";
 const { PROJECT_INFO } = require("../actionTypes");
 
-const initialState = [
-  {
-    id: 0,
-    projectTitle: "",
-    description: ``,
-    projectLink: "",
-  },
-];
+const initialState = { loading: false, error: "", projects: [] };
 
 const projectReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PROJECT_INFO.ADD: {
-      return state.concat({
-        id: action.id,
-        projectTitle: "",
-        description: ``,
-        projectLink: "",
-      });
+    case PROJECT_INFO.UPDATE_STATE: {
+      return { ...state, projects: action.payload };
     }
-    case PROJECT_INFO.UPDATE: {
-      return updateField(state, action);
+    case PROJECT_INFO.SERVER_REQUEST: {
+      return { ...state, loading: true };
     }
-    case PROJECT_INFO.DELETE: {
-      return deleteItem(state, action);
+    case PROJECT_INFO.FETCH_SUCCESS: {
+      return {
+        ...state,
+        projects: action.payload,
+        loading: false,
+      };
+    }
+    case PROJECT_INFO.SERVER_ERROR: {
+      return { ...state, error: action.payload, loading: false };
     }
     default: {
       return state;

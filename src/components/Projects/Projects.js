@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Projects() {
   const classes = useStyles();
-  const projects = useSelector((state) => state.projectInfo);
+  const projects = useSelector((state) => state.projectInfo.projects);
 
   return (
     <Box
