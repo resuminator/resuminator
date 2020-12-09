@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Certifications() {
   const classes = useStyles();
-  const certifications = useSelector((state) => state.certificationInfo);
+  const certifications = useSelector((state) => state.certificationInfo.certifications);
 
   return (
     <Box

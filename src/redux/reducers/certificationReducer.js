@@ -8,39 +8,27 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { deleteItem, updateField } from "../utils";
 const { CERTIFICATION_INFO } = require("../actionTypes");
 
-const initialState = [
-  {
-    id: 0,
-    name: "",
-    authority: "",
-    number: "",
-    obtained: "",
-    expires: "",
-    link: "",
-  },
-];
+const initialState = { loading: false, error: "", certifications: [] };
 
 const certificationReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CERTIFICATION_INFO.ADD: {
-      return state.concat({
-        id: action.id,
-        name: "",
-        authority: "",
-        number: "",
-        obtained: "",
-        expires: "",
-        link: "",
-      });
+    case CERTIFICATION_INFO.UPDATE_STATE: {
+      return { ...state, certifications: action.payload };
     }
-    case CERTIFICATION_INFO.UPDATE: {
-      return updateField(state, action);
+    case CERTIFICATION_INFO.SERVER_REQUEST: {
+      return { ...state, loading: true };
     }
-    case CERTIFICATION_INFO.DELETE: {
-      return deleteItem(state, action)
+    case CERTIFICATION_INFO.FETCH_SUCCESS: {
+      return {
+        ...state,
+        certifications: action.payload,
+        loading: false,
+      };
+    }
+    case CERTIFICATION_INFO.SERVER_ERROR: {
+      return { ...state, error: action.payload, loading: false };
     }
     default: {
       return state;

@@ -11,18 +11,23 @@
 import { Box, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
-import { parseDate } from "../../utils/Helpers";
+import { currentDate } from "../../utils/Helpers";
+import CardControls from "../common/CardControls";
+import ConfirmButton from "../common/ConfirmButton";
 import { CustomCheckbox } from "../common/CustomCheckbox";
+import CustomDatePicker from "../common/CustomDatePicker";
+import ExpandCard from "../common/ExpandCard";
 import FloatingAddButton from "../common/FloatingAddButton";
-import { InputCard } from "../common/InputCard";
+import InputCardContent from "../common/InputCardContent";
 import { InputHeader } from "../common/InputHeader";
+import Loader from "../common/Loader";
 import RemoveButton from "../common/RemoveButton";
 import {
-  addCertificate,
-  deleteCertificateById,
-  updateCertificateById
-} from "./certificationActions";
+  addCertification,
+  deleteCertification,
+  updateCertification,
+  updateCertificationState,
+} from "./certification.actions";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
@@ -39,147 +44,197 @@ const useStyles = makeStyles((theme) => ({
 function CertificationInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [expires, setExpires] = useState({ state: false, date: "" });
-  const [certificate, setCertificate] = useState({});
-  const certifications = useSelector((state) => state.certificationInfo);
-  const [currId, setCurrId] = useState(0);
-  const scrollRef = useHorizontalScroll();
+  const app = useSelector((state) => state.app);
+  const username = useSelector((state) => state.userInfo.username);
+  const storeState = useSelector(
+    (state) => state.certificationInfo.certifications
+  );
+  const loading = useSelector((state) => state.certificationInfo.loading);
+  const [state, setState] = useState(storeState);
+  const [currIndex, setCurrIndex] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [change, setChanged] = useState(false);
+
+  React.useEffect(() => {
+    if (!app.init) setState(storeState);
+  }, [app, storeState]);
+
+  React.useEffect(() => {
+    setState(storeState);
+  }, [loading, storeState]);
 
   const handleAdd = () => {
-    setCertificate({});
-    dispatch(addCertificate(certifications));
+    dispatch(addCertification(username));
   };
 
   const handleDelete = (id) => {
-    setCertificate({});
-    dispatch(deleteCertificateById(id));
+    setCurrIndex(-1);
+    setOpen(false);
+    dispatch(deleteCertification(username, id));
   };
 
-  const handleChange = (e, id) => {
-    setCurrId(id);
+  const handleUpdate = (id, payload) => {
+    dispatch(updateCertification(username, id, payload));
+  };
 
-    if (e.target.id === "expires") {
-      setExpires({
-        state: !expires.state,
-        date: parseDate(e.target.type, e.target.value),
-      });
-      const endValue = expires.state ? expires.date : "Never";
-      setCertificate({ expires: endValue });
-      return;
-    }
+  const handleCheckbox = (resetDate) => {
+    setState((prevState) => [
+      ...prevState.slice(0, currIndex),
+      {
+        ...prevState[currIndex],
+        end:
+          prevState[currIndex].end === "Never"
+            ? resetDate
+            : currentDate(),
+      },
+      ...prevState.slice(currIndex + 1),
+    ]);
+  };
 
+  const handleDateChange = (key) => (date) => {
+    setChanged(true);
+    const field = key;
+    const value = date.toString();
+
+    setState((prevState) => [
+      ...prevState.slice(0, currIndex),
+      { ...prevState[currIndex], [field]: value },
+      ...prevState.slice(currIndex + 1),
+    ]);
+  };
+
+  const handleChange = (e) => {
+    setChanged(true);
     e.preventDefault();
     const field = e.target.name;
-    const value = parseDate(e.target.type, e.target.value);
+    const value = e.target.value;
 
-    setCertificate({ [field]: value });
+    setState((prevState) => [
+      ...prevState.slice(0, currIndex),
+      { ...prevState[currIndex], [field]: value },
+      ...prevState.slice(currIndex + 1),
+    ]);
   };
 
   React.useEffect(() => {
-    setCertificate({});
-  }, [currId]);
-
-  React.useEffect(() => {
-    dispatch(updateCertificateById(currId, certificate));
-  }, [dispatch, certificate, currId]);
+    dispatch(updateCertificationState(state));
+  }, [dispatch, state]);
 
   return (
-    <Box display="flex" flexDirection="column" mt={1} p={2}>
+    <Box display="flex" alignItems="start" flexDirection="column" mt={1} p={2}>
       <InputHeader
         heading="Got any certifications?"
         subtitle="Add your professional certifications with certification ID and/or Link"
       />
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyItems="space-evenly"
-        width="35rem"
-        overflow="auto"
-        ref={scrollRef}
-      >
-        {certifications.map((item) => (
-          <InputCard key={item.id}>
-            <TextField
-              label="Name"
-              name="name"
-              variant="outlined"
-              color="secondary"
-              className={classes.TextField}
-              value={item.name}
-              required
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <TextField
-              variant="outlined"
-              size="small"
-              label="Issuing Authority"
-              name="authority"
-              color="secondary"
-              placeholder="company name"
-              value={item.authority}
-              className={classes.TextField}
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <TextField
-              variant="outlined"
-              size="small"
-              label="Unique Certification ID"
-              name="number"
-              color="secondary"
-              value={item.number}
-              className={classes.TextField}
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
+      {app.loading ? (
+        <Loader />
+      ) : (
+        <InputCardContent>
+          {state.map((item, index) => (
+            <ExpandCard
+              key={item._id}
+              id={item._id}
+              displayProps={{
+                title: item.name,
+                subtitle: item.number,
+                titleAlt: "Click to add certificates",
+                subtitleAlt: "Add certificate number",
+              }}
+              open={open}
+              currIndex={currIndex}
+              index={index}
+              expand={() => {
+                setCurrIndex(index);
+                setOpen(true);
+              }}
+              collapse={() => setOpen(false)}
             >
               <TextField
-                type="date"
+                label="Name"
+                name="name"
+                variant="outlined"
                 color="secondary"
                 className={classes.TextField}
-                label="Obtained"
-                name="obtained"
-                variant="outlined"
-                InputLabelProps={{ shrink: true }}
-                onChange={(e) => handleChange(e, item.id)}
+                value={item.name}
+                required
+                onChange={handleChange}
               />
               <TextField
-                type="date"
-                color="secondary"
-                className={classes.TextField}
-                label="Expires"
-                name="expires"
                 variant="outlined"
-                disabled={item.expires === "Never"}
-                InputLabelProps={{ shrink: true }}
+                size="small"
+                label="Issuing Authority"
+                name="authority"
+                color="secondary"
+                placeholder="company name"
+                value={item.authority}
+                className={classes.TextField}
+                onChange={handleChange}
+              />
+              <TextField
+                variant="outlined"
+                size="small"
+                label="Unique Certification ID"
+                name="number"
+                color="secondary"
+                value={item.number}
+                className={classes.TextField}
+                onChange={handleChange}
+              />
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <CustomDatePicker
+                  label="Obtained"
+                  name="obtained"
+                  views={["year", "month"]}
+                  onChange={handleDateChange("obtained")}
+                  className={classes.TextField}
+                  value={item.start}
+                />
+                <CustomDatePicker
+                  label="Expires"
+                  name="expires"
+                  value={item.expires}
+                  views={["year", "month"]}
+                  onChange={handleDateChange("expires")}
+                  className={classes.TextField}
+                />
+              </Box>
+              <CustomCheckbox
+                checked={item.expires === "Never"}
+                onChange={() => handleCheckbox()}
+                name="end"
+                color="primary"
+                label="Never Expires"
+              />
+              <TextField
+                variant="outlined"
+                size="small"
+                label="Link"
+                name="link"
+                color="secondary"
+                value={item.link}
+                className={classes.TextField}
                 onChange={(e) => handleChange(e, item.id)}
               />
-            </Box>
-            <CustomCheckbox
-              checked={item.expires === "Never"}
-              onChange={(e) => handleChange(e, item.id)}
-              name="end"
-              color="primary"
-              id="expires"
-              label="Never Expires"
-            />
-            <TextField
-              variant="outlined"
-              size="small"
-              label="Link"
-              name="link"
-              color="secondary"
-              value={item.link}
-              className={classes.TextField}
-              onChange={(e) => handleChange(e, item.id)}
-            />
-            <RemoveButton onClick={() => handleDelete(item.id)} />
-          </InputCard>
-        ))}
-        <FloatingAddButton onClick={handleAdd} />
-      </Box>
+              <CardControls>
+                <RemoveButton onClick={() => handleDelete(item._id)} />
+                <ConfirmButton
+                  onClick={() => {
+                    handleUpdate(item._id, item);
+                    setOpen(false);
+                    setChanged(false);
+                  }}
+                  changed={change}
+                />
+              </CardControls>
+            </ExpandCard>
+          ))}
+          <FloatingAddButton onClick={handleAdd} />
+        </InputCardContent>
+      )}
     </Box>
   );
 }
