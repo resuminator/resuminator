@@ -31,30 +31,9 @@ export const fetchEducationInfoSuccess = (info) => {
   };
 };
 
-export const fetchEducationInfoFailure = (error) => {
+export const educationInfoFailure = (error) => {
   return {
-    type: "FETCH_EDUCATION_INFO_FAILURE",
-    payload: error,
-  };
-};
-
-export const addEducationInfoFailure = (error) => {
-  return {
-    type: "ADD_EDUCATION_INFO_FAILURE",
-    payload: error,
-  };
-};
-
-export const deleteEducationInfoFailure = (error) => {
-  return {
-    type: "DELETE_EDUCATION_INFO_FAILURE",
-    payload: error,
-  };
-};
-
-export const updateEducationInfoFailure = (error) => {
-  return {
-    type: "UPDATE_EDUCATION_INFO_FAILURE",
+    type: "EDUCATION_INFO_SERVER_FAILURE",
     payload: error,
   };
 };
@@ -65,7 +44,7 @@ export const fetchEducation = (username) => {
     return axios
       .get(`${SERVER}/education/user/${username}`)
       .then((response) => dispatch(fetchEducationInfoSuccess(response.data)))
-      .catch((error) => dispatch(fetchEducationInfoFailure(error.message)));
+      .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };
 
@@ -75,7 +54,7 @@ export const addEducation = (username) => {
     return axios
       .post(`${SERVER}/education/add`, { username })
       .then(() => dispatch(fetchEducation(username)))
-      .catch((error) => dispatch(addEducationInfoFailure(error)));
+      .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };
 
@@ -85,7 +64,7 @@ export const deleteEducation = (username, id) => {
     return axios
       .delete(`${SERVER}/education/delete/${id}`)
       .then(() => dispatch(fetchEducation(username)))
-      .catch((error) => dispatch(deleteEducationInfoFailure(error)));
+      .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };
 
@@ -95,6 +74,6 @@ export const updateEducation = (username, id, payload) => {
     return axios
       .put(`${SERVER}/education/update/${id}`, { payload })
       .then(() => dispatch(fetchEducation(username)))
-      .catch((error) => dispatch(updateEducationInfoFailure(error)));
+      .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };
