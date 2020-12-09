@@ -13,20 +13,7 @@ const { EDUCATION_INFO } = require("../actionTypes");
 const initialState = {
   loading: false,
   error: "",
-  education: [
-    {
-      _id: 0,
-      institute: "",
-      location: "",
-      degree: "",
-      stream: "",
-      grade: 0.0,
-      total: 0.0,
-      start: "",
-      end: "",
-      description: ``,
-    },
-  ],
+  education: [],
 };
 
 const educationReducer = (state = initialState, action) => {

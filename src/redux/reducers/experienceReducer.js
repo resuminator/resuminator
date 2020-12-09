@@ -14,18 +14,7 @@ const initialState = {
   showTags: true,
   loading: false,
   error: "",
-  experiences: [
-    {
-      _id: 0,
-      jobTitle: "",
-      company: "",
-      start: "",
-      end: "",
-      location: "",
-      description: ``,
-      workLink: "",
-    },
-  ],
+  experiences: [],
 };
 
 const experienceReducer = (state = initialState, action) => {
