@@ -24,11 +24,11 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const ActionButton = ({ startIcon, endIcon, link, buttonText }) => {
+const ActionButton = ({ startIcon, endIcon, link, buttonText, onClick, className }) => {
   const classes = useStyles()
   return (
     <Button
-      className={classes.root}
+      className={classes.root || className}
       variant="outlined"
       color="primary"
       size="large"
@@ -36,6 +36,7 @@ const ActionButton = ({ startIcon, endIcon, link, buttonText }) => {
       endIcon={endIcon}
       href={link}
       target="_blank"
+      onClick={onClick}
     >
       <Typography className={classes.text} variant="subtitle1" color="inherit">
         {buttonText}
