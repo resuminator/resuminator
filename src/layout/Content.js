@@ -17,10 +17,13 @@ import MobileView from "../layout/MobileView";
 import ActionButton from "../components/common/ActionButton";
 import { FiPrinter } from "react-icons/fi";
 import ReactToPrint from "react-to-print";
+import '../styles/page.css'
+import { useSelector } from "react-redux";
 
 function Content() {
   const { width } = useWindowDimensions();
   const resume = useRef();
+  const name = useSelector(state => state.userInfo.name).replace(' ', '_')
 
   return (
     <React.Fragment>
@@ -38,14 +41,15 @@ function Content() {
           </Box>
           <Box justifyItems="center" m={5} p={2} pt={0}>
             <ReactToPrint
+              bodyClass={`page print`}
               trigger={() => (
                 <ActionButton
                   startIcon={<FiPrinter />}
                   buttonText="Print Resume"
                 />
               )}
-              pageStyle="A4"
               content={() => resume.current}
+              documentTitle={`${name}_Resume.pdf`}
             />
           </Box>
         </Box>
