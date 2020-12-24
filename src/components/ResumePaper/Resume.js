@@ -14,12 +14,12 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "../../styles/page.css";
 import "../../styles/shadow.css";
 import Certifications from "../Certifications/Certifications";
+import ColoredLine from "../common/Line";
 import Education from "../Education/Education";
 import Experience from "../Experience/Experience";
 import Projects from "../Projects/Projects";
 import Skills from "../Skills/Skills";
 import Title from "../Title/Title";
-import ColoredLine from "../common/Line";
 
 const useStyles = makeStyles(theme => ({
   watermark: {
