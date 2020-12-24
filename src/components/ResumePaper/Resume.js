@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Resume() {
+function Resume({element}) {
   const userLayout = {
     left: [
       <Experience key="exp" />,
@@ -91,10 +91,11 @@ function Resume() {
       bgcolor="contrast.light"
       className={`shadow`}
       width="21cm"
-      minHeight="29.7cm"
+      height="29.7cm"
       zIndex="100"
       position="relative"
     >
+      <Box ref={element}>
       <Title />
       <ColoredLine color="#44318D" />
       <Box display="flex" justifyContent="space-between" id="resume-insider">
@@ -183,6 +184,7 @@ function Resume() {
       >
         Built using <span className={classes.logo}>Resuminator</span>
       </Typography>
+      </Box>
     </Box>
   );
 }
