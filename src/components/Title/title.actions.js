@@ -38,14 +38,29 @@ export const fetchUserInfoFailure = (error) => {
   };
 };
 
+export const updateUserInfoFailure = (error) => {
+  return {
+    type: "UPDATE_USERINFO_FAILURE",
+    payload: error,
+  };
+};
+
 export const fetchUser = (username) => {
   return (dispatch) => {
     dispatch(fetchUserInfoRequest());
     return axios
       .get(`${SERVER}/users/${username}`)
-      .then((response) =>
-        dispatch(fetchUserInfoSuccess(response.data))
-      )
+      .then((response) => dispatch(fetchUserInfoSuccess(response.data)))
       .catch((error) => dispatch(fetchUserInfoFailure(error.message)));
+  };
+};
+
+export const updateUserInfo = (username, userId, payload) => {
+  return (dispatch) => {
+    dispatch(fetchUserInfoRequest());
+    return axios
+      .put(`${SERVER}/users/update/${userId}`, { payload })
+      .then(() => dispatch(fetchUser(username)))
+      .catch((error) => dispatch(updateUserInfoFailure(error)));
   };
 };
