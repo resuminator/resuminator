@@ -3,6 +3,7 @@
   margin: 0;
 }
 
+/*Change here for print styling*/
 @media print {
   html,
   body {
