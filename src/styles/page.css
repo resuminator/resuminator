@@ -6,7 +6,8 @@
 @media print {
   html,
   body {
-    width: 210mm;
-    height: 297mm;
+    font-size: 16px;
+    width: 210mm !important;
+    height: 297mm !important;
   }
 }

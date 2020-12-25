@@ -15,13 +15,14 @@ import "../../styles/page.css";
 import "../../styles/shadow.css";
 import Certifications from "../Certifications/Certifications";
 import ColoredLine from "../common/Line";
+import Contact from "../Contact/Contact";
 import Education from "../Education/Education";
 import Experience from "../Experience/Experience";
 import Projects from "../Projects/Projects";
 import Skills from "../Skills/Skills";
 import Title from "../Title/Title";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   watermark: {
     padding: "0.5rem",
     bottom: 0,
@@ -34,17 +35,17 @@ const useStyles = makeStyles(theme => ({
   paper: {
     backgroundColor: "inherit",
     marginBottom: "0.1rem",
-    
-    '&:hover, &:active': {
+
+    "&:hover, &:active": {
       border: "solid",
       borderWidth: "0.1rem",
       padding: "0.5rem",
       borderColor: theme.palette.secondary.light,
-    }
-  }
+    },
+  },
 }));
 
-function Resume({element}) {
+function Resume({ element }) {
   const userLayout = {
     left: [
       <Experience key="exp" />,
@@ -90,100 +91,101 @@ function Resume({element}) {
       flexDirection="column"
       bgcolor="contrast.light"
       className={`shadow`}
-      width="21cm"
+      width="21.0cm"
       height="29.7cm"
       zIndex="100"
       position="relative"
     >
-      <Box ref={element}>
-      <Title />
-      <ColoredLine color="#44318D" />
-      <Box display="flex" justifyContent="space-between" id="resume-insider">
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="left">
-            {(provided) => (
-              <Box
-                display="flex"
-                flexDirection="column"
-                p={1}
-                m={1}
-                pr={0}
-                width={leftWide}
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {children.left.map((item, index) => (
-                  <Draggable
-                    key={item.key}
-                    draggableId={item.key}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <Paper
-                      className={classes.paper}
-                      color="inherit"
-                        elevation={0}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                      >
-                        {item}
-                      </Paper>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </Box>
-            )}
-          </Droppable>
-          <Droppable droppableId="right">
-            {(provided) => (
-              <Box
-                display="flex"
-                flexDirection="column"
-                p={1}
-                m={1}
-                pl={0}
-                width={rightWide}
-                className={classes.right}
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {children.right.map((item, index) => (
-                  <Draggable
-                    key={item.key}
-                    draggableId={item.key}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <Paper
-                        className={classes.paper}
-                        elevation={0}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                      >
-                        {item}
-                      </Paper>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </Box>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </Box>
-      <Typography
-        color="textSecondary"
-        variant="caption"
-        component="footer"
-        align="center"
-        id="watermark"
-        className={classes.watermark}
-      >
-        Built using <span className={classes.logo}>Resuminator</span>
-      </Typography>
+      <Box id="printable-paper" ref={element}>
+        <Title />
+        {/* <Contact /> */}
+        <ColoredLine color="#44318D" />
+        <Box display="flex" justifyContent="space-between" id="resume-insider">
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="left">
+              {(provided) => (
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  p={1}
+                  m={1}
+                  pr={0}
+                  width={leftWide}
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {children.left.map((item, index) => (
+                    <Draggable
+                      key={item.key}
+                      draggableId={item.key}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <Paper
+                          className={classes.paper}
+                          color="inherit"
+                          elevation={0}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          {item}
+                        </Paper>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </Box>
+              )}
+            </Droppable>
+            <Droppable droppableId="right">
+              {(provided) => (
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  p={1}
+                  m={1}
+                  pl={0}
+                  width={rightWide}
+                  className={classes.right}
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {children.right.map((item, index) => (
+                    <Draggable
+                      key={item.key}
+                      draggableId={item.key}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <Paper
+                          className={classes.paper}
+                          elevation={0}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          {item}
+                        </Paper>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </Box>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </Box>
+        <Typography
+          color="textSecondary"
+          variant="caption"
+          component="footer"
+          align="center"
+          id="watermark"
+          className={classes.watermark}
+        >
+          Built using <span className={classes.logo}>Resuminator</span>
+        </Typography>
       </Box>
     </Box>
   );
