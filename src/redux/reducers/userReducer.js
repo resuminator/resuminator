@@ -11,6 +11,7 @@
 import { USERINFO } from "../actionTypes";
 
 const initialState = {
+  _id: "",
   name: "",
   jobTitle: "",
   loading: false,
@@ -33,6 +34,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         error: "",
+        _id: action.payload._id,
         name: action.payload.name,
         jobTitle: action.payload.jobTitle,
         username: action.payload.username,
@@ -41,6 +43,9 @@ const userReducer = (state = initialState, action) => {
     }
     case USERINFO.FETCH_ERROR: {
       return { ...state, username: "", error: action.payload, loading: false };
+    }
+    case USERINFO.UPDATE_ERROR: {
+      return {...state, loading: false, error: action.payload}
     }
     default: {
       return state;
