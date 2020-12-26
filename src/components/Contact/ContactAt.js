@@ -12,7 +12,7 @@ import { Box, Link, makeStyles } from "@material-ui/core";
 import React from "react";
 import { FiGithub, FiLinkedin, FiMail, FiTwitter } from "react-icons/fi";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     fontSize: "0.9em",
   },
@@ -22,40 +22,64 @@ const useStyles = makeStyles(theme => ({
   },
   links: {
     textDecoration: "none",
-    fontFamily: theme.typography.fontFamily.primary
-  }
+    fontFamily: theme.typography.fontFamily.primary,
+  },
 }));
 
-function ContactAt(props) {
+function ContactAt({socialMedia, link}) {
   const classes = useStyles();
 
-  function setIcon(name) {
+  const setIcon = (name) => {
     if (name === "github") return <FiGithub className={classes.icon} />;
     if (name === "linkedin") return <FiLinkedin className={classes.icon} />;
     if (name === "twitter") return <FiTwitter className={classes.icon} />;
     if (name === "email") return <FiMail className={classes.icon} />;
-  }
+  };
 
-  const linkHandle = (handle, service) => {
-    const handleLink = `https://www.${service}.com/${handle}`
+  const linkHandle = (link) => {
+    return link
+      .split("/")
+      .filter((item) => item !== "")
+      .slice(-1)[0];
+  };
 
-    if (service === "linkedin"){
-      const linkedinLink = `https://www.${service}.com/in/${handle}`
-      return <Link href={linkedinLink} color="inherit" target="_blank" className={classes.links}>{handle}</Link>
-    }
+  const getHandleFromLink = (name, link) => {
+    if (name === "email")
+      return (
+        <Link
+          href={`mailto:${link}`}
+          color="inherit"
+          target="_blank"
+          className={classes.links}
+        >
+          {link || ""}
+        </Link>
+      );
 
-    if (service === "email"){
-      const mailHandle = `mailto:${handle}`
-      return <Link href={mailHandle} color="inherit" target="_blank" className={classes.links}>{handle}</Link>
-    }
+    if (["linkedin", "twitter", "github"].includes(name))
+      return (
+        <Link
+          href={link}
+          color="inherit"
+          target="_blank"
+          className={classes.links}
+        >
+          {linkHandle(link) || ""}
+        </Link>
+      );
 
-    return <Link href={handleLink} color="inherit" target="_blank" className={classes.links}>{handle}</Link>
-  }  
+    return "";
+  };
 
   return (
-    <Box display="flex" justifyItems="space-between" p={2} className={classes.root}>
-      {setIcon(props.name)}
-      {linkHandle(props.handle, props.name)}
+    <Box
+      display="flex"
+      justifyItems="space-between"
+      p={2}
+      className={classes.root}
+    >
+      {setIcon(socialMedia)}
+      {getHandleFromLink(socialMedia, link)}
     </Box>
   );
 }

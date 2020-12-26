@@ -17,6 +17,12 @@ const initialState = {
   loading: false,
   username: "",
   error: "",
+  contact: {
+    email: "",
+    linkedin: "",
+    twitter: "",
+    github: "",
+  },
 };
 
 const userReducer = (state = initialState, action) => {
@@ -26,6 +32,9 @@ const userReducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
+    }
+    case USERINFO.UPDATE_CONTACT: {
+      return {...state, contact: action.payload}
     }
     case USERINFO.FETCH_REQUEST: {
       return { ...state, loading: true };
@@ -38,6 +47,7 @@ const userReducer = (state = initialState, action) => {
         name: action.payload.name,
         jobTitle: action.payload.jobTitle,
         username: action.payload.username,
+        contact: action.payload.contact,
         loading: false,
       };
     }

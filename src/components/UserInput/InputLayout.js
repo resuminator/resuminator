@@ -10,18 +10,26 @@
 
 import { Box } from "@material-ui/core";
 import React from "react";
+import "../../styles/noscroll.css";
 import CertificationInput from "../Certifications/CertificationInput";
+import ContactInput from "../Contact/ContactInput";
 import EducationInput from "../Education/EducationInput";
 import ExperienceInput from "../Experience/ExperienceInput";
 import ProjectInput from "../Projects/ProjectInput";
 import SkillsInput from "../Skills/SkillsInput";
 import TitleInput from "../Title/TitleInput";
-import "../../styles/noscroll.css"
 
 function InputLayout() {
   return (
-    <Box display="flex" flexDirection="column" height="29.7cm" overflow="auto" className="no-scroll">
+    <Box
+      display="flex"
+      flexDirection="column"
+      height="29.7cm"
+      overflow="auto"
+      className="no-scroll"
+    >
       <TitleInput />
+      <ContactInput />
       <ExperienceInput />
       <EducationInput />
       <ProjectInput />

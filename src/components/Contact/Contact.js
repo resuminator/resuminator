@@ -10,7 +10,7 @@
 
 import { makeStyles } from "@material-ui/core";
 import React from "react";
-import contactInfo from "../../Data/ContactData";
+import { useSelector } from "react-redux";
 import ContactAt from "./ContactAt";
 
 const useStyles = makeStyles({
@@ -24,10 +24,12 @@ const useStyles = makeStyles({
 
 function Contact() {
   const classes = useStyles();
+  const contactInfo = useSelector((state) => state.userInfo.contact);
+
   return (
     <div className={classes.root}>
-      {contactInfo.map((item) => (
-        <ContactAt key={item.name} name={item.name} handle={item.handle} />
+      {Object.keys(contactInfo).map((item) => (
+        <ContactAt key={item} socialMedia={item} link={contactInfo[item]} />
       ))}
     </div>
   );
