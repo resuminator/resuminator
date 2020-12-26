@@ -14,11 +14,12 @@ import {
   IconButton,
   makeStyles,
   TextField,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { FiGithub, FiLinkedin, FiMail, FiTwitter } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
+import { updateUserInfo } from "../Title/title.actions";
 import { updateContactInfoState } from "./contact.action";
 
 const useStyles = makeStyles((theme) => ({
@@ -47,6 +48,7 @@ function ContactInput() {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState("email");
   const app = useSelector((state) => state.app);
+  const userInfo = useSelector((state) => state.userInfo);
   const storeState = useSelector((state) => state.userInfo.contact);
   const loading = useSelector((state) => state.userInfo.loading);
   const [state, setState] = useState(storeState);
@@ -74,6 +76,11 @@ function ContactInput() {
 
   const handleSave = () => {
     setChanged(false);
+    dispatch(
+      updateUserInfo(userInfo.username, userInfo._id, {
+        contact: state,
+      })
+    );
   };
 
   const findValue = (label) => {
@@ -121,13 +128,6 @@ function ContactInput() {
           <FiMail />
         </IconButton>
         <IconButton
-          aria-label="github"
-          color={highlight("github")}
-          onClick={() => setSelected("github")}
-        >
-          <FiGithub />
-        </IconButton>
-        <IconButton
           aria-label="linkedin"
           onClick={() => setSelected("linkedin")}
           color={highlight("linkedin")}
@@ -140,6 +140,13 @@ function ContactInput() {
           onClick={() => setSelected("twitter")}
         >
           <FiTwitter />
+        </IconButton>
+        <IconButton
+          aria-label="github"
+          color={highlight("github")}
+          onClick={() => setSelected("github")}
+        >
+          <FiGithub />
         </IconButton>
       </Box>
       <TextField

@@ -78,8 +78,8 @@ function ContactAt({socialMedia, link}) {
       p={2}
       className={classes.root}
     >
-      {setIcon(socialMedia)}
-      {getHandleFromLink(socialMedia, link)}
+      {link ? setIcon(socialMedia) : null}
+      {link ? getHandleFromLink(socialMedia, link) : null}
     </Box>
   );
 }
