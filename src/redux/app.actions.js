@@ -12,6 +12,7 @@ import { fetchCertification } from "../components/Certifications/certification.a
 import { fetchEducation } from "../components/Education/education.actions";
 import { fetchExperience } from "../components/Experience/experience.actions";
 import { fetchProject } from "../components/Projects/project.actions";
+import { fetchSkills } from "../components/Skills/skills.actions";
 import { fetchUser } from "../components/Title/title.actions";
 
 export const appInitRequest = () => {
@@ -40,7 +41,8 @@ export const initApp = (username) => async (dispatch) => {
     dispatch(fetchExperience(username)),
     dispatch(fetchEducation(username)),
     dispatch(fetchProject(username)),
-    dispatch(fetchCertification(username))
+    dispatch(fetchCertification(username)),
+    dispatch(fetchSkills(username))
   ])
     .then(() => {
       dispatch(appInitSuccess());
