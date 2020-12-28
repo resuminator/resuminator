@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { InputHeader } from "../common/InputHeader";
-import { addSkill, deleteSkillById, setDisplayType } from "./skillActions";
+import { updateSkillInfoState, switchDisplayType } from "./skills.actions";
 import { SkillClassification } from "./SkillClassification";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,17 +38,29 @@ const useStyles = makeStyles((theme) => ({
 function SkillsInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [payload, setPayload] = useState(null);
-  const skills = useSelector((state) => state.skillInfo);
+  const app = useSelector((state) => state.app);
+  const loading = useSelector((state) => state.skillInfo.loading);
+  const storeState = useSelector((state) => state.skillInfo.skills);
+  const [state, setState] = useState(storeState);
   const skillData = SkillClassification;
-  const displayType = useSelector(state => state.properties.skill_display_type);
+  const displayType = useSelector((state) => state.skillInfo.display_type);
 
-  const findSkillInData = (skill) => {
+  React.useEffect(() => {
+    if (!app.init) setState(storeState);
+  }, [app, storeState]);
+
+  React.useEffect(() => {
+    setState(storeState);
+  }, [loading, storeState]);
+
+  const fetchSkillInData = (skill) => {
     const result = skillData.find(
       (item) => item.name.toLowerCase() === skill.toLowerCase()
     );
     if (result) return result;
 
+    //Add new Skill to SkillSet DB
+    //and then add it to Skills and fetch state again.
     return {
       id: skillData[skillData.length - 1].id + 1 || 0,
       name: skill,
@@ -63,24 +75,34 @@ function SkillsInput() {
   };
 
   const handleToggle = (e) => {
-    dispatch(setDisplayType(e.target.value));
+    dispatch(switchDisplayType(e.target.value));
   };
 
   const handleInput = (e) => {
     if (["Enter", ","].includes(e.key)) {
       e.preventDefault();
       const [value] = e.target.value.split(",").slice(-1);
-      const skillObj = findSkillInData(value.trim());
+      const response = fetchSkillInData(value.trim());
 
-      if (!duplicateEntry(skillData, skillObj)) skillData.push(skillObj);
-      setPayload(skillObj);
+      if (duplicateEntry(state, response)) {
+        e.target.value = "";
+        return;
+      }
+      skillData.push(response);
+      setState([...state, response]);
       e.target.value = "";
     }
   };
 
+  const handleDelete = (item) => {
+    setState((newState) =>
+      newState.filter((skill) => skill.name !== item.name)
+    );
+  };
+
   React.useEffect(() => {
-    dispatch(addSkill(payload));
-  }, [dispatch, payload]);
+    dispatch(updateSkillInfoState(state));
+  }, [dispatch, state]);
 
   return (
     <Box display="flex" flexDirection="column" mt={1} p={2}>
@@ -124,20 +146,18 @@ function SkillsInput() {
         maxWidth="30rem"
         flexWrap="wrap"
       >
-        {payload !== null
-          ? skills.map((item) => (
-              <Chip
-                key={item.id}
-                variant="default"
-                color="primary"
-                label={item.name}
-                size="small"
-                className={classes.tags}
-                deleteIcon={<TiDelete />}
-                onDelete={() => dispatch(deleteSkillById(item.id))}
-              />
-            ))
-          : null}
+        {state.map((item) => (
+          <Chip
+            key={item._id}
+            variant="default"
+            color="primary"
+            label={item.name}
+            size="small"
+            className={classes.tags}
+            deleteIcon={<TiDelete />}
+            onDelete={() => handleDelete(item)}
+          />
+        ))}
       </Box>
     </Box>
   );
