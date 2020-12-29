@@ -26,14 +26,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ContactAt({socialMedia, link}) {
+function ContactAt({ socialMedia, link }) {
   const classes = useStyles();
 
   const setIcon = (name) => {
-    if (name === "github") return <FiGithub className={classes.icon} />;
-    if (name === "linkedin") return <FiLinkedin className={classes.icon} />;
-    if (name === "twitter") return <FiTwitter className={classes.icon} />;
-    if (name === "email") return <FiMail className={classes.icon} />;
+    switch (name) {
+      case "github":
+        return <FiGithub className={classes.icon} />;
+      case "linkedin":
+        return <FiLinkedin className={classes.icon} />;
+      case "twitter":
+        return <FiTwitter className={classes.icon} />;
+      case "email":
+        return <FiMail className={classes.icon} />;
+      default:
+        return null;
+    }
   };
 
   const linkHandle = (link) => {
@@ -72,15 +80,19 @@ function ContactAt({socialMedia, link}) {
   };
 
   return (
-    <Box
-      display="flex"
-      justifyItems="space-between"
-      p={2}
-      className={classes.root}
-    >
-      {link ? setIcon(socialMedia) : null}
-      {link ? getHandleFromLink(socialMedia, link) : null}
-    </Box>
+    <React.Fragment>
+      {link ? (
+        <Box
+          display="flex"
+          justifyItems="space-between"
+          p={2}
+          className={classes.root}
+        >
+          {setIcon(socialMedia)}
+          {getHandleFromLink(socialMedia, link)}
+        </Box>
+      ) : null}
+    </React.Fragment>
   );
 }
 
