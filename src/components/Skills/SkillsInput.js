@@ -13,8 +13,15 @@ import React, { useState } from "react";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { InputHeader } from "../common/InputHeader";
-import { updateSkillInfoState, switchDisplayType } from "./skills.actions";
-import { SkillClassification } from "./SkillClassification";
+import Loader from "../common/Loader";
+import {
+  updateSkillInfoState,
+  switchDisplayType,
+  fetchInDatabase,
+  addUserSkill,
+  deleteUserSkill,
+  addSkillToDatabase,
+} from "./skills.actions";
 
 const useStyles = makeStyles((theme) => ({
   TextField: {
@@ -39,10 +46,10 @@ function SkillsInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
+  const username = useSelector((state) => state.userInfo.username);
   const loading = useSelector((state) => state.skillInfo.loading);
   const storeState = useSelector((state) => state.skillInfo.skills);
   const [state, setState] = useState(storeState);
-  const skillData = SkillClassification;
   const displayType = useSelector((state) => state.skillInfo.display_type);
 
   React.useEffect(() => {
@@ -53,24 +60,9 @@ function SkillsInput() {
     setState(storeState);
   }, [loading, storeState]);
 
-  const fetchSkillInData = (skill) => {
-    const result = skillData.find(
-      (item) => item.name.toLowerCase() === skill.toLowerCase()
-    );
-    if (result) return result;
-
-    //Add new Skill to SkillSet DB
-    //and then add it to Skills and fetch state again.
-    return {
-      id: skillData[skillData.length - 1].id + 1 || 0,
-      name: skill,
-      category: "Miscellaneous",
-    };
-  };
-
-  const duplicateEntry = (array, object) => {
-    return array.find(
-      (item) => item.name.toLowerCase() === object.name.toLowerCase()
+  const duplicateEntry = (value) => {
+    return state.find(
+      (item) => item.name.toLowerCase() === value.toLowerCase()
     );
   };
 
@@ -81,22 +73,36 @@ function SkillsInput() {
   const handleInput = (e) => {
     if (["Enter", ","].includes(e.key)) {
       e.preventDefault();
-      const [value] = e.target.value.split(",").slice(-1);
-      const response = fetchSkillInData(value.trim());
+      const [rawValue] = e.target.value.split(",").slice(-1);
+      const value = rawValue.trim();
 
-      if (duplicateEntry(state, response)) {
+      if (duplicateEntry(value)) {
         e.target.value = "";
         return;
       }
-      skillData.push(response);
-      setState([...state, response]);
-      e.target.value = "";
+
+      fetchInDatabase(value).then((response) => {
+        if (response.length !== 0) {
+          setState([...state, response[0]]);
+          e.target.value = "";
+          addUserSkill(username, response[0]._id).then(console.log("added"));
+        } else
+          addSkillToDatabase(value, "Miscellaneous").then(() =>
+            fetchInDatabase(value).then((newSkill) => {
+              setState([...state, newSkill[0]]);
+              e.target.value = "";
+              addUserSkill(username, newSkill[0]._id);
+            })
+          );
+      });
     }
   };
 
   const handleDelete = (item) => {
-    setState((newState) =>
-      newState.filter((skill) => skill.name !== item.name)
+    deleteUserSkill(username, item._id).then(() =>
+      setState((newState) =>
+        newState.filter((skill) => skill.name !== item.name)
+      )
     );
   };
 
@@ -146,18 +152,22 @@ function SkillsInput() {
         maxWidth="30rem"
         flexWrap="wrap"
       >
-        {state.map((item) => (
-          <Chip
-            key={item._id}
-            variant="default"
-            color="primary"
-            label={item.name}
-            size="small"
-            className={classes.tags}
-            deleteIcon={<TiDelete />}
-            onDelete={() => handleDelete(item)}
-          />
-        ))}
+        {loading ? (
+          <Loader />
+        ) : (
+          state.map((item) => (
+            <Chip
+              key={item._id}
+              variant="default"
+              color="primary"
+              label={item.name}
+              size="small"
+              className={classes.tags}
+              deleteIcon={<TiDelete />}
+              onDelete={() => handleDelete(item)}
+            />
+          ))
+        )}
       </Box>
     </Box>
   );
