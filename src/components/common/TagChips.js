@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 export const TagChips = ({ tags, variant, color, size, className }) => {
   const classes = useStyles();
   return (
-    <Box display="flex" justifyItems="space-between" mb={2}>
+    <Box display="flex" flexWrap="wrap" justifyItems="space-between" mb={2}>
       {tags.map((item) => (
         <Chip
           key={item}
