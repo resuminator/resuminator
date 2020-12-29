@@ -20,6 +20,11 @@ const useStyles = makeStyles({
   title: {
     fontSize: "1.5em",
   },
+  tags: {
+    marginRight: "0.3rem",
+    minWidth: "2.5rem",
+    marginTop: "0.5rem",
+  },
 });
 
 // key -> category, value -> name
@@ -41,16 +46,16 @@ const extractNames = (array) => {
 
 function Skills() {
   const classes = useStyles();
-  const displayType = useSelector(
-    (state) => state.skillInfo.display_type
-  );
+  const displayType = useSelector((state) => state.skillInfo.display_type);
   const skillsByCategories = sortByKey(
     useSelector((state) => state.skillInfo.skills),
     "category",
     "name"
   );
 
-  const skillsByName = extractNames(useSelector((state) => state.skillInfo.skills));
+  const skillsByName = extractNames(
+    useSelector((state) => state.skillInfo.skills)
+  );
 
   return (
     <TitleBox flexDirection="column">
@@ -64,10 +69,18 @@ function Skills() {
       </Typography>
       <ColoredLine opacity={0.5} />
       {displayType === "tags" ? (
-        <TagChips tags={skillsByName} color="primary" />
+        <TagChips
+          tags={skillsByName}
+          className={classes.tags}
+          color="primary"
+        />
       ) : (
         Object.keys(skillsByCategories).map((item) => (
-          <SkillSet key={item._id} skillList={skillsByCategories[item]} title={item} />
+          <SkillSet
+            key={item}
+            skillList={skillsByCategories[item]}
+            title={item}
+          />
         ))
       )}
     </TitleBox>
