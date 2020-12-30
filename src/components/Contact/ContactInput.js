@@ -16,9 +16,10 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FiGithub, FiLinkedin, FiMail, FiTwitter } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
+import { AuthContext } from "../Auth/AuthContext";
 import { updateUserInfo } from "../Title/title.actions";
 import { updateContactInfoState } from "./contact.action";
 
@@ -49,6 +50,7 @@ function ContactInput() {
   const [selected, setSelected] = useState("email");
   const app = useSelector((state) => state.app);
   const userInfo = useSelector((state) => state.userInfo);
+  const uid = useContext(AuthContext).uid;
   const storeState = useSelector((state) => state.userInfo.contact);
   const loading = useSelector((state) => state.userInfo.loading);
   const [state, setState] = useState(storeState);
@@ -77,7 +79,7 @@ function ContactInput() {
   const handleSave = () => {
     setChanged(false);
     dispatch(
-      updateUserInfo(userInfo.uid, userInfo._id, {
+      updateUserInfo(uid, userInfo._id, {
         contact: state,
       })
     );

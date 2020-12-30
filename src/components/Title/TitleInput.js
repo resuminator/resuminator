@@ -9,8 +9,9 @@
  */
 
 import { Box, Button, makeStyles, TextField } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { AuthContext } from "../Auth/AuthContext";
 import { InputHeader } from "../common/InputHeader";
 import Loader from "../common/Loader";
 import { addUserInfo, updateUserInfo } from "./title.actions";
@@ -31,6 +32,7 @@ function TitleInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const storeState = useSelector((state) => state.userInfo);
+  const uid = useContext(AuthContext).uid;
   const app = useSelector((state) => state.app);
   const [state, setState] = useState(storeState);
   const [payload, setPayload] = useState({});
@@ -49,7 +51,7 @@ function TitleInput() {
   const handleSave = () => {
     setUnsaved(false);
     dispatch(
-      updateUserInfo(storeState.uid, storeState._id, {
+      updateUserInfo(uid, storeState._id, {
         name: storeState.name,
         jobTitle: storeState.jobTitle,
       })

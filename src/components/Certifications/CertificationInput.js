@@ -9,9 +9,10 @@
  */
 
 import { Box, makeStyles, TextField } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currentDate } from "../../utils/Helpers";
+import { AuthContext } from "../Auth/AuthContext";
 import CardControls from "../common/CardControls";
 import ConfirmButton from "../common/ConfirmButton";
 import { CustomCheckbox } from "../common/CustomCheckbox";
@@ -45,7 +46,7 @@ function CertificationInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const uid = useSelector((state) => state.userInfo.uid);
+  const uid = useContext(AuthContext).uid;
   const storeState = useSelector(
     (state) => state.certificationInfo.certifications
   );

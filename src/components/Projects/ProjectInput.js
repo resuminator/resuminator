@@ -9,8 +9,9 @@
  */
 
 import { Box, makeStyles, TextField } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { AuthContext } from "../Auth/AuthContext";
 import CardControls from "../common/CardControls";
 import ConfirmButton from "../common/ConfirmButton";
 import ExpandCard from "../common/ExpandCard";
@@ -42,7 +43,7 @@ function ProjectInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const uid = useSelector((state) => state.userInfo.uid);
+  const uid = useContext(AuthContext).uid;
   const storeState = useSelector((state) => state.projectInfo.projects);
   const loading = useSelector((state) => state.projectInfo.loading);
   const [state, setState] = useState(storeState);

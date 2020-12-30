@@ -9,9 +9,10 @@ import {
   RadioGroup,
   TextField,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { TiDelete } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
+import { AuthContext } from "../Auth/AuthContext";
 import { InputHeader } from "../common/InputHeader";
 import Loader from "../common/Loader";
 import {
@@ -46,7 +47,7 @@ function SkillsInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const uid = useSelector((state) => state.userInfo.uid);
+  const uid = useContext(AuthContext).uid;
   const loading = useSelector((state) => state.skillInfo.loading);
   const storeState = useSelector((state) => state.skillInfo.skills);
   const [state, setState] = useState(storeState);
