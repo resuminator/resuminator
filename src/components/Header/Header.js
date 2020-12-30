@@ -8,10 +8,11 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import { Box, Button, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import ActionButton from "../common/ActionButton";
 import { FiArrowRight } from "react-icons/fi";
+import firebaseSDK from "../../Services/firebaseSDK";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,10 +34,24 @@ const useStyles = makeStyles((theme) => ({
     borderColor: theme.palette.contrast.main,
     borderWidth: "0.1rem",
   },
+  btn: {
+    textTransform: "none",
+    fontFamily: "Karla",
+    letterSpacing: "-0.05rem",
+    fontSize: "1rem",
+    margin: "1rem",
+  },
 }));
 
 function Header() {
   const classes = useStyles();
+  const handleSignOut = () => {
+    firebaseSDK
+      .auth()
+      .signOut()
+      .then(() => localStorage.removeItem("loggedIn"));
+  };
+
   return (
     <Box
       display="flex"
@@ -56,11 +71,22 @@ function Header() {
       >
         Re
       </Typography>
-      <ActionButton
-        buttonText="💡 Have any suggestions/ideas?"
-        link="https://github.com/viveknigam3003/resuminator/discussions/5"
-        endIcon={<FiArrowRight />}
-      />
+      <Box alignItems="center" justifyItems="center">
+        <ActionButton
+          buttonText="💡 Have any suggestions/ideas?"
+          link="https://github.com/viveknigam3003/resuminator/discussions/5"
+          endIcon={<FiArrowRight />}
+          className={classes.btn}
+        />
+        <Button
+          color="secondary"
+          variant="outlined"
+          onClick={handleSignOut}
+          className={classes.btn}
+        >
+          Sign Out
+        </Button>
+      </Box>
     </Box>
   );
 }

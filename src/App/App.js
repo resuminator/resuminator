@@ -13,42 +13,60 @@ import { MuiThemeProvider } from "@material-ui/core";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LoginScreen from "../components/Auth/LoginScreen";
 import { AlertDialog } from "../components/common/AlertDialog";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import Content from "../layout/Content";
 import { initApp } from "../redux/app.actions";
+import firebaseSDK from "../Services/firebaseSDK";
 import "../styles/App.css";
 import { resuminator } from "../themes/resuminator";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("loggedIn"));
   const [openAlert, setOpenAlert] = useState(
     process.env.NODE_ENV === "production"
   );
   const dispatch = useDispatch();
 
+  firebaseSDK.auth().onAuthStateChanged((user) => {
+    return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  });
+
   React.useEffect(() => {
-    dispatch(initApp("viveknigam3003"));
-  }, [dispatch]);
+    if (isLoggedIn) dispatch(initApp("viveknigam3003"));
+  }, [dispatch, isLoggedIn]);
 
   const handleClose = () => setOpenAlert(false);
 
   return (
-    <MuiThemeProvider theme={resuminator}>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <AlertDialog
-          title="Resuminator : Preview 🎉"
-          message="Thanks for joining Resuminator Early Access Programme! Currently, Resuminator is in preview mode - this means that you may play around the app but your data shall not persist after you leave the app."
-          open={openAlert}
-          onClick={handleClose}
-          onClose={handleClose}
-          buttonText="Got it! 👍🏻"
-        />
-        <Header />
-        <Content />
-        <Footer />
-      </MuiPickersUtilsProvider>
-    </MuiThemeProvider>
+    <Router>
+      {!isLoggedIn ? (
+        <Switch>
+          <Route path="/">
+            <LoginScreen />
+          </Route>
+        </Switch>
+      ) : (
+        <MuiThemeProvider theme={resuminator}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <AlertDialog
+              title="Resuminator : Preview 🎉"
+              message="Thanks for joining Resuminator Early Access Programme! Currently, Resuminator is in preview mode - this means that you may play around the app but your data shall not persist after you leave the app."
+              open={openAlert}
+              onClick={handleClose}
+              onClose={handleClose}
+              buttonText="Got it! 👍🏻"
+            />
+            <Header />
+            <Content />
+            <Footer />
+          </MuiPickersUtilsProvider>
+        </MuiThemeProvider>
+      )}
+    </Router>
   );
 }
 
