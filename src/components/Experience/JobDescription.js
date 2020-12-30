@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1.3,
   },
   link: {
-    fontFamily: theme.typography.fontFamily.secondar,
+    fontFamily: theme.typography.fontFamily.secondary,
     paddingLeft: "1rem",
     fontWeight: 400,
   },

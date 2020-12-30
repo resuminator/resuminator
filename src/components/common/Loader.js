@@ -57,11 +57,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Loader = () => {
+const Loader = ({className}) => {
   const classes = useStyles();
   return (
     <motion.div
-      className={classes.root}
+      className={className || classes.root}
       variants={loadingContainerVariants}
       initial="start"
       animate="end"

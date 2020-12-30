@@ -28,7 +28,7 @@ const ActionButton = ({ startIcon, endIcon, link, buttonText, onClick, className
   const classes = useStyles()
   return (
     <Button
-      className={classes.root || className}
+      className={className || classes.root }
       variant="outlined"
       color="primary"
       size="large"
