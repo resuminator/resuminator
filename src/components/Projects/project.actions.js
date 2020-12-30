@@ -38,42 +38,42 @@ export const projectInfoFailure = (error) => {
   };
 };
 
-export const fetchProject = (username) => {
+export const fetchProject = (uid) => {
   return (dispatch) => {
     dispatch(projectInfoRequest());
     return axios
-      .get(`${SERVER}/project/user/${username}`)
+      .get(`${SERVER}/project/user/${uid}`)
       .then((response) => dispatch(fetchProjectInfoSuccess(response.data)))
       .catch((error) => dispatch(projectInfoFailure(error)));
   };
 };
 
-export const addProject = (username) => {
+export const addProject = (uid) => {
   return (dispatch) => {
     dispatch(projectInfoRequest());
     return axios
-      .post(`${SERVER}/project/add`, { username })
-      .then(() => dispatch(fetchProject(username)))
+      .post(`${SERVER}/project/add`, { uid })
+      .then(() => dispatch(fetchProject(uid)))
       .catch((error) => dispatch(projectInfoFailure(error)));
   };
 };
 
-export const deleteProject = (username, id) => {
+export const deleteProject = (uid, id) => {
   return (dispatch) => {
     dispatch(projectInfoRequest());
     return axios
       .delete(`${SERVER}/project/delete/${id}`)
-      .then(() => dispatch(fetchProject(username)))
+      .then(() => dispatch(fetchProject(uid)))
       .catch((error) => dispatch(projectInfoFailure(error)));
   };
 };
 
-export const updateProject = (username, id, payload) => {
+export const updateProject = (uid, id, payload) => {
   return (dispatch) => {
     dispatch(projectInfoRequest());
     return axios
       .put(`${SERVER}/project/update/${id}`, { payload })
-      .then(() => dispatch(fetchProject(username)))
+      .then(() => dispatch(fetchProject(uid)))
       .catch((error) => dispatch(projectInfoFailure(error)));
   };
 };

@@ -38,42 +38,42 @@ export const educationInfoFailure = (error) => {
   };
 };
 
-export const fetchEducation = (username) => {
+export const fetchEducation = (uid) => {
   return (dispatch) => {
     dispatch(educationInfoRequest());
     return axios
-      .get(`${SERVER}/education/user/${username}`)
+      .get(`${SERVER}/education/user/${uid}`)
       .then((response) => dispatch(fetchEducationInfoSuccess(response.data)))
       .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };
 
-export const addEducation = (username) => {
+export const addEducation = (uid) => {
   return (dispatch) => {
     dispatch(educationInfoRequest());
     return axios
-      .post(`${SERVER}/education/add`, { username })
-      .then(() => dispatch(fetchEducation(username)))
+      .post(`${SERVER}/education/add`, { uid })
+      .then(() => dispatch(fetchEducation(uid)))
       .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };
 
-export const deleteEducation = (username, id) => {
+export const deleteEducation = (uid, id) => {
   return (dispatch) => {
     dispatch(educationInfoRequest());
     return axios
       .delete(`${SERVER}/education/delete/${id}`)
-      .then(() => dispatch(fetchEducation(username)))
+      .then(() => dispatch(fetchEducation(uid)))
       .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };
 
-export const updateEducation = (username, id, payload) => {
+export const updateEducation = (uid, id, payload) => {
   return (dispatch) => {
     dispatch(educationInfoRequest());
     return axios
       .put(`${SERVER}/education/update/${id}`, { payload })
-      .then(() => dispatch(fetchEducation(username)))
+      .then(() => dispatch(fetchEducation(uid)))
       .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };

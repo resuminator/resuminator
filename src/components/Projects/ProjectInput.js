@@ -42,7 +42,7 @@ function ProjectInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const username = useSelector((state) => state.userInfo.username);
+  const uid = useSelector((state) => state.userInfo.uid);
   const storeState = useSelector((state) => state.projectInfo.projects);
   const loading = useSelector((state) => state.projectInfo.loading);
   const [state, setState] = useState(storeState);
@@ -59,17 +59,17 @@ function ProjectInput() {
   }, [loading, storeState]);
 
   const handleAdd = () => {
-    dispatch(addProject(username));
+    dispatch(addProject(uid));
   };
 
   const handleDelete = (id) => {
     setCurrIndex(-1);
     setOpen(false);
-    dispatch(deleteProject(username, id));
+    dispatch(deleteProject(uid, id));
   };
 
   const handleUpdate = (id, payload) => {
-    dispatch(updateProject(username, id, payload));
+    dispatch(updateProject(uid, id, payload));
   };
 
   const handleChange = (e) => {

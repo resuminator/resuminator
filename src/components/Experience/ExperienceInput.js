@@ -47,7 +47,7 @@ function ExperienceInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const username = useSelector((state) => state.userInfo.username);
+  const uid = useSelector((state) => state.userInfo.uid);
   const storeState = useSelector((state) => state.experienceInfo.experiences);
   const loading = useSelector((state) => state.experienceInfo.loading);
   const [currIndex, setCurrIndex] = useState(0);
@@ -64,17 +64,17 @@ function ExperienceInput() {
   }, [loading, storeState]);
 
   const handleAdd = () => {
-    dispatch(addExperience(username));
+    dispatch(addExperience(uid));
   };
 
   const handleDelete = (id) => {
     setCurrIndex(-1);
     setOpen(false);
-    dispatch(deleteExperience(username, id));
+    dispatch(deleteExperience(uid, id));
   };
 
   const handleUpdate = (id, payload) => {
-    dispatch(updateExperience(username, id, payload));
+    dispatch(updateExperience(uid, id, payload));
   };
 
   const handleCheckbox = (resetDate) => {
@@ -139,7 +139,7 @@ function ExperienceInput() {
                 title: item.company,
                 subtitle: item.jobTitle,
                 titleAlt: "Click to add experience info.",
-                subtitleAlt: "Add job title."
+                subtitleAlt: "Add job title.",
               }}
               open={open}
               currIndex={currIndex}

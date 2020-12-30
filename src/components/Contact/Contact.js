@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 function Contact() {
   const classes = useStyles();
   const contactInfo = useSelector((state) => state.userInfo.contact);
-
+  
   return (
     <div className={classes.root}>
       {Object.keys(contactInfo).map((item) => (

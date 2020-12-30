@@ -49,7 +49,7 @@ function TitleInput() {
   const handleSave = () => {
     setUnsaved(false);
     dispatch(
-      updateUserInfo(storeState.username, storeState._id, {
+      updateUserInfo(storeState.uid, storeState._id, {
         name: storeState.name,
         jobTitle: storeState.jobTitle,
       })

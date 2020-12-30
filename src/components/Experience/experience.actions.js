@@ -59,42 +59,42 @@ export const updateExperienceInfoFailure = (error) => {
   };
 };
 
-export const fetchExperience = (username) => {
+export const fetchExperience = (uid) => {
   return (dispatch) => {
     dispatch(experienceInfoRequest());
     return axios
-      .get(`${SERVER}/experience/user/${username}`)
+      .get(`${SERVER}/experience/user/${uid}`)
       .then((response) => dispatch(fetchExperienceInfoSuccess(response.data)))
       .catch((error) => dispatch(fetchExperienceInfoFailure(error.message)));
   };
 };
 
-export const addExperience = (username) => {
+export const addExperience = (uid) => {
   return (dispatch) => {
     dispatch(experienceInfoRequest());
     return axios
-      .post(`${SERVER}/experience/add`, { username })
-      .then(() => dispatch(fetchExperience(username)))
+      .post(`${SERVER}/experience/add`, { uid })
+      .then(() => dispatch(fetchExperience(uid)))
       .catch((error) => dispatch(addExperienceInfoFailure(error)));
   };
 };
 
-export const deleteExperience = (username, id) => {
+export const deleteExperience = (uid, id) => {
   return (dispatch) => {
     dispatch(experienceInfoRequest());
     return axios
       .delete(`${SERVER}/experience/delete/${id}`)
-      .then(() => dispatch(fetchExperience(username)))
+      .then(() => dispatch(fetchExperience(uid)))
       .catch((error) => dispatch(deleteExperienceInfoFailure(error)));
   };
 };
 
-export const updateExperience = (username, id, payload) => {
+export const updateExperience = (uid, id, payload) => {
   return (dispatch) => {
     dispatch(experienceInfoRequest());
     return axios
       .put(`${SERVER}/experience/update/${id}`, { payload })
-      .then(() => dispatch(fetchExperience(username)))
+      .then(() => dispatch(fetchExperience(uid)))
       .catch((error) => dispatch(updateExperienceInfoFailure(error)));
   };
 };

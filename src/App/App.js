@@ -11,9 +11,10 @@
 import DateFnsUtils from "@date-io/date-fns"; // choose your lib
 import { MuiThemeProvider } from "@material-ui/core";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { AuthContext } from "../components/Auth/AuthContext";
 import LoginScreen from "../components/Auth/LoginScreen";
 import { AlertDialog } from "../components/common/AlertDialog";
 import Footer from "../components/Footer/Footer";
@@ -25,10 +26,13 @@ import "../styles/App.css";
 import { resuminator } from "../themes/resuminator";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("loggedIn"));
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("loggedIn")
+  );
   const [openAlert, setOpenAlert] = useState(
     process.env.NODE_ENV === "production"
   );
+  const auth = useContext(AuthContext);
   const dispatch = useDispatch();
 
   firebaseSDK.auth().onAuthStateChanged((user) => {
@@ -36,8 +40,10 @@ function App() {
   });
 
   React.useEffect(() => {
-    if (isLoggedIn) dispatch(initApp("viveknigam3003"));
-  }, [dispatch, isLoggedIn]);
+    if (isLoggedIn && auth.uid) {
+      dispatch(initApp(auth.uid));
+    }
+  }, [dispatch, isLoggedIn, auth]);
 
   const handleClose = () => setOpenAlert(false);
 

@@ -46,7 +46,7 @@ function SkillsInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const username = useSelector((state) => state.userInfo.username);
+  const uid = useSelector((state) => state.userInfo.uid);
   const loading = useSelector((state) => state.skillInfo.loading);
   const storeState = useSelector((state) => state.skillInfo.skills);
   const [state, setState] = useState(storeState);
@@ -85,13 +85,13 @@ function SkillsInput() {
         if (response.length !== 0) {
           setState([...state, response[0]]);
           e.target.value = "";
-          addUserSkill(username, response[0]._id).then(console.log("added"));
+          addUserSkill(uid, response[0]._id).then(console.log("added"));
         } else
           addSkillToDatabase(value, "Miscellaneous").then(() =>
             fetchInDatabase(value).then((newSkill) => {
               setState([...state, newSkill[0]]);
               e.target.value = "";
-              addUserSkill(username, newSkill[0]._id);
+              addUserSkill(uid, newSkill[0]._id);
             })
           );
       });
@@ -99,7 +99,7 @@ function SkillsInput() {
   };
 
   const handleDelete = (item) => {
-    deleteUserSkill(username, item._id).then(() =>
+    deleteUserSkill(uid, item._id).then(() =>
       setState((newState) =>
         newState.filter((skill) => skill.name !== item.name)
       )

@@ -15,7 +15,7 @@ const initialState = {
   name: "",
   jobTitle: "",
   loading: false,
-  username: "",
+  uid: "",
   error: "",
   contact: {
     email: "",
@@ -46,13 +46,13 @@ const userReducer = (state = initialState, action) => {
         _id: action.payload._id,
         name: action.payload.name,
         jobTitle: action.payload.jobTitle,
-        username: action.payload.username,
+        uid: action.payload.uid,
         contact: action.payload.contact,
         loading: false,
       };
     }
     case USERINFO.FETCH_ERROR: {
-      return { ...state, username: "", error: action.payload, loading: false };
+      return { ...state, uid: "", error: action.payload, loading: false };
     }
     case USERINFO.UPDATE_ERROR: {
       return {...state, loading: false, error: action.payload}

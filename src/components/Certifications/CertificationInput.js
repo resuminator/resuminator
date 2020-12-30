@@ -45,7 +45,7 @@ function CertificationInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const username = useSelector((state) => state.userInfo.username);
+  const uid = useSelector((state) => state.userInfo.uid);
   const storeState = useSelector(
     (state) => state.certificationInfo.certifications
   );
@@ -64,17 +64,17 @@ function CertificationInput() {
   }, [loading, storeState]);
 
   const handleAdd = () => {
-    dispatch(addCertification(username));
+    dispatch(addCertification(uid));
   };
 
   const handleDelete = (id) => {
     setCurrIndex(-1);
     setOpen(false);
-    dispatch(deleteCertification(username, id));
+    dispatch(deleteCertification(uid, id));
   };
 
   const handleUpdate = (id, payload) => {
-    dispatch(updateCertification(username, id, payload));
+    dispatch(updateCertification(uid, id, payload));
   };
 
   const handleCheckbox = (resetDate) => {

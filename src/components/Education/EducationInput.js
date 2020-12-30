@@ -46,7 +46,7 @@ function EducationInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const username = useSelector((state) => state.userInfo.username);
+  const uid = useSelector((state) => state.userInfo.uid);
   const storeState = useSelector((state) => state.educationInfo.education);
   const loading = useSelector((state) => state.educationInfo.loading);
   const [state, setState] = useState(storeState);
@@ -63,17 +63,17 @@ function EducationInput() {
   }, [loading, storeState]);
 
   const handleAdd = () => {
-    dispatch(addEducation(username));
+    dispatch(addEducation(uid));
   };
 
   const handleDelete = (id) => {
     setCurrIndex(-1);
     setOpen(false);
-    dispatch(deleteEducation(username, id));
+    dispatch(deleteEducation(uid, id));
   };
 
   const handleUpdate = (id, payload) => {
-    dispatch(updateEducation(username, id, payload));
+    dispatch(updateEducation(uid, id, payload));
   };
 
   const handleCheckbox = (resetDate) => {
@@ -138,7 +138,7 @@ function EducationInput() {
                 title: item.institute,
                 subtitle: item.stream,
                 titleAlt: "Click to add education info",
-                subtitleAlt: "Add degree & majors"
+                subtitleAlt: "Add degree & majors",
               }}
               open={open}
               currIndex={currIndex}

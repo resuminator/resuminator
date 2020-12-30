@@ -38,11 +38,11 @@ export const certificationInfoFailure = (error) => {
   };
 };
 
-export const fetchCertification = (username) => {
+export const fetchCertification = (uid) => {
   return (dispatch) => {
     dispatch(certificationInfoRequest());
     return axios
-      .get(`${SERVER}/certification/user/${username}`)
+      .get(`${SERVER}/certification/user/${uid}`)
       .then((response) =>
         dispatch(fetchCertificationInfoSuccess(response.data))
       )
@@ -50,32 +50,32 @@ export const fetchCertification = (username) => {
   };
 };
 
-export const addCertification = (username) => {
+export const addCertification = (uid) => {
   return (dispatch) => {
     dispatch(certificationInfoRequest());
     return axios
-      .post(`${SERVER}/certification/add`, { username })
-      .then(() => dispatch(fetchCertification(username)))
+      .post(`${SERVER}/certification/add`, { uid })
+      .then(() => dispatch(fetchCertification(uid)))
       .catch((error) => dispatch(certificationInfoFailure(error)));
   };
 };
 
-export const deleteCertification = (username, id) => {
+export const deleteCertification = (uid, id) => {
   return (dispatch) => {
     dispatch(certificationInfoRequest());
     return axios
       .delete(`${SERVER}/certification/delete/${id}`)
-      .then(() => dispatch(fetchCertification(username)))
+      .then(() => dispatch(fetchCertification(uid)))
       .catch((error) => dispatch(certificationInfoFailure(error)));
   };
 };
 
-export const updateCertification = (username, id, payload) => {
+export const updateCertification = (uid, id, payload) => {
   return (dispatch) => {
     dispatch(certificationInfoRequest());
     return axios
       .put(`${SERVER}/certification/update/${id}`, { payload })
-      .then(() => dispatch(fetchCertification(username)))
+      .then(() => dispatch(fetchCertification(uid)))
       .catch((error) => dispatch(certificationInfoFailure(error)));
   };
 };

@@ -45,22 +45,22 @@ export const updateUserInfoFailure = (error) => {
   };
 };
 
-export const fetchUser = (username) => {
+export const fetchUser = (uid) => {
   return (dispatch) => {
     dispatch(fetchUserInfoRequest());
     return axios
-      .get(`${SERVER}/users/${username}`)
+      .get(`${SERVER}/users/${uid}`)
       .then((response) => dispatch(fetchUserInfoSuccess(response.data)))
       .catch((error) => dispatch(fetchUserInfoFailure(error.message)));
   };
 };
 
-export const updateUserInfo = (username, userId, payload) => {
+export const updateUserInfo = (uid, userId, payload) => {
   return (dispatch) => {
     dispatch(fetchUserInfoRequest());
     return axios
       .put(`${SERVER}/users/update/${userId}`, { payload })
-      .then(() => dispatch(fetchUser(username)))
+      .then(() => dispatch(fetchUser(uid)))
       .catch((error) => dispatch(updateUserInfoFailure(error)));
   };
 };

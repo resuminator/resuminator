@@ -38,11 +38,11 @@ export const fetchSkillInfoFailure = (error) => {
   };
 };
 
-export const fetchSkills = (username) => {
+export const fetchSkills = (uid) => {
   return (dispatch) => {
     dispatch(skillInfoRequest());
     return axios
-      .get(`${SERVER}/skills/user/${username}`)
+      .get(`${SERVER}/skills/user/${uid}`)
       .then((response) => {
         axios
           .post(`${SERVER}/skillset/fetchbyids`, {
@@ -63,16 +63,16 @@ export const fetchInDatabase = async (name) => {
     .catch((err) => err.message);
 };
 
-export const addUserSkill = async (username, skillId) => {
+export const addUserSkill = async (uid, skillId) => {
   return axios
-    .put(`${SERVER}/skills/add/${skillId}`, { username })
+    .put(`${SERVER}/skills/add/${skillId}`, { uid })
     .then((response) => response.data)
     .catch((err) => err.message);
 };
 
-export const deleteUserSkill = async (username, skillId) => {
+export const deleteUserSkill = async (uid, skillId) => {
   return axios
-    .put(`${SERVER}/skills/delete/${skillId}`, { username })
+    .put(`${SERVER}/skills/delete/${skillId}`, { uid })
     .then((response) => response.data)
     .catch((err) => err.message);
 };

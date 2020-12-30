@@ -77,7 +77,7 @@ function ContactInput() {
   const handleSave = () => {
     setChanged(false);
     dispatch(
-      updateUserInfo(userInfo.username, userInfo._id, {
+      updateUserInfo(userInfo.uid, userInfo._id, {
         contact: state,
       })
     );
