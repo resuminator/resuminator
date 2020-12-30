@@ -11,9 +11,10 @@
 import {
   Box,
   Button,
+  Link,
   makeStyles,
   TextField,
-  Typography,
+  Typography
 } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import React, { useState } from "react";
@@ -147,11 +148,11 @@ const LoginScreen = () => {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        {/* <Link>
+        <Link href="/resetpassword">
           <Typography variant="subtitle2" className={classes.buttonText}>
             Forgot Password?
           </Typography>
-        </Link> */}
+        </Link>
         <Button
           variant="contained"
           disableElevation

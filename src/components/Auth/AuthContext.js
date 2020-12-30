@@ -18,7 +18,9 @@ export const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     firebaseSDK.auth().onAuthStateChanged((user) => {
-      if (user) setUid(() => user.uid);
+      if (user) {
+        setUid(() => user.uid);
+      }
     });
   }, []);
 

@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AuthContext } from "../components/Auth/AuthContext";
 import LoginScreen from "../components/Auth/LoginScreen";
+import PasswordReset from "../components/Auth/PasswordReset";
 import { AlertDialog } from "../components/common/AlertDialog";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
@@ -51,9 +52,8 @@ function App() {
     <Router>
       {!isLoggedIn ? (
         <Switch>
-          <Route path="/">
-            <LoginScreen />
-          </Route>
+          <Route exact path="/" component={LoginScreen} />
+          <Route path="/resetpassword" component={PasswordReset} />
         </Switch>
       ) : (
         <MuiThemeProvider theme={resuminator}>
