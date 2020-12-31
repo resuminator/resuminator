@@ -13,6 +13,7 @@ import React from "react";
 import ActionButton from "../common/ActionButton";
 import { FiArrowRight } from "react-icons/fi";
 import firebaseSDK from "../../Services/firebaseSDK";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,17 +40,19 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: "-0.05rem",
     fontSize: "1rem",
     margin: "1rem",
-    color: theme.palette.secondary.dark
   },
 }));
 
 function Header() {
   const classes = useStyles();
+  const history = useHistory();
+
   const handleSignOut = () => {
     firebaseSDK
       .auth()
       .signOut()
-      .then(() => localStorage.removeItem("loggedIn"));
+      .then(() => localStorage.removeItem("loggedIn"))
+      .then(() => history.push("/thankyou"));
   };
 
   return (
@@ -71,7 +74,12 @@ function Header() {
       >
         Re
       </Typography>
-      <Box alignItems="center" justifyItems="center" display="flex" flexWrap="wrap">
+      <Box
+        alignItems="center"
+        justifyItems="center"
+        display="flex"
+        flexWrap="wrap"
+      >
         <ActionButton
           buttonText="💡 Have any suggestions/ideas?"
           link="https://github.com/viveknigam3003/resuminator/discussions/5"
@@ -79,6 +87,7 @@ function Header() {
           className={classes.btn}
         />
         <Button
+          color="primary"
           variant="outlined"
           onClick={handleSignOut}
           className={classes.btn}
