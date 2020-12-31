@@ -17,7 +17,6 @@ import firebaseSDK from "../../Services/firebaseSDK";
 const useStyles = makeStyles((theme) => ({
   root: {
     fontFamily: "Karla",
-    // backgroundColor: theme.palette.contrast.main,
     color: theme.palette.text.primary,
     "@media (min-width:1280px)": {
       margin: "4.2rem",
@@ -40,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: "-0.05rem",
     fontSize: "1rem",
     margin: "1rem",
+    color: theme.palette.secondary.dark
   },
 }));
 
@@ -71,7 +71,7 @@ function Header() {
       >
         Re
       </Typography>
-      <Box alignItems="center" justifyItems="center">
+      <Box alignItems="center" justifyItems="center" display="flex" flexWrap="wrap">
         <ActionButton
           buttonText="💡 Have any suggestions/ideas?"
           link="https://github.com/viveknigam3003/resuminator/discussions/5"
@@ -79,7 +79,6 @@ function Header() {
           className={classes.btn}
         />
         <Button
-          color="secondary"
           variant="outlined"
           onClick={handleSignOut}
           className={classes.btn}
