@@ -18,6 +18,7 @@ import { AuthContext } from "../components/Auth/AuthContext";
 import LoginScreen from "../components/Auth/LoginScreen";
 import NewBetaUser from "../components/Auth/NewBetaUser";
 import PasswordReset from "../components/Auth/PasswordReset";
+import SignoutScreen from "../components/Auth/SignoutScreen";
 import { AlertDialog } from "../components/common/AlertDialog";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
@@ -28,9 +29,8 @@ import "../styles/App.css";
 import { resuminator } from "../themes/resuminator";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("loggedIn")
-  );
+  const savedState = localStorage.getItem("loggedIn");
+  const [, setIsLoggedIn] = useState(savedState);
   const [openAlert, setOpenAlert] = useState(
     process.env.NODE_ENV === "production"
   );
@@ -42,27 +42,28 @@ function App() {
   });
 
   React.useEffect(() => {
-    if (isLoggedIn && auth.uid) {
+    if (savedState && auth.uid) {
       dispatch(initApp(auth.uid));
     }
-  }, [dispatch, isLoggedIn, auth]);
+  }, [dispatch, savedState, auth.uid]);
 
   const handleClose = () => setOpenAlert(false);
 
   return (
     <Router>
-      {!isLoggedIn ? (
+      {!savedState ? (
         <Switch>
           <Route exact path="/" component={LoginScreen} />
           <Route exact path="/resetpassword" component={PasswordReset} />
           <Route exact path="/newuser" component={NewBetaUser} />
+          <Route exact path="/thankyou" component={SignoutScreen} />
         </Switch>
       ) : (
         <MuiThemeProvider theme={resuminator}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <AlertDialog
-              title="Resuminator : Preview 🎉"
-              message="Thanks for joining Resuminator Early Access Programme! Currently, Resuminator is in preview mode - this means that you may play around the app but your data shall not persist after you leave the app."
+              title="Welcome to Resuminator! 👋🏻"
+              message="Thanks for joining Resuminator Early Access Programme! Currently, Resuminator is in Beta stage - this means that you may play around the app and we would love to know your feedback to improve!"
               open={openAlert}
               onClick={handleClose}
               onClose={handleClose}

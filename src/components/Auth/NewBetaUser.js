@@ -5,11 +5,16 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import axios from "axios";
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
-import firebaseSDK from "../../Services/firebaseSDK";
-import { SERVER } from "../../utils/Server";
+import { AnimateSharedLayout, motion } from "framer-motion";
+import React, { useContext, useState } from "react";
+import { FiArrowRight } from "react-icons/fi";
+import {
+  createNewUser,
+  fetchUserData,
+  setNewPassword,
+  silentLogin,
+} from "./AuthAPIs";
+import { AuthContext } from "./AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -53,13 +58,14 @@ const useStyles = makeStyles((theme) => ({
 
 const NewBetaUser = (props) => {
   const classes = useStyles();
+  const auth = useContext(AuthContext);
   const MIN_LENGTH = 8;
-  const loggedIn = localStorage.getItem("loggedIn");
   const [passwordPayload, setPasswordPayload] = useState({
     password: "",
     confirmPassword: "",
   });
   const [message, setMessage] = useState("");
+  const [completed, setCompleted] = useState(false);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -71,11 +77,8 @@ const NewBetaUser = (props) => {
     return query.replace("?", "").split("&&P=");
   };
 
-  const fetchUserData = async (uid) => {
-    return axios
-      .get(`${SERVER}/auth/${uid}`)
-      .then((resposne) => resposne.data)
-      .catch((err) => err.message);
+  const setUID = async (uid) => {
+    return auth.setUid(uid);
   };
 
   const handleSubmit = async (e) => {
@@ -91,26 +94,25 @@ const NewBetaUser = (props) => {
 
     const [uid, password] = getCredentials(props.location.search);
 
-    fetchUserData(uid).then((user) => {
-      firebaseSDK
-        .auth()
-        .signInWithEmailAndPassword(user.email, password)
-        .then(() =>
-          firebaseSDK
-            .auth()
-            .currentUser.updatePassword(passwordPayload.password)
-            .then(() => {
-              localStorage.setItem("loggedIn", true);
-            })
-            .catch((err) => setMessage(err.message))
-        )
-        .catch((err) => setMessage(err.message));
-    });
+    fetchUserData(uid)
+      .then((user) => {
+        silentLogin(user.email, password)
+          .then(() => {
+            setNewPassword(passwordPayload.password)
+              .then(() => {
+                createNewUser(uid, user.email).then(() => {
+                  setUID(uid).then(() => {
+                    localStorage.setItem("loggedIn", true);
+                    setCompleted(true);
+                  });
+                });
+              })
+              .catch((err) => setMessage(err.message));
+          })
+          .catch((err) => setMessage(err.message));
+      })
+      .catch((err) => setMessage(err.message));
   };
-
-  React.useEffect(() => {
-    <Redirect exact to="/" />;
-  }, [loggedIn]);
 
   return (
     <Box
@@ -156,28 +158,45 @@ const NewBetaUser = (props) => {
         color="textSecondary"
       >
         Once the password has been set successfully, you will be redirected to
-        Login screen where you can login with your new password.
+        Resuminator where you can start builing an awesome resume.
       </Typography>
-      <Box>
-        <Button
-          variant="contained"
-          color="inherit"
-          disableElevation
-          className={classes.btn}
-          href="/"
-        >
-          Cancel
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          disableElevation
-          className={classes.btn}
-          onClick={handleSubmit}
-        >
-          Reset Password
-        </Button>
-      </Box>
+      <AnimateSharedLayout>
+        {completed ? (
+          <motion.div layout>
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              className={classes.btn}
+              href="/"
+            >
+              Get Started! 🚀
+            </Button>
+          </motion.div>
+        ) : (
+          <motion.div layout>
+            <Button
+              variant="contained"
+              color="inherit"
+              disableElevation
+              className={classes.btn}
+              href="/"
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              className={classes.btn}
+              onClick={handleSubmit}
+              endIcon={<FiArrowRight />}
+            >
+              Continue
+            </Button>
+          </motion.div>
+        )}
+      </AnimateSharedLayout>
       <Typography className={classes.error} variant="body2">
         {message}
       </Typography>
