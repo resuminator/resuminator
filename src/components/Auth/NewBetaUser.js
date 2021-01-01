@@ -50,6 +50,16 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "1rem",
     color: theme.palette.secondary.dark,
   },
+  footer: {
+    fontFamily: "Karla",
+    width: "20rem",
+    marginTop: "2rem",
+    textAlign: "center",
+    fontSize: "0.8rem",
+    color: theme.palette.grey[800],
+    position: "absolute",
+    bottom: "2rem"
+  }
 }));
 
 const NewBetaUser = (props) => {
@@ -196,13 +206,6 @@ const NewBetaUser = (props) => {
           </motion.div>
         )}
       </AnimateSharedLayout>
-      <Typography
-        variant="body1"
-        className={classes.notice}
-        color="textSecondary"
-      >
-        If you face any issues during the process, do let me know at <a href="mailto:viveknigam.nigam3@gmail.com">viveknigam.nigam3@gmail.com</a>
-      </Typography>
       {loading ? (
         <Loader />
       ) : (
@@ -210,6 +213,17 @@ const NewBetaUser = (props) => {
           {message}
         </Typography>
       )}
+      <Typography
+        variant="body1"
+        className={classes.footer}
+        color="textSecondary"
+      >
+        If you face any issues during the process, do let me know at{" "}
+        <a href="mailto:viveknigam.nigam3@gmail.com">
+          viveknigam.nigam3@gmail.com
+        </a>
+        
+      </Typography>
     </Box>
   );
 };
