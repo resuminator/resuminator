@@ -11,7 +11,7 @@ export const RESUMINATOR_REPO_LINK =
   "https://github.com/viveknigam3003/resuminator"
 export const RESUMINATOR_LANDING_REPO_LINK =
   "https://github.com/viveknigam3003/resuminator-landing"
-export const RESUMINATOR_LANDING_HOSTED_LINK = "https://resuminator.gtsb.io/"
+export const RESUMINATOR_LANDING_HOSTED_LINK = "https://resuminator.in"
 export const OWNER_PROFILE = "https://github.com/viveknigam3003/"
 export const RESUMINATOR_ISSUES_GFI =
   "https://github.com/viveknigam3003/resuminator/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"
