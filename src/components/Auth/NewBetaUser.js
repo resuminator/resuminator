@@ -8,12 +8,8 @@ import {
 import { AnimateSharedLayout, motion } from "framer-motion";
 import React, { useContext, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
-import {
-  createNewUser,
-  fetchUserData,
-  setNewPassword,
-  silentLogin,
-} from "./AuthAPIs";
+import Loader from "../common/Loader";
+import { processNewUser } from "./AuthAPIs";
 import { AuthContext } from "./AuthContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -59,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 const NewBetaUser = (props) => {
   const classes = useStyles();
   const auth = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const MIN_LENGTH = 8;
   const [passwordPayload, setPasswordPayload] = useState({
     password: "",
@@ -75,6 +72,12 @@ const NewBetaUser = (props) => {
 
   const getCredentials = (query) => {
     return query.replace("?", "").split("&&P=");
+  };
+
+  const handleError = (err) => {
+    console.log("reached callback");
+    setMessage(err.message);
+    setLoading(false);
   };
 
   const setUID = async (uid) => {
@@ -95,25 +98,20 @@ const NewBetaUser = (props) => {
     const [uid, password] = getCredentials(props.location.search);
 
     localStorage.setItem("newUser", true);
-    fetchUserData(uid)
-      .then((user) => {
-        silentLogin(user.email, password)
+    setLoading(true);
+
+    processNewUser(uid, password, passwordPayload.password)
+      .then(() => {
+        setUID(uid)
           .then(() => {
-            setNewPassword(passwordPayload.password)
-              .then(() => {
-                createNewUser(uid, user.email).then(() => {
-                  setUID(uid).then(() => {
-                    localStorage.setItem("loggedIn", true);
-                    localStorage.removeItem("newUser");
-                    setCompleted(true);
-                  });
-                });
-              })
-              .catch((err) => setMessage(err.message));
+            setLoading(false);
+            localStorage.setItem("loggedIn", true);
+            localStorage.removeItem("newUser");
+            setCompleted(true);
           })
-          .catch((err) => setMessage(err.message));
+          .catch((err) => handleError(err));
       })
-      .catch((err) => setMessage(err.message));
+      .catch((err) => handleError(err));
   };
 
   return (
@@ -199,9 +197,13 @@ const NewBetaUser = (props) => {
           </motion.div>
         )}
       </AnimateSharedLayout>
-      <Typography className={classes.error} variant="body2">
-        {message}
-      </Typography>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Typography className={classes.error} variant="body2">
+          {message}
+        </Typography>
+      )}
     </Box>
   );
 };
