@@ -8,26 +8,23 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import DateFnsUtils from "@date-io/date-fns"; // choose your lib
-import { MuiThemeProvider } from "@material-ui/core";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthContext } from "../components/Auth/AuthContext";
-import { AlertDialog } from "../components/common/AlertDialog";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import Content from "../layout/Content";
 import { initApp } from "../redux/app.actions";
 import firebaseSDK from "../Services/firebaseSDK";
 import "../styles/App.css";
-import { resuminator } from "../themes/resuminator";
+import Providers from "./Providers";
 import Routes from "./Routes";
+import WelcomeDialog from "./WelcomeDialog";
 
 function App() {
   const savedState = localStorage.getItem("loggedIn");
-  const [, setIsLoggedIn] = useState(savedState);
+  const [loggedIn, setLoggedIn] = useState(savedState);
   const [openAlert, setOpenAlert] = useState(
     process.env.NODE_ENV === "production"
   );
@@ -35,37 +32,32 @@ function App() {
   const dispatch = useDispatch();
 
   firebaseSDK.auth().onAuthStateChanged((user) => {
-    return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+    return user ? setLoggedIn(true) : setLoggedIn(false);
   });
 
   React.useEffect(() => {
-    if (savedState && auth.uid) {
+    if (loggedIn && auth.uid) {
       dispatch(initApp(auth.uid));
     }
-  }, [dispatch, savedState, auth.uid]);
+  }, [dispatch, loggedIn, auth.uid]);
 
   const handleClose = () => setOpenAlert(false);
 
   return (
     <Router>
-      {!savedState ? (
-        <Routes/>
+      {!loggedIn ? (
+        <Routes />
       ) : (
-        <MuiThemeProvider theme={resuminator}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <AlertDialog
-              title="Welcome to Resuminator! 👋🏻"
-              message="Thanks for joining Resuminator Early Access Programme! Currently, Resuminator is in Beta stage - this means that you may play around the app and we would love to know your feedback to improve!"
-              open={openAlert}
-              onClick={handleClose}
-              onClose={handleClose}
-              buttonText="Got it! 👍🏻"
-            />
-            <Header />
-            <Content />
-            <Footer />
-          </MuiPickersUtilsProvider>
-        </MuiThemeProvider>
+        <Providers>
+          <WelcomeDialog
+            open={openAlert}
+            onClick={handleClose}
+            onClose={handleClose}
+          />
+          <Header />
+          <Content />
+          <Footer />
+        </Providers>
       )}
     </Router>
   );
