@@ -13,12 +13,8 @@ import { MuiThemeProvider } from "@material-ui/core";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { AuthContext } from "../components/Auth/AuthContext";
-import LoginScreen from "../components/Auth/LoginScreen";
-import NewBetaUser from "../components/Auth/NewBetaUser";
-import PasswordReset from "../components/Auth/PasswordReset";
-import SignoutScreen from "../components/Auth/SignoutScreen";
 import { AlertDialog } from "../components/common/AlertDialog";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
@@ -27,6 +23,7 @@ import { initApp } from "../redux/app.actions";
 import firebaseSDK from "../Services/firebaseSDK";
 import "../styles/App.css";
 import { resuminator } from "../themes/resuminator";
+import Routes from "./Routes";
 
 function App() {
   const savedState = localStorage.getItem("loggedIn");
@@ -52,12 +49,7 @@ function App() {
   return (
     <Router>
       {!savedState ? (
-        <Switch>
-          <Route exact path="/" component={LoginScreen} />
-          <Route exact path="/resetpassword" component={PasswordReset} />
-          <Route exact path="/newuser" component={NewBetaUser} />
-          <Route exact path="/thankyou" component={SignoutScreen} />
-        </Switch>
+        <Routes/>
       ) : (
         <MuiThemeProvider theme={resuminator}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
