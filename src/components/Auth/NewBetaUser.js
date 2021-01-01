@@ -75,7 +75,6 @@ const NewBetaUser = (props) => {
   };
 
   const handleError = (err) => {
-    console.log("reached callback");
     setMessage(err.message);
     setLoading(false);
   };
@@ -197,6 +196,13 @@ const NewBetaUser = (props) => {
           </motion.div>
         )}
       </AnimateSharedLayout>
+      <Typography
+        variant="body1"
+        className={classes.notice}
+        color="textSecondary"
+      >
+        If you face any issues during the process, do let me know at <a href="mailto:viveknigam.nigam3@gmail.com">viveknigam.nigam3@gmail.com</a>
+      </Typography>
       {loading ? (
         <Loader />
       ) : (
