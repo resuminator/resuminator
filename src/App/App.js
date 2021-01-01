@@ -24,6 +24,7 @@ import WelcomeDialog from "./WelcomeDialog";
 
 function App() {
   const savedState = localStorage.getItem("loggedIn");
+  const newUser = localStorage.getItem("newUser");
   const [loggedIn, setLoggedIn] = useState(savedState);
   const [openAlert, setOpenAlert] = useState(
     process.env.NODE_ENV === "production"
@@ -36,16 +37,16 @@ function App() {
   });
 
   React.useEffect(() => {
-    if (loggedIn && auth.uid) {
+    if (loggedIn && auth.uid && !newUser) {
       dispatch(initApp(auth.uid));
     }
-  }, [dispatch, loggedIn, auth.uid]);
+  }, [dispatch, loggedIn, auth.uid, newUser]);
 
   const handleClose = () => setOpenAlert(false);
 
   return (
     <Router>
-      {!loggedIn ? (
+      {!loggedIn || newUser ? (
         <Routes />
       ) : (
         <Providers>

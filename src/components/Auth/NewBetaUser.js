@@ -94,6 +94,7 @@ const NewBetaUser = (props) => {
 
     const [uid, password] = getCredentials(props.location.search);
 
+    localStorage.setItem("newUser", true);
     fetchUserData(uid)
       .then((user) => {
         silentLogin(user.email, password)
@@ -103,6 +104,7 @@ const NewBetaUser = (props) => {
                 createNewUser(uid, user.email).then(() => {
                   setUID(uid).then(() => {
                     localStorage.setItem("loggedIn", true);
+                    localStorage.removeItem("newUser");
                     setCompleted(true);
                   });
                 });
