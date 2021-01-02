@@ -114,7 +114,7 @@ function Footer() {
           Resuminator is a project by Vivek Nigam and is maintained by The
           Bitshift Community
         </Typography>
-        <ServerCheck dark/>
+        <ServerCheck dark relative/>
       </Box>
       <Box id="col-3" display="flex" flexDirection="column" flexShrink={1}>
         <IconButton className={classes.button} href={RESUMINATOR_REPO_LINK}>

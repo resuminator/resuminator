@@ -6,7 +6,7 @@ import { SERVER } from "../utils/Server";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: "absolute",
+    position: (props) => props.relative ? "relative": "absolute",
     bottom: "1rem",
   },
   logo: {
@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ServerCheck = ({ dark }) => {
-  const classes = useStyles({ dark });
+const ServerCheck = ({ dark, relative }) => {
+  const classes = useStyles({ dark, relative });
   const [active, setActive] = useState(false);
 
   React.useEffect(() => {
