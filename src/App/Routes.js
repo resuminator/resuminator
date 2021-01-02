@@ -4,6 +4,7 @@ import LoginScreen from "../components/Auth/LoginScreen";
 import NewBetaUser from "../components/Auth/NewBetaUser";
 import PasswordReset from "../components/Auth/PasswordReset";
 import SignoutScreen from "../components/Auth/SignoutScreen";
+import NotFound from "./404";
 
 const Routes = () => {
   return (
@@ -12,6 +13,7 @@ const Routes = () => {
       <Route exact path="/resetpassword" component={PasswordReset} />
       <Route exact path="/newuser" component={NewBetaUser} />
       <Route exact path="/thankyou" component={SignoutScreen} />
+      <Route component={NotFound} />
     </Switch>
   );
 };
