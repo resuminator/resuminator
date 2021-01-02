@@ -12,13 +12,10 @@ import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthContext } from "../components/Auth/AuthContext";
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
-import Content from "../layout/Content";
 import { initApp } from "../redux/app.actions";
 import firebaseSDK from "../Services/firebaseSDK";
 import "../styles/App.css";
-import Providers from "./Providers";
+import ProtectedRoutes from "./Protected.Routes";
 import Routes from "./Routes";
 import WelcomeDialog from "./WelcomeDialog";
 
@@ -49,16 +46,13 @@ function App() {
       {!loggedIn || newUser ? (
         <Routes />
       ) : (
-        <Providers>
+        <ProtectedRoutes>
           <WelcomeDialog
             open={openAlert}
             onClick={handleClose}
             onClose={handleClose}
           />
-          <Header />
-          <Content />
-          <Footer />
-        </Providers>
+        </ProtectedRoutes>
       )}
     </Router>
   );
