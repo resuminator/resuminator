@@ -49,7 +49,7 @@ const ServerCheck = ({ dark, relative }) => {
     return active ? (
       <Typography className={classes.logo}>🟢 All Systems Normal</Typography>
     ) : (
-      <Typography className={classes.logo}>🔴 Servers Down</Typography>
+      <Typography className={classes.logo}>🟠 Servers Idle</Typography>
     );
   };
 
