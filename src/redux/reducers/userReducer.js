@@ -16,6 +16,7 @@ const initialState = {
   jobTitle: "",
   loading: false,
   error: "",
+  email: "",
   contact: {
     email: "",
     linkedin: "",
@@ -48,6 +49,7 @@ const userReducer = (state = initialState, action) => {
         jobTitle: action.payload.jobTitle,
         contact: action.payload.contact,
         avatar: action.payload.avatar,
+        email: action.payload.email,
         loading: false,
       };
     }
