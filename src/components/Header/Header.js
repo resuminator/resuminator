@@ -8,12 +8,14 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Box, Button, makeStyles, Typography } from "@material-ui/core";
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import ActionButton from "../common/ActionButton";
 import { FiArrowRight } from "react-icons/fi";
-import firebaseSDK from "../../Services/firebaseSDK";
 import { useHistory } from "react-router-dom";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+import firebaseSDK from "../../Services/firebaseSDK";
+import ActionButton from "../common/ActionButton";
+import UserMenu from "./UserMenu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,11 +43,37 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1rem",
     margin: "1rem",
   },
+  menuIcons: {
+    padding: "0.5rem",
+  },
 }));
 
 function Header() {
   const classes = useStyles();
   const history = useHistory();
+  const { width } = useWindowDimensions();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const suggestionButton = () => {
+    if (width >= 1280)
+      return (
+        <ActionButton
+          buttonText="💡 Have any suggestions/ideas?"
+          link="https://github.com/viveknigam3003/resuminator/discussions/5"
+          endIcon={<FiArrowRight />}
+          className={classes.btn}
+        />
+      );
+    return null;
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleSignOut = () => {
     firebaseSDK
@@ -80,20 +108,13 @@ function Header() {
         display="flex"
         flexWrap="wrap"
       >
-        <ActionButton
-          buttonText="💡 Have any suggestions/ideas?"
-          link="https://github.com/viveknigam3003/resuminator/discussions/5"
-          endIcon={<FiArrowRight />}
-          className={classes.btn}
+        {suggestionButton()}
+        <UserMenu
+          handleClick={handleClick}
+          handleClose={handleClose}
+          handleSignOut={handleSignOut}
+          anchorEl={anchorEl}
         />
-        <Button
-          color="primary"
-          variant="outlined"
-          onClick={handleSignOut}
-          className={classes.btn}
-        >
-          Sign Out
-        </Button>
       </Box>
     </Box>
   );

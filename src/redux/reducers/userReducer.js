@@ -22,6 +22,7 @@ const initialState = {
     twitter: "",
     github: "",
   },
+  avatar: ""
 };
 
 const userReducer = (state = initialState, action) => {
@@ -46,6 +47,7 @@ const userReducer = (state = initialState, action) => {
         name: action.payload.name,
         jobTitle: action.payload.jobTitle,
         contact: action.payload.contact,
+        avatar: action.payload.avatar,
         loading: false,
       };
     }
