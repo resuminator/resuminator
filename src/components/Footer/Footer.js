@@ -87,7 +87,7 @@ function Footer() {
         <Typography variant="h6" className={classes.text} color="secondary">
           Resuminator v{packageJSON.version}
           <Chip
-            label="dev"
+            label="beta"
             className={classes.chip}
             variant="outlined"
             size="small"
