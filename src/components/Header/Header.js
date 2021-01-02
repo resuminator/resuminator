@@ -8,12 +8,13 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import { Box, makeStyles } from "@material-ui/core";
 import React from "react";
 import { FiArrowRight } from "react-icons/fi";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import ActionButton from "../common/ActionButton";
 import UserMenu from "../User/UserMenu";
+import ShortLogo from "./ShortLogo";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,15 +25,6 @@ const useStyles = makeStyles((theme) => ({
       marginTop: "1rem",
       marginBottom: 0,
     },
-  },
-  logo: {
-    fontWeight: 700,
-    paddingRight: "0.5rem",
-    letterSpacing: "-0.25rem",
-    fontFamily: "Karla",
-    border: "solid",
-    borderColor: theme.palette.contrast.main,
-    borderWidth: "0.1rem",
   },
   btn: {
     textTransform: "none",
@@ -83,14 +75,7 @@ function Header() {
       mt={2}
       mb={0}
     >
-      <Typography
-        id="logo"
-        variant="h4"
-        className={classes.logo}
-        color="primary"
-      >
-        Re
-      </Typography>
+      <ShortLogo />
       <Box
         alignItems="center"
         justifyItems="center"
