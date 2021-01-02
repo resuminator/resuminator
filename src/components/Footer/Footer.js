@@ -18,6 +18,7 @@ import {
 import React from "react";
 import { FiGithub } from "react-icons/fi";
 import packageJSON from "../../../package.json";
+import ServerCheck from "../../App/ServerCheck";
 import { OWNER_PROFILE, RESUMINATOR_REPO_LINK } from "../../utils/Constants";
 
 const useStyles = makeStyles((theme) => ({
@@ -113,6 +114,7 @@ function Footer() {
           Resuminator is a project by Vivek Nigam and is maintained by The
           Bitshift Community
         </Typography>
+        <ServerCheck dark/>
       </Box>
       <Box id="col-3" display="flex" flexDirection="column" flexShrink={1}>
         <IconButton className={classes.button} href={RESUMINATOR_REPO_LINK}>

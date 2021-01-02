@@ -16,6 +16,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
+import ServerCheck from "../../App/ServerCheck";
 import firebaseSDK from "../../Services/firebaseSDK";
 
 const useStyles = makeStyles((theme) => ({
@@ -141,6 +142,7 @@ const PasswordReset = () => {
           {message}
         </Typography>
       </Box>
+      <ServerCheck/>
     </Box>
   );
 };

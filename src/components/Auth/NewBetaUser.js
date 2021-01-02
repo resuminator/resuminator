@@ -18,6 +18,7 @@ import {
 import { AnimateSharedLayout, motion } from "framer-motion";
 import React, { useContext, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
+import ServerCheck from "../../App/ServerCheck";
 import Loader from "../common/Loader";
 import { processNewUser } from "./AuthAPIs";
 import { AuthContext } from "./AuthContext";
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.8rem",
     color: theme.palette.grey[800],
     position: "absolute",
-    bottom: "2rem",
+    bottom: "3.5rem",
   },
 }));
 
@@ -233,6 +234,7 @@ const NewBetaUser = (props) => {
           viveknigam.nigam3@gmail.com
         </a>
       </Typography>
+      <ServerCheck />
     </Box>
   );
 };

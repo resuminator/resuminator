@@ -14,10 +14,11 @@ import {
   Link,
   makeStyles,
   TextField,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import React, { useState } from "react";
+import ServerCheck from "../../App/ServerCheck";
 import firebaseSDK from "../../Services/firebaseSDK";
 import Loader from "../common/Loader";
 
@@ -170,6 +171,7 @@ const LoginScreen = () => {
       <Typography className={classes.error} variant="body2">
         {error}
       </Typography>
+      <ServerCheck />
     </Box>
   );
 };
