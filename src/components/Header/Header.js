@@ -11,11 +11,9 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import { FiArrowRight } from "react-icons/fi";
-import { useHistory } from "react-router-dom";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
-import firebaseSDK from "../../Services/firebaseSDK";
 import ActionButton from "../common/ActionButton";
-import UserMenu from "./UserMenu";
+import UserMenu from "../User/UserMenu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Header() {
   const classes = useStyles();
-  const history = useHistory();
   const { width } = useWindowDimensions();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -73,14 +70,6 @@ function Header() {
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleSignOut = () => {
-    firebaseSDK
-      .auth()
-      .signOut()
-      .then(() => localStorage.removeItem("loggedIn"))
-      .then(() => history.push("/thankyou"));
   };
 
   return (
@@ -110,9 +99,8 @@ function Header() {
       >
         {suggestionButton()}
         <UserMenu
-          handleClick={handleClick}
           handleClose={handleClose}
-          handleSignOut={handleSignOut}
+          handleClick={handleClick}
           anchorEl={anchorEl}
         />
       </Box>

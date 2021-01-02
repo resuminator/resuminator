@@ -8,6 +8,8 @@ import {
 import React from "react";
 import { FiLogOut, FiUser } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import firebaseSDK from "../../Services/firebaseSDK";
 
 const useStyles = makeStyles((theme) => ({
   menuIcons: {
@@ -19,13 +21,27 @@ const useStyles = makeStyles((theme) => ({
     borderWidth: 2,
     borderColor: theme.palette.primary.light,
     width: "2rem",
-    height: "auto"
+    height: "2rem"
   },
 }));
 
-const UserMenu = ({ handleClick, handleClose, anchorEl, handleSignOut }) => {
+const UserMenu = ({ handleClick, handleClose, anchorEl }) => {
   const classes = useStyles();
+  const history = useHistory();
   const avatar = useSelector((state) => state.userInfo.avatar);
+
+  const handleSignOut = () => {
+    firebaseSDK
+      .auth()
+      .signOut()
+      .then(() => localStorage.removeItem("loggedIn"))
+      .then(() => history.push("/thankyou"));
+  };
+
+  const redirectToAccount = () => {
+    history.push("/account");
+  }
+
   return (
     <React.Fragment>
       <IconButton onClick={handleClick}>
@@ -47,7 +63,7 @@ const UserMenu = ({ handleClick, handleClose, anchorEl, handleSignOut }) => {
           horizontal: "center",
         }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={redirectToAccount}>
           <FiUser className={classes.menuIcons} />
           My account
         </MenuItem>
