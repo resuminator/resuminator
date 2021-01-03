@@ -17,7 +17,8 @@ html, body #root {
   flex-direction: column;
   overflow-y: auto;
   background-color: #fffafa;
-  justify-content: space-between
+  justify-content: space-between;
+  word-wrap: break-word;
 }
 
 ul {
