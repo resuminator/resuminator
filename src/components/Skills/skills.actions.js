@@ -63,6 +63,13 @@ export const fetchInDatabase = async (name) => {
     .catch((err) => err.message);
 };
 
+export const createNewSkillDocument = async (uid) => {
+  return axios
+    .post(`${SERVER}/skills/add`, { uid })
+    .then((response) => response.data)
+    .catch((err) => err.message);
+}
+
 export const addUserSkill = async (uid, skillId) => {
   return axios
     .put(`${SERVER}/skills/add/${skillId}`, { uid })
