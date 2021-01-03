@@ -32,7 +32,7 @@ function JobDescription(props) {
   const classes = useStyles();
   let desc = props.desc;
   return (
-    <Box textAlign="justify" p={1} pt={0}>
+    <Box textAlign="justify" p={1} pt={0} width="98%">
       <ReactMarkdown children={desc} className={classes.item} skipHtml={true} />
       {props.workLink ? (
         <Link href={props.workLink} target="_blank">

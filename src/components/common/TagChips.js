@@ -15,6 +15,8 @@ const useStyles = makeStyles({
   root: {
     marginRight: "0.3rem",
     minWidth: "2.5rem",
+    wordBreak: "break-word",
+    maxWidth: "10rem"
   },
 });
 

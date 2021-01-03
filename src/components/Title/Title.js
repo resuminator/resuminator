@@ -13,17 +13,26 @@ import { Box, makeStyles, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    wordBreak: "break-word",
+    width: "100%",
+    textAlign: "center"
+  },
   title: {
     fontFamily: theme.typography.fontFamily.primary,
     color: theme.palette.text.primary,
     fontSize: "3rem",
-    padding: "0.5rem",
+    paddingBottom: "0.5rem",
     letterSpacing: "-0.2rem",
+    padding: "2rem",
   },
   subtitle: {
     fontFamily: theme.typography.fontFamily.primary,
     fontSize: "1.5rem",
+    padding: "2rem",
     fontWeight: 700,
+    paddingTop: 0,
+    paddingBottom: 0
   },
 }));
 

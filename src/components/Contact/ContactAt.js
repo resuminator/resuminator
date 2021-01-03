@@ -15,6 +15,7 @@ import { FiGithub, FiLinkedin, FiMail, FiTwitter } from "react-icons/fi";
 const useStyles = makeStyles((theme) => ({
   root: {
     fontSize: "0.9em",
+    wordWrap: "break-word"
   },
   icon: {
     fontSize: "1.2em",
@@ -80,19 +81,20 @@ function ContactAt({ socialMedia, link }) {
   };
 
   return (
-    <React.Fragment>
+    <Box>
       {link ? (
         <Box
           display="flex"
           justifyItems="space-between"
           p={2}
           className={classes.root}
+          width="100%"
         >
           {setIcon(socialMedia)}
           {getHandleFromLink(socialMedia, link)}
         </Box>
       ) : null}
-    </React.Fragment>
+    </Box>
   );
 }
 

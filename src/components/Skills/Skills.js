@@ -24,6 +24,8 @@ const useStyles = makeStyles({
     marginRight: "0.3rem",
     minWidth: "2.5rem",
     marginTop: "0.5rem",
+    wordBreak: "break-word",
+    maxWidth: "16rem"
   },
 });
 

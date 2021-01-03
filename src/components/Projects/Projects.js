@@ -17,6 +17,10 @@ import ProjectDescription from "./ProjectDescription";
 import ProjectTitle from "./ProjectTitle";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    wordBreak: "break-word",
+    width: "100%"
+  },
   title: {
     fontSize: "1.5rem",
   },
@@ -49,7 +53,7 @@ function Projects() {
         </Typography>
       ) : (
         projects.map((item) => (
-          <Box key={item._id}>
+          <Box key={item._id} className={classes.root}>
             <ProjectTitle
               title={item.projectTitle}
               company={item.company}

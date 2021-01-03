@@ -33,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
   tags: {
     marginRight: "0.2rem",
     marginBottom: "0.2rem",
+    maxWidth: "10rem",
+    wordBreak: "break-word",
   },
   radioGroup: {
     display: "flex",
@@ -107,6 +109,10 @@ function SkillsInput() {
     );
   };
 
+  const truncateName = (name) => {
+    return name.length >= 20 ? name.substring(0, 20) + "..." : name;
+  }
+
   React.useEffect(() => {
     dispatch(updateSkillInfoState(state));
   }, [dispatch, state]);
@@ -161,7 +167,7 @@ function SkillsInput() {
               key={item._id}
               variant="default"
               color="primary"
-              label={item.name}
+              label={truncateName(item.name)}
               size="small"
               className={classes.tags}
               deleteIcon={<TiDelete />}

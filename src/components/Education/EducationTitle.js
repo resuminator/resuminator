@@ -29,7 +29,7 @@ function EducationTitle(props) {
   const classes = useStyles();
   return (
     <TitleBox id="Education-Title">
-      <Box textAlign="left">
+      <Box textAlign="left" width="70%">
         <Typography id="title" variant="h2" className={classes.title}>
           {props.institute}
         </Typography>
@@ -42,7 +42,7 @@ function EducationTitle(props) {
           {props.grade ? `, ${props.grade}/${props.total}` : null}
         </Typography>
       </Box>
-      <Box textAlign="right">
+      <Box textAlign="right" width="30%">
         <Typography id="duration" className={classes.title}>
           {parseDateView(props.duration.start, "year")} - {parseDateView(props.duration.end, "year")}
         </Typography>
