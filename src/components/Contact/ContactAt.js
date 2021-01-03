@@ -10,12 +10,19 @@
 
 import { Box, Link, makeStyles } from "@material-ui/core";
 import React from "react";
-import { FiGithub, FiLinkedin, FiMail, FiTwitter } from "react-icons/fi";
+import {
+  FiGithub,
+  FiGlobe,
+  FiLinkedin,
+  FiMail,
+  FiPhone,
+  FiTwitter,
+} from "react-icons/fi";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     fontSize: "0.9em",
-    wordWrap: "break-word"
+    wordWrap: "break-word",
   },
   icon: {
     fontSize: "1.2em",
@@ -40,6 +47,10 @@ function ContactAt({ socialMedia, link }) {
         return <FiTwitter className={classes.icon} />;
       case "email":
         return <FiMail className={classes.icon} />;
+      case "portfolio":
+        return <FiGlobe className={classes.icon} />;
+      case "phone":
+        return <FiPhone className={classes.icon} />;
       default:
         return null;
     }
@@ -52,6 +63,10 @@ function ContactAt({ socialMedia, link }) {
       .slice(-1)[0];
   };
 
+  const removeLinkSuffix = (link) => {
+    return link.split("//").filter((item) => item !== "").slice(-1)[0]
+  }
+
   const getHandleFromLink = (name, link) => {
     if (name === "email")
       return (
@@ -62,6 +77,25 @@ function ContactAt({ socialMedia, link }) {
           className={classes.links}
         >
           {link || ""}
+        </Link>
+      );
+
+    if (name === "phone")
+      return (
+        <Link href={`tel:${link}`} color="inherit" className={classes.links}>
+          {link || ""}
+        </Link>
+      );
+
+    if (name === "portfolio")
+      return (
+        <Link
+          href={link}
+          color="inherit"
+          target="_blank"
+          className={classes.links}
+        >
+          {removeLinkSuffix(link) || ""}
         </Link>
       );
 

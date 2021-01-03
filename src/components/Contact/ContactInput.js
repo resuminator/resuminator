@@ -17,7 +17,14 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useContext, useState } from "react";
-import { FiGithub, FiLinkedin, FiMail, FiTwitter } from "react-icons/fi";
+import {
+  FiGithub,
+  FiGlobe,
+  FiLinkedin,
+  FiMail,
+  FiPhone,
+  FiTwitter,
+} from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthContext } from "../Auth/AuthContext";
 import { updateUserInfo } from "../Title/title.actions";
@@ -104,6 +111,10 @@ function ContactInput() {
         return "Enter GitHub Profile Link";
       case "twitter":
         return "Enter Twitter Profile Link";
+      case "portfolio":
+        return "Enter Portfolio Link";
+      case "phone":
+        return "Enter Valid Contact Number";
       default:
         return "Enter Social Handle Link";
     }
@@ -149,6 +160,20 @@ function ContactInput() {
           onClick={() => setSelected("github")}
         >
           <FiGithub />
+        </IconButton>
+        <IconButton
+          aria-label="portfolio"
+          color={highlight("portfolio")}
+          onClick={() => setSelected("portfolio")}
+        >
+          <FiGlobe />
+        </IconButton>
+        <IconButton
+          aria-label="phone"
+          color={highlight("phone")}
+          onClick={() => setSelected("phone")}
+        >
+          <FiPhone />
         </IconButton>
       </Box>
       <TextField

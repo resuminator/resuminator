@@ -22,6 +22,8 @@ const initialState = {
     linkedin: "",
     twitter: "",
     github: "",
+    portfolio: "",
+    phone: ""
   },
   avatar: ""
 };
