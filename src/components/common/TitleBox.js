@@ -8,10 +8,18 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Box } from "@material-ui/core";
+import { Box, makeStyles } from "@material-ui/core";
 import React from "react";
 
+const useStyles = makeStyles({
+  root: {
+    wordWrap: "break-word",
+    width: "100%"
+  }
+})
+
 export const TitleBox = ({id, pb, flexDirection, children}) => {
+  const classes = useStyles();
   return (
     <Box
       display="flex"
@@ -20,6 +28,7 @@ export const TitleBox = ({id, pb, flexDirection, children}) => {
       flexDirection={flexDirection || "row"}
       pb={pb || 1}
       id={id}
+      className={classes.root}
     >
       {children}
     </Box>

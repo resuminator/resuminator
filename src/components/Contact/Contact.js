@@ -19,6 +19,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     flexWrap: "wrap",
+    wordBreak: "break-word"
   },
 });
 

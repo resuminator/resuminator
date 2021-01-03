@@ -14,6 +14,7 @@ import React from "react";
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
+    wordBreak: "break-word"
   },
   heading: {
     color: theme.palette.primary.light,

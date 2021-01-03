@@ -18,7 +18,8 @@ html, body #root {
   overflow-y: auto;
   background-color: #fffafa;
   justify-content: space-between;
-  word-wrap: break-word;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 ul {

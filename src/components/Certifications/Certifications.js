@@ -16,6 +16,9 @@ import ColoredLine from "../common/Line";
 import CertificationTitle from "./CertificationTitle";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    wordBreak: "break-word"
+  },
   title: {
     fontSize: "1.5rem",
   },
@@ -33,6 +36,8 @@ function Certifications() {
       justifyContent="flex-start"
       pb={2}
       flexGrow={1}
+      width="100%"
+      className={classes.root}
     >
       <Typography
         id="title"

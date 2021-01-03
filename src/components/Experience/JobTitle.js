@@ -36,6 +36,7 @@ function JobTitle(props) {
         display="flex"
         flexDirection="column"
         justifyContent="flex-start"
+        width="65%"
       >
         <Typography id="title" variant="h2" className={classes.title}>
           {props.company}
@@ -49,7 +50,7 @@ function JobTitle(props) {
           {props.title} {props.addInfo ? `(${props.addInfo})` : null}
         </Typography>
       </Box>
-      <Box id="right" textAlign="right">
+      <Box id="right" textAlign="right" width="35%">
         <Typography
           id="duration"
           variant="h2"
