@@ -48,14 +48,11 @@ export const fetchSettings = (uid) => {
   };
 };
 
-export const createSettings = (uid) => {
-  return (dispatch) => {
-    dispatch(fetchSettingsRequest());
-    return axios
-      .post(`${SERVER}/settings/add`, { uid })
-      .then(() => dispatch(fetchSettings(uid)))
-      .catch((error) => dispatch(fetchSettingsFailure(error)));
-  };
+export const createNewSettingsDocument = (uid) => {
+  return axios
+    .post(`${SERVER}/settings/add`, { uid })
+    .then((response) => response.data)
+    .catch((err) => err.message);
 };
 
 export const updateSettings = (uid, id, payload) => {
