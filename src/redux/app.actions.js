@@ -14,6 +14,7 @@ import { fetchExperience } from "../components/Experience/experience.actions";
 import { fetchProject } from "../components/Projects/project.actions";
 import { fetchSkills } from "../components/Skills/skills.actions";
 import { fetchUser } from "../components/Title/title.actions";
+import { fetchSettings } from "../components/Settings/settings.actions";
 
 export const appInitRequest = () => {
   return {
@@ -37,12 +38,13 @@ export const appInitFailure = (error) => {
 export const initApp = (uid) => async (dispatch) => {
   await Promise.all([
     dispatch(appInitRequest()),
+    dispatch(fetchSettings(uid)),
     dispatch(fetchUser(uid)),
     dispatch(fetchExperience(uid)),
     dispatch(fetchEducation(uid)),
     dispatch(fetchProject(uid)),
     dispatch(fetchCertification(uid)),
-    dispatch(fetchSkills(uid))
+    dispatch(fetchSkills(uid)),
   ])
     .then(() => {
       dispatch(appInitSuccess());
