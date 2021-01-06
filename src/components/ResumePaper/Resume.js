@@ -8,9 +8,10 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
+import { Box, Button, makeStyles, Paper, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { useDispatch, useSelector } from "react-redux";
 import "../../styles/page.css";
 import "../../styles/shadow.css";
 import Certifications from "../Certifications/Certifications";
@@ -19,6 +20,7 @@ import Contact from "../Contact/Contact";
 import Education from "../Education/Education";
 import Experience from "../Experience/Experience";
 import Projects from "../Projects/Projects";
+import { updateSettings, updateSettingsState } from "../Settings/settings.actions";
 import Skills from "../Skills/Skills";
 import Title from "../Title/Title";
 
@@ -43,46 +45,87 @@ const useStyles = makeStyles((theme) => ({
       borderColor: theme.palette.secondary.light,
     },
   },
+  btn: {
+    textTransform: "none",
+    fontFamily: "Karla",
+    fontSize: "1rem",
+    borderRadius: 0
+  }
 }));
 
-function Resume({ element }) {
-  const userLayout = {
-    left: [
-      <Experience key="exp" />,
-      <Education key="edu" />,
-      <Certifications key="certs" />,
-    ],
-    right: [<Projects key="proj" />, <Skills key="skill" />],
-  };
+const findComponent = (key) => {
+  switch (key) {
+    case "exp":
+      return <Experience key="exp" />;
+    case "edu":
+      return <Education key="edu" />;
+    case "certs":
+      return <Certifications key="certs" />;
+    case "proj":
+      return <Projects key="proj" />;
+    case "skill":
+      return <Skills key="skill" />;
+    default:
+      return <React.Fragment />;
+  }
+};
 
+const componentArray = (keysArray) => {
+  return keysArray.map((item) => findComponent(item));
+}
+
+const keysArray = (componentArray) => {
+  return componentArray.map((item) => item.key)
+};
+
+function Resume({ element }) {
   const classes = useStyles();
-  const [children, setChildren] = useState(userLayout);
+  const dispatch = useDispatch();
+  const storeState = useSelector((state) => state.settings);
+  const app = useSelector((state) => state.app);
+  const [state, setState] = useState(storeState.modules);
+  const [unsaved, setUnsaved] = useState(false);
   const leftWide = "60%";
   const rightWide = "40%";
 
+  React.useEffect(() => {
+    if (!app.init) {
+      setState(storeState.modules);
+    }
+  }, [app, storeState.modules]);
+
+  const handleSave = () => {
+    setUnsaved(false);
+    dispatch(updateSettings(storeState.uid, storeState._id, {modules: storeState.modules}));
+  }
+  
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
+    setUnsaved(true);
     const sourceId = result.source.droppableId;
     const destinationId = result.destination.droppableId;
 
     if (sourceId === destinationId) {
-      const parts = Array.from(children[sourceId]);
+      const parts = Array.from(componentArray(state[sourceId]));
       const [reorderedPart] = parts.splice(result.source.index, 1);
       parts.splice(result.destination.index, 0, reorderedPart);
 
-      setChildren({ ...children, [sourceId]: parts });
+      setState({ ...state, [sourceId]: keysArray(parts) });
     } else {
-      const sourceParts = Array.from(children[sourceId]);
-      const destinationParts = Array.from(children[destinationId]);
+      const sourceParts = Array.from(componentArray(state[sourceId]));
+      const destinationParts = Array.from(componentArray(state[destinationId]));
       const [reorderedPart] = sourceParts.splice(result.source.index, 1);
       destinationParts.splice(result.destination.index, 0, reorderedPart);
-
-      setChildren({
-        [sourceId]: sourceParts,
-        [destinationId]: destinationParts,
+      setState({
+        [sourceId]: keysArray(sourceParts),
+        [destinationId]: keysArray(destinationParts),
       });
     }
   };
+
+  React.useEffect(() => {
+    dispatch(updateSettingsState({ modules: state }));
+  }, [dispatch, state]);
 
   return (
     <Box
@@ -96,6 +139,7 @@ function Resume({ element }) {
       zIndex="100"
       position="relative"
     >
+      {unsaved ? <Button variant="contained" color="primary" onClick={handleSave} disableElevation className={classes.btn}>Save Layout</Button> : null}
       <Box id="printable-paper" ref={element}>
         <Title />
         <Contact />
@@ -114,7 +158,7 @@ function Resume({ element }) {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {children.left.map((item, index) => (
+                  {componentArray(state.left).map((item, index) => (
                     <Draggable
                       key={item.key}
                       draggableId={item.key}
@@ -151,7 +195,7 @@ function Resume({ element }) {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {children.right.map((item, index) => (
+                  {componentArray(state.right).map((item, index) => (
                     <Draggable
                       key={item.key}
                       draggableId={item.key}
