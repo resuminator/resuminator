@@ -1,4 +1,3 @@
-import { deleteItem } from "../utils";
 import { SKILL_INFO } from "../actionTypes";
 
 const initialState = {
@@ -14,9 +13,6 @@ export const skillsReducer = (state = initialState, action) => {
       return action.payload !== null
         ? { ...state, skills: action.payload }
         : state;
-    }
-    case SKILL_INFO.DELETE: {
-      return deleteItem(state, action);
     }
     case SKILL_INFO.DISPLAY_TYPE: {
       return { ...state, display_type: action.payload };
