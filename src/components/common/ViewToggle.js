@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateSettings } from "../Settings/settings.actions";
 import SwitchButton from "./SwitchButton";
 
-const ViewToggle = ({name, show, setShow }) => {
+const ViewToggle = ({ name, show, setShow }) => {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
   const modules = settings.modules;
@@ -20,10 +20,16 @@ const ViewToggle = ({name, show, setShow }) => {
       );
       setShow(false);
     } else {
-      const newModules = {
-        ...modules,
-        left: [...modules["left"], e.target.name],
-      };
+      const newModules =
+        modules["left"].length >= 3
+          ? {
+              ...modules,
+              right: [...modules["right"], e.target.name],
+            }
+          : {
+              ...modules,
+              left: [...modules["left"], e.target.name],
+            };
       dispatch(
         updateSettings(settings.uid, settings._id, { modules: newModules })
       );
