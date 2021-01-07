@@ -9,10 +9,12 @@ const useStyles = makeStyles((theme) => ({
   },
   message: {
     color: theme.palette.contrast.light,
+    "@media (min-width:1280px)": {
+      margin: "0 4rem 0 4rem",
+    },
+    margin: "0 2rem 0 2rem"
   },
   btn: {
-    float: "right",
-    right: "4rem",
     color: theme.palette.secondary.light,
   },
 }));
@@ -25,6 +27,7 @@ const Ticker = () => {
     <React.Fragment>
       {show ? (
         <Box
+          display="flex"
           justifyContent="center"
           alignItems="center"
           textAlign="center"
@@ -33,14 +36,14 @@ const Ticker = () => {
         >
           <Typography variant="body1" className={classes.message}>
             {tickerMessage}
-            <IconButton
-              onClick={() => setShow(false)}
-              className={classes.btn}
-              size="small"
-            >
-              <IoMdClose />
-            </IconButton>
           </Typography>
+          <IconButton
+            onClick={() => setShow(false)}
+            className={classes.btn}
+            size="small"
+          >
+            <IoMdClose />
+          </IconButton>
         </Box>
       ) : null}
     </React.Fragment>
