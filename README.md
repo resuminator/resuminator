@@ -17,4 +17,4 @@ Resuminator allows you to build beautiful single-page resumes; without the hassl
 *  __Auto Skill Classification__: Keep on typing the skills you know, Resuminator automatically classifies them into categories for easy identification by the recruiter.
 
 ## ⭐ Resuminator Early Access Membership
-Sign-up for Resuminator Early Access Program on https://resuminator.gtsb.io for getting insights and testing early release features.
+Sign-up for Resuminator Early Access Program on https://resuminator.in for getting insights and testing early release features.
