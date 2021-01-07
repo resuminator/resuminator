@@ -25,6 +25,13 @@ const useStyles = makeStyles((theme) => ({
   exp: {
     width: "100%",
   },
+  tags: {
+    marginRight: "0.3rem",
+    minWidth: "2.5rem",
+    marginBottom: "0.5rem",
+    wordBreak: "break-word",
+    maxWidth: "10rem"
+  },
 }));
 
 function Experience() {
@@ -62,7 +69,7 @@ function Experience() {
               location={item.location}
             />
             <JobDescription desc={item.description} workLink={item.workLink} />
-            {showTags && item.tags.length ? <TagChips tags={item.tags}/> : null}
+            {showTags && item.tags.length ? <TagChips tags={item.tags} className={classes.tags}/> : null}
           </Box>
         ))
       )}
