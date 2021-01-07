@@ -93,6 +93,21 @@ function ProjectInput() {
     ]);
   };
 
+  const handleTagsInput = (e) => {
+    setChanged(true);
+    const value = e.target.value;
+    const newTags = value !== "" ? value.split(",") : [];
+
+    setState((prevState) => [
+      ...prevState.slice(0, currIndex),
+      {
+        ...prevState[currIndex],
+        tags: newTags,
+      },
+      ...prevState.slice(currIndex + 1),
+    ]);
+  };
+
   React.useEffect(() => {
     dispatch(updateProjectState(state));
   }, [dispatch, state]);
@@ -161,6 +176,17 @@ function ProjectInput() {
                 placeholder="Github/Website/Blog link"
                 className={classes.TextField}
                 onChange={handleChange}
+              />
+              <TextField
+                variant="outlined"
+                color="secondary"
+                label="Tags"
+                name="tags"
+                placeholder="Separate tags by commas"
+                required
+                value={item.tags.toString()}
+                className={classes.TextField}
+                onChange={handleTagsInput}
               />
               <CardControls>
                 <RemoveButton onClick={() => handleDelete(item._id)} />

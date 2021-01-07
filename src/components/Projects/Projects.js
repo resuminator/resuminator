@@ -13,6 +13,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { checkEmptyState } from "../../utils/Helpers";
 import ColoredLine from "../common/Line";
+import { TagChips } from "../common/TagChips";
 import ProjectDescription from "./ProjectDescription";
 import ProjectTitle from "./ProjectTitle";
 
@@ -23,6 +24,13 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: "1.5rem",
+  },
+  tags: {
+    marginRight: "0.3rem",
+    minWidth: "2.5rem",
+    marginBottom: "0.5rem",
+    wordBreak: "break-word",
+    maxWidth: "10rem"
   },
 }));
 
@@ -61,6 +69,7 @@ function Projects() {
               projectLink={item.projectLink}
             />
             <ProjectDescription desc={item.description} />
+            {item.tags.length ? <TagChips tags={item.tags} className={classes.tags}/> : null}
           </Box>
         ))
       )}
