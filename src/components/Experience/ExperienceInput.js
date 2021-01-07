@@ -126,7 +126,8 @@ function ExperienceInput() {
 
   const handleTagsInput = (e) => {
     setChanged(true);
-    const newTags = e.target.value.split(",");
+    const value = e.target.value;
+    const newTags = value !== "" ? value.split(",") : [];
 
     setState((prevState) => [
       ...prevState.slice(0, currIndex),
