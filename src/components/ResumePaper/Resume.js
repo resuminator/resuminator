@@ -20,7 +20,10 @@ import Contact from "../Contact/Contact";
 import Education from "../Education/Education";
 import Experience from "../Experience/Experience";
 import Projects from "../Projects/Projects";
-import { updateSettings, updateSettingsState } from "../Settings/settings.actions";
+import {
+  updateSettings,
+  updateSettingsState,
+} from "../Settings/settings.actions";
 import Skills from "../Skills/Skills";
 import Title from "../Title/Title";
 
@@ -49,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "none",
     fontFamily: "Karla",
     fontSize: "1rem",
-    borderRadius: 0
-  }
+    borderRadius: 0,
+  },
 }));
 
 const findComponent = (key) => {
@@ -72,10 +75,10 @@ const findComponent = (key) => {
 
 const componentArray = (keysArray) => {
   return keysArray.map((item) => findComponent(item));
-}
+};
 
 const keysArray = (componentArray) => {
-  return componentArray.map((item) => item.key)
+  return componentArray.map((item) => item.key);
 };
 
 function Resume({ element }) {
@@ -96,13 +99,17 @@ function Resume({ element }) {
 
   React.useEffect(() => {
     setState(storeState.modules);
-  }, [storeState.loading, storeState.modules])
+  }, [storeState.loading, storeState.modules]);
 
   const handleSave = () => {
     setUnsaved(false);
-    dispatch(updateSettings(storeState.uid, storeState._id, {modules: storeState.modules}));
-  }
-  
+    dispatch(
+      updateSettings(storeState.uid, storeState._id, {
+        modules: storeState.modules,
+      })
+    );
+  };
+
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
     setUnsaved(true);
@@ -143,7 +150,17 @@ function Resume({ element }) {
       zIndex="100"
       position="relative"
     >
-      {unsaved ? <Button variant="contained" color="primary" onClick={handleSave} disableElevation className={classes.btn}>Save Layout</Button> : null}
+      {unsaved ? (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSave}
+          disableElevation
+          className={classes.btn}
+        >
+          Save Layout
+        </Button>
+      ) : null}
       <Box id="printable-paper" ref={element}>
         <Title />
         <Contact />

@@ -1,4 +1,3 @@
-import { Box } from "@material-ui/core";
 /*
  * Copyright Vivek Nigam, 2020
  * Licensed under the GNU General Public License, Version 3.0 (the "License");
@@ -9,6 +8,7 @@ import { Box } from "@material-ui/core";
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
+import { Box } from "@material-ui/core";
 import React from "react";
 
 const CardControls = ({ children }) => {
