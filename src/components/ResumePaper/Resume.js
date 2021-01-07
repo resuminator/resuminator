@@ -94,6 +94,10 @@ function Resume({ element }) {
     }
   }, [app, storeState.modules]);
 
+  React.useEffect(() => {
+    setState(storeState.modules);
+  }, [storeState.loading, storeState.modules])
+
   const handleSave = () => {
     setUnsaved(false);
     dispatch(updateSettings(storeState.uid, storeState._id, {modules: storeState.modules}));

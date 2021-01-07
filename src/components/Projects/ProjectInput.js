@@ -20,6 +20,7 @@ import InputCardContent from "../common/InputCardContent";
 import { InputHeader } from "../common/InputHeader";
 import Loader from "../common/Loader";
 import RemoveButton from "../common/RemoveButton";
+import ViewToggle from "../common/ViewToggle";
 import {
   addProject,
   deleteProject,
@@ -50,10 +51,16 @@ function ProjectInput() {
   const [currIndex, setCurrIndex] = useState(0);
   const [open, setOpen] = useState(false);
   const [change, setChanged] = useState(false);
+  const modules = useSelector((state) => state.settings.modules);
+  const combinedList = modules.left.concat(modules.right);
+  const [show, setShow] = useState(combinedList.includes("proj"));
 
   React.useEffect(() => {
-    if (!app.init) setState(storeState);
-  }, [app, storeState]);
+    if (!app.init) {
+      setState(storeState);
+      setShow(combinedList.includes("proj"));
+    }
+  }, [app, storeState, combinedList]);
 
   React.useEffect(() => {
     setState(storeState);
@@ -97,6 +104,7 @@ function ProjectInput() {
         subtitle="Add details about your top 2/3 projects which align with your job
         profile!"
       />
+      <ViewToggle name="proj" setShow={setShow} show={show}/>
       {app.loading ? (
         <Loader />
       ) : (

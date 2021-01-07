@@ -23,6 +23,7 @@ import InputCardContent from "../common/InputCardContent";
 import { InputHeader } from "../common/InputHeader";
 import Loader from "../common/Loader";
 import RemoveButton from "../common/RemoveButton";
+import ViewToggle from "../common/ViewToggle";
 import {
   addEducation,
   deleteEducation,
@@ -54,10 +55,16 @@ function EducationInput() {
   const [currIndex, setCurrIndex] = useState(0);
   const [open, setOpen] = useState(false);
   const [change, setChanged] = useState(false);
+  const modules = useSelector((state) => state.settings.modules);
+  const combinedList = modules.left.concat(modules.right);
+  const [show, setShow] = useState(combinedList.includes("edu"));
 
   React.useEffect(() => {
-    if (!app.init) setState(storeState);
-  }, [app, storeState]);
+    if (!app.init) {
+      setState(storeState);
+      setShow(combinedList.includes("edu"));
+    }
+  }, [app, storeState, combinedList]);
 
   React.useEffect(() => {
     setState(storeState);
@@ -127,6 +134,7 @@ function EducationInput() {
         subtitle="Add your college/school details along with any other information about
         it."
       />
+      <ViewToggle name="edu" setShow={setShow} show={show}/>
       {app.loading ? (
         <Loader />
       ) : (
