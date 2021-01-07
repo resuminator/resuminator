@@ -23,6 +23,7 @@ import InputCardContent from "../common/InputCardContent";
 import { InputHeader } from "../common/InputHeader";
 import Loader from "../common/Loader";
 import RemoveButton from "../common/RemoveButton";
+import ViewToggle from "../common/ViewToggle";
 import {
   addCertification,
   deleteCertification,
@@ -55,10 +56,16 @@ function CertificationInput() {
   const [currIndex, setCurrIndex] = useState(0);
   const [open, setOpen] = useState(false);
   const [change, setChanged] = useState(false);
+  const modules = useSelector((state) => state.settings.modules);
+  const combinedList = modules.left.concat(modules.right);
+  const [show, setShow] = useState(combinedList.includes("certs"));
 
   React.useEffect(() => {
-    if (!app.init) setState(storeState);
-  }, [app, storeState]);
+    if (!app.init) {
+      setState(storeState);
+      setShow(combinedList.includes("certs"));
+    }
+  }, [app, storeState, combinedList]);
 
   React.useEffect(() => {
     setState(storeState);
@@ -127,6 +134,7 @@ function CertificationInput() {
         heading="Got any certifications?"
         subtitle="Add your professional certifications with certification ID and/or Link"
       />
+      <ViewToggle name="certs" show={show} setShow={setShow}/>
       {app.loading ? (
         <Loader />
       ) : (

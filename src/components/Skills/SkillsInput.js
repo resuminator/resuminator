@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthContext } from "../Auth/AuthContext";
 import { InputHeader } from "../common/InputHeader";
 import Loader from "../common/Loader";
+import ViewToggle from "../common/ViewToggle";
 import {
   updateSkillInfoState,
   switchDisplayType,
@@ -54,10 +55,16 @@ function SkillsInput() {
   const storeState = useSelector((state) => state.skillInfo.skills);
   const [state, setState] = useState(storeState);
   const displayType = useSelector((state) => state.skillInfo.display_type);
+  const modules = useSelector((state) => state.settings.modules);
+  const combinedList = modules.left.concat(modules.right);
+  const [show, setShow] = useState(combinedList.includes("certs"));
 
   React.useEffect(() => {
-    if (!app.init) setState(storeState);
-  }, [app, storeState]);
+    if (!app.init) {
+      setState(storeState);
+      setShow(combinedList.includes("certs"));
+    }
+  }, [app, storeState, combinedList]);
 
   React.useEffect(() => {
     setState(storeState);
@@ -123,6 +130,7 @@ function SkillsInput() {
         heading="Want to show-off some skills?"
         subtitle="Enter skills you remember (sparated by commas). We'll categorise them on your resume"
       />
+      <ViewToggle name="skill" show={show} setShow={setShow} />
       <FormControl component="fieldset">
         <FormLabel component="legend" className={classes.FormControl}>
           Display Type

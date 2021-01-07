@@ -23,6 +23,7 @@ import InputCardContent from "../common/InputCardContent";
 import { InputHeader } from "../common/InputHeader";
 import Loader from "../common/Loader";
 import RemoveButton from "../common/RemoveButton";
+import ViewToggle from "../common/ViewToggle";
 import {
   addExperience,
   deleteExperience,
@@ -55,10 +56,16 @@ function ExperienceInput() {
   const [state, setState] = useState(storeState);
   const [open, setOpen] = useState(false);
   const [change, setChanged] = useState(false);
+  const modules = useSelector((state) => state.settings.modules);
+  const combinedList = modules.left.concat(modules.right);
+  const [show, setShow] = useState(combinedList.includes("exp"));
 
   React.useEffect(() => {
-    if (!app.init) setState(storeState);
-  }, [app, storeState]);
+    if (!app.init) {
+      setState(storeState);
+      setShow(combinedList.includes("exp"));
+    }
+  }, [app, storeState, combinedList]);
 
   React.useEffect(() => {
     setState(storeState);
@@ -128,6 +135,7 @@ function ExperienceInput() {
         subtitle="Don't worry, add anything which you feel relevant for your job
         application"
       />
+      <ViewToggle setShow={setShow} show={show} name="exp" />
       {app.loading ? (
         <Loader />
       ) : (
