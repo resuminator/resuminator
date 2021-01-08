@@ -118,6 +118,7 @@ const NewBetaUser = (props) => {
     const [uid, password] = getCredentials(props.location.search);
 
     localStorage.setItem("newUser", true);
+    localStorage.setItem("firstTime", true);
     setLoading(true);
 
     processNewUser(uid, password, passwordPayload.password)

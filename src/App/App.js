@@ -20,12 +20,9 @@ import Routes from "./Routes";
 import WelcomeDialog from "./WelcomeDialog";
 
 function App() {
-  const savedState = localStorage.getItem("loggedIn");
-  const newUser = localStorage.getItem("newUser");
+  const savedState = JSON.parse(localStorage.getItem("loggedIn"));
+  const newUser = JSON.parse(localStorage.getItem("newUser"));
   const [loggedIn, setLoggedIn] = useState(savedState);
-  const [openAlert, setOpenAlert] = useState(
-    process.env.NODE_ENV === "production"
-  );
   const auth = useContext(AuthContext);
   const dispatch = useDispatch();
 
@@ -39,19 +36,13 @@ function App() {
     }
   }, [dispatch, loggedIn, auth.uid, newUser]);
 
-  const handleClose = () => setOpenAlert(false);
-
   return (
     <Router>
       {!loggedIn || newUser ? (
         <Routes />
       ) : (
         <ProtectedRoutes>
-          <WelcomeDialog
-            open={openAlert}
-            onClick={handleClose}
-            onClose={handleClose}
-          />
+          <WelcomeDialog />
         </ProtectedRoutes>
       )}
     </Router>

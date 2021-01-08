@@ -21,6 +21,7 @@ import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   title: {
+    fontSize: "2rem",
     fontWeight: 700,
     letterSpacing: "-0.05rem",
   },
@@ -36,10 +37,11 @@ const useStyles = makeStyles((theme) => ({
 
 export const AlertDialog = ({ title, message, open, onClose, onClick, buttonText }) => {
   const classes = useStyles();
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle id="dialog-title">
-        <Typography variant="h5" className={classes.title} color="primary">
+        <Typography variant="body1" className={classes.title} color="primary">
           {title}
         </Typography>
       </DialogTitle>
@@ -47,7 +49,6 @@ export const AlertDialog = ({ title, message, open, onClose, onClick, buttonText
         <Typography
           variant="body1"
           className={classes.message}
-          font
           gutterBottom
         >
           {message}

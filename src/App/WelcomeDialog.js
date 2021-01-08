@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { AlertDialog } from "../components/common/AlertDialog";
 import { welcomeMessage } from "./Messages";
 
-const WelcomeDialog = ({ open, onClick, onClose }) => {
+const WelcomeDialog = () => {
   const message = welcomeMessage;
+  const [openAlert, setOpenAlert] = useState(
+    JSON.parse(localStorage.getItem("firstTime")) || false
+  );
+
+  const handleClose = () => {
+    setOpenAlert(false);
+    localStorage.removeItem("firstTime");
+  };
+  
   return (
     <AlertDialog
       title={message.title}
       message={message.message}
-      open={open}
-      onClick={onClick}
-      onClose={onClose}
+      open={openAlert}
+      onClick={handleClose}
+      onClose={handleClose}
       buttonText={message.actionText}
     />
   );
