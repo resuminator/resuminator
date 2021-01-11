@@ -16,4 +16,4 @@ export const welcomeMessage = {
   actionText: "Got it! 👍🏻",
 };
 
-export const tickerMessage = "🌟 New: Add tags to Experiences and Projects. Try it out!"
+export const tickerMessage = "👀 Updated: Toggle resume sections in user settings"
