@@ -85,6 +85,7 @@ function EducationInput() {
   };
 
   const handleCheckbox = (resetDate) => {
+    setChanged(true);
     setState((prevState) => [
       ...prevState.slice(0, currIndex),
       {
@@ -185,7 +186,7 @@ function EducationInput() {
                 label="Degree"
                 name="degree"
                 color="secondary"
-                placeholder="Degree/High School/10th/12th etc."
+                placeholder="Degree/High School/School Board etc."
                 value={item.degree}
                 className={classes.TextField}
                 onChange={handleChange}
