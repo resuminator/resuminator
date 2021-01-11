@@ -15,10 +15,11 @@ import {
   makeStyles,
   Menu,
   MenuItem,
-  Typography,
+  Typography
 } from "@material-ui/core";
 import React from "react";
-import { FiLogOut, FiUser } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
+import { GrUserSettings } from "react-icons/gr";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import firebaseSDK from "../../Services/firebaseSDK";
@@ -83,8 +84,8 @@ const UserMenu = ({ handleClick, handleClose, anchorEl }) => {
           </Typography>
         </Box>
         <MenuItem onClick={redirectToAccount}>
-          <FiUser className={classes.menuIcons} />
-          My account
+          <GrUserSettings className={classes.menuIcons} />
+          User Settings
         </MenuItem>
         <MenuItem onClick={handleSignOut}>
           <FiLogOut className={classes.menuIcons} />

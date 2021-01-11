@@ -26,6 +26,7 @@ const useStyles = makeStyles({
     fontSize: "1.5rem",
     color: grey[900],
     letterSpacing: "-0.05rem",
+    fontWeight: 700,
   },
   TextField: {
     marginTop: "0.2rem",

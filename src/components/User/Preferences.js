@@ -11,6 +11,7 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import React from "react";
+import ModuleToggle from "../Settings/ModuleToggle";
 
 const useStyles = makeStyles({
   h3: {
@@ -28,13 +29,15 @@ const useStyles = makeStyles({
     color: grey[600],
   },
   textLabel: {
-    fontFamily: 'Roboto',
     color: grey[900],
-    fontSize: "1rem",
+    fontSize: "1.2rem",
+    marginTop: "1rem",
+    fontWeight: 700,
+    letterSpacing: "-0.02rem",
   },
 });
 
-const Billing = () => {
+const Preferences = () => {
   const classes = useStyles();
 
   return (
@@ -47,26 +50,18 @@ const Billing = () => {
       pt={4}
     >
       <Typography variant="h3" className={classes.h3}>
-        Billing
+        Preferences
+      </Typography>
+      <Typography variant="body1" className={classes.textLabel}>
+        Resume Sections
       </Typography>
       <Typography variant="subtitle1" className={classes.subtitle}>
-        You can see your current plan and billing info below.
+        Select which sections you would like to see on your Resume. Your data
+        won't be affected.
       </Typography>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        width="100%"
-      >
-        <Typography variant="body1" className={classes.textLabel}>
-          Resuminator Early Access Member
-        </Typography>
-        <Typography variant="subtitle1" className={classes.textLabel}>
-          FREE - ₹ 0.00
-        </Typography>
-      </Box>
+      <ModuleToggle />
     </Box>
   );
 };
 
-export default Billing;
+export default Preferences;
