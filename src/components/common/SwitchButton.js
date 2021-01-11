@@ -14,6 +14,7 @@ import {
   Switch,
   Typography,
 } from "@material-ui/core";
+import { grey } from "@material-ui/core/colors";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "1rem",
     letterSpacing: "-0.01rem",
     fontFamily: "Roboto",
-    color: theme.palette.text.secondary,
+    color: grey[800],
   },
 }));
 

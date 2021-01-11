@@ -18,17 +18,19 @@ const useStyles = makeStyles({
     fontFamily: "Karla",
     fontSize: "1.5rem",
     letterSpacing: "-0.05rem",
+    fontWeight: 700,
+    color: grey[900],
   },
   subtitle: {
     fontFamily: "Roboto",
-    marginTop: "0.8rem",
+    margin: "0.4rem 0 0.8rem 0",
     fontSize: "0.9rem",
     color: grey[600],
   },
   textLabel: {
+    fontFamily: 'Roboto',
     color: grey[900],
     fontSize: "1rem",
-    marginTop: "1rem",
   },
 });
 
@@ -42,6 +44,7 @@ const Billing = () => {
       display="flex"
       flexDirection="column"
       width="100%"
+      pt={4}
     >
       <Typography variant="h3" className={classes.h3}>
         Billing

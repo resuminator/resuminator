@@ -15,6 +15,7 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 import AvatarOverview from "./AvatarOverview";
 import Billing from "./Billing";
 import PersonalDetails from "./PersonalDetails";
+import Preferences from "./Preferences";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "1rem",
       marginBottom: "10rem",
     },
-  }
+  },
 }))
 
 const UserAccount = () => {
@@ -35,7 +36,6 @@ const UserAccount = () => {
     <Box
       alignItems="flex-start"
       justifyContent="left"
-      height="100%"
       display="flex"
       m={36}
       mt={4}
@@ -45,13 +45,13 @@ const UserAccount = () => {
       {width >= 1024 ? <AvatarOverview user={userInfo} /> : null}
       <Box
         alignItems="flex-start"
-        height="100%"
         display="flex"
         flexDirection="column"
         width="26rem"
       >
         <PersonalDetails user={userInfo} />
         <Billing user={userInfo} />
+        <Preferences user={userInfo} />
       </Box>
     </Box>
   );

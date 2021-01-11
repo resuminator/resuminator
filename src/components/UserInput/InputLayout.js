@@ -10,6 +10,7 @@
 
 import { Box } from "@material-ui/core";
 import React from "react";
+import { useSelector } from "react-redux";
 import "../../styles/noscroll.css";
 import CertificationInput from "../Certifications/CertificationInput";
 import ContactInput from "../Contact/ContactInput";
@@ -20,6 +21,14 @@ import SkillsInput from "../Skills/SkillsInput";
 import TitleInput from "../Title/TitleInput";
 
 function InputLayout() {
+  const settings = useSelector((state) => state.settings);
+  const modules = settings.modules;
+  const combinedList = modules.left.concat(modules.right);
+
+  const showInput = (name) => {
+    return combinedList.includes(name);
+  }
+
   return (
     <Box
       display="flex"
@@ -30,11 +39,11 @@ function InputLayout() {
     >
       <TitleInput />
       <ContactInput />
-      <ExperienceInput />
-      <EducationInput />
-      <ProjectInput />
-      <CertificationInput />
-      <SkillsInput />
+      {showInput("exp") ? <ExperienceInput /> : null}
+      {showInput("edu") ? <EducationInput /> : null}
+      {showInput("proj") ? <ProjectInput /> : null}
+      {showInput("certs") ? <CertificationInput />: null}
+      {showInput("skill") ? <SkillsInput /> : null}
     </Box>
   );
 }
