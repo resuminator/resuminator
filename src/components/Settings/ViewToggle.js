@@ -10,10 +10,10 @@
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateSettings } from "../Settings/settings.actions";
-import SwitchButton from "./SwitchButton";
+import { updateSettings } from "./settings.actions";
+import SwitchButton from "../common/SwitchButton";
 
-const ViewToggle = ({ name, show, setShow }) => {
+const ViewToggle = ({ name, label, show }) => {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
   const modules = settings.modules;
@@ -28,7 +28,6 @@ const ViewToggle = ({ name, show, setShow }) => {
       dispatch(
         updateSettings(settings.uid, settings._id, { modules: newModules })
       );
-      setShow(false);
     } else {
       const newModules =
         modules["left"].length >= 3
@@ -43,11 +42,10 @@ const ViewToggle = ({ name, show, setShow }) => {
       dispatch(
         updateSettings(settings.uid, settings._id, { modules: newModules })
       );
-      setShow(true);
     }
   };
 
-  return <SwitchButton name={name} onChange={handleView} checked={show} />;
+  return <SwitchButton name={name} label={label} onChange={handleView} checked={show} />;
 };
 
 export default ViewToggle;
