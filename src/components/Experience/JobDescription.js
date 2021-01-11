@@ -25,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: theme.typography.fontFamily.secondary,
     paddingLeft: "1rem",
     fontWeight: 400,
+    float: "right",
+    textDecoration: "underline"
   },
 }));
 

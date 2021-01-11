@@ -86,6 +86,7 @@ function ExperienceInput() {
   };
 
   const handleCheckbox = (resetDate) => {
+    setChanged(true);
     setState((prevState) => [
       ...prevState.slice(0, currIndex),
       {
@@ -241,7 +242,7 @@ function ExperienceInput() {
                 color="secondary"
                 label="Description"
                 name="description"
-                placeholder="* Start writing in bullet points..."
+                placeholder="Prefix sentences with `* ` to create bullet points"
                 multiline
                 required
                 type="text"
