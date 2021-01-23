@@ -27,6 +27,7 @@ const CustomDatePicker = ({ value, label, name, views, onChange, disabled, class
       disabled={disabled}
       onChange={onChange}
       className={className}
+      autoOk={true}
     />
   );
 };
