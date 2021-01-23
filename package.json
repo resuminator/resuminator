@@ -10,7 +10,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "date-fns": "^2.16.1",
     "firebase": "^8.2.1",
     "framer-motion": "^2.9.5",
