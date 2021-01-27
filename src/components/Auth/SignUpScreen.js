@@ -210,7 +210,7 @@ const SignUpScreen = () => {
       </Box>
       <Typography variant="subtitle2" className={classes.subtitle}>
         Already have an account?{" "}
-        <a href="/signup" className={classes.buttonText}>
+        <a href="/" className={classes.buttonText}>
           Log in!
         </a>
       </Typography>
