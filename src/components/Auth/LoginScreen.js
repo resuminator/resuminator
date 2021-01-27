@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme) => ({
     alignContent: "center",
     justifyContent: "space-around",
   },
+  subtitle: {
+    margin: "0rem 0",
+  },
 }));
 
 const LoginScreen = () => {
@@ -168,6 +171,12 @@ const LoginScreen = () => {
           )}
         </Button>
       </Box>
+      <Typography variant="subtitle2" className={classes.subtitle}>
+        Don't have an account yet?{" "}
+        <a href="/signup" className={classes.buttonText}>
+          Create a new one!
+        </a>
+      </Typography>
       <Typography className={classes.error} variant="body2">
         {error}
       </Typography>
