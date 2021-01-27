@@ -13,12 +13,10 @@ import {
   Button,
   makeStyles,
   TextField,
-  Typography,
+  Typography
 } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
-import { AnimateSharedLayout, motion } from "framer-motion";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import ServerCheck from "../../App/ServerCheck";
 import Loader from "../common/Loader";
 import { signUpUser } from "./AuthAPIs";
