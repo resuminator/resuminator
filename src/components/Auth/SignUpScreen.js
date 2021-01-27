@@ -11,16 +11,15 @@
 import {
   Box,
   Button,
-  Link,
   makeStyles,
   TextField,
-  Typography,
+  Typography
 } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import React, { useState } from "react";
 import ServerCheck from "../../App/ServerCheck";
-import firebaseSDK from "../../Services/firebaseSDK";
 import Loader from "../common/Loader";
+import { signUpUser } from "./AuthAPIs";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -31,12 +30,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.dark,
   },
   greeting: {
-    fontSize: "1.5rem",
+    fontSize: "1.3rem",
     fontFamily: "Karla",
     letterSpacing: "-0.08rem",
     color: theme.palette.grey[900],
     padding: "1rem",
-    paddingBottom: "2rem",
   },
   TextField: {
     marginTop: "1rem",
@@ -74,11 +72,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginScreen = () => {
+const SignUpScreen = () => {
   const classes = useStyles();
-  const [userPayload, setUserPayload] = useState({ email: "", password: "" });
+  const [userPayload, setUserPayload] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [completed, setCompleted] = useState(false);
+  const MIN_LENGTH = 8;
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -94,16 +98,29 @@ const LoginScreen = () => {
     e.preventDefault();
     if (!(userPayload.email && userPayload.password))
       return setError("Please enter your email/password!");
+    if (!userPayload.password) return setError("Please enter new password!");
+    if (!userPayload.confirmPassword)
+      return setError("Please confirm new password!");
+    if (userPayload.password.length < MIN_LENGTH)
+      return setError("Password should atleast be 8 characters");
+    if (userPayload.password !== userPayload.confirmPassword)
+      return setError("Passwords don't match, please check again.");
 
+    localStorage.setItem("newUser", true);
+    localStorage.setItem("firstTime", true);
     setLoading(true);
-    firebaseSDK
-      .auth()
-      .signInWithEmailAndPassword(userPayload.email, userPayload.password)
-      .then(() => localStorage.setItem("loggedIn", true))
-      .then(() => setLoading(false))
-      .catch(() => {
+
+    signUpUser(userPayload.email, userPayload.password)
+      .then(() => {
         setLoading(false);
-        setError("Incorrect Email or Password");
+        localStorage.setItem("loggedIn", true);
+        localStorage.removeItem("newUser");
+        setCompleted(true);
+      })
+      .catch((error) => {
+        setLoading(false);
+        localStorage.removeItem("newUser");
+        setError(error.message);
       });
   };
 
@@ -124,9 +141,9 @@ const LoginScreen = () => {
           Build an awesome single-page resume today!
         </Typography>
       </Box>
-      <Box m={3} display="flex" flexDirection="column" width="16rem">
+      <Box m={2} mb={1} display="flex" flexDirection="column" width="16rem">
         <Typography variant="h3" className={classes.greeting}>
-          Hello, nice to see you!
+          Let's create a new account! 
         </Typography>
         <TextField
           label="Email"
@@ -152,29 +169,49 @@ const LoginScreen = () => {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        <Link href="/resetpassword">
-          <Typography variant="subtitle2" className={classes.buttonText}>
-            Forgot Password?
-          </Typography>
-        </Link>
-        <Button
-          variant="contained"
-          disableElevation
-          color="primary"
-          className={classes.loginBtn}
-          onClick={handleSubmit}
-        >
-          {loading ? (
-            <Loader className={classes.loader} />
-          ) : (
-            "Log in to Resuminator"
-          )}
-        </Button>
+        <TextField
+          label="Confirm Password"
+          variant="outlined"
+          size="small"
+          name="confirmPassword"
+          type="password"
+          className={classes.TextField}
+          value={userPayload.confirmPassword}
+          fullWidth
+          placeholder="Atleast 8 Characters"
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
+        {completed ? (
+          <Button
+            variant="contained"
+            color="primary"
+            disableElevation
+            className={classes.loginBtn}
+            href="/"
+          >
+            Get Started! 🚀
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            disableElevation
+            color="primary"
+            className={classes.loginBtn}
+            onClick={handleSubmit}
+          >
+            {loading ? (
+              <Loader className={classes.loader} />
+            ) : (
+              "Create new account"
+            )}
+          </Button>
+        )}
       </Box>
       <Typography variant="subtitle2" className={classes.subtitle}>
-        Don't have an account yet?{" "}
-        <a href="/signup" className={classes.buttonText}>
-          Create a new one!
+        Already have an account?{" "}
+        <a href="/" className={classes.buttonText}>
+          Log in!
         </a>
       </Typography>
       <Typography className={classes.error} variant="body2">
@@ -185,4 +222,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default SignUpScreen;

@@ -14,6 +14,7 @@ import LoginScreen from "../components/Auth/LoginScreen";
 import NewBetaUser from "../components/Auth/NewBetaUser";
 import PasswordReset from "../components/Auth/PasswordReset";
 import SignoutScreen from "../components/Auth/SignoutScreen";
+import SignUpScreen from "../components/Auth/SignUpScreen";
 import NotFound from "./404";
 import Providers from "./Providers";
 
@@ -22,6 +23,7 @@ const Routes = () => {
     <Providers>
       <Switch>
         <Route exact path="/" component={LoginScreen} />
+        <Route exact path="/signup" component={SignUpScreen} />
         <Route exact path="/resetpassword" component={PasswordReset} />
         <Route exact path="/newuser" component={NewBetaUser} />
         <Route exact path="/thankyou" component={SignoutScreen} />
