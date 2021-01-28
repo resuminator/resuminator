@@ -16,4 +16,4 @@ export const welcomeMessage = {
   actionText: "Got it! 👍🏻",
 };
 
-export const tickerMessage = "👀 Updated: Toggle resume sections in user settings"
+export const tickerMessage = "💡 Hint: Toggle your resume sections in User Settings"
