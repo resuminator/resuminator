@@ -93,17 +93,23 @@ export const parseLines = (value) =>
 
 export const parseDateView = (date, year) => {
   const obj = new Date(date);
-  const currYear = currentDate().split("-")[2];
-  const currMonth = currentDate().split("-")[0];
-  
-  if (
-    currMonth === (obj.getMonth() + 1).toString() &&
-    currYear === obj.getFullYear().toString()
-  )
-    return "Present";
-
-  if (year && obj.getFullYear().toString() === currYear) return "Present";
   if (year) return obj.toLocaleString([], { year: "numeric" });
 
   return obj.toLocaleString([], { month: "short", year: "numeric" });
 };
+
+const sameYear = (date) => {
+  return new Date(date).getFullYear() === new Date().getFullYear();
+};
+
+const sameMonth = (date) => {
+  return new Date(date).getMonth() === new Date().getMonth();
+};
+
+export const parseEndDate = (date) => {
+  return sameYear(date) && sameMonth(date) ? "Present" : parseDateView(date);
+}
+
+export const parseEndYear = (date) => {
+  return sameYear(date) ? "Present" : parseDateView(date, "year");
+}
