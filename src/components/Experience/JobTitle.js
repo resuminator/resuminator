@@ -10,7 +10,7 @@
 
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { parseDateView } from "../../utils/Helpers";
+import { parseDateView, parseEndDate } from "../../utils/Helpers";
 import { TitleBox } from "../common/TitleBox";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +27,11 @@ const useStyles = makeStyles((theme) => ({
 
 function JobTitle(props) {
   const classes = useStyles();
+
+  const duration = () => {
+    const { start, end } = props.duration;
+    return `${parseDateView(start)} - ${parseEndDate(end)}`;
+  };
 
   return (
     <TitleBox id="Job-Title-Box">
@@ -57,7 +62,7 @@ function JobTitle(props) {
           color="primary"
           className={classes.title}
         >
-          {parseDateView(props.duration.start)} - {parseDateView(props.duration.end)}
+          {duration()}
         </Typography>
         <Typography
           id="location"
