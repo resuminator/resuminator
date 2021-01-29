@@ -13,11 +13,13 @@ import {
   Button,
   makeStyles,
   TextField,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
+import axios from "axios";
 import React, { useState } from "react";
 import ServerCheck from "../../App/ServerCheck";
+import { MAIL_WEBHOOK } from "../../utils/Server";
 import Loader from "../common/Loader";
 import { signUpUser } from "./AuthAPIs";
 
@@ -78,6 +80,7 @@ const SignUpScreen = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    fullname: "",
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -96,6 +99,7 @@ const SignUpScreen = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!userPayload.fullname) return setError("Please enter your name!");
     if (!(userPayload.email && userPayload.password))
       return setError("Please enter your email/password!");
     if (!userPayload.password) return setError("Please enter new password!");
@@ -111,6 +115,12 @@ const SignUpScreen = () => {
     setLoading(true);
 
     signUpUser(userPayload.email, userPayload.password)
+      .then(() =>
+        axios.post(`${MAIL_WEBHOOK}/signup`, {
+          recepient: userPayload.email,
+          name: userPayload.fullname,
+        })
+      )
       .then(() => {
         setLoading(false);
         localStorage.setItem("loggedIn", true);
@@ -143,8 +153,19 @@ const SignUpScreen = () => {
       </Box>
       <Box m={2} mb={1} display="flex" flexDirection="column" width="16rem">
         <Typography variant="h3" className={classes.greeting}>
-          Let's create a new account! 
+          Let's create a new account!
         </Typography>
+        <TextField
+          label="Full Name"
+          variant="outlined"
+          size="small"
+          name="fullname"
+          type="name"
+          value={userPayload.fullname}
+          className={classes.TextField}
+          placeholder="Enter name"
+          onChange={handleChange}
+        />
         <TextField
           label="Email"
           variant="outlined"
