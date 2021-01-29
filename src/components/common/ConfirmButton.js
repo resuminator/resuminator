@@ -8,18 +8,23 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { IconButton, makeStyles } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import { AnimateSharedLayout, motion } from "framer-motion";
 import React from "react";
-import { FiArrowUp, FiCheck } from "react-icons/fi";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginBottom: 0,
-    margin: theme.spacing(1),
-    padding: theme.spacing(1)
+    margin: "1rem",
+    textTransform: "none",
+    fontFamily: "Karla",
+    fontWeight: 400,
+  },
+  cancel :{
+    color: theme.palette.primary.dark,
+    borderColor: theme.palette.primary.dark,
   }
-}))
+}));
 
 function ConfirmButton({ onClick, changed }) {
   const classes = useStyles();
@@ -27,15 +32,28 @@ function ConfirmButton({ onClick, changed }) {
     <AnimateSharedLayout>
       {changed ? (
         <motion.div layoutId="confirm-button">
-          <IconButton size="medium" className={classes.root} color="primary" onClick={onClick}>
-            <FiCheck />
-          </IconButton>
+          <Button
+            size="small"
+            variant="contained"
+            className={classes.root}
+            color="primary"
+            onClick={onClick}
+          >
+            Save Changes
+          </Button>
+         
         </motion.div>
       ) : (
         <motion.div layoutId="confirm-button">
-          <IconButton size="medium" className={classes.root} onClick={onClick}>
-            <FiArrowUp color="primary" />
-          </IconButton>
+          <Button
+            size="small"
+            color="primary"
+            variant="outlined"
+            className={`${classes.root} ${classes.cancel}`}
+            onClick={onClick}
+          >
+            Cancel
+          </Button>
         </motion.div>
       )}
     </AnimateSharedLayout>

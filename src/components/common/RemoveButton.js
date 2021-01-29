@@ -8,15 +8,15 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Button, makeStyles, Typography } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(1),
+    margin: "1rem 1rem 0rem 1rem",
     width: "1rem",
+    fontFamily: "Karla",
     textTransform: "none",
-    fontFamily: theme.typography.fontFamily.primary,
     color: theme.palette.secondary.dark,
     borderColor: theme.palette.secondary.dark,
   },
@@ -25,8 +25,13 @@ function RemoveButton(props) {
   const classes = useStyles();
 
   return (
-    <Button variant="outlined" className={classes.root} onClick={props.onClick}>
-      <Typography variant="caption">Remove</Typography>
+    <Button
+      size="small"
+      variant="outlined"
+      className={classes.root}
+      onClick={props.onClick}
+    >
+      Remove
     </Button>
   );
 }
