@@ -116,10 +116,12 @@ const SignUpScreen = () => {
 
     signUpUser(userPayload.email, userPayload.password)
       .then(() =>
-        axios.post(`${MAIL_WEBHOOK}/signup`, {
-          recepient: userPayload.email,
-          name: userPayload.fullname,
-        })
+        axios
+          .post(`${MAIL_WEBHOOK}/signup`, {
+            recepient: userPayload.email,
+            name: userPayload.fullname,
+          })
+          .catch((err) => setError(err.message))
       )
       .then(() => {
         setLoading(false);
