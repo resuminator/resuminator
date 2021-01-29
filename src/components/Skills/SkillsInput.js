@@ -86,7 +86,8 @@ function SkillsInput() {
   };
 
   const handleInput = (e) => {
-    if (["Enter", ","].includes(e.key)) {
+    if(!e.target.value.match(/^[a-zA-Z0-9#_.]/)) return;
+    if (e.target.value && ["Enter"].includes(e.key)) {
       e.preventDefault();
       const [rawValue] = e.target.value.split(",").slice(-1);
       const value = rawValue.trim();
@@ -133,7 +134,7 @@ function SkillsInput() {
     <Box display="flex" flexDirection="column" mt={1} p={2}>
       <InputHeader
         heading="Want to show-off some skills?"
-        subtitle="Enter skills you remember (sparated by commas). We'll categorise them on your resume"
+        subtitle="Enter skills you remember. We'll try to categorise them on your resume"
       />
       <FormControl component="fieldset">
         <FormLabel component="legend" className={classes.FormControl}>
@@ -159,7 +160,7 @@ function SkillsInput() {
         color="secondary"
         label="Add Skill"
         name="skills"
-        placeholder="Separate skills by commas or press enter"
+        placeholder="Enter skill and press Enter↵"
         required
         className={classes.TextField}
         onKeyDown={handleInput}
