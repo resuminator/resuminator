@@ -186,7 +186,12 @@ function ContactInput() {
         className={classes.TextField}
       />
       {changed ? (
-        <Button color="primary" className={classes.btn} onClick={handleSave}>
+        <Button
+          color="primary"
+          variant="contained"
+          className={classes.btn}
+          onClick={handleSave}
+        >
           Save Changes
         </Button>
       ) : null}

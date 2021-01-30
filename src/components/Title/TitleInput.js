@@ -107,6 +107,7 @@ function TitleInput() {
               color="primary"
               className={classes.btn}
               onClick={handleSave}
+              variant="contained"
             >
               Save Changes
             </Button>
