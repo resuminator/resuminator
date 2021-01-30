@@ -12,5 +12,9 @@ export const AllSkills = [
   "Soft Skills",
   "Mathematical Skills",
   "Software Development",
-  "Cloud Development"
+  "Cloud Development",
+  "Operating Systems",
+  "Testing",
+  "Simulation",
+  "Computer Networking"
 ];
