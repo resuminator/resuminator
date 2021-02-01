@@ -16,5 +16,8 @@ export const AllSkills = [
   "Operating Systems",
   "Testing",
   "Simulation",
-  "Computer Networking"
+  "Computer Networking",
+  "Augmented Reality",
+  "Internet of things (IoT)",
+  "Cybersecurity"
 ];
