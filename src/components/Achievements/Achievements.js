@@ -10,21 +10,32 @@
 
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import { useSelector } from "react-redux";
 import { checkEmptyState } from "../../utils/Helpers";
 import ColoredLine from "../common/Line";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    wordBreak: "break-word"
+    wordBreak: "break-word",
   },
   title: {
     fontSize: "1.5rem",
+  },
+  desc: {
+    fontFamily: theme.typography.fontFamily.secondary,
+    padding: "0.5rem 0.5rem 1rem 0rem",
+    fontSize: "0.9rem",
+    textAlign: "justify",
+    color: theme.palette.grey[800],
   },
 }));
 
 function Achievements() {
   const classes = useStyles();
+  const achievements = useSelector(
+    (state) => state.achievementInfo.achievements
+  );
 
   return (
     <Box
@@ -46,6 +57,7 @@ function Achievements() {
         Achievements
       </Typography>
       <ColoredLine opacity="0.5" />
+      <ReactMarkdown className={classes.desc} children={achievements} />
     </Box>
   );
 }
