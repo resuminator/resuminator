@@ -14,6 +14,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import "../../styles/page.css";
 import "../../styles/shadow.css";
+import Achievements from "../Achievements/Achievements";
 import Certifications from "../Certifications/Certifications";
 import ColoredLine from "../common/Line";
 import Contact from "../Contact/Contact";
@@ -68,6 +69,8 @@ const findComponent = (key) => {
       return <Projects key="proj" />;
     case "skill":
       return <Skills key="skill" />;
+    case "achievements":
+      return <Achievements key="achievements" />;
     default:
       return <React.Fragment />;
   }
