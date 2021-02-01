@@ -86,10 +86,14 @@ function SkillsInput() {
   };
 
   const handleInput = (e) => {
-    if(!e.target.value.match(/^[a-zA-Z0-9#_.]/)) return;
-    if (e.target.value && ["Enter"].includes(e.key)) {
+    const rawValue = e.target.value;
+
+    //match the invalid chars
+    if(!rawValue.match(/^[a-zA-Z0-9#_.]/)) return;
+
+    //Process entry on Enter Key.
+    if (rawValue && ["Enter"].includes(e.key)) {
       e.preventDefault();
-      const [rawValue] = e.target.value.split(",").slice(-1);
       const value = rawValue.trim();
 
       if (duplicateEntry(value)) {
@@ -123,6 +127,7 @@ function SkillsInput() {
   };
 
   const truncateName = (name) => {
+    if (!name) return;
     return name.length >= 20 ? name.substring(0, 20) + "..." : name;
   };
 
