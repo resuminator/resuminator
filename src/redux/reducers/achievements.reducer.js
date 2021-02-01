@@ -10,7 +10,7 @@
 
 const { ACHIEVEMENT_INFO } = require("../actionTypes");
 
-const initialState = { loading: false, error: "", achievements: "* Just a text\n* Todo" };
+const initialState = { loading: false, error: "", achievements: "" };
 
 const achievementReducer = (state = initialState, action) => {
   switch (action.type) {

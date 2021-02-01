@@ -12,6 +12,7 @@ import { Box } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
 import "../../styles/noscroll.css";
+import AchievementsInput from "../Achievements/AchievementsInput";
 import CertificationInput from "../Certifications/CertificationInput";
 import ContactInput from "../Contact/ContactInput";
 import EducationInput from "../Education/EducationInput";
@@ -44,6 +45,7 @@ function InputLayout() {
       {showInput("proj") ? <ProjectInput /> : null}
       {showInput("certs") ? <CertificationInput />: null}
       {showInput("skill") ? <SkillsInput /> : null}
+      {showInput("achievements") ? <AchievementsInput /> : null}
     </Box>
   );
 }

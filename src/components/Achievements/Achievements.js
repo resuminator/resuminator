@@ -57,7 +57,13 @@ function Achievements() {
         Achievements
       </Typography>
       <ColoredLine opacity="0.5" />
-      <ReactMarkdown className={classes.desc} children={achievements} />
+      {achievements ? (
+        <ReactMarkdown className={classes.desc} children={achievements} />
+      ) : (
+        <Typography variant="subtitle1">
+          Looks empty here. Write in your achievements through the input on the left.
+        </Typography>
+      )}
     </Box>
   );
 }
