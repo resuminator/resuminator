@@ -98,6 +98,7 @@ function CertificationInput() {
     setChanged(true);
     const field = key;
     const value = date.toString();
+    console.log(field, value);
 
     setState((prevState) => [
       ...prevState.slice(0, currIndex),
@@ -195,7 +196,7 @@ function CertificationInput() {
                   onChange={handleDateChange("obtained")}
                   disabled={item.expires === currentDate()}
                   className={classes.TextField}
-                  value={item.start}
+                  value={item.obtained}
                 />
                 <CustomDatePicker
                   label="Expires"

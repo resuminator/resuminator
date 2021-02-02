@@ -11,12 +11,22 @@
 import { DatePicker } from "@material-ui/pickers";
 import React from "react";
 
-const CustomDatePicker = ({ value, label, name, views, onChange, disabled, className }) => {
+const CustomDatePicker = ({
+  value,
+  label,
+  name,
+  views,
+  onChange,
+  disabled,
+  required,
+  className,
+}) => {
   const MIN_DATE = new Date(`${new Date().getFullYear() - 30}-01-01`);
-  const MAX_DATE = new Date(`${new Date().getFullYear()}-12-31`);
+  const MAX_DATE = new Date(`${new Date().getFullYear() + 5}-12-31`);
 
   return (
     <DatePicker
+      required={required}
       variant="inline"
       openTo="year"
       name={name}
