@@ -111,8 +111,7 @@ function Footer() {
           color="textSecondary"
           className={classes.subtext}
         >
-          Resuminator is a project by Vivek Nigam and is maintained by The
-          Bitshift Community
+          Resuminator is a project developed and maintained by Vivek Nigam.
         </Typography>
         <ServerCheck dark relative/>
       </Box>
