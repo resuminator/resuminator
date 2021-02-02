@@ -59,7 +59,7 @@ function Achievements() {
       {achievements !== "" ? (
         <ReactMarkdown className={classes.desc} children={achievements} />
       ) : (
-        <Typography variant="subtitle1">
+        <Typography variant="caption">
           Looks empty here. Write in your achievements through the input on the left.
         </Typography>
       )}
