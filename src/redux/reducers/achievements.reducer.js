@@ -10,12 +10,12 @@
 
 const { ACHIEVEMENT_INFO } = require("../actionTypes");
 
-const initialState = { loading: false, error: "", achievements: "" };
+const initialState = { loading: false, error: "", _id: "", description: "" };
 
 const achievementReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACHIEVEMENT_INFO.UPDATE_STATE: {
-      return { ...state, achievements: action.payload };
+      return { ...state, description: action.payload };
     }
     case ACHIEVEMENT_INFO.SERVER_REQUEST: {
       return { ...state, loading: true };
@@ -23,8 +23,10 @@ const achievementReducer = (state = initialState, action) => {
     case ACHIEVEMENT_INFO.FETCH_SUCCESS: {
       return {
         ...state,
-        achievements: action.payload,
+        error: "",
         loading: false,
+        _id: action.payload._id,
+        description: action.payload.description,
       };
     }
     case ACHIEVEMENT_INFO.SERVER_ERROR: {
