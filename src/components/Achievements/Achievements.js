@@ -12,7 +12,6 @@ import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { useSelector } from "react-redux";
-import { checkEmptyState } from "../../utils/Helpers";
 import ColoredLine from "../common/Line";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 function Achievements() {
   const classes = useStyles();
   const achievements = useSelector(
-    (state) => state.achievementInfo.achievements
+    (state) => state.achievementInfo.description
   );
 
   return (
@@ -57,7 +56,7 @@ function Achievements() {
         Achievements
       </Typography>
       <ColoredLine opacity="0.5" />
-      {achievements ? (
+      {achievements !== "" ? (
         <ReactMarkdown className={classes.desc} children={achievements} />
       ) : (
         <Typography variant="subtitle1">

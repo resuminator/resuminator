@@ -14,6 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthContext } from "../Auth/AuthContext";
 import { InputHeader } from "../common/InputHeader";
 import Loader from "../common/Loader";
+import {
+  updateAchievement,
+  updateAchievementState
+} from "./achievements.actions";
 
 const useStyles = makeStyles({
   TextField: {
@@ -35,31 +39,34 @@ const useStyles = makeStyles({
 function AchievementsInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const storeState = useSelector((state) => state.achievementInfo.achievements);
+  const storeState = useSelector((state) => state.achievementInfo);
   const uid = useContext(AuthContext).uid;
   const app = useSelector((state) => state.app);
   const [state, setState] = useState(storeState);
   const [unsaved, setUnsaved] = useState(false);
+
+  React.useEffect(() => {
+    if (!app.init) setState(storeState);
+  }, [app, storeState]);
 
   const handleChange = (e) => {
     setUnsaved(true);
     e.preventDefault();
     const value = e.target.value;
 
-    setState({ ...state, achievements: value });
+    setState({ ...state, description: value });
   };
 
   const handleSave = (e) => {
     setUnsaved(false);
+    dispatch(
+      updateAchievement(uid, storeState._id, { description: state.description })
+    );
   };
 
   React.useEffect(() => {
-    if (!app.init) setState(storeState);
-  }, [app, storeState]);
-
-//   React.useEffect(() => {
-//     dispatch(addUserInfo(payload));
-//   }, [dispatch, payload]);
+    dispatch(updateAchievementState(state.description));
+  }, [dispatch, state.description]);
 
   return (
     <Box display="flex" flexDirection="column" p={2}>
@@ -86,7 +93,7 @@ function AchievementsInput() {
               placeholder="Add relevant achievements. Use `*` before sentences to create bullet points."
               multiline
               type="text"
-              value={state.achievements}
+              value={state.description}
               className={classes.TextField}
               onChange={handleChange}
             />
