@@ -15,3 +15,5 @@ export const RESUMINATOR_LANDING_HOSTED_LINK = "https://resuminator.in"
 export const OWNER_PROFILE = "https://github.com/viveknigam3003/"
 export const RESUMINATOR_ISSUES_GFI =
   "https://github.com/viveknigam3003/resuminator/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"
+
+export const TRIGGER_MANUAL_BUILD = true;
