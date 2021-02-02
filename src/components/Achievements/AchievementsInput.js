@@ -18,7 +18,11 @@ import Loader from "../common/Loader";
 const useStyles = makeStyles({
   TextField: {
     marginTop: "1rem",
-    width: "26rem"
+    width: "26rem",
+  },
+  desc: {
+    minHeight: "5rem",
+    whiteSpace: "preLine",
   },
   btn: {
     marginTop: "1rem",
