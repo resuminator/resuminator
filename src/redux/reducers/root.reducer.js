@@ -9,13 +9,14 @@
  */
 
 import { combineReducers } from "redux";
+import achievementReducer from "./achievements.reducer";
 import { appReducer } from "./app.reducer";
 import certificationReducer from "./certification.reducer";
 import educationReducer from "./education.reducer";
 import experienceReducer from "./experience.reducer";
 import projectReducer from "./project.reducer";
-import { skillsReducer } from "./skill.reducer";
 import { settingsReducer } from "./settings.reducer";
+import { skillsReducer } from "./skill.reducer";
 import userReducer from "./user.reducer";
 
 const rootReducer = combineReducers({
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   certificationInfo: certificationReducer,
   projectInfo: projectReducer,
   skillInfo: skillsReducer,
+  achievementInfo: achievementReducer,
   settings: settingsReducer,
   app: appReducer,
 });

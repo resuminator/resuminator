@@ -15,6 +15,7 @@ import { fetchProject } from "../components/Projects/project.actions";
 import { fetchSkills } from "../components/Skills/skills.actions";
 import { fetchUser } from "../components/Title/title.actions";
 import { fetchSettings } from "../components/Settings/settings.actions";
+import { fetchAchievement } from "../components/Achievements/achievements.actions";
 
 export const appInitRequest = () => {
   return {
@@ -45,6 +46,7 @@ export const initApp = (uid) => async (dispatch) => {
     dispatch(fetchProject(uid)),
     dispatch(fetchCertification(uid)),
     dispatch(fetchSkills(uid)),
+    dispatch(fetchAchievement(uid))
   ])
     .then(() => {
       dispatch(appInitSuccess());

@@ -33,6 +33,8 @@ const getLabel = (item) => {
       return "Projects";
     case "skill":
       return "Skills";
+    case "achievements":
+        return "Achievements";
     default:
       return "";
   }
@@ -43,7 +45,7 @@ const ModuleToggle = () => {
   const settings = useSelector((state) => state.settings);
   const modules = settings.modules;
   const combinedList = modules.left.concat(modules.right);
-  const allModules = ["exp", "edu", "certs", "proj", "skill"];
+  const allModules = ["exp", "edu", "certs", "proj", "skill", "achievements"];
 
   return (
     <Box
