@@ -10,6 +10,7 @@
 
 import { Link, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { FiExternalLink } from "react-icons/fi";
 import { TitleBox } from "../common/TitleBox";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,17 +23,38 @@ const useStyles = makeStyles((theme) => ({
   subtitle: {
     color: theme.palette.grey[600],
   },
+  link: {
+    fontFamily: theme.typography.fontFamily.primary,
+    display: "flex",
+    alignItems: "center",
+    paddingLeft: "1rem",
+    fontWeight: 400,
+    float: "right",
+    textDecoration: "underline",
+    fontSize: "0.9rem",
+  },
 }));
 
-function ProjectTitle(props) {
+function ProjectTitle({ title, link }) {
   const classes = useStyles();
   return (
-    <TitleBox flexDirection="column">
-      <Typography id="title" variant="body1" className={classes.title}>
-        <Link href={props.projectLink} target="_blank">
-          {props.title}
-        </Link>
+    <TitleBox>
+      <Typography
+        component="div"
+        id="title"
+        variant="body1"
+        className={classes.title}
+      >
+        {title}
       </Typography>
+      {link ? (
+        <Link href={link} target="_blank">
+          <Typography className={classes.link} component="div">
+            Link{" "}
+            <FiExternalLink style={{ paddingLeft: "0.2rem" }} size="0.9rem" />
+          </Typography>
+        </Link>
+      ) : null}
     </TitleBox>
   );
 }
