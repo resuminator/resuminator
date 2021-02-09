@@ -21,7 +21,13 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "left",
   },
   subtitle: {
-    color: theme.palette.grey[800],
+    paddingTop: "0.2rem",
+    color: theme.palette.grey[900],
+    fontSize: "0.9em",
+    textAlign: "left",
+  },
+  duration: {
+    color: theme.palette.grey[900],
     fontSize: "0.9em",
     textAlign: "left",
   },
@@ -34,13 +40,18 @@ function CertificationTitle(props) {
       <Typography id="name" variant="h2" className={classes.title}>
         {props.name}
       </Typography>
-      <Typography
-        id="authority"
-        variant="subtitle1"
-        className={classes.subtitle}
-      >
-        {props.authority} {props.number ? ` | ${props.number}` : null}{" "}
-        {props.duration.expires !== currentDate() ? ` | Expires: ${parseDateView(props.duration.expires)}` : null}
+      <Typography id="authority" className={classes.subtitle}>
+        {props.authority}{" "}
+        {props.number ? ` | Credential ID: ${props.number}` : null}{" "}
+      </Typography>
+      <Typography id="duration" className={classes.duration}>
+        {props.duration.obtained
+          ? `Issued: ${parseDateView(props.duration.obtained)}`
+          : null}{" "}
+        •
+        {props.duration.expires !== currentDate()
+          ? ` Expires: ${parseDateView(props.duration.expires)}`
+          : null}
       </Typography>
     </TitleBox>
   );
