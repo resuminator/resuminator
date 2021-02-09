@@ -8,38 +8,22 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { makeStyles, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import React from "react";
-import { Link } from "react-router-dom";
+import LOGO_IMG from "../../images/Resuminator_logo.png";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   logo: {
-    fontWeight: 700,
-    paddingRight: "0.5rem",
-    letterSpacing: "-0.25rem",
-    fontFamily: "Karla",
-    border: "solid",
-    borderColor: theme.palette.contrast.main,
-    borderWidth: "0.1rem",
+    width: "3rem",
   },
-  link: {
-    textDecoration: "none",
-  },
-}));
+});
 
 const ShortLogo = () => {
   const classes = useStyles();
   return (
-    <Link to="/" className={classes.link}>
-      <Typography
-        id="logo"
-        variant="h4"
-        className={classes.logo}
-        color="primary"
-      >
-        Re
-      </Typography>
-    </Link>
+    <a href="/">
+      <img src={LOGO_IMG} className={classes.logo} alt="Resuminator" />
+    </a>
   );
 };
 
