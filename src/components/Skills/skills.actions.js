@@ -58,9 +58,9 @@ export const fetchSkills = (uid) => {
 
 export const fetchInDatabase = async (name) => {
   return axios
-    .get(`${SERVER}/skillset/fetchbyname/${name}`)
+    .post(`${SERVER}/skillset/fetchbyname`, {name})
     .then((response) => response.data)
-    .catch((err) => err.message);
+    .catch((err) => err);
 };
 
 export const createNewSkillDocument = async (uid) => {
@@ -68,7 +68,7 @@ export const createNewSkillDocument = async (uid) => {
     .post(`${SERVER}/skills/add`, { uid })
     .then((response) => response.data)
     .catch((err) => err.message);
-}
+};
 
 export const addUserSkill = async (uid, skillId) => {
   return axios

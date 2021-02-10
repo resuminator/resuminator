@@ -80,7 +80,7 @@ function CertificationTitle({ name, authority, number, duration, link }) {
   const renderIssueDate = () =>
     duration.obtained ? (
       <Fragment>
-        {authority || number ? <VerticalLine />: null}
+        {authority || number ? <VerticalLine /> : null}
         <Typography id="issuedate" className={classes.duration}>
           Issued: {parseDateView(duration.obtained)}
         </Typography>
