@@ -60,6 +60,7 @@ function Certifications() {
             authority={item.authority}
             number={item.number}
             duration={{ obtained: item.obtained, expires: item.expires }}
+            link={item.link}
           />
         ))
       )}
