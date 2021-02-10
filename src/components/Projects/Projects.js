@@ -62,14 +62,11 @@ function Projects() {
       ) : (
         projects.map((item) => (
           <Box key={item._id} className={classes.root}>
-            <ProjectTitle
-              title={item.projectTitle}
-              company={item.company}
-              addInfo={item.additionalInfo}
-              projectLink={item.projectLink}
-            />
+            <ProjectTitle title={item.projectTitle} link={item.projectLink} />
             <ProjectDescription desc={item.description} />
-            {item.tags.length ? <TagChips tags={item.tags} className={classes.tags}/> : null}
+            {item.tags.length ? (
+              <TagChips tags={item.tags} className={classes.tags} />
+            ) : null}
           </Box>
         ))
       )}

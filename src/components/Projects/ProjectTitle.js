@@ -10,30 +10,49 @@
 
 import { Link, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { FiExternalLink } from "react-icons/fi";
 import { TitleBox } from "../common/TitleBox";
 
 const useStyles = makeStyles((theme) => ({
-  title: {
+  root: {
     color: theme.palette.primary.light,
+    fontFamily: theme.typography.fontFamily.primary,
     fontWeight: 600,
     paddingBottom: "0.1rem",
     lineHeight: 1.2,
-  },
-  subtitle: {
-    color: theme.palette.grey[600],
+    display: "flex",
+    alignItems: "center",
+    flexWrap: "wrap",
+    textDecoration: "none"
   },
 }));
 
-function ProjectTitle(props) {
+function ProjectTitle({ title, link }) {
   const classes = useStyles();
-  return (
-    <TitleBox flexDirection="column">
-      <Typography id="title" variant="body1" className={classes.title}>
-        <Link href={props.projectLink} target="_blank">
-          {props.title}
-        </Link>
+
+  const renderTitle = () => {
+    return link !== "" ? (
+      <Link
+        className={classes.root}
+        component="a"
+        target="_blank"
+        href={link}
+      >
+        {title}
+        <FiExternalLink style={{ paddingLeft: "0.2rem" }} size="0.9rem" />
+      </Link>
+    ) : (
+      <Typography
+        component="div"
+        id="title"
+        variant="body1"
+        className={classes.root}
+      >
+        {title}
       </Typography>
-    </TitleBox>
-  );
+    );
+  };
+
+  return <TitleBox>{renderTitle()}</TitleBox>;
 }
 export default ProjectTitle;
