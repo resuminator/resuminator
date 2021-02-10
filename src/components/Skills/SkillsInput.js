@@ -89,7 +89,7 @@ function SkillsInput() {
     const rawValue = e.target.value;
 
     //match the invalid chars
-    if(!rawValue.match(/^[a-zA-Z0-9#_.]/)) return;
+    if (!rawValue.match(/^[a-zA-Z0-9#_.]/)) return;
 
     //Process entry on Enter Key.
     if (rawValue && ["Enter"].includes(e.key)) {
@@ -105,7 +105,7 @@ function SkillsInput() {
         if (response.length !== 0) {
           setState([...state, response[0]]);
           e.target.value = "";
-          addUserSkill(uid, response[0]._id).then(console.log("added"));
+          addUserSkill(uid, response[0]._id);
         } else
           addSkillToDatabase(value, "Miscellaneous").then(() =>
             fetchInDatabase(value).then((newSkill) => {
@@ -114,7 +114,7 @@ function SkillsInput() {
               addUserSkill(uid, newSkill[0]._id);
             })
           );
-      });
+      })
     }
   };
 
