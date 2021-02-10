@@ -81,6 +81,7 @@ function CertificationInput() {
   };
 
   const handleCheckbox = (resetDate) => {
+    setChanged(true);
     setState((prevState) => [
       ...prevState.slice(0, currIndex),
       {
@@ -194,7 +195,6 @@ function CertificationInput() {
                   name="obtained"
                   views={["year", "month"]}
                   onChange={handleDateChange("obtained")}
-                  disabled={item.expires === currentDate()}
                   className={classes.TextField}
                   value={item.obtained}
                 />
