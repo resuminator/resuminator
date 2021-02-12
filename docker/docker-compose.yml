@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  server:
+    container_name: r8r_server
+    image: viveknigam3003/r8r_server
+    restart: always
+    ports:
+      - "4001:4001"
+    links:
+      - database
+  database:
+    container_name: r8r_userdb
+    image: mongo
+    ports:
+      - "27017:27017"
