@@ -87,7 +87,9 @@ $ docker-compose up -d
 This step may take some time since it will be pulling the images and builing the Docker containers for you. Once it is completed you may run the following to check if the containers are running successfully
 
 ```shell
-$ docker ps | grep r8r                                                                                                  e1ba2e39e683   viveknigam3003/r8r_server   "docker-entrypoint.s…"   17 hours ago   Up 3 minutes   0.0.0.0:4001->4001/tcp     r8r_server                                                                                                         71d5260cbaa7   mongo                       "docker-entrypoint.s…"   17 hours ago   Up 3 minutes   0.0.0.0:27017->27017/tcp   r8r_userdb
+$ docker ps | grep r8r
+e1ba2e39e683   viveknigam3003/r8r_server   "docker-entrypoint.s…"   17 hours ago   Up 3 minutes   0.0.0.0:4001->4001/tcp     r8r_server
+71d5260cbaa7   mongo                       "docker-entrypoint.s…"   17 hours ago   Up 3 minutes   0.0.0.0:27017->27017/tcp   r8r_userdb
 ```
 
 **Note for Windows 10:** Use `docker ps | findstr r8r` instead :)
