@@ -9,8 +9,9 @@
  */
 
 import { Box } from "@material-ui/core";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import PrintButton from "../components/common/PrintButton";
+import DownloadConfirmDialog from "../components/Feedback/DownloadConfirmDialog";
 import Resume from "../components/ResumePaper/Resume";
 import InputLayout from "../components/UserInput/InputLayout";
 import useWindowDimensions from "../hooks/useWindowDimensions";
@@ -19,6 +20,7 @@ import MobileView from "../layout/MobileView";
 function Content() {
   const { width } = useWindowDimensions();
   const resume = useRef();
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
 
   return (
     <React.Fragment>
@@ -33,9 +35,13 @@ function Content() {
           >
             <InputLayout />
             <Resume element={resume} />
+            <DownloadConfirmDialog
+              open={openConfirmDialog}
+              setOpen={setOpenConfirmDialog}
+            />
           </Box>
           <Box justifyItems="center" m={5} p={2} pt={0}>
-            <PrintButton element={resume} />
+            <PrintButton openDialog={setOpenConfirmDialog} element={resume} />
           </Box>
         </Box>
       ) : (

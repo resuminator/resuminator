@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/analytics"
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -21,4 +22,5 @@ try {
 }
 
 const firebaseSDK = firebase;
+export const analytics = firebase.analytics();
 export default firebaseSDK;
