@@ -1,0 +1,74 @@
+/*
+ * Copyright Vivek Nigam, 2020
+ * Licensed under the GNU General Public License, Version 3.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Authors:
+ * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
+ */
+
+import confetti from 'canvas-confetti';
+import React, { Fragment, useState } from "react";
+import { analyticsEvent } from "../../Services/Analytics";
+import { AlertDialog } from "../common/AlertDialog";
+import CustomDialog from "../common/CustomDialog";
+
+const DownloadConfirmDialog = ({ open, setOpen }) => {
+  const [success, setSuccess] = useState(false);
+
+  const performAfterActions = () => {
+    //close previous dialog
+    setOpen(false);
+    //log analytics
+    analyticsEvent("download_complete");
+    //log KPI FIXME: Wait for fixed status.
+    // logKPI().then((res) => {
+    //   console.log(res);
+    //   setSuccess(true);
+    // });
+    //open success dialog
+    setSuccess(true);
+    confetti({
+      zIndex: 1500,
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  };
+
+  const renderSuccessDialog = () => (
+    <AlertDialog
+      open={success}
+      title="Wohoo! 🎉"
+      message="Congratulations on your awesome new Resume!"
+      buttonText="Close"
+      onClick={() => setSuccess(false)}
+    />
+  );
+
+  const renderDialog = () => (
+    <CustomDialog
+      title="Quick question!"
+      content="Were you able to print your resume as PDF successfully?"
+      open={open}
+      setOpen={setOpen}
+      primaryAction={() => performAfterActions()}
+      secondaryAction={() => {
+        setOpen(false);
+        setSuccess(false);
+      }}
+      primaryText="Yes 🤩"
+      secondaryText="Nope 🙁"
+    />
+  );
+
+  return (
+    <Fragment>
+      {renderDialog()}
+      {success ? renderSuccessDialog() : null}
+    </Fragment>
+  );
+};
+
+export default DownloadConfirmDialog;

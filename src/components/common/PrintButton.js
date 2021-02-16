@@ -10,12 +10,13 @@
 
 import React from "react";
 import { FiPrinter } from "react-icons/fi";
-import ReactToPrint from "react-to-print";
-import ActionButton from "./ActionButton";
 import { useSelector } from "react-redux";
+import ReactToPrint from "react-to-print";
+import { analyticsEvent } from "../../Services/Analytics";
 import "../../styles/page.css";
+import ActionButton from "./ActionButton";
 
-const PrintButton = ({ element }) => {
+const PrintButton = ({ element, openDialog }) => {
   const name = useSelector((state) => state.userInfo.name).replace(" ", "_");
 
   return (
@@ -26,6 +27,8 @@ const PrintButton = ({ element }) => {
       )}
       content={() => element.current}
       documentTitle={`${name}_Resume.pdf`}
+      onBeforePrint={() => analyticsEvent("download_triggered")}
+      onAfterPrint={() => openDialog(true)}
     />
   );
 };
