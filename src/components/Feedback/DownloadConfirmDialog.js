@@ -8,33 +8,29 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import confetti from 'canvas-confetti';
+import confetti from "canvas-confetti";
 import React, { Fragment, useState } from "react";
-import { analyticsEvent } from "../../Services/Analytics";
+import { analyticsEvent, logKPI } from "../../Services/Analytics";
 import { AlertDialog } from "../common/AlertDialog";
 import CustomDialog from "../common/CustomDialog";
 
 const DownloadConfirmDialog = ({ open, setOpen }) => {
   const [success, setSuccess] = useState(false);
 
-  const performAfterActions = () => {
-    //close previous dialog
-    setOpen(false);
-    //log analytics
-    analyticsEvent("download_complete");
-    //log KPI FIXME: Wait for fixed status.
-    // logKPI().then((res) => {
-    //   console.log(res);
-    //   setSuccess(true);
-    // });
-    //open success dialog
+  const successAction = () => {
     setSuccess(true);
     confetti({
       zIndex: 1500,
       particleCount: 100,
       spread: 70,
-      origin: { y: 0.6 }
+      origin: { y: 0.6 },
     });
+  };
+
+  const performAfterActions = () => {
+    setOpen(false);
+    analyticsEvent("download_complete");
+    logKPI().then((res) => (res === 200 ? successAction() : null));
   };
 
   const renderSuccessDialog = () => (
