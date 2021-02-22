@@ -2,6 +2,8 @@
     <img alt="Resuminator" src="https://user-images.githubusercontent.com/30192068/99043945-fc2bc500-25b4-11eb-9d4e-c4e90c0f027f.png" width=100% />
 </div>
 
+# Resuminator Deployed Repository
+
 ## 📜 Description
 Resuminator allows you to build beautiful single-page resumes; without the hassle. Currently in development and open-to-explore for **Resuminator Early Access Programme (REAP)** members.
 
