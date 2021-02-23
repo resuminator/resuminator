@@ -12,6 +12,7 @@ import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthContext } from "../components/Auth/AuthContext";
+import PolicyBanner from "../components/Privacy/PolicyBanner";
 import { initApp } from "../redux/app.actions";
 import firebaseSDK from "../Services/firebaseSDK";
 import "../styles/App.css";
@@ -43,6 +44,7 @@ function App() {
       ) : (
         <ProtectedRoutes>
           <WelcomeDialog />
+          <PolicyBanner/>
         </ProtectedRoutes>
       )}
     </Router>
