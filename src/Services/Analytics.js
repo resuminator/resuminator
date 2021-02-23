@@ -20,10 +20,10 @@ export const analyticsEvent = (name, props) => {
   }
 };
 
-export const logKPI = async () => {
+export const logKPI = async ({uid, status}) => {
   return process.env.NODE_ENV === "production"
     ? axios
-        .get(`${ANALYTICS_SERVER}/add`)
+        .put(`${ANALYTICS_SERVER}/add`, {uid, status})
         .then((res) => res.status)
         .catch((e) => e.message)
     : 200;
