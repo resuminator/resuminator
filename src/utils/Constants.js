@@ -8,7 +8,7 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 export const RESUMINATOR_REPO_LINK =
-  "https://github.com/viveknigam3003/resuminator"
+  "https://github.com/resuminator"
 export const RESUMINATOR_LANDING_REPO_LINK =
   "https://github.com/viveknigam3003/resuminator-landing"
 export const RESUMINATOR_LANDING_HOSTED_LINK = "https://resuminator.in"
