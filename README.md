@@ -3,7 +3,7 @@
 </div>
 
 # Resuminator Deployed Repository
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/00ff09ed-b7f9-432f-9a6e-30965e0a34c3/deploy-status)](https://app.netlify.com/sites/resuminator/deploys)
 ## 📜 Description
 Resuminator allows you to build beautiful single-page resumes; without the hassle. Currently in development and open-to-explore for **Resuminator Early Access Programme (REAP)** members.
 
