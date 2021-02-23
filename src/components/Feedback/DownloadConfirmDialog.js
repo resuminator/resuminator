@@ -37,6 +37,14 @@ const DownloadConfirmDialog = ({ open, setOpen }) => {
     );
   };
 
+  const performFailureActions = () => {
+    setOpen(false);
+    setSuccess(false);
+    logKPI({ uid: auth.uid, status: false }).then((res) =>
+      res === 200 ? successAction() : null
+    );
+  }
+
   const renderSuccessDialog = () => (
     <AlertDialog
       open={success}
@@ -54,10 +62,7 @@ const DownloadConfirmDialog = ({ open, setOpen }) => {
       open={open}
       setOpen={setOpen}
       primaryAction={() => performAfterActions()}
-      secondaryAction={() => {
-        setOpen(false);
-        setSuccess(false);
-      }}
+      secondaryAction={() => performFailureActions()}
       primaryText="Yes 🤩"
       secondaryText="Nope 🙁"
     />
