@@ -21,7 +21,7 @@ export const analyticsEvent = (name, props) => {
 };
 
 export const logKPI = async ({ uid, event }) => {
-  axios
+  return axios
     .put(`${ANALYTICS_SERVER}/add`, { uid, event })
     .then((res) => res.status)
     .catch((e) => e.message);
