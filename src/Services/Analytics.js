@@ -20,9 +20,9 @@ export const analyticsEvent = (name, props) => {
   }
 };
 
-export const logKPI = async ({ uid, status }) => {
+export const logKPI = async ({ uid, event }) => {
   axios
-    .put(`${ANALYTICS_SERVER}/add`, { uid, status })
+    .put(`${ANALYTICS_SERVER}/add`, { uid, event })
     .then((res) => res.status)
     .catch((e) => e.message);
 };
