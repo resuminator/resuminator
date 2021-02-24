@@ -9,13 +9,17 @@
  */
 
 import confetti from "canvas-confetti";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
+import { useToasts } from "react-toast-notifications";
 import { analyticsEvent, logKPI } from "../../Services/Analytics";
+import { AuthContext } from "../Auth/AuthContext";
 import { AlertDialog } from "../common/AlertDialog";
 import CustomDialog from "../common/CustomDialog";
 
 const DownloadConfirmDialog = ({ open, setOpen }) => {
   const [success, setSuccess] = useState(false);
+  const auth = useContext(AuthContext);
+  const { addToast } = useToasts();
 
   const successAction = () => {
     setSuccess(true);
@@ -30,7 +34,27 @@ const DownloadConfirmDialog = ({ open, setOpen }) => {
   const performAfterActions = () => {
     setOpen(false);
     analyticsEvent("download_complete");
-    logKPI().then((res) => (res === 200 ? successAction() : null));
+    logKPI({ uid: auth.uid, status: true }).then((res) =>
+      res === 200
+        ? successAction()
+        : addToast(
+            "Some unexpected error occured while logging your response :/",
+            { appearance: "error", autoDismiss: true }
+          )
+    );
+  };
+
+  const performFailureActions = () => {
+    setOpen(false);
+    setSuccess(false);
+    logKPI({ uid: auth.uid, status: false }).then((res) =>
+      res === 200
+        ? successAction()
+        : addToast(
+            "Some unexpected error occured while logging your response :/",
+            { appearance: "error", autoDismiss: true }
+          )
+    );
   };
 
   const renderSuccessDialog = () => (
@@ -50,10 +74,7 @@ const DownloadConfirmDialog = ({ open, setOpen }) => {
       open={open}
       setOpen={setOpen}
       primaryAction={() => performAfterActions()}
-      secondaryAction={() => {
-        setOpen(false);
-        setSuccess(false);
-      }}
+      secondaryAction={() => performFailureActions()}
       primaryText="Yes 🤩"
       secondaryText="Nope 🙁"
     />
