@@ -34,7 +34,7 @@ const DownloadConfirmDialog = ({ open, setOpen }) => {
   const performAfterActions = () => {
     setOpen(false);
     analyticsEvent("download_complete");
-    logKPI({ uid: auth.uid, status: true }).then((res) =>
+    logKPI({ uid: auth.uid, event: true }).then((res) =>
       res === 200
         ? successAction()
         : addToast(
@@ -47,7 +47,7 @@ const DownloadConfirmDialog = ({ open, setOpen }) => {
   const performFailureActions = () => {
     setOpen(false);
     setSuccess(false);
-    logKPI({ uid: auth.uid, status: false }).then((res) =>
+    logKPI({ uid: auth.uid, event: false }).then((res) =>
       res === 200
         ? successAction()
         : addToast(
