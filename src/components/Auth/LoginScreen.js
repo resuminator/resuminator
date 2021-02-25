@@ -61,7 +61,7 @@ const LoginScreen = () => {
   };
 
   const persist = () =>
-    remember ? authOptions.persistSession : authOptions.persistNone;
+    remember ? authOptions.persistLocal : authOptions.persistSession;
 
   const handleSubmit = (e) => {
     e.preventDefault();

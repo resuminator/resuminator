@@ -25,6 +25,7 @@ const firebaseSDK = firebase;
 export const analytics = firebase.analytics();
 export const authOptions = {
   persistSession: 'session',
+  persistLocal: 'local',
   persistNone: 'none',
 };
 export default firebaseSDK;
