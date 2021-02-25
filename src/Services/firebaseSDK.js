@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import "firebase/analytics"
+import "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -23,4 +23,8 @@ try {
 
 const firebaseSDK = firebase;
 export const analytics = firebase.analytics();
+export const authOptions = {
+  persistSession: firebase.auth.Auth.Persistence.SESSION,
+  persistNone: firebase.auth.Auth.Persistence.NONE,
+};
 export default firebaseSDK;

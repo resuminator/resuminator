@@ -8,17 +8,11 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import {
-  Box,
-
-  makeStyles,
-  TextField,
-  Typography
-} from "@material-ui/core";
+import { Box, makeStyles, TextField, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import ServerCheck from "../../App/ServerCheck";
-import firebaseSDK from "../../Services/firebaseSDK";
+import firebaseSDK, { authOptions } from "../../Services/firebaseSDK";
 import ForgotPasswordText from "./ForgotPasswordText";
 import LoginButton from "./LoginButton";
 
@@ -53,6 +47,7 @@ const LoginScreen = () => {
     addToast(message, { appearance: "error", autoDismiss: true });
   const [userPayload, setUserPayload] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const [remember, setRemember] = useState(false);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -63,6 +58,8 @@ const LoginScreen = () => {
     if (e.key === "Enter") handleSubmit(e);
   };
 
+  const persist = () => remember ? authOptions.persistSession : authOptions.persistNone;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!(userPayload.email && userPayload.password))
@@ -70,7 +67,7 @@ const LoginScreen = () => {
 
     setLoading(true);
     firebaseSDK
-      .auth()
+      .auth(persist)
       .signInWithEmailAndPassword(userPayload.email, userPayload.password)
       .then(() => localStorage.setItem("loggedIn", true))
       .then(() => setLoading(false))
