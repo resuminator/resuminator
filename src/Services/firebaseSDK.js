@@ -24,7 +24,7 @@ try {
 const firebaseSDK = firebase;
 export const analytics = firebase.analytics();
 export const authOptions = {
-  persistSession: firebase.auth.Auth.Persistence.SESSION,
-  persistNone: firebase.auth.Auth.Persistence.NONE,
+  persistSession: 'session',
+  persistNone: 'none',
 };
 export default firebaseSDK;
