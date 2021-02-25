@@ -18,6 +18,7 @@ import {
 } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import React, { useState } from "react";
+import { useToasts } from "react-toast-notifications";
 import ServerCheck from "../../App/ServerCheck";
 import firebaseSDK from "../../Services/firebaseSDK";
 import Loader from "../common/Loader";
@@ -58,9 +59,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     textAlign: "center",
   },
-  error: {
-    color: red[500],
-  },
   loader: {
     margin: "0.88rem",
     width: "2rem",
@@ -76,13 +74,13 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginScreen = () => {
   const classes = useStyles();
+  const {addToast} = useToasts();
+  const error = (message) => addToast(message, {appearance: 'error', autoDismiss:true});
   const [userPayload, setUserPayload] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     e.preventDefault();
-    setError("");
     setUserPayload({ ...userPayload, [e.target.name]: e.target.value });
   };
 
@@ -93,7 +91,7 @@ const LoginScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!(userPayload.email && userPayload.password))
-      return setError("Please enter your email/password!");
+      return error("Please enter your email/password!");
 
     setLoading(true);
     firebaseSDK
@@ -103,7 +101,7 @@ const LoginScreen = () => {
       .then(() => setLoading(false))
       .catch(() => {
         setLoading(false);
-        setError("Incorrect Email or Password");
+        error("Incorrect Email or Password");
       });
   };
 
@@ -176,9 +174,6 @@ const LoginScreen = () => {
         <a href="/signup" className={classes.buttonText}>
           Create a new one!
         </a>
-      </Typography>
-      <Typography className={classes.error} variant="body2">
-        {error}
       </Typography>
       <ServerCheck />
     </Box>
