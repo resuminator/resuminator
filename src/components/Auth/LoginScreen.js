@@ -11,17 +11,17 @@
 import {
   Box,
   Button,
-  Link,
+
   makeStyles,
   TextField,
-  Typography,
+  Typography
 } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
 import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import ServerCheck from "../../App/ServerCheck";
 import firebaseSDK from "../../Services/firebaseSDK";
 import Loader from "../common/Loader";
+import ForgotPasswordText from "./ForgotPasswordText";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -41,14 +41,6 @@ const useStyles = makeStyles((theme) => ({
   },
   TextField: {
     marginTop: "1rem",
-  },
-  buttonText: {
-    color: theme.palette.grey[900],
-    fontSize: "0.9rem",
-    fontFamily: "Karla",
-    textTransform: "none",
-    paddingTop: "0.4rem",
-    cursor: "pointer",
   },
   loginBtn: {
     textTransform: "none",
@@ -150,11 +142,7 @@ const LoginScreen = () => {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        <Link href="/resetpassword">
-          <Typography variant="subtitle2" className={classes.buttonText}>
-            Forgot Password?
-          </Typography>
-        </Link>
+        <ForgotPasswordText/>
         <Button
           variant="contained"
           disableElevation
