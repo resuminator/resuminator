@@ -15,6 +15,7 @@ import ServerCheck from "../../App/ServerCheck";
 import firebaseSDK, { authOptions } from "../../Services/firebaseSDK";
 import ForgotPasswordText from "./ForgotPasswordText";
 import LoginButton from "./LoginButton";
+import SecondaryAction from "./SecondaryAction";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -58,7 +59,8 @@ const LoginScreen = () => {
     if (e.key === "Enter") handleSubmit(e);
   };
 
-  const persist = () => remember ? authOptions.persistSession : authOptions.persistNone;
+  const persist = () =>
+    remember ? authOptions.persistSession : authOptions.persistNone;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -125,12 +127,7 @@ const LoginScreen = () => {
         <ForgotPasswordText />
         <LoginButton isLoading={loading} handleSubmit={handleSubmit} />
       </Box>
-      <Typography variant="subtitle2" className={classes.subtitle}>
-        Don't have an account yet?{" "}
-        <a href="/signup" className={classes.buttonText}>
-          Create a new one!
-        </a>
-      </Typography>
+      <SecondaryAction page="LOGIN" />
       <ServerCheck />
     </Box>
   );
