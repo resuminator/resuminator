@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import ServerCheck from "../../App/ServerCheck";
 import firebaseSDK, { authOptions } from "../../Services/firebaseSDK";
+import { CustomCheckbox } from "../common/CustomCheckbox";
 import ForgotPasswordText from "./ForgotPasswordText";
 import LoginButton from "./LoginButton";
 import SecondaryAction from "./SecondaryAction";
@@ -69,14 +70,26 @@ const LoginScreen = () => {
 
     setLoading(true);
     firebaseSDK
-      .auth(persist)
-      .signInWithEmailAndPassword(userPayload.email, userPayload.password)
-      .then(() => localStorage.setItem("loggedIn", true))
-      .then(() => setLoading(false))
-      .catch(() => {
-        setLoading(false);
-        error("Incorrect Email or Password");
-      });
+      .auth()
+      .setPersistence(persist())
+      .then(() => {
+        return firebaseSDK
+          .auth()
+          .signInWithEmailAndPassword(userPayload.email, userPayload.password)
+          .then(() =>
+            remember ? localStorage.setItem("loggedIn", true) : null
+          )
+          .then(() => setLoading(false))
+          .catch(() => {
+            setLoading(false);
+            error("Incorrect Email or Password");
+          });
+      })
+      .catch(() =>
+        error(
+          "An unexpected error occured while logging you in. Please report this issue on Github issues"
+        )
+      );
   };
 
   return (
@@ -96,7 +109,14 @@ const LoginScreen = () => {
           Build an awesome single-page resume today!
         </Typography>
       </Box>
-      <Box m={3} display="flex" flexDirection="column" width="16rem">
+      <Box
+        m={3}
+        mt={0}
+        mb={1}
+        display="flex"
+        flexDirection="column"
+        width="16rem"
+      >
         <Typography variant="h3" className={classes.greeting}>
           Hello, nice to see you!
         </Typography>
@@ -124,9 +144,13 @@ const LoginScreen = () => {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        <ForgotPasswordText />
+        <CustomCheckbox
+          label="Remember Me"
+          onChange={() => setRemember((c) => !c)}
+        />
         <LoginButton isLoading={loading} handleSubmit={handleSubmit} />
       </Box>
+      <ForgotPasswordText />
       <SecondaryAction page="LOGIN" />
       <ServerCheck />
     </Box>
