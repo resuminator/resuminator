@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     fontFamily: "Karla",
     letterSpacing: "-0.05rem",
     fontSize: "1rem",
-    marginTop: "2rem",
+    margin: "1rem 0 0rem 0",
     display: "flex",
     textAlign: "center",
   },

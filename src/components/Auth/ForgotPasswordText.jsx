@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: "0.9rem",
         fontFamily: "Karla",
         textTransform: "none",
-        paddingTop: "0.4rem",
+        padding: "0rem 0 1rem 0",
         cursor: "pointer",
       },
 }))
