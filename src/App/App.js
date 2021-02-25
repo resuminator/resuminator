@@ -12,13 +12,11 @@ import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthContext } from "../components/Auth/AuthContext";
-import PolicyBanner from "../components/Privacy/PolicyBanner";
 import { initApp } from "../redux/app.actions";
 import firebaseSDK from "../Services/firebaseSDK";
 import "../styles/App.css";
 import ProtectedRoutes from "./Protected.Routes";
 import Routes from "./Routes";
-import WelcomeDialog from "./WelcomeDialog";
 
 function App() {
   const savedState = JSON.parse(localStorage.getItem("loggedIn"));
@@ -38,16 +36,7 @@ function App() {
   }, [dispatch, loggedIn, auth.uid, newUser]);
 
   return (
-    <Router>
-      {!loggedIn || newUser ? (
-        <Routes />
-      ) : (
-        <ProtectedRoutes>
-          <WelcomeDialog />
-          <PolicyBanner/>
-        </ProtectedRoutes>
-      )}
-    </Router>
+    <Router>{!loggedIn || newUser ? <Routes /> : <ProtectedRoutes />}</Router>
   );
 }
 

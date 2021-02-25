@@ -9,29 +9,24 @@
  */
 
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import Ticker from "../components/common/Ticker";
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
+import { Redirect, Route, Switch } from "react-router-dom";
+import SignoutScreen from "../components/Auth/SignoutScreen";
 import UserAccount from "../components/User/UserAccount";
 import Content from "../layout/Content";
-import NotFound from "./404";
+import Layout from "../layout/Layout";
 import Providers from "./Providers";
 
-const ProtectedRoutes = ({ children }) => {
+const ProtectedRoutes = () => {
   return (
     <Providers>
-      <Ticker />
-      <Header />
-      <Switch>
-        <Route exact path="/">
-          {children}
-          <Content />
-        </Route>
-        <Route exact path="/account" component={UserAccount} />
-        <Route component={NotFound} />
-      </Switch>
-      <Footer />
+      <Layout>
+        <Switch>
+          <Route exact path="/" component={Content} />
+          <Route exact path="/account" component={UserAccount} />
+          <Route exact path="/thankyou" component={SignoutScreen} />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </Layout>
     </Providers>
   );
 };
