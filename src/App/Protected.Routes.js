@@ -12,18 +12,21 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import SignoutScreen from "../components/Auth/SignoutScreen";
 import UserAccount from "../components/User/UserAccount";
+import Content from "../layout/Content";
 import Layout from "../layout/Layout";
 import Providers from "./Providers";
 
 const ProtectedRoutes = () => {
   return (
     <Providers>
-      <Switch>
-        <Route exact path="/" component={Layout} />
-        <Route exact path="/account" component={UserAccount} />
-        <Route exact path="/thankyou" component={SignoutScreen} />
-        <Redirect from="*" to="/" />
-      </Switch>
+      <Layout>
+        <Switch>
+          <Route exact path="/" component={Content} />
+          <Route exact path="/account" component={UserAccount} />
+          <Route exact path="/thankyou" component={SignoutScreen} />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </Layout>
     </Providers>
   );
 };

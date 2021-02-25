@@ -14,16 +14,15 @@ import Ticker from "../components/common/Ticker";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import PolicyBanner from "../components/Privacy/PolicyBanner";
-import Content from "./Content";
 
-const Layout = () => {
+const Layout = ({children}) => {
   return (
     <Fragment>
       <Ticker />
       <Header />
       <WelcomeDialog />
       <PolicyBanner />
-      <Content />
+      {children}
       <Footer />
     </Fragment>
   );
