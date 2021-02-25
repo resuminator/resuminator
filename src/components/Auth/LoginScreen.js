@@ -10,7 +10,6 @@
 
 import {
   Box,
-  Button,
 
   makeStyles,
   TextField,
@@ -20,8 +19,8 @@ import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import ServerCheck from "../../App/ServerCheck";
 import firebaseSDK from "../../Services/firebaseSDK";
-import Loader from "../common/Loader";
 import ForgotPasswordText from "./ForgotPasswordText";
+import LoginButton from "./LoginButton";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -42,23 +41,6 @@ const useStyles = makeStyles((theme) => ({
   TextField: {
     marginTop: "1rem",
   },
-  loginBtn: {
-    textTransform: "none",
-    fontFamily: "Karla",
-    letterSpacing: "-0.05rem",
-    fontSize: "1rem",
-    marginTop: "2rem",
-    display: "flex",
-    textAlign: "center",
-  },
-  loader: {
-    margin: "0.88rem",
-    width: "2rem",
-    height: "0rem",
-    display: "flex",
-    alignContent: "center",
-    justifyContent: "space-around",
-  },
   subtitle: {
     margin: "0rem 0",
   },
@@ -66,8 +48,9 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginScreen = () => {
   const classes = useStyles();
-  const {addToast} = useToasts();
-  const error = (message) => addToast(message, {appearance: 'error', autoDismiss:true});
+  const { addToast } = useToasts();
+  const error = (message) =>
+    addToast(message, { appearance: "error", autoDismiss: true });
   const [userPayload, setUserPayload] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
 
@@ -142,20 +125,8 @@ const LoginScreen = () => {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        <ForgotPasswordText/>
-        <Button
-          variant="contained"
-          disableElevation
-          color="primary"
-          className={classes.loginBtn}
-          onClick={handleSubmit}
-        >
-          {loading ? (
-            <Loader className={classes.loader} />
-          ) : (
-            "Log in to Resuminator"
-          )}
-        </Button>
+        <ForgotPasswordText />
+        <LoginButton isLoading={loading} handleSubmit={handleSubmit} />
       </Box>
       <Typography variant="subtitle2" className={classes.subtitle}>
         Don't have an account yet?{" "}
