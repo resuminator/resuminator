@@ -19,6 +19,7 @@
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^17.0.0",
     "react-icons": "^3.11.0",
+    "react-images-uploading": "^3.1.2",
     "react-markdown": "^5.0.3",
     "react-new-window": "^0.1.2",
     "react-redux": "^7.2.2",
