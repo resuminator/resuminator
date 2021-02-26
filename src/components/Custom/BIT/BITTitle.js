@@ -8,9 +8,10 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { Avatar, Box, makeStyles, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import ImageUpload from "./ImageUpload";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,10 +31,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.5rem",
     fontWeight: 700,
   },
-  large: {
-    margin: "1rem",
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+  avatar: {
+    width: theme.spacing(10),
+    height: theme.spacing(10),
+  },
+  icon: {
+    color: theme.palette.getContrastText(theme.palette.primary.light),
   },
 }));
 
@@ -53,11 +56,11 @@ function BITTitle() {
         <Typography variant="h1" className={classes.title}>
           {userInfo.name}
         </Typography>
-        <Typography variant="h2" color="secondary" className={classes.subtitle}>
+        <Typography variant="h2" color="primary" className={classes.subtitle}>
           {userInfo.jobTitle}
         </Typography>
       </Box>
-      <Avatar className={classes.large}/>
+      <ImageUpload />
     </Box>
   );
 }
