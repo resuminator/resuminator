@@ -48,7 +48,7 @@ const ImageUpload = () => {
       {({ onImageUpload }) => (
         <Avatar className={classes.avatar}>
           <IconButton className={classes.icon} onClick={onImageUpload}>
-            {image.uploaded ? (
+            {image.value ? (
               <img
                 src={image.value[0].dataURL}
                 alt="User"
