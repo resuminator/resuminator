@@ -11,6 +11,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import SignoutScreen from "../components/Auth/SignoutScreen";
+import BITPage from "../components/Custom/BIT/BITPage";
 import UserAccount from "../components/User/UserAccount";
 import Content from "../layout/Content";
 import Layout from "../layout/Layout";
@@ -22,6 +23,7 @@ const ProtectedRoutes = () => {
       <Layout>
         <Switch>
           <Route exact path="/" component={Content} />
+          <Route exact path="/bitmesra" component={BITPage} />
           <Route exact path="/account" component={UserAccount} />
           <Route exact path="/thankyou" component={SignoutScreen} />
           <Redirect from="*" to="/" />

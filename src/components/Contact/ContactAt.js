@@ -121,6 +121,7 @@ function ContactAt({ socialMedia, link }) {
           display="flex"
           justifyItems="space-between"
           p={2}
+          pt={0.5}
           className={classes.root}
           width="100%"
         >
