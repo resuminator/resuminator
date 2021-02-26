@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     wordBreak: "break-word",
     width: "90%",
     textAlign: "center",
-    padding: "2rem 3rem 1rem 3rem",
+    padding: "1rem 3rem 1rem 3rem",
   },
   title: {
     fontFamily: theme.typography.fontFamily.primary,
