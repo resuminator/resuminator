@@ -15,13 +15,14 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
 import axios from "axios";
 import React, { useState } from "react";
+import { useToasts } from "react-toast-notifications";
 import ServerCheck from "../../App/ServerCheck";
 import { MAIL_WEBHOOK } from "../../utils/Server";
 import Loader from "../common/Loader";
 import { signUpUser } from "./AuthAPIs";
+import SecondaryAction from "./SecondaryAction";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -58,9 +59,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     textAlign: "center",
   },
-  error: {
-    color: red[500],
-  },
   loader: {
     margin: "0.88rem",
     width: "2rem",
@@ -76,20 +74,21 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUpScreen = () => {
   const classes = useStyles();
+  const { addToast } = useToasts();
+  const setError = (message) =>
+    addToast(message, { appearance: "error", autoDismiss: true });
   const [userPayload, setUserPayload] = useState({
     email: "",
     password: "",
     confirmPassword: "",
     fullname: "",
   });
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
   const MIN_LENGTH = 8;
 
   const handleChange = (e) => {
     e.preventDefault();
-    setError("");
     setUserPayload({ ...userPayload, [e.target.name]: e.target.value });
   };
 
@@ -231,15 +230,7 @@ const SignUpScreen = () => {
           </Button>
         )}
       </Box>
-      <Typography variant="subtitle2" className={classes.subtitle}>
-        Already have an account?{" "}
-        <a href="/" className={classes.buttonText}>
-          Log in!
-        </a>
-      </Typography>
-      <Typography className={classes.error} variant="body2">
-        {error}
-      </Typography>
+      <SecondaryAction page="SIGNUP"/>
       <ServerCheck />
     </Box>
   );

@@ -27,6 +27,15 @@ const SecondaryAction = ({ page }) => {
           </a>
         </Typography>
       );
+    case "SIGNUP":
+      return (
+        <Typography variant="subtitle2" className={classes.subtitle}>
+          Already have an account?{" "}
+          <a href="/" className={classes.buttonText}>
+            Log in!
+          </a>
+        </Typography>
+      );
     default:
       return null;
   }
