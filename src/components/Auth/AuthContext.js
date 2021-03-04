@@ -15,17 +15,21 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [uid, setUid] = useState("");
+  const [verified, setVerified] = useState(false);
+  const [user, setUser] = useState(null);
 
   React.useEffect(() => {
     firebaseSDK.auth().onAuthStateChanged((user) => {
       if (user) {
         setUid(() => user.uid);
+        setVerified(() => user.emailVerified);
+        setUser(user);
       }
     });
   }, []);
 
   return (
-    <AuthContext.Provider value={{ uid, setUid }}>
+    <AuthContext.Provider value={{ user, verified, uid, setUid }}>
       {children}
     </AuthContext.Provider>
   );

@@ -64,14 +64,5 @@ export const signUpUser = async (email, password) => {
   return firebaseSDK
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then((userCredentials) =>
-      createNewUser(
-        userCredentials.user.uid,
-        userCredentials.user.email
-      ).then(() =>
-        createNewSkillDocument(userCredentials.user.uid).then(() =>
-          createNewSettingsDocument(userCredentials.user.uid)
-        )
-      )
-    );
+    .then((creds) => creds.user.sendEmailVerification());
 };
