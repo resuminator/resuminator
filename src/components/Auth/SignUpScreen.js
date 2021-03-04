@@ -120,7 +120,7 @@ const SignUpScreen = () => {
             recepient: userPayload.email,
             name: userPayload.fullname,
           })
-          .catch((err) => setError(err.message))
+          .catch((e) => console.log(e))
       )
       .then(() => {
         setLoading(false);
@@ -230,7 +230,7 @@ const SignUpScreen = () => {
           </Button>
         )}
       </Box>
-      <SecondaryAction page="SIGNUP"/>
+      <SecondaryAction page="SIGNUP" />
       <ServerCheck />
     </Box>
   );
