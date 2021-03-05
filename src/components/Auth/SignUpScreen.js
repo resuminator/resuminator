@@ -210,7 +210,7 @@ const SignUpScreen = () => {
             color="primary"
             disableElevation
             className={classes.loginBtn}
-            href="/"
+            href="/verify"
           >
             Get Started! 🚀
           </Button>
