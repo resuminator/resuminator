@@ -22,27 +22,24 @@ import Providers from "./Providers";
 const ProtectedRoutes = () => {
   const auth = useContext(AuthContext);
 
-  const VerifiedRoutes = () => (
-    <Switch>
-      <Route exact path="/" component={Content} />
-      <Route exact path="/bitmesra" component={BITPage} />
-      <Route exact path="/account" component={UserAccount} />
-      <Route exact path="/thankyou" component={SignoutScreen} />
-      <Redirect from="*" to="/" />
-    </Switch> 
-  );
-
-  const UnverifiedRoutes = () => (
-    <Switch>
-      <Route exact path="/verify" component={VerifyEmail} />
-      <Redirect from="*" to="/verify" />
-    </Switch>
+  const VerifyRoute = ({ ...rest }) => (
+    <Route
+      {...rest}
+      render={() => (!auth.verified ? <VerifyEmail /> : <Redirect to="/" />)}
+    />
   );
 
   return (
     <Providers>
       <Layout>
-        {auth.verified ? <VerifiedRoutes /> : <UnverifiedRoutes />}
+        <Switch>
+          <Route exact path="/" component={Content} />
+          <Route exact path="/bitmesra" component={BITPage} />
+          <Route exact path="/account" component={UserAccount} />
+          <Route exact path="/thankyou" component={SignoutScreen} />
+          <VerifyRoute exact path="/verify" />
+          <Redirect from="*" to="/" />
+        </Switch>
       </Layout>
     </Providers>
   );
