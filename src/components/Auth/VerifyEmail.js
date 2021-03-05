@@ -17,7 +17,7 @@ import { AuthContext } from "./AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    fontFamily: "Inter",
+    fontFamily: "Karla",
     fontWeight: 700,
     letterSpacing: "-0.2rem",
     fontSize: "3rem",
@@ -89,14 +89,34 @@ const VerifyEmail = () => {
                 )
               );
           }
-        });
+        })
   }, 2000);
 
   if (verified) {
-    console.log("Verified");
     window.location.href = "/";
     clearInterval(checkInterval);
   }
+
+  const MessageBody = () =>
+    verified ? (
+      <Typography
+        variant="body1"
+        className={classes.notice}
+        color="textSecondary"
+      >
+        Redirecting ...
+      </Typography>
+    ) : (
+      <Typography
+        variant="body1"
+        className={classes.notice}
+        color="textSecondary"
+      >
+        We have sent you an email to verify your account for Resuminator. Please
+        follow the link in that mail to continue. If you didn't get an email,
+        click on the button below to re-send the verification email
+      </Typography>
+    );
 
   return (
     <Box
@@ -114,17 +134,9 @@ const VerifyEmail = () => {
           Resuminator
         </Typography>
         <Typography variant="h2" className={classes.greeting}>
-          Just one last step...
+          Please verify your email.
         </Typography>
-        <Typography
-          variant="body1"
-          className={classes.notice}
-          color="textSecondary"
-        >
-          We have sent you an email to verify your account for Resuminator.
-          Please follow the link in that mail to continue. If you didn't get an
-          email, click on the button below to re-send the verification email
-        </Typography>
+        <MessageBody />
       </Box>
       <Button
         variant="contained"
