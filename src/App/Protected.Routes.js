@@ -21,7 +21,6 @@ import Providers from "./Providers";
 
 const ProtectedRoutes = () => {
   const auth = useContext(AuthContext);
-  console.log(auth);
 
   const VerifiedRoutes = () => (
     <Switch>

@@ -75,10 +75,6 @@ const VerifyEmail = () => {
         .currentUser.reload()
         .then(() => {
           if (firebaseSDK.auth().currentUser.emailVerified) {
-            addToast("Email verified successfully", {
-              appearance: "success",
-              autoDismiss: true,
-            });
             const { uid, email } = firebaseSDK.auth().currentUser;
             createNewUser(uid, email)
               .then(() => setVerified(true))
@@ -90,7 +86,8 @@ const VerifyEmail = () => {
               );
           }
         })
-  }, 2000);
+        .catch((e) => console.log(e));
+  }, 5000);
 
   if (verified) {
     window.location.href = "/";
