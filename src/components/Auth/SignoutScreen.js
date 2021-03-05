@@ -76,11 +76,10 @@ const SignoutScreen = () => {
           className={classes.notice}
           color="textSecondary"
         >
-          I hope you liked working with this application. If there is something
-          in your mind which would improve the product, you may mail me at{" "}
-          <a href="mailto:viveknigam.nigam3@gmail.com">
-            viveknigam.nigam3@gmail.com
-          </a>
+          We hope you liked working with this application. If there is something
+          in your mind which would improve the product or you have any feedback,
+          you may mail us at{" "}
+          <a href="mailto:hello@resuminator.in">hello@resuminator.in</a>
         </Typography>
         <Button
           variant="contained"
