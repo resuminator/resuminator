@@ -9,20 +9,22 @@
  */
 
 import { Box, Button, makeStyles, Typography } from "@material-ui/core";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useToasts } from "react-toast-notifications";
+import firebaseSDK from "../../Services/firebaseSDK";
+import { createNewUser } from "./AuthAPIs";
 import { AuthContext } from "./AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    fontFamily: "Karla",
+    fontFamily: "Inter",
     fontWeight: 700,
     letterSpacing: "-0.2rem",
     fontSize: "3rem",
     color: theme.palette.primary.dark,
   },
   notice: {
-    fontFamily: "Karla",
+    fontFamily: "Inter",
     width: "20rem",
     marginTop: "2rem",
     textAlign: "cneter",
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   greeting: {
     fontSize: "1.2rem",
-    fontFamily: "Karla",
+    fontFamily: "Inter",
     letterSpacing: "-0.08rem",
     color: theme.palette.grey[900],
     padding: "1rem",
@@ -55,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 const VerifyEmail = () => {
   const classes = useStyles();
   const auth = useContext(AuthContext);
+  const [verified, setVerified] = useState(false);
   const { addToast } = useToasts();
 
   const handleVerification = () => {
@@ -64,6 +67,36 @@ const VerifyEmail = () => {
       autoDismiss: true,
     });
   };
+
+  const checkInterval = setInterval(() => {
+    if (auth.user)
+      firebaseSDK
+        .auth()
+        .currentUser.reload()
+        .then(() => {
+          if (firebaseSDK.auth().currentUser.emailVerified) {
+            addToast("Email verified successfully", {
+              appearance: "success",
+              autoDismiss: true,
+            });
+            const { uid, email } = firebaseSDK.auth().currentUser;
+            createNewUser(uid, email)
+              .then(() => setVerified(true))
+              .catch(() =>
+                addToast(
+                  "Some unexpected error occured, please refresh the page and try again.",
+                  { appearance: "error", autoDismiss: true }
+                )
+              );
+          }
+        });
+  }, 2000);
+
+  if (verified) {
+    console.log("Verified");
+    window.location.href = "/";
+    clearInterval(checkInterval);
+  }
 
   return (
     <Box

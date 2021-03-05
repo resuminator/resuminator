@@ -35,8 +35,8 @@ const ProtectedRoutes = () => {
 
   const UnverifiedRoutes = () => (
     <Switch>
-      <Route exact path="/" component={VerifyEmail} />
-      <Redirect from="*" to="/" />
+      <Route exact path="/verify" component={VerifyEmail} />
+      <Redirect from="*" to="/verify" />
     </Switch>
   );
 
