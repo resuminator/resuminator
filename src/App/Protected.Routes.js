@@ -18,9 +18,11 @@ import UserAccount from "../components/User/UserAccount";
 import Content from "../layout/Content";
 import Layout from "../layout/Layout";
 import Providers from "./Providers";
+import Splash from "./Splash";
 
 const ProtectedRoutes = () => {
   const verified = useSelector((state) => state.userInfo.verified);
+  const init = useSelector((state) => state.app.init);
 
   const VerifyRoute = ({ ...rest }) => (
     <Route
@@ -28,6 +30,8 @@ const ProtectedRoutes = () => {
       render={() => (!verified ? <VerifyEmail /> : <Redirect to="/" />)}
     />
   );
+
+  if(!init) return <Providers><Splash/></Providers>
 
   return (
     <Providers>
