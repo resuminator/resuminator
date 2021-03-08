@@ -10,7 +10,6 @@
 
 import React, { Fragment } from "react";
 import WelcomeDialog from "../App/WelcomeDialog";
-import Ticker from "../components/common/Ticker";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import PolicyBanner from "../components/Privacy/PolicyBanner";
@@ -18,7 +17,6 @@ import PolicyBanner from "../components/Privacy/PolicyBanner";
 const Layout = ({children}) => {
   return (
     <Fragment>
-      <Ticker />
       <Header />
       <WelcomeDialog />
       <PolicyBanner />
