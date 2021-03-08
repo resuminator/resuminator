@@ -13,7 +13,7 @@ import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import firebaseSDK from "../../Services/firebaseSDK";
-import { updateUserInfo } from "../Title/title.actions";
+import { addUserInfo } from "../Title/title.actions";
 import { createNewUser } from "./AuthAPIs";
 import { AuthContext } from "./AuthContext";
 
@@ -60,7 +60,6 @@ const VerifyEmail = () => {
   const classes = useStyles();
   const auth = useContext(AuthContext);
   const verified = useSelector((state) => state.userInfo.verified);
-  const _id = useSelector((state) => state.userInfo._id);
   const dispatch = useDispatch();
   const { addToast } = useToasts();
 
@@ -83,8 +82,7 @@ const VerifyEmail = () => {
               const { uid, email } = firebaseSDK.auth().currentUser;
               createNewUser(uid, email)
                 .then((response) => {
-                  const _id = response._id;
-                  dispatch(updateUserInfo(uid, _id, { verified: true }));
+                  dispatch(addUserInfo({ verified: response.verified }));
                 })
                 .catch(() =>
                   addToast(
@@ -98,7 +96,7 @@ const VerifyEmail = () => {
     }, 5000);
 
     return () => clearInterval(checkInterval);
-  }, [addToast, dispatch, _id, auth.user]);
+  }, [addToast, dispatch, auth.user]);
 
   if (verified) {
     window.location.href = "/";

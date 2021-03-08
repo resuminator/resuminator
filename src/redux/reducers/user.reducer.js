@@ -26,7 +26,7 @@ const initialState = {
     phone: "",
   },
   avatar: "",
-  verified: JSON.parse(window.localStorage.getItem("user_verified")) || false,
+  verified: false,
 };
 
 const userReducer = (state = initialState, action) => {

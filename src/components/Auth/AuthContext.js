@@ -9,14 +9,12 @@
  */
 
 import React, { createContext, useState } from "react";
-import { useSelector } from "react-redux";
 import firebaseSDK from "../../Services/firebaseSDK";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [uid, setUid] = useState("");
-  const verified = useSelector(state=> state.userInfo.verified);
   const [user, setUser] = useState(null);
 
   React.useEffect(() => {
@@ -24,15 +22,12 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         setUid(() => user.uid);
         setUser(user);
-
-        //syncing local state from firebase state
-        if (!verified) localStorage.setItem("user_verified", user.emailVerified);
       }
     });
-  }, [verified]);
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ user, verified, uid, setUid }}>
+    <AuthContext.Provider value={{ user, uid, setUid }}>
       {children}
     </AuthContext.Provider>
   );
