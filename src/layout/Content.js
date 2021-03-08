@@ -10,6 +10,8 @@
 
 import { Box } from "@material-ui/core";
 import React, { useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { AlertDialog } from "../components/common/AlertDialog";
 import PrintButton from "../components/common/PrintButton";
 import DownloadConfirmDialog from "../components/Feedback/DownloadConfirmDialog";
 import Resume from "../components/ResumePaper/Resume";
@@ -20,6 +22,7 @@ import MobileView from "../layout/MobileView";
 function Content() {
   const { width } = useWindowDimensions();
   const resume = useRef();
+  const verified = useSelector((state) => state.userInfo.verified);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
 
   return (
@@ -33,6 +36,13 @@ function Content() {
             id="main"
             m={5}
           >
+            <AlertDialog
+              title="Verify your email"
+              message="We need to verify the user email to enable the account for any user. Without verifying you may not be able to use your Resuminator account."
+              buttonText="Verify Email"
+              open={!verified}
+              onClick={() => (window.location.href = "/verify")}
+            />
             <InputLayout />
             <Resume element={resume} />
             <DownloadConfirmDialog
