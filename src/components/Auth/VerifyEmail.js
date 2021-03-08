@@ -9,9 +9,11 @@
  */
 
 import { Box, Button, makeStyles, Typography } from "@material-ui/core";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import firebaseSDK from "../../Services/firebaseSDK";
+import { addUserInfo } from "../Title/title.actions";
 import { createNewUser } from "./AuthAPIs";
 import { AuthContext } from "./AuthContext";
 
@@ -57,7 +59,8 @@ const useStyles = makeStyles((theme) => ({
 const VerifyEmail = () => {
   const classes = useStyles();
   const auth = useContext(AuthContext);
-  const [verified, setVerified] = useState(false);
+  const verified = useSelector((state) => state.userInfo.verified);
+  const dispatch = useDispatch();
   const { addToast } = useToasts();
 
   const handleVerification = () => {
@@ -68,30 +71,33 @@ const VerifyEmail = () => {
     });
   };
 
-  const checkInterval = setInterval(() => {
-    if (auth.user)
-      firebaseSDK
-        .auth()
-        .currentUser.reload()
-        .then(() => {
-          if (firebaseSDK.auth().currentUser.emailVerified) {
-            const { uid, email } = firebaseSDK.auth().currentUser;
-            createNewUser(uid, email)
-              .then(() => setVerified(true))
-              .catch(() =>
-                addToast(
-                  "Some unexpected error occured, please refresh the page and try again.",
-                  { appearance: "error", autoDismiss: true }
-                )
-              );
-          }
-        })
-        .catch((e) => console.log(e));
-  }, 5000);
+  useEffect(() => {
+    const checkInterval = setInterval(() => {
+      if (auth.user)
+        firebaseSDK
+          .auth()
+          .currentUser.reload()
+          .then(() => {
+            if (firebaseSDK.auth().currentUser.emailVerified) {
+              const { uid, email } = firebaseSDK.auth().currentUser;
+              createNewUser(uid, email)
+                .then(() => dispatch(addUserInfo({ verified: true })))
+                .catch(() =>
+                  addToast(
+                    "Some unexpected error occured, please refresh the page and try again.",
+                    { appearance: "error", autoDismiss: true }
+                  )
+                );
+            }
+          })
+          .catch((e) => console.log(e));
+    }, 5000);
+
+    return () => clearInterval(checkInterval);
+  }, [addToast, dispatch, auth.user]);
 
   if (verified) {
     window.location.href = "/";
-    clearInterval(checkInterval);
   }
 
   const MessageBody = () =>
