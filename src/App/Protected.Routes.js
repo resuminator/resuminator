@@ -8,9 +8,9 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import React, { useContext } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { AuthContext } from "../components/Auth/AuthContext";
 import SignoutScreen from "../components/Auth/SignoutScreen";
 import VerifyEmail from "../components/Auth/VerifyEmail";
 import BITPage from "../components/Custom/BIT/BITPage";
@@ -20,12 +20,12 @@ import Layout from "../layout/Layout";
 import Providers from "./Providers";
 
 const ProtectedRoutes = () => {
-  const auth = useContext(AuthContext);
+  const verified = useSelector((state) => state.userInfo.verified);
 
   const VerifyRoute = ({ ...rest }) => (
     <Route
       {...rest}
-      render={() => (!auth.verified ? <VerifyEmail /> : <Redirect to="/" />)}
+      render={() => (!verified ? <VerifyEmail /> : <Redirect to="/" />)}
     />
   );
 

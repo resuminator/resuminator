@@ -9,24 +9,27 @@
  */
 
 import React, { createContext, useState } from "react";
+import { useSelector } from "react-redux";
 import firebaseSDK from "../../Services/firebaseSDK";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [uid, setUid] = useState("");
-  const [verified, setVerified] = useState(false);
+  const verified = useSelector(state=> state.userInfo.verified);
   const [user, setUser] = useState(null);
 
   React.useEffect(() => {
     firebaseSDK.auth().onAuthStateChanged((user) => {
       if (user) {
         setUid(() => user.uid);
-        setVerified(() => user.emailVerified);
         setUser(user);
+
+        //syncing local state from firebase state
+        if (!verified && user.emailVerified) localStorage.setItem("user_verified", true);
       }
     });
-  }, []);
+  }, [verified]);
 
   return (
     <AuthContext.Provider value={{ user, verified, uid, setUid }}>
