@@ -13,7 +13,7 @@ import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import firebaseSDK from "../../Services/firebaseSDK";
-import { addUserInfo } from "../Title/title.actions";
+import { addUserInfo, updateUserInfo } from "../Title/title.actions";
 import { createNewUser } from "./AuthAPIs";
 import { AuthContext } from "./AuthContext";
 
@@ -60,6 +60,7 @@ const VerifyEmail = () => {
   const classes = useStyles();
   const auth = useContext(AuthContext);
   const verified = useSelector((state) => state.userInfo.verified);
+  const _id = useSelector((state) => state.userInfo._id);
   const dispatch = useDispatch();
   const { addToast } = useToasts();
 
@@ -81,7 +82,11 @@ const VerifyEmail = () => {
             if (firebaseSDK.auth().currentUser.emailVerified) {
               const { uid, email } = firebaseSDK.auth().currentUser;
               createNewUser(uid, email)
-                .then(() => dispatch(addUserInfo({ verified: true })))
+                .then((response) => {
+                  console.log(response)
+                  const _id = response.data._id;
+                  dispatch(updateUserInfo(uid, _id, { verified: true }));
+                })
                 .catch(() =>
                   addToast(
                     "Some unexpected error occured, please refresh the page and try again.",
@@ -94,7 +99,7 @@ const VerifyEmail = () => {
     }, 5000);
 
     return () => clearInterval(checkInterval);
-  }, [addToast, dispatch, auth.user]);
+  }, [addToast, dispatch, _id, auth.user]);
 
   if (verified) {
     window.location.href = "/";
