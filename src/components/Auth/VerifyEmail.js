@@ -13,7 +13,7 @@ import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import firebaseSDK from "../../Services/firebaseSDK";
-import { addUserInfo, updateUserInfo } from "../Title/title.actions";
+import { updateUserInfo } from "../Title/title.actions";
 import { createNewUser } from "./AuthAPIs";
 import { AuthContext } from "./AuthContext";
 
@@ -83,8 +83,7 @@ const VerifyEmail = () => {
               const { uid, email } = firebaseSDK.auth().currentUser;
               createNewUser(uid, email)
                 .then((response) => {
-                  console.log(response)
-                  const _id = response.data._id;
+                  const _id = response._id;
                   dispatch(updateUserInfo(uid, _id, { verified: true }));
                 })
                 .catch(() =>
