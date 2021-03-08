@@ -15,11 +15,11 @@ import App from "./App";
 
 const Root = ({ store }) => {
   return (
-    <AuthProvider>
-      <Provider store={store}>
+    <Provider store={store}>
+      <AuthProvider>
         <App />
-      </Provider>
-    </AuthProvider>
+      </AuthProvider>
+    </Provider>
   );
 };
 
