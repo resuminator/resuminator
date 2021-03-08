@@ -23,9 +23,10 @@ const initialState = {
     twitter: "",
     github: "",
     portfolio: "",
-    phone: ""
+    phone: "",
   },
-  avatar: ""
+  avatar: "",
+  verified: JSON.parse(window.localStorage.getItem("user_verified")) || false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -37,7 +38,7 @@ const userReducer = (state = initialState, action) => {
       };
     }
     case USERINFO.UPDATE_CONTACT: {
-      return {...state, contact: action.payload}
+      return { ...state, contact: action.payload };
     }
     case USERINFO.FETCH_REQUEST: {
       return { ...state, loading: true };
@@ -52,6 +53,7 @@ const userReducer = (state = initialState, action) => {
         contact: action.payload.contact,
         avatar: action.payload.avatar,
         email: action.payload.email,
+        verified: action.payload.verified,
         loading: false,
       };
     }
@@ -59,7 +61,7 @@ const userReducer = (state = initialState, action) => {
       return { ...state, error: action.payload, loading: false };
     }
     case USERINFO.UPDATE_ERROR: {
-      return {...state, loading: false, error: action.payload}
+      return { ...state, loading: false, error: action.payload };
     }
     default: {
       return state;
