@@ -87,6 +87,10 @@ const SignUpScreen = () => {
   const [completed, setCompleted] = useState(false);
   const MIN_LENGTH = 8;
 
+  if (completed) {
+    window.location.href = "/verify";
+  }
+
   const handleChange = (e) => {
     e.preventDefault();
     setUserPayload({ ...userPayload, [e.target.name]: e.target.value });
@@ -204,31 +208,19 @@ const SignUpScreen = () => {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        {completed ? (
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
-            className={classes.loginBtn}
-            href="/verify"
-          >
-            Get Started! 🚀
-          </Button>
-        ) : (
-          <Button
-            variant="contained"
-            disableElevation
-            color="primary"
-            className={classes.loginBtn}
-            onClick={handleSubmit}
-          >
-            {loading ? (
-              <Loader className={classes.loader} />
-            ) : (
-              "Create new account"
-            )}
-          </Button>
-        )}
+        <Button
+          variant="contained"
+          disableElevation
+          color="primary"
+          className={classes.loginBtn}
+          onClick={handleSubmit}
+        >
+          {loading ? (
+            <Loader className={classes.loader} />
+          ) : (
+            "Create new account"
+          )}
+        </Button>
       </Box>
       <SecondaryAction page="SIGNUP" />
       <ServerCheck />
