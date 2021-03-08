@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
         setUser(user);
 
         //syncing local state from firebase state
-        if (!verified && user.emailVerified) localStorage.setItem("user_verified", true);
+        if (!verified) localStorage.setItem("user_verified", user.emailVerified);
       }
     });
   }, [verified]);
