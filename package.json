@@ -1,6 +1,6 @@
 {
   "name": "resuminator",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
@@ -19,12 +19,14 @@
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^17.0.0",
     "react-icons": "^3.11.0",
+    "react-images-uploading": "^3.1.2",
     "react-markdown": "^5.0.3",
     "react-new-window": "^0.1.2",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.0",
     "react-to-print": "^2.12.1",
+    "react-toast-notifications": "^2.4.3",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0"

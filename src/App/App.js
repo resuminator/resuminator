@@ -17,7 +17,6 @@ import firebaseSDK from "../Services/firebaseSDK";
 import "../styles/App.css";
 import ProtectedRoutes from "./Protected.Routes";
 import Routes from "./Routes";
-import WelcomeDialog from "./WelcomeDialog";
 
 function App() {
   const savedState = JSON.parse(localStorage.getItem("loggedIn"));
@@ -31,21 +30,13 @@ function App() {
   });
 
   React.useEffect(() => {
-    if (loggedIn && auth.uid && !newUser) {
+    if (loggedIn && auth.uid && auth.user && !newUser) {
       dispatch(initApp(auth.uid));
     }
-  }, [dispatch, loggedIn, auth.uid, newUser]);
+  }, [dispatch, loggedIn, auth.uid, auth.user, newUser]);
 
   return (
-    <Router>
-      {!loggedIn || newUser ? (
-        <Routes />
-      ) : (
-        <ProtectedRoutes>
-          <WelcomeDialog />
-        </ProtectedRoutes>
-      )}
-    </Router>
+    <Router>{!loggedIn || newUser ? <Routes /> : <ProtectedRoutes />}</Router>
   );
 }
 

@@ -9,29 +9,42 @@
  */
 
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import Ticker from "../components/common/Ticker";
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
+import { useSelector } from "react-redux";
+import { Redirect, Route, Switch } from "react-router-dom";
+import SignoutScreen from "../components/Auth/SignoutScreen";
+import VerifyEmail from "../components/Auth/VerifyEmail";
+import BITPage from "../components/Custom/BIT/BITPage";
 import UserAccount from "../components/User/UserAccount";
 import Content from "../layout/Content";
-import NotFound from "./404";
+import Layout from "../layout/Layout";
 import Providers from "./Providers";
+import Splash from "./Splash";
 
-const ProtectedRoutes = ({ children }) => {
+const ProtectedRoutes = () => {
+  const verified = useSelector((state) => state.userInfo.verified);
+  const init = useSelector((state) => state.app.init);
+
+  const VerifyRoute = ({ ...rest }) => (
+    <Route
+      {...rest}
+      render={() => (!verified ? <VerifyEmail /> : <Redirect to="/" />)}
+    />
+  );
+
+  if(!init) return <Providers><Splash/></Providers>
+
   return (
     <Providers>
-      <Ticker />
-      <Header />
-      <Switch>
-        <Route exact path="/">
-          {children}
-          <Content />
-        </Route>
-        <Route exact path="/account" component={UserAccount} />
-        <Route component={NotFound} />
-      </Switch>
-      <Footer />
+      <Layout>
+        <Switch>
+          <Route exact path="/" component={Content} />
+          <Route exact path="/bitmesra" component={BITPage} />
+          <Route exact path="/account" component={UserAccount} />
+          <Route exact path="/thankyou" component={SignoutScreen} />
+          <VerifyRoute exact path="/verify" />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </Layout>
     </Providers>
   );
 };

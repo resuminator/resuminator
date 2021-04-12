@@ -10,19 +10,16 @@
 
 import { Box } from "@material-ui/core";
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { AlertDialog } from "../components/common/AlertDialog";
-import PrintButton from "../components/common/PrintButton";
-import DownloadConfirmDialog from "../components/Feedback/DownloadConfirmDialog";
-import Resume from "../components/ResumePaper/Resume";
-import InputLayout from "../components/UserInput/InputLayout";
-import useWindowDimensions from "../hooks/useWindowDimensions";
-import MobileView from "../layout/MobileView";
+import PrintButton from "../../common/PrintButton";
+import DownloadConfirmDialog from "../../Feedback/DownloadConfirmDialog";
+import InputLayout from "../../UserInput/InputLayout";
+import useWindowDimensions from "../../../hooks/useWindowDimensions";
+import MobileView from "../../../layout/MobileView";
+import BITResume from "./BITResume";
 
-function Content() {
+function BITPage() {
   const { width } = useWindowDimensions();
   const resume = useRef();
-  const verified = useSelector((state) => state.userInfo.verified);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
 
   return (
@@ -36,15 +33,8 @@ function Content() {
             id="main"
             m={5}
           >
-            <AlertDialog
-              title="Verify your email"
-              message="We need to verify the user email to enable the account for any user. Without verifying you may not be able to use your Resuminator account."
-              buttonText="Verify Email"
-              open={!verified}
-              onClick={() => (window.location.href = "/verify")}
-            />
             <InputLayout />
-            <Resume element={resume} />
+            <BITResume element={resume} />
             <DownloadConfirmDialog
               open={openConfirmDialog}
               setOpen={setOpenConfirmDialog}
@@ -61,4 +51,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default BITPage;
