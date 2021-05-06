@@ -1,9 +1,10 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react";
 
-const TwoColumn: React.FC = ({ children }) => {
+const Layout: React.FC = ({ children }) => {
   return (
     <Box
+      px={{ md: "4rem", lg: "7rem" }}
       display="flex"
       alignItems="flex-start"
       justifyContent="space-between"
@@ -14,4 +15,4 @@ const TwoColumn: React.FC = ({ children }) => {
   );
 };
 
-export default TwoColumn;
+export default Layout;
