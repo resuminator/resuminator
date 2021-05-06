@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/layout";
+import { Box, BoxProps } from "@chakra-ui/layout";
 import React from "react";
 
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC<BoxProps> = ({ children, ...props }) => {
   return (
     <Box
       px={{ md: "4rem", lg: "7rem" }}
@@ -9,6 +9,7 @@ const Layout: React.FC = ({ children }) => {
       alignItems="flex-start"
       justifyContent="space-between"
       height="100vh"
+      {...props}
     >
       {children}
     </Box>
