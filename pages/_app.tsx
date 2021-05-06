@@ -1,5 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import "@fontsource/inter";
+import "@fontsource/inter/500.css";
 import "@fontsource/manrope";
 import { AppProps } from "next/app";
 import "../styles/globals.css";
