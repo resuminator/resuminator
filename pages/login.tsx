@@ -1,8 +1,7 @@
 import { Box, Text } from "@chakra-ui/layout";
 import { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
-import LinkText from "../components/common/LinkText";
 import Layout from "../components/layouts";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
 import LogInWithEmail from "../modules/Auth/LoginWithEmail";
