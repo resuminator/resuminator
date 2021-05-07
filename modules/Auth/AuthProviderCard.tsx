@@ -59,7 +59,7 @@ const ClientIcon: React.FC<AuthProviderProps & IconProps> = ({
 const getColor = (client) => {
   switch (client) {
     case "Google":
-      return "blue";
+      return "blue.500";
     case "Twitter":
       return "cyan.500";
     case "GitHub":

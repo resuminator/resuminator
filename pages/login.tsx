@@ -1,9 +1,10 @@
 import { Box, Text } from "@chakra-ui/layout";
 import { NextPage } from "next";
-import React, { Fragment, useEffect, useState } from "react";
-import InputField from "../components/common/InputField";
+import React, { useEffect, useState } from "react";
+import LinkText from "../components/common/LinkText";
 import Layout from "../components/layouts";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
+import LogInWithEmail from "../modules/Auth/LoginWithEmail";
 
 const Login: NextPage = () => {
   const [client, setClient] = useState(null);
@@ -34,17 +35,38 @@ const Login: NextPage = () => {
         flexBasis="40%"
         bg="whiteAlpha.100"
       >
-        <AuthProvidersList setClient={setClient} />
+        {client === "Email" ? (
+          <LogInWithEmail />
+        ) : (
+          <AuthProvidersList setClient={setClient} />
+        )}
+        <Box textAlign="center" my="4" fontSize={{ base: "sm", md: "md" }}>
+          <Text>
+            Don&apos;t have an account?{" "}
+            <LinkText href="/signup" fontWeight="medium" color="blue.600">
+              Create one
+            </LinkText>
+          </Text>
+          <Text
+            align="center"
+            color="InactiveCaptionText"
+            fontSize="smaller"
+            my="4"
+          >
+            Continue to log in to agree to Resuminator’s{" "}
+            <LinkText href="" textDecoration="underline">
+              Terms of Service
+            </LinkText>{" "}
+            and acknowledge that Resuminator’s{" "}
+            <LinkText href="" textDecoration="underline">
+              Privacy Policy
+            </LinkText>{" "}
+            applies to you.
+          </Text>
+        </Box>
       </Box>
     </Layout>
   );
 };
-
-export const LogInWithEmail = () => (
-  <Fragment>
-    <InputField label="Email" />
-    <InputField label="Password" />
-  </Fragment>
-);
 
 export default Login;
