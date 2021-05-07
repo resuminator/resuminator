@@ -2,17 +2,20 @@ import Icon, { IconProps } from "@chakra-ui/icon";
 import { Box, BoxProps, Text } from "@chakra-ui/layout";
 import React from "react";
 import {
-  AiOutlineGoogle,
-  AiOutlineTwitter,
   AiOutlineGithub,
+  AiOutlineGoogle,
   AiOutlineMail,
+  AiOutlineTwitter,
 } from "react-icons/ai";
 
-interface Props {
+export interface AuthProviderProps {
   client: "Google" | "GitHub" | "Twitter" | "Email";
 }
 
-const AuthProviderCard: React.FC<Props & BoxProps> = ({ client, ...rest }) => {
+const AuthProviderCard: React.FC<AuthProviderProps & BoxProps> = ({
+  client,
+  ...rest
+}) => {
   return (
     <Box
       display="flex"
@@ -25,7 +28,7 @@ const AuthProviderCard: React.FC<Props & BoxProps> = ({ client, ...rest }) => {
       m="2"
       color={getColor(client)}
       transition="color 0.15s ease, background-color 0.15s ease"
-      _hover={{bg: getColor(client), color: "white"}}
+      _hover={{ bg: getColor(client), color: "white" }}
       cursor="pointer"
       {...rest}
     >
@@ -37,7 +40,10 @@ const AuthProviderCard: React.FC<Props & BoxProps> = ({ client, ...rest }) => {
   );
 };
 
-const ClientIcon: React.FC<Props & IconProps> = ({ client, ...rest }) => {
+const ClientIcon: React.FC<AuthProviderProps & IconProps> = ({
+  client,
+  ...rest
+}) => {
   switch (client) {
     case "Google":
       return <Icon as={AiOutlineGoogle} {...rest} />;
