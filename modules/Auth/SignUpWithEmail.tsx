@@ -3,6 +3,7 @@ import { SyntheticEvent, useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import InputField from "../../components/common/InputField";
 import MotionBox from "../../components/layouts/MotionBox";
+import { useEmailValidation } from "../../hooks/useEmailValidation";
 import { usePasswordValidation } from "../../hooks/usePasswordValidation";
 import PasswordHints from "./PasswordHints";
 
@@ -34,6 +35,8 @@ const SignUpWithEmail: React.FC<Props> = ({
   ] = usePasswordValidation(formValues.password, formValues.confirmPassword);
   const [showHints, setShowHints] = useState(false);
   const [showConfirmHint, setShowConfirmHint] = useState(false);
+  const [validEmail, errorMessage] = useEmailValidation(formValues.email);
+  const [showEmailError, setShowEmailError] = useState(false);
 
   return (
     <MotionBox
@@ -55,6 +58,9 @@ const SignUpWithEmail: React.FC<Props> = ({
         value={formValues.email}
         type="email"
         onChange={formHandler}
+        isValid={validEmail}
+        error={{ show: showEmailError, message: errorMessage }}
+        onFocus={() => setShowEmailError(true)}
       />
       <InputField
         label="Password"
