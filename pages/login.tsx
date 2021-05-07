@@ -6,11 +6,11 @@ import LinkText from "../components/common/LinkText";
 import Layout from "../components/layouts";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
 import LogInWithEmail from "../modules/Auth/LoginWithEmail";
+import PageToggle from "../modules/Auth/PageToggle";
+import PrivacyNotice from "../modules/Auth/PrivacyNotice";
 
 const Login: NextPage = () => {
   const [client, setClient] = useState(null);
-
-  useEffect(() => console.log(client), [client]);
 
   return (
     <Layout>
@@ -35,35 +35,15 @@ const Login: NextPage = () => {
         flex="1 0"
         flexBasis="40%"
       >
-        <BoxHeader title="Welcome Back 👋🏻" subtitle="Log in to Resuminator"/>
+        <BoxHeader title={"Welcome Back 👋🏻"} subtitle="Log in to Resuminator" />
         {client === "Email" ? (
-          <LogInWithEmail resetClient={() => setClient(null)}/>
+          <LogInWithEmail resetClient={() => setClient(null)} />
         ) : (
           <AuthProvidersList setClient={setClient} />
         )}
         <Box textAlign="center" my="4" fontSize={{ base: "sm", md: "md" }}>
-          <Text>
-            Don&apos;t have an account?{" "}
-            <LinkText href="/signup" fontWeight="medium" color="blue.600">
-              Create one
-            </LinkText>
-          </Text>
-          <Text
-            align="center"
-            color="InactiveCaptionText"
-            fontSize="smaller"
-            my="4"
-          >
-            Continue to log in to agree to Resuminator’s{" "}
-            <LinkText href="" textDecoration="underline">
-              Terms of Service
-            </LinkText>{" "}
-            and acknowledge that Resuminator’s{" "}
-            <LinkText href="" textDecoration="underline">
-              Privacy Policy
-            </LinkText>{" "}
-            applies to you.
-          </Text>
+          <PageToggle page="LOGIN" />
+          <PrivacyNotice />
         </Box>
       </Box>
     </Layout>
