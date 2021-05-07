@@ -3,16 +3,10 @@ import { InputRightElement } from "@chakra-ui/input";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaCheckCircle } from "react-icons/fa";
-
-
-type ErrorProps = {
-  message: string;
-};
-
 interface RightIconProps {
   forPassword?: boolean;
   onClick?: () => void;
-  options: { show: boolean; error: ErrorProps; valid: boolean };
+  options: { show: boolean; isValid: boolean };
 }
 
 const InputRightIcon: React.FC<RightIconProps> = ({
@@ -37,11 +31,9 @@ const InputRightIcon: React.FC<RightIconProps> = ({
   }
 
   return (
-    !options.error && (
-      <InputRightElement color="green.400">
-        {options.valid && <FaCheckCircle />}
-      </InputRightElement>
-    )
+    <InputRightElement color="green.400">
+      {options.isValid && <FaCheckCircle />}
+    </InputRightElement>
   );
 };
 
