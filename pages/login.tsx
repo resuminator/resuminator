@@ -1,5 +1,5 @@
-import { Box, Text } from "@chakra-ui/layout";
-import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { Box } from "@chakra-ui/layout";
+import { AnimatePresence } from "framer-motion";
 import { NextPage } from "next";
 import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
