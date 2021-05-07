@@ -3,10 +3,9 @@ import { Box, Text, TextProps } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import InputRightIcon from "./InputRightIcon";
 
-type ErrorProps = {
+export interface ErrorProps {
   message: string;
-};
-
+}
 interface Props {
   label?: string;
   labelProps?: TextProps;
