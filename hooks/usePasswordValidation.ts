@@ -16,7 +16,7 @@ export const usePasswordValidation = (
     setUpperCase(password.toLowerCase() !== password);
     setLowerCase(password.toUpperCase() !== password);
     setHasNumber(/\d/.test(password));
-    setMatch(password && password === confirmPassword);
+    setMatch(password === confirmPassword);
   }, [password, confirmPassword, reqLength]);
 
   return [validLength, hasNumber, upperCase, lowerCase, match];
