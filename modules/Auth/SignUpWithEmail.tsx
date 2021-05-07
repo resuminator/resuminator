@@ -59,7 +59,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         type="email"
         onChange={formHandler}
         isValid={validEmail}
-        error={{ show: showEmailError, message: errorMessage }}
+        error={{ show: showEmailError && !validEmail, message: errorMessage }}
         onFocus={() => setShowEmailError(true)}
       />
       <InputField
