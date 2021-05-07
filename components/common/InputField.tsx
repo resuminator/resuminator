@@ -4,20 +4,21 @@ import React, { useState } from "react";
 import InputRightIcon from "./InputRightIcon";
 
 export interface ErrorProps {
+  show?: boolean;
   message: string;
 }
 interface Props {
   label?: string;
   labelProps?: TextProps;
   error?: ErrorProps;
-  valid?: boolean;
+  isValid?: boolean;
 }
 
 const InputField: React.FC<Props & InputProps> = ({
   label,
   labelProps,
-  error = { message: "" },
-  valid,
+  error = { show: false, message: "" },
+  isValid,
   type,
   ...rest
 }) => {
@@ -43,20 +44,18 @@ const InputField: React.FC<Props & InputProps> = ({
           colorScheme="gray"
           mb="2"
           type={handleType(type)}
-          isInvalid={error.message && true}
-          errorBorderColor="red.400"
         />
         <InputRightIcon
           forPassword={type === "password"}
-          options={{ show, error, valid }}
+          options={{ show, isValid }}
           onClick={() => setShow(!show)}
         />
       </InputGroup>
-      {error && (
+      {error.show ? (
         <Text color="red.500" fontSize="sm">
           {error.message}
         </Text>
-      )}
+      ) : null}
     </Box>
   );
 };
