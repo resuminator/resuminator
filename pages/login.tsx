@@ -1,10 +1,15 @@
 import { Box, Text } from "@chakra-ui/layout";
 import { NextPage } from "next";
-import React from "react";
-import AuthProviderCard from "../components/common/AuthProviderCard";
+import React, { Fragment, useEffect, useState } from "react";
+import InputField from "../components/common/InputField";
 import Layout from "../components/layouts";
+import AuthProvidersList from "../modules/Auth/AuthProvidersList";
 
 const Login: NextPage = () => {
+  const [client, setClient] = useState(null);
+
+  useEffect(() => console.log(client), [client]);
+
   return (
     <Layout>
       <Box
@@ -29,13 +34,17 @@ const Login: NextPage = () => {
         flexBasis="40%"
         bg="whiteAlpha.100"
       >
-        <AuthProviderCard client="Google" />
-        <AuthProviderCard client="Twitter" />
-        <AuthProviderCard client="GitHub" />
-        <AuthProviderCard client="Email" />
+        <AuthProvidersList setClient={setClient} />
       </Box>
     </Layout>
   );
 };
+
+export const LogInWithEmail = () => (
+  <Fragment>
+    <InputField label="Email" />
+    <InputField label="Password" />
+  </Fragment>
+);
 
 export default Login;
