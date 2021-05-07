@@ -1,10 +1,10 @@
 import { Button } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
 import { Box } from "@chakra-ui/layout";
-import { Fragment } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import InputField from "../../components/common/InputField";
 import LinkText from "../../components/common/LinkText";
+import MotionBox from "../../components/layouts/MotionBox";
 
 interface Props {
   resetClient: () => void;
@@ -12,10 +12,21 @@ interface Props {
 
 const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
   return (
-    <Fragment>
+    <MotionBox
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <InputField label="Email" />
       <InputField label="Password" />
-      <Button variant="solid" colorScheme="blue" textAlign="center" mb="4">
+      <Button
+        isFullWidth
+        variant="solid"
+        colorScheme="blue"
+        textAlign="center"
+        mb="4"
+      >
         Log In
       </Button>
       <Box
@@ -32,10 +43,10 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
           Need Help?
         </LinkText>
       </Box>
-      <Button variant="link" onClick={resetClient} my="2">
+      <Button isFullWidth variant="link" onClick={resetClient} my="2">
         <FaChevronLeft style={{ paddingRight: "8px" }} /> Back to all options
       </Button>
-    </Fragment>
+    </MotionBox>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import MotionBox from "../../components/layouts/MotionBox";
 import AuthProviderCard from "./AuthProviderCard";
 
 interface AuthProvidersListProps {
@@ -6,12 +6,17 @@ interface AuthProvidersListProps {
 }
 
 const AuthProvidersList: React.FC<AuthProvidersListProps> = ({ setClient }) => (
-  <Fragment>
+  <MotionBox
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+  >
     <AuthProviderCard client="Google" onClick={() => setClient("Google")} />
     <AuthProviderCard client="Twitter" onClick={() => setClient("Twitter")} />
     <AuthProviderCard client="GitHub" onClick={() => setClient("GitHub")} />
     <AuthProviderCard client="Email" onClick={() => setClient("Email")} />
-  </Fragment>
+  </MotionBox>
 );
 
 export default AuthProvidersList;
