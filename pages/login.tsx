@@ -1,6 +1,7 @@
 import { Box, Text } from "@chakra-ui/layout";
 import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
+import BoxHeader from "../components/common/BoxHeader";
 import LinkText from "../components/common/LinkText";
 import Layout from "../components/layouts";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
@@ -33,10 +34,10 @@ const Login: NextPage = () => {
         p={{ base: "2rem", md: "4rem", lg: "4rem 2rem" }}
         flex="1 0"
         flexBasis="40%"
-        bg="whiteAlpha.100"
       >
+        <BoxHeader title="Welcome Back 👋🏻" subtitle="Log in to Resuminator"/>
         {client === "Email" ? (
-          <LogInWithEmail />
+          <LogInWithEmail resetClient={() => setClient(null)}/>
         ) : (
           <AuthProvidersList setClient={setClient} />
         )}
