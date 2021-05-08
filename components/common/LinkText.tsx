@@ -11,9 +11,16 @@ const LinkText: React.FC<Props & TextProps> = ({
   ...rest
 }) => {
   return (
-    <Text as="span" cursor="pointer" _hover={{ textDecorationLine: "underline" }} {...rest}>
-      <Link href={href}>{children}</Link>
-    </Text>
+    <Link href={href}>
+      <Text
+        as="span"
+        cursor="pointer"
+        _hover={{ textDecorationLine: "underline" }}
+        {...rest}
+      >
+        {children}
+      </Text>
+    </Link>
   );
 };
 
