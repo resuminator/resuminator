@@ -51,6 +51,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         value={formValues.fullName}
         type="text"
         onChange={formHandler}
+        placeholder="Elon Musk"
       />
       <InputField
         label="Email"
@@ -61,6 +62,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         isValid={validEmail}
         error={{ show: showEmailError && !validEmail, message: errorMessage }}
         onFocus={() => setShowEmailError(true)}
+        placeholder="example@xyz.com"
       />
       <InputField
         label="Password"
@@ -70,6 +72,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         onChange={formHandler}
         onFocus={() => setShowHints(true)}
         onBlur={() => setShowHints(false)}
+        placeholder="8+ characters"
       />
       {showHints ? (
         <PasswordHints
