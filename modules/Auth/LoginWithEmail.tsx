@@ -36,11 +36,11 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
         mb="4"
         color="GrayText"
       >
-        <Checkbox size="sm" width="fit-content">
+        <Checkbox defaultChecked size="sm" width="fit-content">
           Remember me
         </Checkbox>
         <LinkText fontSize="sm" href="/LoginHelp">
-          Need Help?
+          Forgot Password?
         </LinkText>
       </Box>
       <Button isFullWidth variant="link" onClick={resetClient} my="2">
