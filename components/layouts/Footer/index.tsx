@@ -1,14 +1,14 @@
-import { Button, ButtonGroup, IconButton } from "@chakra-ui/button";
-import { useColorMode } from "@chakra-ui/color-mode";
-import { Box, Divider, HStack, Stack, Text } from "@chakra-ui/layout";
-import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
+import { ButtonGroup, IconButton } from "@chakra-ui/button";
+import { Box, Divider, Text } from "@chakra-ui/layout";
 import React from "react";
 import { AiOutlineGithub, AiOutlineTwitter } from "react-icons/ai";
-import { FaChevronUp, FaMoon, FaSun } from "react-icons/fa";
-import LogoWithText from "../layouts/LogoWithText";
+import ColorModeMenu from "../../common/ColorModeMenu";
+import LogoWithText from "../LogoWithText";
+import FooterLinks from "./FooterLinks";
+import LinkStack from "./LinkStack";
 
 const Footer = () => {
-  const { colorMode, setColorMode } = useColorMode();
+  
   return (
     <Box
       as="footer"
@@ -27,17 +27,7 @@ const Footer = () => {
           LogoProps={{ fontSize: "xl", color: "blue.50" }}
           mb="0"
         />
-        <Stack
-          py={{ base: "4", md: "0" }}
-          spacing={{ base: "2", md: "8" }}
-          color="whiteAlpha.900"
-          direction={{ base: "column", md: "row" }}
-        >
-          <Text fontWeight="medium">Sponsor</Text>
-          <Text fontWeight="medium">BroadMap</Text>
-          <Text fontWeight="medium">Guides</Text>
-          <Text fontWeight="medium">Docs</Text>
-        </Stack>
+        <LinkStack links={FooterLinks} />
       </Box>
       <Box
         display="flex"
@@ -78,33 +68,7 @@ const Footer = () => {
             target="_blank"
           />
         </ButtonGroup>
-        <Menu>
-          <MenuButton
-            as={Button}
-            rightIcon={<FaChevronUp />}
-            my={{ base: "4", md: "0" }}
-          >
-            {colorMode === "light" ? (
-              <HStack>
-                <FaSun />
-                <Text>Light</Text>
-              </HStack>
-            ) : (
-              <HStack>
-                <FaMoon />
-                <Text>Dark</Text>
-              </HStack>
-            )}
-          </MenuButton>
-          <MenuList>
-            <MenuItem icon={<FaSun />} onClick={() => setColorMode("light")}>
-              Light
-            </MenuItem>
-            <MenuItem icon={<FaMoon />} onClick={() => setColorMode("dark")}>
-              Dark
-            </MenuItem>
-          </MenuList>
-        </Menu>
+        <ColorModeMenu/>
       </Box>
     </Box>
   );

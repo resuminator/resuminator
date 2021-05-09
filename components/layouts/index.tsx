@@ -1,10 +1,10 @@
 import { Box, BoxProps } from "@chakra-ui/layout";
 import React, { Fragment } from "react";
-import Footer from "../Footer";
+import Footer from "./Footer";
 
 const Layout: React.FC<BoxProps> = ({ children, ...props }) => {
   return (
-    <Fragment>
+    <Box display="flex" flexDir="column" minH="100vh" justifyContent="space-between">
       <Box
         px={{ md: "4rem", lg: "7rem" }}
         display="flex"
@@ -16,7 +16,7 @@ const Layout: React.FC<BoxProps> = ({ children, ...props }) => {
         {children}
       </Box>
       <Footer />
-    </Fragment>
+    </Box>
   );
 };
 
