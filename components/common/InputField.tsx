@@ -33,7 +33,7 @@ const InputField: React.FC<Props & InputProps> = ({
 
   return (
     <Box aria-label="Input-With-Label" mb="2">
-      <Text {...labelProps} fontSize="md" pb="2" color="gray.500">
+      <Text fontSize="md" pb="2" color="gray.500" {...labelProps}>
         {label}
       </Text>
       <InputGroup>
