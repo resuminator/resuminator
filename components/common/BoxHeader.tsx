@@ -4,13 +4,15 @@ import React from "react";
 interface Props {
   title: string;
   subtitle?: string;
-  size?: { title: string; subtitle: string };
+  size?: { title: string; subtitle?: string };
+  spacing?: string;
 }
 
 const BoxHeader: React.FC<Props & BoxProps> = ({
   title,
   subtitle,
   size = { title: "2xl", subtitle: "md" },
+  spacing = "0.5",
   ...rest
 }) => {
   return (
@@ -18,6 +20,7 @@ const BoxHeader: React.FC<Props & BoxProps> = ({
       <Text fontSize={size.title} fontWeight="semibold">
         {title}
       </Text>
+      <Box p={spacing}/>
       <Text color="InactiveCaptionText" fontSize={size.subtitle}>
         {subtitle}
       </Text>
