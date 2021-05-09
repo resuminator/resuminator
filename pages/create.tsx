@@ -5,7 +5,7 @@ import React from "react";
 import BoxHeader from "../components/common/BoxHeader";
 import InputField from "../components/common/InputField";
 import Layout from "../components/layouts";
-import NavTabs from "../components/NavTabs";
+import NavTabs from "../components/layouts/NavTabs";
 
 const Create: NextPage = () => {
   const router = useRouter();
