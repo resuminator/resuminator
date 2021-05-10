@@ -1,4 +1,9 @@
-export default [
+interface FooterLinkObject {
+  label?: string;
+  link?: string;
+}
+
+const FooterLinks: Array<FooterLinkObject> = [
   {
     label: "Sponsor",
     link: "",
@@ -16,3 +21,5 @@ export default [
     link: "",
   },
 ];
+
+export default FooterLinks
