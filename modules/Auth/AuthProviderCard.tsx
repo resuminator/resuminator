@@ -1,3 +1,4 @@
+import { useColorMode } from "@chakra-ui/color-mode";
 import Icon, { IconProps } from "@chakra-ui/icon";
 import { Box, BoxProps, Text } from "@chakra-ui/layout";
 import React from "react";
@@ -16,6 +17,11 @@ const AuthProviderCard: React.FC<AuthProviderProps & BoxProps> = ({
   client,
   ...rest
 }) => {
+  const { colorMode } = useColorMode();
+
+  const getColor = (client: string) =>
+    colorMode === "light" ? getColorLight(client) : getColorDark(client);
+
   return (
     <Box
       display="flex"
@@ -56,7 +62,7 @@ const ClientIcon: React.FC<AuthProviderProps & IconProps> = ({
   }
 };
 
-const getColor = (client) => {
+const getColorLight = (client) => {
   switch (client) {
     case "Google":
       return "blue.500";
@@ -66,6 +72,19 @@ const getColor = (client) => {
       return "black";
     case "Email":
       return "gray.800";
+  }
+};
+
+const getColorDark = (client) => {
+  switch (client) {
+    case "Google":
+      return "blue.500";
+    case "Twitter":
+      return "cyan.500";
+    case "GitHub":
+      return "gray.400";
+    case "Email":
+      return "brand.500";
   }
 };
 

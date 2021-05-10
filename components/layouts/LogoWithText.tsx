@@ -1,3 +1,4 @@
+import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box, BoxProps, Text, TextProps } from "@chakra-ui/layout";
 
 interface Props {
@@ -15,13 +16,13 @@ const LogoWithText: React.FC<Props & BoxProps> = ({
       <Text
         fontSize="2xl"
         fontWeight="semibold"
-        color="blue.800"
+        color={useColorModeValue("brand.600", "brand.400")}
         {...LogoProps}
       >
         Resuminator
       </Text>
       {hasTagline && (
-        <Text fontSize="sm" color="blue.500">
+        <Text fontSize="sm" color="InactiveCaptionText">
           Build beautiful single-page resumes within minutes
         </Text>
       )}
