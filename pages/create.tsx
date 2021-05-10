@@ -16,13 +16,12 @@ const Create: NextPage = () => {
         display="flex"
         alignItems="flex-start"
         justifyContent="space-between"
-        height="100vh"
         width="100%"
         px="0"
         py="5"
       >
         <Box flexBasis="50%">
-          <Box mb="8">
+          {[1,2,3,4].map(item => <Box key={item} mb="8">
             <BoxHeader
               title="Let's go over some basic info"
               subtitle="Provide your name, email, and where to contact you"
@@ -37,7 +36,7 @@ const Create: NextPage = () => {
               <InputField labelProps={{ fontSize: "sm" }} label="Full Name" />
               <InputField labelProps={{ fontSize: "sm" }} label="Job Title" />
             </Box>
-          </Box>
+          </Box>)}
         </Box>
         <Box flexBasis="50%">Resume</Box>
       </Box>
