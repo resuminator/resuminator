@@ -9,7 +9,7 @@ interface Props {
 const Section: React.FC<Props> = ({ children, header }) => {
   return (
     <Box mb="8">
-      <BoxHeader {...header} />
+      <BoxHeader size={{ title: "lg", subtitle: "sm" }} {...header} />
       <Box
         display="flex"
         flexWrap="wrap"
