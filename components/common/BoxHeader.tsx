@@ -1,14 +1,14 @@
 import { Box, BoxProps, Text } from "@chakra-ui/layout";
 import React from "react";
 
-interface Props {
+export interface BoxHeaderProps {
   title: string;
   subtitle?: string;
   size?: { title: string; subtitle?: string };
   spacing?: string;
 }
 
-const BoxHeader: React.FC<Props & BoxProps> = ({
+const BoxHeader: React.FC<BoxHeaderProps & BoxProps> = ({
   title,
   subtitle,
   size = { title: "2xl", subtitle: "md" },

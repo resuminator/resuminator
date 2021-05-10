@@ -2,10 +2,10 @@ import { Box } from "@chakra-ui/layout";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import BoxHeader from "../components/common/BoxHeader";
 import InputField from "../components/common/InputField";
 import Layout from "../components/layouts";
 import NavTabs from "../components/layouts/NavTabs";
+import Section from "../components/layouts/Section";
 
 const Create: NextPage = () => {
   const router = useRouter();
@@ -20,25 +20,22 @@ const Create: NextPage = () => {
         px="0"
         py="5"
       >
-        <Box flexBasis="50%">
-          {[1,2,3,4].map(item => <Box key={item} mb="8">
-            <BoxHeader
-              title="Let's go over some basic info"
-              subtitle="Provide your name, email, and where to contact you"
-              size={{ title: "lg", subtitle: "sm" }}
-            />
-            <Box
-              display="flex"
-              flexWrap="wrap"
-              justifyContent="space-between"
-              w="80%"
+        <Box aria-label="Resume Inputs" flexBasis="50%">
+          {[1, 2, 3, 4].map((item) => (
+            <Section
+              key={item}
+              header={{
+                title: "Let's go over some basic info",
+                subtitle: "Provide your name, email, and where to contact you",
+                size: { title: "lg", subtitle: "sm" },
+              }}
             >
               <InputField labelProps={{ fontSize: "sm" }} label="Full Name" />
               <InputField labelProps={{ fontSize: "sm" }} label="Job Title" />
-            </Box>
-          </Box>)}
+            </Section>
+          ))}
         </Box>
-        <Box flexBasis="50%">Resume</Box>
+        <Box aria-label="Resume Preview" flexBasis="50%">Resume</Box>
       </Box>
     </Layout>
   );
