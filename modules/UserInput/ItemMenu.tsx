@@ -4,12 +4,15 @@ import { CgOptions } from "react-icons/cg";
 import { FiEye } from "react-icons/fi";
 import { IoMdRemoveCircle } from "react-icons/io";
 import TooltipIconButton from "../../components/common/TooltipIconButton";
+import { DataObject } from "./Contact";
 
 interface Props {
+  item?: DataObject;
+  index?: number;
   handlers?: { hide: (index: number) => void; remove: (index: number) => void };
 }
 
-const ItemMenu = ({ item, index, handlers }) => {
+const ItemMenu: React.FC<Props> = ({ item, index, handlers }) => {
   const { hide, remove } = handlers;
   return (
     <Menu>
