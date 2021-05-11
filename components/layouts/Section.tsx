@@ -6,15 +6,16 @@ interface Props {
   header?: BoxHeaderProps & BoxProps;
 }
 
-const Section: React.FC<Props> = ({ children, header }) => {
+const Section: React.FC<Props & BoxProps> = ({ children, header, ...props }) => {
   return (
     <Box mb="8">
       <BoxHeader size={{ title: "lg", subtitle: "sm" }} {...header} />
       <Box
         display="flex"
-        flexWrap="wrap"
+        flexDir="column"
         justifyContent="space-between"
         w="80%"
+        {...props}
       >
         {children}
       </Box>

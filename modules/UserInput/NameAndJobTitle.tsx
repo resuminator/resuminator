@@ -9,6 +9,8 @@ const NameAndJobTitle = () => {
         title: "Let's go over some basic info",
         subtitle: "Provide your name, email, and where to contact you",
       }}
+      flexDir="row"
+      flexWrap="wrap"
     >
       <InputField labelProps={{ fontSize: "sm" }} label="Full Name" />
       <InputField labelProps={{ fontSize: "sm" }} label="Job Title" />
