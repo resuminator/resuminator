@@ -6,19 +6,17 @@ interface Props {
   label?: string;
 }
 
-const TooltipIconButton: React.FC<Props & IconButtonProps> = ({
-  label,
-  ...props
-}) => {
-  return (
-    <Tooltip label={label}>
-      <IconButton
-        size="sm"
-        variant="ghost"
-        {...props}
-      />
-    </Tooltip>
-  );
-};
+//Unsure if this is the right fix to 'Function components cannot be given refs'
+const TooltipIconButton: React.FC<Props & IconButtonProps> = React.forwardRef(
+  ({ label, ...props }, ref) => {
+    return (
+      <Tooltip label={label}>
+        <IconButton size="sm" variant="ghost" {...props} />
+      </Tooltip>
+    );
+  }
+);
+
+TooltipIconButton.displayName = "TooltipIconButton";
 
 export default TooltipIconButton;
