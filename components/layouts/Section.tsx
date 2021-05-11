@@ -1,9 +1,9 @@
-import { Box } from "@chakra-ui/layout";
+import { Box, BoxProps } from "@chakra-ui/layout";
 import React from "react";
 import BoxHeader, { BoxHeaderProps } from "../common/BoxHeader";
 
 interface Props {
-  header?: BoxHeaderProps;
+  header?: BoxHeaderProps & BoxProps;
 }
 
 const Section: React.FC<Props> = ({ children, header }) => {
