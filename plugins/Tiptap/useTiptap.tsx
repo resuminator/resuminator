@@ -7,7 +7,6 @@ import StarterKit from "@tiptap/starter-kit";
 import { useState } from "react";
 
 type OutputFormat = "HTML" | "JSON";
-type Output = string | Record<string, any>;
 
 const getFormattedOutput = (editor, format: OutputFormat) =>
   format === "HTML" ? editor.getHTML() : editor.getJSON();
@@ -27,7 +26,6 @@ export const useTiptap = (
     placeholder: "",
   }
 ) => {
-  const [output, setOutput] = useState<Output>({});
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -37,9 +35,9 @@ export const useTiptap = (
       Link,
     ],
     content,
-    onUpdate: ({ editor }) =>
-      setOutput(getFormattedOutput(editor, options.outputFormat)),
+    onUpdate: ({ editor }) => setOutput(editor.getHTML()),
   });
+  const [output, setOutput] = useState<Content>(content);
 
   return { editor, output };
 };
