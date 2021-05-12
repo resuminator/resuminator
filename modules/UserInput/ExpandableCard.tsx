@@ -1,4 +1,5 @@
 import { Button } from "@chakra-ui/button";
+import { useDisclosure } from "@chakra-ui/hooks";
 import { Box, BoxProps, HStack, Text } from "@chakra-ui/layout";
 import { Editor } from "@tiptap/react";
 import React from "react";
@@ -11,22 +12,23 @@ type IHandler = { value: boolean; setValue: (value) => void };
 interface Props {
   title: string;
   subtitle?: string;
-  expandHandler?: IHandler;
   visibilityHandler?: IHandler;
   isHidden?: boolean;
   editor?: Editor;
+  chainOnClick?: () => void;
 }
 
 const ExpandableCard: React.FC<Props & BoxProps> = ({
   title,
   subtitle,
-  expandHandler = { value: false, setValue: (value) => value },
   visibilityHandler = { value: false, setValue: (value) => value },
   editor,
+  chainOnClick,
   children,
   ...props
 }) => {
-  return expandHandler.value ? (
+  const {isOpen, onToggle} = useDisclosure();
+  return isOpen ? (
     <Box p="4" mb="2" border="1px solid" borderRadius="10px">
       {children}
       <Box borderRadius="md" my="4">
@@ -35,7 +37,7 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
             size="sm"
             leftIcon={<FaChevronUp />}
             aria-label="Hide-Item-From-Resume"
-            onClick={expandHandler.setValue}
+            onClick={onToggle}
           >
             Collapse
           </Button>
@@ -59,7 +61,7 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
       cursor="pointer"
       _hover={{ bg: "whiteAlpha.100" }}
       transition="all 0.2s"
-      onClick={expandHandler.setValue}
+      onClick={() => {onToggle(); chainOnClick()}}
       {...props}
     >
       <Text>{title}</Text>
