@@ -1,3 +1,7 @@
+import Link from "@tiptap/extension-link";
+import Placeholder from "@tiptap/extension-placeholder";
+import TextAlign from "@tiptap/extension-text-align";
+import Typography from "@tiptap/extension-typography";
 import { Content, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useState } from "react";
@@ -17,7 +21,7 @@ const getFormattedOutput = (editor, format: OutputFormat) =>
 export const useTiptap = (content: Content, format: OutputFormat = "HTML") => {
   const [output, setOutput] = useState<Output>({});
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit, Typography, Placeholder, TextAlign, Link],
     content,
     onUpdate: ({ editor }) => setOutput(getFormattedOutput(editor, format)),
   });

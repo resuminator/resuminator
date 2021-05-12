@@ -17,4 +17,3 @@ const Tiptap: React.FC<TiptapProps> = ({ editor }) => {
 
 export default Tiptap;
 export { useTiptap };
-
