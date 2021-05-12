@@ -1,12 +1,15 @@
-import { Input } from "@chakra-ui/input";
-import { Box, Text } from "@chakra-ui/layout";
-import { Editor } from "@tiptap/react";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { FiPlus } from "react-icons/fi";
+import EditorWithLabel from "../../components/common/EditorWithLabel";
+import InputWithLabel from "../../components/common/InputWithLabel";
+import TooltipIconButton from "../../components/common/TooltipIconButton";
 import Section from "../../components/layouts/Section";
-import Tiptap, { useTiptap } from "../../plugins/Tiptap";
+import { useTiptap } from "../../plugins/Tiptap";
+import ExpandableCard from "./ExpandableCard";
 import SectionControls, { SectionProperties } from "./SectionControls";
 
 interface ExperienceDataObject {
+  _id?: string;
   jobTitle?: string;
   company?: string;
   location?: string;
@@ -18,110 +21,67 @@ interface ExperienceDataObject {
   isHidden?: boolean;
 }
 
-interface ComponentDataObject extends ExperienceDataObject {
+interface DataObject extends ExperienceDataObject {
   isExpanded?: boolean;
 }
 
-type DataState = Array<ComponentDataObject>;
+type DataState = Array<DataObject>;
 
-enum ElementTypes {
-  INPUT,
-  DESCRIPTION,
-  DATE,
-}
-
-interface CardProps {
-  label?: string;
-  name?: string;
-  type?: ElementTypes;
-  placeholder?: string;
-}
-
-const ExpandedCardChildren: Array<CardProps> = [
-  {
-    label: "Job Title",
-    name: "jobTitle",
-    type: ElementTypes.INPUT,
-    placeholder: "Rocket Scientist",
-  },
-  {
-    label: "Organization",
-    name: "company",
-    type: ElementTypes.INPUT,
-    placeholder: "Tesla",
-  },
-  {
-    label: "Location",
-    name: "location",
-    type: ElementTypes.INPUT,
-    placeholder: "Start typing to search location",
-  },
-  {
-    label: "Description",
-    name: "description",
-    type: ElementTypes.DESCRIPTION,
-  },
-  {
-    label: "Link",
-    name: "link",
-    type: ElementTypes.INPUT,
-  },
-  {
-    label: "Tags",
-    name: "tags",
-    type: ElementTypes.INPUT,
-    placeholder: "Separate keywords by commas",
-  },
-];
-
-const getExperienceCardChild = (
-  item: CardProps,
-  plugins: { editor: Editor }
-) => {
-  switch (item.type) {
-    case ElementTypes.INPUT:
-      return (
-        <Fragment>
-          <Text fontSize="md" pb="2" color="gray.500">
-            {item.label}
-          </Text>
-          <Input
-            variant="filled"
-            name={item.name}
-            shadow="sm"
-            colorScheme="gray"
-            mb="2"
-            placeholder={item.placeholder}
-          />
-        </Fragment>
-      );
-    case ElementTypes.DESCRIPTION:
-      return (
-        <Fragment>
-          <Text fontSize="md" pb="2" color="gray.500">
-            {item.label}
-          </Text>
-          <Tiptap editor={plugins.editor} />
-        </Fragment>
-      );
-    case ElementTypes.DATE:
-      return <Fragment>Date</Fragment>;
-    default:
-      return null;
-  }
+const DummyData = {
+  _id: "kasjdfw098hjkaf893nr0",
+  jobTitle: "Student Developer @ CERN-HSF",
+  company: "Google Summer of Code '20",
+  location: "Remote",
+  description: "<p>Testing Testing</p>",
+  link: "",
+  tags: ["GSoC", "React"],
+  start: new Date(),
+  end: new Date(),
+  isHidden: false,
+  isExpanded: true,
 };
 
 const Experience = () => {
   const [properties, setProperties] = useState<SectionProperties>({
     isHidden: false,
   });
+  const [data, setData] = useState<DataState>([]);
   const { editor, output } = useTiptap("", {
-    outputFormat: "JSON",
+    outputFormat: "HTML",
     placeholder: "Describe your role and achievements...",
   });
-  const [data, setData] = useState<DataState>([]);
 
-  useEffect(() => console.log(output), [output]);
+  const handleAdd = () => {
+    setData([...data, DummyData]);
+    editor.commands.setContent(DummyData.description);
+  };
+
+  useEffect(() => {
+    console.log(output);
+  }, [output]);
+
+  const toggleExpand = (id: string) => {
+    const current: DataObject = data.filter((item) => item._id === id)[0];
+    const nextCurrent: DataObject = {
+      ...current,
+      isExpanded: !current.isExpanded,
+    };
+    setData(data.map((item) => (item._id === id ? nextCurrent : item)));
+  };
+
+  const toggleVisibilityOnResume = (id: string) => {
+    const current: DataObject = data.filter((item) => item._id === id)[0];
+    const nextCurrent: DataObject = { ...current, isHidden: !current.isHidden };
+    setData(data.map((item) => (item._id === id ? nextCurrent : item)));
+  };
+
+  const handleChange = (e, id: string) => {
+    e.preventDefault();
+    const [key, value] = [e.target.name, e.target.value];
+    const current: DataObject = data.filter((item) => item._id === id)[0];
+    const nextCurrent: DataObject = { ...current, [key]: value };
+    setData(data.map((item) => (item._id === id ? nextCurrent : item)));
+  };
 
   return (
     <Section
@@ -131,27 +91,65 @@ const Experience = () => {
         mb: "2",
       }}
     >
-      <SectionControls handler={{ properties, setProperties }} />
-      <Box
-        p="5"
-        mb="2"
-        border="1px solid"
-        borderRadius="10px"
-        shadow="md"
-        cursor="pointer"
-        _hover={{ bg: "whiteAlpha.100" }}
-        transition="all 0.2s"
-      >
-        <Text>Google Summer of Code &apos;20</Text>
-        <Text fontSize="sm" color="GrayText">
-          Student Developer @ CERN-HSF
-        </Text>
-      </Box>
-      <Box p="4" mb="2" border="1px solid" borderRadius="10px">
-        {ExpandedCardChildren.map((child) =>
-          getExperienceCardChild(child, { editor })
-        )}
-      </Box>
+      <SectionControls handler={{ properties, setProperties }}>
+        <TooltipIconButton
+          label="Add new experience"
+          aria-label="New-Experience"
+          icon={<FiPlus />}
+          onClick={handleAdd}
+        />
+      </SectionControls>
+      {data.map((item) => (
+        <ExpandableCard
+          key={item._id}
+          title={item.company}
+          subtitle={item.jobTitle}
+          expandHandler={{
+            value: item.isExpanded,
+            setValue: () => toggleExpand(item._id),
+          }}
+          visibilityHandler={{
+            value: item.isHidden,
+            setValue: () => toggleVisibilityOnResume(item._id),
+          }}
+        >
+          <InputWithLabel
+            label="Job Title"
+            name="jobTitle"
+            placeholder="Rocket Scientist"
+            value={item.jobTitle}
+            onChange={(e) => handleChange(e, item._id)}
+          />
+          <InputWithLabel
+            label="Organization"
+            name="jobTitle"
+            placeholder="Tesla"
+            value={item.company}
+            onChange={(e) => handleChange(e, item._id)}
+          />
+          <InputWithLabel
+            label="Location"
+            name="location"
+            placeholder="Start typing to search location"
+            value={item.location}
+            onChange={(e) => handleChange(e, item._id)}
+          />
+          <EditorWithLabel label="Description" editor={editor} />
+          <InputWithLabel
+            label="Tags"
+            name="tags"
+            placeholder="Separate keywords by commas"
+            value={item.tags}
+            onChange={(e) => handleChange(e, item._id)}
+          />
+          <InputWithLabel
+            label="Link"
+            name="link"
+            value={item.link}
+            onChange={(e) => handleChange(e, item._id)}
+          />
+        </ExpandableCard>
+      ))}
     </Section>
   );
 };
