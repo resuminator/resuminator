@@ -1,6 +1,5 @@
 import { Input } from "@chakra-ui/input";
 import { Box, Text } from "@chakra-ui/layout";
-import { Textarea } from "@chakra-ui/textarea";
 import { Editor } from "@tiptap/react";
 import React, { Fragment, useEffect, useState } from "react";
 import Section from "../../components/layouts/Section";
@@ -116,7 +115,10 @@ const Experience = () => {
   const [properties, setProperties] = useState<SectionProperties>({
     isHidden: false,
   });
-  const { editor, output } = useTiptap("", "JSON");
+  const { editor, output } = useTiptap("", {
+    outputFormat: "JSON",
+    placeholder: "Describe your role and achievements...",
+  });
   const [data, setData] = useState<DataState>([]);
 
   useEffect(() => console.log(output), [output]);

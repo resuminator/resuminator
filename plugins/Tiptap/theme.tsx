@@ -43,6 +43,13 @@ const ProseMirror = (props) => ({
       bg: "transparent",
       borderColor: props.colorMode === "light" ? "blue.500" : "blue.300",
     },
+    "p.is-editor-empty:first-of-type::before": {
+      content: "attr(data-placeholder)",
+      float: "left",
+      color: props.colorMode === "light" ? "gray.400" : "whiteAlpha.400",
+      pointerEvents: "none",
+      height: 0,
+    },
   },
 });
 
