@@ -1,8 +1,10 @@
 import { Input } from "@chakra-ui/input";
 import { Box, Text } from "@chakra-ui/layout";
 import { Textarea } from "@chakra-ui/textarea";
-import React, { Fragment, useState } from "react";
+import { Editor } from "@tiptap/react";
+import React, { Fragment, useEffect, useState } from "react";
 import Section from "../../components/layouts/Section";
+import Tiptap, { useTiptap } from "../../plugins/Tiptap";
 import SectionControls, { SectionProperties } from "./SectionControls";
 
 interface ExperienceDataObject {
@@ -41,19 +43,19 @@ const ExpandedCardChildren: Array<CardProps> = [
     label: "Job Title",
     name: "jobTitle",
     type: ElementTypes.INPUT,
-    placeholder: "Rocket Scientist"
+    placeholder: "Rocket Scientist",
   },
   {
     label: "Organization",
     name: "company",
     type: ElementTypes.INPUT,
-    placeholder: "Tesla"
+    placeholder: "Tesla",
   },
   {
     label: "Location",
     name: "location",
     type: ElementTypes.INPUT,
-    placeholder: "Start typing to search location"
+    placeholder: "Start typing to search location",
   },
   {
     label: "Description",
@@ -69,11 +71,14 @@ const ExpandedCardChildren: Array<CardProps> = [
     label: "Tags",
     name: "tags",
     type: ElementTypes.INPUT,
-    placeholder: "Separate keywords by commas"
+    placeholder: "Separate keywords by commas",
   },
 ];
 
-const getExperienceCardChild = (item: CardProps) => {
+const getExperienceCardChild = (
+  item: CardProps,
+  plugins: { editor: Editor }
+) => {
   switch (item.type) {
     case ElementTypes.INPUT:
       return (
@@ -97,7 +102,7 @@ const getExperienceCardChild = (item: CardProps) => {
           <Text fontSize="md" pb="2" color="gray.500">
             {item.label}
           </Text>
-          <Textarea variant="filled" name={item.name} placeholder={item.placeholder}/>
+          <Tiptap editor={plugins.editor} />
         </Fragment>
       );
     case ElementTypes.DATE:
@@ -111,7 +116,10 @@ const Experience = () => {
   const [properties, setProperties] = useState<SectionProperties>({
     isHidden: false,
   });
+  const { editor, output } = useTiptap("", "JSON");
   const [data, setData] = useState<DataState>([]);
+
+  useEffect(() => console.log(output), [output]);
 
   return (
     <Section
@@ -138,7 +146,9 @@ const Experience = () => {
         </Text>
       </Box>
       <Box p="4" mb="2" border="1px solid" borderRadius="10px">
-        {ExpandedCardChildren.map((child) => getExperienceCardChild(child))}
+        {ExpandedCardChildren.map((child) =>
+          getExperienceCardChild(child, { editor })
+        )}
       </Box>
     </Section>
   );
