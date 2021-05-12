@@ -2,7 +2,7 @@ import { Editor, EditorContent } from "@tiptap/react";
 import MenuBar from "./MenuBar";
 import { useTiptap } from "./useTiptap";
 
-interface TiptapProps {
+export interface TiptapProps {
   editor: Editor;
 }
 

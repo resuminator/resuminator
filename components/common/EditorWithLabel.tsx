@@ -1,11 +1,9 @@
 import { Text } from "@chakra-ui/layout";
-import { Editor } from "@tiptap/react";
 import React, { Fragment } from "react";
-import Tiptap from "../../plugins/Tiptap";
+import Tiptap, { TiptapProps } from "../../plugins/Tiptap";
 
-interface Props {
+interface Props extends TiptapProps {
   label: string;
-  editor: Editor;
 }
 
 const EditorWithLabel: React.FC<Props> = ({ label, editor }) => (
