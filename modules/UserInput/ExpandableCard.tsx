@@ -40,10 +40,11 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
             Collapse
           </Button>
           <TooltipIconButton
-            label="Hide from resume"
+            label={visibilityHandler.value ? "Show on resume" : "Hide from resume"}
             aria-label="Hide-Item-From-Resume"
             onClick={visibilityHandler.setValue}
             icon={visibilityHandler.value ? <FiEyeOff /> : <FiEye />}
+            colorScheme={visibilityHandler.value ? "red": "inherit"}
           />
         </HStack>
       </Box>
