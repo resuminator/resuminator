@@ -1,6 +1,6 @@
 import Icon from "@chakra-ui/icon";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
-import { HStack } from "@chakra-ui/layout";
+import { Box, HStack } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import Section from "../../components/layouts/Section";
 import SocialMediaMenu from "../SocialMedia";
@@ -48,7 +48,7 @@ const Contact = () => {
       {/* Displaying user handles */}
       {data.map((item, index) => (
         <HStack key={item.label} mb="2">
-          <InputGroup>
+          <InputGroup flexBasis="80%">
             <InputLeftElement>
               <Icon
                 as={item.icon}
@@ -57,7 +57,7 @@ const Contact = () => {
             </InputLeftElement>
             <Input
               variant="filled"
-              w="16rem"
+              // w="16rem"
               isDisabled={item.isHidden}
               fontSize="sm"
             />

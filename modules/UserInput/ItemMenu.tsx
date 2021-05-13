@@ -1,9 +1,9 @@
+import { IconButton } from "@chakra-ui/button";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
 import React from "react";
 import { CgOptions } from "react-icons/cg";
 import { FiEye } from "react-icons/fi";
 import { IoMdRemoveCircle } from "react-icons/io";
-import TooltipIconButton from "../../components/common/TooltipIconButton";
 import { DataObject } from "./Contact";
 
 interface Props {
@@ -17,13 +17,12 @@ const ItemMenu: React.FC<Props> = ({ item, index, handlers }) => {
   return (
     <Menu>
       <MenuButton
-        as={TooltipIconButton}
+        as={IconButton}
         label="Options"
         aria-label="Show-Current-Handle-Options"
         icon={<CgOptions />}
       />
-
-      <MenuList zIndex="50">
+      <MenuList>
         <MenuItem name="hide" icon={<FiEye />} onClick={() => hide(index)}>
           {item.isHidden ? "Show on resume" : "Hide from resume"}
         </MenuItem>
