@@ -1,35 +1,42 @@
 import { Button } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Box, BoxProps, HStack, Text } from "@chakra-ui/layout";
-import { Editor } from "@tiptap/react";
 import React from "react";
 import { FaChevronUp } from "react-icons/fa";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import TooltipIconButton from "../../components/common/TooltipIconButton";
+import MotionBox, { fade } from "../../components/layouts/MotionBox";
+import {RiDeleteBin6Line} from 'react-icons/ri'
 
-type IHandler = { value: boolean; setValue: (value) => void };
+type IHandler = { value: boolean; setValue: () => void };
 
 interface Props {
   title: string;
   subtitle?: string;
   visibilityHandler?: IHandler;
-  isHidden?: boolean;
-  editor?: Editor;
   chainOnClick?: () => void;
 }
 
 const ExpandableCard: React.FC<Props & BoxProps> = ({
   title,
   subtitle,
-  visibilityHandler = { value: false, setValue: (value) => value },
-  editor,
+  visibilityHandler = { value: false },
   chainOnClick,
   children,
   ...props
 }) => {
-  const {isOpen, onToggle} = useDisclosure();
+  const { isOpen, onToggle } = useDisclosure();
+
   return isOpen ? (
-    <Box p="4" mb="2" border="1px solid" borderRadius="10px">
+    <MotionBox
+      variants={fade}
+      initial="initial"
+      animate="animate"
+      p="4"
+      mb="2"
+      border="1px solid"
+      borderRadius="10px"
+    >
       {children}
       <Box borderRadius="md" my="4">
         <HStack>
@@ -42,15 +49,23 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
             Collapse
           </Button>
           <TooltipIconButton
-            label={visibilityHandler.value ? "Show on resume" : "Hide from resume"}
+            label={
+              visibilityHandler.value ? "Show on resume" : "Hide from resume"
+            }
             aria-label="Hide-Item-From-Resume"
             onClick={visibilityHandler.setValue}
             icon={visibilityHandler.value ? <FiEyeOff /> : <FiEye />}
-            colorScheme={visibilityHandler.value ? "red": "inherit"}
+            colorScheme={visibilityHandler.value ? "red" : "inherit"}
+          />
+          <TooltipIconButton
+            label="Remove Item"
+            colorScheme="red"
+            aria-label="Remove-Item-From-Resume"
+            icon={<RiDeleteBin6Line/>}
           />
         </HStack>
       </Box>
-    </Box>
+    </MotionBox>
   ) : (
     <Box
       p="5"
@@ -60,8 +75,10 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
       shadow="md"
       cursor="pointer"
       _hover={{ bg: "whiteAlpha.100" }}
-      transition="all 0.2s"
-      onClick={() => {onToggle(); chainOnClick()}}
+      onClick={() => {
+        onToggle();
+        chainOnClick();
+      }}
       {...props}
     >
       <Text>{title}</Text>
