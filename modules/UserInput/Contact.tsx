@@ -1,6 +1,6 @@
 import Icon from "@chakra-ui/icon";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
-import { Box, HStack } from "@chakra-ui/layout";
+import { HStack } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import Section from "../../components/layouts/Section";
 import SocialMediaMenu from "../SocialMedia";

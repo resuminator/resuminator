@@ -66,6 +66,13 @@ const Experience = () => {
     setCurrentObject((nextCurrent) => ({ ...nextCurrent, [key]: value }));
   };
 
+  const handleEditorChange = (output: Content) => {
+    setCurrentObject((nextCurrent) => ({
+      ...nextCurrent,
+      description: output,
+    }));
+  };
+
   useEffect(() => {
     setData((nextData) =>
       nextData.map((item) =>
@@ -123,8 +130,8 @@ const Experience = () => {
             onChange={handleChange}
           />
           <EditorWithLabel
-            onChange={setCurrentObject}
-            content={item.description}
+            onChange={handleEditorChange}
+            defaultValue={item.description}
             label="Description"
           />
           <InputWithLabel

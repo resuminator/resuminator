@@ -4,9 +4,8 @@ import TextAlign from "@tiptap/extension-text-align";
 import Typography from "@tiptap/extension-typography";
 import { Content, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useState } from "react";
 
-type OutputFormat = "HTML" | "JSON";
+export type OutputFormat = "HTML" | "JSON";
 
 const getFormattedOutput = (editor, format: OutputFormat) =>
   format === "HTML" ? editor.getHTML() : editor.getJSON();
@@ -15,16 +14,19 @@ const getFormattedOutput = (editor, format: OutputFormat) =>
  * Custom hook for using the Tiptap editor and get the contents as output
  * @param {Content} content - Tiptap Content object
  * @param {Object} options - Other options to initialize editor
- * @param {OutputFormat} options.outputFormat - "HTML" | "JSON", Default ="HTML"
- * @param {string} options.placeholder - Placeholder for the editor
+ * `{ outputFormat: "HTML" | "JSON" , placeholder: string}`
+ * @param {Function} onChange - Callback which fires on every change of the editor instance.
+ *
+ * `(value: Content) => void`
  * @returns Tiptap Editor instance and Output in specified format
  */
 export const useTiptap = (
   content: Content,
-  options: { outputFormat: OutputFormat; placeholder: string } = {
+  options: { outputFormat?: OutputFormat; placeholder: string } = {
     outputFormat: "HTML",
     placeholder: "",
-  }
+  },
+  onChange: (value: Content) => void
 ) => {
   const editor = useEditor({
     extensions: [
@@ -35,9 +37,9 @@ export const useTiptap = (
       Link,
     ],
     content,
-    onUpdate: ({ editor }) => setOutput(editor.getHTML()),
+    onUpdate: ({ editor }) =>
+      onChange(getFormattedOutput(editor, options.outputFormat)),
   });
-  const [output, setOutput] = useState<Content>(content);
 
-  return { editor, output };
+  return editor;
 };
