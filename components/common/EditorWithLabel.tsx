@@ -1,6 +1,8 @@
+import dynamic from 'next/dynamic';
 import { Text } from "@chakra-ui/layout";
 import React, { Fragment } from "react";
-import Tiptap, { TiptapProps } from "../../plugins/Tiptap";
+import { TiptapProps } from "../../plugins/Tiptap";
+const Tiptap = dynamic(() => import("../../plugins/Tiptap"))
 
 interface Props extends TiptapProps {
   label: string;
