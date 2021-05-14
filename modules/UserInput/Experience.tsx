@@ -53,6 +53,10 @@ const Experience = () => {
     await getNewObject().then((res) => setData((data) => [...data, res]));
   };
 
+  const handleDelete = async () => {
+    console.log(`Deleted ${currentObject._id}`);
+  };
+
   const toggleVisibilityOnResume = () => {
     setCurrentObject((nextCurrent) => ({
       ...nextCurrent,
@@ -106,6 +110,7 @@ const Experience = () => {
             value: item.isHidden,
             setValue: () => toggleVisibilityOnResume(),
           }}
+          deleteHandler={handleDelete}
           chainOnClick={() => setCurrentObject(item)}
         >
           <InputWithLabel
