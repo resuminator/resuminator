@@ -3,13 +3,11 @@ import {
   createTheme,
   makeStyles,
   TextField,
-  ThemeProvider
+  ThemeProvider,
 } from "@material-ui/core";
 import { DatePickerProps, MobileDatePicker } from "@material-ui/lab";
 import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
 import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
-import { add, sub } from "date-fns";
-import * as React from "react";
 
 interface Props {
   isDisabled?: boolean;
@@ -18,6 +16,13 @@ interface Props {
 const theme = createTheme({
   typography: {
     fontFamily: "Inter",
+  },
+  palette: {
+    primary: {
+      light: "#4299e1",
+      main: "#3182ce",
+      dark: "#2b6cb0",
+    },
   },
 });
 
@@ -42,15 +47,12 @@ const MUIDatePicker: React.FC<Props & DatePickerProps> = ({
           value={value}
           disabled={isDisabled}
           onChange={onChange}
-          minDate={sub(new Date(), { years: 30 })}
-          maxDate={add(new Date(), { years: 5 })}
-          toolbarPlaceholder="mmmm yyyy"
           {...props}
           InputProps={{
             classes: { notchedOutline: classes.noBorder },
             sx: {
               textAlign: "center",
-              maxWidth: "12rem",
+              flexBasis: "50%",
               outline: "0",
               border: "2px solid",
               borderColor: "transparent",
@@ -89,4 +91,3 @@ const MUIDatePicker: React.FC<Props & DatePickerProps> = ({
 
 export default MUIDatePicker;
 export { TextField };
-

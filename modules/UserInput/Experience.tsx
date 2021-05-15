@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import EditorWithLabel from "../../components/common/EditorWithLabel";
 import InputWithLabel from "../../components/common/InputWithLabel";
+import StartEndDatePicker from "../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../components/common/TooltipIconButton";
 import Section from "../../components/layouts/Section";
 import { getUniqueID } from "../../utils";
@@ -78,10 +79,10 @@ const Experience = () => {
     }));
   };
 
-  const handleDateChange = (date: Date) => {
+  const handleDateChange = (key: string) => (date: Date) => {
     setCurrentObject((nextCurrent) => ({
       ...nextCurrent,
-      start: date,
+      [key]: date,
     }));
   };
 
@@ -147,14 +148,9 @@ const Experience = () => {
             defaultValue={item.description}
             label="Description"
           />
-          <MUIDatePicker
-            renderInput={({ helperText, label, ...params }) => (
-              <TextField label={null} {...params} />
-            )}
-            label="Started"
-            value={item.start}
-            onChange={handleDateChange}
-            views={["year", "month"]}
+          <StartEndDatePicker
+            values={{ start: item.start, end: item.end }}
+            onChangeHandler={handleDateChange}
           />
           <InputWithLabel
             label="Tags"
