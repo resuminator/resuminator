@@ -6,6 +6,7 @@ import InputWithLabel from "../../components/common/InputWithLabel";
 import TooltipIconButton from "../../components/common/TooltipIconButton";
 import Section from "../../components/layouts/Section";
 import { getUniqueID } from "../../utils";
+import MUIDatePicker, { TextField } from "../../widgets/DatePicker";
 import ExpandableCard from "./ExpandableCard";
 import SectionControls, { SectionProperties } from "./SectionControls";
 
@@ -64,7 +65,7 @@ const Experience = () => {
     }));
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const [key, value] = [e.target.name, e.target.value];
     setCurrentObject((nextCurrent) => ({ ...nextCurrent, [key]: value }));
@@ -74,6 +75,13 @@ const Experience = () => {
     setCurrentObject((nextCurrent) => ({
       ...nextCurrent,
       description: output,
+    }));
+  };
+
+  const handleDateChange = (date: Date) => {
+    setCurrentObject((nextCurrent) => ({
+      ...nextCurrent,
+      start: date,
     }));
   };
 
@@ -138,6 +146,15 @@ const Experience = () => {
             onChange={handleEditorChange}
             defaultValue={item.description}
             label="Description"
+          />
+          <MUIDatePicker
+            renderInput={({ helperText, label, ...params }) => (
+              <TextField label={null} {...params} />
+            )}
+            label="Started"
+            value={item.start}
+            onChange={handleDateChange}
+            views={["year", "month"]}
           />
           <InputWithLabel
             label="Tags"
