@@ -75,6 +75,9 @@ const MUIDatePicker: React.FC<Props & DatePickerProps> = ({
           DialogProps={{
             PaperProps: {
               sx: {
+                "& .MuiCalendarPicker-root": {
+                  maxHeight: "16rem"
+                },
                 color: "inherit",
                 bgcolor: useColorModeValue(
                   "var(--chakra-colors-gray-50)",
