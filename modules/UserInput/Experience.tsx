@@ -7,7 +7,6 @@ import StartEndDatePicker from "../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../components/common/TooltipIconButton";
 import Section from "../../components/layouts/Section";
 import { getUniqueID } from "../../utils";
-import MUIDatePicker, { TextField } from "../../widgets/DatePicker";
 import ExpandableCard from "./ExpandableCard";
 import SectionControls, { SectionProperties } from "./SectionControls";
 

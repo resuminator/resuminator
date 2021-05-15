@@ -48,6 +48,7 @@ const StartEndDatePicker: React.FC<Props> = ({
           views={views}
           minDate={values.start}
           maxDate={add(new Date(), { years: 5 })}
+          clearable
         />
       </Box>
     </HStack>
