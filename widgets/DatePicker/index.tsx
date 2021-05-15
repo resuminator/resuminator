@@ -83,9 +83,16 @@ const MUIDatePicker: React.FC<Props & DatePickerProps> = ({
                     "var(--chakra-colors-whiteAlpha-500)"
                   ),
                 },
+                "& .MuiIconButton-label": {
+                  color: useColorModeValue(
+                    "var(--chakra-colors-gray-500)",
+                    "var(--chakra-colors-whiteAlpha-500)"
+                  ),
+                },
                 "& .MuiCalendarPicker-root": {
                   maxHeight: "16rem",
                 },
+                borderRadius: "var(--chakra-radii-lg)",
                 color: "inherit",
                 bgcolor: useColorModeValue(
                   "var(--chakra-colors-gray-50)",
