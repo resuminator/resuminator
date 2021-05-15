@@ -1,3 +1,4 @@
+import { useColorModeValue } from "@chakra-ui/color-mode";
 import { useDisclosure } from "@chakra-ui/hooks";
 import Icon from "@chakra-ui/icon";
 import { Text } from "@chakra-ui/layout";
@@ -39,7 +40,10 @@ const RemoveItemButton: React.FC<Props> = ({
         Are you sure you want to delete this {itemType} from your resume? This
         action is irreversible. <br />
         <br />
-        <Text fontSize="sm" color="GrayText">
+        <Text
+          fontSize="sm"
+          color={useColorModeValue("GrayText", "whiteAlpha.700")}
+        >
           If you wished to just hide it from your resume but still keep the data
           you can do it by using the eye icon (
           <Icon as={FiEye} m="1" color="blue.500" />) button on the item.
