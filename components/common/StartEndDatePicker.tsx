@@ -42,7 +42,7 @@ const StartEndDatePicker: React.FC<Props> = ({
           renderInput={({ helperText, label, ...params }) => (
             <TextField label={null} {...params} />
           )}
-          label="End"
+          label="Ended"
           value={values.end}
           onChange={onChangeHandler("end")}
           views={views}
