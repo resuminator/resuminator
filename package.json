@@ -17,7 +17,6 @@
     "@fontsource/manrope": "^4.2.2",
     "@material-ui/core": "^5.0.0-alpha.33",
     "@material-ui/lab": "^5.0.0-alpha.33",
-    "@resuminator/mui-datepicker": "git+ssh://git@github.com/resuminator/mui-datepicker.git",
     "@tiptap/extension-link": "^2.0.0-beta.15",
     "@tiptap/extension-placeholder": "^2.0.0-beta.15",
     "@tiptap/extension-text-align": "^2.0.0-beta.15",
