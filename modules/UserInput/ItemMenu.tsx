@@ -4,10 +4,10 @@ import React from "react";
 import { CgOptions } from "react-icons/cg";
 import { FiEye } from "react-icons/fi";
 import { IoMdRemoveCircle } from "react-icons/io";
-import { DataObject } from "./Contact";
+import { ContactDataObject } from "./Contact/types";
 
 interface Props {
-  item?: DataObject;
+  item?: ContactDataObject;
   index?: number;
   handlers?: { hide: (index: number) => void; remove: (index: number) => void };
 }

@@ -2,35 +2,29 @@ import Icon from "@chakra-ui/icon";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
 import { HStack } from "@chakra-ui/layout";
 import React, { useState } from "react";
-import Section from "../../components/layouts/Section";
-import SocialMediaMenu from "../SocialMedia";
-import { getColorSchemeForService } from "../SocialMedia/helpers";
-import { SocialHandleObject } from "../SocialMedia/types";
-import ItemMenu from "./ItemMenu";
-import SectionControls, { SectionProperties } from "./SectionControls";
-
-export interface DataObject extends SocialHandleObject {
-  isHidden?: boolean;
-}
+import Section from "../../../components/layouts/Section";
+import SocialMediaMenu from "../../SocialMedia";
+import { getColorSchemeForService } from "../../SocialMedia/helpers";
+import ItemMenu from "../ItemMenu";
+import SectionControls, { SectionProperties } from "../SectionControls";
+import useContactStore from "./store";
 
 const Contact = () => {
   const [properties, setProperties] = useState<SectionProperties>({
     isHidden: false,
   });
-  const [data, setData] = useState<Array<DataObject>>([]);
+  const data = useContactStore((state) => state.data);
+  const update = useContactStore((state) => state.update);
+  const add = useContactStore((state) => state.add);
+
+  React.useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const handleDelete = (index: number) => {
     const preList = data.slice(0, index);
     const postList = data.slice(index + 1);
-    setData([...preList, ...postList]);
-  };
-
-  const handleHide = (index: number) => {
-    const current: DataObject = data[index];
-    const nextCurrent = { ...current, isHidden: !current.isHidden };
-    const preList = data.slice(0, index);
-    const postList = data.slice(index + 1);
-    setData([...preList, nextCurrent, ...postList]);
+    // setData([...preList, ...postList]);
   };
 
   return (
@@ -42,7 +36,7 @@ const Contact = () => {
       }}
     >
       <SectionControls handler={{ properties, setProperties }}>
-        <SocialMediaMenu handler={{ data, setData }} />
+        <SocialMediaMenu handler={{ add }} />
       </SectionControls>
 
       {/* Displaying user handles */}
@@ -57,15 +51,19 @@ const Contact = () => {
             </InputLeftElement>
             <Input
               variant="filled"
-              // w="16rem"
+              value={item.link}
               isDisabled={item.isHidden}
               fontSize="sm"
+              onChange={(e) => update(index, "link", e.target.value)}
             />
           </InputGroup>
           <ItemMenu
             item={item}
             index={index}
-            handlers={{ hide: handleHide, remove: handleDelete }}
+            handlers={{
+              hide: (index) => update(index, "isHidden", !item.isHidden),
+              remove: handleDelete,
+            }}
           />
         </HStack>
       ))}
