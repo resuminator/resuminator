@@ -17,10 +17,6 @@ const Contact = () => {
   const update = useContactStore((state) => state.update);
   const add = useContactStore((state) => state.add);
 
-  React.useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   const handleDelete = (index: number) => {
     const preList = data.slice(0, index);
     const postList = data.slice(index + 1);
