@@ -1,6 +1,7 @@
 import { Content } from "@tiptap/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
+import create from "zustand";
 import EditorWithLabel from "../../components/common/EditorWithLabel";
 import InputWithLabel from "../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../components/common/StartEndDatePicker";
@@ -25,12 +26,42 @@ interface ExperienceDataObject {
 
 type DataState = Array<ExperienceDataObject>;
 
+interface ExperienceState {
+  data: DataState;
+  add: (obj: ExperienceDataObject) => void;
+  update: (index: number, key: string, value: any) => void;
+  toggleVisibility: (index: number) => void;
+}
+
+const updateArray = (
+  array: DataState,
+  index: number,
+  obj: ExperienceDataObject
+) => [...array.slice(0, index), obj, ...array.slice(index + 1)];
+
+const useExperienceStore = create<ExperienceState>((set, get) => ({
+  data: [],
+  add: (obj) => set((state) => ({ data: [...state.data, obj] })),
+  update: (index, key, value) => {
+    const obj = { ...get().data[index], [key]: value };
+    set((state) => ({ data: updateArray(state.data, index, obj) }));
+  },
+  toggleVisibility: (index) => {
+    const obj = { ...get().data[index] };
+    set((state) => ({
+      data: updateArray(state.data, index, { ...obj, isHidden: !obj.isHidden }),
+    }));
+  },
+}));
+
 const Experience = () => {
   const [properties, setProperties] = useState<SectionProperties>({
     isHidden: false,
   });
-  const [data, setData] = useState<DataState>([]);
-  const [currentObject, setCurrentObject] = useState<ExperienceDataObject>();
+  const data = useExperienceStore((state) => state.data);
+  const addData = useExperienceStore((state) => state.add);
+  const updateData = useExperienceStore((state) => state.update);
+  const toggleVisibility = useExperienceStore((state) => state.toggleVisibility);
 
   const DummyData: ExperienceDataObject = {
     _id: getUniqueID(),
@@ -51,47 +82,29 @@ const Experience = () => {
   };
 
   const handleAdd = async () => {
-    await getNewObject().then((res) => setData((data) => [...data, res]));
+    await getNewObject().then((res) => addData(res));
   };
 
-  const handleDelete = async () => {
-    console.log(`Deleted ${currentObject._id}`);
+  const handleDelete = async (id: string) => {
+    console.log(`Deleted ${id}`);
   };
 
-  const toggleVisibilityOnResume = () => {
-    setCurrentObject((nextCurrent) => ({
-      ...nextCurrent,
-      isHidden: !currentObject.isHidden,
-    }));
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     e.preventDefault();
     const [key, value] = [e.target.name, e.target.value];
-    setCurrentObject((nextCurrent) => ({ ...nextCurrent, [key]: value }));
+    updateData(index, key, value);
   };
 
-  const handleEditorChange = (output: Content) => {
-    setCurrentObject((nextCurrent) => ({
-      ...nextCurrent,
-      description: output,
-    }));
+  const handleEditorChange = (index: number, output: Content) => {
+    updateData(index, "description", output);
   };
 
-  const handleDateChange = (key: string) => (date: Date) => {
-    setCurrentObject((nextCurrent) => ({
-      ...nextCurrent,
-      [key]: date,
-    }));
+  const handleDateChange = (index: number, key: string) => (date: Date) => {
+    updateData(index, key, date);
   };
-
-  useEffect(() => {
-    setData((nextData) =>
-      nextData.map((item) =>
-        item._id === currentObject._id ? currentObject : item
-      )
-    );
-  }, [currentObject]);
 
   return (
     <Section
@@ -109,60 +122,59 @@ const Experience = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      {data.map((item) => (
+      {data.map((item, index) => (
         <ExpandableCard
-          key={item._id}
+          key={index}
           title={item.company}
           subtitle={item.jobTitle}
           visibilityHandler={{
             value: item.isHidden,
-            setValue: () => toggleVisibilityOnResume(),
+            setValue: () => toggleVisibility(index),
           }}
-          deleteHandler={handleDelete}
-          chainOnClick={() => setCurrentObject(item)}
+          deleteHandler={() => handleDelete(item._id)}
         >
           <InputWithLabel
             label="Job Title"
             name="jobTitle"
             placeholder="Rocket Scientist"
             value={item.jobTitle}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, index)}
           />
           <InputWithLabel
             label="Organization"
             name="company"
             placeholder="Tesla"
             value={item.company}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, index)}
           />
           <InputWithLabel
             label="Location"
             name="location"
             placeholder="Start typing to search location"
             value={item.location}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, index)}
           />
           <EditorWithLabel
-            onChange={handleEditorChange}
+            onChange={(output) => handleEditorChange(index, output)}
             defaultValue={item.description}
             label="Description"
           />
           <StartEndDatePicker
             values={{ start: item.start, end: item.end }}
-            onChangeHandler={handleDateChange}
+            onChangeHandler={(key) => handleDateChange(index, key)}
           />
           <InputWithLabel
             label="Tags"
             name="tags"
             placeholder="Separate keywords by commas"
             value={item.tags}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, index)}
           />
           <InputWithLabel
             label="Link"
             name="link"
             value={item.link}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, index)}
           />
         </ExpandableCard>
       ))}

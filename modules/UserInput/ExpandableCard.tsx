@@ -15,7 +15,6 @@ interface Props {
   subtitle?: string;
   visibilityHandler?: IHandler;
   deleteHandler: () => void;
-  chainOnClick?: () => void;
 }
 
 const ExpandableCard: React.FC<Props & BoxProps> = ({
@@ -23,7 +22,6 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
   subtitle,
   visibilityHandler = { value: false },
   deleteHandler,
-  chainOnClick,
   children,
   ...props
 }) => {
@@ -40,10 +38,7 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
           shadow="md"
           cursor="pointer"
           _hover={{ bg: "whiteAlpha.100" }}
-          onClick={() => {
-            onToggle();
-            chainOnClick();
-          }}
+          onClick={onToggle}
           {...props}
         >
           <Text>{title}</Text>
