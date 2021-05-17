@@ -19,5 +19,4 @@ export interface ExperienceState {
   data: DataState;
   add: (obj: ExperienceDataObject) => void;
   update: (index: number, key: string, value: any) => void;
-  toggleVisibility: (index: number) => void;
 }

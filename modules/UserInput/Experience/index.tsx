@@ -19,9 +19,6 @@ const Experience = () => {
   const data = useExperienceStore((state) => state.data);
   const addData = useExperienceStore((state) => state.add);
   const updateData = useExperienceStore((state) => state.update);
-  const toggleVisibility = useExperienceStore(
-    (state) => state.toggleVisibility
-  );
 
   const DummyData: ExperienceDataObject = {
     _id: getUniqueID(),
@@ -89,7 +86,7 @@ const Experience = () => {
           subtitle={item.jobTitle}
           visibilityHandler={{
             value: item.isHidden,
-            setValue: () => toggleVisibility(index),
+            setValue: () => updateData(index, "isHidden", !item.isHidden),
           }}
           deleteHandler={() => handleDelete(item._id)}
         >
