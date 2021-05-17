@@ -1,58 +1,16 @@
 import { Content } from "@tiptap/core";
 import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import create from "zustand";
-import EditorWithLabel from "../../components/common/EditorWithLabel";
-import InputWithLabel from "../../components/common/InputWithLabel";
-import StartEndDatePicker from "../../components/common/StartEndDatePicker";
-import TooltipIconButton from "../../components/common/TooltipIconButton";
-import Section from "../../components/layouts/Section";
-import { getUniqueID } from "../../utils";
-import ExpandableCard from "./ExpandableCard";
-import SectionControls, { SectionProperties } from "./SectionControls";
-
-interface ExperienceDataObject {
-  _id?: string;
-  jobTitle?: string;
-  company?: string;
-  location?: string;
-  description?: Content;
-  link?: string;
-  tags?: Array<string>;
-  start?: Date;
-  end?: Date;
-  isHidden?: boolean;
-}
-
-type DataState = Array<ExperienceDataObject>;
-
-interface ExperienceState {
-  data: DataState;
-  add: (obj: ExperienceDataObject) => void;
-  update: (index: number, key: string, value: any) => void;
-  toggleVisibility: (index: number) => void;
-}
-
-const updateArray = (
-  array: DataState,
-  index: number,
-  obj: ExperienceDataObject
-) => [...array.slice(0, index), obj, ...array.slice(index + 1)];
-
-const useExperienceStore = create<ExperienceState>((set, get) => ({
-  data: [],
-  add: (obj) => set((state) => ({ data: [...state.data, obj] })),
-  update: (index, key, value) => {
-    const obj = { ...get().data[index], [key]: value };
-    set((state) => ({ data: updateArray(state.data, index, obj) }));
-  },
-  toggleVisibility: (index) => {
-    const obj = { ...get().data[index] };
-    set((state) => ({
-      data: updateArray(state.data, index, { ...obj, isHidden: !obj.isHidden }),
-    }));
-  },
-}));
+import EditorWithLabel from "../../../components/common/EditorWithLabel";
+import InputWithLabel from "../../../components/common/InputWithLabel";
+import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
+import TooltipIconButton from "../../../components/common/TooltipIconButton";
+import Section from "../../../components/layouts/Section";
+import { getUniqueID } from "../../../utils";
+import ExpandableCard from "../ExpandableCard";
+import SectionControls, { SectionProperties } from "../SectionControls";
+import useExperienceStore from "./store";
+import { ExperienceDataObject } from "./types";
 
 const Experience = () => {
   const [properties, setProperties] = useState<SectionProperties>({
@@ -61,7 +19,9 @@ const Experience = () => {
   const data = useExperienceStore((state) => state.data);
   const addData = useExperienceStore((state) => state.add);
   const updateData = useExperienceStore((state) => state.update);
-  const toggleVisibility = useExperienceStore((state) => state.toggleVisibility);
+  const toggleVisibility = useExperienceStore(
+    (state) => state.toggleVisibility
+  );
 
   const DummyData: ExperienceDataObject = {
     _id: getUniqueID(),
