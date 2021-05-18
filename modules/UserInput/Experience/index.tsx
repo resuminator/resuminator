@@ -1,5 +1,5 @@
 import { Content } from "@tiptap/core";
-import React, { useState } from "react";
+import React from "react";
 import { FiPlus } from "react-icons/fi";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
@@ -8,14 +8,11 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
 import ExpandableCard from "../ExpandableCard";
-import SectionControls, { SectionProperties } from "../SectionControls";
+import SectionControls from "../SectionControls";
 import useExperienceStore from "./store";
 import { ExperienceDataObject } from "./types";
 
 const Experience = () => {
-  const [properties, setProperties] = useState<SectionProperties>({
-    isHidden: false,
-  });
   const data = useExperienceStore((state) => state.data);
   const isDisabled = useExperienceStore((state) => state.isDisabled);
   const toggleDisabled = useExperienceStore((state) => state.toggleDisabled);
@@ -63,6 +60,15 @@ const Experience = () => {
 
   const handleDateChange = (index: number, key: string) => (date: Date) => {
     updateData(index, key, date);
+  };
+
+  const handleTagsInput = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const value = e.target.value;
+    const tags = value !== "" ? value.split(",") : [];
+    updateData(index, "tags", tags);
   };
 
   return (
@@ -126,8 +132,8 @@ const Experience = () => {
             label="Tags"
             name="tags"
             placeholder="Separate keywords by commas"
-            value={item.tags}
-            onChange={(e) => handleChange(e, index)}
+            value={item.tags.toString()}
+            onChange={(e) => handleTagsInput(e, index)}
           />
           <InputWithLabel
             label="Link"
