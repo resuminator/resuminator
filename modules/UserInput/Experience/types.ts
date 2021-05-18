@@ -14,9 +14,3 @@ export interface ExperienceDataObject {
 }
 
 export type DataState = Array<ExperienceDataObject>;
-
-export interface ExperienceState {
-  data: DataState;
-  add: (obj: ExperienceDataObject) => void;
-  update: (index: number, key: string, value: any) => void;
-}

@@ -17,6 +17,8 @@ const Experience = () => {
     isHidden: false,
   });
   const data = useExperienceStore((state) => state.data);
+  const isDisabled = useExperienceStore((state) => state.isDisabled);
+  const toggleDisabled = useExperienceStore((state) => state.toggleDisabled);
   const addData = useExperienceStore((state) => state.add);
   const updateData = useExperienceStore((state) => state.update);
 
@@ -71,7 +73,7 @@ const Experience = () => {
         mb: "2",
       }}
     >
-      <SectionControls handler={{ properties, setProperties }}>
+      <SectionControls handler={{ isDisabled, toggleDisabled }}>
         <TooltipIconButton
           label="Add new experience"
           aria-label="New-Experience"

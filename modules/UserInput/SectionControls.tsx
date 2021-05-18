@@ -9,24 +9,22 @@ export interface SectionProperties {
 
 interface Props {
   handler: {
-    properties: SectionProperties;
-    setProperties: React.Dispatch<React.SetStateAction<SectionProperties>>;
+    isDisabled: boolean;
+    toggleDisabled: () => void;
   };
 }
 
 const SectionControls: React.FC<Props> = ({ handler, children }) => {
-  const { properties, setProperties } = handler;
+  const { isDisabled, toggleDisabled } = handler;
   return (
     <HStack mb="4" spacing="4">
       {children}
       <TooltipIconButton
         aria-label="Toggle Visibility"
         label="Toggle Visibility"
-        icon={properties.isHidden ? <FiEyeOff /> : <FiEye />}
-        onClick={() =>
-          setProperties({ ...properties, isHidden: !properties.isHidden })
-        }
-        colorScheme={properties.isHidden ? "red" : ""}
+        icon={isDisabled ? <FiEyeOff /> : <FiEye />}
+        onClick={toggleDisabled}
+        colorScheme={isDisabled ? "red" : ""}
       />
       <TooltipIconButton
         aria-label="Know More"
