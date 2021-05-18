@@ -4,10 +4,10 @@ import {
   FaLinkedin,
   FaPhoneAlt,
   FaTwitter,
-  FaUserAlt
+  FaUserAlt,
 } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
-import { Services } from "./types";
+import { ContactData, Services } from "./types";
 
 export const getIconForService = (label: Services) => {
   switch (label) {
@@ -45,4 +45,9 @@ export const getColorSchemeForService = (label: Services) => {
     default:
       return "blue.500";
   }
+};
+
+export const labelIsPresent = (data: ContactData, label: Services): boolean => {
+  const keys = data.map((item) => item.label);
+  return keys.includes(label);
 };

@@ -13,7 +13,7 @@ const Contact = () => {
   const [properties, setProperties] = useState<SectionProperties>({
     isHidden: false,
   });
-  const data = useContactStore((state) => state.data);
+  const data = useContactStore((state) => state.contact);
   const update = useContactStore((state) => state.update);
   const add = useContactStore((state) => state.add);
 
@@ -32,7 +32,7 @@ const Contact = () => {
       }}
     >
       <SectionControls handler={{ properties, setProperties }}>
-        <SocialMediaMenu handler={{ add }} />
+        <SocialMediaMenu handler={{ data, add }} />
       </SectionControls>
 
       {/* Displaying user handles */}
@@ -59,6 +59,7 @@ const Contact = () => {
             handlers={{
               hide: (index) => update(index, "isHidden", !item.isHidden),
               remove: handleDelete,
+              update,
             }}
           />
         </HStack>

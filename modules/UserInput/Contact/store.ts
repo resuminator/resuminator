@@ -9,20 +9,28 @@ const updateArray = (
 ) => [...array.slice(0, index), obj, ...array.slice(index + 1)];
 
 interface ContactState {
-  data: ContactData;
+  fullName: string;
+  jobTitle: string;
+  contact: ContactData;
   add: (obj: ContactDataObject) => void;
   update: (index: number, key: string, value: any) => void;
+  setFullName: (value: string) => void;
+  setJobTitle: (value: string) => void;
 }
 
 const useContactStore = create<ContactState>(
   devtools(
     (set, get) => ({
-      data: [],
-      add: (obj) => set((state) => ({ data: [...state.data, obj] })),
+      fullName: "",
+      jobTitle: "",
+      contact: [],
+      add: (obj) => set((state) => ({ contact: [...state.contact, obj] })),
       update: (index, key, value) => {
-        const obj = { ...get().data[index], [key]: value };
-        set((state) => ({ data: updateArray(state.data, index, obj) }));
+        const obj = { ...get().contact[index], [key]: value };
+        set((state) => ({ contact: updateArray(state.contact, index, obj) }));
       },
+      setFullName: (value) => set({ fullName: value }),
+      setJobTitle: (value) => set({ jobTitle: value }),
     }),
     "Contact"
   )

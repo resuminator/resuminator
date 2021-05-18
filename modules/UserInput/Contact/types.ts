@@ -18,6 +18,7 @@ export interface ContactDataObject {
   label: Services | string;
   link: string;
   isHidden?: boolean;
+  identifier?: string;
 }
 
 export type ContactData = Array<ContactDataObject>;
