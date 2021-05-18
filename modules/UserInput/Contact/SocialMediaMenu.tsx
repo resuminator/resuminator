@@ -1,10 +1,9 @@
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
-import TooltipIconButton from "../../components/common/TooltipIconButton";
-import { ContactDataObject } from "../UserInput/Contact/types";
+import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import { getIconForService } from "./helpers";
-import { SocialHandleObject } from "./types";
+import { ContactDataObject, SocialHandleObject } from "./types";
 
 export const SocialHandles: Array<SocialHandleObject> = [
   { label: "LinkedIn" },
@@ -15,6 +14,7 @@ export const SocialHandles: Array<SocialHandleObject> = [
   { label: "Portfolio" },
   { label: "Custom" },
 ];
+
 interface Props {
   handler: {
     add: (obj: ContactDataObject) => void;
@@ -40,7 +40,6 @@ const SocialMediaMenu: React.FC<Props> = ({ handler }) => {
               add({
                 label: item.label,
                 link: "",
-                icon: getIconForService(item.label),
                 isHidden: false,
               })
             }

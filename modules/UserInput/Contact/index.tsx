@@ -3,10 +3,10 @@ import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
 import { HStack } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import Section from "../../../components/layouts/Section";
-import SocialMediaMenu from "../../SocialMedia";
-import { getColorSchemeForService } from "../../SocialMedia/helpers";
-import ItemMenu from "../ItemMenu";
 import SectionControls, { SectionProperties } from "../SectionControls";
+import { getColorSchemeForService, getIconForService } from "./helpers";
+import ItemMenu from "./ItemMenu";
+import SocialMediaMenu from "./SocialMediaMenu";
 import useContactStore from "./store";
 
 const Contact = () => {
@@ -41,7 +41,7 @@ const Contact = () => {
           <InputGroup flexBasis="80%">
             <InputLeftElement>
               <Icon
-                as={item.icon}
+                as={getIconForService(item.label)}
                 color={getColorSchemeForService(item.label)}
               />
             </InputLeftElement>

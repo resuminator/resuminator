@@ -1,6 +1,21 @@
-import { SocialHandleObject } from "../../SocialMedia/types";
+import { IconType } from "react-icons/lib";
 
-export interface ContactDataObject extends SocialHandleObject {
+export type Services =
+  | "LinkedIn"
+  | "Twitter"
+  | "GitHub"
+  | "Email"
+  | "Phone"
+  | "Portfolio"
+  | "Custom"
+  | string;
+export interface SocialHandleObject {
+  label: Services | string;
+  icon?: IconType;
+}
+
+export interface ContactDataObject {
+  label: Services | string;
   link: string;
   isHidden?: boolean;
 }

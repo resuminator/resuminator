@@ -4,7 +4,7 @@ import React from "react";
 import { CgOptions } from "react-icons/cg";
 import { FiEye } from "react-icons/fi";
 import { IoMdRemoveCircle } from "react-icons/io";
-import { ContactDataObject } from "./Contact/types";
+import { ContactDataObject } from "./types";
 
 interface Props {
   item?: ContactDataObject;

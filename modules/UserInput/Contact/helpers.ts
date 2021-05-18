@@ -4,7 +4,7 @@ import {
   FaLinkedin,
   FaPhoneAlt,
   FaTwitter,
-  FaUserAlt,
+  FaUserAlt
 } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { Services } from "./types";
