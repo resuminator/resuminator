@@ -1,3 +1,4 @@
+import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box } from "@chakra-ui/layout";
 import React from "react";
 import FooterLinks from "../../../data/FooterLinks";
@@ -12,7 +13,7 @@ const Footer = () => {
   return (
     <Box
       as="footer"
-      bg="navy"
+      bg={useColorModeValue("darkblue","#000034")}
       p={{ base: "2rem", md: "4rem", lg: "2rem 8rem" }}
     >
       <Box
