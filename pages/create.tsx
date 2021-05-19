@@ -11,6 +11,7 @@ import {
   Experience,
   NameAndJobTitle,
   Projects,
+  Publications,
 } from "../modules/UserInput";
 
 const Create: NextPage = () => {
@@ -33,6 +34,7 @@ const Create: NextPage = () => {
           <Experience />
           <Projects />
           <Certification />
+          <Publications />
         </Box>
         <Box aria-label="Resume Preview" flexBasis="50%">
           Resume
