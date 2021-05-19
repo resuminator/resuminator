@@ -1,4 +1,3 @@
-import { HStack } from "@chakra-ui/layout";
 import { Content } from "@tiptap/core";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
@@ -78,8 +77,8 @@ const Education = () => {
     >
       <SectionControls handler={{ isDisabled, toggleDisabled }}>
         <TooltipIconButton
-          label="Add new experience"
-          aria-label="New-Experience"
+          label="Add new education"
+          aria-label="New-Education"
           icon={<FiPlus />}
           onClick={handleAdd}
         />
@@ -89,7 +88,7 @@ const Education = () => {
           key={index}
           title={item.institute}
           subtitle={item.degree}
-          cardPlaceholder="Your institute name"
+          cardPlaceholder="Your institute"
           type="education"
           visibilityHandler={{
             value: item.isHidden,

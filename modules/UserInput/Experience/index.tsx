@@ -22,12 +22,12 @@ const Experience = () => {
   //This will be removed when server is connected. For mock purposes only.
   const DummyData: ExperienceDataObject = {
     _id: getUniqueID(),
-    jobTitle: "Student Developer @ CERN-HSF",
-    company: "Google Summer of Code '20",
-    location: "Remote",
-    description: "<p>Testing Testing</p>",
+    jobTitle: "",
+    company: "",
+    location: "",
+    description: "",
     link: "",
-    tags: ["GSoC", "React"],
+    tags: [],
     start: new Date(),
     end: new Date(),
     isHidden: false,
@@ -95,6 +95,8 @@ const Experience = () => {
           key={index}
           title={item.company}
           subtitle={item.jobTitle}
+          cardPlaceholder="Your organization"
+          type="experience"
           visibilityHandler={{
             value: item.isHidden,
             setValue: () => updateData(index, "isHidden", !item.isHidden),
