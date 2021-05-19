@@ -67,6 +67,11 @@ const Education = () => {
     updateData(index, key, date);
   };
 
+  const handleCheckbox = (index: number) => {
+    if(data[index].end) return updateData(index, "end", null);
+    else return updateData(index, "end", new Date());
+  }
+
   return (
     <Section
       header={{
@@ -126,6 +131,7 @@ const Education = () => {
             views={["year"]}
             values={{ start: item.start, end: item.end }}
             onChangeHandler={(key) => handleDateChange(index, key)}
+            checkboxHandler={() => handleCheckbox(index)}
           />
           <GradeInput
             gradeObtained={item.gradeObtained}

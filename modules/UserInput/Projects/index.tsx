@@ -64,6 +64,11 @@ const Projects = () => {
     updateData(index, key, date);
   };
 
+  const handleCheckbox = (index: number) => {
+    if(data[index].end) return updateData(index, "end", null);
+    else return updateData(index, "end", new Date());
+  }
+
   const handleTagsInput = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -117,9 +122,9 @@ const Projects = () => {
             onChange={(e) => handleChange(e, index)}
           />
           <StartEndDatePicker
-            views={["year"]}
             values={{ start: item.start, end: item.end }}
             onChangeHandler={(key) => handleDateChange(index, key)}
+            checkboxHandler={() => handleCheckbox(index)}
           />
           <EditorWithLabel
             onChange={(output) => handleEditorChange(index, output)}
