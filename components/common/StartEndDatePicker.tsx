@@ -5,7 +5,7 @@ import { add, sub } from "date-fns";
 import MUIDatePicker, { TextField } from "../../widgets/DatePicker";
 
 interface Props {
-  labels?: { started: string; ended: string };
+  labels?: { started: string; ended: string; checkbox: string };
   values: { start: Date; end: Date };
   onChangeHandler: (key: string) => (date: Date) => void;
   checkboxHandler?: (e) => void;
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const StartEndDatePicker: React.FC<Props> = ({
-  labels = { started: "Started", ended: "Ended" },
+  labels = { started: "Started", ended: "Ended", checkbox: "Present" },
   values,
   onChangeHandler,
   checkboxHandler,
@@ -30,7 +30,7 @@ const StartEndDatePicker: React.FC<Props> = ({
             renderInput={({ helperText, label, ...params }) => (
               <TextField label={null} {...params} />
             )}
-            label="Started"
+            label={labels.started}
             value={values.start}
             onChange={onChangeHandler("start")}
             views={views}
@@ -46,7 +46,7 @@ const StartEndDatePicker: React.FC<Props> = ({
             renderInput={({ helperText, label, ...params }) => (
               <TextField label={null} {...params} />
             )}
-            label="Ended"
+            label={labels.ended}
             value={values.end}
             onChange={onChangeHandler("end")}
             views={views}
@@ -63,7 +63,7 @@ const StartEndDatePicker: React.FC<Props> = ({
         onChange={checkboxHandler}
         isChecked={!values.end}
       >
-        Present
+        {labels.checkbox}
       </Checkbox>
     </>
   );
