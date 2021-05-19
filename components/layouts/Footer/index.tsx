@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <Box
       as="footer"
-      bg={useColorModeValue("darkblue","#000034")}
+      bg={useColorModeValue("darkblue","#002171")}
       p={{ base: "2rem", md: "4rem", lg: "2rem 8rem" }}
     >
       <Box
