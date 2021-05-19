@@ -1,5 +1,6 @@
 export interface EducationDataObject {
   _id: string;
+  isHidden: boolean;
   institute?: string;
   location?: string;
   degree?: string;

@@ -14,6 +14,7 @@ interface Props {
   title: string;
   subtitle?: string;
   cardPlaceholder?: string;
+  type?: string,
   visibilityHandler?: IHandler;
   deleteHandler: () => void;
 }
@@ -22,6 +23,7 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
   title,
   subtitle,
   cardPlaceholder,
+  type,
   visibilityHandler = { value: false },
   deleteHandler,
   children,
@@ -74,7 +76,7 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
                 colorScheme={visibilityHandler.value ? "red" : "inherit"}
               />
               <RemoveItemButton
-                itemType="experience"
+                itemType={type}
                 handleDelete={deleteHandler}
               />
             </HStack>

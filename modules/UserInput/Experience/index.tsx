@@ -19,6 +19,7 @@ const Experience = () => {
   const addData = useExperienceStore((state) => state.add);
   const updateData = useExperienceStore((state) => state.update);
 
+  //This will be removed when server is connected. For mock purposes only.
   const DummyData: ExperienceDataObject = {
     _id: getUniqueID(),
     jobTitle: "Student Developer @ CERN-HSF",
@@ -37,10 +38,12 @@ const Experience = () => {
     return DummyData;
   };
 
+  //Mock async request
   const handleAdd = async () => {
     await getNewObject().then((res) => addData(res));
   };
 
+  //Mocked delete request from server.
   const handleDelete = async (id: string) => {
     console.log(`Deleted ${id}`);
   };
