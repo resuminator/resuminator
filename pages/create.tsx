@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import Layout from "../components/layouts";
 import NavTabs from "../components/layouts/NavTabs";
-import { Contact, Experience, NameAndJobTitle } from "../modules/UserInput";
+import { Contact, Education, Experience, NameAndJobTitle } from "../modules/UserInput";
 
 const Create: NextPage = () => {
   const router = useRouter();
@@ -23,6 +23,7 @@ const Create: NextPage = () => {
           <NameAndJobTitle />
           <Contact />
           <Experience />
+          <Education/>
         </Box>
         <Box aria-label="Resume Preview" flexBasis="50%">
           Resume

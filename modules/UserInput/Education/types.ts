@@ -1,0 +1,12 @@
+export interface EducationDataObject {
+  _id: string;
+  institute?: string;
+  location?: string;
+  degree?: string;
+  stream?: string;
+  gradeObtained?: number;
+  gradeMax?: number;
+  start?: Date;
+  end?: Date;
+  description?: string;
+}
