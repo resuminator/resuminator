@@ -13,6 +13,7 @@ type IHandler = { value: boolean; setValue: () => void };
 interface Props {
   title: string;
   subtitle?: string;
+  cardPlaceholder?: string;
   visibilityHandler?: IHandler;
   deleteHandler: () => void;
 }
@@ -20,6 +21,7 @@ interface Props {
 const ExpandableCard: React.FC<Props & BoxProps> = ({
   title,
   subtitle,
+  cardPlaceholder,
   visibilityHandler = { value: false },
   deleteHandler,
   children,
@@ -41,9 +43,9 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
           onClick={onToggle}
           {...props}
         >
-          <Text>{title}</Text>
+          <Text>{title || cardPlaceholder}</Text>
           <Text fontSize="sm" color="GrayText">
-            {subtitle}
+            {subtitle || "Click on this card to expand and start editing"}
           </Text>
         </Box>
       ) : null}
