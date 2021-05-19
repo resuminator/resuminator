@@ -5,6 +5,7 @@ import React from "react";
 import Layout from "../components/layouts";
 import NavTabs from "../components/layouts/NavTabs";
 import {
+  Certification,
   Contact,
   Education,
   Experience,
@@ -31,6 +32,7 @@ const Create: NextPage = () => {
           <Education />
           <Experience />
           <Projects />
+          <Certification />
         </Box>
         <Box aria-label="Resume Preview" flexBasis="50%">
           Resume

@@ -1,7 +1,5 @@
-import { Content } from "@tiptap/core";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
-import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
@@ -9,27 +7,26 @@ import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
 import ExpandableCard from "../ExpandableCard";
 import SectionControls from "../SectionControls";
-import useProjectStore from "./store";
-import { ProjectDataObject } from "./types";
+import useCertificationStore from "./store";
+import { CertificationDataObject } from "./types";
 
-const Projects = () => {
-  const data = useProjectStore((state) => state.data);
-  const isDisabled = useProjectStore((state) => state.isDisabled);
-  const toggleDisabled = useProjectStore((state) => state.toggleDisabled);
-  const addData = useProjectStore((state) => state.add);
-  const updateData = useProjectStore((state) => state.update);
+const Certification = () => {
+  const data = useCertificationStore((state) => state.data);
+  const isDisabled = useCertificationStore((state) => state.isDisabled);
+  const toggleDisabled = useCertificationStore((state) => state.toggleDisabled);
+  const addData = useCertificationStore((state) => state.add);
+  const updateData = useCertificationStore((state) => state.update);
 
   //This will be removed when server is connected. For mock purposes only.
-  const DummyData: ProjectDataObject = {
+  const DummyData: CertificationDataObject = {
     _id: getUniqueID(),
     isHidden: false,
-    projectName: "",
-    additionalInfo: "",
+    certificateName: "",
+    authority: "",
+    credentialNumber: "",
     start: new Date(),
     end: new Date(),
-    description: "",
     link: "",
-    tags: [],
   };
 
   //mocking data from DB.
@@ -56,10 +53,6 @@ const Projects = () => {
     updateData(index, key, value);
   };
 
-  const handleEditorChange = (index: number, output: Content) => {
-    updateData(index, "description", output);
-  };
-
   const handleDateChange = (index: number, key: string) => (date: Date) => {
     updateData(index, key, date);
   };
@@ -69,27 +62,18 @@ const Projects = () => {
     else return updateData(index, "end", new Date());
   };
 
-  const handleTagsInput = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const value = e.target.value;
-    const tags = value !== "" ? value.split(",") : [];
-    updateData(index, "tags", tags);
-  };
-
   return (
     <Section
       header={{
-        title: "Projects",
-        subtitle: "Add relevant personal projects",
+        title: "Certifications",
+        subtitle: "Add relevant professional certifications",
         mb: "2",
       }}
     >
       <SectionControls handler={{ isDisabled, toggleDisabled }}>
         <TooltipIconButton
-          label="Add new project"
-          aria-label="New-Project"
+          label="Add new certificate"
+          aria-label="New-Certificate"
           icon={<FiPlus />}
           onClick={handleAdd}
         />
@@ -97,10 +81,10 @@ const Projects = () => {
       {data.map((item, index) => (
         <ExpandableCard
           key={index}
-          title={item.projectName}
-          subtitle={item.link}
-          cardPlaceholder="Project Name"
-          type="project"
+          title={item.certificateName}
+          subtitle={item.credentialNumber}
+          cardPlaceholder="Certificate Name"
+          type="certification"
           visibilityHandler={{
             value: item.isHidden,
             setValue: () => updateData(index, "isHidden", !item.isHidden),
@@ -108,41 +92,40 @@ const Projects = () => {
           deleteHandler={() => handleDelete(item._id)}
         >
           <InputWithLabel
-            label="Project Name"
-            name="projectName"
-            placeholder="Resuminator"
-            value={item.projectName}
+            label="Certificate Name"
+            name="certificateName"
+            placeholder="Certified Software Developer"
+            value={item.certificateName}
             onChange={(e) => handleChange(e, index)}
           />
           <InputWithLabel
-            label="Additional Info (Optional)"
-            name="additionalInfo"
-            placeholder="Ex. Organization"
-            value={item.additionalInfo}
+            label="Issuing Authority"
+            name="authority"
+            placeholder="Ex. Microsoft"
+            value={item.authority}
+            onChange={(e) => handleChange(e, index)}
+          />
+          <InputWithLabel
+            label="Credential Number"
+            name="credentialNumber"
+            value={item.credentialNumber}
             onChange={(e) => handleChange(e, index)}
           />
           <StartEndDatePicker
+            labels={{
+              started: "Obtained",
+              ended: "Expires",
+              checkbox: "Never Expires",
+            }}
             values={{ start: item.start, end: item.end }}
             onChangeHandler={(key) => handleDateChange(index, key)}
             checkboxHandler={() => handleCheckbox(index)}
           />
-          <EditorWithLabel
-            onChange={(output) => handleEditorChange(index, output)}
-            defaultValue={item.description}
-            label="Description"
-          />
           <InputWithLabel
-            label="Project Link"
+            label="Certificate Link"
             name="link"
             value={item.link}
             onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Tags"
-            name="tags"
-            placeholder="Separate keywords by commas"
-            value={item.tags.toString()}
-            onChange={(e) => handleTagsInput(e, index)}
           />
         </ExpandableCard>
       ))}
@@ -150,4 +133,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default Certification;
