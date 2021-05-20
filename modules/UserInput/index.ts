@@ -5,6 +5,7 @@ import Experience from "./Experience";
 import Projects from "./Projects";
 import Certification from "./Certification";
 import Publications from "./Publications";
+import Skills from "./Skills";
 
 export {
   NameAndJobTitle,
@@ -13,5 +14,6 @@ export {
   Education,
   Projects,
   Certification,
-  Publications
+  Publications,
+  Skills
 };
