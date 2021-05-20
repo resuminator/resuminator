@@ -1,18 +1,15 @@
 import Icon from "@chakra-ui/icon";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
 import { HStack } from "@chakra-ui/layout";
-import React, { useState } from "react";
+import React from "react";
 import Section from "../../../components/layouts/Section";
-import SectionControls, { SectionProperties } from "../SectionControls";
+import SectionControls from "../SectionControls";
 import { getColorSchemeForService, getIconForService } from "./helpers";
 import ItemMenu from "./ItemMenu";
 import SocialMediaMenu from "./SocialMediaMenu";
 import useContactStore from "./store";
 
 const Contact = () => {
-  const [properties, setProperties] = useState<SectionProperties>({
-    isHidden: false,
-  });
   const data = useContactStore((state) => state.contact);
   const update = useContactStore((state) => state.update);
   const add = useContactStore((state) => state.add);
@@ -31,7 +28,7 @@ const Contact = () => {
         mb: "2",
       }}
     >
-      <SectionControls handler={{ properties, setProperties }}>
+      <SectionControls hasToggleButton={false}>
         <SocialMediaMenu handler={{ data, add }} />
       </SectionControls>
 

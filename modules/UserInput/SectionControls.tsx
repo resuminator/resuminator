@@ -8,24 +8,29 @@ export interface SectionProperties {
 }
 
 interface Props {
-  handler: {
+  handler?: {
     isDisabled: boolean;
     toggleDisabled: () => void;
   };
+  hasToggleButton?: boolean;
 }
 
-const SectionControls: React.FC<Props> = ({ handler, children }) => {
+const SectionControls: React.FC<Props> = ({
+  handler = { isDisabled: false, toggleDisabled: () => ({}) },
+  hasToggleButton = true,
+  children,
+}) => {
   const { isDisabled, toggleDisabled } = handler;
   return (
     <HStack mb="4" spacing="4">
       {children}
-      <TooltipIconButton
+      {hasToggleButton && <TooltipIconButton
         aria-label="Toggle Visibility"
         label="Toggle Visibility"
         icon={isDisabled ? <FiEyeOff /> : <FiEye />}
         onClick={toggleDisabled}
         colorScheme={isDisabled ? "red" : ""}
-      />
+      />}
       <TooltipIconButton
         aria-label="Know More"
         label="Know More"
