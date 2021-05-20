@@ -9,8 +9,10 @@ const updateArray = (
 ) => [...array.slice(0, index), obj, ...array.slice(index + 1)];
 
 interface SkillStore {
+  format: "CATEGORIES" | "TAGS",
   isDisabled: boolean;
   toggleDisabled: () => void;
+  toggleFormat: () => void;
   data: Array<SkillDataObject>;
   add: (obj: SkillDataObject) => void;
   update: (index: number, key: string, value: any) => void;
@@ -19,8 +21,10 @@ interface SkillStore {
 const useSkillStore = create<SkillStore>(
   devtools(
     (set, get) => ({
+      format: "CATEGORIES",
       isDisabled: false,
       toggleDisabled: () => set((state) => ({ isDisabled: !state.isDisabled })),
+      toggleFormat: () => set((state) => ({format: state.format === "CATEGORIES" ? "TAGS" : "CATEGORIES"})),
       data: [],
       add: (obj) => set((state) => ({ data: [...state.data, obj] })),
       //Updates an object at a particular index with a key and value pair.

@@ -7,14 +7,16 @@ import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
 import ExpandableCard from "../ExpandableCard";
 import SectionControls from "../SectionControls";
+import FormatMenu from "./FormatMenu";
 import useSkillStore from "./store";
 import { SkillDataObject } from "./types";
 
 interface Props {}
 
-const Skills = (props: Props) => {
+const Skills = () => {
   const data = useSkillStore((state) => state.data);
   const isDisabled = useSkillStore((state) => state.isDisabled);
+
   const toggleDisabled = useSkillStore((state) => state.toggleDisabled);
   const addData = useSkillStore((state) => state.add);
   const updateData = useSkillStore((state) => state.update);
@@ -66,7 +68,10 @@ const Skills = (props: Props) => {
         mb: "2",
       }}
     >
-      <SectionControls handler={{ isDisabled, toggleDisabled }}>
+      <SectionControls
+        handler={{ isDisabled, toggleDisabled }}
+        extraChildren={<FormatMenu />}
+      >
         <TooltipIconButton
           label="Add new skillset"
           aria-label="New-Skillset"
