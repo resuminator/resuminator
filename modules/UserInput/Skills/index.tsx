@@ -3,6 +3,7 @@ import { FiPlus } from "react-icons/fi";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import TextAreaWithLabel from "../../../components/common/TextAreaWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
+import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
 import ExpandableCard from "../ExpandableCard";
@@ -10,8 +11,6 @@ import SectionControls from "../SectionControls";
 import FormatMenu from "./FormatMenu";
 import useSkillStore from "./store";
 import { SkillDataObject } from "./types";
-
-interface Props {}
 
 const Skills = () => {
   const data = useSkillStore((state) => state.data);
@@ -81,34 +80,38 @@ const Skills = () => {
       </SectionControls>
       {/* Search Bar with Autocomplete. TO BE DONE WITH MATERIAL-UI */}
       {/* Switch for disabling auto skill classification. */}
-      {data.map((item, index) => (
-        <ExpandableCard
-          key={index}
-          title={item.category}
-          cardPlaceholder="New skill category"
-          type="category"
-          visibilityHandler={{
-            value: item.isHidden,
-            setValue: () => updateData(index, "isHidden", !item.isHidden),
-          }}
-          deleteHandler={() => handleDelete(item._id)}
-        >
-          <InputWithLabel
-            label="Category"
-            name="category"
-            placeholder="Programming Languages"
-            value={item.category}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <TextAreaWithLabel
-            label="Skills"
-            name="skillsList"
-            placeholder="Separate skills by commas"
-            value={item.skillsList.toString()}
-            onChange={(e) => handleTagsInput(e, index)}
-          />
-        </ExpandableCard>
-      ))}
+      <DndWrapper id="skills" onDragEnd={() => console.log("skill")}>
+        {data.map((item, index) => (
+          <ExpandableCard
+            index={index}
+            id={item._id}
+            key={index}
+            title={item.category}
+            cardPlaceholder="New skill category"
+            type="category"
+            visibilityHandler={{
+              value: item.isHidden,
+              setValue: () => updateData(index, "isHidden", !item.isHidden),
+            }}
+            deleteHandler={() => handleDelete(item._id)}
+          >
+            <InputWithLabel
+              label="Category"
+              name="category"
+              placeholder="Programming Languages"
+              value={item.category}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <TextAreaWithLabel
+              label="Skills"
+              name="skillsList"
+              placeholder="Separate skills by commas"
+              value={item.skillsList.toString()}
+              onChange={(e) => handleTagsInput(e, index)}
+            />
+          </ExpandableCard>
+        ))}
+      </DndWrapper>
     </Section>
   );
 };

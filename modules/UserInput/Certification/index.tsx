@@ -3,6 +3,7 @@ import { FiPlus } from "react-icons/fi";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
+import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
 import ExpandableCard from "../ExpandableCard";
@@ -78,57 +79,61 @@ const Certification = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      {data.map((item, index) => (
-        <ExpandableCard
-          key={index}
-          title={item.certificateName}
-          subtitle={item.credentialNumber}
-          cardPlaceholder="Certificate Name"
-          type="certification"
-          visibilityHandler={{
-            value: item.isHidden,
-            setValue: () => updateData(index, "isHidden", !item.isHidden),
-          }}
-          deleteHandler={() => handleDelete(item._id)}
-        >
-          <InputWithLabel
-            label="Certificate Name"
-            name="certificateName"
-            placeholder="Certified Software Developer"
-            value={item.certificateName}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Issuing Authority"
-            name="authority"
-            placeholder="Ex. Microsoft"
-            value={item.authority}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Credential Number"
-            name="credentialNumber"
-            value={item.credentialNumber}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <StartEndDatePicker
-            labels={{
-              started: "Obtained",
-              ended: "Expires",
-              checkbox: "Never Expires",
+      <DndWrapper id="certification" onDragEnd={() => console.log("something")}>
+        {data.map((item, index) => (
+          <ExpandableCard
+            id={item._id}
+            index={index}
+            key={index}
+            title={item.certificateName}
+            subtitle={item.credentialNumber}
+            cardPlaceholder="Certificate Name"
+            type="certification"
+            visibilityHandler={{
+              value: item.isHidden,
+              setValue: () => updateData(index, "isHidden", !item.isHidden),
             }}
-            values={{ start: item.start, end: item.end }}
-            onChangeHandler={(key) => handleDateChange(index, key)}
-            checkboxHandler={() => handleCheckbox(index)}
-          />
-          <InputWithLabel
-            label="Certificate Link"
-            name="link"
-            value={item.link}
-            onChange={(e) => handleChange(e, index)}
-          />
-        </ExpandableCard>
-      ))}
+            deleteHandler={() => handleDelete(item._id)}
+          >
+            <InputWithLabel
+              label="Certificate Name"
+              name="certificateName"
+              placeholder="Certified Software Developer"
+              value={item.certificateName}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <InputWithLabel
+              label="Issuing Authority"
+              name="authority"
+              placeholder="Ex. Microsoft"
+              value={item.authority}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <InputWithLabel
+              label="Credential Number"
+              name="credentialNumber"
+              value={item.credentialNumber}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <StartEndDatePicker
+              labels={{
+                started: "Obtained",
+                ended: "Expires",
+                checkbox: "Never Expires",
+              }}
+              values={{ start: item.start, end: item.end }}
+              onChangeHandler={(key) => handleDateChange(index, key)}
+              checkboxHandler={() => handleCheckbox(index)}
+            />
+            <InputWithLabel
+              label="Certificate Link"
+              name="link"
+              value={item.link}
+              onChange={(e) => handleChange(e, index)}
+            />
+          </ExpandableCard>
+        ))}
+      </DndWrapper>
     </Section>
   );
 };

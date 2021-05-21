@@ -5,6 +5,7 @@ import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
+import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
 import ExpandableCard from "../ExpandableCard";
@@ -94,58 +95,62 @@ const Projects = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      {data.map((item, index) => (
-        <ExpandableCard
-          key={index}
-          title={item.projectName}
-          subtitle={item.link}
-          cardPlaceholder="Project Name"
-          type="project"
-          visibilityHandler={{
-            value: item.isHidden,
-            setValue: () => updateData(index, "isHidden", !item.isHidden),
-          }}
-          deleteHandler={() => handleDelete(item._id)}
-        >
-          <InputWithLabel
-            label="Project Name"
-            name="projectName"
-            placeholder="Resuminator"
-            value={item.projectName}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Additional Info (Optional)"
-            name="additionalInfo"
-            placeholder="Ex. Organization"
-            value={item.additionalInfo}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <StartEndDatePicker
-            values={{ start: item.start, end: item.end }}
-            onChangeHandler={(key) => handleDateChange(index, key)}
-            checkboxHandler={() => handleCheckbox(index)}
-          />
-          <EditorWithLabel
-            onChange={(output) => handleEditorChange(index, output)}
-            defaultValue={item.description}
-            label="Description"
-          />
-          <InputWithLabel
-            label="Project Link"
-            name="link"
-            value={item.link}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Tags"
-            name="tags"
-            placeholder="Separate keywords by commas"
-            value={item.tags.toString()}
-            onChange={(e) => handleTagsInput(e, index)}
-          />
-        </ExpandableCard>
-      ))}
+      <DndWrapper id="projects" onDragEnd={() => console.log("to")}>
+        {data.map((item, index) => (
+          <ExpandableCard
+            id={item._id}
+            index={index}
+            key={index}
+            title={item.projectName}
+            subtitle={item.link}
+            cardPlaceholder="Project Name"
+            type="project"
+            visibilityHandler={{
+              value: item.isHidden,
+              setValue: () => updateData(index, "isHidden", !item.isHidden),
+            }}
+            deleteHandler={() => handleDelete(item._id)}
+          >
+            <InputWithLabel
+              label="Project Name"
+              name="projectName"
+              placeholder="Resuminator"
+              value={item.projectName}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <InputWithLabel
+              label="Additional Info (Optional)"
+              name="additionalInfo"
+              placeholder="Ex. Organization"
+              value={item.additionalInfo}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <StartEndDatePicker
+              values={{ start: item.start, end: item.end }}
+              onChangeHandler={(key) => handleDateChange(index, key)}
+              checkboxHandler={() => handleCheckbox(index)}
+            />
+            <EditorWithLabel
+              onChange={(output) => handleEditorChange(index, output)}
+              defaultValue={item.description}
+              label="Description"
+            />
+            <InputWithLabel
+              label="Project Link"
+              name="link"
+              value={item.link}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <InputWithLabel
+              label="Tags"
+              name="tags"
+              placeholder="Separate keywords by commas"
+              value={item.tags.toString()}
+              onChange={(e) => handleTagsInput(e, index)}
+            />
+          </ExpandableCard>
+        ))}
+      </DndWrapper>
     </Section>
   );
 };

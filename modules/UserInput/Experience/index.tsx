@@ -5,6 +5,7 @@ import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
+import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
 import ExpandableCard from "../ExpandableCard";
@@ -66,9 +67,9 @@ const Experience = () => {
   };
 
   const handleCheckbox = (index: number) => {
-    if(data[index].end) return updateData(index, "end", null);
+    if (data[index].end) return updateData(index, "end", null);
     else return updateData(index, "end", new Date());
-  }
+  };
 
   const handleTagsInput = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -77,6 +78,10 @@ const Experience = () => {
     const value = e.target.value;
     const tags = value !== "" ? value.split(",") : [];
     updateData(index, "tags", tags);
+  };
+
+  const handleDragEnd = () => {
+    console.log("soemthing");
   };
 
   return (
@@ -95,65 +100,69 @@ const Experience = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      {data.map((item, index) => (
-        <ExpandableCard
-          key={index}
-          title={item.company}
-          subtitle={item.jobTitle}
-          cardPlaceholder="Your organization"
-          type="experience"
-          visibilityHandler={{
-            value: item.isHidden,
-            setValue: () => updateData(index, "isHidden", !item.isHidden),
-          }}
-          deleteHandler={() => handleDelete(item._id)}
-        >
-          <InputWithLabel
-            label="Job Title"
-            name="jobTitle"
-            placeholder="Rocket Scientist"
-            value={item.jobTitle}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Organization"
-            name="company"
-            placeholder="Tesla"
-            value={item.company}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Location"
-            name="location"
-            placeholder="Start typing to search location"
-            value={item.location}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <EditorWithLabel
-            onChange={(output) => handleEditorChange(index, output)}
-            defaultValue={item.description}
-            label="Description"
-          />
-          <StartEndDatePicker
-            values={{ start: item.start, end: item.end }}
-            onChangeHandler={(key) => handleDateChange(index, key)}
-            checkboxHandler={() => handleCheckbox(index)}
-          />
-          <InputWithLabel
-            label="Tags"
-            name="tags"
-            placeholder="Separate keywords by commas"
-            value={item.tags.toString()}
-            onChange={(e) => handleTagsInput(e, index)}
-          />
-          <InputWithLabel
-            label="Link"
-            name="link"
-            value={item.link}
-            onChange={(e) => handleChange(e, index)}
-          />
-        </ExpandableCard>
-      ))}
+      <DndWrapper id="experience" onDragEnd={handleDragEnd}>
+        {data.map((item, index) => (
+          <ExpandableCard
+            id={item._id}
+            index={index}
+            key={index}
+            title={item.company}
+            subtitle={item.jobTitle}
+            cardPlaceholder="Your organization"
+            type="experience"
+            visibilityHandler={{
+              value: item.isHidden,
+              setValue: () => updateData(index, "isHidden", !item.isHidden),
+            }}
+            deleteHandler={() => handleDelete(item._id)}
+          >
+            <InputWithLabel
+              label="Job Title"
+              name="jobTitle"
+              placeholder="Rocket Scientist"
+              value={item.jobTitle}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <InputWithLabel
+              label="Organization"
+              name="company"
+              placeholder="Tesla"
+              value={item.company}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <InputWithLabel
+              label="Location"
+              name="location"
+              placeholder="Start typing to search location"
+              value={item.location}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <EditorWithLabel
+              onChange={(output) => handleEditorChange(index, output)}
+              defaultValue={item.description}
+              label="Description"
+            />
+            <StartEndDatePicker
+              values={{ start: item.start, end: item.end }}
+              onChangeHandler={(key) => handleDateChange(index, key)}
+              checkboxHandler={() => handleCheckbox(index)}
+            />
+            <InputWithLabel
+              label="Tags"
+              name="tags"
+              placeholder="Separate keywords by commas"
+              value={item.tags.toString()}
+              onChange={(e) => handleTagsInput(e, index)}
+            />
+            <InputWithLabel
+              label="Link"
+              name="link"
+              value={item.link}
+              onChange={(e) => handleChange(e, index)}
+            />
+          </ExpandableCard>
+        ))}
+      </DndWrapper>
     </Section>
   );
 };

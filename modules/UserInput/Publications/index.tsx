@@ -3,6 +3,7 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
+import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
 import ExpandableCard from "../ExpandableCard";
@@ -72,78 +73,82 @@ const Publications = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      {data.map((item, index) => (
-        <ExpandableCard
-          key={index}
-          title={item.articleTitle}
-          subtitle={item.authorNames}
-          cardPlaceholder="Publication Article Title"
-          type="publication"
-          visibilityHandler={{
-            value: item.isHidden,
-            setValue: () => updateData(index, "isHidden", !item.isHidden),
-          }}
-          deleteHandler={() => handleDelete(item._id)}
-        >
-          <InputWithLabel
-            label="Article Title"
-            name="articleTitle"
-            placeholder="5G as Disruptive Technology."
-            value={item.articleTitle}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Authors"
-            name="authorNames"
-            placeholder="[Last Name], [First Initial]"
-            value={item.authorNames}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Journal"
-            name="journalName"
-            placeholder="Journal of Applied Technology"
-            value={item.journalName}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <HStack>
+      <DndWrapper id="publication" onDragEnd={() => console.log("YA")}>
+        {data.map((item, index) => (
+          <ExpandableCard
+            id={item._id}
+            index={index}
+            key={index}
+            title={item.articleTitle}
+            subtitle={item.authorNames}
+            cardPlaceholder="Publication Article Title"
+            type="publication"
+            visibilityHandler={{
+              value: item.isHidden,
+              setValue: () => updateData(index, "isHidden", !item.isHidden),
+            }}
+            deleteHandler={() => handleDelete(item._id)}
+          >
             <InputWithLabel
-              label="Volume Number"
-              name="volumeNumber"
-              value={item.volumeNumber}
-              placeholder="86"
+              label="Article Title"
+              name="articleTitle"
+              placeholder="5G as Disruptive Technology."
+              value={item.articleTitle}
               onChange={(e) => handleChange(e, index)}
             />
             <InputWithLabel
-              label="Issue Number"
-              name="issueNumber"
-              value={item.issueNumber}
-              placeholder="5"
-              onChange={(e) => handleChange(e, index)}
-            />
-          </HStack>
-          <HStack>
-            <InputWithLabel
-              label="Year"
-              name="year"
-              value={item.year}
-              placeholder="2015"
+              label="Authors"
+              name="authorNames"
+              placeholder="[Last Name], [First Initial]"
+              value={item.authorNames}
               onChange={(e) => handleChange(e, index)}
             />
             <InputWithLabel
-              label="Pages"
-              name="pages"
-              value={item.pages}
-              placeholder="118-25"
+              label="Journal"
+              name="journalName"
+              placeholder="Journal of Applied Technology"
+              value={item.journalName}
               onChange={(e) => handleChange(e, index)}
             />
-          </HStack>
-          <FormatRadioGroup
-            value={item.format}
-            onChange={(value) => updateData(index, "format", value)}
-          />
-        </ExpandableCard>
-      ))}
+            <HStack>
+              <InputWithLabel
+                label="Volume Number"
+                name="volumeNumber"
+                value={item.volumeNumber}
+                placeholder="86"
+                onChange={(e) => handleChange(e, index)}
+              />
+              <InputWithLabel
+                label="Issue Number"
+                name="issueNumber"
+                value={item.issueNumber}
+                placeholder="5"
+                onChange={(e) => handleChange(e, index)}
+              />
+            </HStack>
+            <HStack>
+              <InputWithLabel
+                label="Year"
+                name="year"
+                value={item.year}
+                placeholder="2015"
+                onChange={(e) => handleChange(e, index)}
+              />
+              <InputWithLabel
+                label="Pages"
+                name="pages"
+                value={item.pages}
+                placeholder="118-25"
+                onChange={(e) => handleChange(e, index)}
+              />
+            </HStack>
+            <FormatRadioGroup
+              value={item.format}
+              onChange={(value) => updateData(index, "format", value)}
+            />
+          </ExpandableCard>
+        ))}
+      </DndWrapper>
     </Section>
   );
 };

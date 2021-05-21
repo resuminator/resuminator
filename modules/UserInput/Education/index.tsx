@@ -5,6 +5,7 @@ import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
+import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
 import ExpandableCard from "../ExpandableCard";
@@ -68,9 +69,9 @@ const Education = () => {
   };
 
   const handleCheckbox = (index: number) => {
-    if(data[index].end) return updateData(index, "end", null);
+    if (data[index].end) return updateData(index, "end", null);
     else return updateData(index, "end", new Date());
-  }
+  };
 
   return (
     <Section
@@ -88,63 +89,67 @@ const Education = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      {data.map((item, index) => (
-        <ExpandableCard
-          key={index}
-          title={item.institute}
-          subtitle={item.degree}
-          cardPlaceholder="Your institute"
-          type="education"
-          visibilityHandler={{
-            value: item.isHidden,
-            setValue: () => updateData(index, "isHidden", !item.isHidden),
-          }}
-          deleteHandler={() => handleDelete(item._id)}
-        >
-          <InputWithLabel
-            label="Institute"
-            name="institute"
-            placeholder="Umbrella Academy"
-            value={item.institute}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Location"
-            name="location"
-            placeholder="Start typing to search location"
-            value={item.location}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Degree"
-            name="degree"
-            value={item.degree}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <InputWithLabel
-            label="Stream"
-            name="stream"
-            value={item.stream}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <StartEndDatePicker
-            views={["year"]}
-            values={{ start: item.start, end: item.end }}
-            onChangeHandler={(key) => handleDateChange(index, key)}
-            checkboxHandler={() => handleCheckbox(index)}
-          />
-          <GradeInput
-            gradeObtained={item.gradeObtained}
-            gradeMax={item.gradeMax}
-            onChangeHandler={(key, value) => updateData(index, key, value)}
-          />
-          <EditorWithLabel
-            onChange={(output) => handleEditorChange(index, output)}
-            defaultValue={item.description}
-            label="Description"
-          />
-        </ExpandableCard>
-      ))}
+      <DndWrapper id="education" onDragEnd={() => console.log("YO")}>
+        {data.map((item, index) => (
+          <ExpandableCard
+            id={item._id}
+            index={index}
+            key={index}
+            title={item.institute}
+            subtitle={item.degree}
+            cardPlaceholder="Your institute"
+            type="education"
+            visibilityHandler={{
+              value: item.isHidden,
+              setValue: () => updateData(index, "isHidden", !item.isHidden),
+            }}
+            deleteHandler={() => handleDelete(item._id)}
+          >
+            <InputWithLabel
+              label="Institute"
+              name="institute"
+              placeholder="Umbrella Academy"
+              value={item.institute}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <InputWithLabel
+              label="Location"
+              name="location"
+              placeholder="Start typing to search location"
+              value={item.location}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <InputWithLabel
+              label="Degree"
+              name="degree"
+              value={item.degree}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <InputWithLabel
+              label="Stream"
+              name="stream"
+              value={item.stream}
+              onChange={(e) => handleChange(e, index)}
+            />
+            <StartEndDatePicker
+              views={["year"]}
+              values={{ start: item.start, end: item.end }}
+              onChangeHandler={(key) => handleDateChange(index, key)}
+              checkboxHandler={() => handleCheckbox(index)}
+            />
+            <GradeInput
+              gradeObtained={item.gradeObtained}
+              gradeMax={item.gradeMax}
+              onChangeHandler={(key, value) => updateData(index, key, value)}
+            />
+            <EditorWithLabel
+              onChange={(output) => handleEditorChange(index, output)}
+              defaultValue={item.description}
+              label="Description"
+            />
+          </ExpandableCard>
+        ))}
+      </DndWrapper>
     </Section>
   );
 };

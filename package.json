@@ -23,10 +23,12 @@
     "@tiptap/extension-typography": "^2.0.0-beta.10",
     "@tiptap/react": "^2.0.0-beta.33",
     "@tiptap/starter-kit": "^2.0.0-beta.51",
+    "@types/react-beautiful-dnd": "^13.0.0",
     "date-fns": "^2.21.3",
     "framer-motion": "^4.1.11",
     "next": "^10.2.0",
     "react": "17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
     "zustand": "^3.5.1"
