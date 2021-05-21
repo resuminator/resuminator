@@ -4,11 +4,10 @@ import { FiPlus } from "react-icons/fi";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
-import DndWrapper, {
-  handleDragEnd
-} from "../../../components/layouts/DndWrapper";
+import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
+import { handleChange, handleDragEnd } from "../handlers";
 import SectionControls from "../SectionControls";
 import FormatRadioGroup from "./FormatRadioGroup";
 import usePublicationStore from "./store";
@@ -49,15 +48,6 @@ const Publications = () => {
   //Mocked delete request from server.
   const handleDelete = async (id: string) => {
     console.log(`Deleted ${id}`);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    e.preventDefault();
-    const [key, value] = [e.target.name, e.target.value];
-    updateData(index, key, value);
   };
 
   return (
@@ -104,21 +94,21 @@ const Publications = () => {
               name="articleTitle"
               placeholder="5G as Disruptive Technology."
               value={item.articleTitle}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, index, updateData)}
             />
             <InputWithLabel
               label="Authors"
               name="authorNames"
               placeholder="[Last Name], [First Initial]"
               value={item.authorNames}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, index, updateData)}
             />
             <InputWithLabel
               label="Journal"
               name="journalName"
               placeholder="Journal of Applied Technology"
               value={item.journalName}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, index, updateData)}
             />
             <HStack>
               <InputWithLabel
@@ -126,14 +116,14 @@ const Publications = () => {
                 name="volumeNumber"
                 value={item.volumeNumber}
                 placeholder="86"
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, index, updateData)}
               />
               <InputWithLabel
                 label="Issue Number"
                 name="issueNumber"
                 value={item.issueNumber}
                 placeholder="5"
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, index, updateData)}
               />
             </HStack>
             <HStack>
@@ -142,14 +132,14 @@ const Publications = () => {
                 name="year"
                 value={item.year}
                 placeholder="2015"
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, index, updateData)}
               />
               <InputWithLabel
                 label="Pages"
                 name="pages"
                 value={item.pages}
                 placeholder="118-25"
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, index, updateData)}
               />
             </HStack>
             <FormatRadioGroup

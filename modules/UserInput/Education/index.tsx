@@ -1,21 +1,24 @@
-import { Content } from "@tiptap/core";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
-import DndWrapper, {
-  handleDragEnd,
-} from "../../../components/layouts/DndWrapper";
+import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
+import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
-import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
+import {
+  handleChange,
+  handleDateChange,
+  handleDragEnd,
+  handleEditorChange,
+  handlePresentCheckbox,
+} from "../handlers";
 import SectionControls from "../SectionControls";
 import GradeInput from "./GradeInput";
 import useEducationStore from "./store";
 import { EducationDataObject } from "./types";
-import { DropResult } from "react-beautiful-dnd";
 
 const Education = () => {
   const data = useEducationStore((state) => state.data);
@@ -53,28 +56,6 @@ const Education = () => {
   //Mocked delete request from server.
   const handleDelete = async (id: string) => {
     console.log(`Deleted ${id}`);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    e.preventDefault();
-    const [key, value] = [e.target.name, e.target.value];
-    updateData(index, key, value);
-  };
-
-  const handleEditorChange = (index: number, output: Content) => {
-    updateData(index, "description", output);
-  };
-
-  const handleDateChange = (index: number, key: string) => (date: Date) => {
-    updateData(index, key, date);
-  };
-
-  const handleCheckbox = (index: number) => {
-    if (data[index].end) return updateData(index, "end", null);
-    else return updateData(index, "end", new Date());
   };
 
   return (
@@ -122,32 +103,36 @@ const Education = () => {
               name="institute"
               placeholder="Umbrella Academy"
               value={item.institute}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, index, updateData)}
             />
             <InputWithLabel
               label="Location"
               name="location"
               placeholder="Start typing to search location"
               value={item.location}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, index, updateData)}
             />
             <InputWithLabel
               label="Degree"
               name="degree"
               value={item.degree}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, index, updateData)}
             />
             <InputWithLabel
               label="Stream"
               name="stream"
               value={item.stream}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, index, updateData)}
             />
             <StartEndDatePicker
               views={["year"]}
               values={{ start: item.start, end: item.end }}
-              onChangeHandler={(key) => handleDateChange(index, key)}
-              checkboxHandler={() => handleCheckbox(index)}
+              onChangeHandler={(key) =>
+                handleDateChange(index, key, updateData)
+              }
+              checkboxHandler={() =>
+                handlePresentCheckbox(index, data[index].end, updateData)
+              }
             />
             <GradeInput
               gradeObtained={item.gradeObtained}
@@ -155,7 +140,9 @@ const Education = () => {
               onChangeHandler={(key, value) => updateData(index, key, value)}
             />
             <EditorWithLabel
-              onChange={(output) => handleEditorChange(index, output)}
+              onChange={(output) =>
+                handleEditorChange(index, output, updateData)
+              }
               defaultValue={item.description}
               label="Description"
             />

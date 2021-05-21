@@ -1,4 +1,3 @@
-import { Content } from "@tiptap/core";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
@@ -6,11 +5,17 @@ import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
-import DndWrapper, {
-  handleDragEnd
-} from "../../../components/layouts/DndWrapper";
+import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
+import {
+  handleChange,
+  handleDateChange,
+  handleDragEnd,
+  handleEditorChange,
+  handlePresentCheckbox,
+  handleTagsInput
+} from "../handlers";
 import SectionControls from "../SectionControls";
 import useProjectStore from "./store";
 import { ProjectDataObject } from "./types";
@@ -49,37 +54,6 @@ const Projects = () => {
   //Mocked delete request from server.
   const handleDelete = async (id: string) => {
     console.log(`Deleted ${id}`);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    e.preventDefault();
-    const [key, value] = [e.target.name, e.target.value];
-    updateData(index, key, value);
-  };
-
-  const handleEditorChange = (index: number, output: Content) => {
-    updateData(index, "description", output);
-  };
-
-  const handleDateChange = (index: number, key: string) => (date: Date) => {
-    updateData(index, key, date);
-  };
-
-  const handleCheckbox = (index: number) => {
-    if (data[index].end) return updateData(index, "end", null);
-    else return updateData(index, "end", new Date());
-  };
-
-  const handleTagsInput = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const value = e.target.value;
-    const tags = value !== "" ? value.split(",") : [];
-    updateData(index, "tags", tags);
   };
 
   return (
@@ -126,22 +100,28 @@ const Projects = () => {
               name="projectName"
               placeholder="Resuminator"
               value={item.projectName}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, index, updateData)}
             />
             <InputWithLabel
               label="Additional Info (Optional)"
               name="additionalInfo"
               placeholder="Ex. Organization"
               value={item.additionalInfo}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, index, updateData)}
             />
             <StartEndDatePicker
               values={{ start: item.start, end: item.end }}
-              onChangeHandler={(key) => handleDateChange(index, key)}
-              checkboxHandler={() => handleCheckbox(index)}
+              onChangeHandler={(key) =>
+                handleDateChange(index, key, updateData)
+              }
+              checkboxHandler={() =>
+                handlePresentCheckbox(index, data[index].end, updateData)
+              }
             />
             <EditorWithLabel
-              onChange={(output) => handleEditorChange(index, output)}
+              onChange={(output) =>
+                handleEditorChange(index, output, updateData)
+              }
               defaultValue={item.description}
               label="Description"
             />
@@ -149,14 +129,14 @@ const Projects = () => {
               label="Project Link"
               name="link"
               value={item.link}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, index, updateData)}
             />
             <InputWithLabel
               label="Tags"
               name="tags"
               placeholder="Separate keywords by commas"
               value={item.tags.toString()}
-              onChange={(e) => handleTagsInput(e, index)}
+              onChange={(e) => handleTagsInput(e, index, updateData)}
             />
           </ExpandableCard>
         ))}

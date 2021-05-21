@@ -4,11 +4,10 @@ import InputWithLabel from "../../../components/common/InputWithLabel";
 import TextAreaWithLabel from "../../../components/common/TextAreaWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
-import DndWrapper, {
-  handleDragEnd
-} from "../../../components/layouts/DndWrapper";
+import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
+import { handleChange, handleDragEnd, handleTagsInput } from "../handlers";
 import SectionControls from "../SectionControls";
 import FormatMenu from "./FormatMenu";
 import useSkillStore from "./store";
@@ -41,24 +40,6 @@ const Skills = () => {
   //Mocked delete request from server.
   const handleDelete = async (id: string) => {
     console.log(`Deleted ${id}`);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    e.preventDefault();
-    const [key, value] = [e.target.name, e.target.value];
-    updateData(index, key, value);
-  };
-
-  const handleTagsInput = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    index: number
-  ) => {
-    const value = e.target.value;
-    const skills = value !== "" ? value.split(",") : [];
-    updateData(index, "skillsList", skills);
   };
 
   return (
@@ -109,14 +90,16 @@ const Skills = () => {
               name="category"
               placeholder="Programming Languages"
               value={item.category}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(e, index, updateData)}
             />
             <TextAreaWithLabel
               label="Skills"
               name="skillsList"
               placeholder="Separate skills by commas"
               value={item.skillsList.toString()}
-              onChange={(e) => handleTagsInput(e, index)}
+              onChange={(e) =>
+                handleTagsInput(e, index, updateData, "skillsList")
+              }
             />
           </ExpandableCard>
         ))}
