@@ -1,4 +1,4 @@
-export interface EducationDataObject {
+export interface EducationDataObject extends Object {
   _id: string;
   isHidden: boolean;
   institute?: string;
