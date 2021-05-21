@@ -3,7 +3,9 @@ import { FiPlus } from "react-icons/fi";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
-import DndWrapper from "../../../components/layouts/DndWrapper";
+import DndWrapper, {
+  handleDragEnd,
+} from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
@@ -14,6 +16,7 @@ import { CertificationDataObject } from "./types";
 const Certification = () => {
   const data = useCertificationStore((state) => state.data);
   const isDisabled = useCertificationStore((state) => state.isDisabled);
+  const setData = useCertificationStore((state) => state.setData);
   const toggleDisabled = useCertificationStore((state) => state.toggleDisabled);
   const addData = useCertificationStore((state) => state.add);
   const updateData = useCertificationStore((state) => state.update);
@@ -79,7 +82,10 @@ const Certification = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      <DndWrapper droppableId="certification" onDragEnd={() => console.log("something")}>
+      <DndWrapper
+        droppableId="certification"
+        onDragEnd={(result) => handleDragEnd(result, data, setData)}
+      >
         {data.map((item, index) => (
           <ExpandableCard
             DisplayCardProps={{

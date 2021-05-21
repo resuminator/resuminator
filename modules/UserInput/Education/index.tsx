@@ -5,7 +5,9 @@ import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
-import DndWrapper from "../../../components/layouts/DndWrapper";
+import DndWrapper, {
+  handleDragEnd,
+} from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
@@ -75,21 +77,6 @@ const Education = () => {
     else return updateData(index, "end", new Date());
   };
 
-  const handleDragEnd = (result: DropResult) => {
-    const { destination, source } = result;
-    if (!destination) return;
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    )
-      return;
-
-    const items = [...data];
-    const [reorderedItem] = items.splice(source.index, 1);
-    items.splice(destination.index, 0, reorderedItem);
-    setData(items);
-  };
-
   return (
     <Section
       header={{
@@ -106,7 +93,10 @@ const Education = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      <DndWrapper droppableId="education" onDragEnd={handleDragEnd}>
+      <DndWrapper
+        droppableId="education"
+        onDragEnd={(result) => handleDragEnd(result, data, setData)}
+      >
         {data.map((item, index) => (
           <ExpandableCard
             DisplayCardProps={{

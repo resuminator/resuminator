@@ -5,10 +5,12 @@ import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
-import DndWrapper from "../../../components/layouts/DndWrapper";
+import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
+import DndWrapper, {
+  handleDragEnd
+} from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
-import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import SectionControls from "../SectionControls";
 import useProjectStore from "./store";
 import { ProjectDataObject } from "./types";
@@ -16,6 +18,7 @@ import { ProjectDataObject } from "./types";
 const Projects = () => {
   const data = useProjectStore((state) => state.data);
   const isDisabled = useProjectStore((state) => state.isDisabled);
+  const setData = useProjectStore((state) => state.setData);
   const toggleDisabled = useProjectStore((state) => state.toggleDisabled);
   const addData = useProjectStore((state) => state.add);
   const updateData = useProjectStore((state) => state.update);
@@ -95,7 +98,10 @@ const Projects = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      <DndWrapper droppableId="projects" onDragEnd={() => console.log("to")}>
+      <DndWrapper
+        droppableId="projects"
+        onDragEnd={(result) => handleDragEnd(result, data, setData)}
+      >
         {data.map((item, index) => (
           <ExpandableCard
             DisplayCardProps={{

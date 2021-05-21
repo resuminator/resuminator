@@ -7,6 +7,7 @@ export interface SkillStore<T> {
   toggleDisabled: () => void;
   toggleFormat: () => void;
   data: Array<T>;
+  setData?: (list: Array<T>) => void;
   add: (obj: T) => void;
   update: (index: number, key: string, value: any) => void;
 }
@@ -23,6 +24,7 @@ const skillStore = <SkillObjectType>(
       format: state.format === "CATEGORIES" ? "TAGS" : "CATEGORIES",
     })),
   data: [],
+  setData: (list) => set({ data: list }),
   add: (obj) => set((state) => ({ data: [...state.data, obj] })),
   //Updates an object at a particular index with a key and value pair.
   update: (index, key, value) => {

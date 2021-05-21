@@ -5,10 +5,12 @@ import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
-import DndWrapper from "../../../components/layouts/DndWrapper";
+import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
+import DndWrapper, {
+  handleDragEnd
+} from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
-import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import SectionControls from "../SectionControls";
 import useExperienceStore from "./store";
 import { ExperienceDataObject } from "./types";
@@ -16,6 +18,7 @@ import { ExperienceDataObject } from "./types";
 const Experience = () => {
   const data = useExperienceStore((state) => state.data);
   const isDisabled = useExperienceStore((state) => state.isDisabled);
+  const setData = useExperienceStore((state) => state.setData);
   const toggleDisabled = useExperienceStore((state) => state.toggleDisabled);
   const addData = useExperienceStore((state) => state.add);
   const updateData = useExperienceStore((state) => state.update);
@@ -80,10 +83,6 @@ const Experience = () => {
     updateData(index, "tags", tags);
   };
 
-  const handleDragEnd = () => {
-    console.log("soemthing");
-  };
-
   return (
     <Section
       header={{
@@ -100,7 +99,10 @@ const Experience = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      <DndWrapper droppableId="experience" onDragEnd={handleDragEnd}>
+      <DndWrapper
+        droppableId="experience"
+        onDragEnd={(result) => handleDragEnd(result, data, setData)}
+      >
         {data.map((item, index) => (
           <ExpandableCard
             DisplayCardProps={{

@@ -3,10 +3,12 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
-import DndWrapper from "../../../components/layouts/DndWrapper";
+import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
+import DndWrapper, {
+  handleDragEnd
+} from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
-import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import SectionControls from "../SectionControls";
 import FormatRadioGroup from "./FormatRadioGroup";
 import usePublicationStore from "./store";
@@ -15,6 +17,7 @@ import { PublicationDataObject } from "./types";
 const Publications = () => {
   const data = usePublicationStore((state) => state.data);
   const isDisabled = usePublicationStore((state) => state.isDisabled);
+  const setData = usePublicationStore((state) => state.setData);
   const toggleDisabled = usePublicationStore((state) => state.toggleDisabled);
   const addData = usePublicationStore((state) => state.add);
   const updateData = usePublicationStore((state) => state.update);
@@ -73,7 +76,10 @@ const Publications = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      <DndWrapper droppableId="publication" onDragEnd={() => console.log("YA")}>
+      <DndWrapper
+        droppableId="publication"
+        onDragEnd={(result) => handleDragEnd(result, data, setData)}
+      >
         {data.map((item, index) => (
           <ExpandableCard
             DisplayCardProps={{

@@ -3,10 +3,12 @@ import { FiPlus } from "react-icons/fi";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import TextAreaWithLabel from "../../../components/common/TextAreaWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
-import DndWrapper from "../../../components/layouts/DndWrapper";
+import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
+import DndWrapper, {
+  handleDragEnd
+} from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
-import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import SectionControls from "../SectionControls";
 import FormatMenu from "./FormatMenu";
 import useSkillStore from "./store";
@@ -15,7 +17,7 @@ import { SkillDataObject } from "./types";
 const Skills = () => {
   const data = useSkillStore((state) => state.data);
   const isDisabled = useSkillStore((state) => state.isDisabled);
-
+  const setData = useSkillStore((state) => state.setData);
   const toggleDisabled = useSkillStore((state) => state.toggleDisabled);
   const addData = useSkillStore((state) => state.add);
   const updateData = useSkillStore((state) => state.update);
@@ -80,7 +82,10 @@ const Skills = () => {
       </SectionControls>
       {/* Search Bar with Autocomplete. TO BE DONE WITH MATERIAL-UI */}
       {/* Switch for disabling auto skill classification. */}
-      <DndWrapper droppableId="skills" onDragEnd={() => console.log("skill")}>
+      <DndWrapper
+        droppableId="skills"
+        onDragEnd={(result) => handleDragEnd(result, data, setData)}
+      >
         {data.map((item, index) => (
           <ExpandableCard
             DisplayCardProps={{
