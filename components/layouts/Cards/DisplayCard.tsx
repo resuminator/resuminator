@@ -26,6 +26,9 @@ const DisplayCard: React.FC<DisplayCardProps> = ({
     <Draggable key={draggableId} draggableId={draggableId} index={index}>
       {(provided) => (
         <Box
+          key={draggableId}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
           p="5"
           mb="2"
           border="1px solid"
@@ -36,9 +39,8 @@ const DisplayCard: React.FC<DisplayCardProps> = ({
           justifyContent="space-between"
           _hover={{ bg: "whiteAlpha.100" }}
           onClick={onToggle}
-          ref={provided.innerRef}
           {...props}
-          {...provided.draggableProps}
+          
         >
           <Box>
             <Text>{title || titlePlaceholder}</Text>

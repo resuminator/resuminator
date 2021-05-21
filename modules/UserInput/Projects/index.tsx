@@ -8,7 +8,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
-import ExpandableCard from "../ExpandableCard";
+import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import SectionControls from "../SectionControls";
 import useProjectStore from "./store";
 import { ProjectDataObject } from "./types";
@@ -95,21 +95,25 @@ const Projects = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      <DndWrapper id="projects" onDragEnd={() => console.log("to")}>
+      <DndWrapper droppableId="projects" onDragEnd={() => console.log("to")}>
         {data.map((item, index) => (
           <ExpandableCard
-            id={item._id}
-            index={index}
-            key={index}
-            title={item.projectName}
-            subtitle={item.link}
-            cardPlaceholder="Project Name"
-            type="project"
-            visibilityHandler={{
-              value: item.isHidden,
-              setValue: () => updateData(index, "isHidden", !item.isHidden),
+            DisplayCardProps={{
+              draggableId: item._id,
+              index: index,
+              title: item.projectName,
+              subtitle: item.link,
+              titlePlaceholder: "Project Name",
             }}
-            deleteHandler={() => handleDelete(item._id)}
+            InputCardProps={{
+              itemType: "project",
+              visibilityHandler: {
+                value: item.isHidden,
+                setValue: () => updateData(index, "isHidden", !item.isHidden),
+              },
+              deleteHandler: () => handleDelete(item._id),
+            }}
+            key={index}
           >
             <InputWithLabel
               label="Project Name"

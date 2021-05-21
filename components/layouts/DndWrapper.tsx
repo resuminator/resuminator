@@ -2,25 +2,22 @@ import { Box } from "@chakra-ui/layout";
 import React from "react";
 import {
   DragDropContext,
-  Droppable,
   DragDropContextProps,
-  resetServerContext,
+  Droppable
 } from "react-beautiful-dnd";
 
 interface Props {
-  id: string;
+  droppableId: string;
 }
 
 const DndWrapper: React.FC<Props & DragDropContextProps> = ({
-  id,
+  droppableId,
   children,
   ...props
 }) => {
-
-  resetServerContext();
   return (
     <DragDropContext {...props}>
-      <Droppable droppableId={id}>
+      <Droppable droppableId={droppableId}>
         {(provided) => (
           <Box {...provided.droppableProps} ref={provided.innerRef}>
             {children}

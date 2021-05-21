@@ -6,7 +6,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
-import ExpandableCard from "../ExpandableCard";
+import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import SectionControls from "../SectionControls";
 import useCertificationStore from "./store";
 import { CertificationDataObject } from "./types";
@@ -79,21 +79,25 @@ const Certification = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      <DndWrapper id="certification" onDragEnd={() => console.log("something")}>
+      <DndWrapper droppableId="certification" onDragEnd={() => console.log("something")}>
         {data.map((item, index) => (
           <ExpandableCard
-            id={item._id}
-            index={index}
-            key={index}
-            title={item.certificateName}
-            subtitle={item.credentialNumber}
-            cardPlaceholder="Certificate Name"
-            type="certification"
-            visibilityHandler={{
-              value: item.isHidden,
-              setValue: () => updateData(index, "isHidden", !item.isHidden),
+            DisplayCardProps={{
+              draggableId: item._id,
+              index: index,
+              title: item.certificateName,
+              subtitle: item.credentialNumber,
+              titlePlaceholder: "Certificate Name",
             }}
-            deleteHandler={() => handleDelete(item._id)}
+            InputCardProps={{
+              itemType: "certification",
+              visibilityHandler: {
+                value: item.isHidden,
+                setValue: () => updateData(index, "isHidden", !item.isHidden),
+              },
+              deleteHandler: () => handleDelete(item._id),
+            }}
+            key={index}
           >
             <InputWithLabel
               label="Certificate Name"

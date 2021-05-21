@@ -6,7 +6,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
-import ExpandableCard from "../ExpandableCard";
+import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import SectionControls from "../SectionControls";
 import FormatRadioGroup from "./FormatRadioGroup";
 import usePublicationStore from "./store";
@@ -29,7 +29,7 @@ const Publications = () => {
     volumeNumber: "",
     issueNumber: "",
     pages: "",
-    year: null,
+    year: "",
     format: "MLA",
   };
 
@@ -73,21 +73,25 @@ const Publications = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      <DndWrapper id="publication" onDragEnd={() => console.log("YA")}>
+      <DndWrapper droppableId="publication" onDragEnd={() => console.log("YA")}>
         {data.map((item, index) => (
           <ExpandableCard
-            id={item._id}
-            index={index}
-            key={index}
-            title={item.articleTitle}
-            subtitle={item.authorNames}
-            cardPlaceholder="Publication Article Title"
-            type="publication"
-            visibilityHandler={{
-              value: item.isHidden,
-              setValue: () => updateData(index, "isHidden", !item.isHidden),
+            DisplayCardProps={{
+              draggableId: item._id,
+              index: index,
+              title: item.articleTitle,
+              subtitle: item.authorNames,
+              titlePlaceholder: "Publication Article Title",
             }}
-            deleteHandler={() => handleDelete(item._id)}
+            InputCardProps={{
+              itemType: "publication",
+              visibilityHandler: {
+                value: item.isHidden,
+                setValue: () => updateData(index, "isHidden", !item.isHidden),
+              },
+              deleteHandler: () => handleDelete(item._id),
+            }}
+            key={index}
           >
             <InputWithLabel
               label="Article Title"

@@ -8,16 +8,18 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
-import ExpandableCard from "../ExpandableCard";
+import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import SectionControls from "../SectionControls";
 import GradeInput from "./GradeInput";
 import useEducationStore from "./store";
 import { EducationDataObject } from "./types";
+import { DropResult } from "react-beautiful-dnd";
 
 const Education = () => {
   const data = useEducationStore((state) => state.data);
   const isDisabled = useEducationStore((state) => state.isDisabled);
   const toggleDisabled = useEducationStore((state) => state.toggleDisabled);
+  const setData = useEducationStore((state) => state.setData);
   const addData = useEducationStore((state) => state.add);
   const updateData = useEducationStore((state) => state.update);
 
@@ -73,6 +75,21 @@ const Education = () => {
     else return updateData(index, "end", new Date());
   };
 
+  const handleDragEnd = (result: DropResult) => {
+    const { destination, source, draggableId } = result;
+    if (!destination) return;
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    )
+      return;
+
+    const items = [...data];
+    const [reorderedItem] = items.splice(source.index, 1);
+    items.splice(destination.index, 0, reorderedItem);
+    setData(items);
+  };
+
   return (
     <Section
       header={{
@@ -89,21 +106,26 @@ const Education = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      <DndWrapper id="education" onDragEnd={() => console.log("YO")}>
+      <DndWrapper droppableId="education" onDragEnd={handleDragEnd}>
         {data.map((item, index) => (
           <ExpandableCard
-            id={item._id}
-            index={index}
-            key={index}
-            title={item.institute}
-            subtitle={item.degree}
-            cardPlaceholder="Your institute"
-            type="education"
-            visibilityHandler={{
-              value: item.isHidden,
-              setValue: () => updateData(index, "isHidden", !item.isHidden),
+            DisplayCardProps={{
+              draggableId: item._id,
+              index: index,
+              title: item.institute,
+              subtitle: item.degree,
+              titlePlaceholder: "Institute Name",
             }}
-            deleteHandler={() => handleDelete(item._id)}
+            InputCardProps={{
+              itemType: "education",
+              visibilityHandler: {
+                value: item.isHidden,
+                setValue: () => updateData(index, "isHidden", !item.isHidden),
+              },
+              deleteHandler: () => handleDelete(item._id),
+            }}
+            key={item._id}
+            id={item._id}
           >
             <InputWithLabel
               label="Institute"

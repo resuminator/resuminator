@@ -8,7 +8,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
-import ExpandableCard from "../ExpandableCard";
+import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import SectionControls from "../SectionControls";
 import useExperienceStore from "./store";
 import { ExperienceDataObject } from "./types";
@@ -100,21 +100,25 @@ const Experience = () => {
           onClick={handleAdd}
         />
       </SectionControls>
-      <DndWrapper id="experience" onDragEnd={handleDragEnd}>
+      <DndWrapper droppableId="experience" onDragEnd={handleDragEnd}>
         {data.map((item, index) => (
           <ExpandableCard
-            id={item._id}
-            index={index}
-            key={index}
-            title={item.company}
-            subtitle={item.jobTitle}
-            cardPlaceholder="Your organization"
-            type="experience"
-            visibilityHandler={{
-              value: item.isHidden,
-              setValue: () => updateData(index, "isHidden", !item.isHidden),
+            DisplayCardProps={{
+              draggableId: item._id,
+              index: index,
+              title: item.company,
+              subtitle: item.jobTitle,
+              titlePlaceholder: "Organization Name",
             }}
-            deleteHandler={() => handleDelete(item._id)}
+            InputCardProps={{
+              itemType: "experience",
+              visibilityHandler: {
+                value: item.isHidden,
+                setValue: () => updateData(index, "isHidden", !item.isHidden),
+              },
+              deleteHandler: () => handleDelete(item._id),
+            }}
+            key={index}
           >
             <InputWithLabel
               label="Job Title"

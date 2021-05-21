@@ -29,7 +29,9 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
   return (
     <DisclosureContext.Provider value={{ isOpen, onToggle }}>
       {!isOpen ? <DisplayCard {...DisplayCardProps} {...props} /> : null}
-      <InputCard {...InputCardProps} />
+      <InputCard {...InputCardProps}>
+        {children}
+      </InputCard>
     </DisclosureContext.Provider>
   );
 };

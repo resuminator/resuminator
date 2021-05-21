@@ -6,7 +6,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID } from "../../../utils";
-import ExpandableCard from "../ExpandableCard";
+import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import SectionControls from "../SectionControls";
 import FormatMenu from "./FormatMenu";
 import useSkillStore from "./store";
@@ -80,20 +80,24 @@ const Skills = () => {
       </SectionControls>
       {/* Search Bar with Autocomplete. TO BE DONE WITH MATERIAL-UI */}
       {/* Switch for disabling auto skill classification. */}
-      <DndWrapper id="skills" onDragEnd={() => console.log("skill")}>
+      <DndWrapper droppableId="skills" onDragEnd={() => console.log("skill")}>
         {data.map((item, index) => (
           <ExpandableCard
-            index={index}
-            id={item._id}
-            key={index}
-            title={item.category}
-            cardPlaceholder="New skill category"
-            type="category"
-            visibilityHandler={{
-              value: item.isHidden,
-              setValue: () => updateData(index, "isHidden", !item.isHidden),
+            DisplayCardProps={{
+              draggableId: item._id,
+              index: index,
+              title: item.category,
+              titlePlaceholder: "Untitled category",
             }}
-            deleteHandler={() => handleDelete(item._id)}
+            InputCardProps={{
+              itemType: "category",
+              visibilityHandler: {
+                value: item.isHidden,
+                setValue: () => updateData(index, "isHidden", !item.isHidden),
+              },
+              deleteHandler: () => handleDelete(item._id),
+            }}
+            key={index}
           >
             <InputWithLabel
               label="Category"

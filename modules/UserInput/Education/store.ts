@@ -8,10 +8,13 @@ const updateArray = (
   obj: EducationDataObject
 ) => [...array.slice(0, index), obj, ...array.slice(index + 1)];
 
+type DataArray = Array<EducationDataObject>;
+
 interface EducationStore {
   isDisabled: boolean;
   toggleDisabled: () => void;
-  data: Array<EducationDataObject>;
+  data: DataArray;
+  setData?: (list: DataArray) => void;
   add: (obj: EducationDataObject) => void;
   update: (index: number, key: string, value: any) => void;
 }
@@ -22,6 +25,7 @@ const useEducationStore = create<EducationStore>(
       isDisabled: false,
       toggleDisabled: () => set((state) => ({ isDisabled: !state.isDisabled })),
       data: [],
+      setData: (list) => set({ data: list }),
       add: (obj) => set((state) => ({ data: [...state.data, obj] })),
       //Updates an object at a particular index with a key and value pair.
       update: (index, key, value) => {
