@@ -11,10 +11,10 @@ export interface SkillStore<T> {
   update: (index: number, key: string, value: any) => void;
 }
 
-const skillStore = <T,>(
-  set: SetState<SkillStore<T>>,
-  get: GetState<SkillStore<T>>
-): SkillStore<T> => ({
+const skillStore = <SkillObjectType>(
+  set: SetState<SkillStore<SkillObjectType>>,
+  get: GetState<SkillStore<SkillObjectType>>
+): SkillStore<SkillObjectType> => ({
   format: "CATEGORIES",
   isDisabled: false,
   toggleDisabled: () => set((state) => ({ isDisabled: !state.isDisabled })),

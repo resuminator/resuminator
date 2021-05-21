@@ -11,10 +11,10 @@ export interface ContactStore<T> {
   setJobTitle: (value: string) => void;
 }
 
-const contactStore = <T>(
-  set: SetState<ContactStore<T>>,
-  get: GetState<ContactStore<T>>
-): ContactStore<T> => ({
+const contactStore = <ContactObjectType>(
+  set: SetState<ContactStore<ContactObjectType>>,
+  get: GetState<ContactStore<ContactObjectType>>
+): ContactStore<ContactObjectType> => ({
   fullName: "",
   jobTitle: "",
   contact: [],

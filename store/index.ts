@@ -1,19 +1,19 @@
 import { GetState, SetState } from "zustand";
 import { updateArray } from "../utils";
 
-export interface Store<T> {
+export interface Store<ObjectType> {
   isDisabled: boolean;
   toggleDisabled: () => void;
-  data: Array<T>;
-  setData?: (list: Array<T>) => void;
-  add: (obj: T) => void;
+  data: Array<ObjectType>;
+  setData?: (list: Array<ObjectType>) => void;
+  add: (obj: ObjectType) => void;
   update: (index: number, key: string, value: any) => void;
 }
 
-const store = <T>(
-  set: SetState<Store<T>>,
-  get: GetState<Store<T>>
-): Store<T> => ({
+const store = <ObjectType>(
+  set: SetState<Store<ObjectType>>,
+  get: GetState<Store<ObjectType>>
+): Store<ObjectType> => ({
   isDisabled: false,
   toggleDisabled: () => set((state) => ({ isDisabled: !state.isDisabled })),
   //Data array which comes from the server.
