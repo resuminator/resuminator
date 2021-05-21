@@ -1,15 +1,6 @@
 import { GetState, SetState } from "zustand";
 import { updateArray } from "../utils";
-
-export interface ContactStore<T> {
-  fullName: string;
-  jobTitle: string;
-  contact: Array<T>;
-  add: (obj: T) => void;
-  update: (index: number, key: string, value: any) => void;
-  setFullName: (value: string) => void;
-  setJobTitle: (value: string) => void;
-}
+import { ContactStore } from "./types";
 
 const contactStore = <ContactObjectType>(
   set: SetState<ContactStore<ContactObjectType>>,

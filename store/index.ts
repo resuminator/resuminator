@@ -1,14 +1,6 @@
 import { GetState, SetState } from "zustand";
 import { updateArray } from "../utils";
-
-export interface Store<ObjectType> {
-  isDisabled: boolean;
-  toggleDisabled: () => void;
-  data: Array<ObjectType>;
-  setData?: (list: Array<ObjectType>) => void;
-  add: (obj: ObjectType) => void;
-  update: (index: number, key: string, value: any) => void;
-}
+import { Store } from "./types";
 
 const store = <ObjectType>(
   set: SetState<Store<ObjectType>>,

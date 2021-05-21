@@ -1,6 +1,7 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import contactStore, { ContactStore } from "../../../store/contact.store";
+import contactStore from "../../../store/contact.store";
+import { ContactStore } from "../../../store/types";
 import { ContactDataObject } from "./types";
 
 const useContactStore = create<ContactStore<ContactDataObject>>(

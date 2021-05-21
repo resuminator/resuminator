@@ -1,6 +1,7 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import skillStore, { SkillStore } from "../../../store/skill.store";
+import skillStore from "../../../store/skill.store";
+import { SkillStore } from "../../../store/types";
 import { SkillDataObject } from "./types";
 
 const useSkillStore = create<SkillStore<SkillDataObject>>(

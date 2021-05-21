@@ -1,16 +1,6 @@
 import { GetState, SetState } from "zustand";
 import { updateArray } from "../utils";
-
-export interface SkillStore<T> {
-  format: "CATEGORIES" | "TAGS";
-  isDisabled: boolean;
-  toggleDisabled: () => void;
-  toggleFormat: () => void;
-  data: Array<T>;
-  setData?: (list: Array<T>) => void;
-  add: (obj: T) => void;
-  update: (index: number, key: string, value: any) => void;
-}
+import { SkillStore } from "./types";
 
 const skillStore = <SkillObjectType>(
   set: SetState<SkillStore<SkillObjectType>>,
