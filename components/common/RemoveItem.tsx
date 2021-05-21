@@ -5,8 +5,8 @@ import { Text } from "@chakra-ui/layout";
 import React, { Fragment } from "react";
 import { FiEye } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import ActionModal from "../../components/common/ActionModal";
-import TooltipIconButton from "../../components/common/TooltipIconButton";
+import ActionModal from "./ActionModal";
+import TooltipIconButton from "./TooltipIconButton";
 
 interface Props {
   itemType?: string;
