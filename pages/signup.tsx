@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
-import LogoWithText from "../components/layouts/LogoWithText";
+import { LogoWithText } from "../components/layouts/Logos";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
 import PageToggle from "../modules/Auth/PageToggle";
 import PrivacyNotice from "../modules/Auth/PrivacyNotice";
@@ -29,7 +29,7 @@ const Signup = () => {
   };
 
   return (
-    <Layout>
+    <Layout hasHeaderHidden>
       <Box
         display="flex"
         flexDir="column"

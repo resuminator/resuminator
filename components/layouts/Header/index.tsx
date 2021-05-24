@@ -2,7 +2,7 @@ import { Avatar } from "@chakra-ui/avatar";
 import { Box } from "@chakra-ui/layout";
 import { useRouter } from "next/router";
 import React from "react";
-import LogoSquare from "../LogoSquare";
+import { LogoSquare } from "../Logos";
 import NavTabs from "../NavTabs";
 
 const Header = () => {

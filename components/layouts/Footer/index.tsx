@@ -4,7 +4,7 @@ import React from "react";
 import FooterLinks from "../../../data/FooterLinks";
 import SocialLinks from "../../../data/SocialLinks";
 import ColorModeMenu from "../../common/ColorModeMenu";
-import LogoWithText from "../LogoWithText";
+import { LogoWithText } from "../Logos";
 import Copyright from "./Copyright";
 import LinkStack from "./LinkStack";
 import SocialButtons from "./SocialButtons";
@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <Box
       as="footer"
-      bg={useColorModeValue("darkblue","#002171")}
+      bg={useColorModeValue("darkblue", "#002171")}
       p={{ base: "2rem", md: "4rem", lg: "2rem 8rem" }}
     >
       <Box

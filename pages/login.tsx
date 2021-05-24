@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
-import LogoWithText from "../components/layouts/LogoWithText";
+import { LogoWithText } from "../components/layouts/Logos";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
 import LogInWithEmail from "../modules/Auth/LoginWithEmail";
 import PageToggle from "../modules/Auth/PageToggle";
@@ -14,7 +14,7 @@ const Login: NextPage = () => {
   const [client, setClient] = useState(null);
 
   return (
-    <Layout>
+    <Layout hasHeaderHidden>
       <Box
         display={{ base: "none", lg: "inherit" }}
         flexDir="column"
