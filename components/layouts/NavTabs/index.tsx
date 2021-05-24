@@ -1,6 +1,6 @@
 import { ButtonGroup } from "@chakra-ui/button";
-import { Divider } from "@chakra-ui/layout";
-import React, { Fragment } from "react";
+import { Box, Divider } from "@chakra-ui/layout";
+import React from "react";
 import TabButton from "./TabButton";
 
 interface TabItem {
@@ -15,8 +15,8 @@ interface Props {
 
 const NavTabs: React.FC<Props> = ({ tabs = defaultTabs, currentRoute }) => {
   return (
-    <Fragment>
-      <ButtonGroup isAttached p="4" pb="0">
+    <Box>
+      <ButtonGroup isAttached px="4">
         {tabs.map((tabitem) => (
           <TabButton
             isSelected={tabitem.link === currentRoute}
@@ -28,7 +28,7 @@ const NavTabs: React.FC<Props> = ({ tabs = defaultTabs, currentRoute }) => {
         ))}
       </ButtonGroup>
       <Divider />
-    </Fragment>
+    </Box>
   );
 };
 

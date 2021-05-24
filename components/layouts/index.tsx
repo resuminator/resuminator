@@ -1,6 +1,7 @@
 import { Box, BoxProps } from "@chakra-ui/layout";
 import React from "react";
 import Footer from "./Footer";
+import Header from "./Header";
 
 const Layout: React.FC<BoxProps> = ({ children, ...props }) => {
   return (
@@ -10,6 +11,7 @@ const Layout: React.FC<BoxProps> = ({ children, ...props }) => {
       minH="100vh"
       justifyContent="space-between"
     >
+      <Header />
       <Box
         px={{ md: "4rem", lg: "7rem" }}
         display="flex"
