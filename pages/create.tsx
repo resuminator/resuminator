@@ -1,9 +1,7 @@
 import { Box } from "@chakra-ui/layout";
 import { NextPage } from "next";
-import { useRouter } from "next/router";
 import React from "react";
 import Layout from "../components/layouts";
-import NavTabs from "../components/layouts/NavTabs";
 import {
   Certification,
   Contact,
@@ -12,14 +10,12 @@ import {
   NameAndJobTitle,
   Projects,
   Publications,
-  Skills,
+  Skills
 } from "../modules/UserInput";
 
 const Create: NextPage = () => {
-  const router = useRouter();
   return (
     <Layout display="flex" flexDir="column" alignItems="center" w="100%">
-      <NavTabs currentRoute={router.pathname} />
       <Box
         display="flex"
         alignItems="flex-start"
