@@ -10,8 +10,9 @@ import {
   NameAndJobTitle,
   Projects,
   Publications,
-  Skills
+  Skills,
 } from "../modules/UserInput";
+import Viewer from "../modules/Viewer";
 
 const Create: NextPage = () => {
   return (
@@ -35,7 +36,7 @@ const Create: NextPage = () => {
           <Skills />
         </Box>
         <Box aria-label="Resume Preview" flexBasis="50%">
-          Resume
+          <Viewer />
         </Box>
       </Box>
     </Layout>

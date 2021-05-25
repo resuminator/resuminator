@@ -1,7 +1,7 @@
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box, BoxProps, Text } from "@chakra-ui/layout";
 
-const LogoSquare: React.FC<BoxProps> = ({...props}) => {
+const LogoSquare: React.FC<BoxProps> = ({ ...props }) => {
   return (
     <Box
       w="2.5rem"
@@ -9,7 +9,7 @@ const LogoSquare: React.FC<BoxProps> = ({...props}) => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      borderRadius="5px"
+      borderRadius="4px"
       bgColor={useColorModeValue("brand.600", "blue.500")}
       {...props}
     >
