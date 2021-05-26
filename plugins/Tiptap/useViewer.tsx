@@ -19,7 +19,6 @@ export const useViewer = (content: Content) => {
         class: "viewer"
       }
     },
-    onUpdate: ({ editor }) => editor.getHTML(),
   });
 
   return editor;
