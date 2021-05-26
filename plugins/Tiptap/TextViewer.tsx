@@ -1,4 +1,5 @@
 import { Content, EditorContent } from "@tiptap/react";
+import { useEffect } from "react";
 import { useViewer } from "./useViewer";
 
 export interface TiptapProps {
@@ -7,6 +8,12 @@ export interface TiptapProps {
 
 const TextViewer: React.FC<TiptapProps> = ({ content }) => {
   const editor = useViewer(content);
+
+  useEffect(() => {
+    if(editor){
+      editor.commands.setContent(content);
+    }
+  }, [editor, content])
 
   return <EditorContent editor={editor} />;
 };

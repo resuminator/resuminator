@@ -1,4 +1,29 @@
 const ProseMirror = (props) => ({
+  ".ProseMirror.viewer": {
+    bg: "inherit",
+    resize: "none",
+    m: "0",
+    p: "0",
+    paddingInlineStart: "0",
+    WebkitPaddingStart: "0",
+    paddingInlineEnd: "0",
+    WebkitPaddingEnd: "0",
+    minHeight: "4",
+    maxHeight: "xs",
+    fontSize: "sm",
+    minWidth: "0px",
+    border: "none",
+    borderRadius: "none",
+    color: props.colorMode === "light" ? "gray.600" : "gray.400",
+    overflow: "hidden",
+    ":hover": {
+      bg: "transparent",
+    },
+    ":focus": {
+      bg: "transparent",
+      border: "none",
+    },
+  },
   ".ProseMirror": {
     bg: props.colorMode === "light" ? "gray.100" : "whiteAlpha.50",
     my: "2",
