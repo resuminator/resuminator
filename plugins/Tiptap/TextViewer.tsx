@@ -1,6 +1,6 @@
 import { Content, EditorContent } from "@tiptap/react";
 import { useEffect } from "react";
-import { useViewer } from "./useViewer";
+import { useViewer } from "./hooks/useViewer";
 
 export interface TiptapProps {
   content: Content;

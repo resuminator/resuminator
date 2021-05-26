@@ -1,6 +1,6 @@
 import { Content, EditorContent } from "@tiptap/react";
 import MenuBar from "./MenuBar";
-import { OutputFormat, useTiptap } from "./useTiptap";
+import { OutputFormat, useTiptap } from "./hooks/useTiptap";
 
 export interface TiptapProps {
   defaultValue: Content;
