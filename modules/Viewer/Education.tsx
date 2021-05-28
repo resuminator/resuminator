@@ -34,10 +34,12 @@ const Education = (props: Props) => {
   };
 
   const parseDate = (date: Date, view: "Y" | "YM" = "Y") => {
+    const parsedDate = new Date(date);
     if (date === undefined) return "";
     if (date === null) return "Present";
-    if (view === "Y") return date.getFullYear();
-    if (view === "YM") return `${date.getMonth()} ${date.getFullYear()}`;
+    if (view === "Y") return parsedDate.getFullYear();
+    if (view === "YM")
+      return `${parsedDate.getMonth()} ${parsedDate.getFullYear()}`;
   };
 
   return (
