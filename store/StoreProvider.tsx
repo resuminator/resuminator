@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useCallback, useEffect } from "react";
 import { useQuery } from "react-query";
 import API_URL from "../config/server";
+import res from "../data/DummyUserData";
 import useCertificationStore from "../modules/UserInput/Certification/store";
 import useEducationStore from "../modules/UserInput/Education/store";
 import useExperienceStore from "../modules/UserInput/Experience/store";
@@ -19,7 +20,11 @@ const getResumeData = async () => {
 };
 
 const StoreProvider: React.FC = ({ children }) => {
-  const { data, isError, isSuccess } = useQuery("getResumeData", getResumeData);
+  const { data, isError, isSuccess } = useQuery(
+    "getResumeData",
+    getResumeData,
+    { initialData: res }
+  );
   const educationInit = useEducationStore((state) => state.setData);
   const experienceInit = useExperienceStore((state) => state.setData);
   const certificationInit = useCertificationStore((state) => state.setData);
