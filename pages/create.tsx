@@ -10,7 +10,7 @@ import {
   NameAndJobTitle,
   Projects,
   Publications,
-  Skills,
+  Skills
 } from "../modules/UserInput";
 import Viewer from "../modules/Viewer";
 
