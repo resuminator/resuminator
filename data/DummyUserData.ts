@@ -70,7 +70,7 @@ interface Result {
   customSections: Array<CustomSectionDataObject>;
 }
 
-export const res: Result = {
+const res: Result = {
   _id: "Firebase_UID_Also_Mongo_UID",
   resumes: [
     {
@@ -210,3 +210,5 @@ export const res: Result = {
     },
   ],
 };
+
+export default res;
