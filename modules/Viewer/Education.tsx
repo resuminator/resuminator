@@ -23,8 +23,7 @@ const Education = (props: Props) => {
   const titleStyle: TextProps = {
     fontSize: "md",
     color: `${PRIMARY_COLOR}.600`,
-    fontWeight: "medium",
-    mb: "0.5",
+    fontWeight: "semibold",
   };
 
   const subtitleStyle: TextProps = {
@@ -42,6 +41,11 @@ const Education = (props: Props) => {
       return `${parsedDate.getMonth()} ${parsedDate.getFullYear()}`;
   };
 
+  const parseGrade = (obtained: number, max: number) => {
+    if(max === 100) return `${obtained}%`
+    else return `${obtained}/${max}`
+  }
+
   return (
     <Box p="2">
       <Text {...headerStyle}>Education</Text>
@@ -51,6 +55,7 @@ const Education = (props: Props) => {
           alignContent="flex-start"
           flexDir="column"
           key={item._id}
+          mb="2.5"
         >
           <Box
             display="flex"
@@ -71,7 +76,7 @@ const Education = (props: Props) => {
             mb="1"
           >
             <Text {...subtitleStyle}>
-              {item.degree} {item.stream}, {item.gradeObtained}/{item.gradeMax}
+              {item.degree} {item.stream}, {parseGrade(item.gradeObtained, item.gradeMax)}
             </Text>
             <Text {...subtitleStyle}>{item.location}</Text>
           </Box>
