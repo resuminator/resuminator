@@ -34,3 +34,7 @@ export const parseDate = (date: Date, view: "Y" | "YM" = "Y") => {
     return `${parsedDate.getMonth()} ${parsedDate.getFullYear()}`;
 };
 
+export const validateColorHex = (hexCode: string) => {
+  const regex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+  return regex.test(hexCode);
+}
