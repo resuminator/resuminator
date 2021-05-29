@@ -1,7 +1,7 @@
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box } from "@chakra-ui/layout";
 import React from "react";
-import Education from "./Education";
+import ResumePaper from "../Resume";
 
 interface Props {}
 
@@ -14,7 +14,7 @@ const Viewer = (props: Props) => {
       height="29.7cm"
       px="8"
     >
-      <Education />
+      <ResumePaper />
     </Box>
   );
 };
