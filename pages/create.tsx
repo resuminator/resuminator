@@ -12,7 +12,7 @@ import {
   Publications,
   Skills,
 } from "../modules/UserInput";
-import Viewer from "../modules/Resume";
+import Viewer from "../modules/Viewer";
 import useGlobalStore from "../store/global.store";
 import { InputSectionKeys } from "../store/types";
 

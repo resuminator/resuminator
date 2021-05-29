@@ -1,8 +1,8 @@
 import { Box, Text, TextProps } from "@chakra-ui/layout";
 import { ColorProps } from "@chakra-ui/styled-system";
 import React from "react";
-import TextViewer from "../../plugins/Tiptap/TextViewer";
-import useEducationStore from "../UserInput/Education/store";
+import TextViewer from "../../../plugins/Tiptap/TextViewer";
+import useEducationStore from "../../UserInput/Education/store";
 
 interface Props {}
 
@@ -42,9 +42,9 @@ const Education = (props: Props) => {
   };
 
   const parseGrade = (obtained: number, max: number) => {
-    if(max === 100) return `${obtained}%`
-    else return `${obtained}/${max}`
-  }
+    if (max === 100) return `${obtained}%`;
+    else return `${obtained}/${max}`;
+  };
 
   return (
     <Box p="2">
@@ -76,7 +76,8 @@ const Education = (props: Props) => {
             mb="1"
           >
             <Text {...subtitleStyle}>
-              {item.degree} {item.stream}, {parseGrade(item.gradeObtained, item.gradeMax)}
+              {item.degree} {item.stream},{" "}
+              {parseGrade(item.gradeObtained, item.gradeMax)}
             </Text>
             <Text {...subtitleStyle}>{item.location}</Text>
           </Box>
