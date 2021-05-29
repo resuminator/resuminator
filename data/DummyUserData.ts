@@ -1,80 +1,11 @@
-import { CertificationDataObject } from "../modules/UserInput/Certification/types";
-import { EducationDataObject } from "../modules/UserInput/Education/types";
-import { ExperienceDataObject } from "../modules/UserInput/Experience/types";
-import { ProjectDataObject } from "../modules/UserInput/Projects/types";
-import { PublicationDataObject } from "../modules/UserInput/Publications/types";
-import { SkillDataObject } from "../modules/UserInput/Skills/types";
+import { Result } from "../store/types";
 import { getUniqueID } from "../utils";
 
-type HeaderElements = "USER_IMAGE" | "SOCIAL_HANDLES" | "NAME_AND_JT";
-type FooterElements = "WATERMARK" | "DATE" | "DATE_W" | "CUSTOM";
-
-type Sections =
-  | "EDUCATION"
-  | "EXPERIENCE"
-  | "PROJECTS"
-  | "CERTIFICATIONS"
-  | "PUBLICATIONS"
-  | "SKILLS";
-
-type FontProfile = "CLASSIC" | "POISE" | "SENIOR" | "MAGAZINE" | "SPACE";
-type SpacingProfile = "COMPACT" | "NORMAL" | "AIRY";
-type ColorProfiles = "blue" | "purple" | "yellow" | "red" | "pink";
-
-interface ResumeLayoutObject {
-  header: Array<Array<HeaderElements>>;
-  body: Array<Array<Sections | CustomSectionObject["header"]>>;
-  footer: Array<FooterElements>;
-}
-
-interface CustomInputFieldsObject {
-  id: string;
-  type: "TEXT" | "DATE" | "DESC";
-  name: string;
-}
-
-interface CustomSectionObject {
-  header: string;
-  hasTitleRow?: boolean;
-  inputFields: Array<CustomInputFieldsObject>;
-  layout: Array<Array<CustomInputFieldsObject["id"]>>;
-}
-
-interface CustomSectionDataObject {
-  header: CustomSectionObject["header"];
-  data: Array<{ id: CustomInputFieldsObject["id"]; value: Date | string }>;
-}
-
-interface ResumeStyleObject {
-  id: string;
-  profile_name: string;
-  isPublic?: boolean;
-  isClonable?: boolean;
-  inputs: Array<Sections | CustomSectionObject["header"]>;
-  layout: ResumeLayoutObject;
-  font_profile?: FontProfile;
-  spacing?: SpacingProfile;
-  color?: ColorProfiles | string;
-  customSections?: Array<CustomSectionObject>;
-}
-
-interface Result {
-  _id: string;
-  resumes: Array<ResumeStyleObject>;
-  education: Array<EducationDataObject>;
-  experience: Array<ExperienceDataObject>;
-  projects: Array<ProjectDataObject>;
-  certifications: Array<CertificationDataObject>;
-  publications: Array<PublicationDataObject>;
-  skills: { hasCategories: boolean; data: Array<SkillDataObject> };
-  customSections: Array<CustomSectionDataObject>;
-}
-
 const res: Result = {
-  _id: "Firebase_UID_Also_Mongo_UID",
+  _id: "Firebase_UID_Also_DB_UID",
   resumes: [
     {
-      id: "SomeResumeUUID", //Default (at Index 0)
+      id: "DefaultID", //Default (at Index 0)
       profile_name: "Default Template",
       isPublic: true,
       isClonable: true,
@@ -127,8 +58,8 @@ const res: Result = {
     {
       _id: getUniqueID(),
       isHidden: false,
-      institute: "Birla Institute of Technology",
-      location: "Ranchi, India",
+      institute: "",
+      location: "",
       degree: "",
       stream: "",
       gradeObtained: 1,
@@ -141,13 +72,12 @@ const res: Result = {
   experience: [
     {
       _id: getUniqueID(),
-      jobTitle: "Student Developer @ CERN-HSF",
-      company: "Google Summer of Code 2020",
-      location: "Remote",
-      description:
-        "<ul><li><p>Developed a new thing.</p></li><li><p>Wrote docs.</p></li></ul>",
-      link: "https://github.com/rucio/desktop",
-      tags: ["React", " Redux", " ElectronJS", " ExpressJS"],
+      jobTitle: "",
+      company: "",
+      location: "",
+      description: "",
+      link: "",
+      tags: [],
       start: new Date(),
       end: new Date(),
       isHidden: false,
