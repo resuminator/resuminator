@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/layout";
 import { NextPage } from "next";
-import React from "react";
+import React, { Fragment } from "react";
 import Layout from "../components/layouts";
 import {
   Certification,
@@ -10,11 +10,31 @@ import {
   NameAndJobTitle,
   Projects,
   Publications,
-  Skills
+  Skills,
 } from "../modules/UserInput";
-import Viewer from "../modules/Viewer";
+import Viewer from "../modules/Resume";
+import useGlobalStore from "../store/global.store";
+import { InputSectionKeys } from "../store/types";
+
+const getInputSection = (key: InputSectionKeys) => {
+  switch (key) {
+    case "EDUCATION":
+      return <Education />;
+    case "EXPERIENCE":
+      return <Experience />;
+    case "PROJECTS":
+      return <Projects />;
+    case "CERTIFICATIONS":
+      return <Certification />;
+    case "PUBLICATIONS":
+      return <Publications />;
+    case "SKILLS":
+      return <Skills />;
+  }
+};
 
 const Create: NextPage = () => {
+  const inputs = useGlobalStore((state) => state.properties.inputs);
   return (
     <Layout display="flex" flexDir="column" alignItems="center" w="100%">
       <Box
@@ -28,12 +48,9 @@ const Create: NextPage = () => {
         <Box aria-label="Resume Inputs" flexBasis="50%">
           <NameAndJobTitle />
           <Contact />
-          <Education />
-          <Experience />
-          <Projects />
-          <Certification />
-          <Publications />
-          <Skills />
+          {inputs.map((key) => (
+            <Fragment key={key}>{getInputSection(key)}</Fragment>
+          ))}
         </Box>
         <Box aria-label="Resume Preview" flexBasis="50%">
           <Viewer />

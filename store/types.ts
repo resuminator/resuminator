@@ -101,8 +101,10 @@ export interface Result {
   customSections?: Array<CustomSectionDataObject>;
 }
 
+export type InputSectionKeys = Sections | CustomSectionObject["header"];
+
 interface GlobalProperties {
-  inputs: Array<Sections | CustomSectionObject["header"]>;
+  inputs: Array<InputSectionKeys>;
   layout: ResumeLayoutObject;
 }
 
