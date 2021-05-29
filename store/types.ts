@@ -50,7 +50,7 @@ export type Sections =
 
 export type FontProfile = "CLASSIC" | "POISE" | "SENIOR" | "MAGAZINE" | "SPACE";
 export type SpacingProfile = "COMPACT" | "NORMAL" | "AIRY";
-export type ColorProfiles = "blue" | "purple" | "yellow" | "red" | "pink";
+export type ColorProfiles = "blue" | "purple" | "yellow" | "red" | "pink" | string;
 
 export interface ResumeLayoutObject {
   header: Array<Array<HeaderElements>>;
