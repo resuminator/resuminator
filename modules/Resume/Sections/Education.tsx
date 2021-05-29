@@ -1,9 +1,9 @@
 import { Box, Text, TextProps } from "@chakra-ui/layout";
-import { ColorProps } from "@chakra-ui/styled-system";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
 import SectionName from "../../../components/elements/SectionName";
 import TextViewer from "../../../plugins/Tiptap/TextViewer";
+import useResumeStore from "../../../store/resume.store";
 import { parseDate } from "../../../utils";
 import useEducationStore from "../../UserInput/Education/store";
 
@@ -13,8 +13,8 @@ const Education = (props: Props) => {
   const data = useEducationStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
-
-  const PRIMARY_COLOR: ColorProps["color"] = "purple.600";
+  const color = useResumeStore(state => state.color);
+  const PRIMARY_COLOR = `${color}.500`
 
   const titleStyle: TextProps = {
     fontSize: "md",

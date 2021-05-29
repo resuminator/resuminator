@@ -14,14 +14,12 @@ import useGlobalStore from "./global.store";
 import useResumeStore from "./resume.store";
 import { Result } from "./types";
 
-export const AppContext = React.createContext<Result>({});
-
 const getResumeData = async () => {
   const res = await axios.get(`${API_URL}/resume`);
   return res.data;
 };
 
-const AppProvider: React.FC = ({ children }) => {
+const InitGlobalStore = () => {
   const { data, isError, isLoading, isSuccess } = useQuery(
     "getResumeData",
     getResumeData,
@@ -33,9 +31,24 @@ const AppProvider: React.FC = ({ children }) => {
   const projectInit = useProjectStore((state) => state.setData);
   const publicationsInit = usePublicationStore((state) => state.setData);
   const skillsInit = useSkillStore((state) => state.setData);
-  const { setProperties } = useResumeStore();
+  const { setProperties, setFontProfile, setColorProfile, setSpacingProfile } =
+    useResumeStore();
   const { setInit, setLoading } = useGlobalStore();
   const toast = useToast();
+
+  const initResume = useCallback(
+    (resume: Result["resumes"]) => {
+      const obj = resume[0];
+      setProperties({
+        inputs: obj.inputs, //default
+        layout: obj.layout, //default
+      });
+      setFontProfile(obj.font_profile);
+      setColorProfile(obj.color);
+      setSpacingProfile(obj.spacing);
+    },
+    [setProperties, setFontProfile, setColorProfile, setSpacingProfile]
+  );
 
   const initApp = useCallback(
     (data: Result) => {
@@ -45,10 +58,7 @@ const AppProvider: React.FC = ({ children }) => {
       projectInit(data.projects);
       publicationsInit(data.publications);
       skillsInit(data.skills.data);
-      setProperties({
-        inputs: data.resumes[0].inputs, //default
-        layout: data.resumes[0].layout, //default
-      });
+      initResume(data.resumes);
       setInit(true);
     },
     [
@@ -58,8 +68,8 @@ const AppProvider: React.FC = ({ children }) => {
       projectInit,
       publicationsInit,
       skillsInit,
-      setProperties,
       setInit,
+      initResume,
     ]
   );
 
@@ -83,9 +93,7 @@ const AppProvider: React.FC = ({ children }) => {
     }
   }, [data, initApp, setLoading, isSuccess]);
 
-  return (
-    <AppContext.Provider value={data.resumes}>{children}</AppContext.Provider>
-  );
+  return <></>;
 };
 
-export default AppProvider;
+export default InitGlobalStore;
