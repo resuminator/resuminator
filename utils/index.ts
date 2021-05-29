@@ -18,3 +18,19 @@ export const updateArray = <T>(array: Array<T>, index: number, obj: T) => [
   obj,
   ...array.slice(index + 1),
 ];
+
+/**
+ * Parses the Date String and returns a string to display.
+ * @param date Date Instance
+ * @param view "Y" | "YM" Decides what view to render - Year only (Y) or Year and Month (YM)
+ * @returns Formatted String to display
+ */
+export const parseDate = (date: Date, view: "Y" | "YM" = "Y") => {
+  const parsedDate = new Date(date);
+  if (date === undefined) return "";
+  if (date === null) return "Present";
+  if (view === "Y") return parsedDate.getFullYear();
+  if (view === "YM")
+    return `${parsedDate.getMonth()} ${parsedDate.getFullYear()}`;
+};
+
