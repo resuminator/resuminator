@@ -1,12 +1,12 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react";
-import useGlobalStore from "../../store/global.store";
+import useResumeStore from "../../store/resume.store";
 import { getLayout } from "./legend";
 
 interface Props {}
 
 const ResumePaper = (props: Props) => {
-  const { header, body } = useGlobalStore((state) => state.properties.layout);
+  const { header, body } = useResumeStore((state) => state.properties.layout);
 
   return (
     <Box display="flex" flexDir="column" aria-label="Resume Paper">

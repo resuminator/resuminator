@@ -13,7 +13,7 @@ import {
   Skills,
 } from "../modules/UserInput";
 import Viewer from "../modules/Viewer";
-import useGlobalStore from "../store/global.store";
+import useResumeStore from "../store/resume.store";
 import { InputSectionKeys } from "../store/types";
 
 const getInputSection = (key: InputSectionKeys) => {
@@ -34,7 +34,7 @@ const getInputSection = (key: InputSectionKeys) => {
 };
 
 const Create: NextPage = () => {
-  const inputs = useGlobalStore((state) => state.properties.inputs);
+  const inputs = useResumeStore((state) => state.properties.inputs);
   return (
     <Layout display="flex" flexDir="column" alignItems="center" w="100%">
       <Box

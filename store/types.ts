@@ -108,24 +108,33 @@ interface GlobalProperties {
   layout: ResumeLayoutObject;
 }
 
+interface ResumeProperties {
+  inputs: Array<InputSectionKeys>;
+  layout: ResumeLayoutObject;
+}
+
 export interface GlobalStore {
   init?: boolean;
-  status?: { error: boolean; loading: boolean; success: boolean };
-  properties: GlobalProperties;
-  setProperties: (value: GlobalProperties) => void;
+  isLoading?: boolean;
   setInit?: (value: boolean) => void;
-  updateInputs?: (arr: GlobalProperties["inputs"]) => void;
-  updateLayout?: (key: string, value: any) => void;
-  setStatus?: (key: "error" | "loading" | "success", value: boolean) => void;
+  setLoading?: (value: boolean) => void;
 }
 
 export interface ResumeStore {
   id: string;
   profileName?: string;
-  isPublic?: boolean;
-  isClonable?: boolean;
+  privacy?: { isPublic?: boolean; isClonable?: boolean };
+  properties: ResumeProperties;
   fontProfile?: FontProfile;
   spacing?: SpacingProfile;
   color?: ColorProfiles;
-  customSections?: Array<CustomSectionObject>;
+  updateInputs?: (arr: GlobalProperties["inputs"]) => void;
+  updateLayout?: (key: string, value: any) => void;
+  setProperties: (value: GlobalProperties) => void;
+  togglePrivacy?: (key: "isPublic" | "isClonable") => void;
+  setProfileName?: (value: string) => void;
+  setFontProfile?: (value: FontProfile) => void;
+  setSpacingProfile?: (value: SpacingProfile) => void;
+  setColorProfile?: (value: ColorProfiles) => void;
+  // customSections?: Array<CustomSectionObject>;
 }

@@ -11,6 +11,7 @@ import useProjectStore from "../modules/UserInput/Projects/store";
 import usePublicationStore from "../modules/UserInput/Publications/store";
 import useSkillStore from "../modules/UserInput/Skills/store";
 import useGlobalStore from "./global.store";
+import useResumeStore from "./resume.store";
 import { Result } from "./types";
 
 export const AppContext = React.createContext<Result>({});
@@ -21,7 +22,7 @@ const getResumeData = async () => {
 };
 
 const AppProvider: React.FC = ({ children }) => {
-  const { data, isError, isSuccess } = useQuery(
+  const { data, isError, isLoading, isSuccess } = useQuery(
     "getResumeData",
     getResumeData,
     { placeholderData: res }
@@ -32,7 +33,8 @@ const AppProvider: React.FC = ({ children }) => {
   const projectInit = useProjectStore((state) => state.setData);
   const publicationsInit = usePublicationStore((state) => state.setData);
   const skillsInit = useSkillStore((state) => state.setData);
-  const { setInit, setProperties } = useGlobalStore();
+  const { setProperties } = useResumeStore();
+  const { setInit, setLoading } = useGlobalStore();
   const toast = useToast();
 
   const initApp = useCallback(
@@ -72,11 +74,14 @@ const AppProvider: React.FC = ({ children }) => {
       isClosable: true,
     });
 
+  if (isLoading) setLoading(true);
+
   useEffect(() => {
     if (isSuccess) {
       initApp(data);
+      setLoading(false);
     }
-  }, [data, initApp, isSuccess]);
+  }, [data, initApp, setLoading, isSuccess]);
 
   return (
     <AppContext.Provider value={data.resumes}>{children}</AppContext.Provider>
