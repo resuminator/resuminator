@@ -10,20 +10,21 @@ import useExperienceStore from "../modules/UserInput/Experience/store";
 import useProjectStore from "../modules/UserInput/Projects/store";
 import usePublicationStore from "../modules/UserInput/Publications/store";
 import useSkillStore from "../modules/UserInput/Skills/store";
+import useGlobalStore from "./global.store";
 import { Result } from "./types";
 
-const StoreContext = React.createContext<Result>({});
+export const AppContext = React.createContext<Result>({});
 
 const getResumeData = async () => {
   const res = await axios.get(`${API_URL}/resume`);
   return res.data;
 };
 
-const StoreProvider: React.FC = ({ children }) => {
+const AppProvider: React.FC = ({ children }) => {
   const { data, isError, isSuccess } = useQuery(
     "getResumeData",
     getResumeData,
-    { initialData: res }
+    { placeholderData: res }
   );
   const educationInit = useEducationStore((state) => state.setData);
   const experienceInit = useExperienceStore((state) => state.setData);
@@ -31,6 +32,7 @@ const StoreProvider: React.FC = ({ children }) => {
   const projectInit = useProjectStore((state) => state.setData);
   const publicationsInit = usePublicationStore((state) => state.setData);
   const skillsInit = useSkillStore((state) => state.setData);
+  const { setInit, setProperties } = useGlobalStore();
   const toast = useToast();
 
   const initApp = useCallback(
@@ -41,6 +43,11 @@ const StoreProvider: React.FC = ({ children }) => {
       projectInit(data.projects);
       publicationsInit(data.publications);
       skillsInit(data.skills.data);
+      setProperties({
+        inputs: data.resumes[0].inputs, //default
+        layout: data.resumes[0].layout, //default
+      });
+      setInit(true);
     },
     [
       educationInit,
@@ -49,6 +56,8 @@ const StoreProvider: React.FC = ({ children }) => {
       projectInit,
       publicationsInit,
       skillsInit,
+      setProperties,
+      setInit,
     ]
   );
 
@@ -70,10 +79,8 @@ const StoreProvider: React.FC = ({ children }) => {
   }, [data, initApp, isSuccess]);
 
   return (
-    <StoreContext.Provider value={data.resumes}>
-      {children}
-    </StoreContext.Provider>
+    <AppContext.Provider value={data.resumes}>{children}</AppContext.Provider>
   );
 };
 
-export default StoreProvider;
+export default AppProvider;

@@ -37,10 +37,10 @@ export interface SkillStore<T> {
   update: UpdateAction;
 }
 
-type HeaderElements = "USER_IMAGE" | "SOCIAL_HANDLES" | "NAME_AND_JT";
-type FooterElements = "WATERMARK" | "DATE" | "DATE_W" | "CUSTOM";
+export type HeaderElements = "USER_IMAGE" | "SOCIAL_HANDLES" | "NAME_AND_JT";
+export type FooterElements = "WATERMARK" | "DATE" | "DATE_W" | "CUSTOM";
 
-type Sections =
+export type Sections =
   | "EDUCATION"
   | "EXPERIENCE"
   | "PROJECTS"
@@ -48,35 +48,35 @@ type Sections =
   | "PUBLICATIONS"
   | "SKILLS";
 
-type FontProfile = "CLASSIC" | "POISE" | "SENIOR" | "MAGAZINE" | "SPACE";
-type SpacingProfile = "COMPACT" | "NORMAL" | "AIRY";
-type ColorProfiles = "blue" | "purple" | "yellow" | "red" | "pink";
+export type FontProfile = "CLASSIC" | "POISE" | "SENIOR" | "MAGAZINE" | "SPACE";
+export type SpacingProfile = "COMPACT" | "NORMAL" | "AIRY";
+export type ColorProfiles = "blue" | "purple" | "yellow" | "red" | "pink";
 
-interface ResumeLayoutObject {
+export interface ResumeLayoutObject {
   header: Array<Array<HeaderElements>>;
   body: Array<Array<Sections | CustomSectionObject["header"]>>;
   footer: Array<FooterElements>;
 }
 
-interface CustomInputFieldsObject {
+export interface CustomInputFieldsObject {
   id: string;
   type: "TEXT" | "DATE" | "DESC";
   name: string;
 }
 
-interface CustomSectionObject {
+export interface CustomSectionObject {
   header: string;
   hasTitleRow?: boolean;
   inputFields: Array<CustomInputFieldsObject>;
   layout: Array<Array<CustomInputFieldsObject["id"]>>;
 }
 
-interface CustomSectionDataObject {
+export interface CustomSectionDataObject {
   header: CustomSectionObject["header"];
   data: Array<{ id: CustomInputFieldsObject["id"]; value: Date | string }>;
 }
 
-interface ResumeStyleObject {
+export interface ResumeStyleObject {
   id: string;
   profile_name: string;
   isPublic?: boolean;
@@ -99,4 +99,31 @@ export interface Result {
   publications?: Array<PublicationDataObject>;
   skills?: { hasCategories: boolean; data: Array<SkillDataObject> };
   customSections?: Array<CustomSectionDataObject>;
+}
+
+interface GlobalProperties {
+  inputs: Array<Sections | CustomSectionObject["header"]>;
+  layout: ResumeLayoutObject;
+}
+
+export interface GlobalStore {
+  init?: boolean;
+  status?: { error: boolean; loading: boolean; success: boolean };
+  properties: GlobalProperties;
+  setProperties: (value: GlobalProperties) => void;
+  setInit?: (value: boolean) => void;
+  updateInputs?: (arr: GlobalProperties["inputs"]) => void;
+  updateLayout?: (key: string, value: any) => void;
+  setStatus?: (key: "error" | "loading" | "success", value: boolean) => void;
+}
+
+export interface ResumeStore {
+  id: string;
+  profileName?: string;
+  isPublic?: boolean;
+  isClonable?: boolean;
+  fontProfile?: FontProfile;
+  spacing?: SpacingProfile;
+  color?: ColorProfiles;
+  customSections?: Array<CustomSectionObject>;
 }

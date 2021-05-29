@@ -5,7 +5,7 @@ import "@fontsource/manrope";
 import { AppProps } from "next/app";
 import Router from "next/router";
 import { QueryClient, QueryClientProvider } from "react-query";
-import StoreProvider from "../store/StoreProvider";
+import AppProvider from "../store/AppProvider";
 import "../styles/globals.css";
 import DefaultTheme from "../styles/theme";
 import progress from "../widgets/ProgressBar";
@@ -20,9 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={DefaultTheme}>
       <QueryClientProvider client={queryClient}>
-        <StoreProvider>
+        <AppProvider>
           <Component {...pageProps} />
-        </StoreProvider>
+        </AppProvider>
       </QueryClientProvider>
     </ChakraProvider>
   );
