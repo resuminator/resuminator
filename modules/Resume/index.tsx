@@ -1,34 +1,9 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react";
 import useGlobalStore from "../../store/global.store";
-import { InputSectionKeys } from "../../store/types";
-import {
-  CertificationsLayout,
-  EducationLayout,
-  ExperienceLayout,
-  ProjectLayout,
-  PublicationsLayout,
-  SkillsLayout
-} from "./Layouts";
+import { getLayout } from "./legend";
 
 interface Props {}
-
-const getLayout = (key: InputSectionKeys) => {
-  switch (key) {
-    case "EDUCATION":
-      return <EducationLayout />;
-    case "EXPERIENCE":
-      return <ExperienceLayout />;
-    case "PROJECTS":
-      return <ProjectLayout />;
-    case "CERTIFICATIONS":
-      return <CertificationsLayout />;
-    case "PUBLICATIONS":
-      return <PublicationsLayout />;
-    case "SKILLS":
-      return <SkillsLayout />;
-  }
-};
 
 const ResumePaper = (props: Props) => {
   const { header, body } = useGlobalStore((state) => state.properties.layout);

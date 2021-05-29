@@ -1,4 +1,12 @@
-import { FontProfile, SpacingProfile } from "../../store/types";
+import { SpacingProfile, InputSectionKeys } from "../../store/types";
+import {
+  CertificationsLayout,
+  EducationLayout,
+  ExperienceLayout,
+  ProjectLayout,
+  PublicationsLayout,
+  SkillsLayout
+} from "./Sections";
 
 export const getSpacingFactor = (profile: SpacingProfile) => {
   switch (profile) {
@@ -10,5 +18,22 @@ export const getSpacingFactor = (profile: SpacingProfile) => {
       return 2;
     default:
       return 1;
+  }
+};
+
+export const getLayout = (key: InputSectionKeys) => {
+  switch (key) {
+    case "EDUCATION":
+      return <EducationLayout />;
+    case "EXPERIENCE":
+      return <ExperienceLayout />;
+    case "PROJECTS":
+      return <ProjectLayout />;
+    case "CERTIFICATIONS":
+      return <CertificationsLayout />;
+    case "PUBLICATIONS":
+      return <PublicationsLayout />;
+    case "SKILLS":
+      return <SkillsLayout />;
   }
 };
