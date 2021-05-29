@@ -12,7 +12,6 @@ const Viewer = (props: Props) => {
       bg={useColorModeValue("white", "inherit")}
       shadow={useColorModeValue("lg", "2xl")}
       height="29.7cm"
-      px="8"
     >
       <ResumePaper />
     </Box>

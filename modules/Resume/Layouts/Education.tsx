@@ -1,7 +1,10 @@
 import { Box, Text, TextProps } from "@chakra-ui/layout";
 import { ColorProps } from "@chakra-ui/styled-system";
 import React from "react";
+import DataRow from "../../../components/elements/DataRow";
+import SectionName from "../../../components/elements/SectionName";
 import TextViewer from "../../../plugins/Tiptap/TextViewer";
+import { parseDate } from "../../../utils";
 import useEducationStore from "../../UserInput/Education/store";
 
 interface Props {}
@@ -11,18 +14,11 @@ const Education = (props: Props) => {
     (item) => !item.isHidden
   );
 
-  const PRIMARY_COLOR: ColorProps["color"] = "purple";
-
-  const headerStyle: TextProps = {
-    color: `${PRIMARY_COLOR}.600`,
-    fontSize: "xl",
-    fontWeight: "bold",
-    mb: "2",
-  };
+  const PRIMARY_COLOR: ColorProps["color"] = "purple.600";
 
   const titleStyle: TextProps = {
     fontSize: "md",
-    color: `${PRIMARY_COLOR}.600`,
+    color: PRIMARY_COLOR,
     fontWeight: "semibold",
   };
 
@@ -32,23 +28,14 @@ const Education = (props: Props) => {
     mb: "1",
   };
 
-  const parseDate = (date: Date, view: "Y" | "YM" = "Y") => {
-    const parsedDate = new Date(date);
-    if (date === undefined) return "";
-    if (date === null) return "Present";
-    if (view === "Y") return parsedDate.getFullYear();
-    if (view === "YM")
-      return `${parsedDate.getMonth()} ${parsedDate.getFullYear()}`;
-  };
-
   const parseGrade = (obtained: number, max: number) => {
     if (max === 100) return `${obtained}%`;
     else return `${obtained}/${max}`;
   };
 
   return (
-    <Box p="2">
-      <Text {...headerStyle}>Education</Text>
+    <Box aria-label="Education Layout" w="inherit">
+      <SectionName color={PRIMARY_COLOR}>Education</SectionName>
       {data.map((item) => (
         <Box
           display="flex"
@@ -57,38 +44,24 @@ const Education = (props: Props) => {
           key={item._id}
           mb="2.5"
         >
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            width="100%"
-          >
+          <DataRow>
             <Text {...titleStyle}>{item.institute}</Text>
-            <Text {...titleStyle}>
+            <Text {...titleStyle} textAlign="right">
               {parseDate(item.start)} - {parseDate(item.end)}
             </Text>
-          </Box>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            width="100%"
-            mb="1"
-          >
+          </DataRow>
+          <DataRow mb="1">
             <Text {...subtitleStyle}>
               {item.degree} {item.stream},{" "}
               {parseGrade(item.gradeObtained, item.gradeMax)}
             </Text>
-            <Text {...subtitleStyle}>{item.location}</Text>
-          </Box>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            width="100%"
-          >
+            <Text {...subtitleStyle} textAlign="right">
+              {item.location}
+            </Text>
+          </DataRow>
+          <DataRow>
             <TextViewer content={item.description} />
-          </Box>
+          </DataRow>
         </Box>
       ))}
     </Box>

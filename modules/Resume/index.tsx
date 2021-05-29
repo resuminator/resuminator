@@ -1,4 +1,4 @@
-import { Box, VStack } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/layout";
 import React from "react";
 import useGlobalStore from "../../store/global.store";
 import { InputSectionKeys } from "../../store/types";
@@ -8,7 +8,7 @@ import {
   ExperienceLayout,
   ProjectLayout,
   PublicationsLayout,
-  SkillsLayout,
+  SkillsLayout
 } from "./Layouts";
 
 interface Props {}
@@ -34,29 +34,36 @@ const ResumePaper = (props: Props) => {
   const { header, body } = useGlobalStore((state) => state.properties.layout);
 
   return (
-    <Box aria-label="Body" display="flex">
-      {body.map((row, index) => (
-        <Box
-          display="flex"
-          flexDir="column"
-          alignItems="flex-start"
-          justifyContent="space-between"
-          aria-label={`Column-${index + 1}`}
-          key={index}
-        >
-          {row.map((key) => (
-            <Box
-              display="flex"
-              alignItems="flex-start"
-              justifyContent="space-between"
-              aria-label={key}
-              key={key}
-            >
-              {getLayout(key)}
-            </Box>
-          ))}
-        </Box>
-      ))}
+    <Box display="flex" flexDir="column" aria-label="Resume Paper">
+      <Box aria-label="Header">Header</Box>
+      <Box
+        aria-label="Body"
+        display="flex"
+        alignItems="flex-start"
+        justifyContent="space-between"
+        width="100%"
+      >
+        {body.map((rowAsColumn, index) => (
+          <Box
+            display="flex"
+            flexDir="column"
+            aria-label={`Column-${index + 1}`}
+            key={index}
+            flexBasis={`${(1 / body.length) * 100}%`}
+          >
+            {rowAsColumn.map((layoutKey) => (
+              <Box
+                display="flex"
+                aria-label={layoutKey}
+                key={layoutKey}
+                width="100%"
+              >
+                {getLayout(layoutKey)}
+              </Box>
+            ))}
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 };
