@@ -70,7 +70,7 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       title: "Cannot connect to server.",
       variant: "subtle",
       description:
-        "Try checking your network connection. If you continue to face this error, contact us.",
+        "Try checking your network connection while we try to reconnect.",
       status: "error",
       duration: 3500,
       isClosable: true,
