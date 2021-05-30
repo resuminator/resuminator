@@ -1,19 +1,8 @@
-import Contact from "./Contact";
-import NameAndJobTitle from "./Contact/NameAndJobTitle";
-import Education from "./Education";
-import Experience from "./Experience";
-import Projects from "./Projects";
-import Certification from "./Certification";
-import Publications from "./Publications";
-import Skills from "./Skills";
-
-export {
-  NameAndJobTitle,
-  Contact,
-  Experience,
-  Education,
-  Projects,
-  Certification,
-  Publications,
-  Skills
-};
+export { default as Contact } from "./Contact";
+export { default as NameAndJobTitle } from "./Contact/NameAndJobTitle";
+export { default as Education } from "./Education";
+export { default as Experience } from "./Experience";
+export { default as Projects } from "./Projects";
+export { default as Certification } from "./Certification";
+export { default as Publications } from "./Publications";
+export { default as Skills } from "./Skills";
