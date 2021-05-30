@@ -26,8 +26,10 @@
     "@types/react-beautiful-dnd": "^13.0.0",
     "axios": "^0.21.1",
     "date-fns": "^2.21.3",
+    "express": "^4.17.1",
     "framer-motion": "^4.1.11",
     "next": "^10.2.0",
+    "puppeteer": "^9.1.1",
     "react": "17.0.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-dom": "17.0.2",
@@ -36,6 +38,7 @@
     "zustand": "^3.5.1"
   },
   "devDependencies": {
+    "@types/express": "^4.17.12",
     "@types/node": "^15.0.2",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.5",
