@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { NextApiRequest, NextApiResponse } from "next";
-import chromium from "chrome-aws-lambda";
+import type { NextApiRequest, NextApiResponse } from "next";
+const chromium = require("chrome-aws-lambda");
 
 const getBrowserInstance = async () => {
   const executablePath = await chromium.executablePath;
