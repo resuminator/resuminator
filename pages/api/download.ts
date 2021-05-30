@@ -6,20 +6,20 @@ import chromium from "chrome-aws-lambda";
 const getBrowserInstance = async () => {
   const executablePath = await chromium.executablePath;
 
-  // if (!executablePath) {
-  //   const puppeteer = require("puppeteer");
-  //   return await puppeteer.launch({
-  //     args: chromium.args,
-  //     headless: true,
-  //     ignoreHTTPSErrors: true,
-  //   });
-  // }
+  if (!executablePath) {
+    const puppeteer = require("puppeteer");
+    return await puppeteer.launch({
+      args: chromium.args,
+      headless: true,
+      ignoreHTTPSErrors: true,
+    });
+  }
 
   return await chromium.puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
     executablePath,
-    headless: true,
+    headless: chromium.headless,
   });
 };
 
