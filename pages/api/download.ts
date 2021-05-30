@@ -6,21 +6,20 @@ import chromium from "chrome-aws-lambda";
 const getBrowserInstance = async () => {
   const executablePath = await chromium.executablePath;
 
-  if (!executablePath) {
-    const puppeteer = require("puppeteer");
-    return await puppeteer.launch({
-      args: chromium.args,
-      headless: true,
-      ignoreHTTPSErrors: true,
-    });
-  }
+  // if (!executablePath) {
+  //   const puppeteer = require("puppeteer");
+  //   return await puppeteer.launch({
+  //     args: chromium.args,
+  //     headless: true,
+  //     ignoreHTTPSErrors: true,
+  //   });
+  // }
 
   return await chromium.puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
     executablePath,
     headless: chromium.headless,
-    ignoreHTTPSErrors: true,
   });
 };
 
@@ -31,18 +30,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  let pdf = null;
-  let browser = null;
+  const browser = await getBrowserInstance();
 
   try {
-    browser = await getBrowserInstance();
     const page = await browser.newPage();
-
     await page.goto(url, {
-      waitUntil: "domcontentloaded",
+      waitUntil: "networkidle0",
     });
 
-    pdf = await page.pdf({
+    const pdf = await page.pdf({
       printBackground: true,
       format: "a4",
       margin: {
@@ -52,6 +48,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         right: "0px",
       },
     });
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.status(200).send(pdf);
   } catch (e) {
     return res.status(500).json(e);
   } finally {
@@ -59,8 +58,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       await browser.close();
     }
   }
-
-  await browser.close();
-  res.setHeader("Content-Type", "application/pdf");
-  res.status(200).send(pdf);
 };
