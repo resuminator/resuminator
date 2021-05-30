@@ -1,9 +1,9 @@
 import ReactDOMServer from "react-dom/server";
-import Viewer from "../Resume";
+import ResumePaper from "../Resume";
 
 export const renderStaticResume = ({ ...props }) => {
   const resumeMarkup = ReactDOMServer.renderToStaticMarkup(
-    <Viewer {...props} />
+    <ResumePaper {...props} />
   );
 
   return `

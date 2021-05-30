@@ -1,9 +1,6 @@
 import { useToast } from "@chakra-ui/toast";
-import axios from "axios";
 import React, { useCallback, useEffect } from "react";
-import { useQuery } from "react-query";
-import API_URL from "../config/server";
-import res from "../data/DummyUserData";
+import { QueryStatus } from "react-query";
 import useCertificationStore from "../modules/UserInput/Certification/store";
 import useEducationStore from "../modules/UserInput/Education/store";
 import useExperienceStore from "../modules/UserInput/Experience/store";
@@ -14,17 +11,12 @@ import useGlobalStore from "./global.store";
 import useResumeStore from "./resume.store";
 import { Result } from "./types";
 
-const getResumeData = async () => {
-  const res = await axios.get(`${API_URL}/resume`);
-  return res.data;
-};
+interface Props {
+  data: Result;
+  status: QueryStatus;
+}
 
-const InitGlobalStore = () => {
-  const { data, isError, isLoading, isSuccess } = useQuery(
-    "getResumeData",
-    getResumeData,
-    { placeholderData: res }
-  );
+const InitStore: React.FC<Props> = ({ data, status }) => {
   const educationInit = useEducationStore((state) => state.setData);
   const experienceInit = useExperienceStore((state) => state.setData);
   const certificationInit = useCertificationStore((state) => state.setData);
@@ -73,7 +65,7 @@ const InitGlobalStore = () => {
     ]
   );
 
-  if (isError)
+  if (status === "error")
     toast({
       title: "Cannot connect to server.",
       variant: "subtle",
@@ -84,16 +76,16 @@ const InitGlobalStore = () => {
       isClosable: true,
     });
 
-  if (isLoading) setLoading(true);
+  if (status === "loading") setLoading(true);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (status === "success") {
       initApp(data);
       setLoading(false);
     }
-  }, [data, initApp, setLoading, isSuccess]);
+  }, [data, initApp, status, setLoading]);
 
-  return <></>;
+  return null;
 };
 
-export default InitGlobalStore;
+export default InitStore;

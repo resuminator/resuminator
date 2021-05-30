@@ -1,7 +1,7 @@
 import { Result } from "../store/types";
 import { getUniqueID } from "../utils";
 
-const res: Result = {
+const placeholderData: Result = {
   _id: "Firebase_UID_Also_DB_UID",
   resumes: [
     {
@@ -141,4 +141,4 @@ const res: Result = {
   ],
 };
 
-export default res;
+export default placeholderData;
