@@ -16,7 +16,7 @@ export const profiles: Array<ColorProfiles> = [
   "yellow",
 ];
 
-export const isCustom = (color) => !profiles.includes(color);
+export const isCustom = (color: ColorProfiles) => !profiles.includes(color);
 
 const ColorSelector = (props: Props) => {
   const color = useResumeStore((state) => state.color);
