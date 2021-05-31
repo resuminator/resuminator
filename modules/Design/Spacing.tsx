@@ -50,7 +50,7 @@ const Spacing = (props: Props) => {
           <SliderFilledTrack />
         </SliderTrack>
         <Tooltip hasArrow label={getTooltipLabel(spacing)}>
-          <SliderThumb boxSize={6} />
+          <SliderThumb bg="cyan.500" boxSize={6} />
         </Tooltip>
       </Slider>
     </Section>
