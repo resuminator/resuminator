@@ -23,7 +23,7 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
   const projectInit = useProjectStore((state) => state.setData);
   const publicationsInit = usePublicationStore((state) => state.setData);
   const skillsInit = useSkillStore((state) => state.setData);
-  const { setProperties, setFontProfile, setColorProfile, setSpacingProfile } =
+  const { setProperties, setFontProfile, setColorProfile, setSpacing } =
     useResumeStore();
   const { setInit, setLoading } = useGlobalStore();
   const toast = useToast();
@@ -37,9 +37,9 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       });
       setFontProfile(obj.font_profile);
       setColorProfile(obj.color);
-      setSpacingProfile(obj.spacing);
+      setSpacing(obj.spacing);
     },
-    [setProperties, setFontProfile, setColorProfile, setSpacingProfile]
+    [setProperties, setFontProfile, setColorProfile, setSpacing]
   );
 
   const initApp = useCallback(

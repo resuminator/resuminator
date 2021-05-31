@@ -49,7 +49,6 @@ export type Sections =
   | "SKILLS";
 
 export type FontProfile = "CLASSIC" | "POISE" | "SENIOR" | "MAGAZINE" | "SPACE";
-export type SpacingProfile = "COMPACT" | "NORMAL" | "AIRY";
 export type ColorProfiles = "blue" | "purple" | "yellow" | "red" | "pink" | string;
 
 export interface ResumeLayoutObject {
@@ -84,7 +83,7 @@ export interface ResumeStyleObject {
   inputs: Array<Sections | CustomSectionObject["header"]>;
   layout: ResumeLayoutObject;
   font_profile?: FontProfile;
-  spacing?: SpacingProfile;
+  spacing?: number;
   color?: ColorProfiles | string;
   customSections?: Array<CustomSectionObject>;
 }
@@ -126,7 +125,7 @@ export interface ResumeStore {
   privacy?: { isPublic?: boolean; isClonable?: boolean };
   properties: ResumeProperties;
   fontProfile?: FontProfile;
-  spacing?: SpacingProfile;
+  spacing?: number;
   color?: ColorProfiles;
   updateInputs?: (arr: GlobalProperties["inputs"]) => void;
   updateLayout?: (key: string, value: any) => void;
@@ -134,7 +133,7 @@ export interface ResumeStore {
   togglePrivacy?: (key: "isPublic" | "isClonable") => void;
   setProfileName?: (value: string) => void;
   setFontProfile?: (value: FontProfile) => void;
-  setSpacingProfile?: (value: SpacingProfile) => void;
+  setSpacing?: (value: number) => void;
   setColorProfile?: (value: ColorProfiles) => void;
   // customSections?: Array<CustomSectionObject>;
 }

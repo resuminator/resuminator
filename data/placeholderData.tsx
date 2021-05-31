@@ -26,7 +26,7 @@ const placeholderData: Result = {
         footer: ["WATERMARK"],
       },
       font_profile: "CLASSIC",
-      spacing: "NORMAL",
+      spacing: 1,
       color: "BLUE", //Any valid HEX color (Defaults to Black)
       customSections: [
         {
