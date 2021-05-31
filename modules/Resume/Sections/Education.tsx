@@ -5,6 +5,7 @@ import SectionName from "../../../components/elements/SectionName";
 import TextViewer from "../../../plugins/Tiptap/TextViewer";
 import useResumeStore from "../../../store/resume.store";
 import { parseDate } from "../../../utils";
+import { isCustom } from "../../Design/ColorSelector";
 import useEducationStore from "../../UserInput/Education/store";
 
 interface Props {}
@@ -14,7 +15,7 @@ const Education = (props: Props) => {
     (item) => !item.isHidden
   );
   const color = useResumeStore(state => state.color);
-  const PRIMARY_COLOR = `${color}.500`
+  const PRIMARY_COLOR = isCustom(color) ? color : `${color}.500`
 
   const titleStyle: TextProps = {
     fontSize: "md",

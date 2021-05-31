@@ -6,6 +6,7 @@ import { dehydrate } from "react-query/hydration";
 import Layout from "../components/layouts";
 import API_URL from "../config/server";
 import placeholderData from "../data/placeholderData";
+import ColorSelector from "../modules/Design/ColorSelector";
 import FontSelector from "../modules/Design/FontSelector";
 import Spacing from "../modules/Design/Spacing";
 import Viewer from "../modules/Viewer";
@@ -36,6 +37,7 @@ const Design: NextPage = () => {
           <Box aria-label="Resume Inputs" flexBasis="50%">
             <Spacing />
             <FontSelector/>
+            <ColorSelector/>
           </Box>
           <Box aria-label="Resume Preview" flexBasis="50%">
             <Viewer />
