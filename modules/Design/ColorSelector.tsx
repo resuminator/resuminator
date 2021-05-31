@@ -1,6 +1,7 @@
 import { IconButton } from "@chakra-ui/button";
 import { HStack } from "@chakra-ui/layout";
 import React from "react";
+import { FaCheck } from "react-icons/fa";
 import ColorPicker from "../../components/elements/ColorPicker";
 import Section from "../../components/layouts/Section";
 import useResumeStore from "../../store/resume.store";
@@ -34,10 +35,10 @@ const ColorSelector = (props: Props) => {
         {profiles.map((item) => (
           <IconButton
             aria-label={`color-${item}`}
+            icon={item === color && <FaCheck />}
             key={item}
             isRound
             colorScheme={item}
-            boxShadow={item === color && `0px 0px 0 4px ${item}`}
             onClick={() => setColorProfile(item)}
           />
         ))}

@@ -27,7 +27,7 @@ const placeholderData: Result = {
       },
       font_profile: "CLASSIC",
       spacing: 1,
-      color: "BLUE", //Any valid HEX color (Defaults to Black)
+      color: "blue", //Any valid HEX color (Defaults to Black)
       customSections: [
         {
           header: "ACHIEVEMENTS", //also Unique.
