@@ -23,7 +23,6 @@
     "@tiptap/extension-typography": "^2.0.0-beta.10",
     "@tiptap/react": "^2.0.0-beta.33",
     "@tiptap/starter-kit": "^2.0.0-beta.51",
-    "@types/puppeteer-core": "^5.4.0",
     "@types/react-beautiful-dnd": "^13.0.0",
     "axios": "^0.21.1",
     "chrome-aws-lambda": "^9.1.0",
@@ -52,8 +51,5 @@
     "puppeteer": "^9.1.1",
     "typescript": "^4.2.4"
   },
-  "optionalDependencies": {
-    "bufferutil": "^4.0.3",
-    "utf-8-validate": "^5.0.5"
-  }
+  "optionalDependencies": {}
 }
