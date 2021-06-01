@@ -7,7 +7,7 @@ import {
   PopoverContent,
   PopoverFooter,
   PopoverHeader,
-  PopoverTrigger,
+  PopoverTrigger
 } from "@chakra-ui/popover";
 import React, { useState } from "react";
 import { HexColorPicker } from "react-colorful";

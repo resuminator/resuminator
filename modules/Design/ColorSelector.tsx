@@ -40,6 +40,7 @@ const ColorSelector = (props: Props) => {
             isRound
             colorScheme={item}
             onClick={() => setColorProfile(item)}
+            _focus={{boxShadow: `0 0 2px 3px ${item}`}}
           />
         ))}
         <ColorPicker
