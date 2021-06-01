@@ -8,6 +8,7 @@ import API_URL from "../config/server";
 import placeholderData from "../data/placeholderData";
 import ColorSelector from "../modules/Design/ColorSelector";
 import FontSelector from "../modules/Design/FontSelector";
+import FooterSelector from "../modules/Design/FooterSelector";
 import Spacing from "../modules/Design/Spacing";
 import Viewer from "../modules/Viewer";
 import InitStore from "../store/InitStore";
@@ -36,8 +37,9 @@ const Design: NextPage = () => {
         >
           <Box aria-label="Resume Inputs" flexBasis="50%">
             <Spacing />
-            <FontSelector/>
-            <ColorSelector/>
+            <FontSelector />
+            <ColorSelector />
+            <FooterSelector />
           </Box>
           <Box aria-label="Resume Preview" flexBasis="50%">
             <Viewer />
