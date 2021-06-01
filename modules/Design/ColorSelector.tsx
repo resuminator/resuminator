@@ -30,7 +30,7 @@ const ColorSelector = (props: Props) => {
   const toggleGrayscaleFilter = useGlobalStore(
     (state) => state.toggleGrayscaleFilter
   );
-  const grayscaleFilter = useGlobalStore((state) => grayscaleFilter);
+  const grayscaleFilter = useGlobalStore((state) => state.grayscaleFilter);
 
   return (
     <Section
@@ -61,7 +61,7 @@ const ColorSelector = (props: Props) => {
       <HStack>
         <Checkbox
           size="sm"
-          value={grayscaleFilter}
+          defaultChecked={grayscaleFilter}
           onChange={toggleGrayscaleFilter}
         >
           <Text fontSize="sm" color="InactiveCaptionText">
