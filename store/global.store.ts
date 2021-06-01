@@ -7,8 +7,11 @@ const useGlobalStore = create<GlobalStore>(
     (set) => ({
       init: false,
       isLoading: false,
+      grayscaleFilter: false,
       setLoading: (value) => set({ isLoading: value }),
       setInit: (value) => set({ init: value }),
+      toggleGrayscaleFilter: () =>
+        set((state) => ({ grayscaleFilter: !state.grayscaleFilter })),
     }),
     "Global"
   )

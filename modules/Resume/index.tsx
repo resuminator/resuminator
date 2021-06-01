@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react";
+import useGlobalStore from "../../store/global.store";
 import useResumeStore from "../../store/resume.store";
 import { getLayout } from "./legend";
 
@@ -7,9 +8,17 @@ interface Props {}
 
 const ResumePaper = (props: Props) => {
   const { header, body } = useResumeStore((state) => state.properties.layout);
+  const grayscaleFilter = useGlobalStore((state) => state.grayscaleFilter);
+
+  const applyFilters = grayscaleFilter && { filter: "grayscale(1)" };
 
   return (
-    <Box display="flex" flexDir="column" aria-label="Resume Paper">
+    <Box
+      display="flex"
+      flexDir="column"
+      aria-label="Resume Paper"
+      {...applyFilters}
+    >
       <Box aria-label="Header">Header</Box>
       <Box
         aria-label="Body"

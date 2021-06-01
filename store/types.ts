@@ -115,8 +115,10 @@ interface ResumeProperties {
 export interface GlobalStore {
   init?: boolean;
   isLoading?: boolean;
+  grayscaleFilter: boolean;
   setInit?: (value: boolean) => void;
   setLoading?: (value: boolean) => void;
+  toggleGrayscaleFilter?: () => void;
 }
 
 export interface ResumeStore {
