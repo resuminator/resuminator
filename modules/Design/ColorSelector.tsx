@@ -1,11 +1,12 @@
 import { IconButton } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
+import { useColorMode } from "@chakra-ui/color-mode";
 import Icon from "@chakra-ui/icon";
 import { Box, HStack, Text } from "@chakra-ui/layout";
 import { Tooltip } from "@chakra-ui/tooltip";
 import React from "react";
 import { FaCheck } from "react-icons/fa";
-import { FiInfo } from "react-icons/fi";
+import { FiAlertTriangle, FiInfo } from "react-icons/fi";
 import ColorPicker from "../../components/elements/ColorPicker";
 import Section from "../../components/layouts/Section";
 import useGlobalStore from "../../store/global.store";
@@ -31,6 +32,7 @@ const ColorSelector = (props: Props) => {
     (state) => state.toggleGrayscaleFilter
   );
   const grayscaleFilter = useGlobalStore((state) => state.grayscaleFilter);
+  const { colorMode } = useColorMode();
 
   return (
     <Section
@@ -58,7 +60,7 @@ const ColorSelector = (props: Props) => {
           isActive={isCustom(color)}
         />
       </HStack>
-      <HStack>
+      <HStack mb="2">
         <Checkbox
           size="sm"
           defaultChecked={grayscaleFilter}
@@ -77,6 +79,12 @@ const ColorSelector = (props: Props) => {
           </Box>
         </Tooltip>
       </HStack>
+      {colorMode === "dark" && grayscaleFilter && (
+        <HStack mb="2" color="yellow">
+          <FiAlertTriangle />
+          <Text fontSize="sm">Use light mode for an accurate preview</Text>
+        </HStack>
+      )}
     </Section>
   );
 };
