@@ -1,5 +1,5 @@
 import { Box, Text, TextProps } from "@chakra-ui/layout";
-import React from "react";
+import React, { useContext } from "react";
 import DataRow from "../../../components/elements/DataRow";
 import SectionName from "../../../components/elements/SectionName";
 import TextViewer from "../../../plugins/Tiptap/TextViewer";
@@ -7,6 +7,7 @@ import useResumeStore from "../../../store/resume.store";
 import { parseDate } from "../../../utils";
 import { isCustom } from "../../Design/ColorSelector";
 import useEducationStore from "../../UserInput/Education/store";
+import { StylePropsContext } from "../StylePropsProvider";
 
 interface Props {}
 
@@ -14,11 +15,13 @@ const Education = (props: Props) => {
   const data = useEducationStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
-  const color = useResumeStore(state => state.color);
-  const PRIMARY_COLOR = isCustom(color) ? color : `${color}.500`
+  const color = useResumeStore((state) => state.color);
+  const PRIMARY_COLOR = isCustom(color) ? color : `${color}.500`;
+  const font = useContext(StylePropsContext).font;
 
   const titleStyle: TextProps = {
-    fontSize: "md",
+    fontFamily: font.family,
+    fontSize: font.size,
     color: PRIMARY_COLOR,
     fontWeight: "semibold",
   };
@@ -36,7 +39,7 @@ const Education = (props: Props) => {
 
   return (
     <Box aria-label="Education Layout" w="inherit">
-      <SectionName color={PRIMARY_COLOR}>Education</SectionName>
+      <SectionName fontFamily={font.family} color={PRIMARY_COLOR}>Education</SectionName>
       {data.map((item) => (
         <Box
           display="flex"
