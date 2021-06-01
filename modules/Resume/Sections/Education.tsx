@@ -20,13 +20,14 @@ const Education = (props: Props) => {
   const font = useContext(StylePropsContext).font;
 
   const titleStyle: TextProps = {
-    fontFamily: font.family,
+    fontFamily: font.family.primary,
     fontSize: font.size,
     color: PRIMARY_COLOR,
     fontWeight: "semibold",
   };
 
   const subtitleStyle: TextProps = {
+    fontFamily: font.family.secondary,
     fontSize: "sm",
     color: "gray.500",
     mb: "1",
@@ -39,7 +40,7 @@ const Education = (props: Props) => {
 
   return (
     <Box aria-label="Education Layout" w="inherit">
-      <SectionName fontFamily={font.family} color={PRIMARY_COLOR}>Education</SectionName>
+      <SectionName fontFamily={font.family.primary} color={PRIMARY_COLOR}>Education</SectionName>
       {data.map((item) => (
         <Box
           display="flex"
