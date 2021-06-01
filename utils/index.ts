@@ -34,7 +34,21 @@ export const parseDate = (date: Date, view: "Y" | "YM" = "Y") => {
     return `${parsedDate.getMonth()} ${parsedDate.getFullYear()}`;
 };
 
+/**
+ * Checks if the patterns matches a valid HEX Code pattern
+ * @param hexCode HEX Code string for color
+ * @returns True if the color hex is valid
+ */
 export const isValidColorHex = (hexCode: string) => {
   const regex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
   return regex.test(hexCode);
-}
+};
+
+/**
+ * Changes string's first character to uppercase and rest to lowercase.
+ * @param str String to convert
+ * @returns The string `str` with First Letter Capital
+ */
+export const toCamelCase = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
+};

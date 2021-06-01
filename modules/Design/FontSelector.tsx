@@ -5,12 +5,9 @@ import { FaChevronCircleDown } from "react-icons/fa";
 import Section from "../../components/layouts/Section";
 import useResumeStore from "../../store/resume.store";
 import { FontProfile } from "../../store/types";
+import { toCamelCase } from "../../utils";
 
 interface Props {}
-
-const toCamelCase = (str: string) => {
-  return str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
-};
 
 const FontSelector = (props: Props) => {
   const profiles: Array<FontProfile> = [

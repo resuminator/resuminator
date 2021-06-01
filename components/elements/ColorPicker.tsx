@@ -7,10 +7,11 @@ import {
   PopoverContent,
   PopoverFooter,
   PopoverHeader,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@chakra-ui/popover";
-import React from "react";
+import React, { useState } from "react";
 import { HexColorPicker } from "react-colorful";
+import { FaCheck } from "react-icons/fa";
 import { MdColorLens } from "react-icons/md";
 import InputWithLabel from "../common/InputWithLabel";
 import TooltipIconButton from "../common/TooltipIconButton";
@@ -23,18 +24,41 @@ interface ColorPickerProps extends Omit<IconButtonProps, "aria-label"> {
 const ColorPicker: React.FC<ColorPickerProps> = ({
   value,
   handler,
-  ...rest
+  isActive,
+  ...props
 }) => {
+  const [hovering, setHovering] = useState(false);
+
+  const restConditionalProps = () => {
+    if (isActive)
+      return {
+        icon: hovering ? <MdColorLens /> : <FaCheck />,
+        color: !hovering && value,
+        colorScheme: hovering && "gray",
+      };
+    return {
+      icon: <MdColorLens />,
+      colorScheme: "gray",
+    };
+  };
+
   return (
     <Popover matchWidth placement="bottom-end">
       <PopoverTrigger>
         <TooltipIconButton
           label="Custom Color"
-          icon={<MdColorLens />}
           aria-label={`color-custom`}
           isRound
           size="md"
-          {...rest}
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+          boxShadow={isActive && `0 0 0 4px ${value}`}
+          variant={isActive ? "solid" : "outline"}
+          onClick={() => {
+            !isActive && handler("#");
+          }}
+          {...restConditionalProps()}
+          {...props}
         />
       </PopoverTrigger>
       <PopoverContent>

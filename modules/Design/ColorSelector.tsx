@@ -45,12 +45,7 @@ const ColorSelector = (props: Props) => {
         <ColorPicker
           value={color}
           handler={setColorProfile}
-          color="gray.600"
-          boxShadow={isCustom(color) && `0 0 0 4px ${color}`}
-          variant={isCustom(color) ? "solid" : "outline"}
-          onClick={() => {
-            !isCustom(color) && setColorProfile("#");
-          }}
+          isActive={isCustom(color)}
         />
       </HStack>
     </Section>
