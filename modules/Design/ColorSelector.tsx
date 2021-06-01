@@ -75,7 +75,7 @@ const ColorSelector = (props: Props) => {
           aria-label="graysale tooltip"
         >
           <Box as="span" color="InactiveCaptionText" width="fit-content">
-            <Icon as={FiInfo} size="sm" />
+            <Icon as={FiInfo} />
           </Box>
         </Tooltip>
       </HStack>
