@@ -11,7 +11,7 @@ export interface TiptapProps {
 
 const TextViewer: React.FC<TiptapProps> = ({ content }) => {
   const editor = useViewer(content);
-  const { family } = Fonts[useResumeStore((state) => state.fontProfile)];
+  const { secondary } = Fonts[useResumeStore((state) => state.fontProfile)];
 
   useEffect(() => {
     if (editor) {
@@ -22,9 +22,7 @@ const TextViewer: React.FC<TiptapProps> = ({ content }) => {
   return (
     <Box
       sx={{
-        ".ProseMirror.viewer": {
-          fontFamily: family.secondary,
-        },
+        ".ProseMirror.viewer": {...secondary, fontStyle: "initial"},
       }}
     >
       <EditorContent editor={editor} />

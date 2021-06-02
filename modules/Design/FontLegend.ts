@@ -2,33 +2,58 @@ import { FontsObject } from "./types";
 
 const Fonts: FontsObject = {
   CLASSIC: {
-    family: {
-      primary: "Inter",
-      secondary: "Inter",
+    primary: {
+      fontFamily: "Inter",
+      fontSize: "12pt",
+      fontWeight: "medium"
+    },
+    secondary: {
+      fontFamily: "Inter",
+      fontSize: "10pt",
     },
   },
   MAGAZINE: {
-    family: {
-      primary: "Playfair Display",
-      secondary: "Source Sans Pro",
+    primary: {
+      fontFamily: "Garamond",
+      fontSize: "14pt",
+      fontWeight: "semibold"
+    },
+    secondary: {
+      fontFamily: "Garamond",
+      fontSize: "12pt",
+      fontStyle: "italic"
     },
   },
   POISE: {
-    family: {
-      primary: "Inter",
-      secondary: "Inter",
+    primary: {
+      fontFamily: "Cambria",
+      fontSize: "14pt",
+      fontWeight: "semibold"
+    },
+    secondary: {
+      fontFamily: "Cambria",
+      fontSize: "11pt",
+      fontStyle: "italic"
     },
   },
   SENIOR: {
-    family: {
-      primary: "Inter",
-      secondary: "Inter",
+    primary: {
+      fontFamily: "Inter",
+      fontSize: "14pt",
+    },
+    secondary: {
+      fontFamily: "Inter",
+      fontSize: "11pt",
     },
   },
   SPACE: {
-    family: {
-      primary: "Inter",
-      secondary: "Inter",
+    primary: {
+      fontFamily: "Inter",
+      fontSize: "14pt",
+    },
+    secondary: {
+      fontFamily: "Inter",
+      fontSize: "11pt",
     },
   },
 };

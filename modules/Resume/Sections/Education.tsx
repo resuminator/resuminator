@@ -20,17 +20,14 @@ const Education = (props: Props) => {
   const font = useContext(StylePropsContext).font;
 
   const titleStyle: TextProps = {
-    fontFamily: font.family.primary,
-    fontSize: font.size,
     color: PRIMARY_COLOR,
-    fontWeight: "semibold",
+    ...font.primary,
   };
 
   const subtitleStyle: TextProps = {
-    fontFamily: font.family.secondary,
-    fontSize: "sm",
     color: "gray.500",
     mb: "1",
+    ...font.secondary,
   };
 
   const parseGrade = (obtained: number, max: number) => {
@@ -40,7 +37,9 @@ const Education = (props: Props) => {
 
   return (
     <Box aria-label="Education Layout" w="inherit">
-      <SectionName fontFamily={font.family.primary} color={PRIMARY_COLOR}>Education</SectionName>
+      <SectionName fontFamily={font.primary.fontFamily} color={PRIMARY_COLOR}>
+        Education
+      </SectionName>
       {data.map((item) => (
         <Box
           display="flex"

@@ -6,9 +6,9 @@ import { IStylePropsContext } from "../Design/types";
 
 export const StylePropsContext = createContext<IStylePropsContext>({
   font: {
-    family: { primary: "", secondary: "" },
-    size: "md",
-    weight: "regular",
+    primary: {
+      fontFamily: "inherit",
+    },
   },
 });
 

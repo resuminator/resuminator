@@ -1,19 +1,22 @@
 import { TextProps } from "@chakra-ui/layout";
 import { FontProfile } from "../../store/types";
-
-export interface FontProps {
-  family: {
-    primary: string;
-    secondary?: string;
-  };
-  size?: TextProps["fontSize"];
-  weight?: TextProps["fontWeight"];
+export interface CustomTextProps {
+  fontFamily: TextProps["fontFamily"];
+  fontSize?: TextProps["fontSize"];
+  fontWeight?: TextProps["fontWeight"];
+  fontStyle?: TextProps["fontStyle"];
+  lineHeight?: TextProps["lineHeight"];
 }
 
-export interface IStylePropsContext {
-  font: FontProps;
+export interface FontProps {
+  primary: CustomTextProps;
+  secondary?: CustomTextProps;
 }
 
 export type FontsObject = {
   [key in FontProfile]: FontProps;
 };
+
+export interface IStylePropsContext {
+  font: FontProps;
+}
