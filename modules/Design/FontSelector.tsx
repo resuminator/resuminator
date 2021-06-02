@@ -7,16 +7,15 @@ import useResumeStore from "../../store/resume.store";
 import { FontProfile } from "../../store/types";
 import { toCamelCase } from "../../utils";
 
-interface Props {}
+const profiles: Array<FontProfile> = [
+  "CLASSIC",
+  "MAGAZINE",
+  "POISE",
+  "SENIOR",
+  "SPACE",
+];
 
-const FontSelector = (props: Props) => {
-  const profiles: Array<FontProfile> = [
-    "CLASSIC",
-    "MAGAZINE",
-    "POISE",
-    "SENIOR",
-    "SPACE",
-  ];
+const FontSelector = () => {
   const fontProfile = useResumeStore((state) => state.fontProfile);
   const setFontProfile = useResumeStore((state) => state.setFontProfile);
 

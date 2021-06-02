@@ -11,6 +11,7 @@ export interface CustomTextProps {
 export interface FontProps {
   primary: CustomTextProps;
   secondary?: CustomTextProps;
+  body?: CustomTextProps;
 }
 
 export type FontsObject = {

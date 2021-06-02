@@ -3,48 +3,66 @@ import { FontsObject } from "./types";
 const Fonts: FontsObject = {
   CLASSIC: {
     primary: {
-      fontFamily: "Inter",
-      fontSize: "12pt",
-      fontWeight: "medium"
+      fontFamily: "Inter", //Final
+      fontSize: "1em",
+      fontWeight: "medium",
     },
     secondary: {
       fontFamily: "Inter",
-      fontSize: "10pt",
+      fontSize: "0.8em",
     },
+    body: {
+      fontFamily: "Inter",
+      fontSize: "0.9em",
+    }
   },
   MAGAZINE: {
     primary: {
-      fontFamily: "Garamond",
-      fontSize: "14pt",
-      fontWeight: "semibold"
+      fontFamily: "Nunito",
+      fontSize: "1.0em",
+      fontWeight: 700,
     },
     secondary: {
-      fontFamily: "Garamond",
-      fontSize: "12pt",
-      fontStyle: "italic"
+      fontFamily: "Lora",
+      fontSize: "0.9em",
+      fontStyle: "italic",
     },
+    body: {
+      fontFamily: "Nunito",
+      fontSize: "0.9em",
+    }
   },
   POISE: {
     primary: {
-      fontFamily: "Cambria",
-      fontSize: "14pt",
-      fontWeight: "semibold"
+      fontFamily: "Cambria", //Final
+      fontSize: "1.1em",
+      fontWeight: "semibold",
     },
     secondary: {
       fontFamily: "Cambria",
-      fontSize: "11pt",
-      fontStyle: "italic"
+      fontSize: "0.9em",
+      fontStyle: "italic",
     },
+    body: {
+      fontFamily: "Nunito",
+      fontSize: "0.9em",
+    }
   },
   SENIOR: {
     primary: {
-      fontFamily: "Inter",
-      fontSize: "14pt",
+      fontFamily: "Didot",
+      fontSize: "1.2em",
+      fontWeight: "semibold",
     },
     secondary: {
-      fontFamily: "Inter",
-      fontSize: "11pt",
+      fontFamily: "Didot",
+      fontSize: "1em",
+      fontStyle: "italic"
     },
+    body: {
+      fontFamily: "Nunito",
+      fontSize: "0.9em",
+    }
   },
   SPACE: {
     primary: {
@@ -55,6 +73,10 @@ const Fonts: FontsObject = {
       fontFamily: "Inter",
       fontSize: "11pt",
     },
+    body: {
+      fontFamily: "Nunito",
+      fontSize: "0.9em",
+    }
   },
 };
 

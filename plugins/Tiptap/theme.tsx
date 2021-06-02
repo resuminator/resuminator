@@ -10,7 +10,6 @@ const ProseMirror = (props) => ({
     WebkitPaddingEnd: "0",
     minHeight: "4",
     maxHeight: "xs",
-    fontSize: "12pt",
     minWidth: "0px",
     border: "none",
     borderRadius: "none",
