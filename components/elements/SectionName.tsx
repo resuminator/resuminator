@@ -4,8 +4,6 @@ import React from "react";
 const SectionName: React.FC<TextProps> = ({ color, children, ...rest }) => {
   const headerStyle: TextProps = {
     color,
-    fontSize: "xl",
-    fontWeight: "bold",
     mb: "2",
     ...rest,
   };

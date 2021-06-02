@@ -1,10 +1,14 @@
 import { ChakraProvider } from "@chakra-ui/react";
+//-------------Resume Font Imports-----------
 import "@fontsource/inter";
 import "@fontsource/inter/500.css";
 import "@fontsource/manrope";
-import "@fontsource/playfair-display";
-import "@fontsource/source-sans-pro";
 import "@fontsource/nunito";
+import "@fontsource/lora";
+import "@fontsource/poppins";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+//-------------Resume Font Imports-----------
 import { AppProps } from "next/app";
 import Router from "next/router";
 import { useRef } from "react";

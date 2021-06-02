@@ -6,13 +6,13 @@ import Section from "../../components/layouts/Section";
 import useResumeStore from "../../store/resume.store";
 import { FontProfile } from "../../store/types";
 import { toCamelCase } from "../../utils";
+import Fonts from "./FontLegend";
 
 const profiles: Array<FontProfile> = [
   "CLASSIC",
   "MAGAZINE",
   "POISE",
   "SENIOR",
-  "SPACE",
 ];
 
 const FontSelector = () => {
@@ -34,12 +34,13 @@ const FontSelector = () => {
           my="4"
           variant="outline"
           rightIcon={<FaChevronCircleDown />}
+          fontFamily={Fonts[fontProfile].primary.fontFamily}
         >
           {toCamelCase(fontProfile)}
         </MenuButton>
         <MenuList>
           {profiles.map((item) => (
-            <MenuItem key={item} onClick={() => setFontProfile(item)}>
+            <MenuItem key={item} fontFamily={Fonts[item].primary.fontFamily} onClick={() => setFontProfile(item)}>
               {toCamelCase(item)}
             </MenuItem>
           ))}

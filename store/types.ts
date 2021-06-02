@@ -48,7 +48,7 @@ export type Sections =
   | "PUBLICATIONS"
   | "SKILLS";
 
-export type FontProfile = "CLASSIC" | "POISE" | "SENIOR" | "MAGAZINE" | "SPACE";
+export type FontProfile = "CLASSIC" | "POISE" | "SENIOR" | "MAGAZINE";
 export type ColorProfiles = "blue" | "purple" | "yellow" | "red" | "pink" | string;
 
 export interface ResumeLayoutObject {

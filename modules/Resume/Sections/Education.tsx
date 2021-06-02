@@ -37,7 +37,7 @@ const Education = (props: Props) => {
 
   return (
     <Box aria-label="Education Layout" w="inherit">
-      <SectionName fontFamily={font.primary.fontFamily} color={PRIMARY_COLOR}>
+      <SectionName {...font.heading} color={PRIMARY_COLOR}>
         Education
       </SectionName>
       {data.map((item) => (
