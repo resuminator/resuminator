@@ -8,9 +8,8 @@
  * - Vivek Nigam, <viveknigam.nigam3@gmail.com>, 2020
  */
 
-import { Box, Button, makeStyles, Typography } from "@material-ui/core";
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { FiArrowLeft } from "react-icons/fi";
 import MaintenanceImage from "../images/pixeltrue-settings-1.png";
 
 const useStyles = makeStyles((theme) => ({
