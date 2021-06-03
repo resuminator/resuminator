@@ -15,7 +15,7 @@ import PasswordReset from "../components/Auth/PasswordReset";
 import SignoutScreen from "../components/Auth/SignoutScreen";
 import SignUpScreen from "../components/Auth/SignUpScreen";
 import NotFound from "./404";
-import Maintenance from "./Maintainance";
+import Maintenance from "./Maintenance";
 import Providers from "./Providers";
 
 const Routes = () => {
