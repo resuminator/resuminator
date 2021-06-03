@@ -2,18 +2,13 @@ import { Button } from "@chakra-ui/button";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
 import React from "react";
 import { FaChevronCircleDown } from "react-icons/fa";
-import Section from "../../components/layouts/Section";
-import useResumeStore from "../../store/resume.store";
-import { FontProfile } from "../../store/types";
-import { toCamelCase } from "../../utils";
-import Fonts from "./FontLegend";
+import Section from "../../../components/layouts/Section";
+import useResumeStore from "../../../store/resume.store";
+import { FontProfile } from "../../../store/types";
+import { toCamelCase } from "../../../utils";
+import Fonts from "./legend";
 
-const profiles: Array<FontProfile> = [
-  "CLASSIC",
-  "MAGAZINE",
-  "POISE",
-  "SENIOR",
-];
+const profiles: Array<FontProfile> = ["CLASSIC", "MAGAZINE", "POISE", "SENIOR"];
 
 const FontSelector = () => {
   const fontProfile = useResumeStore((state) => state.fontProfile);
@@ -40,7 +35,11 @@ const FontSelector = () => {
         </MenuButton>
         <MenuList>
           {profiles.map((item) => (
-            <MenuItem key={item} fontFamily={Fonts[item].primary.fontFamily} onClick={() => setFontProfile(item)}>
+            <MenuItem
+              key={item}
+              fontFamily={Fonts[item].primary.fontFamily}
+              onClick={() => setFontProfile(item)}
+            >
               {toCamelCase(item)}
             </MenuItem>
           ))}

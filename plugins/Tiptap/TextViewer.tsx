@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/layout";
 import { Content, EditorContent } from "@tiptap/react";
 import { useEffect } from "react";
-import Fonts from "../../modules/Design/FontLegend";
+import Fonts from "../../modules/Design/Fonts/legend";
 import useResumeStore from "../../store/resume.store";
 import { useViewer } from "./hooks/useViewer";
 

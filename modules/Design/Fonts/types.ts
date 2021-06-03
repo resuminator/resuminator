@@ -1,5 +1,6 @@
 import { TextProps } from "@chakra-ui/layout";
-import { FontProfile } from "../../store/types";
+import { FontProfile } from "../../../store/types";
+
 export interface CustomTextProps extends TextProps {
   fontFamily: TextProps["fontFamily"];
   fontSize?: TextProps["fontSize"];
@@ -18,7 +19,3 @@ export interface FontProps {
 export type FontsObject = {
   [key in FontProfile]: FontProps;
 };
-
-export interface IStylePropsContext {
-  font: FontProps;
-}

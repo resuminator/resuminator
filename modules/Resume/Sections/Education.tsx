@@ -5,9 +5,9 @@ import SectionName from "../../../components/elements/SectionName";
 import TextViewer from "../../../plugins/Tiptap/TextViewer";
 import useResumeStore from "../../../store/resume.store";
 import { parseDate } from "../../../utils";
-import { isCustom } from "../../Design/ColorSelector";
+import { isCustom } from "../../Design/Colors/ColorSelector";
 import useEducationStore from "../../UserInput/Education/store";
-import { StylePropsContext } from "../StylePropsProvider";
+import { StylePropsContext } from "../../Design/StylePropsProvider";
 
 interface Props {}
 

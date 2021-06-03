@@ -1,8 +1,11 @@
 import { createContext } from "react";
 import useResumeStore from "../../store/resume.store";
-import { FontProfile } from "../../store/types";
-import Fonts from "../Design/FontLegend";
-import { IStylePropsContext } from "../Design/types";
+import Fonts from "./Fonts/legend";
+import { FontProps } from "./Fonts/types";
+
+export interface IStylePropsContext {
+  font: FontProps;
+}
 
 export const StylePropsContext = createContext<IStylePropsContext>({
   font: {

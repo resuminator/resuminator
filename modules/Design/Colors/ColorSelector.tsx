@@ -1,19 +1,16 @@
 import { IconButton } from "@chakra-ui/button";
-import { Checkbox } from "@chakra-ui/checkbox";
-import { useColorMode } from "@chakra-ui/color-mode";
 import Icon from "@chakra-ui/icon";
-import { Box, HStack, Text } from "@chakra-ui/layout";
+import { Box, HStack } from "@chakra-ui/layout";
 import { Tooltip } from "@chakra-ui/tooltip";
 import React from "react";
 import { FaCheck } from "react-icons/fa";
-import { FiAlertTriangle, FiInfo } from "react-icons/fi";
-import ColorPicker from "../../components/elements/ColorPicker";
-import Section from "../../components/layouts/Section";
-import useGlobalStore from "../../store/global.store";
-import useResumeStore from "../../store/resume.store";
-import { ColorProfiles } from "../../store/types";
-
-interface Props {}
+import { FiInfo } from "react-icons/fi";
+import ColorPicker from "../../../components/elements/ColorPicker";
+import Section from "../../../components/layouts/Section";
+import useResumeStore from "../../../store/resume.store";
+import { ColorProfiles } from "../../../store/types";
+import ColorModeWarning from "./ColorModeWarning";
+import GrayscalePreviewCheckbox from "./GrayscalePreviewCheckbox";
 
 export const profiles: Array<ColorProfiles> = [
   "blue",
@@ -25,14 +22,9 @@ export const profiles: Array<ColorProfiles> = [
 
 export const isCustom = (color: ColorProfiles) => !profiles.includes(color);
 
-const ColorSelector = (props: Props) => {
+const ColorSelector = () => {
   const color = useResumeStore((state) => state.color);
   const setColorProfile = useResumeStore((state) => state.setColorProfile);
-  const toggleGrayscaleFilter = useGlobalStore(
-    (state) => state.toggleGrayscaleFilter
-  );
-  const grayscaleFilter = useGlobalStore((state) => state.grayscaleFilter);
-  const { colorMode } = useColorMode();
 
   return (
     <Section
@@ -61,15 +53,7 @@ const ColorSelector = (props: Props) => {
         />
       </HStack>
       <HStack mb="2">
-        <Checkbox
-          size="sm"
-          defaultChecked={grayscaleFilter}
-          onChange={toggleGrayscaleFilter}
-        >
-          <Text fontSize="sm" color="InactiveCaptionText">
-            Grayscale preview
-          </Text>
-        </Checkbox>
+        <GrayscalePreviewCheckbox />
         <Tooltip
           label="Check how your resume will look when printed in grayscale"
           aria-label="graysale tooltip"
@@ -79,12 +63,7 @@ const ColorSelector = (props: Props) => {
           </Box>
         </Tooltip>
       </HStack>
-      {colorMode === "dark" && grayscaleFilter && (
-        <HStack mb="2" color="yellow">
-          <FiAlertTriangle />
-          <Text fontSize="sm">Use light mode for an accurate preview</Text>
-        </HStack>
-      )}
+      <ColorModeWarning />
     </Section>
   );
 };

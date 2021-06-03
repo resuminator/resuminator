@@ -9,23 +9,23 @@ const Fonts: FontsObject = {
       fontWeight: "light",
     },
     primary: {
-      fontFamily: "Inter", 
+      fontFamily: "Inter",
       fontSize: "1em",
       fontWeight: "semibold",
     },
     secondary: {
-      fontFamily: "Inter", 
+      fontFamily: "Inter",
       fontSize: "0.8em",
     },
     body: {
-      fontFamily: "Inter", 
+      fontFamily: "Inter",
       fontSize: "0.9em",
     },
   },
   MAGAZINE: {
     //✅ Final
     heading: {
-      fontFamily: "Lora", 
+      fontFamily: "Lora",
       fontSize: "xl",
       fontWeight: "bold",
     },
@@ -46,11 +46,11 @@ const Fonts: FontsObject = {
   POISE: {
     //✅ Final
     heading: {
-      fontFamily: "Poppins", 
+      fontFamily: "Poppins",
       fontSize: "lg",
       fontWeight: "extrabold",
       textTransform: "uppercase",
-      letterSpacing: "wider"
+      letterSpacing: "wider",
     },
     primary: {
       fontFamily: "Poppins", //Final
@@ -73,7 +73,7 @@ const Fonts: FontsObject = {
       fontSize: "md",
       fontWeight: "bold",
       textTransform: "uppercase",
-      letterSpacing: "wide"
+      letterSpacing: "wide",
     },
     primary: {
       fontFamily: "Georgia",

@@ -3,7 +3,7 @@ import React from "react";
 import useGlobalStore from "../../store/global.store";
 import useResumeStore from "../../store/resume.store";
 import { getLayout } from "./legend";
-import StylePropsProvider from "./StylePropsProvider";
+import StylePropsProvider from "../Design/StylePropsProvider";
 
 interface Props {}
 
