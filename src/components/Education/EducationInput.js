@@ -47,7 +47,7 @@ function EducationInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const uid = useContext(AuthContext).uid;
+  const token = useContext(AuthContext).token;
   const storeState = useSelector((state) => state.educationInfo.education);
   const loading = useSelector((state) => state.educationInfo.loading);
   const [state, setState] = useState(storeState);
@@ -66,17 +66,17 @@ function EducationInput() {
   }, [loading, storeState]);
 
   const handleAdd = () => {
-    dispatch(addEducation(uid));
+    dispatch(addEducation(token));
   };
 
   const handleDelete = (id) => {
     setCurrIndex(-1);
     setOpen(false);
-    dispatch(deleteEducation(uid, id));
+    dispatch(deleteEducation(token, id));
   };
 
   const handleUpdate = (id, payload) => {
-    dispatch(updateEducation(uid, id, payload));
+    dispatch(updateEducation(token, id, payload));
   };
 
   const handleCheckbox = (resetDate) => {

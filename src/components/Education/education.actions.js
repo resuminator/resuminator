@@ -10,6 +10,7 @@
 
 import axios from "axios";
 import { SERVER } from "../../utils/Server";
+import getHeader from "../Auth/Headers";
 
 export const updateEducationState = (payload) => {
   return {
@@ -38,42 +39,44 @@ export const educationInfoFailure = (error) => {
   };
 };
 
-export const fetchEducation = (uid) => {
+export const fetchEducation = (token) => {
   return (dispatch) => {
     dispatch(educationInfoRequest());
     return axios
-      .get(`${SERVER}/education/user/${uid}`)
+      .get(`${SERVER}/education/user`, { headers: getHeader(token) })
       .then((response) => dispatch(fetchEducationInfoSuccess(response.data)))
       .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };
 
-export const addEducation = (uid) => {
+export const addEducation = (token) => {
   return (dispatch) => {
     dispatch(educationInfoRequest());
     return axios
-      .post(`${SERVER}/education/add`, { uid })
-      .then(() => dispatch(fetchEducation(uid)))
+      .post(`${SERVER}/education/add`, {}, { headers: getHeader(token) })
+      .then(() => dispatch(fetchEducation(token)))
       .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };
 
-export const deleteEducation = (uid, id) => {
+export const deleteEducation = (token, id) => {
   return (dispatch) => {
     dispatch(educationInfoRequest());
     return axios
-      .delete(`${SERVER}/education/delete/${id}`)
-      .then(() => dispatch(fetchEducation(uid)))
+      .delete(`${SERVER}/education/delete/${id}`, { headers: getHeader(token) })
+      .then(() => dispatch(fetchEducation(token)))
       .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };
 
-export const updateEducation = (uid, id, payload) => {
+export const updateEducation = (token, id, payload) => {
   return (dispatch) => {
     dispatch(educationInfoRequest());
     return axios
-      .put(`${SERVER}/education/update/${id}`, { payload })
-      .then(() => dispatch(fetchEducation(uid)))
+      .put(`${SERVER}/education/update/${id}`, payload, {
+        headers: getHeader(token),
+      })
+      .then(() => dispatch(fetchEducation(token)))
       .catch((error) => dispatch(educationInfoFailure(error)));
   };
 };
