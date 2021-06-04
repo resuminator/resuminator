@@ -9,12 +9,13 @@
  */
 
 import { Box, Button, makeStyles, Paper, Typography } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import "../../styles/page.css";
 import "../../styles/shadow.css";
 import Achievements from "../Achievements/Achievements";
+import { AuthContext } from "../Auth/AuthContext";
 import Certifications from "../Certifications/Certifications";
 import ColoredLine from "../common/Line";
 import Contact from "../Contact/Contact";
@@ -88,6 +89,7 @@ function Resume({ element }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const storeState = useSelector((state) => state.settings);
+  const token = useContext(AuthContext).token;
   const app = useSelector((state) => state.app);
   const [state, setState] = useState(storeState.modules);
   const [unsaved, setUnsaved] = useState(false);
@@ -107,7 +109,7 @@ function Resume({ element }) {
   const handleSave = () => {
     setUnsaved(false);
     dispatch(
-      updateSettings(storeState.uid, storeState._id, {
+      updateSettings(token, {
         modules: storeState.modules,
       })
     );

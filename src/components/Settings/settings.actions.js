@@ -10,11 +10,12 @@
 
 import axios from "axios";
 import { SERVER } from "../../utils/Server";
+import getHeader from "../Auth/Headers";
 
 export const updateSettingsState = (payload) => {
   return {
     type: "UPDATE_SETTINGS_STATE",
-    payload
+    payload,
   };
 };
 
@@ -38,29 +39,29 @@ export const fetchSettingsFailure = (error) => {
   };
 };
 
-export const fetchSettings = (uid) => {
+export const fetchSettings = (token) => {
   return (dispatch) => {
     dispatch(fetchSettingsRequest());
     return axios
-      .get(`${SERVER}/settings/user/${uid}`)
+      .get(`${SERVER}/settings/user`, { headers: getHeader(token) })
       .then((response) => dispatch(fetchSettingsSuccess(response.data)))
       .catch((error) => dispatch(fetchSettingsFailure(error)));
   };
 };
 
-export const createNewSettingsDocument = (uid) => {
+export const createNewSettingsDocument = (token) => {
   return axios
-    .post(`${SERVER}/settings/add`, { uid })
+    .post(`${SERVER}/settings/add`, { headers: getHeader(token) })
     .then((response) => response.data)
     .catch((err) => err.message);
 };
 
-export const updateSettings = (uid, id, payload) => {
+export const updateSettings = (token, payload) => {
   return (dispatch) => {
     dispatch(fetchSettingsRequest());
     return axios
-      .put(`${SERVER}/settings/update/${id}`, { payload })
-      .then(() => dispatch(fetchSettings(uid)))
+      .put(`${SERVER}/settings/update`, payload, { headers: getHeader(token) })
+      .then(() => dispatch(fetchSettings(token)))
       .catch((error) => dispatch(fetchSettingsFailure(error)));
   };
 };
