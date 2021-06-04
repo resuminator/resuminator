@@ -27,7 +27,7 @@ const ProtectedRoutes = () => {
   const VerifyRoute = ({ ...rest }) => (
     <Route
       {...rest}
-      render={() => (!verified ? <VerifyEmail /> : <Redirect to="/" />)}
+      render={() => (!verified ? <VerifyEmail /> : <Redirect to="/login" />)}
     />
   );
 
