@@ -10,6 +10,7 @@
 
 import axios from "axios";
 import { SERVER } from "../../utils/Server";
+import getHeader from "../Auth/Headers";
 
 export const updateCertificationState = (payload) => {
   return {
@@ -38,11 +39,11 @@ export const certificationInfoFailure = (error) => {
   };
 };
 
-export const fetchCertification = (uid) => {
+export const fetchCertification = (token) => {
   return (dispatch) => {
     dispatch(certificationInfoRequest());
     return axios
-      .get(`${SERVER}/certification/user/${uid}`)
+      .get(`${SERVER}/certification/user`, { headers: getHeader(token) })
       .then((response) =>
         dispatch(fetchCertificationInfoSuccess(response.data))
       )
@@ -50,32 +51,36 @@ export const fetchCertification = (uid) => {
   };
 };
 
-export const addCertification = (uid) => {
+export const addCertification = (token) => {
   return (dispatch) => {
     dispatch(certificationInfoRequest());
     return axios
-      .post(`${SERVER}/certification/add`, { uid })
-      .then(() => dispatch(fetchCertification(uid)))
+      .post(`${SERVER}/certification/add`, {}, { headers: getHeader(token) })
+      .then(() => dispatch(fetchCertification(token)))
       .catch((error) => dispatch(certificationInfoFailure(error)));
   };
 };
 
-export const deleteCertification = (uid, id) => {
+export const deleteCertification = (token, id) => {
   return (dispatch) => {
     dispatch(certificationInfoRequest());
     return axios
-      .delete(`${SERVER}/certification/delete/${id}`)
-      .then(() => dispatch(fetchCertification(uid)))
+      .delete(`${SERVER}/certification/delete/${id}`, {
+        headers: getHeader(token),
+      })
+      .then(() => dispatch(fetchCertification(token)))
       .catch((error) => dispatch(certificationInfoFailure(error)));
   };
 };
 
-export const updateCertification = (uid, id, payload) => {
+export const updateCertification = (token, id, payload) => {
   return (dispatch) => {
     dispatch(certificationInfoRequest());
     return axios
-      .put(`${SERVER}/certification/update/${id}`, { payload })
-      .then(() => dispatch(fetchCertification(uid)))
+      .put(`${SERVER}/certification/update/${id}`, payload, {
+        headers: getHeader(token),
+      })
+      .then(() => dispatch(fetchCertification(token)))
       .catch((error) => dispatch(certificationInfoFailure(error)));
   };
 };
