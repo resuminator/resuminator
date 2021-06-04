@@ -11,6 +11,7 @@
 import axios from "axios";
 import firebaseSDK from "../../Services/firebaseSDK";
 import { SERVER } from "../../utils/Server";
+import getHeader from "./Headers";
 
 export const fetchUserData = async (uid) => {
   return axios
@@ -27,9 +28,9 @@ export const setNewPassword = (password) => {
     .catch((err) => err.message);
 };
 
-export const createNewUser = async (uid, email) => {
+export const createNewUser = async (token, email) => {
   return axios
-    .post(`${SERVER}/users/add`, { uid, email })
+    .post(`${SERVER}/users/add`, { headers: getHeader(token), email })
     .then((response) => response.data)
     .catch((err) => err.message);
 };
