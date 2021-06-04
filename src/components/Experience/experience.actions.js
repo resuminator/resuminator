@@ -10,6 +10,7 @@
 
 import axios from "axios";
 import { SERVER } from "../../utils/Server";
+import getHeader from "../Auth/Headers";
 
 export const updateExperienceById = (payload) => {
   return {
@@ -22,7 +23,7 @@ export const experienceInfoRequest = () => {
   return {
     type: "EXPERIENCE_INFO_SERVER_REQUEST",
   };
-}
+};
 
 export const fetchExperienceInfoSuccess = (info) => {
   return {
@@ -59,42 +60,46 @@ export const updateExperienceInfoFailure = (error) => {
   };
 };
 
-export const fetchExperience = (uid) => {
+export const fetchExperience = (token) => {
   return (dispatch) => {
     dispatch(experienceInfoRequest());
     return axios
-      .get(`${SERVER}/experience/user/${uid}`)
+      .get(`${SERVER}/experience/user`, { headers: getHeader(token) })
       .then((response) => dispatch(fetchExperienceInfoSuccess(response.data)))
       .catch((error) => dispatch(fetchExperienceInfoFailure(error.message)));
   };
 };
 
-export const addExperience = (uid) => {
+export const addExperience = (token) => {
   return (dispatch) => {
     dispatch(experienceInfoRequest());
     return axios
-      .post(`${SERVER}/experience/add`, { uid })
-      .then(() => dispatch(fetchExperience(uid)))
+      .post(`${SERVER}/experience/add`, {} ,{headers: getHeader(token)} )
+      .then(() => dispatch(fetchExperience(token)))
       .catch((error) => dispatch(addExperienceInfoFailure(error)));
   };
 };
 
-export const deleteExperience = (uid, id) => {
+export const deleteExperience = (token, id) => {
   return (dispatch) => {
     dispatch(experienceInfoRequest());
     return axios
-      .delete(`${SERVER}/experience/delete/${id}`)
-      .then(() => dispatch(fetchExperience(uid)))
+      .delete(`${SERVER}/experience/delete/${id}`, {
+        headers: getHeader(token),
+      })
+      .then(() => dispatch(fetchExperience(token)))
       .catch((error) => dispatch(deleteExperienceInfoFailure(error)));
   };
 };
 
-export const updateExperience = (uid, id, payload) => {
+export const updateExperience = (token, id, payload) => {
   return (dispatch) => {
     dispatch(experienceInfoRequest());
     return axios
-      .put(`${SERVER}/experience/update/${id}`, { payload })
-      .then(() => dispatch(fetchExperience(uid)))
+      .put(`${SERVER}/experience/update/${id}`, payload, {
+        headers: getHeader(token),
+      })
+      .then(() => dispatch(fetchExperience(token)))
       .catch((error) => dispatch(updateExperienceInfoFailure(error)));
   };
 };

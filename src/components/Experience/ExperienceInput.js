@@ -48,7 +48,7 @@ function ExperienceInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const uid = useContext(AuthContext).uid;
+  const token = useContext(AuthContext).token;
   const storeState = useSelector((state) => state.experienceInfo.experiences);
   const loading = useSelector((state) => state.experienceInfo.loading);
   const [currIndex, setCurrIndex] = useState(0);
@@ -67,17 +67,17 @@ function ExperienceInput() {
   }, [loading, storeState]);
 
   const handleAdd = () => {
-    dispatch(addExperience(uid));
+    dispatch(addExperience(token));
   };
 
   const handleDelete = (id) => {
     setCurrIndex(-1);
     setOpen(false);
-    dispatch(deleteExperience(uid, id));
+    dispatch(deleteExperience(token, id));
   };
 
   const handleUpdate = (id, payload) => {
-    dispatch(updateExperience(uid, id, payload));
+    dispatch(updateExperience(token, id, payload));
   };
 
   const handleCheckbox = (resetDate) => {
