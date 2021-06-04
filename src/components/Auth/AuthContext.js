@@ -14,20 +14,20 @@ import firebaseSDK from "../../Services/firebaseSDK";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [uid, setUid] = useState("");
+  const [token, setToken] = useState("");
   const [user, setUser] = useState(null);
 
   React.useEffect(() => {
     firebaseSDK.auth().onAuthStateChanged((user) => {
       if (user) {
-        setUid(() => user.uid);
+        user.getIdToken().then((res) => setToken(res));
         setUser(user);
       }
     });
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, uid, setUid }}>
+    <AuthContext.Provider value={{ user, token, setToken }}>
       {children}
     </AuthContext.Provider>
   );
