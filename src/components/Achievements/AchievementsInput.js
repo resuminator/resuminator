@@ -40,7 +40,7 @@ function AchievementsInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const storeState = useSelector((state) => state.achievementInfo);
-  const uid = useContext(AuthContext).uid;
+  const token = useContext(AuthContext).token;
   const app = useSelector((state) => state.app);
   const [state, setState] = useState(storeState);
   const [unsaved, setUnsaved] = useState(false);
@@ -60,7 +60,7 @@ function AchievementsInput() {
   const handleSave = (e) => {
     setUnsaved(false);
     dispatch(
-      updateAchievement(uid, storeState._id, { description: state.description })
+      updateAchievement(token, storeState._id, { description: state.description })
     );
   };
 

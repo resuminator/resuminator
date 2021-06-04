@@ -10,6 +10,7 @@
 
 import axios from "axios";
 import { SERVER } from "../../utils/Server";
+import getHeader from "../Auth/Headers";
 
 export const updateAchievementState = (payload) => {
   return {
@@ -38,32 +39,35 @@ export const achievementInfoFailure = (error) => {
   };
 };
 
-export const fetchAchievement = (uid) => {
+export const fetchAchievement = (token) => {
   return (dispatch) => {
     dispatch(achievementInfoRequest());
     return axios
-      .get(`${SERVER}/achievement/user/${uid}`)
+      .get(`${SERVER}/achievement/user`, { headers: getHeader(token) })
       .then((response) => dispatch(fetchAchievementInfoSuccess(response.data)))
       .catch((error) => dispatch(achievementInfoFailure(error)));
   };
 };
 
-export const addAchievement = (uid) => {
+export const addAchievement = (token) => {
   return (dispatch) => {
     dispatch(achievementInfoRequest());
     return axios
-      .post(`${SERVER}/achievement/add`, { uid })
-      .then(() => dispatch(fetchAchievement(uid)))
+      .post(`${SERVER}/achievement/add`, { headers: getHeader(token) })
+      .then(() => dispatch(fetchAchievement(token)))
       .catch((error) => dispatch(achievementInfoFailure(error)));
   };
 };
 
-export const updateAchievement = (uid, id, payload) => {
+export const updateAchievement = (token, id, payload) => {
   return (dispatch) => {
     dispatch(achievementInfoRequest());
     return axios
-      .put(`${SERVER}/achievement/update/${id}`, { payload })
-      .then(() => dispatch(fetchAchievement(uid)))
+      .put(`${SERVER}/achievement/update/${id}`, {
+        headers: getHeader(token),
+        payload,
+      })
+      .then(() => dispatch(fetchAchievement(token)))
       .catch((error) => dispatch(achievementInfoFailure(error)));
   };
 };
