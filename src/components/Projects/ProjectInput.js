@@ -43,7 +43,7 @@ function ProjectInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const uid = useContext(AuthContext).uid;
+  const token = useContext(AuthContext).token;
   const storeState = useSelector((state) => state.projectInfo.projects);
   const loading = useSelector((state) => state.projectInfo.loading);
   const [state, setState] = useState(storeState);
@@ -62,17 +62,17 @@ function ProjectInput() {
   }, [loading, storeState]);
 
   const handleAdd = () => {
-    dispatch(addProject(uid));
+    dispatch(addProject(token));
   };
 
   const handleDelete = (id) => {
     setCurrIndex(-1);
     setOpen(false);
-    dispatch(deleteProject(uid, id));
+    dispatch(deleteProject(token, id));
   };
 
   const handleUpdate = (id, payload) => {
-    dispatch(updateProject(uid, id, payload));
+    dispatch(updateProject(token, id, payload));
   };
 
   const handleChange = (e) => {
