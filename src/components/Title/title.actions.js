@@ -51,7 +51,14 @@ export const fetchUser = (token) => {
     dispatch(fetchUserInfoRequest());
     return axios
       .get(`${SERVER}/users`, { headers: getHeader(token) })
-      .then((response) => dispatch(fetchUserInfoSuccess(response.data)))
+      .then((response) => {
+        if (response.status === 220) {
+          return axios
+            .get(`${SERVER}/users`, { headers: getHeader(token) })
+            .then((res) => dispatch(fetchUserInfoSuccess(res.data)));
+        }
+        return dispatch(fetchUserInfoSuccess(response.data));
+      })
       .catch((error) => dispatch(fetchUserInfoFailure(error.message)));
   };
 };

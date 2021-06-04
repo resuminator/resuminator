@@ -11,10 +11,11 @@
 import { Box, Button, makeStyles, Typography } from "@material-ui/core";
 import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { useToasts } from "react-toast-notifications";
 import firebaseSDK from "../../Services/firebaseSDK";
 import { addUserInfo } from "../Title/title.actions";
-import { createNewUser } from "./AuthAPIs";
+import { signOut } from "./AuthAPIs";
 import { AuthContext } from "./AuthContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -59,9 +60,12 @@ const useStyles = makeStyles((theme) => ({
 const VerifyEmail = () => {
   const classes = useStyles();
   const auth = useContext(AuthContext);
+  const history = useHistory();
   const verified = useSelector((state) => state.userInfo.verified);
   const dispatch = useDispatch();
   const { addToast } = useToasts();
+
+  useEffect(() => console.log(verified), [verified]);
 
   const handleVerification = () => {
     auth.user.sendEmailVerification();
@@ -78,50 +82,31 @@ const VerifyEmail = () => {
           .auth()
           .currentUser.reload()
           .then(() => {
-            if (firebaseSDK.auth().currentUser.emailVerified) {
-              const { uid, email } = firebaseSDK.auth().currentUser;
-              createNewUser(uid, email)
-                .then((response) => {
-                  dispatch(addUserInfo({ verified: response.verified }));
-                })
-                .catch(() =>
-                  addToast(
-                    "Some unexpected error occured, please refresh the page and try again.",
-                    { appearance: "error", autoDismiss: true }
-                  )
-                );
+            const userVerified = firebaseSDK.auth().currentUser.emailVerified;
+            if (userVerified) {
+              dispatch(addUserInfo({ verified: userVerified }));
+              signOut()
+                .then(() => localStorage.removeItem("loggedIn"))
+                .then(() => history.push("/login"));
             }
           })
           .catch((e) => console.log(e));
     }, 5000);
 
     return () => clearInterval(checkInterval);
-  }, [addToast, dispatch, auth.user]);
+  }, [addToast, dispatch, history, auth.user]);
 
-  if (verified) {
-    window.location.href = "/";
-  }
-
-  const MessageBody = () =>
-    verified ? (
-      <Typography
-        variant="body1"
-        className={classes.notice}
-        color="textSecondary"
-      >
-        Redirecting ...
-      </Typography>
-    ) : (
-      <Typography
-        variant="body1"
-        className={classes.notice}
-        color="textSecondary"
-      >
-        We have sent you an email to verify your account for Resuminator. Please
-        follow the link in that mail to continue. If you didn't get an email,
-        click on the button below to re-send the verification email
-      </Typography>
-    );
+  const MessageBody = () => (
+    <Typography
+      variant="body1"
+      className={classes.notice}
+      color="textSecondary"
+    >
+      We have sent you an email to verify your account for Resuminator. Please
+      follow the link in that mail to continue. If you didn't get an email,
+      click on the button below to re-send the verification email
+    </Typography>
+  );
 
   return (
     <Box

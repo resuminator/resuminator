@@ -37,17 +37,18 @@ export const appInitFailure = (error) => {
 };
 
 export const initApp = (token) => async (dispatch) => {
-  await Promise.all([
-    dispatch(appInitRequest()),
-    dispatch(fetchSettings(token)),
-    dispatch(fetchUser(token)),
-    dispatch(fetchExperience(token)),
-    dispatch(fetchEducation(token)),
-    dispatch(fetchProject(token)),
-    dispatch(fetchCertification(token)),
-    dispatch(fetchSkills(token)),
-    dispatch(fetchAchievement(token))
-  ])
+  await Promise.all([dispatch(appInitRequest()), dispatch(fetchUser(token))])
+    .then(() =>
+      Promise.all([
+        dispatch(fetchSettings(token)),
+        dispatch(fetchExperience(token)),
+        dispatch(fetchEducation(token)),
+        dispatch(fetchProject(token)),
+        dispatch(fetchCertification(token)),
+        dispatch(fetchSkills(token)),
+        dispatch(fetchAchievement(token)),
+      ])
+    )
     .then(() => {
       dispatch(appInitSuccess());
     })

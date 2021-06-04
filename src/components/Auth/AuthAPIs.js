@@ -30,7 +30,7 @@ export const setNewPassword = (password) => {
 
 export const createNewUser = async (token, email) => {
   return axios
-    .post(`${SERVER}/users/add`, { headers: getHeader(token), email })
+    .post(`${SERVER}/users/add`, {}, { headers: getHeader(token), email })
     .then((response) => response.data)
     .catch((err) => err.message);
 };
