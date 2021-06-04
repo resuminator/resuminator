@@ -10,6 +10,7 @@
 
 import axios from "axios";
 import { SERVER } from "../../utils/Server";
+import getHeader from "../Auth/Headers";
 
 export const updateSkillInfoState = (payload) => {
   return { type: "UPDATE_SKILL_INFO_STATE", payload };
@@ -38,16 +39,20 @@ export const fetchSkillInfoFailure = (error) => {
   };
 };
 
-export const fetchSkills = (uid) => {
+export const fetchSkills = (token) => {
   return (dispatch) => {
     dispatch(skillInfoRequest());
     return axios
-      .get(`${SERVER}/skills/user/${uid}`)
+      .get(`${SERVER}/skills/user`, { headers: getHeader(token) })
       .then((response) => {
         axios
-          .post(`${SERVER}/skillset/fetchbyids`, {
-            skills: response.data[0].skills,
-          })
+          .post(
+            `${SERVER}/skillset/fetchbyids`,
+            {
+              skills: response.data[0].skills,
+            },
+            { headers: getHeader(token) }
+          )
           .then((response) => {
             dispatch(fetchSkillInfoSuccess(response.data));
           });
@@ -56,37 +61,49 @@ export const fetchSkills = (uid) => {
   };
 };
 
-export const fetchInDatabase = async (name) => {
+export const fetchInDatabase = async (token, name) => {
   return axios
-    .post(`${SERVER}/skillset/fetchbyname`, {name})
+    .post(
+      `${SERVER}/skillset/fetchbyname`,
+      { name },
+      { headers: getHeader(token) }
+    )
     .then((response) => response.data)
     .catch((err) => err);
 };
 
-export const createNewSkillDocument = async (uid) => {
+export const createNewSkillDocument = async (token) => {
   return axios
-    .post(`${SERVER}/skills/add`, { uid })
+    .post(`${SERVER}/skills/add`, {}, { headers: getHeader(token) })
     .then((response) => response.data)
     .catch((err) => err.message);
 };
 
-export const addUserSkill = async (uid, skillId) => {
+export const addUserSkill = async (token, skillId) => {
   return axios
-    .put(`${SERVER}/skills/add/${skillId}`, { uid })
+    .put(`${SERVER}/skills/add/${skillId}`, {}, { headers: getHeader(token) })
     .then((response) => response.data)
     .catch((err) => err.message);
 };
 
-export const deleteUserSkill = async (uid, skillId) => {
+export const deleteUserSkill = async (token, skillId) => {
   return axios
-    .put(`${SERVER}/skills/delete/${skillId}`, { uid })
+    .put(
+      `${SERVER}/skills/delete/${skillId}`,
+      {},
+      { headers: getHeader(token) }
+    )
     .then((response) => response.data)
     .catch((err) => err.message);
 };
 
-export const addSkillToDatabase = async (name, category, commonAbbr) => {
+export const addSkillToDatabase = async (token, name, category, commonAbbr) => {
   return axios
-    .post(`${SERVER}/skillset/add`, { name, category, commonAbbr })
+    .post(
+      `${SERVER}/skillset/add`,
+      { name, category, commonAbbr },
+      { headers: getHeader(token) }
+    )
     .then((response) => response.data)
     .catch((err) => err.message);
 };

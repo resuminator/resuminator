@@ -59,7 +59,7 @@ function SkillsInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const uid = useContext(AuthContext).uid;
+  const token = useContext(AuthContext).token;
   const loading = useSelector((state) => state.skillInfo.loading);
   const storeState = useSelector((state) => state.skillInfo.skills);
   const [state, setState] = useState(storeState);
@@ -87,6 +87,7 @@ function SkillsInput() {
 
   const handleInput = (e) => {
     const rawValue = e.target.value;
+    if(rawValue === ".") return;
 
     //match the invalid chars
     if (!rawValue.match(/^[a-zA-Z0-9#_.]/)) return;
@@ -101,25 +102,25 @@ function SkillsInput() {
         return;
       }
 
-      fetchInDatabase(value).then((response) => {
+      fetchInDatabase(token, value).then((response) => {
         if (response.length !== 0) {
           setState([...state, response[0]]);
           e.target.value = "";
-          addUserSkill(uid, response[0]._id);
+          addUserSkill(token, response[0]._id);
         } else
-          addSkillToDatabase(value, "Miscellaneous").then(() =>
-            fetchInDatabase(value).then((newSkill) => {
+          addSkillToDatabase(token, value, "Miscellaneous").then(() =>
+            fetchInDatabase(token, value).then((newSkill) => {
               setState([...state, newSkill[0]]);
               e.target.value = "";
-              addUserSkill(uid, newSkill[0]._id);
+              addUserSkill(token, newSkill[0]._id);
             })
           );
-      })
+      });
     }
   };
 
   const handleDelete = (item) => {
-    deleteUserSkill(uid, item._id).then(() =>
+    deleteUserSkill(token, item._id).then(() =>
       setState((newState) =>
         newState.filter((skill) => skill.name !== item.name)
       )
