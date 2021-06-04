@@ -56,7 +56,6 @@ function ContactInput() {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState("email");
   const app = useSelector((state) => state.app);
-  const userInfo = useSelector((state) => state.userInfo);
   const token = useContext(AuthContext).token;
   const storeState = useSelector((state) => state.userInfo.contact);
   const loading = useSelector((state) => state.userInfo.loading);
