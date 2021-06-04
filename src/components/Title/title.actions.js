@@ -10,6 +10,7 @@
 
 import axios from "axios";
 import { SERVER } from "../../utils/Server";
+import getHeader from "../Auth/Headers";
 
 export const addUserInfo = (payload) => {
   return {
@@ -45,22 +46,23 @@ export const updateUserInfoFailure = (error) => {
   };
 };
 
-export const fetchUser = (uid) => {
+export const fetchUser = (token) => {
   return (dispatch) => {
     dispatch(fetchUserInfoRequest());
     return axios
-      .get(`${SERVER}/users/${uid}`)
+      .get(`${SERVER}/users`, { headers: getHeader(token) })
       .then((response) => dispatch(fetchUserInfoSuccess(response.data)))
       .catch((error) => dispatch(fetchUserInfoFailure(error.message)));
   };
 };
 
-export const updateUserInfo = (uid, userId, payload) => {
+export const updateUserInfo = (token, payload) => {
   return (dispatch) => {
     dispatch(fetchUserInfoRequest());
+    console.log({ headers: getHeader(token), payload });
     return axios
-      .put(`${SERVER}/users/update/${userId}`, { payload })
-      .then(() => dispatch(fetchUser(uid)))
-      .catch((error) => dispatch(updateUserInfoFailure(error)));
+      .put(`${SERVER}/users/update`, payload, { headers: getHeader(token) })
+      .then(() => dispatch(fetchUser(token)))
+      .catch((error) => console.log(error.message));
   };
 };

@@ -57,7 +57,7 @@ function ContactInput() {
   const [selected, setSelected] = useState("email");
   const app = useSelector((state) => state.app);
   const userInfo = useSelector((state) => state.userInfo);
-  const uid = useContext(AuthContext).uid;
+  const token = useContext(AuthContext).token;
   const storeState = useSelector((state) => state.userInfo.contact);
   const loading = useSelector((state) => state.userInfo.loading);
   const [state, setState] = useState(storeState);
@@ -86,7 +86,7 @@ function ContactInput() {
   const handleSave = () => {
     setChanged(false);
     dispatch(
-      updateUserInfo(uid, userInfo._id, {
+      updateUserInfo(token, {
         contact: state,
       })
     );

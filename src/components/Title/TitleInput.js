@@ -32,7 +32,7 @@ function TitleInput() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const storeState = useSelector((state) => state.userInfo);
-  const uid = useContext(AuthContext).uid;
+  const token = useContext(AuthContext).token;
   const app = useSelector((state) => state.app);
   const [state, setState] = useState(storeState);
   const [payload, setPayload] = useState({});
@@ -51,7 +51,7 @@ function TitleInput() {
   const handleSave = () => {
     setUnsaved(false);
     dispatch(
-      updateUserInfo(uid, storeState._id, {
+      updateUserInfo(token, {
         name: storeState.name,
         jobTitle: storeState.jobTitle,
       })
