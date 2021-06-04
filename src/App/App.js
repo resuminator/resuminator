@@ -30,10 +30,10 @@ function App() {
   });
 
   React.useEffect(() => {
-    if (loggedIn && auth.uid && auth.user && !newUser) {
-      dispatch(initApp(auth.uid));
+    if (loggedIn && auth.token && auth.user && !newUser) {
+      dispatch(initApp(auth.token));
     }
-  }, [dispatch, loggedIn, auth.uid, auth.user, newUser]);
+  }, [dispatch, loggedIn, auth.token, auth.user, newUser]);
 
   return (
     <Router>{!loggedIn || newUser ? <Routes /> : <ProtectedRoutes />}</Router>
