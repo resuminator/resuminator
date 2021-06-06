@@ -1,44 +1,34 @@
-import { useColorMode } from "@chakra-ui/color-mode";
-import { Box, Text } from "@chakra-ui/layout";
-import React, { useContext, useMemo } from "react";
+import { Box } from "@chakra-ui/layout";
+import React, { useMemo } from "react";
 import DataRow from "../../../components/elements/DataRow";
-import { StylePropsContext } from "../../Design/StylePropsProvider";
 import useSkillStore from "../../UserInput/Skills/store";
 import { SkillDataObject } from "../../UserInput/Skills/types";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import Tags from "../components/Tags";
+import TextItem from "../components/TextItem";
 import TitleRow from "../components/TitleRow";
 
 interface CategoriesProps {
   data: Array<SkillDataObject>;
 }
 
-const Categories: React.FC<CategoriesProps> = React.memo(({ data }) => {
-  const { body } = useContext(StylePropsContext).font;
-  const colorMode = useColorMode().colorMode;
-
-  return (
-    <>
-      {data.map((item) => (
-        <SectionContent key={item._id}>
-          <DataRow>
-            <TitleRow>{item.category}</TitleRow>
-          </DataRow>
-          <DataRow>
-            <Text
-              aria-label={`Skill List: ${item.category}`}
-              {...body}
-              color={colorMode === "light" ? "gray.600" : "gray.400"}
-            >
-              {item.skillsList.join(", ")}
-            </Text>
-          </DataRow>
-        </SectionContent>
-      ))}
-    </>
-  );
-});
+const Categories: React.FC<CategoriesProps> = React.memo(({ data }) => (
+  <>
+    {data.map((item) => (
+      <SectionContent key={item._id}>
+        <DataRow>
+          <TitleRow>{item.category}</TitleRow>
+        </DataRow>
+        <DataRow>
+          <TextItem aria-label={`Skill List: ${item.category}`}>
+            {item.skillsList.join(", ")}
+          </TextItem>
+        </DataRow>
+      </SectionContent>
+    ))}
+  </>
+));
 
 const generateListFromCategories = (data: Array<SkillDataObject>) => {
   const list = [];
