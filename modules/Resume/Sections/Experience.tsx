@@ -8,7 +8,7 @@ import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
 import Tags from "../components/Tags";
 import TitleRow from "../components/TitleRow";
-import BodyText from "./BodyText";
+import BodyText from "../components/BodyText";
 
 const ExperienceLayout = () => {
   const data = useExperienceStore((state) => state.data).filter(
