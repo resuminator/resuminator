@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 /**
  * Generate a unique ID for objects locally.
  * @returns unique ID as a string.
@@ -29,9 +31,9 @@ export const parseDate = (date: Date, view: "Y" | "YM" = "Y") => {
   const parsedDate = new Date(date);
   if (date === undefined) return "";
   if (date === null) return "Present";
-  if (view === "Y") return parsedDate.getFullYear();
-  if (view === "YM")
-    return `${parsedDate.getMonth()} ${parsedDate.getFullYear()}`;
+  if (view === "Y") return format(parsedDate, "yyyy");
+  if (view === "YM") return format(parsedDate, "MMM yyyy");
+  // `${parsedDate.getMonth()} ${parsedDate.getFullYear()}`;
 };
 
 /**
