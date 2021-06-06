@@ -2,7 +2,7 @@ import { Text } from "@chakra-ui/layout";
 import React, { useContext } from "react";
 import { StylePropsContext } from "../../Design/StylePropsProvider";
 
-const LayoutTitle: React.FC = ({ children }) => {
+const SectionTitle: React.FC = ({ children }) => {
   const props = useContext(StylePropsContext).sectionTitleProps;
 
   return (
@@ -12,4 +12,4 @@ const LayoutTitle: React.FC = ({ children }) => {
   );
 };
 
-export default LayoutTitle;
+export default SectionTitle;

@@ -5,7 +5,8 @@ import TextViewer from "../../../plugins/Tiptap/TextViewer";
 import { parseDate } from "../../../utils";
 import { StylePropsContext } from "../../Design/StylePropsProvider";
 import useEducationStore from "../../UserInput/Education/store";
-import LayoutTitle from "./LayoutTitle";
+import SectionTitle from "./SectionTitle";
+import TitleRow from "./TitleRow";
 
 const EducationLayout = () => {
   const data = useEducationStore((state) => state.data).filter(
@@ -27,7 +28,7 @@ const EducationLayout = () => {
 
   return (
     <Box aria-label="Education Layout" w="inherit">
-      <LayoutTitle>Education</LayoutTitle>
+      <SectionTitle>Education</SectionTitle>
       {data.map((item) => (
         <Box
           display="flex"
@@ -37,10 +38,10 @@ const EducationLayout = () => {
           mb="2.5"
         >
           <DataRow>
-            <Text {...titleRowProps}>{item.institute}</Text>
-            <Text {...titleRowProps} textAlign="right">
+            <TitleRow>{item.institute}</TitleRow>
+            <TitleRow textAlign="right">
               {parseDate(item.start)} - {parseDate(item.end)}
-            </Text>
+            </TitleRow>
           </DataRow>
           <DataRow mb="1">
             <Text {...subtitleRowProps}>
