@@ -5,7 +5,7 @@ import { StylePropsContext } from "../../Design/StylePropsProvider";
 const SubtitleRow: React.FC<TextProps> = ({ children, ...props }) => {
   const subtitleRowProps = useContext(StylePropsContext).subtitleRowProps;
   return (
-    <Text {...subtitleRowProps} {...props}>
+    <Text aria-label="Subtitle Row" {...subtitleRowProps} {...props}>
       {children}
     </Text>
   );

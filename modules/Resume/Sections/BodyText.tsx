@@ -7,6 +7,7 @@ const BodyText: React.FC<TiptapProps & BoxProps> = ({ content, ...props }) => {
   const bodyProps = useContext(StylePropsContext).bodyProps;
 
   const bodyTextProps: BoxProps = {
+    "aria-label": "Body Text",
     mb: "2",
     ...props,
   };

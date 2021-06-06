@@ -6,7 +6,7 @@ const SectionTitle: React.FC = ({ children }) => {
   const props = useContext(StylePropsContext).sectionTitleProps;
 
   return (
-    <Text mb="2" {...props}>
+    <Text aria-label="Section Title" mb="2" {...props}>
       {children}
     </Text>
   );

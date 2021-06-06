@@ -13,7 +13,7 @@ const Tags: React.FC<Props> = ({ list }) => {
   const font = useContext(StylePropsContext).font;
 
   return (
-    <Box>
+    <Box aria-label="Tags">
       {list.map((tag) => (
         <Tag
           colorScheme={color}

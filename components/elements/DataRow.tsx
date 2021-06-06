@@ -4,6 +4,7 @@ import React from "react";
 const DataRow: React.FC<BoxProps> = ({ children, ...rest }) => {
   return (
     <Box
+      aria-label="Data Row"
       display="flex"
       alignItems="center"
       justifyContent="space-between"

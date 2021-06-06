@@ -13,7 +13,7 @@ const TitleRow: ComponentWithAs<"p", TextProps> = ({ children, ...props }) => {
   };
   
   return (
-    <Text {...titleRowProps} {...props} {...hoverProps}>
+    <Text aria-label="Title Row" {...titleRowProps} {...props} {...hoverProps}>
       {children}
       {props.href && (
         <span>
