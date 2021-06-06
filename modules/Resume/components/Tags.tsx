@@ -14,19 +14,21 @@ const Tags: React.FC<Props> = ({ list }) => {
 
   return (
     <Box aria-label="Tags">
-      {list.map((tag) => (
-        <Tag
-          colorScheme={color}
-          {...font.body}
-          borderRadius="full"
-          variant="subtle"
-          key={tag}
-          mr="1"
-          mb="1.5"
-        >
-          {tag}
-        </Tag>
-      ))}
+      {list.map((tag) =>
+        tag.trim().length ? (
+          <Tag
+            colorScheme={color}
+            {...font.body}
+            borderRadius="full"
+            variant="subtle"
+            key={tag}
+            mr="1"
+            mb="1.5"
+          >
+            {tag.trim()}
+          </Tag>
+        ) : null
+      )}
     </Box>
   );
 };
