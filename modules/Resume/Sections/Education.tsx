@@ -4,6 +4,7 @@ import DataRow from "../../../components/elements/DataRow";
 import { parseDate } from "../../../utils";
 import useEducationStore from "../../UserInput/Education/store";
 import BodyText from "./BodyText";
+import SectionContent from "./SectionContent";
 import SectionTitle from "./SectionTitle";
 import SubtitleRow from "./SubtitleRow";
 import TitleRow from "./TitleRow";
@@ -28,13 +29,7 @@ const EducationLayout = () => {
     <Box aria-label="Education Layout" w="inherit">
       <SectionTitle>Education</SectionTitle>
       {data.map((item) => (
-        <Box
-          display="flex"
-          alignContent="flex-start"
-          flexDir="column"
-          key={item._id}
-          mb="2.5"
-        >
+        <SectionContent key={item._id}>
           <DataRow>
             <TitleRow>{item.institute}</TitleRow>
             <TitleRow textAlign="right">
@@ -51,7 +46,7 @@ const EducationLayout = () => {
           <DataRow>
             <BodyText content={item.description} />
           </DataRow>
-        </Box>
+        </SectionContent>
       ))}
     </Box>
   );
