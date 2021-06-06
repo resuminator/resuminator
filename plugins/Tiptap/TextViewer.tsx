@@ -1,17 +1,14 @@
 import { Box } from "@chakra-ui/layout";
 import { Content, EditorContent } from "@tiptap/react";
 import { useEffect } from "react";
-import Fonts from "../../modules/Design/Fonts/legend";
-import useResumeStore from "../../store/resume.store";
 import { useViewer } from "./hooks/useViewer";
 
 export interface TiptapProps {
   content: Content;
 }
 
-const TextViewer: React.FC<TiptapProps> = ({ content }) => {
+const TextViewer: React.FC<TiptapProps> = ({ content, ...props }) => {
   const editor = useViewer(content);
-  const { body } = Fonts[useResumeStore((state) => state.fontProfile)];
 
   useEffect(() => {
     if (editor) {
@@ -20,11 +17,7 @@ const TextViewer: React.FC<TiptapProps> = ({ content }) => {
   }, [editor, content]);
 
   return (
-    <Box
-      sx={{
-        ".ProseMirror.viewer": { ...body },
-      }}
-    >
+    <Box {...props}>
       <EditorContent editor={editor} />
     </Box>
   );
