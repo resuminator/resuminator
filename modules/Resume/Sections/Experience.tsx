@@ -6,6 +6,7 @@ import useExperienceStore from "../../UserInput/Experience/store";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
+import Tags from "../components/Tags";
 import TitleRow from "../components/TitleRow";
 import BodyText from "./BodyText";
 
@@ -33,6 +34,9 @@ const ExperienceLayout = () => {
           </DataRow>
           <DataRow>
             <BodyText content={item.description} />
+          </DataRow>
+          <DataRow justifyContent="flex-start">
+            <Tags list={item.tags} />
           </DataRow>
         </SectionContent>
       ))}
