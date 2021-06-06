@@ -1,19 +1,17 @@
-import { Box, Text } from "@chakra-ui/layout";
-import React, { useContext } from "react";
+import { Box } from "@chakra-ui/layout";
+import React from "react";
 import DataRow from "../../../components/elements/DataRow";
-import TextViewer from "../../../plugins/Tiptap/TextViewer";
 import { parseDate } from "../../../utils";
-import { StylePropsContext } from "../../Design/StylePropsProvider";
 import useEducationStore from "../../UserInput/Education/store";
+import BodyText from "./BodyText";
 import SectionTitle from "./SectionTitle";
+import SubtitleRow from "./SubtitleRow";
 import TitleRow from "./TitleRow";
 
 const EducationLayout = () => {
   const data = useEducationStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
-  const { titleRowProps, subtitleRowProps, bodyProps } =
-    useContext(StylePropsContext);
 
   /**
    * Create a string from obtained and max grade depending on if the max grade is 100 or not
@@ -44,16 +42,14 @@ const EducationLayout = () => {
             </TitleRow>
           </DataRow>
           <DataRow mb="1">
-            <Text {...subtitleRowProps}>
+            <SubtitleRow>
               {item.degree} {item.stream},{" "}
               {parseGrade(item.gradeObtained, item.gradeMax)}
-            </Text>
-            <Text {...subtitleRowProps} textAlign="right">
-              {item.location}
-            </Text>
+            </SubtitleRow>
+            <SubtitleRow textAlign="right">{item.location}</SubtitleRow>
           </DataRow>
           <DataRow>
-            <TextViewer content={item.description} {...bodyProps} />
+            <BodyText content={item.description} />
           </DataRow>
         </Box>
       ))}
