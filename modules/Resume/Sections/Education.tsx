@@ -3,11 +3,11 @@ import React from "react";
 import DataRow from "../../../components/elements/DataRow";
 import { parseDate } from "../../../utils";
 import useEducationStore from "../../UserInput/Education/store";
+import SectionContent from "../components/SectionContent";
+import SectionTitle from "../components/SectionTitle";
+import SubtitleRow from "../components/SubtitleRow";
+import TitleRow from "../components/TitleRow";
 import BodyText from "./BodyText";
-import SectionContent from "./SectionContent";
-import SectionTitle from "./SectionTitle";
-import SubtitleRow from "./SubtitleRow";
-import TitleRow from "./TitleRow";
 
 const EducationLayout = () => {
   const data = useEducationStore((state) => state.data).filter(
