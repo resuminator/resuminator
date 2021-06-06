@@ -25,7 +25,7 @@ const StylePropsProvider: React.FC = ({ children }) => {
   const fontProfile = useResumeStore((state) => state.fontProfile);
   const spacing = useResumeStore((state) => state.spacing);
   const color = useResumeStore((state) => state.color);
-  const primaryColor = isCustom(color) ? color : `${color}.500`;
+  const primaryColor = isCustom(color) ? color : `${color}.700`;
 
   const styleProps: IStylePropsContext = {
     font: Fonts[fontProfile],
