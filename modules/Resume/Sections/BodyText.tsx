@@ -5,7 +5,13 @@ import { StylePropsContext } from "../../Design/StylePropsProvider";
 
 const BodyText: React.FC<TiptapProps & BoxProps> = ({ content, ...props }) => {
   const bodyProps = useContext(StylePropsContext).bodyProps;
-  return <TextViewer content={content} {...bodyProps} {...props} />;
+
+  const bodyTextProps: BoxProps = {
+    mb: "2",
+    ...props,
+  };
+
+  return <TextViewer content={content} {...bodyProps} {...bodyTextProps} />;
 };
 
 export default BodyText;
