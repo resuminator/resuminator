@@ -66,7 +66,6 @@ export const fetchUser = (token) => {
 export const updateUserInfo = (token, payload) => {
   return (dispatch) => {
     dispatch(fetchUserInfoRequest());
-    console.log({ headers: getHeader(token), payload });
     return axios
       .put(`${SERVER}/users/update`, payload, { headers: getHeader(token) })
       .then(() => dispatch(fetchUser(token)))
