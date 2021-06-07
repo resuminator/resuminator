@@ -21,7 +21,34 @@ const ResumePaper = (props: Props) => {
         aria-label="Resume Paper"
         {...applyFilters}
       >
-        <Box aria-label="Header">Header</Box>
+        <Box
+          aria-label="Header"
+          display="flex"
+          alignItems="flex-start"
+          justifyContent="space-between"
+          width="100%"
+        >
+          {header.map((rowAsColumn, index) => (
+            <Box
+              display="flex"
+              flexDir="column"
+              aria-label={`Column-${index + 1}`}
+              key={index}
+              flexBasis={`${(1 / body.length) * 100}%`}
+            >
+              {rowAsColumn.map((layoutKey) => (
+                <Box
+                  display="flex"
+                  aria-label={layoutKey}
+                  key={layoutKey}
+                  width="100%"
+                >
+                  {getLayout(layoutKey)}
+                </Box>
+              ))}
+            </Box>
+          ))}
+        </Box>
         <Box
           aria-label="Body"
           display="flex"
