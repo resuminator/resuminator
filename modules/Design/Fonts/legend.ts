@@ -3,10 +3,20 @@ import { FontsObject } from "./types";
 //Keep minimum fontSize as 0.8em and maximum up to 1.2em
 const Fonts: FontsObject = {
   CLASSIC: {
+    headerTitle: {
+      fontFamily: "Inter",
+      fontSize: "4xl",
+      fontWeight: "light",
+    },
+    headerSubtitle: {
+      fontFamily: "Inter",
+      fontSize: "xl",
+      fontWeight: "semibold",
+    },
     heading: {
       fontFamily: "Inter", //✅ Final
       fontSize: "2xl",
-      fontWeight: "light",
+      fontWeight: "regular",
     },
     primary: {
       fontFamily: "Inter",
@@ -24,6 +34,11 @@ const Fonts: FontsObject = {
   },
   MAGAZINE: {
     //✅ Final
+    headerTitle: {
+      fontFamily: "Lora",
+      fontSize: "4xl",
+      fontWeight: "light",
+    },
     heading: {
       fontFamily: "Lora",
       fontSize: "xl",
@@ -45,6 +60,11 @@ const Fonts: FontsObject = {
   },
   POISE: {
     //✅ Final
+    headerTitle: {
+      fontFamily: "Poppins",
+      fontSize: "4xl",
+      fontWeight: "light",
+    },
     heading: {
       fontFamily: "Poppins",
       fontSize: "lg",
@@ -68,6 +88,11 @@ const Fonts: FontsObject = {
   },
   SENIOR: {
     //✅ Final
+    headerTitle: {
+      fontFamily: "Georgia",
+      fontSize: "4xl",
+      fontWeight: "light",
+    },
     heading: {
       fontFamily: "Inter",
       fontSize: "md",

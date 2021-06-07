@@ -10,6 +10,8 @@ export interface CustomTextProps extends TextProps {
 }
 
 export interface FontProps {
+  headerTitle?: CustomTextProps;
+  headerSubtitle?: CustomTextProps;
   heading?: CustomTextProps;
   primary: CustomTextProps;
   secondary?: CustomTextProps;

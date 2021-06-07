@@ -1,9 +1,20 @@
-import React from "react";
+import { Box, Text } from "@chakra-ui/layout";
+import React, { useContext } from "react";
+import { StylePropsContext } from "../../Design/StylePropsProvider";
+import useContactStore from "../../UserInput/Contact/store";
 
-interface Props {}
+const NameAndJobTitleLayout = () => {
+  const fullName = useContactStore((state) => state.fullName);
+  const jobTitle = useContactStore((state) => state.jobTitle);
+  const { headerTitleProps, headerSubtitleProps } =
+    useContext(StylePropsContext);
 
-const NameAndJobTitleLayout = (props: Props) => {
-  return <h2>NameAndJT</h2>;
+  return (
+    <Box display="flex" flexDir="column" justifyContent="center">
+      <Text {...headerTitleProps}>{fullName}</Text>
+      <Text {...headerSubtitleProps}>{jobTitle}</Text>
+    </Box>
+  );
 };
 
 export default NameAndJobTitleLayout;

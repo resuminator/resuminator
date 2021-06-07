@@ -7,6 +7,8 @@ import { FontProps } from "./Fonts/types";
 
 export interface IStylePropsContext {
   font: FontProps;
+  headerTitleProps?: TextProps;
+  headerSubtitleProps?: TextProps;
   sectionTitleProps?: TextProps;
   titleRowProps?: TextProps;
   subtitleRowProps?: TextProps;
@@ -29,6 +31,14 @@ const StylePropsProvider: React.FC = ({ children }) => {
 
   const styleProps: IStylePropsContext = {
     font: Fonts[fontProfile],
+    headerTitleProps: {
+      color: primaryColor,
+      ...Fonts[fontProfile].headerTitle
+    },
+    headerSubtitleProps: {
+      color: primaryColor,
+      ...Fonts[fontProfile].headerSubtitle
+    },
     sectionTitleProps: {
       color: primaryColor,
       ...Fonts[fontProfile].heading,
