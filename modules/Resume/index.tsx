@@ -37,14 +37,13 @@ const ResumePaper = (props: Props) => {
               aria-label={`Row-${index + 1}`}
               key={index}
               width="100%"
+              justifyContent="space-between"
             >
               {row.map((layoutKey) => (
                 <Box
                   display="flex"
                   aria-label={layoutKey}
                   key={layoutKey}
-                  width="100%"
-                  flexBasis={`${(1 / header[index].length) * 100}%`}
                 >
                   {getHeaderLayout(layoutKey)}
                 </Box>
