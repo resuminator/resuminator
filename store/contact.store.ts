@@ -8,12 +8,15 @@ const contactStore = <ContactObjectType>(
 ): ContactStore<ContactObjectType> => ({
   fullName: "",
   jobTitle: "",
+  userImage: "",
   contact: [],
   add: (obj) => set((state) => ({ contact: [...state.contact, obj] })),
   update: (index, key, value) => {
     const obj = { ...get().contact[index], [key]: value };
     set((state) => ({ contact: updateArray(state.contact, index, obj) }));
   },
+  setContact: (value) => set({ contact: value }),
+  setUserImage: (value) => set({ userImage: value }),
   setFullName: (value) => set({ fullName: value }),
   setJobTitle: (value) => set({ jobTitle: value }),
 });

@@ -1,4 +1,8 @@
 import { CertificationDataObject } from "../modules/UserInput/Certification/types";
+import {
+  ContactDataObject,
+  UserContactDataObject,
+} from "../modules/UserInput/Contact/types";
 import { EducationDataObject } from "../modules/UserInput/Education/types";
 import { ExperienceDataObject } from "../modules/UserInput/Experience/types";
 import { ProjectDataObject } from "../modules/UserInput/Projects/types";
@@ -19,9 +23,12 @@ export interface Store<ObjectType> {
 export interface ContactStore<T> {
   fullName: string;
   jobTitle: string;
+  userImage: string;
   contact: Array<T>;
   add: (obj: T) => void;
   update: (index: number, key: string, value: any) => void;
+  setContact: (value: Array<T>) => void;
+  setUserImage: (value: string) => void;
   setFullName: (value: string) => void;
   setJobTitle: (value: string) => void;
 }
@@ -49,7 +56,13 @@ export type Sections =
   | "SKILLS";
 
 export type FontProfile = "CLASSIC" | "POISE" | "SENIOR" | "MAGAZINE";
-export type ColorProfiles = "blue" | "purple" | "yellow" | "red" | "pink" | string;
+export type ColorProfiles =
+  | "blue"
+  | "purple"
+  | "yellow"
+  | "red"
+  | "pink"
+  | string;
 
 export interface ResumeLayoutObject {
   header: Array<Array<HeaderElements>>;
@@ -91,6 +104,7 @@ export interface ResumeStyleObject {
 export interface Result {
   _id?: string;
   resumes?: Array<ResumeStyleObject>;
+  contact?: UserContactDataObject;
   education?: Array<EducationDataObject>;
   experience?: Array<ExperienceDataObject>;
   projects?: Array<ProjectDataObject>;

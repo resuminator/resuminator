@@ -22,3 +22,10 @@ export interface ContactDataObject {
 }
 
 export type ContactData = Array<ContactDataObject>;
+
+export interface UserContactDataObject {
+  fullName?: string;
+  jobTitle?: string;
+  userImage?: string;
+  contact?: ContactData;
+}

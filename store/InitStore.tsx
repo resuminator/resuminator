@@ -2,6 +2,7 @@ import { useToast } from "@chakra-ui/toast";
 import React, { useCallback, useEffect } from "react";
 import { QueryStatus } from "react-query";
 import useCertificationStore from "../modules/UserInput/Certification/store";
+import useContactStore from "../modules/UserInput/Contact/store";
 import useEducationStore from "../modules/UserInput/Education/store";
 import useExperienceStore from "../modules/UserInput/Experience/store";
 import useProjectStore from "../modules/UserInput/Projects/store";
@@ -23,6 +24,8 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
   const projectInit = useProjectStore((state) => state.setData);
   const publicationsInit = usePublicationStore((state) => state.setData);
   const skillsInit = useSkillStore((state) => state.setData);
+  const { setFullName, setContact, setJobTitle, setUserImage } =
+    useContactStore();
   const { setProperties, setFontProfile, setColorProfile, setSpacing } =
     useResumeStore();
   const { setInit, setLoading } = useGlobalStore();
@@ -42,6 +45,16 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
     [setProperties, setFontProfile, setColorProfile, setSpacing]
   );
 
+  const initUserInfo = useCallback(
+    (userInfo: Result["contact"]) => {
+      setFullName(userInfo.fullName);
+      setJobTitle(userInfo.jobTitle);
+      setUserImage(userInfo.userImage);
+      setContact(userInfo.contact);
+    },
+    [setContact, setFullName, setJobTitle, setUserImage]
+  );
+
   const initApp = useCallback(
     (data: Result) => {
       educationInit(data.education);
@@ -51,6 +64,7 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       publicationsInit(data.publications);
       skillsInit(data.skills.data);
       initResume(data.resumes);
+      initUserInfo(data.contact);
       setInit(true);
     },
     [
@@ -62,6 +76,7 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       skillsInit,
       setInit,
       initResume,
+      initUserInfo,
     ]
   );
 
