@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/layout";
 import React from "react";
 import useGlobalStore from "../../store/global.store";
 import useResumeStore from "../../store/resume.store";
-import { getLayout } from "./legend";
+import { getHeaderLayout, getLayout } from "./legend";
 import StylePropsProvider from "../Design/StylePropsProvider";
 
 interface Props {}
@@ -12,6 +12,8 @@ const ResumePaper = (props: Props) => {
   const grayscaleFilter = useGlobalStore((state) => state.grayscaleFilter);
 
   const applyFilters = grayscaleFilter && { filter: "grayscale(1)" };
+
+  React.useEffect(() => console.log(header), [header]);
 
   return (
     <StylePropsProvider>
@@ -24,26 +26,27 @@ const ResumePaper = (props: Props) => {
         <Box
           aria-label="Header"
           display="flex"
+          flexDir="column"
           alignItems="flex-start"
           justifyContent="space-between"
           width="100%"
         >
-          {header.map((rowAsColumn, index) => (
+          {header.map((row, index) => (
             <Box
               display="flex"
-              flexDir="column"
-              aria-label={`Column-${index + 1}`}
+              aria-label={`Row-${index + 1}`}
               key={index}
-              flexBasis={`${(1 / body.length) * 100}%`}
+              width="100%"
             >
-              {rowAsColumn.map((layoutKey) => (
+              {row.map((layoutKey) => (
                 <Box
                   display="flex"
                   aria-label={layoutKey}
                   key={layoutKey}
                   width="100%"
+                  flexBasis={`${(1 / header[index].length) * 100}%`}
                 >
-                  {getLayout(layoutKey)}
+                  {getHeaderLayout(layoutKey)}
                 </Box>
               ))}
             </Box>

@@ -1,15 +1,10 @@
-import React from 'react'
+import { Text } from "@chakra-ui/layout";
+import React from "react";
 
-interface Props {
-    
-}
+interface Props {}
 
-const UserImage = (props: Props) => {
-    return (
-        <h2>
-           Image 
-        </h2>
-    )
-}
+const UserImageLayout = (props: Props) => {
+  return <Text>Image</Text>;
+};
 
-export default UserImage
+export default UserImageLayout;

@@ -1,11 +1,14 @@
-import { InputSectionKeys } from "../../store/types";
+import { HeaderElements, InputSectionKeys } from "../../store/types";
+import NameAndJobTitleLayout from "./Header/NameAndJT";
+import UserImageLayout from "./Header/UserImage";
+import SocialHandlesLayout from "./Header/SocialHandles";
 import {
   CertificationsLayout,
   EducationLayout,
   ExperienceLayout,
   ProjectLayout,
   PublicationsLayout,
-  SkillsLayout
+  SkillsLayout,
 } from "./Sections";
 
 export const getLayout = (key: InputSectionKeys) => {
@@ -22,5 +25,18 @@ export const getLayout = (key: InputSectionKeys) => {
       return <PublicationsLayout />;
     case "SKILLS":
       return <SkillsLayout />;
+  }
+};
+
+export const getHeaderLayout = (key: HeaderElements) => {
+  switch (key) {
+    case "NAME_AND_JT":
+      return <NameAndJobTitleLayout />;
+    case "USER_IMAGE":
+      return <UserImageLayout />;
+    case "SOCIAL_HANDLES":
+      return <SocialHandlesLayout />;
+    default:
+      return null;
   }
 };

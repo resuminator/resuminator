@@ -2,8 +2,8 @@ import React from "react";
 
 interface Props {}
 
-const NameAndJT = (props: Props) => {
+const NameAndJobTitleLayout = (props: Props) => {
   return <h2>NameAndJT</h2>;
 };
 
-export default NameAndJT;
+export default NameAndJobTitleLayout;
