@@ -1,9 +1,10 @@
 import { useColorMode } from "@chakra-ui/color-mode";
 import { Text, TextProps } from "@chakra-ui/layout";
+import { ComponentWithAs } from "@chakra-ui/system";
 import React, { useContext } from "react";
 import { StylePropsContext } from "../../Design/StylePropsProvider";
 
-const TextItem: React.FC<TextProps> = ({ children, ...rest }) => {
+const TextItem: ComponentWithAs<"p", TextProps> = ({ children, ...rest }) => {
   const { body } = useContext(StylePropsContext).font;
   const colorMode = useColorMode().colorMode;
 

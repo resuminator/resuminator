@@ -51,3 +51,22 @@ export const labelIsPresent = (data: ContactData, label: Services): boolean => {
   const keys = data.map((item) => item.label);
   return keys.includes(label);
 };
+
+export const generateLinkForLabel = (label: Services, link: string) => {
+  switch (label) {
+    case "LinkedIn":
+      return `https://linkedin.com/in/${link}`;
+    case "Twitter":
+      return `https://twitter.com/${link}`;
+    case "GitHub":
+      return `https://github.com/${link}`;
+    case "Email":
+      return `mailto:${link}`;
+    case "Phone":
+      return `tel:${link}`;
+    case "Portfolio":
+      return `https://${link}`;
+    default:
+      return link;
+  }
+}

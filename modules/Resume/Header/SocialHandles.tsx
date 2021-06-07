@@ -1,9 +1,10 @@
 import Icon from "@chakra-ui/icon";
-import { Box, HStack } from "@chakra-ui/layout";
+import { Box, HStack, Stack } from "@chakra-ui/layout";
 import React from "react";
 import {
+  generateLinkForLabel,
   getColorSchemeForService,
-  getIconForService
+  getIconForService,
 } from "../../UserInput/Contact/helpers";
 import useContactStore from "../../UserInput/Contact/store";
 import TextItem from "../components/TextItem";
@@ -12,7 +13,7 @@ const SocialHandlesLayout = () => {
   const data = useContactStore((state) => state.contact);
 
   return (
-    <HStack wrap="wrap">
+    <Stack wrap="wrap" isInline>
       {data
         .filter((item) => !item.isHidden)
         .map((item) => (
@@ -20,16 +21,28 @@ const SocialHandlesLayout = () => {
             <Icon
               as={getIconForService(item.label)}
               color={getColorSchemeForService(item.label)}
-              mx="1"
+              mr="1"
             />
             {item.identifier ? (
-              <TextItem>{item.identifier}</TextItem>
+              <TextItem
+                as="a"
+                href={generateLinkForLabel(item.identifier, item.link)}
+                target="_blank"
+              >
+                {item.identifier}
+              </TextItem>
             ) : (
-              <TextItem>{item.link}</TextItem>
+              <TextItem
+                as="a"
+                href={generateLinkForLabel(item.label, item.link)}
+                target="_blank"
+              >
+                {item.link}
+              </TextItem>
             )}
           </Box>
         ))}
-    </HStack>
+    </Stack>
   );
 };
 
