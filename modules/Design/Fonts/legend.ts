@@ -1,14 +1,4 @@
 import { FontsObject } from "./types";
-//-------------Resume Font Imports-----------
-import "@fontsource/inter";
-import "@fontsource/inter/500.css";
-import "@fontsource/manrope";
-import "@fontsource/nunito";
-import "@fontsource/lora";
-import "@fontsource/poppins";
-import "@fontsource/poppins/600.css";
-import "@fontsource/poppins/700.css";
-//-------------Resume Font Imports-----------
 
 //Keep minimum fontSize as 0.8em and maximum up to 1.2em
 const Fonts: FontsObject = {
