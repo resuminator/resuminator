@@ -13,11 +13,16 @@ const SocialHandlesLayout = () => {
   const data = useContactStore((state) => state.contact);
 
   return (
-    <Stack wrap="wrap" isInline>
+    <Stack aria-label="Social Handles" wrap="wrap" isInline>
       {data
         .filter((item) => !item.isHidden)
         .map((item) => (
-          <Box display="flex" alignItems="center" key={item.label}>
+          <Box
+            aria-label={item.label}
+            display="flex"
+            alignItems="center"
+            key={item.label}
+          >
             <Icon
               as={getIconForService(item.label)}
               color={getColorSchemeForService(item.label)}
@@ -25,17 +30,21 @@ const SocialHandlesLayout = () => {
             />
             {item.identifier ? (
               <TextItem
+                aria-label={item.identifier}
                 as="a"
                 href={generateLinkForLabel(item.identifier, item.link)}
                 target="_blank"
+                _hover={{ textDecoration: "underline" }}
               >
                 {item.identifier}
               </TextItem>
             ) : (
               <TextItem
+                aria-label={item.label}
                 as="a"
                 href={generateLinkForLabel(item.label, item.link)}
                 target="_blank"
+                _hover={{ textDecoration: "underline" }}
               >
                 {item.link}
               </TextItem>
