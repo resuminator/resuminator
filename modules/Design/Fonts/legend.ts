@@ -15,7 +15,7 @@ const Fonts: FontsObject = {
     },
     heading: {
       fontFamily: "Inter", //✅ Final
-      fontSize: "2xl",
+      fontSize: "1.3em",
       fontWeight: "regular",
     },
     primary: {
