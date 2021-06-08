@@ -20,6 +20,8 @@ const ResumePaper = () => {
         display="flex"
         flexDir="column"
         aria-label="Resume Paper"
+        height="inherit"
+        overflowY="clip"
         {...applyFilters}
       >
         <Box
@@ -52,7 +54,7 @@ const ResumePaper = () => {
           alignItems="flex-start"
           justifyContent="space-between"
           width="100%"
-          // px={spacing * 8} py={spacing * 2}
+          py={spacing * 2}
         >
           {body.map((rowAsColumn, index) => (
             <Box
