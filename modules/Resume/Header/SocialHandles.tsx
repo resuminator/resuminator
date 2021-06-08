@@ -1,10 +1,10 @@
 import Icon from "@chakra-ui/icon";
-import { Box, HStack, Stack } from "@chakra-ui/layout";
+import { Box, Stack } from "@chakra-ui/layout";
 import React from "react";
 import {
   generateLinkForLabel,
   getColorSchemeForService,
-  getIconForService,
+  getIconForService
 } from "../../UserInput/Contact/helpers";
 import useContactStore from "../../UserInput/Contact/store";
 import TextItem from "../components/TextItem";
