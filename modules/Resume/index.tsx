@@ -2,12 +2,10 @@ import { Box } from "@chakra-ui/layout";
 import React from "react";
 import useGlobalStore from "../../store/global.store";
 import useResumeStore from "../../store/resume.store";
-import { getHeaderLayout, getLayout } from "./legend";
 import StylePropsProvider from "../Design/StylePropsProvider";
+import { getHeaderLayout, getLayout } from "./legend";
 
-interface Props {}
-
-const ResumePaper = (props: Props) => {
+const ResumePaper = () => {
   const { header, body } = useResumeStore((state) => state.properties.layout);
   const grayscaleFilter = useGlobalStore((state) => state.grayscaleFilter);
 
@@ -40,11 +38,7 @@ const ResumePaper = (props: Props) => {
               justifyContent="space-between"
             >
               {row.map((layoutKey) => (
-                <Box
-                  display="flex"
-                  aria-label={layoutKey}
-                  key={layoutKey}
-                >
+                <Box display="flex" aria-label={layoutKey} key={layoutKey}>
                   {getHeaderLayout(layoutKey)}
                 </Box>
               ))}

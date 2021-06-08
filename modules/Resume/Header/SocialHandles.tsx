@@ -1,9 +1,9 @@
 import Icon from "@chakra-ui/icon";
 import { Box, Stack } from "@chakra-ui/layout";
-import React from "react";
+import React, { useContext } from "react";
+import { StylePropsContext } from "../../Design/StylePropsProvider";
 import {
   generateLinkForLabel,
-  getColorSchemeForService,
   getIconForService
 } from "../../UserInput/Contact/helpers";
 import useContactStore from "../../UserInput/Contact/store";
@@ -11,6 +11,7 @@ import TextItem from "../components/TextItem";
 
 const SocialHandlesLayout = () => {
   const data = useContactStore((state) => state.contact);
+  const primaryColor = useContext(StylePropsContext).primaryColor;
 
   return (
     <Stack aria-label="Social Handles" wrap="wrap" spacing="4" isInline m="2">
@@ -25,7 +26,7 @@ const SocialHandlesLayout = () => {
           >
             <Icon
               as={getIconForService(item.label)}
-              color={getColorSchemeForService(item.label)}
+              color={primaryColor}
               mr="1"
             />
             {item.identifier ? (

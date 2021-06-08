@@ -1,4 +1,5 @@
 import { BoxProps, TextProps } from "@chakra-ui/layout";
+import { ColorProps } from "@chakra-ui/styled-system";
 import { createContext } from "react";
 import useResumeStore from "../../store/resume.store";
 import { isCustom } from "./Colors/ColorSelector";
@@ -13,6 +14,7 @@ export interface IStylePropsContext {
   titleRowProps?: TextProps;
   subtitleRowProps?: TextProps;
   bodyProps?: BoxProps;
+  primaryColor?: ColorProps["color"];
 }
 
 export const StylePropsContext = createContext<IStylePropsContext>({
@@ -33,11 +35,11 @@ const StylePropsProvider: React.FC = ({ children }) => {
     font: Fonts[fontProfile],
     headerTitleProps: {
       color: primaryColor,
-      ...Fonts[fontProfile].headerTitle
+      ...Fonts[fontProfile].headerTitle,
     },
     headerSubtitleProps: {
       color: primaryColor,
-      ...Fonts[fontProfile].headerSubtitle
+      ...Fonts[fontProfile].headerSubtitle,
     },
     sectionTitleProps: {
       color: primaryColor,
@@ -57,6 +59,7 @@ const StylePropsProvider: React.FC = ({ children }) => {
         ".ProseMirror.viewer": { ...Fonts[fontProfile].body },
       },
     },
+    primaryColor,
   };
 
   return (
