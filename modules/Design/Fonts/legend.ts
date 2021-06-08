@@ -39,6 +39,11 @@ const Fonts: FontsObject = {
       fontSize: "4xl",
       fontWeight: "light",
     },
+    headerSubtitle: {
+      fontFamily: "Nunito",
+      fontSize: "xl",
+      fontWeight: "bold",
+    },
     heading: {
       fontFamily: "Lora",
       fontSize: "xl",
@@ -60,10 +65,16 @@ const Fonts: FontsObject = {
   },
   POISE: {
     //✅ Final
+
     headerTitle: {
       fontFamily: "Poppins",
       fontSize: "4xl",
-      fontWeight: "light",
+      fontWeight: "bold",
+    },
+    headerSubtitle: {
+      fontFamily: "Poppins",
+      fontSize: "xl",
+      fontWeight: "medium",
     },
     heading: {
       fontFamily: "Poppins",
@@ -92,6 +103,11 @@ const Fonts: FontsObject = {
       fontFamily: "Georgia",
       fontSize: "4xl",
       fontWeight: "light",
+    },
+    headerSubtitle: {
+      fontFamily: "Inter",
+      fontSize: "xl",
+      fontWeight: "semibold",
     },
     heading: {
       fontFamily: "Inter",
