@@ -7,6 +7,7 @@ import { getHeaderLayout, getLayout } from "./legend";
 
 const ResumePaper = () => {
   const { header, body } = useResumeStore((state) => state.properties.layout);
+  const spacing = useResumeStore((state) => state.spacing);
   const grayscaleFilter = useGlobalStore((state) => state.grayscaleFilter);
 
   const applyFilters = grayscaleFilter && { filter: "grayscale(1)" };
@@ -51,6 +52,7 @@ const ResumePaper = () => {
           alignItems="flex-start"
           justifyContent="space-between"
           width="100%"
+          // px={spacing * 8} py={spacing * 2}
         >
           {body.map((rowAsColumn, index) => (
             <Box
@@ -58,6 +60,7 @@ const ResumePaper = () => {
               flexDir="column"
               aria-label={`Column-${index + 1}`}
               key={index}
+              px={spacing * 4} py={spacing * 2}
               flexBasis={`${(1 / body.length) * 100}%`}
             >
               {rowAsColumn.map((layoutKey) => (

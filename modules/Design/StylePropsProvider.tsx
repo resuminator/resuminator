@@ -51,7 +51,6 @@ const StylePropsProvider: React.FC = ({ children }) => {
     },
     subtitleRowProps: {
       color: "gray.500",
-      mb: "1",
       ...Fonts[fontProfile].secondary,
     },
     bodyProps: {

@@ -1,6 +1,7 @@
 import Icon from "@chakra-ui/icon";
 import { Box, Stack } from "@chakra-ui/layout";
 import React, { useContext } from "react";
+import useResumeStore from "../../../store/resume.store";
 import { StylePropsContext } from "../../Design/StylePropsProvider";
 import {
   generateLinkForLabel,
@@ -12,9 +13,17 @@ import TextItem from "../components/TextItem";
 const SocialHandlesLayout = () => {
   const data = useContactStore((state) => state.contact);
   const primaryColor = useContext(StylePropsContext).primaryColor;
+  const spacing = useResumeStore((state) => state.spacing);
 
   return (
-    <Stack aria-label="Social Handles" wrap="wrap" spacing="4" isInline m="2">
+    <Stack
+      aria-label="Social Handles"
+      wrap="wrap"
+      spacing="4"
+      isInline
+      px={spacing * 8}
+      py={spacing * 2}
+    >
       {data
         .filter((item) => !item.isHidden)
         .map((item) => (
