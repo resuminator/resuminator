@@ -10,7 +10,7 @@ const NameAndJobTitleLayout = () => {
     useContext(StylePropsContext);
 
   return (
-    <Box display="flex" flexDir="column" justifyContent="center">
+    <Box display="flex" flexDir="column" justifyContent="center" m="2">
       <Text {...headerTitleProps}>{fullName}</Text>
       <Text {...headerSubtitleProps}>{jobTitle}</Text>
     </Box>

@@ -13,7 +13,7 @@ const SocialHandlesLayout = () => {
   const data = useContactStore((state) => state.contact);
 
   return (
-    <Stack aria-label="Social Handles" wrap="wrap" isInline>
+    <Stack aria-label="Social Handles" wrap="wrap" spacing="4" isInline m="2">
       {data
         .filter((item) => !item.isHidden)
         .map((item) => (

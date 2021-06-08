@@ -5,7 +5,7 @@ import useContactStore from "../../UserInput/Contact/store";
 const UserImageLayout = () => {
   const fullName = useContactStore((state) => state.fullName);
   const userImage = useContactStore((state) => state.userImage);
-  return <Avatar size="md" name={fullName} src={userImage} />;
+  return <Avatar size="lg" name={fullName} src={userImage} m="2"/>;
 };
 
 export default UserImageLayout;
