@@ -1,8 +1,8 @@
-import { Box } from "@chakra-ui/layout";
 import React, { useMemo } from "react";
 import DataRow from "../../../components/elements/DataRow";
 import useSkillStore from "../../UserInput/Skills/store";
 import { SkillDataObject } from "../../UserInput/Skills/types";
+import SectionBox from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import Tags from "../components/Tags";
@@ -47,14 +47,14 @@ const SkillsLayout = () => {
   );
 
   return (
-    <Box aria-label="Skills Layout" w="inherit">
+    <SectionBox aria-label="Skills Layout">
       <SectionTitle>Skills</SectionTitle>
       {format === "CATEGORIES" ? (
         <Categories data={data} />
       ) : (
         <Tags list={listfromCategories} />
       )}
-    </Box>
+    </SectionBox>
   );
 };
 

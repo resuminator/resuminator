@@ -1,14 +1,14 @@
-import { Box } from "@chakra-ui/layout";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
 import { parseDate } from "../../../utils";
 import useExperienceStore from "../../UserInput/Experience/store";
+import BodyText from "../components/BodyText";
+import SectionBox from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
 import Tags from "../components/Tags";
 import TitleRow from "../components/TitleRow";
-import BodyText from "../components/BodyText";
 
 const ExperienceLayout = () => {
   const data = useExperienceStore((state) => state.data).filter(
@@ -16,7 +16,7 @@ const ExperienceLayout = () => {
   );
 
   return (
-    <Box aria-label="Experience Layout" w="inherit">
+    <SectionBox aria-label="Experience Layout">
       <SectionTitle>Experience</SectionTitle>
       {data.map((item) => (
         <SectionContent key={item._id}>
@@ -40,7 +40,7 @@ const ExperienceLayout = () => {
           </DataRow>
         </SectionContent>
       ))}
-    </Box>
+    </SectionBox>
   );
 };
 

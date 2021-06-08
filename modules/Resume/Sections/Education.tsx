@@ -1,13 +1,13 @@
-import { Box } from "@chakra-ui/layout";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
 import { parseDate } from "../../../utils";
 import useEducationStore from "../../UserInput/Education/store";
+import BodyText from "../components/BodyText";
+import SectionBox from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
 import TitleRow from "../components/TitleRow";
-import BodyText from "../components/BodyText";
 
 const EducationLayout = () => {
   const data = useEducationStore((state) => state.data).filter(
@@ -26,7 +26,7 @@ const EducationLayout = () => {
   };
 
   return (
-    <Box aria-label="Education Layout" w="inherit">
+    <SectionBox aria-label="Education Layout">
       <SectionTitle>Education</SectionTitle>
       {data.map((item) => (
         <SectionContent key={item._id}>
@@ -48,7 +48,7 @@ const EducationLayout = () => {
           </DataRow>
         </SectionContent>
       ))}
-    </Box>
+    </SectionBox>
   );
 };
 

@@ -1,14 +1,14 @@
-import { Box } from "@chakra-ui/layout";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
 import { parseDate } from "../../../utils";
 import useProjectStore from "../../UserInput/Projects/store";
+import BodyText from "../components/BodyText";
+import SectionBox from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
 import Tags from "../components/Tags";
 import TitleRow from "../components/TitleRow";
-import BodyText from "../components/BodyText";
 
 const ProjectLayout = () => {
   const data = useProjectStore((state) => state.data).filter(
@@ -16,7 +16,7 @@ const ProjectLayout = () => {
   );
 
   return (
-    <Box aria-label="Project Layout" w="inherit">
+    <SectionBox aria-label="Project Layout">
       <SectionTitle>Projects</SectionTitle>
       {data.map((item) => (
         <SectionContent key={item._id}>
@@ -39,7 +39,7 @@ const ProjectLayout = () => {
           </DataRow>
         </SectionContent>
       ))}
-    </Box>
+    </SectionBox>
   );
 };
 

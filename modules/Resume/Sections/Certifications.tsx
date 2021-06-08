@@ -1,8 +1,8 @@
-import { Box } from "@chakra-ui/layout";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
 import { parseDate } from "../../../utils";
 import useCertificationStore from "../../UserInput/Certification/store";
+import SectionBox from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
@@ -34,7 +34,7 @@ const CertificationsLayout = () => {
   };
 
   return (
-    <Box aria-label="Certification Layout" w="inherit">
+    <SectionBox aria-label="Certification Layout">
       <SectionTitle>Certification</SectionTitle>
       {data.map((item) => (
         <SectionContent key={item._id}>
@@ -49,7 +49,7 @@ const CertificationsLayout = () => {
           </DataRow>
         </SectionContent>
       ))}
-    </Box>
+    </SectionBox>
   );
 };
 

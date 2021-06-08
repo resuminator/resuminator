@@ -1,8 +1,9 @@
-import { Box, Text } from "@chakra-ui/layout";
+import { Text } from "@chakra-ui/layout";
 import React, { Fragment } from "react";
 import DataRow from "../../../components/elements/DataRow";
 import usePublicationStore from "../../UserInput/Publications/store";
 import { PublicationDataObject } from "../../UserInput/Publications/types";
+import SectionBox from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import TextItem from "../components/TextItem";
@@ -49,7 +50,7 @@ const PublicationsLayout = () => {
   );
 
   return (
-    <Box aria-label="Publication Layout" w="inherit">
+    <SectionBox aria-label="Publication Layout">
       <SectionTitle>Publications</SectionTitle>
       <SectionContent>
         {data.map((item) => (
@@ -64,7 +65,7 @@ const PublicationsLayout = () => {
           </DataRow>
         ))}
       </SectionContent>
-    </Box>
+    </SectionBox>
   );
 };
 
