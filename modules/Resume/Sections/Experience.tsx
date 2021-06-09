@@ -3,6 +3,7 @@ import DataRow from "../../../components/elements/DataRow";
 import { parseDate } from "../../../utils";
 import useExperienceStore from "../../UserInput/Experience/store";
 import BodyText from "../components/BodyText";
+import ExternalLink from "../components/ExternalLink";
 import SectionBox from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
@@ -27,13 +28,14 @@ const ExperienceLayout = () => {
             </TitleRow>
           </DataRow>
           <DataRow mb="1">
-            <SubtitleRow>
-              {item.jobTitle}
-            </SubtitleRow>
+            <SubtitleRow>{item.jobTitle}</SubtitleRow>
             <SubtitleRow textAlign="right">{item.location}</SubtitleRow>
           </DataRow>
           <DataRow>
             <BodyText content={item.description} />
+          </DataRow>
+          <DataRow>
+            <ExternalLink as="a" href={item.link} />
           </DataRow>
           <DataRow justifyContent="flex-start">
             <Tags list={item.tags} />
