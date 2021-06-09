@@ -69,7 +69,7 @@ const PublicationsLayout = () => {
               <ExternalLink
                 as="a"
                 pb="0"
-                href={`https://doi.org/${item.doi}`}
+                href={item.doi && `https://doi.org/${item.doi}`}
               />
             </DataRow>
           </Fragment>
