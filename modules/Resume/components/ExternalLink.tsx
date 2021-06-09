@@ -13,7 +13,7 @@ const ExternalLink: ComponentWithAs<"p", TextProps> = ({ ...props }) => {
   };
 
   return props.href ? (
-    <Text fontSize="sm" pb="2" {...rest} {...hoverProps} {...props}>
+    <Text fontSize="sm" pb="2" target="_blank" {...rest} {...hoverProps} {...props}>
       Link
       <span>
         <Icon as={FiExternalLink} mx="1" height="0.8rem" />
