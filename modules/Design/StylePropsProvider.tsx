@@ -29,12 +29,12 @@ const StylePropsProvider: React.FC = ({ children }) => {
   const fontProfile = useResumeStore((state) => state.fontProfile);
   const spacing = useResumeStore((state) => state.spacing);
   const color = useResumeStore((state) => state.color);
-  const primaryColor = isCustom(color) ? color : `${color}.700`;
+  const primaryColor = isCustom(color) ? color : `${color}.600`;
 
   const styleProps: IStylePropsContext = {
     font: Fonts[fontProfile],
     headerTitleProps: {
-      color: primaryColor,
+      color: "gray.600",
       ...Fonts[fontProfile].headerTitle,
     },
     headerSubtitleProps: {

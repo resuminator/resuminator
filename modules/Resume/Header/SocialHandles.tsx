@@ -35,7 +35,7 @@ const SocialHandlesLayout = () => {
           >
             <Icon
               as={getIconForService(item.label)}
-              color={primaryColor}
+              color="gray.600"
               mr="1"
             />
             {item.identifier ? (
