@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import DataRow from "../../../components/elements/DataRow";
 import usePublicationStore from "../../UserInput/Publications/store";
 import { PublicationDataObject } from "../../UserInput/Publications/types";
+import ExternalLink from "../components/ExternalLink";
 import SectionBox from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
@@ -15,13 +16,13 @@ const WithQuotes = ({ text = "" }) =>
     </Text>
   ) : null;
 
-  /**
-   * Appends and Prepends a string with special characters
-   * @param prefix String: Special Character
-   * @param text String: Text to wrap
-   * @param suffix String: Special Character
-   * @returns Null if text is not present, {prefix}{text}{suffix} in all other cases
-   */
+/**
+ * Appends and Prepends a string with special characters
+ * @param prefix String: Special Character
+ * @param text String: Text to wrap
+ * @param suffix String: Special Character
+ * @returns Null if text is not present, {prefix}{text}{suffix} in all other cases
+ */
 const withSpecialCharacters = (prefix = "", text = "", suffix = "") =>
   text.length ? `${prefix}${text}${suffix}` : null;
 
@@ -54,15 +55,24 @@ const PublicationsLayout = () => {
       <SectionTitle>Publications</SectionTitle>
       <SectionContent>
         {data.map((item) => (
-          <DataRow mb="1" key={item._id}>
-            <TextItem as="li">
-              {item.format === "MLA" ? (
-                <MLAStyle item={item} />
-              ) : (
-                <APAStyle item={item} />
-              )}
-            </TextItem>
-          </DataRow>
+          <Fragment key={item._id}>
+            <DataRow mb="1" key={item._id}>
+              <TextItem as="li">
+                {item.format === "MLA" ? (
+                  <MLAStyle item={item} />
+                ) : (
+                  <APAStyle item={item} />
+                )}
+              </TextItem>
+            </DataRow>
+            <DataRow>
+              <ExternalLink
+                as="a"
+                pb="0"
+                href={`https://doi.org/${item.doi}`}
+              />
+            </DataRow>
+          </Fragment>
         ))}
       </SectionContent>
     </SectionBox>

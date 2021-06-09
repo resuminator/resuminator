@@ -9,4 +9,5 @@ export interface PublicationDataObject {
   year?: string;
   pages?: string;
   format?: "MLA" | "APA";
+  doi?: string;
 }

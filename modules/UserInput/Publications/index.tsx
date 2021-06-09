@@ -33,6 +33,7 @@ const Publications = () => {
     pages: "",
     year: "",
     format: "MLA",
+    doi: "",
   };
 
   //mocking data from DB.
@@ -142,6 +143,12 @@ const Publications = () => {
                 onChange={(e) => handleChange(e, index, updateData)}
               />
             </HStack>
+            <InputWithLabel
+              label="DOI"
+              name="doi"
+              value={item.doi}
+              onChange={(e) => handleChange(e, index, updateData)}
+            />
             <FormatRadioGroup
               value={item.format}
               onChange={(value) => updateData(index, "format", value)}
