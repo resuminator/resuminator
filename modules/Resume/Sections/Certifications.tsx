@@ -39,7 +39,9 @@ const CertificationsLayout = () => {
       {data.map((item) => (
         <SectionContent key={item._id}>
           <DataRow>
-            <TitleRow>{item.certificateName}</TitleRow>
+            <TitleRow as="a" href={item.link}>
+              {item.certificateName}
+            </TitleRow>
           </DataRow>
           <DataRow mb="1">
             <SubtitleRow>
