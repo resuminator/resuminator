@@ -81,12 +81,11 @@ const Fonts: FontsObject = {
       fontSize: "lg",
       fontWeight: "extrabold",
       textTransform: "uppercase",
-      letterSpacing: "wider",
     },
     primary: {
       fontFamily: "Poppins", //Final
       fontSize: "1.05em",
-      fontWeight: "semibold",
+      fontWeight: 500,
     },
     secondary: {
       fontFamily: "Poppins",
@@ -94,7 +93,7 @@ const Fonts: FontsObject = {
     },
     body: {
       fontFamily: "Poppins",
-      fontSize: "0.8em",
+      fontSize: "0.85em",
     },
   },
   SENIOR: {
