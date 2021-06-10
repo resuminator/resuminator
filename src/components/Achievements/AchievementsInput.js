@@ -60,7 +60,7 @@ function AchievementsInput() {
   const handleSave = (e) => {
     setUnsaved(false);
     dispatch(
-      updateAchievement(token, storeState._id, { description: state.description })
+      updateAchievement(token, { description: state.description })
     );
   };
 

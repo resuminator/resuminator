@@ -53,19 +53,18 @@ export const addAchievement = (token) => {
   return (dispatch) => {
     dispatch(achievementInfoRequest());
     return axios
-      .post(`${SERVER}/achievement/add`, { headers: getHeader(token) })
+      .post(`${SERVER}/achievement/add`, {}, { headers: getHeader(token) })
       .then(() => dispatch(fetchAchievement(token)))
       .catch((error) => dispatch(achievementInfoFailure(error)));
   };
 };
 
-export const updateAchievement = (token, id, payload) => {
+export const updateAchievement = (token, payload) => {
   return (dispatch) => {
     dispatch(achievementInfoRequest());
     return axios
-      .put(`${SERVER}/achievement/update/${id}`, {
+      .put(`${SERVER}/achievement/update`, payload, {
         headers: getHeader(token),
-        payload,
       })
       .then(() => dispatch(fetchAchievement(token)))
       .catch((error) => dispatch(achievementInfoFailure(error)));
