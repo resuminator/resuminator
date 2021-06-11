@@ -1,5 +1,4 @@
 import { Result } from "../store/types";
-import { getUniqueID } from "../utils";
 
 const placeholderData: Result = {
   _id: "Firebase_UID_Also_DB_UID",
