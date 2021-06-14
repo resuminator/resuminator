@@ -85,7 +85,7 @@ export interface CustomSectionObject {
 
 export interface CustomSectionDataObject {
   header: CustomSectionObject["header"];
-  data: Array<{ id: CustomInputFieldsObject["id"]; value: Date | string }>;
+  data?: Array<{ id: CustomInputFieldsObject["id"]; value: Date | string }>;
 }
 
 export interface ResumeStyleObject {
