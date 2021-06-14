@@ -8,16 +8,17 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  useCounter,
+  useCounter
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight, FiCheck } from "react-icons/fi";
 import {
   CustomInputFieldsObject,
-  CustomSectionObject,
+  CustomSectionObject
 } from "../../../store/types";
 import { getUniqueID } from "../../../utils";
 import ModalStep1 from "./ModalStep1";
+import ModalStep2 from "./ModalStep2";
 
 interface NewSectionModalProps {
   isOpen: boolean;
@@ -31,7 +32,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
   const { valueAsNumber, increment, decrement } = useCounter({
     defaultValue: 1,
     min: 1,
-    max: 3,
+    max: 2,
   });
   const [section, setSection] = useState<CustomSectionObject>({
     header: "",
@@ -44,12 +45,10 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
   }, [section]);
 
   const addInputField = (type: CustomInputFieldsObject["type"]) => {
+    const id = getUniqueID();
     setSection((nextSection) => ({
       ...nextSection,
-      inputFields: [
-        ...nextSection.inputFields,
-        { id: getUniqueID(), type, name: "" },
-      ],
+      inputFields: [...nextSection.inputFields, { id, type, name: "" }],
     }));
   };
 
@@ -71,6 +70,8 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
             deleteHandler={deleteInputField}
           />
         );
+      case 2:
+        return <ModalStep2 section={section} />;
       default:
         return null;
     }
@@ -84,7 +85,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
         <ModalBody>{getBodyForStep(valueAsNumber)}</ModalBody>
         <ModalFooter justifyContent="space-between">
           <Text fontWeight="medium" color="gray.400">
-            Step {valueAsNumber} of 3
+            Step {valueAsNumber} of 2
           </Text>
           <ButtonGroup>
             <Button
@@ -94,9 +95,19 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
             >
               Prev Step
             </Button>
-            <Button rightIcon={<FiArrowRight />} onClick={() => increment()}>
-              Next Step
-            </Button>
+            {valueAsNumber === 2 ? (
+              <Button
+                colorScheme="green"
+                rightIcon={<FiCheck />}
+                onClick={() => console.log(section)}
+              >
+                Confirm
+              </Button>
+            ) : (
+              <Button rightIcon={<FiArrowRight />} onClick={() => increment()}>
+                Next Step
+              </Button>
+            )}
           </ButtonGroup>
         </ModalFooter>
       </ModalContent>
