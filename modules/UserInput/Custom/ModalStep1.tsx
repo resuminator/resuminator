@@ -21,7 +21,8 @@ import {
 
 interface Props {
   section: CustomSectionObject;
-  handler?: (type: CustomInputFieldsObject["type"]) => void;
+  addHandler?: (type: CustomInputFieldsObject["type"]) => void;
+  deleteHandler?: (id: string) => void;
 }
 
 const getIconForField = (type: CustomInputFieldsObject["type"]) => {
@@ -37,7 +38,7 @@ const getIconForField = (type: CustomInputFieldsObject["type"]) => {
   }
 };
 
-const ModalStep1: React.FC<Props> = ({ section, handler }) => {
+const ModalStep1: React.FC<Props> = ({ section, addHandler, deleteHandler }) => {
   return (
     <Fragment>
       <Text fontSize="sm" mb="4">
@@ -54,19 +55,19 @@ const ModalStep1: React.FC<Props> = ({ section, handler }) => {
       </Text>
       <ButtonGroup mb="2">
         <Button
-          onClick={() => handler("TEXT")}
+          onClick={() => addHandler("TEXT")}
           leftIcon={<MdTextFields />}
         >
           Text Field
         </Button>
         <Button
-          onClick={() => handler("DATE")}
+          onClick={() => addHandler("DATE")}
           leftIcon={<MdDateRange />}
         >
           Date Range
         </Button>
         <Button
-          onClick={() => handler("DESC")}
+          onClick={() => addHandler("DESC")}
           leftIcon={<BsTextareaT />}
         >
           Text Area
@@ -94,6 +95,7 @@ const ModalStep1: React.FC<Props> = ({ section, handler }) => {
                 aria-label="Remove field"
                 color="red"
                 icon={<MdRemoveCircle />}
+                onClick={() => deleteHandler(field.id)}
               />
             </InputRightAddon>
           </InputGroup>

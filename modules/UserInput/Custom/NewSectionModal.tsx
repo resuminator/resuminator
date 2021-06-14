@@ -10,7 +10,7 @@ import {
   Text,
   useCounter,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import {
   CustomInputFieldsObject,
@@ -39,6 +39,10 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
     layout: [],
   });
 
+  useEffect(() => {
+    console.log(section);
+  }, [section]);
+
   const addInputField = (type: CustomInputFieldsObject["type"]) => {
     setSection((nextSection) => ({
       ...nextSection,
@@ -49,10 +53,24 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
     }));
   };
 
+  const deleteInputField = (id: string) => {
+    const newInputFields = section.inputFields.filter((item) => item.id !== id);
+    setSection((nextSection) => ({
+      ...nextSection,
+      inputFields: newInputFields,
+    }));
+  };
+
   const getBodyForStep = (step: number) => {
     switch (step) {
       case 1:
-        return <ModalStep1 section={section} handler={addInputField} />;
+        return (
+          <ModalStep1
+            section={section}
+            addHandler={addInputField}
+            deleteHandler={deleteInputField}
+          />
+        );
       default:
         return null;
     }
