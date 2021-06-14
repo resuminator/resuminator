@@ -29,7 +29,7 @@ const placeholderData: Result = {
       color: "blue", //Any valid HEX color (Defaults to Black)
       customSections: [
         {
-          header: "ACHIEVEMENTS", //also Unique.
+          header: "Achievements", //also Unique.
           hasTitleRow: true,
           inputFields: [
             {
