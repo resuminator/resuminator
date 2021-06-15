@@ -32,6 +32,7 @@
     "date-fns": "^2.21.3",
     "express": "^4.17.1",
     "framer-motion": "^4.1.11",
+    "immer": "^9.0.3",
     "next": "^10.2.0",
     "puppeteer-core": "^9.1.0",
     "react": "17.0.2",
