@@ -47,22 +47,6 @@ const ModalStep1: React.FC<Props> = ({
   addHandler,
   deleteHandler,
 }) => {
-  const HeaderInputField = () => (
-    <Fragment>
-      <Text fontSize="sm" mb="4">
-        For creating a custom section you&apos;ll need a unique name for it and
-        select which type of sections you want in it.
-      </Text>
-      <InputWithLabel
-        label="Unique name for section"
-        name="header"
-        placeholder="Achievements"
-        value={section.header}
-        onChange={onChangeHandlers.header}
-      />
-    </Fragment>
-  );
-
   const InputFieldButtonGroup = () => (
     <Fragment>
       <Text mt="4" mb="2" color="gray.500">
@@ -84,7 +68,17 @@ const ModalStep1: React.FC<Props> = ({
 
   return (
     <Fragment>
-      <HeaderInputField />
+      <Text fontSize="sm" mb="4">
+        For creating a custom section you&apos;ll need a unique name for it and
+        select which type of sections you want in it.
+      </Text>
+      <InputWithLabel
+        label="Unique name for section"
+        name="header"
+        placeholder="Achievements"
+        value={section.header}
+        onChange={onChangeHandlers.header}
+      />
       <InputFieldButtonGroup />
       {section.inputFields.map((field) => (
         <Box key={field.id}>

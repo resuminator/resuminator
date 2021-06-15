@@ -8,18 +8,18 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  useCounter,
+  useCounter
 } from "@chakra-ui/react";
+import produce from "immer";
 import { useState } from "react";
 import { FiArrowLeft, FiArrowRight, FiCheck } from "react-icons/fi";
 import {
   CustomInputFieldsObject,
-  CustomSectionObject,
+  CustomSectionObject
 } from "../../../store/types";
 import { getUniqueID } from "../../../utils";
 import ModalStep1 from "./ModalStep1";
 import ModalStep2 from "./ModalStep2";
-import produce from "immer";
 
 interface NewSectionModalProps {
   isOpen: boolean;
@@ -67,8 +67,10 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
     }));
   };
 
-  const handleHeaderInput = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const handleHeaderInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSection((nextSection) => ({ ...nextSection, header: e.target.value }));
+  };
+
   const handleFieldInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = e.target.id;
     const indexOfField = section.inputFields.map((item) => item.id).indexOf(id);
