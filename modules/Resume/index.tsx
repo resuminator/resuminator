@@ -12,8 +12,6 @@ const ResumePaper = () => {
 
   const applyFilters = grayscaleFilter && { filter: "grayscale(1)" };
 
-  React.useEffect(() => console.log(header), [header]);
-
   return (
     <StylePropsProvider>
       <Box

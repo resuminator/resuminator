@@ -10,7 +10,7 @@ import {
   Text,
   useCounter
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FiArrowLeft, FiArrowRight, FiCheck } from "react-icons/fi";
 import {
   CustomInputFieldsObject,
@@ -34,29 +34,36 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
     min: 1,
     max: 2,
   });
-  const [section, setSection] = useState<CustomSectionObject>({
+  const initialSectionState = {
     header: "",
     inputFields: [],
     layout: [],
-  });
-
-  useEffect(() => {
-    console.log(section);
-  }, [section]);
+  };
+  const [section, setSection] =
+    useState<CustomSectionObject>(initialSectionState);
 
   const addInputField = (type: CustomInputFieldsObject["type"]) => {
     const id = getUniqueID();
     setSection((nextSection) => ({
       ...nextSection,
       inputFields: [...nextSection.inputFields, { id, type, name: "" }],
+      layout: [...nextSection.layout, [id]],
     }));
   };
 
   const deleteInputField = (id: string) => {
     const newInputFields = section.inputFields.filter((item) => item.id !== id);
+    const newLayout = section.layout
+      .map((subArr) =>
+        subArr.includes(id) ? subArr.filter((e) => e !== id) : subArr
+      )
+      .filter((item) => item.length);
+
+    console.log(newLayout);
     setSection((nextSection) => ({
       ...nextSection,
       inputFields: newInputFields,
+      layout: newLayout,
     }));
   };
 
@@ -99,7 +106,10 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
               <Button
                 colorScheme="green"
                 rightIcon={<FiCheck />}
-                onClick={() => console.log(section)}
+                onClick={() => {
+                  console.log(section);
+                  setSection(initialSectionState);
+                }}
               >
                 Confirm
               </Button>
