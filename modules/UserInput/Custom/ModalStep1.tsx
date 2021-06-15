@@ -24,8 +24,8 @@ export type InputHandlerFn = (e: React.ChangeEvent<HTMLInputElement>) => void;
 interface Props {
   section: CustomSectionObject;
   onChangeHandlers: { header: InputHandlerFn; field: InputHandlerFn };
-  addHandler?: (type: CustomInputFieldsObject["type"]) => void;
-  deleteHandler?: (id: string) => void;
+  addHandler: (type: CustomInputFieldsObject["type"]) => void;
+  deleteHandler: (id: string) => void;
 }
 
 const getIconForField = (type: CustomInputFieldsObject["type"]) => {
@@ -47,7 +47,7 @@ const ModalStep1: React.FC<Props> = ({
   addHandler,
   deleteHandler,
 }) => {
-  return (
+  const HeaderInputField = () => (
     <Fragment>
       <Text fontSize="sm" mb="4">
         For creating a custom section you&apos;ll need a unique name for it and
@@ -60,6 +60,11 @@ const ModalStep1: React.FC<Props> = ({
         value={section.header}
         onChange={onChangeHandlers.header}
       />
+    </Fragment>
+  );
+
+  const InputFieldButtonGroup = () => (
+    <Fragment>
       <Text mt="4" mb="2" color="gray.500">
         Click on the section type to add
       </Text>
@@ -74,6 +79,13 @@ const ModalStep1: React.FC<Props> = ({
           Text Area
         </Button>
       </ButtonGroup>
+    </Fragment>
+  );
+
+  return (
+    <Fragment>
+      <HeaderInputField />
+      <InputFieldButtonGroup />
       {section.inputFields.map((field) => (
         <Box key={field.id}>
           <Text fontSize="md" pb="2" color="gray.500">
