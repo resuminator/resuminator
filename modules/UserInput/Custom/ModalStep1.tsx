@@ -19,8 +19,11 @@ import {
   CustomSectionObject,
 } from "../../../store/types";
 
+export type InputHandlerFn = (e: React.ChangeEvent<HTMLInputElement>) => void;
+
 interface Props {
   section: CustomSectionObject;
+  onChangeHandlers: { header: InputHandlerFn; field: InputHandlerFn };
   addHandler?: (type: CustomInputFieldsObject["type"]) => void;
   deleteHandler?: (id: string) => void;
 }
@@ -38,7 +41,12 @@ const getIconForField = (type: CustomInputFieldsObject["type"]) => {
   }
 };
 
-const ModalStep1: React.FC<Props> = ({ section, addHandler, deleteHandler }) => {
+const ModalStep1: React.FC<Props> = ({
+  section,
+  onChangeHandlers,
+  addHandler,
+  deleteHandler,
+}) => {
   return (
     <Fragment>
       <Text fontSize="sm" mb="4">
@@ -49,27 +57,20 @@ const ModalStep1: React.FC<Props> = ({ section, addHandler, deleteHandler }) => 
         label="Unique name for section"
         name="header"
         placeholder="Achievements"
+        value={section.header}
+        onChange={onChangeHandlers.header}
       />
       <Text mt="4" mb="2" color="gray.500">
         Click on the section type to add
       </Text>
       <ButtonGroup mb="2">
-        <Button
-          onClick={() => addHandler("TEXT")}
-          leftIcon={<MdTextFields />}
-        >
+        <Button onClick={() => addHandler("TEXT")} leftIcon={<MdTextFields />}>
           Text Field
         </Button>
-        <Button
-          onClick={() => addHandler("DATE")}
-          leftIcon={<MdDateRange />}
-        >
+        <Button onClick={() => addHandler("DATE")} leftIcon={<MdDateRange />}>
           Date Range
         </Button>
-        <Button
-          onClick={() => addHandler("DESC")}
-          leftIcon={<BsTextareaT />}
-        >
+        <Button onClick={() => addHandler("DESC")} leftIcon={<BsTextareaT />}>
           Text Area
         </Button>
       </ButtonGroup>
@@ -88,6 +89,8 @@ const ModalStep1: React.FC<Props> = ({ section, addHandler, deleteHandler }) => 
               colorScheme="gray"
               mb="2"
               id={field.id}
+              value={field.name}
+              onChange={onChangeHandlers.field}
             />
             <InputRightAddon>
               <TooltipIconButton

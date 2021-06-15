@@ -8,17 +8,18 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  useCounter
+  useCounter,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FiArrowLeft, FiArrowRight, FiCheck } from "react-icons/fi";
 import {
   CustomInputFieldsObject,
-  CustomSectionObject
+  CustomSectionObject,
 } from "../../../store/types";
 import { getUniqueID } from "../../../utils";
 import ModalStep1 from "./ModalStep1";
 import ModalStep2 from "./ModalStep2";
+import produce from "immer";
 
 interface NewSectionModalProps {
   isOpen: boolean;
@@ -59,12 +60,24 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
       )
       .filter((item) => item.length);
 
-    console.log(newLayout);
     setSection((nextSection) => ({
       ...nextSection,
       inputFields: newInputFields,
       layout: newLayout,
     }));
+  };
+
+  const handleHeaderInput = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSection((nextSection) => ({ ...nextSection, header: e.target.value }));
+  const handleFieldInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const id = e.target.id;
+    const indexOfField = section.inputFields.map((item) => item.id).indexOf(id);
+
+    //Mutably modifying the next state using Immer (https://immerjs.github.io/immer/produce#example)
+    const nextInputFields = produce(section.inputFields, (draft) => {
+      draft[indexOfField].name = e.target.value;
+    });
+    setSection((nextState) => ({ ...nextState, inputFields: nextInputFields }));
   };
 
   const getBodyForStep = (step: number) => {
@@ -73,6 +86,10 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
         return (
           <ModalStep1
             section={section}
+            onChangeHandlers={{
+              header: handleHeaderInput,
+              field: handleFieldInput,
+            }}
             addHandler={addInputField}
             deleteHandler={deleteInputField}
           />
