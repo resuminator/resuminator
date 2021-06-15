@@ -1,13 +1,8 @@
 import { Text } from "@chakra-ui/react";
 import React, { Fragment } from "react";
-import { useEffect } from "react";
 import DataRow from "../../../components/elements/DataRow";
-import {
-  CustomInputFieldsObject,
-  CustomSectionObject,
-} from "../../../store/types";
+import { CustomSectionObject } from "../../../store/types";
 import SectionContent from "../../Resume/components/SectionContent";
-import SectionTitle from "../../Resume/components/SectionTitle";
 
 interface Props {
   section: CustomSectionObject;
@@ -16,23 +11,8 @@ interface Props {
 const ModalStep2: React.FC<Props> = ({ section }) => {
   const { layout, inputFields, hasTitleRow } = section;
 
-  useEffect(() => console.log(section), [section]);
-
   const getInputFieldFromId = (id: string) =>
     inputFields.filter((item) => item.id === id)[0];
-
-  const getSection = (sectionObject: CustomInputFieldsObject) => {
-    switch (sectionObject.type) {
-      case "TEXT":
-        return <Text>{sectionObject.name}</Text>;
-      case "DATE":
-        return <Text>{sectionObject.name}</Text>;
-      case "DESC":
-        return <Text>{sectionObject.name}</Text>;
-      default:
-        return null;
-    }
-  };
 
   return (
     <Fragment>
@@ -40,15 +20,17 @@ const ModalStep2: React.FC<Props> = ({ section }) => {
         Arrange the layout of the selected inputs on your resume. Drag the items
         to rearrange the layout.
       </Text>
-      <SectionTitle>{section.header}</SectionTitle>
+      <Text mb="2" fontWeight="semibold" fontSize="lg">
+        {section.header}
+      </Text>
       <SectionContent>
-        {layout.map((row) =>
-          row.map((sectionId) => (
-            <DataRow key={sectionId}>
-              {getSection(getInputFieldFromId(sectionId))}
-            </DataRow>
-          ))
-        )}
+        {layout.map((row, index) => (
+          <DataRow key={index}>
+            {row.map((sectionId) => (
+              <Text key={sectionId}>{getInputFieldFromId(sectionId).name}</Text>
+            ))}
+          </DataRow>
+        ))}
       </SectionContent>
     </Fragment>
   );
