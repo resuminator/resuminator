@@ -41,6 +41,19 @@ const getIconForField = (type: CustomInputFieldsObject["type"]) => {
   }
 };
 
+const getPlaceholder = (type: CustomInputFieldsObject["type"]) => {
+  switch (type) {
+    case "TEXT":
+      return "";
+    case "DATE":
+      return "Start Date";
+    case "DESC":
+      return "Description";
+    default:
+      return "";
+  }
+}
+
 const ModalStep1: React.FC<Props> = ({
   section,
   onChangeHandlers,
@@ -97,6 +110,7 @@ const ModalStep1: React.FC<Props> = ({
               id={field.id}
               value={field.name}
               onChange={onChangeHandlers.field}
+              placeholder={getPlaceholder(field.type)}
             />
             <InputRightAddon>
               <TooltipIconButton
