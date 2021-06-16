@@ -1,8 +1,5 @@
 import { CertificationDataObject } from "../modules/UserInput/Certification/types";
-import {
-  ContactDataObject,
-  UserContactDataObject,
-} from "../modules/UserInput/Contact/types";
+import { UserContactDataObject } from "../modules/UserInput/Contact/types";
 import { EducationDataObject } from "../modules/UserInput/Education/types";
 import { ExperienceDataObject } from "../modules/UserInput/Experience/types";
 import { ProjectDataObject } from "../modules/UserInput/Projects/types";
