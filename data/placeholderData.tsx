@@ -48,7 +48,7 @@ const placeholderData: Result = {
               name: "Description",
             },
           ],
-          layout: [["abc12345"], ["abc123de"], ["abc123fg"]],
+          layout: [["abc12345", "abc123de"], [], ["abc123fg"]],
         },
       ],
     },
@@ -70,11 +70,11 @@ const placeholderData: Result = {
   },
   customSections: [
     {
-      header: "ACHIEVEMENTS", //Also Unique
+      header: "Achievements", //Also Unique
       data: [
         {
           id: "abc12345",
-          value: "",
+          value: "Organization",
         },
         {
           id: "abc123de",
@@ -82,7 +82,8 @@ const placeholderData: Result = {
         },
         {
           id: "abc123fg",
-          value: "<ul><li><p>Developed a new thing.</p></li></ul>",
+          value:
+            "<ul><li><p>Developed a new thing.</p></li><li><p>Developed a new thing.</p></li><li><p>Developed a new thing.</p></li></ul>",
         },
       ],
     },
