@@ -10,6 +10,7 @@ import {
   PublicationsLayout,
   SkillsLayout,
 } from "./Sections";
+import CustomSectionLayout from "./Sections/CustomSection";
 
 export const getLayout = (key: InputSectionKeys) => {
   switch (key) {
@@ -25,6 +26,8 @@ export const getLayout = (key: InputSectionKeys) => {
       return <PublicationsLayout />;
     case "SKILLS":
       return <SkillsLayout />;
+    default: 
+      return <CustomSectionLayout sectionKey={key}/>;
   }
 };
 
