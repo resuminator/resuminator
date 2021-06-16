@@ -140,6 +140,7 @@ export interface ResumeStore {
   fontProfile?: FontProfile;
   spacing?: number;
   color?: ColorProfiles;
+  customSections?: Array<CustomSectionObject>;
   updateInputs?: (arr: GlobalProperties["inputs"]) => void;
   updateLayout?: (key: string, value: any) => void;
   setProperties: (value: GlobalProperties) => void;
@@ -148,5 +149,5 @@ export interface ResumeStore {
   setFontProfile?: (value: FontProfile) => void;
   setSpacing?: (value: number) => void;
   setColorProfile?: (value: ColorProfiles) => void;
-  // customSections?: Array<CustomSectionObject>;
+  setCustomSections?: (value: Array<CustomSectionObject>) => void;
 }

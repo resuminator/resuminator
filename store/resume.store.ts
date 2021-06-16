@@ -35,6 +35,8 @@ const useResumeStore = create<ResumeStore>(
       setSpacing: (value) => set({ spacing: value }),
       color: "blue",
       setColorProfile: (value) => set({ color: value }),
+      customSections: [],
+      setCustomSections: (value) => set({ customSections: value }),
     }),
     "Resume"
   )

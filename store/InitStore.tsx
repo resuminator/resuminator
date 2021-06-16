@@ -26,8 +26,13 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
   const skillsInit = useSkillStore((state) => state.setData);
   const { setFullName, setContact, setJobTitle, setUserImage } =
     useContactStore();
-  const { setProperties, setFontProfile, setColorProfile, setSpacing } =
-    useResumeStore();
+  const {
+    setProperties,
+    setFontProfile,
+    setColorProfile,
+    setSpacing,
+    setCustomSections,
+  } = useResumeStore();
   const { setInit, setLoading } = useGlobalStore();
   const toast = useToast();
 
@@ -41,8 +46,15 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       setFontProfile(obj.font_profile);
       setColorProfile(obj.color);
       setSpacing(obj.spacing);
+      setCustomSections(obj.customSections);
     },
-    [setProperties, setFontProfile, setColorProfile, setSpacing]
+    [
+      setProperties,
+      setFontProfile,
+      setColorProfile,
+      setSpacing,
+      setCustomSections,
+    ]
   );
 
   const initUserInfo = useCallback(

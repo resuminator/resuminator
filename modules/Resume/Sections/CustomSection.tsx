@@ -2,6 +2,7 @@ import { Text } from "@chakra-ui/layout";
 import React, { Fragment } from "react";
 import DataRow from "../../../components/elements/DataRow";
 import res from "../../../data/placeholderData";
+import useResumeStore from "../../../store/resume.store";
 import { parseDate } from "../../../utils";
 import BodyText from "../components/BodyText";
 import SectionBox from "../components/SectionBox";
@@ -16,10 +17,11 @@ interface CustomSectionLayoutProps {
 const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
   sectionKey,
 }) => {
+  const customSections = useResumeStore((state) => state.customSections);
   const sectionData = res.customSections.filter(
     (item) => item.header.toUpperCase() === sectionKey
   )[0];
-  const properties = res.resumes[0].customSections.filter(
+  const properties = customSections.filter(
     (item) => item.header.toUpperCase() === sectionKey
   )[0];
 
