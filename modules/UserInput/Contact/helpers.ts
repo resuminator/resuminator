@@ -75,7 +75,7 @@ export const labelIsPresent = (data: ContactData, label: Services): boolean => {
   return keys.includes(label);
 };
 
-export const generateLinkForLabel = (label: Services, link: string) => {
+export const generateLinkForLabel = (label: Services | string, link: string) => {
   switch (label) {
     case "LinkedIn":
       return `https://linkedin.com/in/${link}`;

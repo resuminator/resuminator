@@ -32,6 +32,7 @@ const SocialHandlesLayout = () => {
             display="flex"
             alignItems="center"
             key={item.label}
+            pb="1"
           >
             <Icon
               as={getIconForService(item.label)}
