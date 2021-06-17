@@ -31,7 +31,6 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
     setFontProfile,
     setColorProfile,
     setSpacing,
-    setCustomSections,
   } = useResumeStore();
   const { setInit, setLoading } = useGlobalStore();
   const toast = useToast();
@@ -46,14 +45,12 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       setFontProfile(obj.font_profile);
       setColorProfile(obj.color);
       setSpacing(obj.spacing);
-      setCustomSections(obj.customSections);
     },
     [
       setProperties,
       setFontProfile,
       setColorProfile,
       setSpacing,
-      setCustomSections,
     ]
   );
 
