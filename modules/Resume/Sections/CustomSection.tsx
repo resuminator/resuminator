@@ -2,7 +2,6 @@ import { Text } from "@chakra-ui/layout";
 import React, { Fragment } from "react";
 import DataRow from "../../../components/elements/DataRow";
 import res from "../../../data/placeholderData";
-import useResumeStore from "../../../store/resume.store";
 import { parseDate } from "../../../utils";
 import BodyText from "../components/BodyText";
 import SectionBox from "../components/SectionBox";
@@ -17,29 +16,20 @@ interface CustomSectionLayoutProps {
 const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
   sectionKey,
 }) => {
-  const customSections = useResumeStore((state) => state.customSections);
-  const sectionData = res.customSections.filter(
-    (item) => item.header.toUpperCase() === sectionKey
-  )[0];
-  const properties = customSections.filter(
+  const section = res.customSections.filter(
     (item) => item.header.toUpperCase() === sectionKey
   )[0];
 
+  if(!section) return null;
   /*If the sectionKey mismatches then don't show section on resume
   FIXME: Can be updated to a better logic like - 
   if the section is not present on the inputs 
   or layout object of the resume then don't show.*/
-  if (!sectionData || !properties) return null;
-
-  const { header, data } = sectionData;
-  const { layout, hasTitleRow } = properties;
+  const { header, data, hasTitleRow, layout } = section;
 
   const getSection = (sectionId: string) => {
-    const { type } = properties.inputFields.filter(
-      (item) => item.id === sectionId
-    )[0];
+    const { type, value } = data.filter((item) => item.id === sectionId)[0];
 
-    const { value } = data.filter((item) => item.id === sectionId)[0];
     switch (type) {
       case "TEXT":
         return <Text>{value}</Text>;
@@ -59,7 +49,7 @@ const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
           <DataRow key={index}>
             {row.map((sectionId) =>
               hasTitleRow && index === 0 ? (
-                <TitleRow>{getSection(sectionId)}</TitleRow>
+                <TitleRow key={sectionId}>{getSection(sectionId)}</TitleRow>
               ) : (
                 <Fragment key={sectionId}>{getSection(sectionId)}</Fragment>
               )
