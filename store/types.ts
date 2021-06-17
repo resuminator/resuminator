@@ -1,5 +1,6 @@
 import { CertificationDataObject } from "../modules/UserInput/Certification/types";
 import { UserContactDataObject } from "../modules/UserInput/Contact/types";
+import { CustomSectionObject } from "../modules/UserInput/Custom/types";
 import { EducationDataObject } from "../modules/UserInput/Education/types";
 import { ExperienceDataObject } from "../modules/UserInput/Experience/types";
 import { ProjectDataObject } from "../modules/UserInput/Projects/types";
@@ -65,25 +66,6 @@ export interface ResumeLayoutObject {
   header: Array<Array<HeaderElements>>;
   body: Array<Array<Sections | CustomSectionObject["header"]>>;
   footer: Array<FooterElements>;
-}
-
-type CustomSectionDataObject = {
-  id: string;
-  type: "TEXT" | "DATE" | "DESC";
-  name: string;
-  value: Date | string;
-};
-
-export interface CustomSectionObject {
-  header: string;
-  hasTitleRow?: boolean;
-  data?: Array<CustomSectionDataObject>;
-  layout: Array<Array<CustomSectionDataObject["id"]>>;
-}
-
-
-export interface CustomSectionStore<T> extends CustomSectionObject {
-  setState: (key: string, value: any) => void;
 }
 
 export interface ResumeStyleObject {
