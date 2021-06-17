@@ -11,7 +11,7 @@ const Viewer = (props: Props) => {
       borderRadius="10px"
       bg={useColorModeValue("white", "inherit")}
       shadow={useColorModeValue("lg", "2xl")}
-      // width="21cm"
+      width="21cm"
       height="29.7cm"
     >
       <ResumePaper />
