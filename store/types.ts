@@ -67,22 +67,18 @@ export interface ResumeLayoutObject {
   footer: Array<FooterElements>;
 }
 
-export interface CustomInputFieldsObject {
+type CustomSectionDataObject = {
   id: string;
   type: "TEXT" | "DATE" | "DESC";
   name: string;
-}
+  value: Date | string;
+};
 
 export interface CustomSectionObject {
   header: string;
   hasTitleRow?: boolean;
-  inputFields: Array<CustomInputFieldsObject>;
-  layout: Array<Array<CustomInputFieldsObject["id"]>>;
-}
-
-export interface CustomSectionDataObject {
-  header: CustomSectionObject["header"];
-  data?: Array<{ id: CustomInputFieldsObject["id"]; value: Date | string }>;
+  data?: Array<CustomSectionDataObject>;
+  layout: Array<Array<CustomSectionDataObject["id"]>>;
 }
 
 export interface ResumeStyleObject {
@@ -95,7 +91,6 @@ export interface ResumeStyleObject {
   font_profile?: FontProfile;
   spacing?: number;
   color?: ColorProfiles | string;
-  customSections?: Array<CustomSectionObject>;
 }
 
 export interface Result {
@@ -108,15 +103,10 @@ export interface Result {
   certifications?: Array<CertificationDataObject>;
   publications?: Array<PublicationDataObject>;
   skills?: { hasCategories: boolean; data: Array<SkillDataObject> };
-  customSections?: Array<CustomSectionDataObject>;
+  customSections?: Array<CustomSectionObject>;
 }
 
 export type InputSectionKeys = Sections | CustomSectionObject["header"];
-
-interface GlobalProperties {
-  inputs: Array<InputSectionKeys>;
-  layout: ResumeLayoutObject;
-}
 
 interface ResumeProperties {
   inputs: Array<InputSectionKeys>;
@@ -140,14 +130,12 @@ export interface ResumeStore {
   fontProfile?: FontProfile;
   spacing?: number;
   color?: ColorProfiles;
-  customSections?: Array<CustomSectionObject>;
-  updateInputs?: (arr: GlobalProperties["inputs"]) => void;
+  updateInputs?: (arr: ResumeProperties["inputs"]) => void;
   updateLayout?: (key: string, value: any) => void;
-  setProperties: (value: GlobalProperties) => void;
+  setProperties: (value: ResumeProperties) => void;
   togglePrivacy?: (key: "isPublic" | "isClonable") => void;
   setProfileName?: (value: string) => void;
   setFontProfile?: (value: FontProfile) => void;
   setSpacing?: (value: number) => void;
   setColorProfile?: (value: ColorProfiles) => void;
-  setCustomSections?: (value: Array<CustomSectionObject>) => void;
 }
