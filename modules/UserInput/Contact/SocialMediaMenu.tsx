@@ -13,9 +13,13 @@ export const SocialHandles: Array<SocialHandleObject> = [
   { label: "LinkedIn" },
   { label: "Twitter" },
   { label: "GitHub" },
+  { label: "GitLab" },
   { label: "Email" },
   { label: "Phone" },
   { label: "Portfolio" },
+  { label: "Behance" },
+  { label: "Dribble" },
+  { label: "YouTube" },
 ];
 
 interface Props {

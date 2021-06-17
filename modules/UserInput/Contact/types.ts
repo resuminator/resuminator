@@ -4,18 +4,21 @@ export type Services =
   | "LinkedIn"
   | "Twitter"
   | "GitHub"
+  | "GitLab"
   | "Email"
   | "Phone"
   | "Portfolio"
-  | "Custom"
-  | string;
+  | "Behance"
+  | "Dribble"
+  | "YouTube"
+  | "Custom";
 export interface SocialHandleObject {
-  label: Services | string;
+  label: Services;
   icon?: IconType;
 }
 
 export interface ContactDataObject {
-  label: Services | string;
+  label: Services;
   link: string;
   isHidden?: boolean;
   identifier?: string;
