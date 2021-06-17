@@ -19,8 +19,9 @@ const SocialHandlesLayout = () => {
     <Stack
       aria-label="Social Handles"
       wrap="wrap"
-      spacing="4"
+      spacing="2"
       isInline
+      shouldWrapChildren
       px={spacing * 8}
       py={spacing * 2}
     >
