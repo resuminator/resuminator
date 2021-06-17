@@ -31,17 +31,6 @@ export interface ContactStore<T> {
   setJobTitle: (value: string) => void;
 }
 
-export interface SkillStore<T> {
-  format: "CATEGORIES" | "TAGS";
-  isDisabled: boolean;
-  toggleDisabled: () => void;
-  toggleFormat: () => void;
-  data: Array<T>;
-  setData?: (list: Array<T>) => void;
-  add: (obj: T) => void;
-  update: UpdateAction;
-}
-
 export type HeaderElements = "USER_IMAGE" | "SOCIAL_HANDLES" | "NAME_AND_JT";
 export type FooterElements = "WATERMARK" | "DATE" | "DATE_W" | "CUSTOM";
 
