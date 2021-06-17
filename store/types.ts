@@ -18,19 +18,6 @@ export interface Store<ObjectType> {
   update: UpdateAction;
 }
 
-export interface ContactStore<T> {
-  fullName: string;
-  jobTitle: string;
-  userImage: string;
-  contact: Array<T>;
-  add: (obj: T) => void;
-  update: (index: number, key: string, value: any) => void;
-  setContact: (value: Array<T>) => void;
-  setUserImage: (value: string) => void;
-  setFullName: (value: string) => void;
-  setJobTitle: (value: string) => void;
-}
-
 export type HeaderElements = "USER_IMAGE" | "SOCIAL_HANDLES" | "NAME_AND_JT";
 export type FooterElements = "WATERMARK" | "DATE" | "DATE_W" | "CUSTOM";
 

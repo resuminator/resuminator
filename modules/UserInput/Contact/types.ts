@@ -32,3 +32,16 @@ export interface UserContactDataObject {
   userImage?: string;
   contact?: ContactData;
 }
+
+export interface ContactStore<T> {
+  fullName: string;
+  jobTitle: string;
+  userImage: string;
+  contact: Array<T>;
+  add: (obj: T) => void;
+  update: (index: number, key: string, value: any) => void;
+  setContact: (value: Array<T>) => void;
+  setUserImage: (value: string) => void;
+  setFullName: (value: string) => void;
+  setJobTitle: (value: string) => void;
+}
