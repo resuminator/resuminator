@@ -3,6 +3,7 @@ import React, { useCallback, useEffect } from "react";
 import { QueryStatus } from "react-query";
 import useCertificationStore from "../modules/UserInput/Certification/store";
 import useContactStore from "../modules/UserInput/Contact/store";
+import { useCustomSectionStore } from "../modules/UserInput/Custom/store";
 import useEducationStore from "../modules/UserInput/Education/store";
 import useExperienceStore from "../modules/UserInput/Experience/store";
 import useProjectStore from "../modules/UserInput/Projects/store";
@@ -26,12 +27,9 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
   const skillsInit = useSkillStore((state) => state.setData);
   const { setFullName, setContact, setJobTitle, setUserImage } =
     useContactStore();
-  const {
-    setProperties,
-    setFontProfile,
-    setColorProfile,
-    setSpacing,
-  } = useResumeStore();
+  const { setProperties, setFontProfile, setColorProfile, setSpacing } =
+    useResumeStore();
+  const customSectionInit = useCustomSectionStore((state) => state.setData);
   const { setInit, setLoading } = useGlobalStore();
   const toast = useToast();
 
@@ -46,12 +44,7 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       setColorProfile(obj.color);
       setSpacing(obj.spacing);
     },
-    [
-      setProperties,
-      setFontProfile,
-      setColorProfile,
-      setSpacing,
-    ]
+    [setProperties, setFontProfile, setColorProfile, setSpacing]
   );
 
   const initUserInfo = useCallback(
@@ -74,6 +67,7 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       skillsInit(data.skills.data);
       initResume(data.resumes);
       initUserInfo(data.contact);
+      customSectionInit(data.customSections);
       setInit(true);
     },
     [
@@ -83,6 +77,7 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       projectInit,
       publicationsInit,
       skillsInit,
+      customSectionInit,
       setInit,
       initResume,
       initUserInfo,

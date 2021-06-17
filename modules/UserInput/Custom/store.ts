@@ -1,17 +1,13 @@
-import { GetState, SetState } from "zustand";
-import create from "zustand";
-import { CustomSectionStore, CustomSectionObject } from "./types";
+import create, { GetState, SetState } from "zustand";
 import { devtools } from "zustand/middleware";
+import { CustomSectionObject, CustomSectionStore } from "./types";
 
 const customSectionStore = <T>(
   set: SetState<CustomSectionStore<T>>,
   get: GetState<CustomSectionStore<T>>
 ): CustomSectionStore<T> => ({
-  header: "",
-  hasTitleRow: false,
   data: [],
-  layout: [],
-  setState: (key, value) => set((state) => ({ ...state, [key]: value })),
+  setData: (value) => set({ data: value }),
 });
 
 export const useCustomSectionStore = create<

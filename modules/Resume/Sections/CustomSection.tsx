@@ -1,8 +1,8 @@
 import { Text } from "@chakra-ui/layout";
 import React, { Fragment } from "react";
 import DataRow from "../../../components/elements/DataRow";
-import res from "../../../data/placeholderData";
 import { parseDate } from "../../../utils";
+import { useCustomSectionStore } from "../../UserInput/Custom/store";
 import BodyText from "../components/BodyText";
 import SectionBox from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
@@ -16,11 +16,12 @@ interface CustomSectionLayoutProps {
 const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
   sectionKey,
 }) => {
-  const section = res.customSections.filter(
-    (item) => item.header.toUpperCase() === sectionKey
-  )[0];
+  const section = useCustomSectionStore(
+    (state) =>
+      state.data.filter((item) => item.header.toUpperCase() === sectionKey)[0]
+  );
 
-  if(!section) return null;
+  if (!section) return null;
   /*If the sectionKey mismatches then don't show section on resume
   FIXME: Can be updated to a better logic like - 
   if the section is not present on the inputs 
