@@ -1,18 +1,18 @@
 import { Box, Text } from "@chakra-ui/react";
 import React, { Fragment } from "react";
 import DataRow from "../../../components/elements/DataRow";
-import { CustomSectionObject } from "../../../store/types";
 import SectionContent from "../../Resume/components/SectionContent";
+import { CustomSectionObject } from "./types";
 
 interface Props {
   section: CustomSectionObject;
 }
 
 const ModalStep2: React.FC<Props> = ({ section }) => {
-  const { layout, inputFields, hasTitleRow } = section;
+  const { layout, data, hasTitleRow } = section;
 
   const getInputFieldFromId = (id: string) =>
-    inputFields.filter((item) => item.id === id)[0];
+    data.filter((item) => item.id === id)[0];
 
   return (
     <Fragment>

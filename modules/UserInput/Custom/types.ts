@@ -1,4 +1,4 @@
-type CustomSectionDataObject = {
+export type CustomSectionDataObject = {
   id: string;
   type: "TEXT" | "DATE" | "DESC";
   name: string;

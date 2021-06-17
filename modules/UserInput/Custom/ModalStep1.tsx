@@ -7,28 +7,25 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightAddon,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import React, { Fragment } from "react";
 import { BsTextareaT } from "react-icons/bs";
 import { MdDateRange, MdRemoveCircle, MdTextFields } from "react-icons/md";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
-import {
-  CustomInputFieldsObject,
-  CustomSectionObject,
-} from "../../../store/types";
+import { CustomSectionDataObject, CustomSectionObject } from "./types";
 
 export type InputHandlerFn = (e: React.ChangeEvent<HTMLInputElement>) => void;
 
 interface Props {
   section: CustomSectionObject;
   onChangeHandlers: { header: InputHandlerFn; field: InputHandlerFn };
-  addHandler: (type: CustomInputFieldsObject["type"]) => void;
+  addHandler: (type: CustomSectionDataObject["type"]) => void;
   deleteHandler: (id: string) => void;
 }
 
-const getIconForField = (type: CustomInputFieldsObject["type"]) => {
+const getIconForField = (type: CustomSectionDataObject["type"]) => {
   switch (type) {
     case "TEXT":
       return MdTextFields;
@@ -41,7 +38,7 @@ const getIconForField = (type: CustomInputFieldsObject["type"]) => {
   }
 };
 
-const getPlaceholder = (type: CustomInputFieldsObject["type"]) => {
+const getPlaceholder = (type: CustomSectionDataObject["type"]) => {
   switch (type) {
     case "TEXT":
       return "";
@@ -52,7 +49,7 @@ const getPlaceholder = (type: CustomInputFieldsObject["type"]) => {
     default:
       return "";
   }
-}
+};
 
 const ModalStep1: React.FC<Props> = ({
   section,
@@ -93,7 +90,7 @@ const ModalStep1: React.FC<Props> = ({
         onChange={onChangeHandlers.header}
       />
       <InputFieldButtonGroup />
-      {section.inputFields.map((field) => (
+      {section.data.map((field) => (
         <Box key={field.id}>
           <Text fontSize="md" pb="2" color="gray.500">
             Field Name

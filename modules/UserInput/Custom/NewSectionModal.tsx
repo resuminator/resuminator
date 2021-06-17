@@ -8,18 +8,15 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  useCounter
+  useCounter,
 } from "@chakra-ui/react";
 import produce from "immer";
 import { useState } from "react";
 import { FiArrowLeft, FiArrowRight, FiCheck } from "react-icons/fi";
-import {
-  CustomInputFieldsObject,
-  CustomSectionObject
-} from "../../../store/types";
 import { getUniqueID } from "../../../utils";
 import ModalStep1 from "./ModalStep1";
 import ModalStep2 from "./ModalStep2";
+import { CustomSectionDataObject, CustomSectionObject } from "./types";
 
 interface NewSectionModalProps {
   isOpen: boolean;
@@ -37,24 +34,25 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
   });
   const initialSectionState = {
     header: "",
-    inputFields: [],
+    hasTitleRow: false,
+    data: [],
     layout: [],
   };
   const [section, setSection] =
     useState<CustomSectionObject>(initialSectionState);
 
-  const addInputField = (type: CustomInputFieldsObject["type"]) => {
+  const addInputField = (type: CustomSectionDataObject["type"]) => {
     const id = getUniqueID();
     setSection((nextSection) => ({
       ...nextSection,
-      inputFields: [...nextSection.inputFields, { id, type, name: "" }],
+      data: [...nextSection.data, { id, type, name: "", value: "" }],
       layout: [...nextSection.layout, [id]],
     }));
   };
 
   const deleteInputField = (id: string) => {
-    const newInputFields = section.inputFields.filter((item) => item.id !== id);
-    const newLayout = section.layout
+    const nextData = section.data.filter((item) => item.id !== id);
+    const nextLayout = section.layout
       .map((subArr) =>
         subArr.includes(id) ? subArr.filter((e) => e !== id) : subArr
       )
@@ -62,8 +60,8 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
 
     setSection((nextSection) => ({
       ...nextSection,
-      inputFields: newInputFields,
-      layout: newLayout,
+      data: nextData,
+      layout: nextLayout,
     }));
   };
 
@@ -73,13 +71,13 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
 
   const handleFieldInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = e.target.id;
-    const indexOfField = section.inputFields.map((item) => item.id).indexOf(id);
+    const index = section.data.map((item) => item.id).indexOf(id);
 
     //Mutably modifying the next state using Immer (https://immerjs.github.io/immer/produce#example)
-    const nextInputFields = produce(section.inputFields, (draft) => {
-      draft[indexOfField].name = e.target.value;
+    const nextData = produce(section.data, (draft) => {
+      draft[index].name = e.target.value;
     });
-    setSection((nextState) => ({ ...nextState, inputFields: nextInputFields }));
+    setSection((nextState) => ({ ...nextState, data: nextData }));
   };
 
   const getBodyForStep = (step: number) => {
