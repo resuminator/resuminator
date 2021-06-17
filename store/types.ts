@@ -81,6 +81,11 @@ export interface CustomSectionObject {
   layout: Array<Array<CustomSectionDataObject["id"]>>;
 }
 
+
+export interface CustomSectionStore<T> extends CustomSectionObject {
+  setState: (key: string, value: any) => void;
+}
+
 export interface ResumeStyleObject {
   id: string;
   profile_name: string;
