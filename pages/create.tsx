@@ -17,6 +17,7 @@ import {
   Skills,
 } from "../modules/UserInput";
 import CustomSections from "../modules/UserInput/Custom";
+import CustomSectionInputs from "../modules/UserInput/Custom/CustomSectionInputs";
 import Viewer from "../modules/Viewer";
 import InitStore from "../store/InitStore";
 import useResumeStore from "../store/resume.store";
@@ -64,6 +65,7 @@ const Create: NextPage = () => {
               <Fragment key={key}>{getInputSection(key)}</Fragment>
             ))}
             <CustomSections />
+            <CustomSectionInputs />
           </Box>
           <Box aria-label="Resume Preview" flexBasis="50%">
             <Viewer />
