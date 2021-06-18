@@ -1,19 +1,28 @@
-export type CustomSectionDataObject = {
-  id: string;
+type InputID = CustomSectionInputObject["_id"];
+
+export type CustomSectionInputObject = {
+  _id: string;
   type: "TEXT" | "DATE" | "DESC";
   name: string;
-  value: Date | string;
+};
+
+export type CustomSectionDataObject = {
+  _id: string;
+  isHidden?: boolean;
+  values: { [key in InputID]: string | Date };
 };
 
 export interface CustomSectionObject {
+  _id: string;
   header: string;
   hasTitleRow?: boolean;
+  inputs?: Array<CustomSectionInputObject>;
   data?: Array<CustomSectionDataObject>;
-  layout: Array<Array<CustomSectionDataObject["id"]>>;
+  layout: Array<Array<InputID>>;
 }
 
-export interface CustomSectionStore<T> {
-  data: Array<T>;
-  setData: (value: Array<T>) => void;
-  updateData: (value: T) => void;
+export interface CustomSectionStore<CustomSectionObject> {
+  sections: Array<CustomSectionObject>;
+  setSections: (value: Array<CustomSectionObject>) => void;
+  updateData: (id: string, value: Array<CustomSectionDataObject>) => void;
 }

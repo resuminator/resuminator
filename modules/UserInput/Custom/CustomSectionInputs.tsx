@@ -5,7 +5,7 @@ import { useCustomSectionStore } from "./store";
 
 const CustomSectionInputs = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const customSections = useCustomSectionStore((state) => state.data);
+  const customSections = useCustomSectionStore((state) => state.sections);
 
   return (
     <Fragment>
