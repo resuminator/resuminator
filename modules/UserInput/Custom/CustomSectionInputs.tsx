@@ -4,9 +4,11 @@ import { FiPlus } from "react-icons/fi";
 import { RiListSettingsFill } from "react-icons/ri";
 import Section from "../../../components/layouts/Section";
 import NewSectionModal from "./NewSectionModal";
+import { useCustomSectionStore } from "./store";
 
-const CustomSections = () => {
+const CustomSectionInputs = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const data = useCustomSectionStore(state => state.data);
 
   return (
     <Section
@@ -33,4 +35,4 @@ const CustomSections = () => {
   );
 };
 
-export default CustomSections;
+export default CustomSectionInputs;
