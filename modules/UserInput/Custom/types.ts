@@ -15,4 +15,5 @@ export interface CustomSectionObject {
 export interface CustomSectionStore<T> {
   data: Array<T>;
   setData: (value: Array<T>) => void;
+  updateData: (value: T) => void;
 }

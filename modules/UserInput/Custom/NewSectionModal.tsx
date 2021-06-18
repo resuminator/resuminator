@@ -16,6 +16,7 @@ import { FiArrowLeft, FiArrowRight, FiCheck } from "react-icons/fi";
 import { getUniqueID } from "../../../utils";
 import ModalStep1 from "./ModalStep1";
 import ModalStep2 from "./ModalStep2";
+import { useCustomSectionStore } from "./store";
 import { CustomSectionDataObject, CustomSectionObject } from "./types";
 
 interface NewSectionModalProps {
@@ -40,6 +41,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
   };
   const [section, setSection] =
     useState<CustomSectionObject>(initialSectionState);
+  const updateData = useCustomSectionStore((state) => state.updateData);
 
   const addInputField = (type: CustomSectionDataObject["type"]) => {
     const id = getUniqueID();
@@ -124,7 +126,8 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
                 colorScheme="green"
                 rightIcon={<FiCheck />}
                 onClick={() => {
-                  console.log(section);
+                  updateData(section);
+                  onClose();
                   setSection(initialSectionState);
                 }}
               >

@@ -8,6 +8,7 @@ const customSectionStore = <T>(
 ): CustomSectionStore<T> => ({
   data: [],
   setData: (value) => set({ data: value }),
+  updateData: (value) => set(state => ({data: [...state.data, value]}))
 });
 
 export const useCustomSectionStore = create<
