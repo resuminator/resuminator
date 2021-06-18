@@ -9,6 +9,7 @@ import {
   ModalOverlay,
   Text,
   useCounter,
+  useToast
 } from "@chakra-ui/react";
 import produce from "immer";
 import { useState } from "react";
@@ -28,7 +29,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const { valueAsNumber, increment, decrement } = useCounter({
+  const { valueAsNumber, increment, decrement, reset } = useCounter({
     defaultValue: 1,
     min: 1,
     max: 2,
@@ -42,6 +43,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
   const [section, setSection] =
     useState<CustomSectionObject>(initialSectionState);
   const updateData = useCustomSectionStore((state) => state.updateData);
+  const toast = useToast();
 
   const addInputField = (type: CustomSectionDataObject["type"]) => {
     const id = getUniqueID();
@@ -80,6 +82,20 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
       draft[index].name = e.target.value;
     });
     setSection((nextState) => ({ ...nextState, data: nextData }));
+  };
+
+  const performConfirmActions = () => {
+    updateData(section);
+    onClose();
+    reset();
+    setSection(initialSectionState);
+    toast({
+      title: "New Custom Section Added",
+      description: "You can manage settings for this section in user settings.",
+      status: "info",
+      isClosable: true,
+      duration: 3000,
+    });
   };
 
   const getBodyForStep = (step: number) => {
@@ -125,11 +141,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
               <Button
                 colorScheme="green"
                 rightIcon={<FiCheck />}
-                onClick={() => {
-                  updateData(section);
-                  onClose();
-                  setSection(initialSectionState);
-                }}
+                onClick={() => performConfirmActions()}
               >
                 Confirm
               </Button>
