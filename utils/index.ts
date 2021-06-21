@@ -9,6 +9,15 @@ export const getUniqueID = (): string =>
   Math.random().toString(36).substr(2, 9);
 
 /**
+ * Truncates a string upto the given limit and appends (...)
+ * @param str String to truncate
+ * @param limit Character limit for truncating
+ * @returns Truncated String
+ */
+export const truncateString = (str: string, limit: number) =>
+  str.length > limit ? str.substr(0, limit) + "..." : str;
+
+/**
  * Immutably replaces an object in an array.
  * @param array The array to be updated.
  * @param index Index of the object to be updated.
