@@ -48,11 +48,25 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
   const addSection = useCustomSectionStore((state) => state.addSection);
   const toast = useToast();
 
+  const getDefaultName = (type: CustomSectionInputObject["type"]) => {
+    switch (type) {
+      case "DATE":
+        return "Duration";
+      case "DESC":
+        return "Description";
+      default:
+        return "";
+    }
+  };
+
   const addInputField = (type: CustomSectionInputObject["type"]) => {
     const id = getUniqueID();
     setSection((nextSection) => ({
       ...nextSection,
-      inputs: [...nextSection.inputs, { _id: id, type, name: "" }],
+      inputs: [
+        ...nextSection.inputs,
+        { _id: id, type, name: getDefaultName(type) },
+      ],
       layout: [...nextSection.layout, [id]],
     }));
   };
