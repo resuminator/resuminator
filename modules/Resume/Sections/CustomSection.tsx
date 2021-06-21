@@ -28,7 +28,8 @@ const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
   FIXME: Can be updated to a better logic like - 
   if the section is not present on the inputs 
   or layout object of the resume then don't show.*/
-  const { header, data, inputs, hasTitleRow, layout } = section;
+  const { header, data: rawData, inputs, hasTitleRow, layout } = section;
+  const data = rawData.filter(item => !item.isHidden);
 
   const getSection = (itemId: string, inputId: string) => {
     const { type } = inputs.filter((input) => input._id === inputId)[0];
