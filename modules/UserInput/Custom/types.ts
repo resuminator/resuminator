@@ -33,6 +33,7 @@ export interface Store {
     sectionId: string,
     id: string,
     key: CustomSectionInputObject["_id"],
-    value: string
+    value: any
   ) => void;
+  toggleDataVisibility: (sectionId: string, id: string) => void;
 }

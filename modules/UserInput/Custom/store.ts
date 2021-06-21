@@ -35,7 +35,7 @@ const customSectionStore = (
         const currentSection = draftState.sections.filter(
           (item) => item._id === sectionId
         )[0];
-        currentSection["data"] = [value, ...currentSection.data];
+        currentSection["data"].unshift(value);
       })
     ),
   deleteData: (sectionId, id) =>
@@ -58,6 +58,18 @@ const customSectionStore = (
           (item) => item._id === id
         )[0];
         currentDataObject.values[key] = value;
+      })
+    ),
+  toggleDataVisibility: (sectionId, id) =>
+    set((state) =>
+      produce(state, (draftState) => {
+        const currentSection = draftState.sections.filter(
+          (item) => item._id === sectionId
+        )[0];
+        const currentDataObject = currentSection.data.filter(
+          (item) => item._id === id
+        )[0];
+        currentDataObject.isHidden = !currentDataObject.isHidden;
       })
     ),
 });
