@@ -37,8 +37,14 @@ const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
     switch (type) {
       case "TEXT":
         return <Text>{values[inputId]}</Text>;
-      case "DATE":
-        return <Text>{parseDate(new Date(values[inputId]), "Y")}</Text>;
+      case "DATE": {
+        const { start, end } = values[inputId];
+        return (
+          <Text>
+            {parseDate(start, "Y")} - {parseDate(end, "Y")}
+          </Text>
+        );
+      }
       case "DESC":
         return <BodyText content={values[inputId].toString()} />;
     }
