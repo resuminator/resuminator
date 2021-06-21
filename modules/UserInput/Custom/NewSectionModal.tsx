@@ -94,7 +94,8 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
     setSection(initialSectionState);
     toast({
       title: "New Custom Section Added",
-      description: "You can manage settings for this section in user settings.",
+      description:
+        "Manage section properties in user settings. You can add a maximum of 3 custom sections",
       status: "info",
       isClosable: true,
       duration: 3000,
