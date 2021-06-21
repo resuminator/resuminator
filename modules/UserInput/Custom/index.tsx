@@ -1,7 +1,6 @@
 import { Button, ButtonGroup, useDisclosure, useToast } from "@chakra-ui/react";
 import React from "react";
-import { FiPlus } from "react-icons/fi";
-import { RiListSettingsFill } from "react-icons/ri";
+import { FiPlus, FiSettings } from "react-icons/fi";
 import Section from "../../../components/layouts/Section";
 import NewSectionModal from "./NewSectionModal";
 import { useCustomSectionStore } from "./store";
@@ -42,12 +41,8 @@ const CustomSections = () => {
         >
           Create new section
         </Button>
-        <Button
-          colorScheme="purple"
-          variant="ghost"
-          leftIcon={<RiListSettingsFill />}
-        >
-          Manage custom sections
+        <Button colorScheme="purple" variant="ghost" leftIcon={<FiSettings />}>
+          Manage
         </Button>
       </ButtonGroup>
       <NewSectionModal isOpen={isOpen} onClose={onClose} />
