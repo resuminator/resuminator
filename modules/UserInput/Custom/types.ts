@@ -6,7 +6,8 @@ export type CustomSectionInputObject = {
   name: string;
 };
 
-type valueTypes = string & {start: Date, end: Date};
+export type DateValue = {start: Date, end: Date};
+type valueTypes = string & DateValue;
 
 export type CustomSectionDataObject = {
   _id: string;

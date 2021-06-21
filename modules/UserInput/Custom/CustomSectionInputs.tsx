@@ -1,22 +1,28 @@
 import React, { Fragment } from "react";
 import { FiPlus } from "react-icons/fi";
+import EditorWithLabel from "../../../components/common/EditorWithLabel";
+import InputWithLabel from "../../../components/common/InputWithLabel";
+import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID, truncateString } from "../../../utils";
+import { handleDateChange } from "../handlers";
 import SectionControls from "../SectionControls";
 import { useCustomSectionStore } from "./store";
 import {
   CustomSectionDataObject,
   CustomSectionInputObject,
-  CustomSectionObject
+  CustomSectionObject,
+  DateValue,
 } from "./types";
 
 const CustomSectionInputs = () => {
   const customSections = useCustomSectionStore((state) => state.sections);
   const addData = useCustomSectionStore((state) => state.addData);
   const deleteData = useCustomSectionStore((state) => state.deleteData);
+  const updateData = useCustomSectionStore((state) => state.updateData);
   const toggleDataVisibility = useCustomSectionStore(
     (state) => state.toggleDataVisibility
   );
@@ -28,12 +34,12 @@ const CustomSectionInputs = () => {
       case "DESC":
         return "";
       case "DATE":
-        return new Date();
+        return { start: new Date(), end: new Date() };
     }
   };
 
   const getTypeFromId = (section: CustomSectionObject, fieldId: string) =>
-    section.inputs.filter((item) => item._id === fieldId)[0].type;
+    section.inputs.filter((dataItem) => dataItem._id === fieldId)[0].type;
 
   const createDataObject = (
     section: CustomSectionObject
@@ -56,7 +62,60 @@ const CustomSectionInputs = () => {
 
   const getCardTitle = (data: CustomSectionDataObject) => {
     const firstField = Object.keys(data.values)[0];
+    if (typeof firstField !== "string") return "";
     return truncateString(data.values[firstField].toString(), 40);
+  };
+
+  const getInputFieldComponent = (
+    sectionId: string,
+    dataItem: CustomSectionDataObject,
+    field: CustomSectionInputObject
+  ) => {
+    switch (field.type) {
+      case "TEXT":
+        return (
+          <InputWithLabel
+            key={field._id}
+            label={field.name}
+            value={dataItem.values[field._id]}
+            onChange={(e) =>
+              updateData(sectionId, dataItem._id, field._id, e.target.value)
+            }
+          />
+        );
+      case "DATE": {
+        const dateObj = dataItem.values[field._id];
+        const { start, end } = dataItem.values[field._id];
+        return (
+          <StartEndDatePicker
+            values={{ start, end }}
+            onChangeHandler={(key) => (date) =>
+              updateData(sectionId, dataItem._id, field._id, {
+                ...(dateObj as DateValue),
+                [key]: date,
+              })}
+            checkboxHandler={(e) =>
+              updateData(sectionId, dataItem._id, field._id, {
+                ...(dateObj as DateValue),
+                end: dateObj.end === null ? new Date() : null,
+              })
+            }
+          />
+        );
+      }
+      case "DESC":
+        return (
+          <EditorWithLabel
+            onChange={(output) =>
+              updateData(sectionId, dataItem._id, field._id, output)
+            }
+            defaultValue={dataItem.values[field._id]}
+            label="Description"
+          />
+        );
+      default:
+        return null;
+    }
   };
 
   return (
@@ -81,24 +140,31 @@ const CustomSectionInputs = () => {
             droppableId={section.header.toLocaleLowerCase()}
             onDragEnd={(result) => console.log(result)}
           >
-            {section.data.map((item, index) => (
+            {section.data.map((dataItem, index) => (
               <ExpandableCard
                 DisplayCardProps={{
-                  draggableId: item._id,
+                  draggableId: dataItem._id,
                   index: index,
-                  title: getCardTitle(item),
+                  title: getCardTitle(dataItem),
                   titlePlaceholder: `New ${section.header.toLowerCase()}`,
                 }}
                 InputCardProps={{
                   itemType: "publication",
                   visibilityHandler: {
-                    value: item.isHidden,
-                    setValue: () => toggleDataVisibility(section._id, item._id),
+                    value: dataItem.isHidden,
+                    setValue: () =>
+                      toggleDataVisibility(section._id, dataItem._id),
                   },
-                  deleteHandler: () => deleteData(section._id, item._id),
+                  deleteHandler: () => deleteData(section._id, dataItem._id),
                 }}
                 key={index}
-              ></ExpandableCard>
+              >
+                {section.inputs.map((field) => (
+                  <Fragment key={field._id}>
+                    {getInputFieldComponent(section._id, dataItem, field)}
+                  </Fragment>
+                ))}
+              </ExpandableCard>
             ))}
           </DndWrapper>
         </Section>
