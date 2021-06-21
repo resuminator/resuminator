@@ -6,10 +6,12 @@ export type CustomSectionInputObject = {
   name: string;
 };
 
+type valueTypes = string & {start: Date, end: Date};
+
 export type CustomSectionDataObject = {
   _id: string;
   isHidden?: boolean;
-  values: { [key in InputID]: string | Date };
+  values: { [key in InputID]: valueTypes };
 };
 
 export interface CustomSectionObject {
