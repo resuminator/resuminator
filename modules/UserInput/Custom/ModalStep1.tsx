@@ -7,7 +7,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightAddon,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import React, { Fragment } from "react";
 import { BsTextareaT } from "react-icons/bs";
@@ -57,6 +57,9 @@ const ModalStep1: React.FC<Props> = ({
   addHandler,
   deleteHandler,
 }) => {
+  const checkDisabled = (type: CustomSectionInputObject["type"]) =>
+    section.inputs.filter((item) => item.type === type).length > 0;
+
   const InputFieldButtonGroup = () => (
     <Fragment>
       <Text mt="4" mb="2" color="gray.500">
@@ -66,10 +69,18 @@ const ModalStep1: React.FC<Props> = ({
         <Button onClick={() => addHandler("TEXT")} leftIcon={<MdTextFields />}>
           Text Field
         </Button>
-        <Button onClick={() => addHandler("DATE")} leftIcon={<MdDateRange />}>
+        <Button
+          isDisabled={checkDisabled("DATE")}
+          onClick={() => addHandler("DATE")}
+          leftIcon={<MdDateRange />}
+        >
           Date Range
         </Button>
-        <Button onClick={() => addHandler("DESC")} leftIcon={<BsTextareaT />}>
+        <Button
+          isDisabled={checkDisabled("DESC")}
+          onClick={() => addHandler("DESC")}
+          leftIcon={<BsTextareaT />}
+        >
           Text Area
         </Button>
       </ButtonGroup>
