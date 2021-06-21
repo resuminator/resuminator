@@ -21,8 +21,18 @@ export interface CustomSectionObject {
   layout: Array<Array<InputID>>;
 }
 
-export interface CustomSectionStore<CustomSectionObject> {
+export interface Store {
   sections: Array<CustomSectionObject>;
   setSections: (value: Array<CustomSectionObject>) => void;
-  updateData: (id: string, value: Array<CustomSectionDataObject>) => void;
+  addSection: (value: CustomSectionObject) => void;
+  deleteSection: (sectionId: string) => void;
+  updateSections: (sectionId: string, key: string, value: any) => void;
+  addData?: (sectionId: string, value: CustomSectionDataObject) => void;
+  deleteData?: (sectionId: string, id: string) => void;
+  updateData?: (
+    sectionId: string,
+    id: string,
+    key: CustomSectionInputObject["_id"],
+    value: string
+  ) => void;
 }

@@ -9,7 +9,7 @@ import {
   ModalOverlay,
   Text,
   useCounter,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import produce from "immer";
 import { useState } from "react";
@@ -17,6 +17,7 @@ import { FiArrowLeft, FiArrowRight, FiCheck } from "react-icons/fi";
 import { getUniqueID } from "../../../utils";
 import ModalStep1 from "./ModalStep1";
 import ModalStep2 from "./ModalStep2";
+import { useCustomSectionStore } from "./store";
 import { CustomSectionInputObject, CustomSectionObject } from "./types";
 
 interface NewSectionModalProps {
@@ -44,6 +45,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
 
   const [section, setSection] =
     useState<CustomSectionObject>(initialSectionState);
+  const addSection = useCustomSectionStore((state) => state.addSection);
   const toast = useToast();
 
   const addInputField = (type: CustomSectionInputObject["type"]) => {
@@ -86,6 +88,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
   };
 
   const performConfirmActions = () => {
+    addSection(section);
     onClose();
     reset();
     setSection(initialSectionState);
