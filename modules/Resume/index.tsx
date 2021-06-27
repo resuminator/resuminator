@@ -1,13 +1,17 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react";
+import ColoredDivider from "../../components/common/ColoredDivider";
 import useGlobalStore from "../../store/global.store";
 import useResumeStore from "../../store/resume.store";
+import { isCustom } from "../Design/Colors/ColorSelector";
 import StylePropsProvider from "../Design/StylePropsProvider";
 import { getHeaderLayout, getLayout } from "./legend";
 
 const ResumePaper = () => {
   const { header, body } = useResumeStore((state) => state.properties.layout);
   const spacing = useResumeStore((state) => state.spacing);
+  const color = useResumeStore(state => state.color);
+  const primaryColor = isCustom(color) ? color : `${color}.600`;
   const grayscaleFilter = useGlobalStore((state) => state.grayscaleFilter);
 
   const applyFilters = grayscaleFilter && { filter: "grayscale(1)" };
@@ -46,6 +50,7 @@ const ResumePaper = () => {
             </Box>
           ))}
         </Box>
+        <ColoredDivider color={primaryColor} mb="2"/>
         <Box
           aria-label="Body"
           display="flex"
@@ -60,7 +65,8 @@ const ResumePaper = () => {
               flexDir="column"
               aria-label={`Column-${index + 1}`}
               key={index}
-              px={spacing * 4} py={spacing * 2}
+              px={spacing * 4}
+              py={spacing * 2}
               flexBasis={`${(1 / body.length) * 100}%`}
             >
               {rowAsColumn.map((layoutKey) => (
