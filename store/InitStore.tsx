@@ -29,7 +29,7 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
     useContactStore();
   const { setProperties, setFontProfile, setColorProfile, setSpacing } =
     useResumeStore();
-  const customSectionInit = useCustomSectionStore((state) => state.setData);
+  const customSectionInit = useCustomSectionStore((state) => state.setSections);
   const { setInit, setLoading } = useGlobalStore();
   const toast = useToast();
 

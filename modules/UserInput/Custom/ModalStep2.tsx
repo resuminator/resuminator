@@ -9,10 +9,10 @@ interface Props {
 }
 
 const ModalStep2: React.FC<Props> = ({ section }) => {
-  const { layout, data, hasTitleRow } = section;
+  const { layout, inputs, hasTitleRow } = section;
 
   const getInputFieldFromId = (id: string) =>
-    data.filter((item) => item.id === id)[0];
+    inputs.filter((item) => item._id === id)[0];
 
   return (
     <Fragment>
@@ -37,9 +37,9 @@ const ModalStep2: React.FC<Props> = ({ section }) => {
         <SectionContent>
           {layout.map((row, index) => (
             <DataRow key={index}>
-              {row.map((sectionId) => (
-                <Text key={sectionId}>
-                  {getInputFieldFromId(sectionId).name}
+              {row.map((inputId) => (
+                <Text key={inputId}>
+                  {getInputFieldFromId(inputId).name}
                 </Text>
               ))}
             </DataRow>

@@ -18,7 +18,9 @@ const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
 }) => {
   const section = useCustomSectionStore(
     (state) =>
-      state.data.filter((item) => item.header.toUpperCase() === sectionKey)[0]
+      state.sections.filter(
+        (item) => item.header.toUpperCase() === sectionKey
+      )[0]
   );
 
   if (!section) return null;
@@ -26,18 +28,26 @@ const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
   FIXME: Can be updated to a better logic like - 
   if the section is not present on the inputs 
   or layout object of the resume then don't show.*/
-  const { header, data, hasTitleRow, layout } = section;
+  const { header, data: rawData, inputs, hasTitleRow, layout } = section;
+  const data = rawData.filter(item => !item.isHidden);
 
-  const getSection = (sectionId: string) => {
-    const { type, value } = data.filter((item) => item.id === sectionId)[0];
+  const getSection = (itemId: string, inputId: string) => {
+    const { type } = inputs.filter((input) => input._id === inputId)[0];
+    const { values } = data.filter((item) => item._id === itemId)[0];
 
     switch (type) {
       case "TEXT":
-        return <Text>{value}</Text>;
-      case "DATE":
-        return <Text>{parseDate(new Date(value), "Y")}</Text>;
+        return <Text>{values[inputId]}</Text>;
+      case "DATE": {
+        const { start, end } = values[inputId];
+        return (
+          <Text>
+            {parseDate(start, "Y")} - {parseDate(end, "Y")}
+          </Text>
+        );
+      }
       case "DESC":
-        return <BodyText content={value.toString()} />;
+        return <BodyText content={values[inputId].toString()} />;
     }
   };
 
@@ -45,19 +55,25 @@ const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
     <SectionBox aria-label={`${header} Layout`}>
       <SectionTitle>{header}</SectionTitle>
 
-      <SectionContent>
-        {layout.map((row, index) => (
-          <DataRow key={index}>
-            {row.map((sectionId) =>
-              hasTitleRow && index === 0 ? (
-                <TitleRow key={sectionId}>{getSection(sectionId)}</TitleRow>
-              ) : (
-                <Fragment key={sectionId}>{getSection(sectionId)}</Fragment>
-              )
-            )}
-          </DataRow>
-        ))}
-      </SectionContent>
+      {data.map((item) => (
+        <SectionContent key={item._id}>
+          {layout.map((row, index) => (
+            <DataRow key={index}>
+              {row.map((inputId) =>
+                hasTitleRow && index === 0 ? (
+                  <TitleRow key={inputId}>
+                    {getSection(item._id, inputId)}
+                  </TitleRow>
+                ) : (
+                  <Fragment key={inputId}>
+                    {getSection(item._id, inputId)}
+                  </Fragment>
+                )
+              )}
+            </DataRow>
+          ))}
+        </SectionContent>
+      ))}
     </SectionBox>
   );
 };

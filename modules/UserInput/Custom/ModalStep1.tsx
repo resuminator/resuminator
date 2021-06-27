@@ -7,25 +7,25 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightAddon,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import React, { Fragment } from "react";
 import { BsTextareaT } from "react-icons/bs";
 import { MdDateRange, MdRemoveCircle, MdTextFields } from "react-icons/md";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
-import { CustomSectionDataObject, CustomSectionObject } from "./types";
+import { CustomSectionInputObject, CustomSectionObject } from "./types";
 
 export type InputHandlerFn = (e: React.ChangeEvent<HTMLInputElement>) => void;
 
 interface Props {
   section: CustomSectionObject;
   onChangeHandlers: { header: InputHandlerFn; field: InputHandlerFn };
-  addHandler: (type: CustomSectionDataObject["type"]) => void;
+  addHandler: (type: CustomSectionInputObject["type"]) => void;
   deleteHandler: (id: string) => void;
 }
 
-const getIconForField = (type: CustomSectionDataObject["type"]) => {
+const getIconForField = (type: CustomSectionInputObject["type"]) => {
   switch (type) {
     case "TEXT":
       return MdTextFields;
@@ -38,7 +38,7 @@ const getIconForField = (type: CustomSectionDataObject["type"]) => {
   }
 };
 
-const getPlaceholder = (type: CustomSectionDataObject["type"]) => {
+const getPlaceholder = (type: CustomSectionInputObject["type"]) => {
   switch (type) {
     case "TEXT":
       return "";
@@ -57,6 +57,9 @@ const ModalStep1: React.FC<Props> = ({
   addHandler,
   deleteHandler,
 }) => {
+  const checkDisabled = (type: CustomSectionInputObject["type"]) =>
+    section.inputs.filter((item) => item.type === type).length > 0;
+
   const InputFieldButtonGroup = () => (
     <Fragment>
       <Text mt="4" mb="2" color="gray.500">
@@ -66,10 +69,18 @@ const ModalStep1: React.FC<Props> = ({
         <Button onClick={() => addHandler("TEXT")} leftIcon={<MdTextFields />}>
           Text Field
         </Button>
-        <Button onClick={() => addHandler("DATE")} leftIcon={<MdDateRange />}>
+        <Button
+          isDisabled={checkDisabled("DATE")}
+          onClick={() => addHandler("DATE")}
+          leftIcon={<MdDateRange />}
+        >
           Date Range
         </Button>
-        <Button onClick={() => addHandler("DESC")} leftIcon={<BsTextareaT />}>
+        <Button
+          isDisabled={checkDisabled("DESC")}
+          onClick={() => addHandler("DESC")}
+          leftIcon={<BsTextareaT />}
+        >
           Text Area
         </Button>
       </ButtonGroup>
@@ -90,8 +101,8 @@ const ModalStep1: React.FC<Props> = ({
         onChange={onChangeHandlers.header}
       />
       <InputFieldButtonGroup />
-      {section.data.map((field) => (
-        <Box key={field.id}>
+      {section.inputs.map((field) => (
+        <Box key={field._id}>
           <Text fontSize="md" pb="2" color="gray.500">
             Field Name
           </Text>
@@ -104,7 +115,7 @@ const ModalStep1: React.FC<Props> = ({
               shadow="sm"
               colorScheme="gray"
               mb="2"
-              id={field.id}
+              id={field._id}
               value={field.name}
               onChange={onChangeHandlers.field}
               placeholder={getPlaceholder(field.type)}
@@ -115,7 +126,7 @@ const ModalStep1: React.FC<Props> = ({
                 aria-label="Remove field"
                 color="red"
                 icon={<MdRemoveCircle />}
-                onClick={() => deleteHandler(field.id)}
+                onClick={() => deleteHandler(field._id)}
               />
             </InputRightAddon>
           </InputGroup>

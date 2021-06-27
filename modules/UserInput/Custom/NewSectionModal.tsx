@@ -9,7 +9,7 @@ import {
   ModalOverlay,
   Text,
   useCounter,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import produce from "immer";
 import { useState } from "react";
@@ -18,7 +18,7 @@ import { getUniqueID } from "../../../utils";
 import ModalStep1 from "./ModalStep1";
 import ModalStep2 from "./ModalStep2";
 import { useCustomSectionStore } from "./store";
-import { CustomSectionDataObject, CustomSectionObject } from "./types";
+import { CustomSectionInputObject, CustomSectionObject } from "./types";
 
 interface NewSectionModalProps {
   isOpen: boolean;
@@ -34,28 +34,45 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
     min: 1,
     max: 2,
   });
-  const initialSectionState = {
+  const initialSectionState: CustomSectionObject = {
+    _id: "",
     header: "",
-    hasTitleRow: false,
+    hasTitleRow: true,
+    inputs: [],
     data: [],
     layout: [],
   };
+
   const [section, setSection] =
     useState<CustomSectionObject>(initialSectionState);
-  const updateData = useCustomSectionStore((state) => state.updateData);
+  const addSection = useCustomSectionStore((state) => state.addSection);
   const toast = useToast();
 
-  const addInputField = (type: CustomSectionDataObject["type"]) => {
+  const getDefaultName = (type: CustomSectionInputObject["type"]) => {
+    switch (type) {
+      case "DATE":
+        return "Duration";
+      case "DESC":
+        return "Description";
+      default:
+        return "";
+    }
+  };
+
+  const addInputField = (type: CustomSectionInputObject["type"]) => {
     const id = getUniqueID();
     setSection((nextSection) => ({
       ...nextSection,
-      data: [...nextSection.data, { id, type, name: "", value: "" }],
+      inputs: [
+        ...nextSection.inputs,
+        { _id: id, type, name: getDefaultName(type) },
+      ],
       layout: [...nextSection.layout, [id]],
     }));
   };
 
   const deleteInputField = (id: string) => {
-    const nextData = section.data.filter((item) => item.id !== id);
+    const nextInputs = section.inputs.filter((item) => item._id !== id);
     const nextLayout = section.layout
       .map((subArr) =>
         subArr.includes(id) ? subArr.filter((e) => e !== id) : subArr
@@ -64,7 +81,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
 
     setSection((nextSection) => ({
       ...nextSection,
-      data: nextData,
+      inputs: nextInputs,
       layout: nextLayout,
     }));
   };
@@ -75,23 +92,24 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
 
   const handleFieldInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = e.target.id;
-    const index = section.data.map((item) => item.id).indexOf(id);
+    const index = section.inputs.map((item) => item._id).indexOf(id);
 
     //Mutably modifying the next state using Immer (https://immerjs.github.io/immer/produce#example)
-    const nextData = produce(section.data, (draft) => {
+    const nextData = produce(section.inputs, (draft) => {
       draft[index].name = e.target.value;
     });
-    setSection((nextState) => ({ ...nextState, data: nextData }));
+    setSection((nextState) => ({ ...nextState, inputs: nextData }));
   };
 
   const performConfirmActions = () => {
-    updateData(section);
+    addSection(section);
     onClose();
     reset();
     setSection(initialSectionState);
     toast({
       title: "New Custom Section Added",
-      description: "You can manage settings for this section in user settings.",
+      description:
+        "Manage section properties in user settings. You can add a maximum of 3 custom sections",
       status: "info",
       isClosable: true,
       duration: 3000,
