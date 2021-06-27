@@ -7,6 +7,7 @@ import Layout from "../components/layouts";
 import API_URL from "../config/server";
 import placeholderData from "../data/placeholderData";
 import ColorSelector from "../modules/Design/Colors/ColorSelector";
+import Columns from "../modules/Design/Columns";
 import FontSelector from "../modules/Design/Fonts/FontSelector";
 import FooterSelector from "../modules/Design/FooterSelector";
 import Spacing from "../modules/Design/Spacing";
@@ -36,6 +37,7 @@ const Design: NextPage = () => {
           py="5"
         >
           <Box aria-label="Resume Inputs" flexBasis="50%">
+            <Columns/>
             <Spacing />
             <FontSelector />
             <ColorSelector />
