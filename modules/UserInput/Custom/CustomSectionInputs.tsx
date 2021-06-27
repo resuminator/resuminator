@@ -8,14 +8,13 @@ import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID, truncateString } from "../../../utils";
-import { handleDateChange } from "../handlers";
 import SectionControls from "../SectionControls";
 import { useCustomSectionStore } from "./store";
 import {
   CustomSectionDataObject,
   CustomSectionInputObject,
   CustomSectionObject,
-  DateValue,
+  DateValue
 } from "./types";
 
 const CustomSectionInputs = () => {
