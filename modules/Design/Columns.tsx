@@ -12,6 +12,7 @@ const Columns = () => {
    * @returns void
    */
   const convertToSingleColumn = () => {
+    //To prevent unintended side-effects if the body is already one-column
     if (body.length === 1) return;
 
     const nextBody = body.reduce((initial, item) => [...initial, ...item]);
@@ -23,6 +24,7 @@ const Columns = () => {
    * @returns void
    */
   const convertToTwoColumn = () => {
+    //To prevent unintended side-effects if the body is already two-column
     if (body.length === 2) return;
 
     const mid = Math.ceil(body[0].length / 2);
@@ -32,7 +34,7 @@ const Columns = () => {
   };
 
   /**
-   * Generates the styling props depending on if the button is selected or not. 
+   * Generates the styling props depending on if the button is selected or not.
    * @param isSelected Condition which evaluates to true if the current button is selected
    * @returns ButtonProps Object
    */
@@ -40,8 +42,8 @@ const Columns = () => {
     const baseProps: ButtonProps = {
       colorScheme: "purple",
       _focus: {
-          border: "none"
-      }
+        border: "none",
+      },
     };
 
     const selectedProps: ButtonProps = {
