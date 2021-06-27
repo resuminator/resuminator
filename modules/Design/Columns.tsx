@@ -7,6 +7,10 @@ const Columns = () => {
   const { body } = useResumeStore((state) => state.properties.layout);
   const updateLayout = useResumeStore((state) => state.updateLayout);
 
+  /**
+   * Converts the two column body format to compatible single column format
+   * @returns void
+   */
   const convertToSingleColumn = () => {
     if (body.length === 1) return;
 
@@ -14,6 +18,10 @@ const Columns = () => {
     updateLayout("body", [nextBody]);
   };
 
+  /**
+   * Converts the single row body to two column format
+   * @returns void
+   */
   const convertToTwoColumn = () => {
     if (body.length === 2) return;
 
@@ -23,6 +31,11 @@ const Columns = () => {
     updateLayout("body", nextBody);
   };
 
+  /**
+   * Generates the styling props depending on if the button is selected or not. 
+   * @param isSelected Condition which evaluates to true if the current button is selected
+   * @returns ButtonProps Object
+   */
   const getRestProps = (isSelected: boolean): ButtonProps => {
     const baseProps: ButtonProps = {
       colorScheme: "purple",
