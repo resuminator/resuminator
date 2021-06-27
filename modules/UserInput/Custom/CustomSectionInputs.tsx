@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { DropResult } from "react-beautiful-dnd";
 import { FiPlus } from "react-icons/fi";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
@@ -19,6 +20,7 @@ import {
 
 const CustomSectionInputs = () => {
   const customSections = useCustomSectionStore((state) => state.sections);
+  const updateSections = useCustomSectionStore((state) => state.updateSections);
   const addData = useCustomSectionStore((state) => state.addData);
   const deleteData = useCustomSectionStore((state) => state.deleteData);
   const updateData = useCustomSectionStore((state) => state.updateData);
@@ -117,6 +119,21 @@ const CustomSectionInputs = () => {
     }
   };
 
+  const handleDragEnd = (result: DropResult, section: CustomSectionObject) => {
+    const { destination, source } = result;
+    if (!destination) return;
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    )
+      return;
+
+    const items = [...section.data];
+    const [reorderedItem] = items.splice(source.index, 1);
+    items.splice(destination.index, 0, reorderedItem);
+    updateSections(section._id, "data", items);
+  };
+
   return (
     <Fragment>
       {customSections.map((section) => (
@@ -137,7 +154,7 @@ const CustomSectionInputs = () => {
           </SectionControls>
           <DndWrapper
             droppableId={section.header.toLocaleLowerCase()}
-            onDragEnd={(result) => console.log(result)}
+            onDragEnd={(result) => handleDragEnd(result, section)}
           >
             {section.data.map((dataItem, index) => (
               <ExpandableCard
