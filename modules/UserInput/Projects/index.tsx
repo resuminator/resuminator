@@ -7,6 +7,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import { useDisabled } from "../../../hooks/useDisabled";
 import { getUniqueID } from "../../../utils";
 import {
   handleChange,
@@ -22,9 +23,8 @@ import { ProjectDataObject } from "./types";
 
 const Projects = () => {
   const data = useProjectStore((state) => state.data);
-  const isDisabled = useProjectStore((state) => state.isDisabled);
+  const { isDisabled, toggleDisabled } = useDisabled("PROJECTS");
   const setData = useProjectStore((state) => state.setData);
-  const toggleDisabled = useProjectStore((state) => state.toggleDisabled);
   const addData = useProjectStore((state) => state.add);
   const updateData = useProjectStore((state) => state.update);
 

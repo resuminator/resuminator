@@ -6,6 +6,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import { useDisabled } from "../../../hooks/useDisabled";
 import { getUniqueID } from "../../../utils";
 import { handleChange, handleDragEnd } from "../handlers";
 import SectionControls from "../SectionControls";
@@ -15,9 +16,8 @@ import { PublicationDataObject } from "./types";
 
 const Publications = () => {
   const data = usePublicationStore((state) => state.data);
-  const isDisabled = usePublicationStore((state) => state.isDisabled);
+  const { isDisabled, toggleDisabled } = useDisabled("PUBLICATIONS");
   const setData = usePublicationStore((state) => state.setData);
-  const toggleDisabled = usePublicationStore((state) => state.toggleDisabled);
   const addData = usePublicationStore((state) => state.add);
   const updateData = usePublicationStore((state) => state.update);
 

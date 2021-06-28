@@ -6,6 +6,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import { useDisabled } from "../../../hooks/useDisabled";
 import { getUniqueID } from "../../../utils";
 import {
   handleChange,
@@ -19,9 +20,8 @@ import { CertificationDataObject } from "./types";
 
 const Certification = () => {
   const data = useCertificationStore((state) => state.data);
-  const isDisabled = useCertificationStore((state) => state.isDisabled);
+  const { isDisabled, toggleDisabled } = useDisabled("CERTIFICATIONS");
   const setData = useCertificationStore((state) => state.setData);
-  const toggleDisabled = useCertificationStore((state) => state.toggleDisabled);
   const addData = useCertificationStore((state) => state.add);
   const updateData = useCertificationStore((state) => state.update);
 

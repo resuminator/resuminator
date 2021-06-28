@@ -6,6 +6,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import { useDisabled } from "../../../hooks/useDisabled";
 import { getUniqueID } from "../../../utils";
 import { handleChange, handleDragEnd, handleTagsInput } from "../handlers";
 import SectionControls from "../SectionControls";
@@ -15,9 +16,8 @@ import { SkillDataObject } from "./types";
 
 const Skills = () => {
   const data = useSkillStore((state) => state.data);
-  const isDisabled = useSkillStore((state) => state.isDisabled);
+  const { isDisabled, toggleDisabled } = useDisabled("SKILLS");
   const setData = useSkillStore((state) => state.setData);
-  const toggleDisabled = useSkillStore((state) => state.toggleDisabled);
   const addData = useSkillStore((state) => state.add);
   const updateData = useSkillStore((state) => state.update);
 
