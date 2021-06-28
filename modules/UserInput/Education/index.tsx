@@ -7,14 +7,13 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
-import { useDisabled } from "../../../hooks/useDisabled";
 import { getUniqueID } from "../../../utils";
 import {
   handleChange,
   handleDateChange,
   handleDragEnd,
   handleEditorChange,
-  handlePresentCheckbox,
+  handlePresentCheckbox
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import GradeInput from "./GradeInput";
@@ -23,7 +22,6 @@ import { EducationDataObject } from "./types";
 
 const Education = () => {
   const data = useEducationStore((state) => state.data);
-  const { isDisabled, toggleDisabled } = useDisabled("EDUCATION");
   const setData = useEducationStore((state) => state.setData);
   const addData = useEducationStore((state) => state.add);
   const updateData = useEducationStore((state) => state.update);
@@ -66,7 +64,7 @@ const Education = () => {
         mb: "2",
       }}
     >
-      <SectionControls handler={{ isDisabled, toggleDisabled }}>
+      <SectionControls layoutKey="EDUCATION">
         <TooltipIconButton
           label="Add new education"
           aria-label="New-Education"

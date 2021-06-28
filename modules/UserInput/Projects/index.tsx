@@ -7,7 +7,6 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
-import { useDisabled } from "../../../hooks/useDisabled";
 import { getUniqueID } from "../../../utils";
 import {
   handleChange,
@@ -23,7 +22,6 @@ import { ProjectDataObject } from "./types";
 
 const Projects = () => {
   const data = useProjectStore((state) => state.data);
-  const { isDisabled, toggleDisabled } = useDisabled("PROJECTS");
   const setData = useProjectStore((state) => state.setData);
   const addData = useProjectStore((state) => state.add);
   const updateData = useProjectStore((state) => state.update);
@@ -64,7 +62,7 @@ const Projects = () => {
         mb: "2",
       }}
     >
-      <SectionControls handler={{ isDisabled, toggleDisabled }}>
+      <SectionControls layoutKey="PROJECTS">
         <TooltipIconButton
           label="Add new project"
           aria-label="New-Project"

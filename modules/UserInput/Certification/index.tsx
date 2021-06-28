@@ -6,13 +6,12 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
-import { useDisabled } from "../../../hooks/useDisabled";
 import { getUniqueID } from "../../../utils";
 import {
   handleChange,
   handleDateChange,
   handleDragEnd,
-  handlePresentCheckbox
+  handlePresentCheckbox,
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import useCertificationStore from "./store";
@@ -20,7 +19,6 @@ import { CertificationDataObject } from "./types";
 
 const Certification = () => {
   const data = useCertificationStore((state) => state.data);
-  const { isDisabled, toggleDisabled } = useDisabled("CERTIFICATIONS");
   const setData = useCertificationStore((state) => state.setData);
   const addData = useCertificationStore((state) => state.add);
   const updateData = useCertificationStore((state) => state.update);
@@ -60,7 +58,7 @@ const Certification = () => {
         mb: "2",
       }}
     >
-      <SectionControls handler={{ isDisabled, toggleDisabled }}>
+      <SectionControls layoutKey="CERTIFICATIONS">
         <TooltipIconButton
           label="Add new certificate"
           aria-label="New-Certificate"

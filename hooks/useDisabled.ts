@@ -1,7 +1,8 @@
 import produce from "immer";
 import { useState } from "react";
-import { ResumeLayoutObject, Sections } from "../store/types";
+import { CustomSectionObject } from "../modules/UserInput/Custom/types";
 import useResumeStore from "../store/resume.store";
+import { ResumeLayoutObject, Sections } from "../store/types";
 
 /**
  * Returns the disabled status of a section using its layout key.
@@ -11,13 +12,15 @@ import useResumeStore from "../store/resume.store";
  */
 export const getDisabledStatus = (
   body: ResumeLayoutObject["body"],
-  layoutKey: Sections
+  layoutKey: Sections | CustomSectionObject["header"]
 ) => {
   const bodyLayoutKeys = body.reduce((initial, item) => [...initial, ...item]);
   return !bodyLayoutKeys.includes(layoutKey);
 };
 
-export const useDisabled = (layoutKey: Sections) => {
+export const useDisabled = (
+  layoutKey: Sections | CustomSectionObject["header"]
+) => {
   const body = useResumeStore((state) => state.properties.layout.body);
   const isDisabled = getDisabledStatus(body, layoutKey);
   const updateLayout = useResumeStore((state) => state.updateLayout);

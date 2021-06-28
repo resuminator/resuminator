@@ -7,7 +7,6 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
-import { useDisabled } from "../../../hooks/useDisabled";
 import { getUniqueID } from "../../../utils";
 import {
   handleChange,
@@ -22,7 +21,6 @@ import useExperienceStore from "./store";
 import { ExperienceDataObject } from "./types";
 
 const Experience = () => {
-  const { isDisabled, toggleDisabled } = useDisabled("EXPERIENCE");
   const data = useExperienceStore((state) => state.data);
   const setData = useExperienceStore((state) => state.setData);
   const addData = useExperienceStore((state) => state.add);
@@ -65,7 +63,7 @@ const Experience = () => {
         mb: "2",
       }}
     >
-      <SectionControls handler={{ isDisabled, toggleDisabled }}>
+      <SectionControls layoutKey="EXPERIENCE">
         <TooltipIconButton
           label="Add new experience"
           aria-label="New-Experience"

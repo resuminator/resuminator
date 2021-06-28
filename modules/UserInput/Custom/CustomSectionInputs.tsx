@@ -144,7 +144,7 @@ const CustomSectionInputs = () => {
             mb: "2",
           }}
         >
-          <SectionControls>
+          <SectionControls layoutKey={section.header.toUpperCase()}>
             <TooltipIconButton
               label={`Add new ${section.header.toLocaleLowerCase()}`}
               aria-label={`New-${section.header}`}
