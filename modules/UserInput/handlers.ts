@@ -1,8 +1,7 @@
 import { Content } from "@tiptap/core";
-import produce from "immer";
 import React from "react";
 import { DropResult } from "react-beautiful-dnd";
-import { ResumeLayoutObject, Sections, UpdateAction } from "../../store/types";
+import { UpdateAction } from "../../store/types";
 
 /**
  * Handles the input element change for the current object using `key:value` pair
@@ -108,51 +107,4 @@ export const handleDragEnd = <T>(
   const [reorderedItem] = items.splice(source.index, 1);
   items.splice(destination.index, 0, reorderedItem);
   setData(items);
-};
-
-/**
- * Returns the disabled status of a section using its layout key.
- * @param body Array[][] of Sections
- * @param layoutKey String: Section
- * @returns `true` if the `layoutKey` is present in `body`
- */
-export const getDisabledStatus = (
-  body: ResumeLayoutObject["body"],
-  layoutKey: Sections
-) => {
-  const bodyLayoutKeys = body.reduce((initial, item) => [...initial, ...item]);
-  return !bodyLayoutKeys.includes(layoutKey);
-};
-
-/**
- * Toggles the presence of `layoutKey` of an element in the `body` array.
- * @param body Array[][] of Sections
- * @param layoutKey String: Sections
- * @param position {value: number[], handler: React.SetStateAction}
- * @param callback Callback to set the value of `body` array.
- */
-export const toggleVisibility = (
-  body: ResumeLayoutObject["body"],
-  layoutKey: Sections,
-  position: {
-    value: number[];
-    handler: React.Dispatch<React.SetStateAction<number[]>>;
-  },
-  callback: (key: string, value: any) => void
-) => {
-  if (getDisabledStatus(body, layoutKey)) {
-    const [i, j] = position.value;
-    const nextBody = produce(body, (draftState) => {
-      draftState[i].splice(j, 0, layoutKey);
-    });
-    callback("body", nextBody);
-  } else {
-    //Saving last position of the element
-    const row = body.findIndex((row) => row.includes(layoutKey));
-    const col = body[row].indexOf(layoutKey);
-    position.handler([row, col]);
-
-    const nextBody = body.map((row) => row.filter((key) => key !== layoutKey));
-    callback("body", nextBody);
-  }
 };
