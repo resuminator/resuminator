@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { FiPlus } from "react-icons/fi";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
@@ -7,38 +7,22 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
-import useResumeStore from "../../../store/resume.store";
+import { useDisabled } from "../../../hooks/useDisabled";
 import { getUniqueID } from "../../../utils";
 import {
-  getDisabledStatus,
   handleChange,
   handleDateChange,
   handleDragEnd,
   handleEditorChange,
   handlePresentCheckbox,
-  handleTagsInput,
-  toggleVisibility
+  handleTagsInput
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import useExperienceStore from "./store";
 import { ExperienceDataObject } from "./types";
 
 const Experience = () => {
-  const body = useResumeStore((state) => state.properties.layout.body);
-  const isDisabled = useMemo(
-    () => getDisabledStatus(body, "EXPERIENCE"),
-    [body]
-  );
-  const [pos, setPos] = useState([0, 0]);
-  const toggleDisabled = () =>
-    toggleVisibility(
-      body,
-      "EXPERIENCE",
-      { value: pos, handler: setPos },
-      updateLayout
-    );
-  const updateLayout = useResumeStore((state) => state.updateLayout);
-
+  const { isDisabled, toggleDisabled } = useDisabled("EXPERIENCE");
   const data = useExperienceStore((state) => state.data);
   const setData = useExperienceStore((state) => state.setData);
   const addData = useExperienceStore((state) => state.add);
