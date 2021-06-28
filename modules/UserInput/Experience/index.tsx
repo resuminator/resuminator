@@ -1,5 +1,4 @@
-import produce from "immer";
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
@@ -9,59 +8,41 @@ import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import useResumeStore from "../../../store/resume.store";
-import { ResumeLayoutObject, Sections } from "../../../store/types";
 import { getUniqueID } from "../../../utils";
 import {
+  getDisabledStatus,
   handleChange,
   handleDateChange,
   handleDragEnd,
   handleEditorChange,
   handlePresentCheckbox,
   handleTagsInput,
+  toggleVisibility
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import useExperienceStore from "./store";
 import { ExperienceDataObject } from "./types";
 
 const Experience = () => {
-  const getDisabledStatus = (
-    body: ResumeLayoutObject["body"],
-    layoutKey: Sections
-  ) => {
-    const bodyLayoutKeys = body.reduce((initial, item) => [
-      ...initial,
-      ...item,
-    ]);
-    return !bodyLayoutKeys.includes(layoutKey);
-  };
-
   const body = useResumeStore((state) => state.properties.layout.body);
-  const isDisabled = getDisabledStatus(body, "EXPERIENCE");
-  const toggleDisabled = () => toggleVisibility(body, "EXPERIENCE", updateLayout);
+  const isDisabled = useMemo(
+    () => getDisabledStatus(body, "EXPERIENCE"),
+    [body]
+  );
+  const [pos, setPos] = useState([0, 0]);
+  const toggleDisabled = () =>
+    toggleVisibility(
+      body,
+      "EXPERIENCE",
+      { value: pos, handler: setPos },
+      updateLayout
+    );
   const updateLayout = useResumeStore((state) => state.updateLayout);
-  
+
   const data = useExperienceStore((state) => state.data);
   const setData = useExperienceStore((state) => state.setData);
   const addData = useExperienceStore((state) => state.add);
   const updateData = useExperienceStore((state) => state.update);
-
-  const toggleVisibility = (
-    body: ResumeLayoutObject["body"],
-    layoutKey: Sections,
-    callback: (key: string, value: any) => void
-  ) => {
-    if (getDisabledStatus(body, layoutKey)) {
-      const nextBody = produce(body, (draftState) => {
-        draftState[0].push(layoutKey);
-      });
-      callback("body", nextBody);
-    } else {
-      const nextBody = body.map((row) =>
-        row.filter((key) => key !== layoutKey)
-      );
-      callback("body", nextBody);
-    }
-  };
 
   //This will be removed when server is connected. For mock purposes only.
   const DummyData: ExperienceDataObject = {
