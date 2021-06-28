@@ -19,7 +19,7 @@ export const getDisabledStatus = (
 };
 
 export const useDisabled = (
-  layoutKey: Sections | CustomSectionObject["header"]
+  layoutKey: Sections | CustomSectionObject["header"] = ""
 ) => {
   const body = useResumeStore((state) => state.properties.layout.body);
   const isDisabled = getDisabledStatus(body, layoutKey);
