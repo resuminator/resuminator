@@ -13,7 +13,7 @@ const useResumeStore = create<ResumeStore>(
         set((state) => ({
           privacy: { ...state.privacy, [key]: !state.privacy[key] },
         })),
-      properties: { inputs: [], layout: { header: [], body: [], footer: [] } },
+      properties: { inputs: [], layout: { header: [[]], body: [[]], footer: [] } },
       setProperties: (value) => set({ properties: value }),
       updateInputs: (arr) =>
         set((state) => ({
