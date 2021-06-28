@@ -165,7 +165,7 @@ const CustomSectionInputs = () => {
                   titlePlaceholder: `New ${section.header.toLowerCase()}`,
                 }}
                 InputCardProps={{
-                  itemType: "publication",
+                  itemType: section.header.toLowerCase(),
                   visibilityHandler: {
                     value: dataItem.isHidden,
                     setValue: () =>
