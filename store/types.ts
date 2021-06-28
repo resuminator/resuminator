@@ -10,8 +10,6 @@ import { SkillDataObject } from "../modules/UserInput/Skills/types";
 export type UpdateAction = (index: number, key: string, value: any) => void;
 
 export interface Store<ObjectType> {
-  isDisabled: boolean;
-  toggleDisabled: () => void;
   data: Array<ObjectType>;
   setData?: (list: Array<ObjectType>) => void;
   add: (obj: ObjectType) => void;

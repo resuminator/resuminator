@@ -6,8 +6,6 @@ const store = <ObjectType>(
   set: SetState<Store<ObjectType>>,
   get: GetState<Store<ObjectType>>
 ): Store<ObjectType> => ({
-  isDisabled: false,
-  toggleDisabled: () => set((state) => ({ isDisabled: !state.isDisabled })),
   //Data array which comes from the server.
   data: [],
   setData: (list) => set({ data: list }),
