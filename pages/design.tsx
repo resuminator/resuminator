@@ -1,10 +1,9 @@
 import { Box } from "@chakra-ui/layout";
-import axios from "axios";
 import { NextPage } from "next";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
+import getResumeData from "../apis/getResumeData";
 import Layout from "../components/layouts";
-import API_URL from "../config/server";
 import placeholderData from "../data/placeholderData";
 import ColorSelector from "../modules/Design/Colors/ColorSelector";
 import Columns from "../modules/Design/Columns";
@@ -13,11 +12,6 @@ import FooterSelector from "../modules/Design/FooterSelector";
 import Spacing from "../modules/Design/Spacing";
 import Viewer from "../modules/Viewer";
 import InitStore from "../store/InitStore";
-
-const getResumeData = async () => {
-  const res = await axios.get(`${API_URL}/resume`);
-  return res.data;
-};
 
 const Design: NextPage = () => {
   const { data, status } = useQuery("getResumeData", getResumeData, {
@@ -37,7 +31,7 @@ const Design: NextPage = () => {
           py="5"
         >
           <Box aria-label="Resume Inputs" flexBasis="50%">
-            <Columns/>
+            <Columns />
             <Spacing />
             <FontSelector />
             <ColorSelector />
