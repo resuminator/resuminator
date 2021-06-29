@@ -17,23 +17,23 @@ const Home: NextPage = () => {
   const { data, status } = useQuery("getResumeList", getResumeList, {
     placeholderData: resumeList,
   });
-  const { setProperties, setFontProfile, setColorProfile, setSpacing, setProfileName } =
-    useResumeStore();
+  const { setProperty } = useResumeStore();
   const toast = useToast();
   const { setLoading } = useGlobalStore();
 
   const initResume = useCallback(
     (object: ResumeStyleObject) => {
-      setProperties({
+      setProperty("_id", object.id);
+      setProperty("properties", {
         inputs: object.inputs, //default
         layout: object.layout, //default
       });
-      setFontProfile(object.font_profile);
-      setColorProfile(object.color);
-      setSpacing(object.spacing);
-      setProfileName(object.profile_name)
+      setProperty("fontProfile", object.font_profile);
+      setProperty("color", object.color);
+      setProperty("spacing", object.spacing);
+      setProperty("profileName", object.profile_name);
     },
-    [setProperties, setFontProfile, setColorProfile, setSpacing, setProfileName]
+    [setProperty]
   );
 
   if (status === "error")

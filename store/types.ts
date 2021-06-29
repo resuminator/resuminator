@@ -85,19 +85,15 @@ export interface GlobalStore {
 }
 
 export interface ResumeStore {
-  id: string;
+  _id: string;
   profileName?: string;
   privacy?: { isPublic?: boolean; isClonable?: boolean };
   properties: ResumeProperties;
   fontProfile?: FontProfile;
   spacing?: number;
   color?: ColorProfiles;
+  setProperty?: (key: string, value: any) => void;
   updateInputs?: (arr: ResumeProperties["inputs"]) => void;
   updateLayout?: (key: string, value: any) => void;
-  setProperties: (value: ResumeProperties) => void;
   togglePrivacy?: (key: "isPublic" | "isClonable") => void;
-  setProfileName?: (value: string) => void;
-  setFontProfile?: (value: FontProfile) => void;
-  setSpacing?: (value: number) => void;
-  setColorProfile?: (value: ColorProfiles) => void;
 }

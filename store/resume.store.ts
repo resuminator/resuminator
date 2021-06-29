@@ -1,3 +1,4 @@
+import produce from "immer";
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 import { ResumeStore } from "./types";
@@ -5,16 +6,20 @@ import { ResumeStore } from "./types";
 const useResumeStore = create<ResumeStore>(
   devtools(
     (set) => ({
-      id: "",
+      _id: "",
       profileName: "",
-      setProfileName: (value) => set({ profileName: value }),
       privacy: { isPublic: false, isClonable: false },
+      properties: {
+        inputs: [],
+        layout: { header: [[]], body: [[]], footer: [] },
+      },
+      fontProfile: "CLASSIC",
+      spacing: 1,
+      color: "blue",
       togglePrivacy: (key: "isPublic" | "isClonable") =>
         set((state) => ({
           privacy: { ...state.privacy, [key]: !state.privacy[key] },
         })),
-      properties: { inputs: [], layout: { header: [[]], body: [[]], footer: [] } },
-      setProperties: (value) => set({ properties: value }),
       updateInputs: (arr) =>
         set((state) => ({
           properties: {
@@ -29,12 +34,12 @@ const useResumeStore = create<ResumeStore>(
             layout: { ...state.properties.layout, [key]: value },
           },
         })),
-      fontProfile: "CLASSIC",
-      setFontProfile: (value) => set({ fontProfile: value }),
-      spacing: 1,
-      setSpacing: (value) => set({ spacing: value }),
-      color: "blue",
-      setColorProfile: (value) => set({ color: value }),
+      setProperty: (key, value) =>
+        set((state) =>
+          produce(state, (draftState) => {
+            draftState[key] = value;
+          })
+        ),
     }),
     "Resume"
   )
