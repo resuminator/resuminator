@@ -1,4 +1,5 @@
 import { Box, Center, GridItem, HStack, Icon, Text } from "@chakra-ui/react";
+import Link from "next/link";
 import React from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import BoxHeader from "../../components/common/BoxHeader";
@@ -27,16 +28,18 @@ const ResumeList: React.FC<ResumeListProps> = ({ data, callback }) => {
       <HStack spacing="8">
         {data.map((item) => (
           <Center key={item.id} flexDirection="column">
-            <Box
-              h="10rem"
-              w="10rem"
-              shadow="md"
-              borderRadius="10px"
-              cursor="pointer"
-              onClick={() => handleSelect(item.id)}
-            >
-              {item.profile_name}
-            </Box>
+            <Link href="/create">
+              <Box
+                h="10rem"
+                w="10rem"
+                shadow="md"
+                borderRadius="10px"
+                cursor="pointer"
+                onClick={() => handleSelect(item.id)}
+              >
+                {item.profile_name}
+              </Box>
+            </Link>
             <Text my="2">{item.profile_name}</Text>
           </Center>
         ))}
