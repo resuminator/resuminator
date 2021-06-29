@@ -28,10 +28,6 @@ export const useDisabled = (
 
   /**
    * Toggles the presence of `layoutKey` of an element in the `body` array.
-   * @param body Array[][] of Sections
-   * @param layoutKey String: Sections
-   * @param position {value: number[], handler: React.SetStateAction}
-   * @param callback Callback to set the value of `body` array.
    */
   const toggleDisabled = () => {
     if (getDisabledStatus(body, layoutKey)) {
