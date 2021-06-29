@@ -1,4 +1,4 @@
-import { Grid, GridItem, useToast } from "@chakra-ui/react";
+import { Grid, useToast } from "@chakra-ui/react";
 import { NextPage } from "next";
 import React, { useCallback } from "react";
 import { QueryClient, useQuery } from "react-query";
@@ -8,6 +8,7 @@ import Footer from "../components/layouts/Footer";
 import Header from "../components/layouts/Header";
 import { resumeList } from "../data/placeholderData";
 import ResumeList from "../modules/Home/ResumeList";
+import Sidebar from "../modules/Home/Sidebar";
 import TemplateList from "../modules/Home/TemplateList";
 import useGlobalStore from "../store/global.store";
 import useResumeStore from "../store/resume.store";
@@ -57,9 +58,11 @@ const Home: NextPage = () => {
         templateRows="repeat(2, 1fr)"
         templateColumns="repeat(4, 1fr)"
         gap={4}
+        mx={{ md: "4rem", lg: "7rem" }}
+        my={{ base: "2rem" }}
       >
         {/**Each component under Grid must be wrapped inside a GridItem component */}
-        <GridItem rowSpan={2} colSpan={1} />
+        <Sidebar />
         <ResumeList data={data} callback={initResume} />
         <TemplateList />
       </Grid>
