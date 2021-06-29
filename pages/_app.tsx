@@ -3,6 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import "@fontsource/inter";
 import "@fontsource/inter/500.css";
 import "@fontsource/manrope";
+import "@fontsource/manrope/600.css";
 import "@fontsource/nunito";
 import "@fontsource/lora";
 import "@fontsource/poppins";
