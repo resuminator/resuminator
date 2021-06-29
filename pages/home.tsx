@@ -17,9 +17,9 @@ const Home: NextPage = () => {
   const { data, status } = useQuery("getResumeList", getResumeList, {
     placeholderData: resumeList,
   });
-  const { setProperty } = useResumeStore();
+  const setProperty = useResumeStore((state) => state.setProperty);
+  const setLoading = useGlobalStore((state) => state.setLoading);
   const toast = useToast();
-  const { setLoading } = useGlobalStore();
 
   const initResume = useCallback(
     (object: ResumeStyleObject) => {

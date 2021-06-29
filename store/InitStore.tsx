@@ -26,7 +26,6 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
   const skillsInit = useSkillStore((state) => state.setData);
   const { setFullName, setContact, setJobTitle, setUserImage } =
     useContactStore();
-
   const customSectionInit = useCustomSectionStore((state) => state.setSections);
   const { setInit, setLoading } = useGlobalStore();
   const toast = useToast();
