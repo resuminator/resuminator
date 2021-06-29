@@ -10,7 +10,6 @@ import useProjectStore from "../modules/UserInput/Projects/store";
 import usePublicationStore from "../modules/UserInput/Publications/store";
 import useSkillStore from "../modules/UserInput/Skills/store";
 import useGlobalStore from "./global.store";
-import useResumeStore from "./resume.store";
 import { Result } from "./types";
 
 interface Props {
@@ -27,25 +26,10 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
   const skillsInit = useSkillStore((state) => state.setData);
   const { setFullName, setContact, setJobTitle, setUserImage } =
     useContactStore();
-  const { setProperties, setFontProfile, setColorProfile, setSpacing } =
-    useResumeStore();
+
   const customSectionInit = useCustomSectionStore((state) => state.setSections);
   const { setInit, setLoading } = useGlobalStore();
   const toast = useToast();
-
-  const initResume = useCallback(
-    (resume: Result["resumes"]) => {
-      const obj = resume[0];
-      setProperties({
-        inputs: obj.inputs, //default
-        layout: obj.layout, //default
-      });
-      setFontProfile(obj.font_profile);
-      setColorProfile(obj.color);
-      setSpacing(obj.spacing);
-    },
-    [setProperties, setFontProfile, setColorProfile, setSpacing]
-  );
 
   const initUserInfo = useCallback(
     (userInfo: Result["contact"]) => {
@@ -65,7 +49,6 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       projectInit(data.projects);
       publicationsInit(data.publications);
       skillsInit(data.skills.data);
-      initResume(data.resumes);
       initUserInfo(data.contact);
       customSectionInit(data.customSections);
       setInit(true);
@@ -79,7 +62,6 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       skillsInit,
       customSectionInit,
       setInit,
-      initResume,
       initUserInfo,
     ]
   );

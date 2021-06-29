@@ -2,8 +2,19 @@ import { Box, Center, GridItem, HStack, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import BoxHeader from "../../components/common/BoxHeader";
+import { ResumeListType, ResumeStyleObject } from "../../store/types";
 
-const ResumeList = () => {
+interface ResumeListProps {
+  data: ResumeListType;
+  callback: (object: ResumeStyleObject) => void;
+}
+
+const ResumeList: React.FC<ResumeListProps> = ({ data, callback }) => {
+  const handleSelect = (id: string) => {
+    const obj = data.filter((item) => item.id === id)[0];
+    callback(obj);
+  };
+
   return (
     <GridItem colSpan={3}>
       <BoxHeader
@@ -14,18 +25,19 @@ const ResumeList = () => {
         spacing="0"
       />
       <HStack spacing="8">
-        {[1, 2].map((item) => (
-          <Center key={item} flexDirection="column">
+        {data.map((item) => (
+          <Center key={item.id} flexDirection="column">
             <Box
               h="10rem"
               w="10rem"
               shadow="md"
               borderRadius="10px"
               cursor="pointer"
+              onClick={() => handleSelect(item.id)}
             >
-              Resume {item}
+              {item.profile_name}
             </Box>
-            <Text my="2">Software Developer</Text>
+            <Text my="2">{item.profile_name}</Text>
           </Center>
         ))}
 
