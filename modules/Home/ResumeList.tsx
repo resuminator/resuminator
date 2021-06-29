@@ -1,9 +1,9 @@
-import { Box, Center, GridItem, HStack, Icon, Text } from "@chakra-ui/react";
-import Link from "next/link";
+import { GridItem, HStack } from "@chakra-ui/react";
 import React from "react";
-import { FiPlusCircle } from "react-icons/fi";
 import BoxHeader from "../../components/common/BoxHeader";
 import { ResumeListType, ResumeStyleObject } from "../../store/types";
+import NewResumeCard from "./NewResumeCard";
+import ResumeCard from "./ResumeCard";
 
 interface ResumeListProps {
   data: ResumeListType;
@@ -25,39 +25,11 @@ const ResumeList: React.FC<ResumeListProps> = ({ data, callback }) => {
         titleProps={{ as: "h1", letterSpacing: "tight" }}
         spacing="0"
       />
-      <HStack spacing="8">
+      <HStack spacing="8" alignItems="flex-start">
         {data.map((item) => (
-          <Center key={item.id} flexDirection="column">
-            <Link href="/create">
-              <Box
-                h="10rem"
-                w="10rem"
-                shadow="md"
-                borderRadius="10px"
-                cursor="pointer"
-                onClick={() => handleSelect(item.id)}
-              >
-                {item.profile_name}
-              </Box>
-            </Link>
-            <Text my="2">{item.profile_name}</Text>
-          </Center>
+          <ResumeCard key={item.id} dataObject={item} callback={handleSelect} />
         ))}
-
-        <Center
-          flexDir="column"
-          h="10rem"
-          w="10rem"
-          border="1px solid"
-          borderColor="GrayText"
-          borderRadius="10px"
-          cursor="pointer"
-        >
-          <Icon as={FiPlusCircle} w={6} h={6} color="Highlight" />
-          <Text my="2" color="Highlight" fontWeight="semibold" fontSize="sm">
-            Create New Resume
-          </Text>
-        </Center>
+        <NewResumeCard />
       </HStack>
     </GridItem>
   );
