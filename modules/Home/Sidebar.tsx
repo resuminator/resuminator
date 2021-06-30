@@ -11,7 +11,11 @@ import React from "react";
 import { FiSettings, FiStar, FiTrash } from "react-icons/fi";
 
 const Sidebar = () => {
-  const hoverProps = { bg: useColorModeValue("gray.100", "whiteAlpha.100") };
+  const hoverProps = {
+    bg: useColorModeValue("gray.100", "whiteAlpha.100"),
+    color: useColorModeValue("blue.500", "blue.300"),
+  };
+
   const options = [
     {
       title: "Manage Resumes",
