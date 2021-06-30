@@ -1,5 +1,6 @@
 import { Center, Text } from "@chakra-ui/react";
 import { ResumeStyleObject } from "../../store/types";
+import { isCustom } from "../Design/Colors/ColorSelector";
 
 interface ResumeCardProps {
   dataObject: ResumeStyleObject;
@@ -7,12 +8,13 @@ interface ResumeCardProps {
 }
 
 const ResumeCard: React.FC<ResumeCardProps> = ({ dataObject, callback }) => {
+  const primaryColor = isCustom(dataObject.color) ? dataObject.color : `${dataObject.color}.500`
   return (
     <Center key={dataObject.id} flexDirection="column">
       <Center
         h="10rem"
         w="10rem"
-        bg="Highlight"
+        bg={primaryColor}
         _hover={{ shadow: "md", filter: "brightness(80%)" }}
         borderRadius="10px"
         cursor="pointer"

@@ -5,7 +5,7 @@ import {
   Icon,
   Text,
   useColorModeValue,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import React from "react";
 import { FiSettings, FiStar, FiTrash } from "react-icons/fi";
@@ -61,7 +61,7 @@ const Sidebar = () => {
           </Text>
           {options.map((item) => (
             <HStack
-              key="title"
+              key={item.title}
               p="2"
               cursor="pointer"
               transition="0.2s all"
