@@ -44,12 +44,13 @@ export interface ResumeLayoutObject {
 
 export interface ResumeStyleObject {
   id: string;
-  profile_name: string;
+  profileName: string;
+  icon?: string;
   isPublic?: boolean;
   isClonable?: boolean;
   inputs: Array<Sections | CustomSectionObject["header"]>;
   layout: ResumeLayoutObject;
-  font_profile?: FontProfile;
+  fontProfile?: FontProfile;
   spacing?: number;
   color?: ColorProfiles | string;
 }
@@ -87,6 +88,7 @@ export interface GlobalStore {
 export interface ResumeStore {
   _id: string;
   profileName?: string;
+  icon?: string;
   privacy?: { isPublic?: boolean; isClonable?: boolean };
   properties: ResumeProperties;
   fontProfile?: FontProfile;

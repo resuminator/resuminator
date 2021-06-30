@@ -29,10 +29,11 @@ const Home: NextPage = () => {
         inputs: object.inputs, //default
         layout: object.layout, //default
       });
-      setProperty("fontProfile", object.font_profile);
+      setProperty("fontProfile", object.fontProfile);
       setProperty("color", object.color);
       setProperty("spacing", object.spacing);
-      setProperty("profileName", object.profile_name);
+      setProperty("profileName", object.profileName);
+      setProperty("icon", object.icon);
     },
     [setProperty]
   );

@@ -1,4 +1,4 @@
-import { Box, Center, Text } from "@chakra-ui/react";
+import { Center, Text } from "@chakra-ui/react";
 import { ResumeStyleObject } from "../../store/types";
 
 interface ResumeCardProps {
@@ -9,7 +9,7 @@ interface ResumeCardProps {
 const ResumeCard: React.FC<ResumeCardProps> = ({ dataObject, callback }) => {
   return (
     <Center key={dataObject.id} flexDirection="column">
-      <Box
+      <Center
         h="10rem"
         w="10rem"
         bg="Highlight"
@@ -19,9 +19,9 @@ const ResumeCard: React.FC<ResumeCardProps> = ({ dataObject, callback }) => {
         onClick={() => callback(dataObject.id)}
         transition="all 0.2s"
       >
-        {dataObject.profile_name}
-      </Box>
-      <Text my="2">{dataObject.profile_name}</Text>
+        <Text fontSize="4xl">{dataObject.icon}</Text>
+      </Center>
+      <Text my="2">{dataObject.profileName}</Text>
     </Center>
   );
 };

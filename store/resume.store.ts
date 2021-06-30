@@ -8,6 +8,7 @@ const useResumeStore = create<ResumeStore>(
     (set) => ({
       _id: "",
       profileName: "",
+      icon: "",
       privacy: { isPublic: false, isClonable: false },
       properties: {
         inputs: [],
