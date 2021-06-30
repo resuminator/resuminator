@@ -1,4 +1,5 @@
 import { GridItem, HStack } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 import BoxHeader from "../../components/common/BoxHeader";
 import { ResumeListType, ResumeStyleObject } from "../../store/types";
@@ -11,9 +12,11 @@ interface ResumeListProps {
 }
 
 const ResumeList: React.FC<ResumeListProps> = ({ data, callback }) => {
+  const router = useRouter();
   const handleSelect = (id: string) => {
     const obj = data.filter((item) => item.id === id)[0];
     callback(obj);
+    router.push("/create");
   };
 
   return (
