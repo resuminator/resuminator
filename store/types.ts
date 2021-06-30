@@ -55,8 +55,10 @@ export interface ResumeStyleObject {
   color?: ColorProfiles | string;
 }
 
+export type ResumeListType = Array<ResumeStyleObject>
 export interface Result {
   _id?: string;
+  resumes?: ResumeListType;
   contact?: UserContactDataObject;
   education?: Array<EducationDataObject>;
   experience?: Array<ExperienceDataObject>;
@@ -68,8 +70,6 @@ export interface Result {
 }
 
 export type InputSectionKeys = Sections | CustomSectionObject["header"];
-
-export type ResumeListType = Array<ResumeStyleObject>;
 
 interface ResumeProperties {
   inputs: Array<InputSectionKeys>;

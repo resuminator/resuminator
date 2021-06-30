@@ -2,21 +2,18 @@ import { GridItem, HStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import BoxHeader from "../../components/common/BoxHeader";
-import { ResumeListType, ResumeStyleObject } from "../../store/types";
+import { ResumeListType } from "../../store/types";
 import NewResumeCard from "./NewResumeCard";
 import ResumeCard from "./ResumeCard";
 
 interface ResumeListProps {
   data: ResumeListType;
-  callback: (object: ResumeStyleObject) => void;
 }
 
-const ResumeList: React.FC<ResumeListProps> = ({ data, callback }) => {
+const ResumeList: React.FC<ResumeListProps> = ({ data }) => {
   const router = useRouter();
   const handleSelect = (id: string) => {
-    const obj = data.filter((item) => item.id === id)[0];
-    callback(obj);
-    router.push("/create");
+    router.push(`/create/${id}`);
   };
 
   return (

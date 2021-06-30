@@ -10,14 +10,16 @@ import useProjectStore from "../modules/UserInput/Projects/store";
 import usePublicationStore from "../modules/UserInput/Publications/store";
 import useSkillStore from "../modules/UserInput/Skills/store";
 import useGlobalStore from "./global.store";
+import useResumeStore from "./resume.store";
 import { Result } from "./types";
 
 interface Props {
   data: Result;
   status: QueryStatus;
+  id?: string;
 }
 
-const InitStore: React.FC<Props> = ({ data, status }) => {
+const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
   const educationInit = useEducationStore((state) => state.setData);
   const experienceInit = useExperienceStore((state) => state.setData);
   const certificationInit = useCertificationStore((state) => state.setData);
@@ -28,6 +30,7 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
     useContactStore();
   const customSectionInit = useCustomSectionStore((state) => state.setSections);
   const { setInit, setLoading } = useGlobalStore();
+  const setProperty = useResumeStore((state) => state.setProperty);
   const toast = useToast();
 
   const initUserInfo = useCallback(
@@ -40,8 +43,26 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
     [setContact, setFullName, setJobTitle, setUserImage]
   );
 
+  const initResume = useCallback(
+    (id: string) => {
+      const object = data.resumes.filter((item) => item.id === id)[0];
+      if (!object) return;
+      setProperty("_id", object.id);
+      setProperty("properties", {
+        inputs: object.inputs, //default
+        layout: object.layout, //default
+      });
+      setProperty("fontProfile", object.fontProfile);
+      setProperty("color", object.color);
+      setProperty("spacing", object.spacing);
+      setProperty("profileName", object.profileName);
+      setProperty("icon", object.icon);
+    },
+    [setProperty, data.resumes]
+  );
+
   const initApp = useCallback(
-    (data: Result) => {
+    (id: string, data: Result) => {
       educationInit(data.education);
       experienceInit(data.experience);
       certificationInit(data.certifications);
@@ -50,9 +71,11 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
       skillsInit(data.skills.data);
       initUserInfo(data.contact);
       customSectionInit(data.customSections);
+      initResume(id);
       setInit(true);
     },
     [
+      initResume,
       educationInit,
       experienceInit,
       certificationInit,
@@ -80,10 +103,10 @@ const InitStore: React.FC<Props> = ({ data, status }) => {
 
   useEffect(() => {
     if (status === "success") {
-      initApp(data);
+      initApp(id, data);
       setLoading(false);
     }
-  }, [data, initApp, status, setLoading]);
+  }, [id, data, initApp, status, setLoading]);
 
   return null;
 };
