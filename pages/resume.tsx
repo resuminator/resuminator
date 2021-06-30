@@ -1,16 +1,10 @@
-import axios from "axios";
 import { NextPage } from "next";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
-import API_URL from "../config/server";
+import getResumeData from "../apis/getResumeData";
 import placeholderData from "../data/placeholderData";
 import ResumePaper from "../modules/Resume";
 import InitStore from "../store/InitStore";
-
-const getResumeData = async () => {
-  const res = await axios.get(`${API_URL}/resume`);
-  return res.data;
-};
 
 const Resume: NextPage = () => {
   const { data, status } = useQuery("getResumeData", getResumeData, {
