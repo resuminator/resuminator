@@ -98,4 +98,7 @@ export interface ResumeStore {
   updateInputs?: (arr: ResumeProperties["inputs"]) => void;
   updateLayout?: (key: string, value: any) => void;
   togglePrivacy?: (key: "isPublic" | "isClonable") => void;
+  setFontProfile?: (value: FontProfile) => void;
+  setColorProfile?: (value: ColorProfiles | string) => void;
+  setSpacing?: (value: number) => void;
 }
