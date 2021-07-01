@@ -1,5 +1,4 @@
 import { Button, ButtonProps } from "@chakra-ui/button";
-import { Box } from "@chakra-ui/layout";
 import Link from "next/link";
 
 interface TabButtonProps {
@@ -11,19 +10,19 @@ const TabButton: React.FC<ButtonProps & TabButtonProps> = ({
   children,
   isSelected,
   href,
+  ...rest
 }) => {
   return (
     <Link href={href}>
-      <Box>
-        <Button
-          fontWeight={isSelected ? "semibold" : "medium"}
-          variant="ghost"
-          color={isSelected ? "blue.500" : "inherit"}
-          width="8rem"
-        >
-          {children}
-        </Button>
-      </Box>
+      <Button
+        fontWeight={isSelected ? "semibold" : "medium"}
+        variant="ghost"
+        color={isSelected ? "blue.500" : "inherit"}
+        width="8rem"
+        {...rest}
+      >
+        {children}
+      </Button>
     </Link>
   );
 };

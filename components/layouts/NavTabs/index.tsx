@@ -6,22 +6,33 @@ import TabButton from "./TabButton";
 interface TabItem {
   label: string;
   link: string;
+  key: string;
 }
 
 interface Props {
-  tabs?: Array<TabItem>;
+  id: string | string[];
   currentRoute: string;
 }
 
-const NavTabs: React.FC<Props> = ({ tabs = defaultTabs, currentRoute }) => {
+const NavTabs: React.FC<Props> = ({ id, currentRoute }) => {
+  const getDefaultTabs = (id: Props["id"]): Array<TabItem> => [
+    { key: "home", label: "Home", link: "/home" },
+    { key: "create", label: "Create", link: `/create/${id}` },
+    { key: "design", label: "Design", link: `/design/${id}` },
+    { key: "share", label: "Share", link: "/share" },
+  ];
+
+  const tabs = getDefaultTabs(id);
+
   return (
     <Box>
       <ButtonGroup isAttached px="4">
         {tabs.map((tabitem) => (
           <TabButton
-            isSelected={tabitem.link === currentRoute}
-            key={tabitem.link}
+            key={tabitem.key}
+            isSelected={currentRoute.split("/").includes(tabitem.key)}
             href={tabitem.link}
+            isDisabled={tabitem.key !== "home" && !id.length}
           >
             {tabitem.label}
           </TabButton>
@@ -31,12 +42,5 @@ const NavTabs: React.FC<Props> = ({ tabs = defaultTabs, currentRoute }) => {
     </Box>
   );
 };
-
-const defaultTabs = [
-  { label: "Home", link: "/home" },
-  { label: "Create", link: "/create" },
-  { label: "Design", link: "/design" },
-  { label: "Share", link: "/share" },
-];
 
 export default NavTabs;
