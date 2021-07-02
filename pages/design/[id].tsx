@@ -17,7 +17,7 @@ interface DesignProps {
   id: string;
 }
 const Design: NextPage<DesignProps> = ({ id }) => {
-  const { data, status } = useQuery("getResumeData", getResumeData, {
+  const { data, status } = useQuery("getResumeData", () => getResumeData(id), {
     placeholderData,
   });
 
@@ -55,7 +55,7 @@ export const getServerSideProps = async (context) => {
   const { id } = context.params;
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery("getResumeData", getResumeData);
+  await queryClient.prefetchQuery("getResumeData", () => getResumeData(id));
 
   return {
     props: {

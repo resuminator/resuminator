@@ -43,11 +43,6 @@ export interface ResumeLayoutObject {
 }
 
 export interface ResumeStyleObject {
-  id: string;
-  profileName: string;
-  icon?: string;
-  isPublic?: boolean;
-  isClonable?: boolean;
   inputs: Array<Sections | CustomSectionObject["header"]>;
   layout: ResumeLayoutObject;
   fontProfile?: FontProfile;
@@ -55,10 +50,9 @@ export interface ResumeStyleObject {
   color?: ColorProfiles | string;
 }
 
-export type ResumeListType = Array<ResumeStyleObject>
 export interface Result {
-  _id?: string;
-  resumes?: ResumeListType;
+  _id?: string; //Unique Resume ID which should also be in the user metadata
+  template?: ResumeStyleObject;
   contact?: UserContactDataObject;
   education?: Array<EducationDataObject>;
   experience?: Array<ExperienceDataObject>;
@@ -86,10 +80,7 @@ export interface GlobalStore {
 }
 
 export interface ResumeStore {
-  _id: string;
-  profileName?: string;
-  icon?: string;
-  privacy?: { isPublic?: boolean; isClonable?: boolean };
+  _id: string; //Resume ID which comes with the result
   properties: ResumeProperties;
   fontProfile?: FontProfile;
   spacing?: number;
@@ -97,7 +88,6 @@ export interface ResumeStore {
   setProperty?: (key: string, value: any) => void;
   updateInputs?: (arr: ResumeProperties["inputs"]) => void;
   updateLayout?: (key: string, value: any) => void;
-  togglePrivacy?: (key: "isPublic" | "isClonable") => void;
   setFontProfile?: (value: FontProfile) => void;
   setColorProfile?: (value: ColorProfiles | string) => void;
   setSpacing?: (value: number) => void;

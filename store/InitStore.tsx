@@ -45,9 +45,9 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
 
   const initResume = useCallback(
     (id: string) => {
-      const object = data.resumes.filter((item) => item.id === id)[0];
+      const object = data.template;
       if (!object) return;
-      setProperty("_id", object.id);
+      setProperty("_id", id);
       setProperty("properties", {
         inputs: object.inputs, //default
         layout: object.layout, //default
@@ -55,10 +55,8 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
       setProperty("fontProfile", object.fontProfile);
       setProperty("color", object.color);
       setProperty("spacing", object.spacing);
-      setProperty("profileName", object.profileName);
-      setProperty("icon", object.icon);
     },
-    [setProperty, data.resumes]
+    [setProperty, data.template]
   );
 
   const initApp = useCallback(

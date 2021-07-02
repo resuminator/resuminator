@@ -6,6 +6,7 @@ import { dehydrate } from "react-query/hydration";
 import getUserData from "../apis/getUserData";
 import Footer from "../components/layouts/Footer";
 import Header from "../components/layouts/Header";
+import { userPlaceholder } from "../data/placeholderData";
 import ResumeList from "../modules/Home/ResumeList";
 import Sidebar from "../modules/Home/Sidebar";
 import TemplateList from "../modules/Home/TemplateList";
@@ -14,7 +15,7 @@ import { UserObject } from "../modules/User/types";
 
 const Home: NextPage = () => {
   const { data, status } = useQuery<UserObject, Error>("getUserData", () =>
-    getUserData("viveknigam3003")
+    getUserData("viveknigam3003"), {placeholderData: userPlaceholder}
   );
   const setProperty = useUserStore((state) => state.setProperty);
   const toast = useToast();

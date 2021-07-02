@@ -10,7 +10,7 @@ export interface ResumeMetadata {
 
 export interface UserObject {
   _id: string;
-  isBanned: 0 | 1 | 2;
+  isBanned: number;
   fullName: string;
   email: string;
   image: string;

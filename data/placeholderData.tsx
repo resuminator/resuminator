@@ -1,12 +1,18 @@
 import { Result } from "../store/types";
 
+export const userPlaceholder = {
+  _id: "",
+  isBanned: 0,
+  fullName: "",
+  email: "",
+  image: "",
+  active: [],
+}
+
 const placeholderData: Result = {
-  resumes: [
+  _id: "DefaultID", //Default (at Index 0)
+  template:
     {
-      id: "DefaultID", //Default (at Index 0)
-      profileName: "Default Template",
-      isPublic: true,
-      isClonable: true,
       inputs: [
         "EDUCATION",
         "EXPERIENCE",
@@ -27,7 +33,6 @@ const placeholderData: Result = {
       spacing: 1,
       color: "blue", //Any valid HEX color (Defaults to Black)
     },
-  ],
   contact: {
     fullName: "",
     jobTitle: "",

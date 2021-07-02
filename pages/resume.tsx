@@ -7,7 +7,7 @@ import ResumePaper from "../modules/Resume";
 import InitStore from "../store/InitStore";
 
 const Resume: NextPage = () => {
-  const { data, status } = useQuery("getResumeData", getResumeData, {
+  const { data, status } = useQuery("getResumeData", () => getResumeData(""), {
     placeholderData,
   });
 
@@ -24,7 +24,7 @@ export default Resume;
 export async function getStaticProps() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery("getResumeData", getResumeData);
+  await queryClient.prefetchQuery("getResumeData", () => getResumeData(""));
 
   return {
     props: {
