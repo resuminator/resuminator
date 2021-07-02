@@ -3,7 +3,7 @@ import create from "zustand";
 import { devtools } from "zustand/middleware";
 import { UserStore } from "./types";
 
-const useGlobalStore = create<UserStore>(
+const useUserStore = create<UserStore>(
   devtools(
     (set) => ({
       _id: "",
@@ -32,4 +32,4 @@ const useGlobalStore = create<UserStore>(
   )
 );
 
-export default useGlobalStore;
+export default useUserStore;
