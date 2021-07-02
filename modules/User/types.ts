@@ -13,7 +13,7 @@ export interface UserObject {
   isBanned: number;
   fullName: string;
   email: string;
-  image: string;
+  avatar: string;
   active: Array<ResumeMetadata>;
 }
 

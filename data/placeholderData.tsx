@@ -1,11 +1,12 @@
+import { UserObject } from "../modules/User/types";
 import { Result } from "../store/types";
 
-export const userPlaceholder = {
+export const userPlaceholder: UserObject = {
   _id: "",
   isBanned: 0,
   fullName: "",
   email: "",
-  image: "",
+  avatar: "",
   active: [],
 }
 

@@ -14,8 +14,10 @@ import useUserStore from "../modules/User/store";
 import { UserObject } from "../modules/User/types";
 
 const Home: NextPage = () => {
-  const { data, status } = useQuery<UserObject, Error>("getUserData", () =>
-    getUserData("viveknigam3003"), {placeholderData: userPlaceholder}
+  const { data, status } = useQuery<UserObject, Error>(
+    "getUserData",
+    () => getUserData("viveknigam3003"),
+    { placeholderData: userPlaceholder }
   );
   const setProperty = useUserStore((state) => state.setProperty);
   const toast = useToast();
@@ -36,6 +38,7 @@ const Home: NextPage = () => {
       setProperty("_id", data._id);
       setProperty("active", data.active);
       setProperty("email", data.email);
+      setProperty("avatar", data.avatar);
       setProperty("fullName", data.fullName);
       setProperty("isBanned", data.isBanned);
     }

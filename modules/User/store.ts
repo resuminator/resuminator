@@ -10,7 +10,7 @@ const useUserStore = create<UserStore>(
       isBanned: 0,
       fullName: "",
       email: "",
-      image: "",
+      avatar: "",
       active: [],
       setProperty: (key, value) =>
         set((state) =>
