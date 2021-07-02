@@ -23,7 +23,7 @@ const Header = () => {
     >
       <LogoSquare />
       <NavTabs id={id} currentRoute={router.pathname} />
-      <UserAvatar src="https://www.gravatar.com/avatar/516fd0624a35f74e54802fea778abf41" />
+      <UserAvatar src={userAvatar} />
     </Box>
   );
 };

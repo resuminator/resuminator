@@ -1,6 +1,6 @@
-import { Grid, useToast } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 import { NextPage } from "next";
-import React, { useEffect } from "react";
+import React from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import getUserData from "../apis/getUserData";
@@ -10,8 +10,8 @@ import { userPlaceholder } from "../data/placeholderData";
 import ResumeList from "../modules/Home/ResumeList";
 import Sidebar from "../modules/Home/Sidebar";
 import TemplateList from "../modules/Home/TemplateList";
-import useUserStore from "../modules/User/store";
 import { UserObject } from "../modules/User/types";
+import InitUserStore from "../store/InitUserStore";
 
 const Home: NextPage = () => {
   const { data, status } = useQuery<UserObject, Error>(
@@ -19,33 +19,10 @@ const Home: NextPage = () => {
     () => getUserData("viveknigam3003"),
     { placeholderData: userPlaceholder }
   );
-  const setProperty = useUserStore((state) => state.setProperty);
-  const toast = useToast();
-
-  if (status === "error")
-    toast({
-      title: "Cannot connect to server.",
-      variant: "subtle",
-      description:
-        "Try checking your network connection while we try to reconnect.",
-      status: "error",
-      duration: 3500,
-      isClosable: true,
-    });
-
-  useEffect(() => {
-    if (status === "success") {
-      setProperty("_id", data._id);
-      setProperty("active", data.active);
-      setProperty("email", data.email);
-      setProperty("avatar", data.avatar);
-      setProperty("fullName", data.fullName);
-      setProperty("isBanned", data.isBanned);
-    }
-  }, [status, data, setProperty]);
 
   return (
     <>
+      <InitUserStore data={data} status={status}/>
       <Header />
       <Grid
         height="100vh"
