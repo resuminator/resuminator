@@ -1,25 +1,47 @@
-import { Grid } from "@chakra-ui/react";
+import { Grid, useToast } from "@chakra-ui/react";
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
-import getResumeData from "../apis/getResumeData";
+import getUserData from "../apis/getUserData";
 import Footer from "../components/layouts/Footer";
 import Header from "../components/layouts/Header";
-import placeholderData from "../data/placeholderData";
 import ResumeList from "../modules/Home/ResumeList";
 import Sidebar from "../modules/Home/Sidebar";
 import TemplateList from "../modules/Home/TemplateList";
-import InitStore from "../store/InitStore";
+import useUserStore from "../modules/User/store";
+import { UserObject } from "../modules/User/types";
 
 const Home: NextPage = () => {
-  const { data, status } = useQuery("getResumeData", getResumeData, {
-    placeholderData,
-  });
+  const { data, status } = useQuery<UserObject, Error>("getUserData", () =>
+    getUserData("viveknigam3003")
+  );
+  const setProperty = useUserStore((state) => state.setProperty);
+  const toast = useToast();
+
+  if (status === "error")
+    toast({
+      title: "Cannot connect to server.",
+      variant: "subtle",
+      description:
+        "Try checking your network connection while we try to reconnect.",
+      status: "error",
+      duration: 3500,
+      isClosable: true,
+    });
+
+  useEffect(() => {
+    if (status === "success") {
+      setProperty("_id", data._id);
+      setProperty("active", data.active);
+      setProperty("email", data.email);
+      setProperty("fullName", data.fullName);
+      setProperty("isBanned", data.isBanned);
+    }
+  }, [status, data, setProperty]);
 
   return (
     <>
-      <InitStore data={data} status={status} />
       <Header />
       <Grid
         height="100vh"
@@ -31,7 +53,7 @@ const Home: NextPage = () => {
       >
         {/**Each component under Grid must be wrapped inside a GridItem component */}
         <Sidebar />
-        <ResumeList data={data.resumes} />
+        <ResumeList data={data.active} />
         <TemplateList />
       </Grid>
       <Footer />
@@ -44,7 +66,9 @@ export default Home;
 export async function getStaticProps() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery("getResumeData", getResumeData);
+  await queryClient.prefetchQuery("getUserData", () =>
+    getUserData("viveknigam3003")
+  );
 
   return {
     props: {

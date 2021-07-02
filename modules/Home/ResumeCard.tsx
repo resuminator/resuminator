@@ -1,14 +1,16 @@
 import { Center, Text } from "@chakra-ui/react";
-import { ResumeStyleObject } from "../../store/types";
 import { isCustom } from "../Design/Colors/ColorSelector";
+import { ResumeMetadata } from "../User/types";
 
 interface ResumeCardProps {
-  dataObject: ResumeStyleObject;
+  dataObject: ResumeMetadata;
   callback: (id: string) => void;
 }
 
 const ResumeCard: React.FC<ResumeCardProps> = ({ dataObject, callback }) => {
-  const primaryColor = isCustom(dataObject.color) ? dataObject.color : `${dataObject.color}.500`
+  const primaryColor = isCustom(dataObject.color)
+    ? dataObject.color
+    : `${dataObject.color}.500`;
   return (
     <Center key={dataObject.id} flexDirection="column">
       <Center

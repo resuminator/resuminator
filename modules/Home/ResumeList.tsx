@@ -2,12 +2,12 @@ import { GridItem, HStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import BoxHeader from "../../components/common/BoxHeader";
-import { ResumeListType } from "../../store/types";
+import { ResumeMetadata } from "../User/types";
 import NewResumeCard from "./NewResumeCard";
 import ResumeCard from "./ResumeCard";
 
 interface ResumeListProps {
-  data: ResumeListType;
+  data: Array<ResumeMetadata>;
 }
 
 const ResumeList: React.FC<ResumeListProps> = ({ data }) => {
