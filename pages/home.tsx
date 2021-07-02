@@ -16,13 +16,13 @@ import InitUserStore from "../store/InitUserStore";
 const Home: NextPage = () => {
   const { data, status } = useQuery<UserObject, Error>(
     "getUserData",
-    () => getUserData("viveknigam3003"),
+    getUserData,
     { placeholderData: userPlaceholder }
   );
 
   return (
     <>
-      <InitUserStore data={data} status={status}/>
+      <InitUserStore data={data} status={status} />
       <Header />
       <Grid
         height="100vh"
@@ -47,9 +47,7 @@ export default Home;
 export async function getStaticProps() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery("getUserData", () =>
-    getUserData("viveknigam3003")
-  );
+  await queryClient.prefetchQuery("getUserData", getUserData);
 
   return {
     props: {

@@ -16,7 +16,7 @@ import {
   NameAndJobTitle,
   Projects,
   Publications,
-  Skills,
+  Skills
 } from "../../modules/UserInput";
 import CustomSections from "../../modules/UserInput/Custom";
 import CustomSectionInputs from "../../modules/UserInput/Custom/CustomSectionInputs";
@@ -55,7 +55,7 @@ const Create: NextPage<CreateProps> = ({ id }) => {
   const { data: userData, status: userQueryStatus } = useQuery<
     UserObject,
     Error
-  >("getUserData", () => getUserData("viveknigam3003"), {
+  >("getUserData", getUserData, {
     placeholderData: userPlaceholder,
   });
 

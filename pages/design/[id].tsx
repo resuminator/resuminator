@@ -26,7 +26,7 @@ const Design: NextPage<DesignProps> = ({ id }) => {
   const { data: userData, status: userQueryStatus } = useQuery<
     UserObject,
     Error
-  >("getUserData", () => getUserData("viveknigam3003"), {
+  >("getUserData", getUserData, {
     placeholderData: userPlaceholder,
   });
 
