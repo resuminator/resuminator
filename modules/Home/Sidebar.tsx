@@ -5,10 +5,10 @@ import {
   Icon,
   Text,
   useColorModeValue,
-  VStack
+  VStack,
 } from "@chakra-ui/react";
 import React from "react";
-import { FiSettings, FiStar, FiTrash } from "react-icons/fi";
+import { FiSettings, FiStar } from "react-icons/fi";
 
 const Sidebar = () => {
   const hoverProps = {
@@ -24,10 +24,6 @@ const Sidebar = () => {
     {
       title: "Favorites",
       icon: FiStar,
-    },
-    {
-      title: "Trash",
-      icon: FiTrash,
     },
   ];
 
