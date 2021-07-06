@@ -1,13 +1,11 @@
 import {
-  Box,
-  Button,
-  GridItem,
-  HStack, Text,
+  Box, GridItem, Text,
   useColorModeValue,
   VStack
 } from "@chakra-ui/react";
 import React from "react";
 import { FiSettings, FiStar } from "react-icons/fi";
+import SidebarOptions from "./SidebarOptions";
 
 const Sidebar = () => {
   const options = [
@@ -51,25 +49,7 @@ const Sidebar = () => {
           >
             Workspace
           </Text>
-          {options.map((item) => (
-            <HStack
-              key={item.title}
-              transition="0.2s all"
-              width="inherit"
-            >
-              <Button
-                isDisabled={item.isDisabled}
-                variant="ghost"
-                isFullWidth
-                justifyContent="left"
-                fontWeight="normal"
-                size="sm"
-                leftIcon={<item.icon />}
-              >
-                {item.title}
-              </Button>
-            </HStack>
-          ))}
+          <SidebarOptions itemList={options} />
         </VStack>
       </Box>
     </GridItem>
