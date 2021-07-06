@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import BoxHeader from "../../components/common/BoxHeader";
 import { ResumeMetadata } from "../User/types";
-import NewResumeCard from "./NewResumeCard";
+import CreateResumeCard from "./CreateResumeCard";
 import ResumeCard from "./ResumeCard";
 
 interface ResumeListProps {
@@ -15,6 +15,8 @@ const ResumeList: React.FC<ResumeListProps> = ({ data }) => {
   const handleSelect = (id: string) => {
     router.push(`/create/${id}`);
   };
+
+
 
   return (
     <GridItem colSpan={3}>
@@ -29,7 +31,7 @@ const ResumeList: React.FC<ResumeListProps> = ({ data }) => {
         {data.map((item) => (
           <ResumeCard key={item.id} dataObject={item} callback={handleSelect} />
         ))}
-        <NewResumeCard />
+        <CreateResumeCard onClick={() => console.log("Create New")}/>
       </HStack>
     </GridItem>
   );
