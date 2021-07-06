@@ -10,6 +10,16 @@ export const userPlaceholder: UserObject = {
   active: [],
 }
 
+export const resumeMetaPlaceholder =   {
+  id: "",
+  profileName: "",
+  webId: "",
+  icon: "",
+  isPublic: true,
+  isTemplate: true,
+  color: "",
+}
+
 const placeholderData: Result = {
   _id: "DefaultID", //Default (at Index 0)
   template:

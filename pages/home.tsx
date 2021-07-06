@@ -1,17 +1,25 @@
-import { Grid } from "@chakra-ui/react";
+import { Grid, useDisclosure } from "@chakra-ui/react";
 import { NextPage } from "next";
+import dynamic from "next/dynamic";
 import React from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import getUserData from "../apis/getUserData";
 import Footer from "../components/layouts/Footer";
 import Header from "../components/layouts/Header";
-import { userPlaceholder } from "../data/placeholderData";
+import {
+  resumeMetaPlaceholder,
+  userPlaceholder
+} from "../data/placeholderData";
 import ResumeList from "../modules/Home/ResumeList";
 import Sidebar from "../modules/Home/Sidebar";
 import TemplateList from "../modules/Home/TemplateList";
 import { UserObject } from "../modules/User/types";
 import InitUserStore from "../store/InitUserStore";
+
+const CreateResumeModal = dynamic(
+  () => import("../modules/Home/CreateResumeModal")
+);
 
 const Home: NextPage = () => {
   const { data, status } = useQuery<UserObject, Error>(
@@ -19,6 +27,12 @@ const Home: NextPage = () => {
     getUserData,
     { placeholderData: userPlaceholder }
   );
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleNewResumeButton = () => {
+    if (!data.active.length) return console.log(resumeMetaPlaceholder);
+    return onOpen();
+  };
 
   return (
     <>
@@ -34,9 +48,10 @@ const Home: NextPage = () => {
       >
         {/**Each component under Grid must be wrapped inside a GridItem component */}
         <Sidebar />
-        <ResumeList data={data.active} />
+        <ResumeList data={data.active} handleNew={handleNewResumeButton} />
         <TemplateList />
       </Grid>
+      <CreateResumeModal data={data} options={{ isOpen, onClose }} />
       <Footer />
     </>
   );
