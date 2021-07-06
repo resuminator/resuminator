@@ -1,29 +1,25 @@
 import {
   Box,
+  Button,
   GridItem,
-  HStack,
-  Icon,
-  Text,
+  HStack, Text,
   useColorModeValue,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import React from "react";
 import { FiSettings, FiStar } from "react-icons/fi";
 
 const Sidebar = () => {
-  const hoverProps = {
-    bg: useColorModeValue("gray.100", "whiteAlpha.100"),
-    color: useColorModeValue("blue.500", "blue.300"),
-  };
-
   const options = [
     {
       title: "Manage Resumes",
       icon: FiSettings,
+      isDisabled: false,
     },
     {
       title: "Favorites",
       icon: FiStar,
+      isDisabled: false,
     },
   ];
 
@@ -58,15 +54,20 @@ const Sidebar = () => {
           {options.map((item) => (
             <HStack
               key={item.title}
-              p="2"
-              cursor="pointer"
               transition="0.2s all"
               width="inherit"
-              borderRadius="10px"
-              _hover={hoverProps}
             >
-              <Icon as={item.icon} />
-              <Text fontSize="sm">{item.title}</Text>
+              <Button
+                isDisabled={item.isDisabled}
+                variant="ghost"
+                isFullWidth
+                justifyContent="left"
+                fontWeight="normal"
+                size="sm"
+                leftIcon={<item.icon />}
+              >
+                {item.title}
+              </Button>
             </HStack>
           ))}
         </VStack>
