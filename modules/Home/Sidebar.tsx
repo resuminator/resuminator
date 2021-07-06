@@ -1,23 +1,54 @@
-import {
-  Box, GridItem, Text,
-  useColorModeValue,
-  VStack
-} from "@chakra-ui/react";
+import { Box, GridItem, useColorModeValue, VStack } from "@chakra-ui/react";
 import React from "react";
-import { FiSettings, FiStar } from "react-icons/fi";
-import SidebarOptions from "./SidebarOptions";
+import {
+  FiBook,
+  FiCopy,
+  FiHelpCircle,
+  FiMap,
+  FiSettings, FiShare2,
+  FiStar
+} from "react-icons/fi";
+import SidebarSection from "./SidebarSection"
 
 const Sidebar = () => {
-  const options = [
+  const workspace = [
     {
       title: "Manage Resumes",
       icon: FiSettings,
-      isDisabled: false,
+      link: "/settings/resume",
     },
     {
       title: "Favorites",
       icon: FiStar,
-      isDisabled: false,
+      link: "",
+    },
+    {
+      title: "Templates",
+      icon: FiCopy,
+      link: "", // /templates
+    },
+    {
+      title: "Quick Share",
+      icon: FiShare2,
+      link: "", // /share
+    },
+  ];
+
+  const resources = [
+    {
+      title: "Guide to Resuminator",
+      icon: FiBook,
+      link: "", // /docs/getting-started
+    },
+    {
+      title: "Broadmap",
+      icon: FiMap,
+      link: "http://broadmap.resuminator.in",
+    },
+    {
+      title: "Help Center",
+      icon: FiHelpCircle,
+      link: "", // /support
     },
   ];
 
@@ -39,17 +70,8 @@ const Sidebar = () => {
           width="100%"
           mb="4"
         >
-          <Text
-            fontSize="sm"
-            color="InactiveCaptionText"
-            fontWeight="semibold"
-            letterSpacing="wider"
-            textTransform="uppercase"
-            pb="2"
-          >
-            Workspace
-          </Text>
-          <SidebarOptions itemList={options} />
+          <SidebarSection sectionTitle="Workspce" items={workspace} />
+          <SidebarSection sectionTitle="Resources" items={resources} />
         </VStack>
       </Box>
     </GridItem>
