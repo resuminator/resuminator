@@ -13,7 +13,6 @@ import {
 } from "../data/placeholderData";
 import ResumeList from "../modules/Home/ResumeList";
 import Sidebar from "../modules/Home/Sidebar";
-import TemplateList from "../modules/Home/TemplateList";
 import { UserObject } from "../modules/User/types";
 import InitUserStore from "../store/InitUserStore";
 

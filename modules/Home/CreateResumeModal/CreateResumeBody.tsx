@@ -1,9 +1,8 @@
 import {
-  BoxProps,
   ModalBody,
   Text,
   TextProps,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import BoxHeader from "../../../components/common/BoxHeader";
 import { UserObject } from "../../User/types";

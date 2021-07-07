@@ -7,7 +7,7 @@ import {
   MenuItem,
   MenuList,
   Text,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";

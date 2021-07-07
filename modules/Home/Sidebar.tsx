@@ -5,10 +5,11 @@ import {
   FiCopy,
   FiHelpCircle,
   FiMap,
-  FiSettings, FiShare2,
+  FiSettings,
+  FiShare2,
   FiStar
 } from "react-icons/fi";
-import SidebarSection from "./SidebarSection"
+import SidebarSection from "./SidebarSection";
 
 const Sidebar = () => {
   const workspace = [

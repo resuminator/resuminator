@@ -1,4 +1,4 @@
-import { GridItem, Text } from "@chakra-ui/react";
+import { GridItem } from "@chakra-ui/react";
 import React from "react";
 import BoxHeader from "../../components/common/BoxHeader";
 
