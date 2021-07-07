@@ -1,5 +1,14 @@
-import { Avatar, Box, GridItem, Input, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  GridItem,
+  Input,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import React, { Fragment } from "react";
+import { FiUpload } from "react-icons/fi";
 import BoxHeader from "../../../components/common/BoxHeader";
 import useUserStore from "../../User/store";
 
@@ -46,9 +55,21 @@ const General = () => {
           />
         </Box>
       </GridItem>
-      <GridItem rowSpan={2} colSpan={1}>
-        <Text></Text>  
-        <Avatar size="2xl" src={avatar} />
+      <GridItem rowSpan={2} colSpan={1} p="4">
+        <VStack>
+          <Text fontSize="sm" fontWeight="semibold" colorScheme="gray" mb="2">
+            Profile Picture
+          </Text>
+          <Avatar size="2xl" src={avatar} />
+          <Button
+            rightIcon={<FiUpload />}
+            colorScheme="purple"
+            size="sm"
+            variant="ghost"
+          >
+            {avatar.length ? "Upload New" : "Upload"}
+          </Button>
+        </VStack>
       </GridItem>
     </Fragment>
   );
