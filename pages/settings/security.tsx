@@ -8,6 +8,7 @@ import BoxHeader from "../../components/common/BoxHeader";
 import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import { userPlaceholder } from "../../data/placeholderData";
+import ChangePassword from "../../modules/Settings/Security/ChangePassword";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import { UserObject } from "../../modules/User/types";
 import InitUserStore from "../../store/InitUserStore";
@@ -38,6 +39,7 @@ const SecuritySettings: NextPage = () => {
           />
         </GridItem>
         <SettingsSidebar />
+        <ChangePassword />
       </Grid>
       <Footer />
     </>
