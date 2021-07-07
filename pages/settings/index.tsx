@@ -8,6 +8,7 @@ import BoxHeader from "../../components/common/BoxHeader";
 import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import { userPlaceholder } from "../../data/placeholderData";
+import General from "../../modules/Settings/General";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import { UserObject } from "../../modules/User/types";
 import InitUserStore from "../../store/InitUserStore";
@@ -38,6 +39,7 @@ const Settings: NextPage = () => {
           />
         </GridItem>
         <SettingsSidebar />
+        <General />
       </Grid>
       <Footer />
     </>
