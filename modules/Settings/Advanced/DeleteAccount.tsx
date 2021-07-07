@@ -38,19 +38,17 @@ const DeleteAccount = () => {
           titleProps={{ color: "red" }}
         />
         <Text fontSize="sm" mb="4">
-          Proceeding with this options will delete
+          Proceeding with this options will delete your Resuminator account
+          along with
           <Highlight> all your personal data</Highlight>,{" "}
-          <Highlight>resumes</Highlight>, and
-          <Highlight> metadata</Highlight>. It will reset your Resuminator
-          account including the social profile and any shared resume links will
-          be deleted too!
+          <Highlight>resumes</Highlight>,{" "}
+          <Highlight>shared resume links</Highlight>, and
+          <Highlight> metadata</Highlight>. This action is irreversible. Proceed
+          with caution.
         </Text>
         <Button colorScheme="red" size="sm" mb="4" onClick={onOpen}>
-          Delete Account Data
+          Delete My Account
         </Button>
-        <Text fontSize="sm" color="red.500" mb="2">
-          This action is irreversible. Proceed with caution.
-        </Text>
       </Box>
       <ActionModal
         title="Are you absolutely sure?"
@@ -66,9 +64,9 @@ const DeleteAccount = () => {
           Read the text below with caution!
         </Text>
         <Text fontSize="sm" mb="4">
-          This action cannot be undone. This will permanently delete all the
-          data associated with the account linked to {email} and reset the
-          account including all the resume links and your social profile.
+          This action cannot be undone. This will PERMANENTLY delete your
+          account linked to {email} including all data and sharable resume links
+          associated with this account.
         </Text>
         <InputWithLabel
           label={`Please enter your email "${email}" below to confirm this action`}

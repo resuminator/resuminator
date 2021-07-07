@@ -42,7 +42,7 @@ const DeleteData = () => {
           Proceeding with this options will delete
           <Highlight> all your personal data</Highlight>,{" "}
           <Highlight>resumes</Highlight>, and
-          <Highlight> metadata</Highlight>. It will reset your Resuminator
+          <Highlight> metadata</Highlight>. It will also <strong>reset</strong> your Resuminator
           account including the social profile and any shared resume links will
           be deleted too!
         </Text>
@@ -67,7 +67,7 @@ const DeleteData = () => {
           Read the text below with caution!
         </Text>
         <Text fontSize="sm" mb="4">
-          This action cannot be undone. This will permanently delete all the
+          This action cannot be undone. This will PERMANENTLY delete all the
           data associated with the account linked to {email} and reset the
           account including all the resume links and your social profile.
         </Text>
