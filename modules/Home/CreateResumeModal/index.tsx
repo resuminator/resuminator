@@ -5,6 +5,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { UserObject } from "../../User/types";
@@ -32,7 +33,11 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
         <ModalCloseButton />
         <ModalHeader>
           <Text>Create new resume</Text>
-          <Text fontSize="sm" color="gray" fontWeight="normal">
+          <Text
+            fontSize="sm"
+            color={useColorModeValue("gray", "whiteAlpha")}
+            fontWeight="normal"
+          >
             Select one to get started
           </Text>
         </ModalHeader>
