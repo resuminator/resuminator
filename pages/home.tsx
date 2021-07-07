@@ -49,7 +49,9 @@ const Home: NextPage = () => {
         {/**Each component under Grid must be wrapped inside a GridItem component */}
         <Sidebar />
         <ResumeList data={data.active} handleNew={handleNewResumeButton} />
-        <TemplateList />
+        
+        {/* Will be uncommented when we'll launch the template gallery */}
+        {/* <TemplateList /> */}
       </Grid>
       <CreateResumeModal data={data} options={{ isOpen, onClose }} />
       <Footer />

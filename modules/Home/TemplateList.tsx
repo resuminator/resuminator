@@ -17,9 +17,9 @@ const TemplateList = () => {
         }}
         spacing="0"
       />
-      <Text color="InactiveCaptionText" fontWeight="bold" fontSize="xl">
+      {/* <Text color="gray" fontWeight="normal" fontSize="xl">
         Coming Soon
-      </Text>
+      </Text> */}
     </GridItem>
   );
 };
