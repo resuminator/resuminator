@@ -5,19 +5,34 @@ import {
   GridItem,
   Input,
   Text,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import React, { Fragment } from "react";
+import { useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import BoxHeader from "../../../components/common/BoxHeader";
 import useUserStore from "../../User/store";
 
 const General = () => {
   const { fullName, email, avatar, setProperty } = useUserStore();
+  const [unsavedChanges, setUnsavedChanges] = useState<boolean>(false);
+  const toast = useToast();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const [key, value] = [e.target.name, e.target.value];
+    setUnsavedChanges(true);
     setProperty(key, value);
+  };
+
+  const saveChanges = () => {
+    setUnsavedChanges(false);
+    toast({
+      title: "Changes Saved",
+      duration: 3000,
+      status: "success",
+      variant: "subtle"
+    });
   };
 
   return (
@@ -54,6 +69,13 @@ const General = () => {
             isDisabled
           />
         </Box>
+        <Button
+          colorScheme="green"
+          isDisabled={!unsavedChanges}
+          onClick={saveChanges}
+        >
+          Save Changes
+        </Button>
       </GridItem>
       <GridItem rowSpan={2} colSpan={1} p="4">
         <VStack>
