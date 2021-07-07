@@ -6,6 +6,7 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { FaDiscord } from "react-icons/fa";
 import {
   FiBook,
@@ -20,6 +21,11 @@ import useUserStore from "../User/store";
 
 const UserMenu = () => {
   const userAvatar = useUserStore((state) => state.avatar);
+  const router = useRouter();
+
+  const routeTo = (path: string) => {
+    router.push(path);
+  };
 
   return (
     <Menu isLazy>
@@ -28,8 +34,15 @@ const UserMenu = () => {
       </MenuButton>
       <MenuList>
         <MenuItem icon={<FiUser />}>Profile</MenuItem>
-        <MenuItem icon={<FiSettings />}>Settings</MenuItem>
-        <MenuItem icon={<FiCheckCircle />}>Preferences</MenuItem>
+        <MenuItem icon={<FiSettings />} onClick={() => routeTo("/settings")}>
+          Settings
+        </MenuItem>
+        <MenuItem
+          icon={<FiCheckCircle />}
+          onClick={() => routeTo("/settings/preferences")}
+        >
+          Preferences
+        </MenuItem>
         <Divider />
         <MenuItem icon={<FiBook />}>Guides</MenuItem>
         <MenuItem icon={<FaDiscord />}>Join Discord Channel</MenuItem>
