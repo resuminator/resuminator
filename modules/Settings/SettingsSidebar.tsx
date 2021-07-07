@@ -5,6 +5,7 @@ import {
   FiCheckCircle,
   FiDatabase,
   FiFileText,
+  FiSettings,
   FiUser,
 } from "react-icons/fi";
 import SidebarSection, { SideBarItems } from "../Home/SidebarSection";
@@ -13,8 +14,13 @@ const SettingsSidebar = () => {
   const general: SideBarItems = [
     {
       title: "General",
-      icon: FiUser,
+      icon: FiSettings,
       link: "/settings",
+    },
+    {
+      title: "Account",
+      icon: FiUser,
+      link: "/settings/account",
     },
     // {
     //   title: "Preferences",
@@ -25,11 +31,6 @@ const SettingsSidebar = () => {
       title: "Resume",
       icon: FiFileText,
       link: "/settings/resume",
-    },
-    {
-      title: "Data & Security",
-      icon: FiDatabase,
-      link: "/settings/security",
     },
     {
       title: "Advanced",
