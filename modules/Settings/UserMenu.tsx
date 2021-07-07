@@ -1,6 +1,6 @@
 import {
+  Avatar,
   Divider,
-  IconButton,
   Menu,
   MenuButton,
   MenuItem,
@@ -16,7 +16,6 @@ import {
   FiSettings,
   FiUser,
 } from "react-icons/fi";
-import UserAvatar from "../../components/layouts/Header/UserAvatar";
 import useUserStore from "../User/store";
 
 const UserMenu = () => {
@@ -30,7 +29,7 @@ const UserMenu = () => {
   return (
     <Menu isLazy>
       <MenuButton>
-        <UserAvatar as={IconButton} src={userAvatar} />
+        <Avatar size="md" src={userAvatar} />
       </MenuButton>
       <MenuList>
         <MenuItem icon={<FiUser />}>Profile</MenuItem>
