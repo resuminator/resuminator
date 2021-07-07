@@ -6,7 +6,7 @@ import useUserStore from "../../User/store";
 const RequestData = () => {
   const { email } = useUserStore();
   return (
-    <GridItem rowSpan={2} colStart={2} colSpan={1} px="4">
+    <GridItem rowSpan={1} colStart={2} colSpan={1} px="4">
       <Box mb="8">
         <BoxHeader
           title="Request Data"
@@ -19,7 +19,9 @@ const RequestData = () => {
           resume, and all metadata for your account linked to {email} by raising
           a request.
         </Text>
-        <Button colorScheme="purple" size="sm" mb="4">Request Account Data</Button>
+        <Button colorScheme="purple" size="sm" mb="4">
+          Request Account Data
+        </Button>
         <Text fontSize="sm" color="gray" mb="2">
           Your data will be sent to you via your primary email {`(${email})`}{" "}
           within 14 days of request.
