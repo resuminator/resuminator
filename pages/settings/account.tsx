@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { GridItem } from "@chakra-ui/react";
 import { NextPage } from "next";
 import React from "react";
 import { QueryClient, useQuery } from "react-query";
@@ -33,8 +33,8 @@ const SecuritySettings: NextPage = () => {
           />
         </GridItem>
         <SettingsSidebar />
-        <GridItem rowSpan={2} colStart={2} colSpan={1}>
-        <ChangePassword />
+        <GridItem rowSpan={2} colSpan={1}>
+          <ChangePassword />
         </GridItem>
       </SettingsLayoutGrid>
       <Footer />

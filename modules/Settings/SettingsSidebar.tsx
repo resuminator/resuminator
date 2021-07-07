@@ -39,7 +39,7 @@ const SettingsSidebar = () => {
     },
   ];
   return (
-    <GridItem rowSpan={5} colSpan={1}>
+    <GridItem colSpan={1}>
       <Box
         alignItems="flex-start"
         flexDir="column"
