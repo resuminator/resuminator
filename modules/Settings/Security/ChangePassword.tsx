@@ -32,7 +32,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <GridItem rowSpan={2} colSpan={2} px="4">
+    <GridItem rowSpan={2} colStart={2} colSpan={1} px="4">
       <Box mb="8">
         <BoxHeader
           title="Change Password"

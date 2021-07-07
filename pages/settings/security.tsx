@@ -9,6 +9,7 @@ import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import { userPlaceholder } from "../../data/placeholderData";
 import ChangePassword from "../../modules/Settings/Security/ChangePassword";
+import RequestData from "../../modules/Settings/Security/RequestData";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import { UserObject } from "../../modules/User/types";
 import InitUserStore from "../../store/InitUserStore";
@@ -25,9 +26,9 @@ const SecuritySettings: NextPage = () => {
       <InitUserStore data={data} status={status} />
       <Header />
       <Grid
-        height="100vh"
-        templateRows="repeat(6, 1fr)"
-        templateColumns="repeat(4, 1fr)"
+        minH="100vh"
+        templateRows="1fr repeat(4, 2fr)"
+        templateColumns="1fr 2fr 1fr"
         gap={4}
         mx={{ md: "4rem", lg: "7rem" }}
         my={{ base: "2rem" }}
@@ -40,6 +41,7 @@ const SecuritySettings: NextPage = () => {
         </GridItem>
         <SettingsSidebar />
         <ChangePassword />
+        <RequestData />
       </Grid>
       <Footer />
     </>
