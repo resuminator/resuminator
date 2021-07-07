@@ -27,18 +27,18 @@ const Settings: NextPage = () => {
       <InitUserStore data={data} status={status} />
       <Header />
       <SettingsLayoutGrid>
-        <GridItem rowStart={1} rowSpan={0.5} colStart={1} colEnd={4}>
+        <GridItem rowSpan={1} colSpan={4}>
           <BoxHeader
             title="Settings"
             subtitle="Select a section from the sidebar to change its settings"
           />
         </GridItem>
         <SettingsSidebar />
-        <GridItem rowSpan={1} colStart={2} colSpan={1}>
+        <GridItem rowSpan={1} colSpan={1}>
           <PersonalDetails />
         </GridItem>
-        <GridItem rowSpan={2} colSpan={1}>
-        <ProfilePhoto />
+        <GridItem rowSpan={1} colSpan={1}>
+          <ProfilePhoto />
         </GridItem>
       </SettingsLayoutGrid>
       <Footer />
