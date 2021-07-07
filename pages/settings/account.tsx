@@ -9,6 +9,7 @@ import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import { userPlaceholder } from "../../data/placeholderData";
 import ChangePassword from "../../modules/Settings/Account/ChangePassword";
+import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import { UserObject } from "../../modules/User/types";
 import InitUserStore from "../../store/InitUserStore";
@@ -24,14 +25,7 @@ const SecuritySettings: NextPage = () => {
     <>
       <InitUserStore data={data} status={status} />
       <Header />
-      <Grid
-        minH="100vh"
-        templateRows="1fr repeat(4, 2fr)"
-        templateColumns="1fr 2fr 1fr"
-        gap={4}
-        mx={{ md: "4rem", lg: "7rem" }}
-        my={{ base: "2rem" }}
-      >
+      <SettingsLayoutGrid>
         <GridItem rowSpan={1} colSpan={4}>
           <BoxHeader
             title="Settings"
@@ -39,8 +33,10 @@ const SecuritySettings: NextPage = () => {
           />
         </GridItem>
         <SettingsSidebar />
+        <GridItem rowSpan={2} colStart={2} colSpan={1}>
         <ChangePassword />
-      </Grid>
+        </GridItem>
+      </SettingsLayoutGrid>
       <Footer />
     </>
   );

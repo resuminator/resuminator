@@ -6,7 +6,7 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import BoxHeader from "../../../components/common/BoxHeader";
 import useUserStore from "../../User/store";
 
@@ -31,7 +31,7 @@ const PersonalDetails = () => {
     });
   };
   return (
-    <GridItem rowStart={2} rowSpan={1} colStart={2} colSpan={1} p="4">
+    <Fragment>
       <Box mb="8">
         <BoxHeader
           title="Full Name"
@@ -73,7 +73,7 @@ const PersonalDetails = () => {
         Save Changes
       </Button>
       <Divider />
-    </GridItem>
+    </Fragment>
   );
 };
 

@@ -6,15 +6,14 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { useState } from "react";
 import ActionModal from "../../../components/common/ActionModal";
 import BoxHeader from "../../../components/common/BoxHeader";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import useUserStore from "../../User/store";
 
-const DeleteData = () => {
+const DeleteAccount = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { email } = useUserStore();
   const [confirmInput, setConfirmInput] = useState("");
@@ -33,7 +32,7 @@ const DeleteData = () => {
     <Fragment>
       <Box mb="8">
         <BoxHeader
-          title="Delete all data"
+          title="Delete account"
           size={{ title: "lg", subtitle: "sm" }}
           mb="2.5"
           titleProps={{ color: "red" }}
@@ -77,8 +76,8 @@ const DeleteData = () => {
           onChange={(e) => setConfirmInput(e.target.value)}
         />
       </ActionModal>
-      </Fragment>
+    </Fragment>
   );
 };
 
-export default DeleteData;
+export default DeleteAccount;

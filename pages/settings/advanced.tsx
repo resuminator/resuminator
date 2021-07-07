@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { GridItem } from "@chakra-ui/react";
 import { NextPage } from "next";
 import React from "react";
 import { QueryClient, useQuery } from "react-query";
@@ -8,8 +8,10 @@ import BoxHeader from "../../components/common/BoxHeader";
 import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import { userPlaceholder } from "../../data/placeholderData";
+import DeleteAccount from "../../modules/Settings/Advanced/DeleteAccount";
 import DeleteData from "../../modules/Settings/Advanced/DeleteData";
 import RequestData from "../../modules/Settings/Advanced/RequestData";
+import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import { UserObject } from "../../modules/User/types";
 import InitUserStore from "../../store/InitUserStore";
@@ -25,14 +27,7 @@ const AdvancedSettings: NextPage = () => {
     <>
       <InitUserStore data={data} status={status} />
       <Header />
-      <Grid
-        minH="100vh"
-        templateRows="1fr repeat(4, 2fr)"
-        templateColumns="1fr 2fr 1fr"
-        gap={4}
-        mx={{ md: "4rem", lg: "7rem" }}
-        my={{ base: "2rem" }}
-      >
+      <SettingsLayoutGrid>
         <GridItem rowSpan={1} colSpan={4}>
           <BoxHeader
             title="Settings"
@@ -40,9 +35,14 @@ const AdvancedSettings: NextPage = () => {
           />
         </GridItem>
         <SettingsSidebar />
-        <RequestData />
-        <DeleteData />
-      </Grid>
+        <GridItem rowSpan={1} colStart={2} colSpan={1}>
+          <RequestData />
+        </GridItem>
+        <GridItem rowSpan={1} colStart={2} colSpan={1}>
+          <DeleteData />
+          <DeleteAccount />
+        </GridItem>
+      </SettingsLayoutGrid>
       <Footer />
     </>
   );

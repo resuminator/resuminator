@@ -15,7 +15,11 @@ import { usePasswordValidation } from "../../../hooks/usePasswordValidation";
 import PasswordHints from "../../Auth/PasswordHints";
 
 const ChangePassword = () => {
-  const [password, setPassword] = useState({ current: "", new: "", confirm: "" });
+  const [password, setPassword] = useState({
+    current: "",
+    new: "",
+    confirm: "",
+  });
   const [validLength, hasNumber, upperCase, lowerCase, match] =
     usePasswordValidation(password.new, password.confirm);
   const [showHints, setShowHints] = useState(false);
@@ -32,69 +36,67 @@ const ChangePassword = () => {
   };
 
   return (
-    <GridItem rowSpan={2} colStart={2} colSpan={1} px="4">
-      <Box mb="8">
-        <BoxHeader
-          title="Change Password"
-          size={{ title: "lg", subtitle: "sm" }}
-          mb="2.5"
+    <Box mb="8">
+      <BoxHeader
+        title="Change Password"
+        size={{ title: "lg", subtitle: "sm" }}
+        mb="2.5"
+      />
+      <InputField
+        label="Current Password"
+        name="current"
+        value={password.current}
+        type="password"
+        onChange={handleForm}
+      />
+      <InputField
+        label="Password"
+        name="new"
+        value={password.new}
+        type="password"
+        onChange={handleForm}
+        onFocus={() => setShowHints(true)}
+        onBlur={() => setShowHints(false)}
+        placeholder="8+ characters"
+      />
+      {showHints ? (
+        <PasswordHints
+          validators={{ validLength, hasNumber, upperCase, lowerCase }}
         />
-        <InputField
-          label="Current Password"
-          name="current"
-          value={password.current}
-          type="password"
-          onChange={handleForm}
+      ) : null}
+      <InputField
+        label="Confirm Password"
+        name="confirm"
+        value={password.confirm}
+        type="password"
+        onChange={handleForm}
+        onFocus={() => setShowConfirmHint(true)}
+        onBlur={() => setShowConfirmHint(false)}
+      />
+      {showConfirmHint && !match ? (
+        <PasswordHints
+          hints={[{ message: "Passwords don't match", validator: match }]}
         />
-        <InputField
-          label="Password"
-          name="new"
-          value={password.new}
-          type="password"
-          onChange={handleForm}
-          onFocus={() => setShowHints(true)}
-          onBlur={() => setShowHints(false)}
-          placeholder="8+ characters"
-        />
-        {showHints ? (
-          <PasswordHints
-            validators={{ validLength, hasNumber, upperCase, lowerCase }}
-          />
-        ) : null}
-        <InputField
-          label="Confirm Password"
-          name="confirm"
-          value={password.confirm}
-          type="password"
-          onChange={handleForm}
-          onFocus={() => setShowConfirmHint(true)}
-          onBlur={() => setShowConfirmHint(false)}
-        />
-        {showConfirmHint && !match ? (
-          <PasswordHints
-            hints={[{ message: "Passwords don't match", validator: match }]}
-          />
-        ) : null}
-        <ButtonGroup spacing="4">
-          <Button colorScheme="blue" my="2" size="sm" onClick={handleSubmit}>
-            Update password
-          </Button>
-          <Button
-            colorScheme="blue"
-            fontWeight="normal"
-            variant="link"
-            my="2"
-            size="sm"
-          >
-            Forgot Password?
-          </Button>
-        </ButtonGroup>
-        <Text fontSize="sm" color="gray" mb="2">
-          You will need to login again once you change your password
-        </Text>
-        <Divider />
-      </Box>
-    </GridItem>
+      ) : null}
+      <ButtonGroup spacing="4">
+        <Button colorScheme="blue" my="2" size="sm" onClick={handleSubmit}>
+          Update password
+        </Button>
+        <Button
+          colorScheme="blue"
+          fontWeight="normal"
+          variant="link"
+          my="2"
+          size="sm"
+        >
+          Forgot Password?
+        </Button>
+      </ButtonGroup>
+      <Text fontSize="sm" color="gray" mb="2">
+        You will need to login again once you change your password
+      </Text>
+      <Divider />
+    </Box>
   );
 };
 
