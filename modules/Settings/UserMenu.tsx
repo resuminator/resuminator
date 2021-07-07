@@ -9,11 +9,13 @@ import {
 import { useRouter } from "next/router";
 import { FaDiscord } from "react-icons/fa";
 import {
-  FiBook, FiHelpCircle,
+  FiBook,
+  FiHelpCircle,
   FiLogOut,
   FiSettings,
   FiUser
 } from "react-icons/fi";
+import { DISCORD_INVITE } from "../../data/RefLinks";
 import useUserStore from "../User/store";
 
 const UserMenu = () => {
@@ -36,7 +38,14 @@ const UserMenu = () => {
         </MenuItem>
         <Divider />
         <MenuItem icon={<FiBook />}>Guides</MenuItem>
-        <MenuItem icon={<FaDiscord />}>Join Discord Channel</MenuItem>
+        <MenuItem
+          icon={<FaDiscord />}
+          as="a"
+          href={DISCORD_INVITE}
+          target="_blank"
+        >
+          Join Discord Server
+        </MenuItem>
         <MenuItem icon={<FiHelpCircle />}>Help Center</MenuItem>
         <Divider />
         <MenuItem icon={<FiLogOut />}>Logout</MenuItem>
