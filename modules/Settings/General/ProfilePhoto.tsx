@@ -16,7 +16,7 @@ const ProfilePhoto = () => {
 
   const uploadPhoto = () => {
     toast({
-      title: "Changes Saved",
+      title: "Profile Photo Changed",
       duration: 3000,
       status: "success",
       variant: "subtle",

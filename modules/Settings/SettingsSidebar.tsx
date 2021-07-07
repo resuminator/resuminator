@@ -5,7 +5,7 @@ import {
   FiCheckCircle,
   FiDatabase,
   FiFileText,
-  FiUser
+  FiUser,
 } from "react-icons/fi";
 import SidebarSection, { SideBarItems } from "../Home/SidebarSection";
 

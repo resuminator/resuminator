@@ -68,6 +68,7 @@ const PersonalDetails = () => {
         isDisabled={!unsavedChanges}
         onClick={saveChanges}
         mb="2"
+        size="sm"
       >
         Save Changes
       </Button>
