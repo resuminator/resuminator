@@ -1,11 +1,13 @@
 import {
-    Button,
-    HStack,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuList,
-    Text
+  Button,
+  ButtonProps,
+  HStack,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
@@ -22,17 +24,30 @@ const ResumeTemplateDropdown: React.FC<Props> = React.memo(
     const [selectedResume, setSelectedResume] = useState<ResumeMetadata>(() =>
       data.active.length ? data.active[0] : resumeMetaPlaceholder
     );
+    const buttonLightModeProps: ButtonProps = {
+      colorScheme: method === "EXISTING" ? "blue" : "blackAlpha",
+    };
+
+    const buttonDarkModeProps: ButtonProps = {
+      colorScheme: method === "EXISTING" ? "blue" : "inherit",
+    };
+
+    const buttonProps = useColorModeValue(
+      buttonLightModeProps,
+      buttonDarkModeProps
+    );
+
     return (
       <Menu>
         <MenuButton
           as={Button}
           size="sm"
           isDisabled={!data.active.length}
-          colorScheme={method === "EXISTING" ? "blue" : "blackAlpha"}
           variant="outline"
           rightIcon={<FiChevronDown />}
           _focus={{ outline: "none" }}
           mb="2"
+          {...buttonProps}
         >
           <HStack>
             <Text>{selectedResume.icon}</Text>

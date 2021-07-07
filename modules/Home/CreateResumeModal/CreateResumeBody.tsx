@@ -1,4 +1,10 @@
-import { ModalBody, Text } from "@chakra-ui/react";
+import {
+  BoxProps,
+  ModalBody,
+  Text,
+  TextProps,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import BoxHeader from "../../../components/common/BoxHeader";
 import { UserObject } from "../../User/types";
 import { Method } from "./index";
@@ -16,6 +22,22 @@ const CreateResumeBody: React.FC<CreateResumeBodyProps> = ({
   method,
   callback,
 }) => {
+  const titleLightModeProps = (id: Method): TextProps => ({
+    color: method === id ? "blue.500" : "inherit",
+  });
+
+  const titleDarkModeProps = (id: Method): TextProps => ({
+    color: method === id ? "blue.100" : "inherit",
+  });
+
+  const subtitleLightModeProps = (id: Method): TextProps => ({
+    color: method === id ? "blue.500" : "inherit",
+  });
+
+  const subtitleDarkModeProps = (id: Method): TextProps => ({
+    color: "whiteAlpha.800",
+  });
+
   return (
     <ModalBody display="flex" flexWrap={{ base: "wrap", md: "nowrap" }}>
       <ToggleCard id="EXISTING" method={method} callback={callback}>
@@ -23,11 +45,20 @@ const CreateResumeBody: React.FC<CreateResumeBodyProps> = ({
           title="Start with existing resume"
           subtitle="Duplicate an existing resume to get started quickly than ever."
           size={{ title: "md", subtitle: "sm" }}
-          titleProps={{
-            color: method === "EXISTING" ? "blue.500" : "inherit",
-          }}
+          titleProps={useColorModeValue(
+            titleLightModeProps("EXISTING"),
+            titleDarkModeProps("EXISTING")
+          )}
+          subtitleProps={useColorModeValue(
+            subtitleLightModeProps("EXISTING"),
+            subtitleDarkModeProps("EXISTING")
+          )}
         />
-        <Text color="gray" fontSize="sm" mb="2">
+        <Text
+          color={useColorModeValue("gray", "whiteAlpha.800")}
+          fontSize="sm"
+          mb="2"
+        >
           Select a resume to use as template
         </Text>
         <ResumeTemplateDropdown data={data} method={method} />
@@ -37,9 +68,14 @@ const CreateResumeBody: React.FC<CreateResumeBodyProps> = ({
           title="Start from scratch"
           subtitle="Start with a fresh blank paper. Customize as you like."
           size={{ title: "md", subtitle: "sm" }}
-          titleProps={{
-            color: method === "SCRATCH" ? "blue.500" : "inherit",
-          }}
+          titleProps={useColorModeValue(
+            titleLightModeProps("SCRATCH"),
+            titleDarkModeProps("SCRATCH")
+          )}
+          subtitleProps={useColorModeValue(
+            subtitleLightModeProps("SCRATCH"),
+            subtitleDarkModeProps("SCRATCH")
+          )}
         />
       </ToggleCard>
     </ModalBody>

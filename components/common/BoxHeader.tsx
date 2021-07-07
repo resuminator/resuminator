@@ -8,6 +8,7 @@ export interface BoxHeaderProps {
   size?: { title: string; subtitle?: string };
   spacing?: string;
   titleProps?: TextProps;
+  subtitleProps?: TextProps;
 }
 
 const BoxHeader: React.FC<BoxHeaderProps & BoxProps> = ({
@@ -16,6 +17,7 @@ const BoxHeader: React.FC<BoxHeaderProps & BoxProps> = ({
   size = { title: "2xl", subtitle: "md" },
   spacing = "0.5",
   titleProps,
+  subtitleProps = {color: "InactiveCaptionText"},
   ...rest
 }) => {
   return (
@@ -24,7 +26,7 @@ const BoxHeader: React.FC<BoxHeaderProps & BoxProps> = ({
         {title}
       </Text>
       <Box p={spacing}/>
-      <Text color="InactiveCaptionText" fontSize={size.subtitle}>
+      <Text {...subtitleProps} fontSize={size.subtitle}>
         {subtitle}
       </Text>
     </Box>
