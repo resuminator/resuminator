@@ -35,10 +35,8 @@ const AdvancedSettings: NextPage = () => {
           />
         </GridItem>
         <SettingsSidebar />
-        <GridItem rowSpan={1} colStart={2} colSpan={1}>
+        <GridItem rowSpan={3} colSpan={1}>
           <RequestData />
-        </GridItem>
-        <GridItem rowSpan={1} colStart={2} colSpan={1}>
           <DeleteData />
           <DeleteAccount />
         </GridItem>
