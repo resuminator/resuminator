@@ -8,7 +8,9 @@ import BoxHeader from "../../components/common/BoxHeader";
 import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import { userPlaceholder } from "../../data/placeholderData";
-import General from "../../modules/Settings/General";
+import ChangePassword from "../../modules/Settings/General/ChangePassword";
+import PersonalDetails from "../../modules/Settings/General/PersonalDetails";
+import ProfilePhoto from "../../modules/Settings/General/ProfilePhoto";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import { UserObject } from "../../modules/User/types";
 import InitUserStore from "../../store/InitUserStore";
@@ -25,21 +27,23 @@ const Settings: NextPage = () => {
       <InitUserStore data={data} status={status} />
       <Header />
       <Grid
-        height="100vh"
-        templateRows="repeat(6, 1fr)"
-        templateColumns="repeat(4, 1fr)"
+        minHeight="100vh"
+        templateRows="0.5fr repeat(2, 2fr) repeat(2, 1fr)" //6 rows, 1
+        templateColumns="1fr 2fr 1fr" //4 columns, 1
         gap={4}
         mx={{ md: "4rem", lg: "7rem" }}
         my={{ base: "2rem" }}
       >
-        <GridItem rowSpan={1} colSpan={4}>
+        <GridItem rowStart={1} rowSpan={0.5} colStart={1} colEnd={4}>
           <BoxHeader
             title="Settings"
             subtitle="Select a section from the sidebar to change its settings"
           />
         </GridItem>
         <SettingsSidebar />
-        <General />
+        <PersonalDetails />
+        <ProfilePhoto />
+        <ChangePassword />
       </Grid>
       <Footer />
     </>
