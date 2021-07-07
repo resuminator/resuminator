@@ -4,17 +4,15 @@ import {
   Menu,
   MenuButton,
   MenuItem,
-  MenuList,
+  MenuList
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FaDiscord } from "react-icons/fa";
 import {
-  FiBook,
-  FiCheckCircle,
-  FiHelpCircle,
+  FiBook, FiHelpCircle,
   FiLogOut,
   FiSettings,
-  FiUser,
+  FiUser
 } from "react-icons/fi";
 import useUserStore from "../User/store";
 
@@ -35,12 +33,6 @@ const UserMenu = () => {
         <MenuItem icon={<FiUser />}>Profile</MenuItem>
         <MenuItem icon={<FiSettings />} onClick={() => routeTo("/settings")}>
           Settings
-        </MenuItem>
-        <MenuItem
-          icon={<FiCheckCircle />}
-          onClick={() => routeTo("/settings/preferences")}
-        >
-          Preferences
         </MenuItem>
         <Divider />
         <MenuItem icon={<FiBook />}>Guides</MenuItem>

@@ -12,7 +12,7 @@ import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import { UserObject } from "../../modules/User/types";
 import InitUserStore from "../../store/InitUserStore";
 
-const Preferences: NextPage = () => {
+const SecuritySettings: NextPage = () => {
   const { data, status } = useQuery<UserObject, Error>(
     "getUserData",
     getUserData,
@@ -44,7 +44,7 @@ const Preferences: NextPage = () => {
   );
 };
 
-export default Preferences;
+export default SecuritySettings;
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();

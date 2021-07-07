@@ -8,7 +8,6 @@ import BoxHeader from "../../components/common/BoxHeader";
 import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import { userPlaceholder } from "../../data/placeholderData";
-import ChangePassword from "../../modules/Settings/General/ChangePassword";
 import PersonalDetails from "../../modules/Settings/General/PersonalDetails";
 import ProfilePhoto from "../../modules/Settings/General/ProfilePhoto";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
@@ -43,7 +42,6 @@ const Settings: NextPage = () => {
         <SettingsSidebar />
         <PersonalDetails />
         <ProfilePhoto />
-        <ChangePassword />
       </Grid>
       <Footer />
     </>
