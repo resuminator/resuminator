@@ -17,7 +17,7 @@ const BoxHeader: React.FC<BoxHeaderProps & BoxProps> = ({
   size = { title: "2xl", subtitle: "md" },
   spacing = "0.5",
   titleProps,
-  subtitleProps = {color: "InactiveCaptionText"},
+  subtitleProps = { color: "InactiveCaptionText" },
   ...rest
 }) => {
   return (
@@ -25,7 +25,7 @@ const BoxHeader: React.FC<BoxHeaderProps & BoxProps> = ({
       <Text {...titleProps} fontSize={size.title} fontWeight="semibold">
         {title}
       </Text>
-      <Box p={spacing}/>
+      <Box p={spacing} />
       <Text {...subtitleProps} fontSize={size.subtitle}>
         {subtitle}
       </Text>
