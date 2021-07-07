@@ -1,5 +1,6 @@
 import { IconButton } from "@chakra-ui/button";
 import { InputRightElement } from "@chakra-ui/input";
+import { useColorModeValue } from "@chakra-ui/react";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaCheckCircle } from "react-icons/fa";
@@ -14,12 +15,14 @@ const InputRightIcon: React.FC<RightIconProps> = ({
   onClick,
   options,
 }) => {
+  const colorScheme = useColorModeValue("blackAlpha", "gray");
+
   if (forPassword) {
     return (
       <InputRightElement color="inherit">
         <Tooltip label={options.show ? "Hide Password" : "Show Password"}>
           <IconButton
-            colorScheme="blackAlpha"
+            colorScheme={colorScheme}
             variant="ghost"
             onClick={onClick}
             aria-label="show-password"
