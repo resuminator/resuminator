@@ -16,7 +16,7 @@ import {
   NameAndJobTitle,
   Projects,
   Publications,
-  Skills
+  Skills,
 } from "../../modules/UserInput";
 import CustomSections from "../../modules/UserInput/Custom";
 import CustomSectionInputs from "../../modules/UserInput/Custom/CustomSectionInputs";
