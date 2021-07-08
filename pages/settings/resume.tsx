@@ -9,6 +9,7 @@ import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import { userPlaceholder } from "../../data/placeholderData";
 import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
+import ManageResumes from "../../modules/Settings/Resume/ManageResumes";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import { UserObject } from "../../modules/User/types";
 import InitUserStore from "../../store/InitUserStore";
@@ -27,11 +28,14 @@ const ResumeSettings: NextPage = () => {
       <SettingsLayoutGrid>
         <GridItem rowSpan={1} colSpan={4}>
           <BoxHeader
-            title="Settings"
-            subtitle="Select a section from the sidebar to change its settings"
+            title="Resume Settings"
+            subtitle="Manage your resumes, custom sections, and sharing information."
           />
         </GridItem>
         <SettingsSidebar />
+        <GridItem rowSpan={1} colSpan={1}>
+          <ManageResumes />
+        </GridItem>
       </SettingsLayoutGrid>
       <Footer />
     </>

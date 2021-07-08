@@ -29,8 +29,8 @@ const Settings: NextPage = () => {
       <SettingsLayoutGrid>
         <GridItem rowSpan={1} colSpan={4}>
           <BoxHeader
-            title="Settings"
-            subtitle="Select a section from the sidebar to change its settings"
+            title="General Settings"
+            subtitle="Change how your profile looks, update your personal info."
           />
         </GridItem>
         <SettingsSidebar />

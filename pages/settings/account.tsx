@@ -28,8 +28,8 @@ const SecuritySettings: NextPage = () => {
       <SettingsLayoutGrid>
         <GridItem rowSpan={1} colSpan={4}>
           <BoxHeader
-            title="Settings"
-            subtitle="Select a section from the sidebar to change its settings"
+            title="Account Settings"
+            subtitle="Account related settings like passwords, and preferences."
           />
         </GridItem>
         <SettingsSidebar />

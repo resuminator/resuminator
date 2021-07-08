@@ -30,8 +30,8 @@ const AdvancedSettings: NextPage = () => {
       <SettingsLayoutGrid>
         <GridItem rowSpan={1} colSpan={4}>
           <BoxHeader
-            title="Settings"
-            subtitle="Select a section from the sidebar to change its settings"
+            title="Advanced Settings"
+            subtitle="Control your data settings. Request, or delete your data"
           />
         </GridItem>
         <SettingsSidebar />
