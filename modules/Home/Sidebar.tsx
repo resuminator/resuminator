@@ -14,9 +14,9 @@ import SidebarSection from "./SidebarSection";
 const Sidebar = () => {
   const workspace = [
     {
-      title: "Manage Resumes",
+      title: "Settings",
       icon: FiSettings,
-      link: "/settings/resume",
+      link: "/settings",
     },
     {
       title: "Favorites",
