@@ -9,7 +9,6 @@ import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import { userPlaceholder } from "../../data/placeholderData";
 import DeleteAccount from "../../modules/Settings/Advanced/DeleteAccount";
-import DeleteData from "../../modules/Settings/Advanced/DeleteData";
 import RequestData from "../../modules/Settings/Advanced/RequestData";
 import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
@@ -37,7 +36,6 @@ const AdvancedSettings: NextPage = () => {
         <SettingsSidebar />
         <GridItem rowSpan={3} colSpan={1}>
           <RequestData />
-          <DeleteData />
           <DeleteAccount />
         </GridItem>
       </SettingsLayoutGrid>
