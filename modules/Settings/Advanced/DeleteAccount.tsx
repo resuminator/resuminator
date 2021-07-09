@@ -1,13 +1,5 @@
-import {
-  Box,
-  Button,
-  Divider,
-  GridItem,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
-import React, { Fragment } from "react";
-import { useState } from "react";
+import { Box, Button, Text, useDisclosure } from "@chakra-ui/react";
+import React, { Fragment, useState } from "react";
 import ActionModal from "../../../components/common/ActionModal";
 import BoxHeader from "../../../components/common/BoxHeader";
 import InputWithLabel from "../../../components/common/InputWithLabel";
@@ -39,6 +31,7 @@ const DeleteAccount = () => {
         />
         <Text fontSize="sm" mb="4">
           Proceeding with this options will delete your Resuminator account
+          linked to <strong>{email} </strong>
           along with
           <Highlight> all your personal data</Highlight>,{" "}
           <Highlight>resumes</Highlight>,{" "}
@@ -65,7 +58,7 @@ const DeleteAccount = () => {
         </Text>
         <Text fontSize="sm" mb="4">
           This action cannot be undone. This will PERMANENTLY delete your
-          account linked to {email} including all data and sharable resume links
+          account linked to {email} including all data and shareable resume links
           associated with this account.
         </Text>
         <InputWithLabel
