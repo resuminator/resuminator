@@ -3,7 +3,6 @@
 
 Resuminator allows you to build beautiful single-page resumes; without the hassle. The easiest resume-builder out there with intuitive drag-n-drop & WYSIWYG editor.
   
-[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/resuminator/resuminator-next)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/resuminator/resuminator?style=flat-square)
 ![Twitter Follow](https://img.shields.io/twitter/follow/resuminator?style=social)
 
