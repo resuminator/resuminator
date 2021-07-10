@@ -8,7 +8,7 @@ import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
 import TitleRow from "../components/TitleRow";
 
-const CertificationsLayout = () => {
+const CertificationsLayout = (props) => {
   const data = useCertificationStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
@@ -34,7 +34,7 @@ const CertificationsLayout = () => {
   };
 
   return (
-    <SectionBox aria-label="Certification Layout">
+    <SectionBox aria-label="Certification Layout" {...props}>
       <SectionTitle>Certification</SectionTitle>
       {data.map((item) => (
         <SectionContent key={item._id}>

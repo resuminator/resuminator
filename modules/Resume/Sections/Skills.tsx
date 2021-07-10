@@ -36,7 +36,7 @@ const generateListFromCategories = (data: Array<SkillDataObject>) => {
   return list;
 };
 
-const SkillsLayout = () => {
+const SkillsLayout = (props) => {
   const format = useSkillStore((state) => state.format);
   const data = useSkillStore((state) => state.data).filter(
     (item) => !item.isHidden
@@ -47,7 +47,7 @@ const SkillsLayout = () => {
   );
 
   return (
-    <SectionBox aria-label="Skills Layout">
+    <SectionBox aria-label="Skills Layout" {...props}>
       <SectionTitle>Skills</SectionTitle>
       {format === "CATEGORIES" ? (
         <Categories data={data} />

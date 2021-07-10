@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import ColoredDivider from "../../components/common/ColoredDivider";
 import useResumeStore from "../../store/resume.store";
 import { isCustom } from "../Design/Colors/ColorSelector";
@@ -33,23 +34,42 @@ const ResumePaper = () => {
           ))}
         </HeaderBox>
         <ColoredDivider color={primaryColor} mb="2" />
-        <BodyBox py={spacing * 2}>
-          {body.map((rowAsColumn, index) => (
-            <BodyColumn
-              key={index}
-              index={index}
-              px={spacing * 4}
-              py={spacing * 2}
-              flexBasis={`${(1 / body.length) * 100}%`}
-            >
-              {rowAsColumn.map((layoutKey) => (
-                <BodySectionBox label={layoutKey} key={layoutKey}>
-                  {getLayout(layoutKey)}
-                </BodySectionBox>
-              ))}
-            </BodyColumn>
-          ))}
-        </BodyBox>
+        <DragDropContext onDragEnd={() => console.log("Drag Complete")}>
+          <BodyBox py={spacing * 2}>
+            {body.map((rowAsColumn, index) => (
+              <Droppable key={index} droppableId={`column-${index + 1}`}>
+                {(provided) => (
+                  <Box
+                    display="flex"
+                    flexDir="column"
+                    aria-label={`Column-${index + 1}`}
+                    index={index}
+                    px={spacing * 4}
+                    py={spacing * 2}
+                    flexBasis={`${(1 / body.length) * 100}%`}
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {rowAsColumn.map((layoutKey, index) => (
+                      <Box
+                        display="flex"
+                        aria-label={layoutKey}
+                        width="100%"
+                        key={layoutKey}
+                      >
+                        {getLayout(layoutKey, {
+                          draggableId: layoutKey,
+                          index: index,
+                        })}
+                      </Box>
+                    ))}
+                    {provided.placeholder}
+                  </Box>
+                )}
+              </Droppable>
+            ))}
+          </BodyBox>
+        </DragDropContext>
       </Paper>
     </StylePropsProvider>
   );

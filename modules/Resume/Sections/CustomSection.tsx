@@ -4,7 +4,7 @@ import DataRow from "../../../components/elements/DataRow";
 import { parseDate } from "../../../utils";
 import { useCustomSectionStore } from "../../UserInput/Custom/store";
 import BodyText from "../components/BodyText";
-import SectionBox from "../components/SectionBox";
+import SectionBox, { SectionBoxProps } from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import TitleRow from "../components/TitleRow";
@@ -13,9 +13,9 @@ interface CustomSectionLayoutProps {
   sectionKey: string;
 }
 
-const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
-  sectionKey,
-}) => {
+const CustomSectionLayout: React.FC<
+  CustomSectionLayoutProps & SectionBoxProps
+> = ({ sectionKey, ...props }) => {
   const section = useCustomSectionStore(
     (state) =>
       state.sections.filter(
@@ -29,7 +29,7 @@ const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
   if the section is not present on the inputs 
   or layout object of the resume then don't show.*/
   const { header, data: rawData, inputs, hasTitleRow, layout } = section;
-  const data = rawData.filter(item => !item.isHidden);
+  const data = rawData.filter((item) => !item.isHidden);
 
   const getSection = (itemId: string, inputId: string) => {
     const { type } = inputs.filter((input) => input._id === inputId)[0];
@@ -52,7 +52,7 @@ const CustomSectionLayout: React.FC<CustomSectionLayoutProps> = ({
   };
 
   return (
-    <SectionBox aria-label={`${header} Layout`}>
+    <SectionBox aria-label={`${header} Layout`} {...props}>
       <SectionTitle>{header}</SectionTitle>
 
       {data.map((item) => (

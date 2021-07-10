@@ -11,13 +11,13 @@ import SubtitleRow from "../components/SubtitleRow";
 import Tags from "../components/Tags";
 import TitleRow from "../components/TitleRow";
 
-const ExperienceLayout = () => {
+const ExperienceLayout = (props) => {
   const data = useExperienceStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
 
   return (
-    <SectionBox aria-label="Experience Layout">
+    <SectionBox aria-label="Experience Layout" {...props}>
       <SectionTitle>Experience</SectionTitle>
       {data.map((item) => (
         <SectionContent key={item._id}>

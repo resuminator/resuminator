@@ -3,13 +3,13 @@ import DataRow from "../../../components/elements/DataRow";
 import { parseDate } from "../../../utils";
 import useEducationStore from "../../UserInput/Education/store";
 import BodyText from "../components/BodyText";
-import SectionBox from "../components/SectionBox";
+import SectionBox, { SectionBoxProps } from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
 import TitleRow from "../components/TitleRow";
 
-const EducationLayout = () => {
+const EducationLayout: React.FC<SectionBoxProps> = (props) => {
   const data = useEducationStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
@@ -26,7 +26,11 @@ const EducationLayout = () => {
   };
 
   return (
-    <SectionBox aria-label="Education Layout">
+    <SectionBox
+      aria-label="Education Layout"
+      draggableId={props.draggableId}
+      index={props.index}
+    >
       <SectionTitle>Education</SectionTitle>
       {data.map((item) => (
         <SectionContent key={item._id}>

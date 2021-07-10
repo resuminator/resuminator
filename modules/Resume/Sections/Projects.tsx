@@ -10,13 +10,13 @@ import SubtitleRow from "../components/SubtitleRow";
 import Tags from "../components/Tags";
 import TitleRow from "../components/TitleRow";
 
-const ProjectLayout = () => {
+const ProjectLayout = (props) => {
   const data = useProjectStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
 
   return (
-    <SectionBox aria-label="Project Layout">
+    <SectionBox aria-label="Project Layout" {...props}>
       <SectionTitle>Projects</SectionTitle>
       {data.map((item) => (
         <SectionContent key={item._id}>

@@ -45,13 +45,13 @@ const APAStyle: React.FC<{ item: PublicationDataObject }> = ({ item }) => (
   </Fragment>
 );
 
-const PublicationsLayout = () => {
+const PublicationsLayout = (props) => {
   const data = usePublicationStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
 
   return (
-    <SectionBox aria-label="Publication Layout">
+    <SectionBox aria-label="Publication Layout" {...props}>
       <SectionTitle>Publications</SectionTitle>
       <SectionContent>
         {data.map((item) => (
