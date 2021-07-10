@@ -26,11 +26,13 @@ const SectionBox: React.FC<BoxProps & SectionBoxProps> = ({
     bg: "white",
     border: "2px solid",
     borderColor: "blue.500",
+    shadow: "lg"
   };
   const draggingDark: BoxProps = {
     bg: "gray.800",
     border: "2px solid",
     borderColor: "blue.500",
+    shadow: "lg"
   };
   const cardProps = useColorModeValue(lightModeProps, darkModeProps);
   const draggingProps = useColorModeValue(draggingLight, draggingDark);
