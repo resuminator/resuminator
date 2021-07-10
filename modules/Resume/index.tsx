@@ -79,6 +79,7 @@ const ResumePaper = () => {
                 {/*The 'provided' argument gives props to make columns as droppable areas*/}
                 {(provided, snapshot) => (
                   <Box
+                    height="100%"
                     display="flex"
                     flexDir="column"
                     aria-label={`Column-${index + 1}`}

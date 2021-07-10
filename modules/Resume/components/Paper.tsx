@@ -12,7 +12,7 @@ const Paper: React.FC<BoxProps> = ({ children, ...props }) => {
       flexDir="column"
       aria-label="Resume Paper"
       height="inherit"
-      overflowY="clip"
+      // overflowY="clip"
       {...applyFilters}
       {...props}
     >
