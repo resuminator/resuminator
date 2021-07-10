@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/layout";
+import { BoxProps, useColorModeValue } from "@chakra-ui/react";
 import produce from "immer";
 import React from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
@@ -18,6 +19,14 @@ const ResumePaper = () => {
   const spacing = useResumeStore((state) => state.spacing);
   const color = useResumeStore((state) => state.color);
   const primaryColor = isCustom(color) ? color : `${color}.600`;
+
+  const lightModeProps: BoxProps = {
+    bg: "gray.100"
+  }
+  const darkModeProps: BoxProps = {
+    bg: "whiteAlpha.100"
+  }
+  const dndProps = useColorModeValue(lightModeProps, darkModeProps);
 
   const handleOnDragEnd = (result: DropResult) => {
     const { destination, source } = result;
@@ -68,15 +77,16 @@ const ResumePaper = () => {
             {body.map((rowAsColumn, index) => (
               <Droppable key={index} droppableId={`${index}`}>
                 {/*The 'provided' argument gives props to make columns as droppable areas*/}
-                {(provided) => (
+                {(provided, snapshot) => (
                   <Box
                     display="flex"
                     flexDir="column"
                     aria-label={`Column-${index + 1}`}
                     index={index}
-                    px={spacing * 4}
-                    py={spacing * 2}
+                    px={spacing * 4 - 1}
+                    py={spacing * 2 - 1}
                     flexBasis={`${(1 / body.length) * 100}%`}
+                    bg={snapshot.isDraggingOver ? dndProps.bg : 'inherit'}
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
