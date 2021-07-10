@@ -1,88 +1,56 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react";
 import ColoredDivider from "../../components/common/ColoredDivider";
-import useGlobalStore from "../../store/global.store";
 import useResumeStore from "../../store/resume.store";
 import { isCustom } from "../Design/Colors/ColorSelector";
 import StylePropsProvider from "../Design/StylePropsProvider";
+import BodyBox from "./components/BodyBox";
+import BodyColumn from "./components/BodyColumn";
+import BodySectionBox from "./components/BodySectionBox";
+import HeaderBox from "./components/HeaderBox";
+import HeaderRow from "./components/HeaderRow";
+import Paper from "./components/Paper";
 import { getHeaderLayout, getLayout } from "./legend";
 
 const ResumePaper = () => {
   const { header, body } = useResumeStore((state) => state.properties.layout);
   const spacing = useResumeStore((state) => state.spacing);
-  const color = useResumeStore(state => state.color);
+  const color = useResumeStore((state) => state.color);
   const primaryColor = isCustom(color) ? color : `${color}.600`;
-  const grayscaleFilter = useGlobalStore((state) => state.grayscaleFilter);
-
-  const applyFilters = grayscaleFilter && { filter: "grayscale(1)" };
 
   return (
     <StylePropsProvider>
-      <Box
-        display="flex"
-        flexDir="column"
-        aria-label="Resume Paper"
-        height="inherit"
-        overflowY="clip"
-        {...applyFilters}
-      >
-        <Box
-          aria-label="Header"
-          display="flex"
-          flexDir="column"
-          alignItems="flex-start"
-          justifyContent="space-between"
-          width="100%"
-        >
+      <Paper>
+        <HeaderBox>
           {header.map((row, index) => (
-            <Box
-              display="flex"
-              aria-label={`Row-${index + 1}`}
-              key={index}
-              width="100%"
-              justifyContent="space-between"
-            >
+            <HeaderRow key={index} index={index}>
               {row.map((layoutKey) => (
                 <Box display="flex" aria-label={layoutKey} key={layoutKey}>
                   {getHeaderLayout(layoutKey)}
                 </Box>
               ))}
-            </Box>
+            </HeaderRow>
           ))}
-        </Box>
-        <ColoredDivider color={primaryColor} mb="2"/>
-        <Box
-          aria-label="Body"
-          display="flex"
-          alignItems="flex-start"
-          justifyContent="space-between"
-          width="100%"
-          py={spacing * 2}
-        >
+        </HeaderBox>
+        <ColoredDivider color={primaryColor} mb="2" />
+        <BodyBox py={spacing * 2}>
           {body.map((rowAsColumn, index) => (
-            <Box
-              display="flex"
-              flexDir="column"
-              aria-label={`Column-${index + 1}`}
+            <BodyColumn
               key={index}
+              index={index}
               px={spacing * 4}
               py={spacing * 2}
               flexBasis={`${(1 / body.length) * 100}%`}
             >
               {rowAsColumn.map((layoutKey) => (
-                <Box
-                  display="flex"
-                  aria-label={layoutKey}
-                  key={layoutKey}
-                  width="100%"
-                >
+                <BodySectionBox label={layoutKey} key={layoutKey}>
                   {getLayout(layoutKey)}
-                </Box>
+                </BodySectionBox>
               ))}
-            </Box>
+            </BodyColumn>
           ))}
-        </Box>
-      </Box>
+        </BodyBox>
+      </Paper>
     </StylePropsProvider>
   );
 };
