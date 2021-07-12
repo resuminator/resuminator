@@ -84,6 +84,7 @@ const Education = () => {
               title: item.institute,
               subtitle: item.degree,
               titlePlaceholder: "Institute Name",
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "education",

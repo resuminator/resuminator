@@ -69,6 +69,7 @@ const Skills = () => {
               index: index,
               title: item.category,
               titlePlaceholder: "Untitled category",
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "category",

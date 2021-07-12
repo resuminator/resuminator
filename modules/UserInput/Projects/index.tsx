@@ -82,6 +82,7 @@ const Projects = () => {
               title: item.projectName,
               subtitle: item.link,
               titlePlaceholder: "Project Name",
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "project",

@@ -78,6 +78,7 @@ const Certification = () => {
               title: item.certificateName,
               subtitle: item.credentialNumber,
               titlePlaceholder: "Certificate Name",
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "certification",

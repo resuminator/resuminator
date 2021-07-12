@@ -77,6 +77,7 @@ const Publications = () => {
               title: item.articleTitle,
               subtitle: item.authorNames,
               titlePlaceholder: "Publication Article Title",
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "publication",

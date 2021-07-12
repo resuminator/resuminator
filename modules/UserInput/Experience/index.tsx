@@ -83,6 +83,7 @@ const Experience = () => {
               title: item.company,
               subtitle: item.jobTitle,
               titlePlaceholder: "Organization Name",
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "experience",

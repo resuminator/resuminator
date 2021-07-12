@@ -163,6 +163,7 @@ const CustomSectionInputs = () => {
                   index: index,
                   title: getCardTitle(dataItem),
                   titlePlaceholder: `New ${section.header.toLowerCase()}`,
+                  isHidden: dataItem.isHidden
                 }}
                 InputCardProps={{
                   itemType: section.header.toLowerCase(),
