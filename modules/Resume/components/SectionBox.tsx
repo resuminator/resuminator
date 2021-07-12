@@ -37,6 +37,16 @@ const SectionBox: React.FC<BoxProps & SectionBoxProps> = ({
   const cardProps = useColorModeValue(lightModeProps, darkModeProps);
   const draggingProps = useColorModeValue(draggingLight, draggingDark);
 
+  const hoverPropsLight: BoxProps = {
+    bg: "gray.100",
+  }
+
+  const hoverPropsDark: BoxProps = {
+    bg: "whiteAlpha.100"
+  }
+
+  const hoverProps = useColorModeValue(hoverPropsLight, hoverPropsDark);
+
   return (
     <Draggable key={draggableId} draggableId={draggableId} index={index}>
       {(provided, snapshot) => (
@@ -47,6 +57,7 @@ const SectionBox: React.FC<BoxProps & SectionBoxProps> = ({
           pb="0"
           mb={spacing * 1}
           borderRadius="10px"
+          _hover={hoverProps}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
