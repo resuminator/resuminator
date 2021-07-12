@@ -1,5 +1,11 @@
 import Icon from "@chakra-ui/icon";
 import { Box, Text } from "@chakra-ui/layout";
+import {
+  BoxProps,
+  TextProps,
+  useColorModeValue,
+  VStack,
+} from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { GrDrag } from "react-icons/gr";
@@ -11,6 +17,7 @@ export interface DisplayCardProps {
   title: string;
   subtitle?: string;
   titlePlaceholder?: string;
+  isHidden?: boolean;
 }
 
 const DisplayCard: React.FC<DisplayCardProps> = ({
@@ -19,9 +26,36 @@ const DisplayCard: React.FC<DisplayCardProps> = ({
   title,
   subtitle,
   titlePlaceholder,
+  isHidden,
   ...props
 }) => {
   const { onToggle } = useContext(DisclosureContext);
+
+  const lightProps: BoxProps = {
+    shadow: isHidden ? "none" : "md",
+    bg: isHidden ? "gray.100" : "white",
+    _hover: {
+      bg: isHidden ? "gray.200" : "gray.100",
+    },
+  };
+
+  const darkProps: BoxProps = {
+    shadow: isHidden ? "none" : "2xl",
+    bg: isHidden ? "whiteAlpha.100" : "gray.800",
+    _hover: { bg: isHidden ? "whiteAlpha.200" : "whiteAlpha.100" },
+  };
+
+  const textLight: TextProps = {
+    color: isHidden ? "gray.500" : "gray.800",
+  };
+
+  const textDark: TextProps = {
+    color: isHidden ? "gray.600" : "inherit",
+  };
+
+  const rest = useColorModeValue(lightProps, darkProps);
+  const textProps = useColorModeValue(textLight, textDark);
+
   return (
     <Draggable key={draggableId} draggableId={draggableId} index={index}>
       {(provided) => (
@@ -31,23 +65,22 @@ const DisplayCard: React.FC<DisplayCardProps> = ({
           {...provided.draggableProps}
           p="5"
           mb="2"
-          border="1px solid"
           borderRadius="10px"
-          shadow="md"
           cursor="pointer"
           display="flex"
           justifyContent="space-between"
-          _hover={{ bg: "whiteAlpha.100" }}
           onClick={onToggle}
+          {...rest}
           {...props}
-          
         >
-          <Box>
-            <Text>{title || titlePlaceholder}</Text>
+          <VStack alignItems="flex-start" spacing="1">
+            <Text fontWeight="semibold" {...textProps}>
+              {title || titlePlaceholder}
+            </Text>
             <Text fontSize="sm" color="GrayText">
               {subtitle || "Click on this card to expand and start editing"}
             </Text>
-          </Box>
+          </VStack>
           <Box
             transition="all 0.2s"
             opacity="0.2"
