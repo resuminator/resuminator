@@ -13,7 +13,7 @@ const Viewer = (props: Props) => {
       shadow={useColorModeValue("lg", "2xl")}
       width="21cm"
       height="29.7cm"
-      overflowY="clip"
+      overflowY="auto"
     >
       <ResumePaper />
     </Box>
