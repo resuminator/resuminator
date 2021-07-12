@@ -40,7 +40,7 @@ const Columns = () => {
    */
   const getRestProps = (isSelected: boolean): ButtonProps => {
     const baseProps: ButtonProps = {
-      colorScheme: "purple",
+      colorScheme: "blue",
       _focus: {
         border: "none",
       },
