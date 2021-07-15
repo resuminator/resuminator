@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
@@ -9,6 +10,7 @@ import AuthProvidersList from "../modules/Auth/AuthProvidersList";
 import PageToggle from "../modules/Auth/PageToggle";
 import PrivacyNotice from "../modules/Auth/PrivacyNotice";
 import SignUpWithEmail, { FormValues } from "../modules/Auth/SignUpWithEmail";
+import firebaseSDK from "../services/firebase";
 
 const Signup = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
@@ -18,6 +20,32 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
+  const toast = useToast();
+
+  const createToast = (
+    title: string,
+    status: "error" | "info" | "warning" | "success",
+    description = ""
+  ) =>
+    toast({
+      title,
+      status,
+      description,
+      variant: "solid",
+      duration: 5000,
+      isClosable: true,
+    });
+
+  const getProvider = (c: AuthProviderProps["client"]) => {
+    switch (c) {
+      case "Google":
+        return new firebaseSDK.auth.GoogleAuthProvider();
+      case "GitHub":
+        return new firebaseSDK.auth.GithubAuthProvider();
+      default:
+        return null;
+    }
+  };
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -30,8 +58,16 @@ const Signup = () => {
   };
 
   const handleSignIn = (client: AuthProviderProps["client"]) => {
-    if(client === "Email") return setWithEmail(true);
+    if (client === "Email") return setWithEmail(true);
 
+    const provider = getProvider(client);
+    firebaseSDK
+      .auth()
+      .signInWithPopup(provider)
+      .then(() => createToast("Account created successfully", "success"))
+      .catch((e) =>
+        createToast(`Couldn't sign up with ${client}`, "error", e.message)
+      );
   };
 
   return (
