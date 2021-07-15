@@ -38,6 +38,8 @@ const SignUpWithEmail: React.FC<Props> = ({
   const [validEmail, errorMessage] = useEmailValidation(formValues.email);
   const [showEmailError, setShowEmailError] = useState(false);
 
+  const isDisabled = Object.values(formValues).some(v => !v.length)
+
   return (
     <MotionBox
       initial={{ opacity: 0 }}
@@ -51,7 +53,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         value={formValues.fullName}
         type="text"
         onChange={formHandler}
-        placeholder="Elon Musk"
+        placeholder="Tony Stark"
       />
       <InputField
         label="Email"
@@ -99,6 +101,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         colorScheme="blue"
         textAlign="center"
         mb="4"
+        isDisabled={isDisabled}
         onClick={submitHandler}
       >
         Create new account
