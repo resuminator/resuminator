@@ -1,17 +1,59 @@
 import { Box } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 import { NextPage } from "next";
 import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
 import { LogoWithText } from "../components/layouts/Logos";
+import { AuthProviderProps } from "../modules/Auth/AuthProviderCard";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
 import LogInWithEmail from "../modules/Auth/LoginWithEmail";
 import PageToggle from "../modules/Auth/PageToggle";
 import PrivacyNotice from "../modules/Auth/PrivacyNotice";
+import firebaseSDK from "../services/firebase";
 
 const Login: NextPage = () => {
-  const [client, setClient] = useState(null);
+  const [withEmail, setWithEmail] = useState<boolean>(false);
+  const toast = useToast();
+
+  const createToast = (
+    title: string,
+    status: "error" | "info" | "warning" | "success",
+    description = ""
+  ) =>
+    toast({
+      title,
+      status,
+      description,
+      variant: "solid",
+      duration: 5000,
+      isClosable: true,
+    });
+
+  const getProvider = (c: AuthProviderProps["client"]) => {
+    switch (c) {
+      case "Google":
+        return new firebaseSDK.auth.GoogleAuthProvider();
+      case "GitHub":
+        return new firebaseSDK.auth.GithubAuthProvider();
+      default:
+        return null;
+    }
+  };
+
+  const handleSignIn = (client: AuthProviderProps["client"]) => {
+    if (client === "Email") return setWithEmail(true);
+
+    const provider = getProvider(client);
+    firebaseSDK
+      .auth()
+      .signInWithPopup(provider)
+      .then(() => createToast("Logged in successfully", "success"))
+      .catch((e) =>
+        createToast(`Couldn't sign in with ${client}`, "error", e.message)
+      );
+  };
 
   return (
     <Layout hasHeaderHidden>
@@ -34,10 +76,10 @@ const Login: NextPage = () => {
         <LogoWithText display={{ base: "inherit", lg: "none" }} />
         <BoxHeader title={"Welcome Back 👋🏻"} subtitle="Log in to Resuminator" />
         <AnimatePresence>
-          {client === "Email" ? (
-            <LogInWithEmail resetClient={() => setClient(null)} />
+          {withEmail ? (
+            <LogInWithEmail resetClient={() => setWithEmail(false)} />
           ) : (
-            <AuthProvidersList setClient={setClient} />
+            <AuthProvidersList handleSignIn={handleSignIn} />
           )}
         </AnimatePresence>
         <Box textAlign="center" my="4" fontSize={{ base: "sm", md: "md" }}>

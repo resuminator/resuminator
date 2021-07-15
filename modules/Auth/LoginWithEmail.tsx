@@ -14,28 +14,29 @@ interface Props {
   resetClient: () => void;
 }
 
-enum RequestStatus {
+export enum Status {
   loading,
   idle,
   error,
   success,
 }
-
 const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [remember, setRemember] = useState(true);
   const persist = remember ? authPersist.local : authPersist.session;
-  const [status, setStatus] = useState<RequestStatus>(RequestStatus.idle);
+  const [status, setStatus] = useState<Status>(Status.idle);
   const toast = useToast();
 
   const createToast = (
     title: string,
-    status: "error" | "info" | "warning" | "success"
+    status: "error" | "info" | "warning" | "success",
+    description = ""
   ) =>
     toast({
       title,
       status,
-      variant: "subtle",
+      description,
+      variant: "solid",
       duration: 5000,
       isClosable: true,
     });
@@ -51,7 +52,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
   const handleSubmit = () => {
     if (!(credentials.email && credentials.password))
       return createToast("Please enter valid email and password", "warning");
-    setStatus(RequestStatus.loading);
+    setStatus(Status.loading);
 
     firebaseSDK
       .auth()
@@ -61,15 +62,25 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
           .auth()
           .signInWithEmailAndPassword(credentials.email, credentials.password)
           .then(() => {
-            setStatus(RequestStatus.success);
+            setStatus(Status.success);
             createToast("Logged in successfully", "success");
           })
           .catch((e) => {
-            setStatus(RequestStatus.error);
-            createToast(e.message, "error");
+            setStatus(Status.error);
+            createToast(
+              "Couldn't log you in with these credentials",
+              "error",
+              e.message
+            );
           })
       )
-      .catch((e) => createToast(e.message, "error"));
+      .catch((e) =>
+        createToast(
+          "Couldn't log you in with these credentials",
+          "error",
+          e.message
+        )
+      );
   };
 
   return (
@@ -99,7 +110,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
         colorScheme="blue"
         textAlign="center"
         mb="4"
-        isLoading={status === RequestStatus.loading}
+        isLoading={status === Status.loading}
         onClick={handleSubmit}
       >
         Log In

@@ -6,11 +6,10 @@ import {
   AiOutlineGithub,
   AiOutlineGoogle,
   AiOutlineMail,
-  AiOutlineTwitter,
 } from "react-icons/ai";
 
 export interface AuthProviderProps {
-  client: "Google" | "GitHub" | "Twitter" | "Email";
+  client: "Google" | "GitHub" | "Email";
 }
 
 const AuthProviderCard: React.FC<AuthProviderProps & BoxProps> = ({
@@ -53,8 +52,6 @@ const ClientIcon: React.FC<AuthProviderProps & IconProps> = ({
   switch (client) {
     case "Google":
       return <Icon as={AiOutlineGoogle} {...rest} />;
-    case "Twitter":
-      return <Icon as={AiOutlineTwitter} {...rest} />;
     case "GitHub":
       return <Icon as={AiOutlineGithub} {...rest} />;
     case "Email":
@@ -66,8 +63,6 @@ const getColorLight = (client) => {
   switch (client) {
     case "Google":
       return "blue.500";
-    case "Twitter":
-      return "cyan.500";
     case "GitHub":
       return "black";
     case "Email":
@@ -79,8 +74,6 @@ const getColorDark = (client) => {
   switch (client) {
     case "Google":
       return "blue.500";
-    case "Twitter":
-      return "cyan.500";
     case "GitHub":
       return "gray.400";
     case "Email":
