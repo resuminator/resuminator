@@ -26,19 +26,23 @@ const SignUpWithEmail: React.FC<Props> = ({
   formHandler,
   submitHandler,
 }) => {
-  const [
-    validLength,
-    hasNumber,
-    upperCase,
-    lowerCase,
-    match,
-  ] = usePasswordValidation(formValues.password, formValues.confirmPassword);
+  const [validLength, hasNumber, upperCase, lowerCase, match] =
+    usePasswordValidation(formValues.password, formValues.confirmPassword);
   const [showHints, setShowHints] = useState(false);
   const [showConfirmHint, setShowConfirmHint] = useState(false);
   const [validEmail, errorMessage] = useEmailValidation(formValues.email);
   const [showEmailError, setShowEmailError] = useState(false);
 
-  const isDisabled = Object.values(formValues).some(v => !v.length)
+  const isDisabled =
+    Object.values(formValues).some((v) => !v.length) ||
+    !(
+      validEmail &&
+      validLength &&
+      hasNumber &&
+      upperCase &&
+      lowerCase &&
+      match
+    );
 
   return (
     <MotionBox
