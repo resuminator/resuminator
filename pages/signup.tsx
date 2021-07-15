@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
 import { LogoWithText } from "../components/layouts/Logos";
+import { AuthProviderProps } from "../modules/Auth/AuthProviderCard";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
 import PageToggle from "../modules/Auth/PageToggle";
 import PrivacyNotice from "../modules/Auth/PrivacyNotice";
 import SignUpWithEmail, { FormValues } from "../modules/Auth/SignUpWithEmail";
 
 const Signup = () => {
-  const [client, setClient] = useState(null);
+  const [withEmail, setWithEmail] = useState<boolean>(false);
   const [formValues, setFormValues] = useState<FormValues>({
     fullName: "",
     email: "",
@@ -28,6 +29,11 @@ const Signup = () => {
     console.log(formValues);
   };
 
+  const handleSignIn = (client: AuthProviderProps["client"]) => {
+    if(client === "Email") return setWithEmail(true);
+
+  };
+
   return (
     <Layout hasHeaderHidden>
       <Box
@@ -43,15 +49,15 @@ const Signup = () => {
           subtitle="Create a new account"
         />
         <AnimatePresence>
-          {client === "Email" ? (
+          {withEmail ? (
             <SignUpWithEmail
-              resetClient={() => setClient(null)}
+              resetClient={() => setWithEmail(false)}
               formValues={formValues}
               formHandler={handleForm}
               submitHandler={handleSubmit}
             />
           ) : (
-            <AuthProvidersList setClient={setClient} />
+            <AuthProvidersList handleSignIn={handleSignIn} />
           )}
         </AnimatePresence>
         <Box textAlign="center" my="4" fontSize={{ base: "sm", md: "md" }}>
