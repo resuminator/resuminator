@@ -13,7 +13,6 @@ const AuthProvidersList: React.FC<AuthProvidersListProps> = ({ setClient }) => (
     transition={{ duration: 0.5 }}
   >
     <AuthProviderCard client="Google" onClick={() => setClient("Google")} />
-    <AuthProviderCard client="Twitter" onClick={() => setClient("Twitter")} />
     <AuthProviderCard client="GitHub" onClick={() => setClient("GitHub")} />
     <AuthProviderCard client="Email" onClick={() => setClient("Email")} />
   </MotionBox>
