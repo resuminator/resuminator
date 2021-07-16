@@ -1,4 +1,4 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Text, useColorModeValue } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -10,6 +10,11 @@ const VerifyEmailNotice: React.FC<Props> = ({ onClick }) => {
   const router = useRouter();
   const { email, verified } = router.query;
 
+  const props = {
+    bg: useColorModeValue("orange.50", "orange.900"),
+    color: useColorModeValue("orange.500", "orange.200"),
+  };
+
   return (
     verified === "false" && (
       <Box
@@ -18,11 +23,11 @@ const VerifyEmailNotice: React.FC<Props> = ({ onClick }) => {
         borderRadius="10px"
         border="1px solid"
         borderColor="orange"
-        bg="orange.50"
+        bg={props.bg}
         p="4"
         mb="2"
       >
-        <Text fontSize="sm" color="orange.500" mb="2">
+        <Text fontSize="sm" color={props.color} mb="2">
           Your email - {email} is not verified yet. Please verify your email by
           following the instructions sent to your inbox. <br /> Did not receive
           the instructions?
