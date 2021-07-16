@@ -88,19 +88,17 @@ const Signup = () => {
         return response;
       })
       .then((response) => {
-        //Sending verification email
-        response.user.sendEmailVerification();
+        //Sending verification email with redirecting url
+        response.user.sendEmailVerification({url: "http://localhost:3000/login"});
 
         //when done set status to success and create toast
         setStatus(Status.success);
-        createToast("Account created successfully", "success");
-        
+        createToast("Account created successfully", "success", "Verify your email and log in with your new account.");
+
         //Since firebase signs the user in, we don't need unverified users, hence log out.
         firebaseSDK.auth().signOut();
         //Finally route to login with email and verified status.
-        return router.push(
-          `/login?email=${response.user.email}&verified=${response.user.emailVerified}`
-        );
+        return router.push("/login");
       })
       .catch((e) => {
         setStatus(Status.error);

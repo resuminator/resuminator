@@ -10,6 +10,7 @@ import LinkText from "../../components/common/LinkText";
 import MotionBox from "../../components/layouts/MotionBox";
 import firebaseSDK from "../../services/firebase";
 import { authPersist } from "../../services/firebase/persistence";
+import VerifyEmailNotice from "./VerifyEmailNotice";
 
 interface Props {
   resetClient: () => void;
@@ -26,6 +27,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
   const [remember, setRemember] = useState(true);
   const persist = remember ? authPersist.local : authPersist.session;
   const [status, setStatus] = useState<Status>(Status.idle);
+  const [user, setUser] = useState<firebase.default.User | null>(null);
   const toast = useToast();
   const router = useRouter();
 
@@ -64,6 +66,9 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
           .auth()
           .signInWithEmailAndPassword(credentials.email, credentials.password)
           .then((response) => {
+            //Set the user object from the response to perform consecutive actions like sending verification email
+            setUser(response.user);
+
             //If in case the user email is not verfied, then logout the user and route to /login again
             if (!response.user.emailVerified) {
               router.push(
@@ -100,6 +105,30 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
       );
   };
 
+  const handleEmailVerification = () => {
+    //If user is present, it means that the user tried to login once without verifying their account
+    try {
+      if (user) {
+        //Send verification email with redirect url
+        user.sendEmailVerification({
+          url: `http://localhost:3000/login`,
+        });
+        return createToast(
+          "Verification Email Sent!",
+          "success",
+          `Verify your email by following the link sent to your mail - ${user.email}`
+        );
+      }
+    } catch {
+      //If couldn't send verification email, then do this
+      return createToast(
+        "Couldn't send verification email",
+        "error",
+        "Try again in a minute and if the error persists contact us at hello@resuminator.in"
+      );
+    }
+  };
+
   return (
     <MotionBox
       initial={{ opacity: 0 }}
@@ -107,6 +136,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
+      <VerifyEmailNotice onClick={handleEmailVerification} />
       <InputField
         label="Email"
         name="email"
