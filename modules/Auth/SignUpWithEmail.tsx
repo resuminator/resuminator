@@ -19,7 +19,7 @@ interface Props {
   formValues: FormValues;
   formHandler: (e: SyntheticEvent) => void;
   submitHandler?: () => void;
-  status?: Status
+  status?: Status;
 }
 
 const SignUpWithEmail: React.FC<Props> = ({
@@ -27,7 +27,7 @@ const SignUpWithEmail: React.FC<Props> = ({
   formValues,
   formHandler,
   submitHandler,
-  status
+  status,
 }) => {
   const [validLength, hasNumber, upperCase, lowerCase, match] =
     usePasswordValidation(formValues.password, formValues.confirmPassword);
