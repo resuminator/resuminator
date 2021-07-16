@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
@@ -12,8 +13,16 @@ import PrivacyNotice from "../modules/Auth/PrivacyNotice";
 import SignUpWithEmail, { FormValues } from "../modules/Auth/SignUpWithEmail";
 import firebaseSDK from "../services/firebase";
 
+export enum Status {
+  loading,
+  idle,
+  error,
+  success,
+}
+
 const Signup = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
+  const [status, setStatus] = useState<Status>(Status.idle);
   const [formValues, setFormValues] = useState<FormValues>({
     fullName: "",
     email: "",
@@ -21,6 +30,7 @@ const Signup = () => {
     confirmPassword: "",
   });
   const toast = useToast();
+  const router = useRouter();
 
   const createToast = (
     title: string,
@@ -47,16 +57,6 @@ const Signup = () => {
     }
   };
 
-  const handleForm = (e) => {
-    e.preventDefault();
-    const [key, value] = [e.target.name, e.target.value];
-    setFormValues({ ...formValues, [key]: value });
-  };
-
-  const handleSubmit = () => {
-    console.log(formValues);
-  };
-
   const handleSignIn = (client: AuthProviderProps["client"]) => {
     if (client === "Email") return setWithEmail(true);
 
@@ -68,6 +68,48 @@ const Signup = () => {
       .catch((e) =>
         createToast(`Couldn't sign up with ${client}`, "error", e.message)
       );
+  };
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    const [key, value] = [e.target.name, e.target.value];
+    setFormValues({ ...formValues, [key]: value });
+  };
+
+  const handleSubmit = () => {
+    setStatus(Status.loading);
+
+    firebaseSDK
+      .auth()
+      .createUserWithEmailAndPassword(formValues.email, formValues.password)
+      .then(async (response) => {
+        //Update display name of user
+        await response.user.updateProfile({ displayName: formValues.fullName });
+        return response;
+      })
+      .then((response) => {
+        //Sending verification email
+        response.user.sendEmailVerification();
+
+        //when done set status to success and create toast
+        setStatus(Status.success);
+        createToast("Account created successfully", "success");
+        
+        //Since firebase signs the user in, we don't need unverified users, hence log out.
+        firebaseSDK.auth().signOut();
+        //Finally route to login with email and verified status.
+        return router.push(
+          `/login?email=${response.user.email}&verified=${response.user.emailVerified}`
+        );
+      })
+      .catch((e) => {
+        setStatus(Status.error);
+        createToast(
+          "Could not create account with this email",
+          "error",
+          e.message
+        );
+      });
   };
 
   return (
@@ -91,6 +133,7 @@ const Signup = () => {
               formValues={formValues}
               formHandler={handleForm}
               submitHandler={handleSubmit}
+              status={status}
             />
           ) : (
             <AuthProvidersList handleSignIn={handleSignIn} />
