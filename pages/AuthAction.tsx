@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/layout";
-import { useColorModeValue } from "@chakra-ui/react";
+import { Center, Icon, useColorModeValue } from "@chakra-ui/react";
 import { NextPage } from "next";
+import { FiAlertTriangle } from "react-icons/fi";
 import BoxHeader from "../components/common/BoxHeader";
 import Footer from "../components/layouts/Footer";
 import ScreenCenter from "../components/layouts/ScreenCenter";
@@ -50,11 +51,19 @@ const AuthAction: NextPage<ActionProps> = ({ mode, oobCode, continueUrl }) => {
               continueUrl={continueUrl.toString()}
             />
           ) : (
-            <BoxHeader
-              title="Cannot access this page"
-              subtitle="Invalid Auth Action Error. ERR_CODE: 403 Forbidden"
-              mb="0"
-            />
+            <Center>
+              <BoxHeader
+                title="Area 51 : Access Restricted"
+                subtitle="Invalid Auth Action Error. ERR_CODE: 403 Forbidden"
+                mb="0"
+              />
+              <Icon
+                as={FiAlertTriangle}
+                boxSize="4rem"
+                m="4"
+                color="yellow.500"
+              />
+            </Center>
           )}
         </Box>
       </ScreenCenter>
@@ -66,11 +75,10 @@ const AuthAction: NextPage<ActionProps> = ({ mode, oobCode, continueUrl }) => {
 export default AuthAction;
 
 export const getServerSideProps = async ({ query }) => {
-  if (Object.keys(query).length) {
-    const { mode, oobCode, continueUrl } = query;
-    return {
-      props: { mode, oobCode, continueUrl },
-    };
-  }
-  return { props: { mode: null, oobCode: null, continueUrl: null } };
+  const mode = query.mode || "";
+  const oobCode = query.oobCode || "";
+  const continueUrl = query.continueUrl || "";
+  return {
+    props: { mode, oobCode, continueUrl },
+  };
 };
