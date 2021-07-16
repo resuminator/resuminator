@@ -10,9 +10,13 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     return firebaseSDK.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        const token = await user.getIdToken();
         setUser(user);
-        nookies.set(undefined, "token", token, { path: "/" });
+
+        //Save cookie token only if the user is verified
+        if (user.emailVerified) {
+          const token = await user.getIdToken();
+          nookies.set(undefined, "token", token, { path: "/" });
+        }
       }
     });
   }, []);
@@ -20,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const interval = setInterval(async () => {
       const user = firebaseSDK.auth().currentUser;
-      if (user) await user.getIdToken(true);
+      if (user && user.emailVerified) await user.getIdToken(true);
     }, 30 * 60 * 1000);
 
     // clean up setInterval
