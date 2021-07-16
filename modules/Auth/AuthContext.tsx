@@ -7,8 +7,9 @@ const AuthContext = createContext<{ user: firebase.default.User | null }>(null);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
+  //Listen to token changes.
   useEffect(() => {
-    return firebaseSDK.auth().onAuthStateChanged(async (user) => {
+    return firebaseSDK.auth().onIdTokenChanged(async (user) => {
       if (user) {
         setUser(user);
 
@@ -17,10 +18,14 @@ export const AuthProvider = ({ children }) => {
           const token = await user.getIdToken();
           nookies.set(undefined, "token", token, { path: "/" });
         }
+      } else {
+        setUser(null);
+        nookies.set(undefined, "token", "", { path: "/" });
       }
     });
   }, []);
 
+  //Force Refresh token every 30 mins. Firebase Limit 60 mins.
   useEffect(() => {
     const interval = setInterval(async () => {
       const user = firebaseSDK.auth().currentUser;
