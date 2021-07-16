@@ -5,6 +5,7 @@ import InputField from "../../components/common/InputField";
 import MotionBox from "../../components/layouts/MotionBox";
 import { useEmailValidation } from "../../hooks/useEmailValidation";
 import { usePasswordValidation } from "../../hooks/usePasswordValidation";
+import { Status } from "../../pages/signup";
 import PasswordHints from "./PasswordHints";
 
 export interface FormValues {
@@ -18,6 +19,7 @@ interface Props {
   formValues: FormValues;
   formHandler: (e: SyntheticEvent) => void;
   submitHandler?: () => void;
+  status?: Status
 }
 
 const SignUpWithEmail: React.FC<Props> = ({
@@ -25,6 +27,7 @@ const SignUpWithEmail: React.FC<Props> = ({
   formValues,
   formHandler,
   submitHandler,
+  status
 }) => {
   const [validLength, hasNumber, upperCase, lowerCase, match] =
     usePasswordValidation(formValues.password, formValues.confirmPassword);
@@ -105,6 +108,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         colorScheme="blue"
         textAlign="center"
         mb="4"
+        isLoading={status === Status.loading}
         isDisabled={isDisabled}
         onClick={submitHandler}
       >
