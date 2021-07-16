@@ -2,6 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
 import { Box } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import InputField from "../../components/common/InputField";
@@ -26,6 +27,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
   const persist = remember ? authPersist.local : authPersist.session;
   const [status, setStatus] = useState<Status>(Status.idle);
   const toast = useToast();
+  const router = useRouter();
 
   const createToast = (
     title: string,
@@ -61,7 +63,22 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
         firebaseSDK
           .auth()
           .signInWithEmailAndPassword(credentials.email, credentials.password)
-          .then(() => {
+          .then((response) => {
+            //If in case the user email is not verfied, then logout the user and route to /login again
+            if (!response.user.emailVerified) {
+              router.push(
+                `/login?email=${response.user.email}&verified=${response.user.emailVerified}`
+              );
+              firebaseSDK.auth().signOut();
+              createToast(
+                "Email not verified",
+                "warning",
+                `Please verify your email "${response.user.email}" to continue or use your Google or GitHub account to login`
+              );
+              return setStatus(Status.error);
+            }
+
+            //If email verified, then perform all the email success actions
             setStatus(Status.success);
             createToast("Logged in successfully", "success");
           })
