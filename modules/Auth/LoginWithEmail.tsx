@@ -158,6 +158,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
         textAlign="center"
         mb="4"
         isLoading={status === Status.loading}
+        loadingText="Logging in"
         onClick={handleSubmit}
       >
         Log In

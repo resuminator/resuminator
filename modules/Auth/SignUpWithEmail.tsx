@@ -109,6 +109,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         textAlign="center"
         mb="4"
         isLoading={status === Status.loading}
+        loadingText="Creating New Account"
         isDisabled={isDisabled}
         onClick={submitHandler}
       >
