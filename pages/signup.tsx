@@ -87,16 +87,22 @@ const Signup = () => {
         await response.user.updateProfile({ displayName: formValues.fullName });
         return response;
       })
-      .then((response) => {
+      .then(async (response) => {
         //Sending verification email with redirecting url
-        response.user.sendEmailVerification({url: "http://localhost:3000/login"});
+        response.user.sendEmailVerification({
+          url: "http://localhost:3000/login",
+        });
 
         //when done set status to success and create toast
         setStatus(Status.success);
-        createToast("Account created successfully", "success", "Verify your email and log in with your new account.");
+        createToast(
+          "Account created successfully",
+          "success",
+          "Verify your email and log in with your new account. Make sure to check your spam/junk folder."
+        );
 
-        //Since firebase signs the user in, we don't need unverified users, hence log out.
-        firebaseSDK.auth().signOut();
+        //Since firebase signs the user in, and we don't need unverified users, hence log out.
+        await firebaseSDK.auth().signOut();
         //Finally route to login with email and verified status.
         return router.push("/login");
       })
