@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
 import { LogoWithText } from "../components/layouts/Logos";
+import { BASE_URL } from "../data/RefLinks";
 import { AuthProviderProps } from "../modules/Auth/AuthProviderCard";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
 import PageToggle from "../modules/Auth/PageToggle";
@@ -90,7 +91,7 @@ const Signup = () => {
       .then(async (response) => {
         //Sending verification email with redirecting url
         response.user.sendEmailVerification({
-          url: "http://localhost:3000/login",
+          url: `${BASE_URL}/login`,
         });
 
         //when done set status to success and create toast
