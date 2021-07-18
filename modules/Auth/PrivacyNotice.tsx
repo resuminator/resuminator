@@ -4,7 +4,7 @@ import LinkText from "../../components/common/LinkText";
 const PrivacyNotice = () => {
   return (
     <Text align="center" color="InactiveCaptionText" fontSize="smaller" my="4">
-      Continue to log in to agree to Resuminator’s{" "}
+      Continue to agree to Resuminator’s{" "}
       <LinkText href="" textDecoration="underline">
         Terms of Service
       </LinkText>{" "}
