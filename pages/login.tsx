@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/layout";
-import { useToast } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 import { NextPage } from "next";
 import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
 import { LogoWithText } from "../components/layouts/Logos";
+import { useCustomToast } from "../hooks/useCustomToast";
 import { AuthProviderProps } from "../modules/Auth/AuthProviderCard";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
 import LogInWithEmail from "../modules/Auth/LoginWithEmail";
@@ -15,21 +15,7 @@ import firebaseSDK from "../services/firebase";
 
 const Login: NextPage = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
-  const toast = useToast();
-
-  const createToast = (
-    title: string,
-    status: "error" | "info" | "warning" | "success",
-    description = ""
-  ) =>
-    toast({
-      title,
-      status,
-      description,
-      variant: "solid",
-      duration: 5000,
-      isClosable: true,
-    });
+  const { createToast } = useCustomToast();
 
   const getProvider = (c: AuthProviderProps["client"]) => {
     switch (c) {

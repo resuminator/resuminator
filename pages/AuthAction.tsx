@@ -8,13 +8,6 @@ import ScreenCenter from "../components/layouts/ScreenCenter";
 import ResetPassword from "../modules/Auth/ResetPassword";
 import VerifyEmail from "../modules/Auth/VerifyEmail";
 
-export enum Status {
-  loading,
-  idle,
-  error,
-  success,
-}
-
 interface ActionProps {
   mode?: string;
   oobCode?: string;

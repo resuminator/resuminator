@@ -1,11 +1,15 @@
 import { Button } from "@chakra-ui/button";
-import { SyntheticEvent, useState } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import InputField from "../../components/common/InputField";
 import MotionBox from "../../components/layouts/MotionBox";
+import { BASE_URL } from "../../data/RefLinks";
+import { useCustomToast } from "../../hooks/useCustomToast";
 import { useEmailValidation } from "../../hooks/useEmailValidation";
 import { usePasswordValidation } from "../../hooks/usePasswordValidation";
-import { Status } from "../../pages/signup";
+import firebaseSDK from "../../services/firebase";
+import { Status } from "../../utils/constants";
 import PasswordHints from "./PasswordHints";
 
 export interface FormValues {
@@ -16,25 +20,70 @@ export interface FormValues {
 }
 interface Props {
   resetClient: () => void;
-  formValues: FormValues;
-  formHandler: (e: SyntheticEvent) => void;
-  submitHandler?: () => void;
-  status?: Status;
 }
 
-const SignUpWithEmail: React.FC<Props> = ({
-  resetClient,
-  formValues,
-  formHandler,
-  submitHandler,
-  status,
-}) => {
+const SignUpWithEmail: React.FC<Props> = ({ resetClient }) => {
+  const [status, setStatus] = useState<Status>(Status.idle);
+  const [formValues, setFormValues] = useState<FormValues>({
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [validLength, hasNumber, upperCase, lowerCase, match] =
     usePasswordValidation(formValues.password, formValues.confirmPassword);
   const [showHints, setShowHints] = useState(false);
   const [showConfirmHint, setShowConfirmHint] = useState(false);
   const [validEmail, errorMessage] = useEmailValidation(formValues.email);
   const [showEmailError, setShowEmailError] = useState(false);
+  const { createToast } = useCustomToast();
+  const router = useRouter();
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    const [key, value] = [e.target.name, e.target.value];
+    setFormValues({ ...formValues, [key]: value });
+  };
+
+  const handleSubmit = () => {
+    setStatus(Status.loading);
+
+    firebaseSDK
+      .auth()
+      .createUserWithEmailAndPassword(formValues.email, formValues.password)
+      .then(async (response) => {
+        //Update display name of user
+        await response.user.updateProfile({ displayName: formValues.fullName });
+        return response;
+      })
+      .then(async (response) => {
+        //Sending verification email with redirecting url
+        response.user.sendEmailVerification({
+          url: `${BASE_URL}/login`,
+        });
+
+        //when done set status to success and create toast
+        setStatus(Status.success);
+        createToast(
+          "Account created successfully",
+          "success",
+          "Verify your email and log in with your new account. Make sure to check your spam/junk folder."
+        );
+
+        //Since firebase signs the user in, and we don't need unverified users, hence log out.
+        await firebaseSDK.auth().signOut();
+        //Finally route to login with email and verified status.
+        return router.push("/login");
+      })
+      .catch((e) => {
+        setStatus(Status.error);
+        createToast(
+          "Could not create account with this email",
+          "error",
+          e.message
+        );
+      });
+  };
 
   const isDisabled =
     Object.values(formValues).some((v) => !v.length) ||
@@ -59,7 +108,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         name="fullName"
         value={formValues.fullName}
         type="text"
-        onChange={formHandler}
+        onChange={handleForm}
         placeholder="Tony Stark"
       />
       <InputField
@@ -67,7 +116,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         name="email"
         value={formValues.email}
         type="email"
-        onChange={formHandler}
+        onChange={handleForm}
         isValid={validEmail}
         error={{ show: showEmailError && !validEmail, message: errorMessage }}
         onFocus={() => setShowEmailError(true)}
@@ -78,7 +127,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         name="password"
         value={formValues.password}
         type="password"
-        onChange={formHandler}
+        onChange={handleForm}
         onFocus={() => setShowHints(true)}
         onBlur={() => setShowHints(false)}
         placeholder="8+ characters"
@@ -93,7 +142,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         name="confirmPassword"
         value={formValues.confirmPassword}
         type="password"
-        onChange={formHandler}
+        onChange={handleForm}
         onFocus={() => setShowConfirmHint(true)}
         onBlur={() => setShowConfirmHint(false)}
       />
@@ -111,7 +160,7 @@ const SignUpWithEmail: React.FC<Props> = ({
         isLoading={status === Status.loading}
         loadingText="Creating New Account"
         isDisabled={isDisabled}
-        onClick={submitHandler}
+        onClick={handleSubmit}
       >
         Create new account
       </Button>

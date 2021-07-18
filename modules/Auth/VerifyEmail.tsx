@@ -1,25 +1,19 @@
-import { Button, Center, Icon, Spinner, useToast } from "@chakra-ui/react";
+import { Button, Center, Icon, Spinner } from "@chakra-ui/react";
 import Link from "next/link";
 import React, { Fragment, useEffect, useState } from "react";
 import {
   FiAlertCircle,
   FiArrowLeft,
   FiArrowRight,
-  FiCheckCircle,
+  FiCheckCircle
 } from "react-icons/fi";
 import BoxHeader from "../../components/common/BoxHeader";
 import firebaseSDK from "../../services/firebase";
+import { Status } from "../../utils/constants";
 
 interface VerifyEmailProps {
   actionCode?: string;
   continueUrl?: string;
-}
-
-export enum Status {
-  loading,
-  idle,
-  error,
-  success,
 }
 
 //This component renders if the email verification is successful

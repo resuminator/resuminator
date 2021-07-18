@@ -1,27 +1,21 @@
-import { Button, useToast } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import { FiLock } from "react-icons/fi";
 import BoxHeader from "../../components/common/BoxHeader";
 import InputField from "../../components/common/InputField";
+import { useCustomToast } from "../../hooks/useCustomToast";
 import { usePasswordValidation } from "../../hooks/usePasswordValidation";
 import firebaseSDK from "../../services/firebase";
+import { Status } from "../../utils/constants";
 import PasswordHints from "./PasswordHints";
 
 interface ResetPasswordProps {
   actionCode: string;
 }
 
-export enum Status {
-  loading,
-  idle,
-  error,
-  success,
-}
-
 const ResetPassword: React.FC<ResetPasswordProps> = ({ actionCode }) => {
   const router = useRouter();
-
   const [status, setStatus] = useState<Status>(Status.idle);
   const [password, setPassword] = useState({
     new: "",
@@ -31,20 +25,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ actionCode }) => {
     usePasswordValidation(password.new, password.confirm);
   const [showHints, setShowHints] = useState(false);
   const [showConfirmHint, setShowConfirmHint] = useState(false);
-  const toast = useToast();
-  const createToast = (
-    title: string,
-    status: "error" | "info" | "warning" | "success",
-    description = ""
-  ) =>
-    toast({
-      title,
-      status,
-      description,
-      variant: "solid",
-      duration: 5000,
-      isClosable: true,
-    });
+  const { createToast } = useCustomToast();
 
   const handleForm = (e) => {
     e.preventDefault();

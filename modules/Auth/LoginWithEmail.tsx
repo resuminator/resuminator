@@ -1,49 +1,31 @@
 import { Button } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
 import { Box } from "@chakra-ui/layout";
-import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import InputField from "../../components/common/InputField";
 import LinkText from "../../components/common/LinkText";
 import MotionBox from "../../components/layouts/MotionBox";
+import { BASE_URL } from "../../data/RefLinks";
+import { useCustomToast } from "../../hooks/useCustomToast";
 import firebaseSDK from "../../services/firebase";
 import { authPersist } from "../../services/firebase/persistence";
+import { Status } from "../../utils/constants";
 import VerifyEmailNotice from "./VerifyEmailNotice";
 
 interface Props {
   resetClient: () => void;
 }
 
-export enum Status {
-  loading,
-  idle,
-  error,
-  success,
-}
 const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [remember, setRemember] = useState(true);
   const persist = remember ? authPersist.local : authPersist.session;
   const [status, setStatus] = useState<Status>(Status.idle);
   const [user, setUser] = useState<firebase.default.User | null>(null);
-  const toast = useToast();
+  const { createToast } = useCustomToast();
   const router = useRouter();
-
-  const createToast = (
-    title: string,
-    status: "error" | "info" | "warning" | "success",
-    description = ""
-  ) =>
-    toast({
-      title,
-      status,
-      description,
-      variant: "solid",
-      duration: 5000,
-      isClosable: true,
-    });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -89,20 +71,10 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
           })
           .catch((e) => {
             setStatus(Status.error);
-            createToast(
-              "Couldn't log you in with these credentials",
-              "error",
-              e.message
-            );
+            createToast("Error while logging in", "error", e.message);
           })
       )
-      .catch((e) =>
-        createToast(
-          "Couldn't log you in with these credentials",
-          "error",
-          e.message
-        )
-      );
+      .catch((e) => createToast("Error while logging in", "error", e.message));
   };
 
   const handleEmailVerification = () => {
@@ -111,7 +83,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
       if (user) {
         //Send verification email with redirect url
         user.sendEmailVerification({
-          url: `http://localhost:3000/login`,
+          url: `${BASE_URL}/login`,
         });
         return createToast(
           "Verification Email Sent!",

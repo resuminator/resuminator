@@ -13,13 +13,7 @@ import Footer from "../components/layouts/Footer";
 import ScreenCenter from "../components/layouts/ScreenCenter";
 import { useEmailValidation } from "../hooks/useEmailValidation";
 import firebaseSDK from "../services/firebase";
-
-export enum Status {
-  loading,
-  idle,
-  error,
-  success,
-}
+import { Status } from "../utils/constants";
 
 const LoginHelp: NextPage = () => {
   const [email, setEmail] = useState("");

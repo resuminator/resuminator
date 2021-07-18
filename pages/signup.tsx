@@ -1,51 +1,20 @@
 import { Box } from "@chakra-ui/layout";
-import { useToast } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
 import { LogoWithText } from "../components/layouts/Logos";
-import { BASE_URL } from "../data/RefLinks";
+import { useCustomToast } from "../hooks/useCustomToast";
 import { AuthProviderProps } from "../modules/Auth/AuthProviderCard";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
 import PageToggle from "../modules/Auth/PageToggle";
 import PrivacyNotice from "../modules/Auth/PrivacyNotice";
-import SignUpWithEmail, { FormValues } from "../modules/Auth/SignUpWithEmail";
+import SignUpWithEmail from "../modules/Auth/SignUpWithEmail";
 import firebaseSDK from "../services/firebase";
-
-export enum Status {
-  loading,
-  idle,
-  error,
-  success,
-}
 
 const Signup = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
-  const [status, setStatus] = useState<Status>(Status.idle);
-  const [formValues, setFormValues] = useState<FormValues>({
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const toast = useToast();
-  const router = useRouter();
-
-  const createToast = (
-    title: string,
-    status: "error" | "info" | "warning" | "success",
-    description = ""
-  ) =>
-    toast({
-      title,
-      status,
-      description,
-      variant: "solid",
-      duration: 5000,
-      isClosable: true,
-    });
+  const { createToast } = useCustomToast();
 
   const getProvider = (c: AuthProviderProps["client"]) => {
     switch (c) {
@@ -71,52 +40,6 @@ const Signup = () => {
       );
   };
 
-  const handleForm = (e) => {
-    e.preventDefault();
-    const [key, value] = [e.target.name, e.target.value];
-    setFormValues({ ...formValues, [key]: value });
-  };
-
-  const handleSubmit = () => {
-    setStatus(Status.loading);
-
-    firebaseSDK
-      .auth()
-      .createUserWithEmailAndPassword(formValues.email, formValues.password)
-      .then(async (response) => {
-        //Update display name of user
-        await response.user.updateProfile({ displayName: formValues.fullName });
-        return response;
-      })
-      .then(async (response) => {
-        //Sending verification email with redirecting url
-        response.user.sendEmailVerification({
-          url: `${BASE_URL}/login`,
-        });
-
-        //when done set status to success and create toast
-        setStatus(Status.success);
-        createToast(
-          "Account created successfully",
-          "success",
-          "Verify your email and log in with your new account. Make sure to check your spam/junk folder."
-        );
-
-        //Since firebase signs the user in, and we don't need unverified users, hence log out.
-        await firebaseSDK.auth().signOut();
-        //Finally route to login with email and verified status.
-        return router.push("/login");
-      })
-      .catch((e) => {
-        setStatus(Status.error);
-        createToast(
-          "Could not create account with this email",
-          "error",
-          e.message
-        );
-      });
-  };
-
   return (
     <Layout hasHeaderHidden>
       <Box
@@ -133,13 +56,7 @@ const Signup = () => {
         />
         <AnimatePresence>
           {withEmail ? (
-            <SignUpWithEmail
-              resetClient={() => setWithEmail(false)}
-              formValues={formValues}
-              formHandler={handleForm}
-              submitHandler={handleSubmit}
-              status={status}
-            />
+            <SignUpWithEmail resetClient={() => setWithEmail(false)} />
           ) : (
             <AuthProvidersList handleSignIn={handleSignIn} />
           )}
