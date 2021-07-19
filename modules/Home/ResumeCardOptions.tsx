@@ -13,7 +13,7 @@ import {
   SimpleGrid,
   Text,
   Tooltip,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import Emoticons from "../../data/Emoticons";
 import useUserStore from "../User/store";
@@ -26,12 +26,16 @@ interface ResumeCardOptionProps {
 const ResumeCardOptions: React.FC<ResumeCardOptionProps> = ({ dataObject }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const updateActive = useUserStore((state) => state.updateActive);
+  
   const handleInput = (
     dataObject: ResumeMetadata,
     key: string,
     value: string
   ) => {
-    updateActive(dataObject.id, key, value);
+    if (key === "profileName" && value === "")
+      return updateActive(dataObject.id, key, "Untitled Resume");
+
+    return updateActive(dataObject.id, key, value);
   };
 
   return (
