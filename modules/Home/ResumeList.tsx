@@ -2,6 +2,7 @@ import { GridItem, HStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import BoxHeader from "../../components/common/BoxHeader";
+import useUserStore from "../User/store";
 import { ResumeMetadata } from "../User/types";
 import CreateResumeCard from "./CreateResumeCard";
 import ResumeCard from "./ResumeCard";
@@ -16,6 +17,11 @@ const ResumeList: React.FC<ResumeListProps> = ({ data, handleNew }) => {
   const handleSelect = (id: string) => {
     router.push(`/create/${id}`);
   };
+  const updateActive = useUserStore((state) => state.updateActive);
+
+  const handleInputSubmit = (dataObject: ResumeMetadata) => (value: string) => {
+    updateActive(dataObject.id, "profileName", value);
+  };
 
   return (
     <GridItem colSpan={3}>
@@ -28,7 +34,12 @@ const ResumeList: React.FC<ResumeListProps> = ({ data, handleNew }) => {
       />
       <HStack spacing="8" alignItems="flex-start">
         {data.map((item) => (
-          <ResumeCard key={item.id} dataObject={item} callback={handleSelect} />
+          <ResumeCard
+            key={item.id}
+            dataObject={item}
+            callback={handleSelect}
+            onSubmit={handleInputSubmit(item)}
+          />
         ))}
         <CreateResumeCard onClick={handleNew} />
       </HStack>

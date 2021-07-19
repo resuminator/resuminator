@@ -1,16 +1,29 @@
-import { Center, Text } from "@chakra-ui/react";
+import {
+  Center,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
 import { isCustom } from "../Design/Colors/ColorSelector";
 import { ResumeMetadata } from "../User/types";
 
 interface ResumeCardProps {
   dataObject: ResumeMetadata;
   callback: (id: string) => void;
+  onSubmit?: (value: string) => void;
 }
 
-const ResumeCard: React.FC<ResumeCardProps> = ({ dataObject, callback }) => {
+const ResumeCard: React.FC<ResumeCardProps> = ({
+  dataObject,
+  callback,
+  onSubmit,
+}) => {
   const primaryColor = isCustom(dataObject.color)
     ? dataObject.color
     : `${dataObject.color}.500`;
+
   return (
     <Center key={dataObject.id} flexDirection="column">
       <Center
@@ -25,7 +38,21 @@ const ResumeCard: React.FC<ResumeCardProps> = ({ dataObject, callback }) => {
       >
         <Text fontSize="4xl">{dataObject.icon}</Text>
       </Center>
-      <Text my="2">{dataObject.profileName}</Text>
+
+      <Editable
+        my="2"
+        p="1"
+        defaultValue={dataObject.profileName}
+        width="10rem"
+        textAlign="center"
+        onSubmit={onSubmit}
+        placeholder="Untitled Resume"
+      >
+        <Tooltip label="Click to edit" hasArrow>
+          <EditablePreview />
+        </Tooltip>
+        <EditableInput />
+      </Editable>
     </Center>
   );
 };
