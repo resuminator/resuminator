@@ -4,7 +4,7 @@ import {
   EditableInput,
   EditablePreview,
   Text,
-  Tooltip,
+  Tooltip
 } from "@chakra-ui/react";
 import { isCustom } from "../Design/Colors/ColorSelector";
 import { ResumeMetadata } from "../User/types";
@@ -39,20 +39,20 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
         <Text fontSize="4xl">{dataObject.icon}</Text>
       </Center>
 
-      <Editable
-        my="2"
-        p="1"
-        defaultValue={dataObject.profileName}
-        width="10rem"
-        textAlign="center"
-        onSubmit={onSubmit}
-        placeholder="Untitled Resume"
-      >
-        <Tooltip label="Click to edit" hasArrow>
+      <Tooltip label="Click to edit" hasArrow>
+        <Editable
+          my="2"
+          p="1"
+          defaultValue={dataObject.profileName}
+          width="10rem"
+          textAlign="center"
+          onSubmit={onSubmit}
+          placeholder="Untitled Resume"
+        >
           <EditablePreview />
-        </Tooltip>
-        <EditableInput />
-      </Editable>
+          <EditableInput />
+        </Editable>
+      </Tooltip>
     </Center>
   );
 };
