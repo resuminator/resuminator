@@ -1,28 +1,33 @@
 import {
   Center,
-  Editable,
-  EditableInput,
-  EditablePreview,
+  Popover,
+  PopoverTrigger,
   Text,
-  Tooltip
+  Tooltip,
+  useDisclosure,
 } from "@chakra-ui/react";
+import dynamic from 'next/dynamic'
 import { isCustom } from "../Design/Colors/ColorSelector";
 import { ResumeMetadata } from "../User/types";
+const ResumeCardOptions = dynamic(() => import("./ResumeCardOptions")) ;
 
 interface ResumeCardProps {
   dataObject: ResumeMetadata;
   callback: (id: string) => void;
   onSubmit?: (value: string) => void;
+  onSelect?: (value: string) => void;
 }
 
 const ResumeCard: React.FC<ResumeCardProps> = ({
   dataObject,
   callback,
   onSubmit,
+  onSelect,
 }) => {
   const primaryColor = isCustom(dataObject.color)
     ? dataObject.color
     : `${dataObject.color}.500`;
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Center key={dataObject.id} flexDirection="column">
@@ -39,20 +44,20 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
         <Text fontSize="4xl">{dataObject.icon}</Text>
       </Center>
 
-      <Tooltip label="Click to edit" hasArrow>
-        <Editable
-          my="2"
-          p="1"
-          defaultValue={dataObject.profileName}
-          width="10rem"
-          textAlign="center"
+      <Popover isOpen={isOpen} onClose={onClose} placement="bottom" matchWidth>
+        <PopoverTrigger>
+          <Text fontSize="md" my="2" onClick={onOpen} cursor="pointer">
+            <Tooltip hasArrow label="Click to edit">
+              {dataObject.profileName}
+            </Tooltip>
+          </Text>
+        </PopoverTrigger>
+        <ResumeCardOptions
+          dataObject={dataObject}
+          onSelect={onSelect}
           onSubmit={onSubmit}
-          placeholder="Untitled Resume"
-        >
-          <EditablePreview />
-          <EditableInput />
-        </Editable>
-      </Tooltip>
+        />
+      </Popover>
     </Center>
   );
 };

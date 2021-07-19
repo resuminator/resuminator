@@ -8,20 +8,20 @@ import CreateResumeCard from "./CreateResumeCard";
 import ResumeCard from "./ResumeCard";
 
 interface ResumeListProps {
-  data: Array<ResumeMetadata>;
   handleNew?: () => void;
 }
 
-const ResumeList: React.FC<ResumeListProps> = ({ data, handleNew }) => {
+const ResumeList: React.FC<ResumeListProps> = ({ handleNew }) => {
   const router = useRouter();
   const handleSelect = (id: string) => {
     router.push(`/create/${id}`);
   };
+  const data = useUserStore((state) => state.active);
   const updateActive = useUserStore((state) => state.updateActive);
-
-  const handleInputSubmit = (dataObject: ResumeMetadata) => (value: string) => {
-    updateActive(dataObject.id, "profileName", value);
-  };
+  const handleInputSubmit =
+    (dataObject: ResumeMetadata, key: string) => (value: string) => {
+      updateActive(dataObject.id, key, value);
+    };
 
   return (
     <GridItem colSpan={3}>
@@ -38,7 +38,8 @@ const ResumeList: React.FC<ResumeListProps> = ({ data, handleNew }) => {
             key={item.id}
             dataObject={item}
             callback={handleSelect}
-            onSubmit={handleInputSubmit(item)}
+            onSubmit={handleInputSubmit(item, "profileName")}
+            onSelect={handleInputSubmit(item, "icon")}
           />
         ))}
         <CreateResumeCard onClick={handleNew} />

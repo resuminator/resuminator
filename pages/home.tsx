@@ -47,8 +47,8 @@ const Home: NextPage = () => {
       >
         {/**Each component under Grid must be wrapped inside a GridItem component */}
         <Sidebar />
-        <ResumeList data={data.active} handleNew={handleNewResumeButton} />
-        
+        <ResumeList handleNew={handleNewResumeButton} />
+
         {/* Will be uncommented when we'll launch the template gallery */}
         {/* <TemplateList /> */}
       </Grid>
