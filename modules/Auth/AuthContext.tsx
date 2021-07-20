@@ -2,17 +2,18 @@ import nookies from "nookies";
 import { createContext, useContext, useEffect, useState } from "react";
 import firebaseSDK from "../../services/firebase";
 
-const AuthContext = createContext<{ user: firebase.default.User | null }>(null);
+const AuthContext = createContext<{ user: firebase.default.User | null }>({
+  user: null,
+});
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<firebase.default.User | null>(null);
 
   //Listen to token changes.
   useEffect(() => {
     return firebaseSDK.auth().onIdTokenChanged(async (user) => {
       if (user) {
         setUser(user);
-
         //Save cookie token only if the user is verified
         if (user.emailVerified) {
           const token = await user.getIdToken();
@@ -36,7 +37,9 @@ export const AuthProvider = ({ children }) => {
     return () => clearInterval(interval);
   }, []);
 
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {
