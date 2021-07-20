@@ -21,7 +21,10 @@ const ProfilePhoto = () => {
   const auth = useAuth();
   const { createToast } = useCustomToast();
   const [status, setStatus] = useState<Status>(Status.idle);
-  const [image, setImage] = useState({ file: null, url: "" });
+  const [image, setImage] = useState<{ file: File; url: string }>({
+    file: null,
+    url: "",
+  });
 
   useEffect(() => console.log(auth.user), [auth]);
 
@@ -57,31 +60,29 @@ const ProfilePhoto = () => {
 
   const uploadToFirebase = async (file: File) => {
     if (file && auth) {
+      const storageRef = firebaseSDK.storage().ref();
       const uid = auth.user.uid || "";
-      const fileName = `profile.${getExtension(file.name)}`;
-      const imageRef = firebaseSDK.storage().ref(uid).child(fileName);
+      // const fileName = `profile.${getExtension(file.name)}`;
+      const fileName = file.name;
 
-      const uploadTask = imageRef.put(image.file, { contentType: file.type });
+      const uploadTask = storageRef
+        .child(uid + "/" + fileName)
+        .put(image.file, { contentType: file.type });
       uploadTask.on(
         "state_change",
         (snapshot) => {
-          console.log(snapshot);
-          createToast("Image Upload Started", "info");
+          setStatus(Status.loading);
+          // createToast("Image Upload Started", "info");
         },
         (err) => {
           createToast("Error", "error", err.message);
         },
         () => {
-          firebaseSDK
-            .storage()
-            .ref(`${uid}`)
-            .child(fileName)
-            .getDownloadURL()
-            .then((url) => {
-              console.log(url);
-              setImage({ ...image, url });
-              createToast("Image Uploaded Successfully", "success");
-            });
+          uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+            setStatus(Status.success);
+            setImage({ ...image, url });
+            createToast("Image Uploaded Successfully", "success");
+          });
         }
       );
     } else {
@@ -113,6 +114,8 @@ const ProfilePhoto = () => {
         size="sm"
         variant="ghost"
         onClick={triggerFileDialog}
+        loadingText="Uploading"
+        isDisabled={!auth.user}
         isLoading={status === Status.loading}
       >
         {avatar.length ? "Upload New" : "Upload"}
