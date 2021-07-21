@@ -1,4 +1,5 @@
 import { Avatar, Button, Input, Text, VStack } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import { useCustomToast } from "../../../hooks/useCustomToast";
@@ -27,13 +28,7 @@ const ProfilePhoto = () => {
   1. Initialize Firebase Storage ✅
   2. Upload Image to Firebase from user ✅
   3. Get temporary link for firebase stored image ✅
-  4. Crop Image using TPL (Third Party Library)
-  5. Upload Final Image
-  6. Profit
   */
-
-  const getExtension = (filename: string) =>
-    filename.substr(filename.lastIndexOf(".") + 1);
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files[0];
@@ -42,7 +37,6 @@ const ProfilePhoto = () => {
       setImage({ ...image, file });
     } else {
       setImage({ ...image, file: null });
-      return null;
     }
   };
 
@@ -67,7 +61,7 @@ const ProfilePhoto = () => {
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then((url) => {
             setStatus(Status.success);
-            setImage({ ...image, url });
+            setImage({ file: null, url });
             auth.user.updateProfile({ photoURL: url }).then(() => {
               return createToast("Image Uploaded Successfully", "success");
             });
@@ -91,8 +85,8 @@ const ProfilePhoto = () => {
         ref={fileInputRef}
         onChange={handleImageChange}
         pt="1"
+        variant="filled"
       />
-
       <Button
         rightIcon={<FiUpload />}
         colorScheme="purple"
@@ -103,7 +97,7 @@ const ProfilePhoto = () => {
         isDisabled={!image.file}
         isLoading={status === Status.loading}
       >
-        {avatar.length ? "Upload New" : "Upload"}
+        Upload
       </Button>
     </VStack>
   );
