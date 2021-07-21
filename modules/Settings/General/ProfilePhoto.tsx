@@ -24,7 +24,7 @@ const ProfilePhoto = () => {
     }
   }, [auth]);
 
-  /*TODO: 
+  /* 
   1. Initialize Firebase Storage ✅
   2. Upload Image to Firebase from user ✅
   3. Get temporary link for firebase stored image ✅
