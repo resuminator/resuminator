@@ -4,32 +4,41 @@ import {
   Menu,
   MenuButton,
   MenuItem,
-  MenuList
+  MenuList,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useState } from "react";
 import { FaDiscord } from "react-icons/fa";
 import {
   FiBook,
   FiHelpCircle,
   FiLogOut,
   FiSettings,
-  FiUser
+  FiUser,
 } from "react-icons/fi";
 import { DISCORD_INVITE } from "../../data/RefLinks";
-import useUserStore from "../User/store";
+import { useAuth } from "../Auth/AuthContext";
 
 const UserMenu = () => {
-  const userAvatar = useUserStore((state) => state.avatar);
+  const auth = useAuth();
   const router = useRouter();
+  const [avatar, setAvatar] = useState("");
 
   const routeTo = (path: string) => {
     router.push(path);
   };
 
+  useEffect(() => {
+    if (auth.user) {
+      setAvatar(auth.user.photoURL);
+    }
+  }, [auth]);
+
   return (
     <Menu isLazy>
       <MenuButton>
-        <Avatar size="md" src={userAvatar} />
+        <Avatar size="md" src={avatar} />
       </MenuButton>
       <MenuList>
         <MenuItem icon={<FiUser />}>Profile</MenuItem>
