@@ -1,5 +1,4 @@
 import { Avatar, Button, Input, Text, VStack } from "@chakra-ui/react";
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import { useCustomToast } from "../../../hooks/useCustomToast";
