@@ -1,22 +1,18 @@
-import {
-  Box,
-  GridItem,
-  Text,
-  Divider,
-  Button,
-  ButtonGroup,
-} from "@chakra-ui/react";
-import React from "react";
-import { useState } from "react";
+import { Box, Button, ButtonGroup, Divider, Text } from "@chakra-ui/react";
+import Link from "next/link";
+import React, { useState } from "react";
 import BoxHeader from "../../../components/common/BoxHeader";
 import InputField from "../../../components/common/InputField";
-import InputWithLabel from "../../../components/common/InputWithLabel";
+import { useCustomToast } from "../../../hooks/useCustomToast";
 import { usePasswordValidation } from "../../../hooks/usePasswordValidation";
+import { Status } from "../../../utils/constants";
+import { useAuth } from "../../Auth/AuthContext";
 import PasswordHints from "../../Auth/PasswordHints";
 
 const ChangePassword = () => {
+  const auth = useAuth();
+  const [status, setStatus] = useState<Status>(Status.idle);
   const [password, setPassword] = useState({
-    current: "",
     new: "",
     confirm: "",
   });
@@ -24,6 +20,7 @@ const ChangePassword = () => {
     usePasswordValidation(password.new, password.confirm);
   const [showHints, setShowHints] = useState(false);
   const [showConfirmHint, setShowConfirmHint] = useState(false);
+  const { createToast } = useCustomToast();
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -31,9 +28,41 @@ const ChangePassword = () => {
     setPassword({ ...password, [key]: value });
   };
 
-  const handleSubmit = () => {
-    console.log(password);
+  /**
+   * Handles the password update request from Firebase
+   * @returns Promise | Toast
+   */
+  const handleSubmit = async () => {
+    setStatus(Status.loading);
+    try {
+      return await auth.user
+        .updatePassword(password.new)
+        .then(() => {
+          setStatus(Status.success);
+          return createToast(
+            "Password updated successfully",
+            "success",
+            "You can now sign in with your new password"
+          );
+        })
+        .catch((err) => {
+          setStatus(Status.error);
+          return createToast("Couldn't update password", "error", err.message);
+        });
+    } catch {
+      setStatus(Status.error);
+      return createToast(
+        "Couldn't update password",
+        "error",
+        "An error occured while performin this request"
+      );
+    }
   };
+
+  //Condition for keeping the update password button disabled
+  const isDisabled =
+    Object.values(password).some((v) => !v.length) ||
+    !(validLength && hasNumber && upperCase && lowerCase && match);
 
   return (
     <Box mb="8">
@@ -41,13 +70,6 @@ const ChangePassword = () => {
         title="Change Password"
         size={{ title: "lg", subtitle: "sm" }}
         mb="2.5"
-      />
-      <InputField
-        label="Current Password"
-        name="current"
-        value={password.current}
-        type="password"
-        onChange={handleForm}
       />
       <InputField
         label="Password"
@@ -79,21 +101,32 @@ const ChangePassword = () => {
         />
       ) : null}
       <ButtonGroup spacing="4">
-        <Button colorScheme="blue" my="2" size="sm" onClick={handleSubmit}>
-          Update password
-        </Button>
         <Button
           colorScheme="blue"
-          fontWeight="normal"
-          variant="link"
           my="2"
           size="sm"
+          onClick={handleSubmit}
+          isDisabled={isDisabled}
+          isLoading={status === Status.loading}
+          loadingText="Updating Password"
         >
-          Forgot Password?
+          Update password
         </Button>
+        <Link href="/LoginHelp">
+          <Button
+            colorScheme="blue"
+            fontWeight="normal"
+            variant="link"
+            my="2"
+            size="sm"
+          >
+            Forgot Password?
+          </Button>
+        </Link>
       </ButtonGroup>
       <Text fontSize="sm" color="gray" mb="2">
-        You will need to login again once you change your password
+        You will be logged out of Resuminator on all the other devices once you
+        successfully update your password
       </Text>
       <Divider />
     </Box>
