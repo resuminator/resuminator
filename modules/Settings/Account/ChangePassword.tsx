@@ -39,6 +39,7 @@ const ChangePassword = () => {
         .updatePassword(password.new)
         .then(() => {
           setStatus(Status.success);
+          setPassword({new: "", confirm: ""})
           return createToast(
             "Password updated successfully",
             "success",
