@@ -1,35 +1,44 @@
-import {
-  Box,
-  Button,
-  Divider,
-  GridItem,
-  Input,
-  useToast,
-} from "@chakra-ui/react";
-import React, { Fragment, useState } from "react";
+import { Box, Button, Divider, Input } from "@chakra-ui/react";
+import React, { Fragment, useEffect, useState } from "react";
 import BoxHeader from "../../../components/common/BoxHeader";
-import useUserStore from "../../User/store";
+import { useCustomToast } from "../../../hooks/useCustomToast";
+import { Status } from "../../../utils/constants";
+import { useAuth } from "../../Auth/AuthContext";
 
 const PersonalDetails = () => {
-  const { fullName, email, setProperty } = useUserStore();
+  const auth = useAuth();
+  const [user, setUser] = useState({ displayName: "", email: "" });
+  const [status, setStatus] = useState<Status>(Status.idle);
   const [unsavedChanges, setUnsavedChanges] = useState<boolean>(false);
-  const toast = useToast();
+  const { createToast } = useCustomToast();
+
+  useEffect(() => {
+    if (auth.user) {
+      setUser({ displayName: auth.user.displayName, email: auth.user.email });
+    }
+  }, [auth.user]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const [key, value] = [e.target.name, e.target.value];
     setUnsavedChanges(true);
-    setProperty(key, value);
+    const [key, value] = [e.target.name, e.target.value];
+    setUser({ ...user, [key]: value });
   };
 
-  const saveChanges = () => {
-    setUnsavedChanges(false);
-    toast({
-      title: "Changes Saved",
-      duration: 3000,
-      status: "success",
-      variant: "subtle",
-    });
+  const saveChanges = async () => {
+    setStatus(Status.loading);
+    await auth.user
+      .updateProfile({ displayName: user.displayName })
+      .then(() => {
+        setUnsavedChanges(false);
+        setStatus(Status.success);
+        createToast("Changes Saved", "success");
+      })
+      .catch((err) => {
+        setStatus(Status.error);
+        createToast("Couldn't save changes", "error", err.message);
+      });
   };
+
   return (
     <Fragment>
       <Box mb="8">
@@ -40,10 +49,10 @@ const PersonalDetails = () => {
           mb="2.5"
         />
         <Input
-          maxW="64"
+          maxW="80"
           variant="outline"
-          name="fullName"
-          value={fullName}
+          name="displayName"
+          value={user.displayName}
           onChange={handleInput}
         />
       </Box>
@@ -55,10 +64,10 @@ const PersonalDetails = () => {
           mb="2.5"
         />
         <Input
-          maxW="64"
+          maxW="80"
           variant="outline"
           name="email"
-          value={email}
+          value={user.email}
           onChange={handleInput}
           isDisabled
         />
@@ -69,6 +78,8 @@ const PersonalDetails = () => {
         onClick={saveChanges}
         mb="2"
         size="sm"
+        isLoading={status === Status.loading}
+        loadingText="Saving changes"
       >
         Save Changes
       </Button>
