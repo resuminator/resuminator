@@ -2,12 +2,14 @@ import { Avatar, Button, Text, useDisclosure, VStack } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { FiUpload } from "react-icons/fi";
+import { useCustomToast } from "../../../hooks/useCustomToast";
 import { useAuth } from "../../Auth/AuthContext";
-const PhotoUploadModal = dynamic(() => import("./PhotoUploadModal"));
+const PhotoUploadModal = dynamic(() => import("../../Shared/PhotoUploadModal"));
 
 const ProfilePhoto = () => {
   const auth = useAuth();
   const [avatar, setAvatar] = useState("");
+  const { createToast } = useCustomToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
@@ -15,6 +17,12 @@ const ProfilePhoto = () => {
       setAvatar(auth.user.photoURL);
     }
   }, [auth]);
+
+  const setUserPhotoUrl = (url: string) => {
+    auth.user.updateProfile({ photoURL: url }).then(() => {
+      return createToast("Image Uploaded Successfully", "success");
+    });
+  };
 
   return (
     <VStack>
@@ -37,6 +45,8 @@ const ProfilePhoto = () => {
         onClose={onClose}
         auth={auth}
         setAvatarCallback={setAvatar}
+        dbCallback={setUserPhotoUrl}
+        fileName="profile"
       />
     </VStack>
   );
