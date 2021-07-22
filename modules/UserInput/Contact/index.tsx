@@ -7,6 +7,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { GrDrag } from "react-icons/gr";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import { useCustomToast } from "../../../hooks/useCustomToast";
 import { handleDragEnd } from "../handlers";
 import SectionControls from "../SectionControls";
 import { getColorSchemeForService, getIconForService } from "./helpers";
@@ -19,11 +20,12 @@ const Contact = () => {
   const update = useContactStore((state) => state.update);
   const add = useContactStore((state) => state.add);
   const set = useContactStore((state) => state.setContact);
+  const { createToast } = useCustomToast();
 
-  const handleDelete = (index: number) => {
-    const preList = data.slice(0, index);
-    const postList = data.slice(index + 1);
-    // setData([...preList, ...postList]);
+  const handleDelete = (itemIndex: number) => {
+    const nextState = data.filter((item, index) => index !== itemIndex);
+    set(nextState);
+    return createToast("Deleted Successfully", "success");
   };
 
   return (

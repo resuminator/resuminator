@@ -6,12 +6,13 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
 import {
   handleChange,
   handleDateChange,
   handleDragEnd,
-  handlePresentCheckbox,
+  handlePresentCheckbox
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import useCertificationStore from "./store";
@@ -22,6 +23,7 @@ const Certification = () => {
   const setData = useCertificationStore((state) => state.setData);
   const addData = useCertificationStore((state) => state.add);
   const updateData = useCertificationStore((state) => state.update);
+  const { createToast } = useCustomToast();
 
   //This will be removed when server is connected. For mock purposes only.
   const DummyData: CertificationDataObject = {
@@ -47,7 +49,9 @@ const Certification = () => {
 
   //Mocked delete request from server.
   const handleDelete = async (id: string) => {
-    console.log(`Deleted ${id}`);
+    const nextState = data.filter((item) => item._id !== id);
+    setData(nextState);
+    return createToast("Deleted Successfully", "success");
   };
 
   return (
@@ -78,7 +82,7 @@ const Certification = () => {
               title: item.certificateName,
               subtitle: item.credentialNumber,
               titlePlaceholder: "Certificate Name",
-              isHidden: item.isHidden
+              isHidden: item.isHidden,
             }}
             InputCardProps={{
               itemType: "certification",

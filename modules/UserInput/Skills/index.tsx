@@ -6,6 +6,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
 import { handleChange, handleDragEnd, handleTagsInput } from "../handlers";
 import SectionControls from "../SectionControls";
@@ -18,6 +19,7 @@ const Skills = () => {
   const setData = useSkillStore((state) => state.setData);
   const addData = useSkillStore((state) => state.add);
   const updateData = useSkillStore((state) => state.update);
+  const { createToast } = useCustomToast();
 
   const DummyData: SkillDataObject = {
     _id: getUniqueID(),
@@ -37,7 +39,9 @@ const Skills = () => {
 
   //Mocked delete request from server.
   const handleDelete = async (id: string) => {
-    console.log(`Deleted ${id}`);
+    const nextState = data.filter((item) => item._id !== id);
+    setData(nextState);
+    return createToast("Deleted Successfully", "success");
   };
 
   return (
@@ -69,7 +73,7 @@ const Skills = () => {
               index: index,
               title: item.category,
               titlePlaceholder: "Untitled category",
-              isHidden: item.isHidden
+              isHidden: item.isHidden,
             }}
             InputCardProps={{
               itemType: "category",

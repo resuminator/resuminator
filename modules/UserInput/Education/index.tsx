@@ -7,13 +7,14 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
 import {
   handleChange,
   handleDateChange,
   handleDragEnd,
   handleEditorChange,
-  handlePresentCheckbox
+  handlePresentCheckbox,
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import GradeInput from "./GradeInput";
@@ -25,6 +26,7 @@ const Education = () => {
   const setData = useEducationStore((state) => state.setData);
   const addData = useEducationStore((state) => state.add);
   const updateData = useEducationStore((state) => state.update);
+  const { createToast } = useCustomToast();
 
   //This will be removed when server is connected. For mock purposes only.
   const DummyData: EducationDataObject = {
@@ -53,7 +55,9 @@ const Education = () => {
 
   //Mocked delete request from server.
   const handleDelete = async (id: string) => {
-    console.log(`Deleted ${id}`);
+    const nextState = data.filter((item) => item._id !== id);
+    setData(nextState);
+    return createToast("Deleted Successfully", "success");
   };
 
   return (
@@ -84,7 +88,7 @@ const Education = () => {
               title: item.institute,
               subtitle: item.degree,
               titlePlaceholder: "Institute Name",
-              isHidden: item.isHidden
+              isHidden: item.isHidden,
             }}
             InputCardProps={{
               itemType: "education",

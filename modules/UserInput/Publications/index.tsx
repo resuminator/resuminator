@@ -6,6 +6,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
 import { handleChange, handleDragEnd } from "../handlers";
 import SectionControls from "../SectionControls";
@@ -18,6 +19,7 @@ const Publications = () => {
   const setData = usePublicationStore((state) => state.setData);
   const addData = usePublicationStore((state) => state.add);
   const updateData = usePublicationStore((state) => state.update);
+  const { createToast } = useCustomToast();
 
   //This will be removed when server is connected. For mock purposes only.
   const DummyData: PublicationDataObject = {
@@ -46,7 +48,9 @@ const Publications = () => {
 
   //Mocked delete request from server.
   const handleDelete = async (id: string) => {
-    console.log(`Deleted ${id}`);
+    const nextState = data.filter((item) => item._id !== id);
+    setData(nextState);
+    return createToast("Deleted Successfully", "success");
   };
 
   return (
