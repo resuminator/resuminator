@@ -18,6 +18,7 @@ import {
   Publications,
   Skills,
 } from "../../modules/UserInput";
+import UserImage from "../../modules/UserInput/Contact/UserImage";
 import CustomSections from "../../modules/UserInput/Custom";
 import CustomSectionInputs from "../../modules/UserInput/Custom/CustomSectionInputs";
 import Viewer from "../../modules/Viewer";
@@ -74,6 +75,7 @@ const Create: NextPage<CreateProps> = ({ id }) => {
         >
           <Box aria-label="Resume Inputs" flexBasis="50%">
             <NameAndJobTitle />
+            <UserImage />
             <Contact />
             {inputs.map((key) => (
               <Fragment key={key}>{getInputSection(key)}</Fragment>
