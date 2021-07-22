@@ -1,14 +1,6 @@
 import { Box, GridItem, useColorModeValue, VStack } from "@chakra-ui/react";
 import React from "react";
-import {
-  FiBook,
-  FiCopy,
-  FiHelpCircle,
-  FiMap,
-  FiSettings,
-  FiShare2,
-  FiStar
-} from "react-icons/fi";
+import { FiMap, FiSettings } from "react-icons/fi";
 import SidebarSection from "./SidebarSection";
 
 const Sidebar = () => {
@@ -18,39 +10,39 @@ const Sidebar = () => {
       icon: FiSettings,
       link: "/settings",
     },
-    {
-      title: "Favorites",
-      icon: FiStar,
-      link: "",
-    },
-    {
-      title: "Templates",
-      icon: FiCopy,
-      link: "", // /templates
-    },
-    {
-      title: "Quick Share",
-      icon: FiShare2,
-      link: "", // /share
-    },
+    // {
+    //   title: "Favorites",
+    //   icon: FiStar,
+    //   link: "",
+    // },
+    // {
+    //   title: "Templates",
+    //   icon: FiCopy,
+    //   link: "", // /templates
+    // },
+    // {
+    //   title: "Quick Share",
+    //   icon: FiShare2,
+    //   link: "", // /share
+    // },
   ];
 
   const resources = [
-    {
-      title: "Guide to Resuminator",
-      icon: FiBook,
-      link: "", // /docs/getting-started
-    },
+    // {
+    //   title: "Guide to Resuminator",
+    //   icon: FiBook,
+    //   link: "", // /docs/getting-started
+    // },
     {
       title: "Broadmap",
       icon: FiMap,
       link: "http://broadmap.resuminator.in",
     },
-    {
-      title: "Help Center",
-      icon: FiHelpCircle,
-      link: "", // /support
-    },
+    // {
+    //   title: "Help Center",
+    //   icon: FiHelpCircle,
+    //   link: "", // /support
+    // },
   ];
 
   return (
@@ -71,7 +63,7 @@ const Sidebar = () => {
           width="100%"
           mb="4"
         >
-          <SidebarSection sectionTitle="Workspce" items={workspace} />
+          <SidebarSection sectionTitle="Workspace" items={workspace} />
           <SidebarSection sectionTitle="Resources" items={resources} />
         </VStack>
       </Box>
