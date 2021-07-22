@@ -1,4 +1,15 @@
-import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import {
+  Avatar,
+  Divider,
+  HStack,
+  Menu,
+  MenuButton,
+  MenuGroup,
+  MenuItem,
+  MenuList,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import nookies from "nookies";
 import { useEffect, useState } from "react";
@@ -12,7 +23,11 @@ import { useAuth } from "../Auth/AuthContext";
 const UserMenu = () => {
   const auth = useAuth();
   const router = useRouter();
-  const [avatar, setAvatar] = useState("");
+  const [user, setUser] = useState({
+    photoUrl: "",
+    displayName: "",
+    email: "",
+  });
   const { createToast } = useCustomToast();
 
   const routeTo = (path: string) => {
@@ -21,7 +36,11 @@ const UserMenu = () => {
 
   useEffect(() => {
     if (auth.user) {
-      setAvatar(auth.user.photoURL);
+      setUser({
+        displayName: auth.user.displayName,
+        photoUrl: auth.user.photoURL,
+        email: auth.user.email,
+      });
     }
   }, [auth]);
 
@@ -39,9 +58,32 @@ const UserMenu = () => {
   return (
     <Menu isLazy>
       <MenuButton>
-        <Avatar size="md" src={avatar} />
+        <Avatar size="md" src={user.photoUrl} />
       </MenuButton>
       <MenuList>
+        <MenuItem
+          isFocusable={false}
+          fontWeight="medium"
+          display="flex"
+          alignItems="flex-start"
+          flexDir="column"
+          pb="4"
+          pointerEvents="none"
+        >
+          <Text
+            fontSize="xs"
+            textTransform="uppercase"
+            fontWeight="semibold"
+            mb="2"
+          >
+            Logged in as
+          </Text>
+          <VStack alignItems="flex-start" spacing="1">
+            <Text fontSize="md">{user.displayName}</Text>
+            <Text fontSize="xs">{user.email}</Text>
+          </VStack>
+        </MenuItem>
+        <Divider />
         {/* <MenuItem icon={<FiUser />}>Profile</MenuItem> */}
         <MenuItem icon={<FiSettings />} onClick={() => routeTo("/settings")}>
           Settings
