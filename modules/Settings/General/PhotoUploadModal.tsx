@@ -19,7 +19,7 @@ import { useCustomToast } from "../../../hooks/useCustomToast";
 import firebaseSDK from "../../../services/firebase";
 import { Status } from "../../../utils/constants";
 
-const MAX_FILE_SIZE = 524288; //512Kb
+const MAX_FILE_SIZE = 524288; //512KB
 
 interface PhotoUploadModalProps {
   isOpen: boolean;
@@ -64,7 +64,7 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
         return createToast(
           "File too large",
           "warning",
-          "Maximum file size allowed is 512Kb"
+          "Maximum file size allowed is 512KB"
         );
       }
 
@@ -156,7 +156,7 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
             fontSize="sm"
             color={useColorModeValue("gray", "whiteAlpha.600")}
           >
-            Supported Format: PNG/JPEG. Max file size = 512Kb
+            Supported Format: PNG/JPEG. Max file size = 512KB
           </Text>
           <Input
             type="file"

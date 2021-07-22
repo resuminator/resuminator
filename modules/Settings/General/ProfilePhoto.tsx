@@ -1,7 +1,7 @@
 import { Avatar, Button, Text, useDisclosure, VStack } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
-import { FiImage } from "react-icons/fi";
+import { FiUpload } from "react-icons/fi";
 import { useAuth } from "../../Auth/AuthContext";
 const PhotoUploadModal = dynamic(() => import("./PhotoUploadModal"));
 
@@ -23,14 +23,14 @@ const ProfilePhoto = () => {
       </Text>
       <Avatar size="2xl" src={avatar} />
       <Button
-        leftIcon={<FiImage />}
+        leftIcon={<FiUpload />}
         colorScheme="purple"
         size="sm"
         variant="ghost"
         onClick={onOpen}
         isDisabled={!auth.user}
       >
-        Select New
+        {avatar.length ? "Upload New" : "Upload"}
       </Button>
       <PhotoUploadModal
         isOpen={isOpen}
