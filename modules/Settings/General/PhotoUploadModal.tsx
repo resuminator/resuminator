@@ -13,7 +13,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import firebaseSDK from "../../../services/firebase";
@@ -41,6 +41,11 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
     file: null,
     url: "",
   });
+
+  const handleModalClose = () => {
+    setImage({ ...image, file: null });
+    onClose();
+  };
 
   /**
    * Handles the image upload to browser and checks for limits
@@ -132,7 +137,7 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleModalClose}>
       <ModalOverlay />
       <ModalContent minW="lg">
         <ModalCloseButton />
@@ -185,7 +190,7 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
               colorScheme="gray"
               size="sm"
               variant="ghost"
-              onClick={onClose}
+              onClick={handleModalClose}
               isDisabled={status === Status.loading}
             >
               Cancel
