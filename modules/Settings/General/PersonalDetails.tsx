@@ -26,7 +26,7 @@ const PersonalDetails = () => {
 
   const saveChanges = async () => {
     setStatus(Status.loading);
-    await auth.user
+    return await auth.user
       .updateProfile({ displayName: user.displayName })
       .then(() => {
         setUnsavedChanges(false);
