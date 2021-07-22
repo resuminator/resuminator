@@ -16,7 +16,7 @@ import {
   NameAndJobTitle,
   Projects,
   Publications,
-  Skills,
+  Skills
 } from "../../modules/UserInput";
 import UserImage from "../../modules/UserInput/Contact/UserImage";
 import CustomSections from "../../modules/UserInput/Custom";
@@ -73,7 +73,12 @@ const Create: NextPage<CreateProps> = ({ id }) => {
           px="0"
           py="5"
         >
-          <Box aria-label="Resume Inputs" flexBasis="50%">
+          <Box
+            aria-label="Resume Inputs"
+            flexBasis="50%"
+            height="29.7cm"
+            overflowY="scroll"
+          >
             <NameAndJobTitle />
             <UserImage />
             <Contact />
