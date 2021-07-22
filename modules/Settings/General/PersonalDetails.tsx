@@ -59,7 +59,8 @@ const PersonalDetails = () => {
       <Box mb="8">
         <BoxHeader
           title="Primary Email"
-          subtitle="Updating your email means you will be logged out and will have to verify your email again."
+          // subtitle="Updating your email means you will be logged out and will have to verify your email again."
+          subtitle="This is the email used for all primary communication. It cannot be changed."
           size={{ title: "lg", subtitle: "sm" }}
           mb="2.5"
         />
