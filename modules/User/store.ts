@@ -8,9 +8,6 @@ const useUserStore = create<UserStore>(
     (set) => ({
       _id: "",
       isBanned: 0,
-      fullName: "",
-      email: "",
-      avatar: "",
       active: [],
       setProperty: (key, value) =>
         set((state) =>

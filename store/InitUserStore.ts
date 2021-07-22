@@ -27,9 +27,6 @@ const InitUserStore: React.FC<InitUserStoreProps> = ({ data, status }) => {
     if (status === "success") {
       setProperty("_id", data._id);
       setProperty("active", data.active);
-      setProperty("email", data.email);
-      setProperty("avatar", data.avatar);
-      setProperty("fullName", data.fullName);
       setProperty("isBanned", data.isBanned);
     }
   }, [status, data, setProperty]);

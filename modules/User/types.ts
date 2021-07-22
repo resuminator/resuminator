@@ -11,9 +11,6 @@ export interface ResumeMetadata {
 export interface UserObject {
   _id: string;
   isBanned: number;
-  fullName: string;
-  email: string;
-  avatar: string;
   active: Array<ResumeMetadata>;
 }
 
