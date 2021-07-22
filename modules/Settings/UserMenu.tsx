@@ -4,18 +4,14 @@ import {
   Menu,
   MenuButton,
   MenuItem,
-  MenuList,
+  MenuList
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaDiscord } from "react-icons/fa";
 import {
-  FiBook,
-  FiHelpCircle,
   FiLogOut,
-  FiSettings,
-  FiUser,
+  FiSettings
 } from "react-icons/fi";
 import { DISCORD_INVITE } from "../../data/RefLinks";
 import { useAuth } from "../Auth/AuthContext";
@@ -41,12 +37,12 @@ const UserMenu = () => {
         <Avatar size="md" src={avatar} />
       </MenuButton>
       <MenuList>
-        <MenuItem icon={<FiUser />}>Profile</MenuItem>
+        {/* <MenuItem icon={<FiUser />}>Profile</MenuItem> */}
         <MenuItem icon={<FiSettings />} onClick={() => routeTo("/settings")}>
           Settings
         </MenuItem>
-        <Divider />
-        <MenuItem icon={<FiBook />}>Guides</MenuItem>
+        {/* <Divider /> */}
+        {/* <MenuItem icon={<FiBook />}>Guides</MenuItem> */}
         <MenuItem
           icon={<FaDiscord />}
           as="a"
@@ -55,8 +51,8 @@ const UserMenu = () => {
         >
           Join Discord Server
         </MenuItem>
-        <MenuItem icon={<FiHelpCircle />}>Help Center</MenuItem>
-        <Divider />
+        {/* <MenuItem icon={<FiHelpCircle />}>Help Center</MenuItem> */}
+        {/* <Divider /> */}
         <MenuItem icon={<FiLogOut />}>Logout</MenuItem>
       </MenuList>
     </Menu>
