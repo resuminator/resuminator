@@ -11,13 +11,13 @@ import {
   ModalOverlay,
   Progress,
   Text,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FiUpload } from "react-icons/fi";
-import { useCustomToast } from "../../../hooks/useCustomToast";
-import firebaseSDK from "../../../services/firebase";
-import { Status } from "../../../utils/constants";
+import { useCustomToast } from "../../hooks/useCustomToast";
+import firebaseSDK from "../../services/firebase";
+import { Status } from "../../utils/constants";
 
 const MAX_FILE_SIZE = 524288; //512KB
 
@@ -26,6 +26,8 @@ interface PhotoUploadModalProps {
   onClose: () => void;
   auth: { user: firebase.default.User };
   setAvatarCallback: (url: string) => void;
+  dbCallback: (url: string) => void;
+  fileName: string;
 }
 
 const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
@@ -33,6 +35,8 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
   onClose,
   auth,
   setAvatarCallback,
+  dbCallback,
+  fileName,
 }) => {
   const { createToast } = useCustomToast();
   const [status, setStatus] = useState<Status>(Status.idle);
@@ -90,10 +94,7 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
       const storageRef = firebaseSDK.storage().ref();
       const uid = auth.user.uid || "";
 
-      //Set File name to "profile" always.
-      const fileName = `profile`;
-
-      //Create an upload task and save the image to {uid}/profile
+      //Create an upload task and save the image to {uid}/{filename}
       //Only Auth user can write, any user can read.
       const uploadTask = storageRef
         .child(uid + "/" + fileName)
@@ -122,10 +123,8 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
             //The callback below changes the image of the user for instant feedback.
             setAvatarCallback(url);
 
-            //Finally set the url of the uploaded image as the photoUrl of auth user.
-            auth.user.updateProfile({ photoURL: url }).then(() => {
-              return createToast("Image Uploaded Successfully", "success");
-            });
+            //Finally set the url of the uploaded image to DB.
+            dbCallback(url);
 
             onClose();
           });
