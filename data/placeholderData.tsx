@@ -30,7 +30,7 @@ const placeholderData: Result = {
         "SKILLS",
       ],
       layout: {
-        header: [["USER_IMAGE", "NAME_AND_JT"], ["SOCIAL_HANDLES"]], //BFS
+        header: [["NAME_AND_JT", "USER_IMAGE"], ["SOCIAL_HANDLES"]], //BFS
         body: [
           ["EXPERIENCE", "PROJECTS", "EDUCATION"],
           ["SKILLS", "PUBLICATIONS"],
