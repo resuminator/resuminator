@@ -66,22 +66,27 @@ const Home: NextPage<HomePageProps> = ({ token }) => {
 export default Home;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const queryClient = new QueryClient();
-  try {
-    const cookies = nookies.get(ctx);
-    const token = cookies.token;
+  //Try to get token from cookies.
+  const cookies = nookies.get(ctx);
+  const token = cookies.token;
 
-    await queryClient.prefetchQuery("getUserData", () => getUserData(token));
+  //If the token does not exist or is cleared then redirect to login page.
+  if (!token) {
     return {
-      props: {
-        token,
-        dehydratedState: dehydrate(queryClient),
+      redirect: {
+        permanent: false,
+        destination: "/login",
       },
     };
-  } catch (err) {
-    ctx.res.writeHead(401, { Location: "/login" });
-    ctx.res.end();
-
-    return { props: {} as never };
   }
+
+  //If token is present, pass it to the query to fetch data from API
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery("getUserData", () => getUserData(token));
+  return {
+    props: {
+      token,
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
 };
