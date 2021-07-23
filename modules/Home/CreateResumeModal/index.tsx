@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
+import getCloneResume from "../../../apis/getCloneResume";
 import getNewResume from "../../../apis/getNewResume";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { Status } from "../../../utils/constants";
@@ -35,9 +36,12 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
   const { setProperty } = useUserStore();
   const token = Cookies.get("token");
 
-  const createFromScratch = async (token: string) => {
+  const createResume = async (
+    apiCallback: (params: any) => Promise<any>,
+    token = null
+  ) => {
     setStatus(Status.loading);
-    return await getNewResume(token)
+    return await apiCallback(token)
       .then((res) => {
         setStatus(Status.success);
         setProperty("active", res.active);
@@ -65,11 +69,15 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
       });
   };
 
-  const createNewResume = async (method: Method) => {
+  const createNewResume = async (method: Method, sourceResumeId = "") => {
     console.log(method);
     switch (method) {
       case "SCRATCH":
-        return await createFromScratch(token).then(() => onClose());
+        return await createResume(getNewResume, token).then(() => onClose());
+      case "EXISTING":
+        return await createResume(getCloneResume(""), token).then(
+          () => onClose()
+        );
     }
   };
 
