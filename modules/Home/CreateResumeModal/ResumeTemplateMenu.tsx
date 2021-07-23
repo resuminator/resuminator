@@ -9,65 +9,68 @@ import {
   Text,
   useColorModeValue
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { SetStateAction } from "react";
 import { FiChevronDown } from "react-icons/fi";
-import { resumeMetaPlaceholder } from "../../../data/placeholderData";
 import { ResumeMetadata, UserObject } from "../../User/types";
 
 interface Props {
   data: UserObject;
+  selectedHandlers: {
+    value: ResumeMetadata;
+    setValue: React.Dispatch<SetStateAction<ResumeMetadata>>;
+  };
   method?: "EXISTING" | "SCRATCH" | null;
 }
 
-const ResumeTemplateDropdown: React.FC<Props> = React.memo(
-  ({ data, method }) => {
-    const [selectedResume, setSelectedResume] = useState<ResumeMetadata>(() =>
-      data.active.length ? data.active[0] : resumeMetaPlaceholder
-    );
-    const buttonLightModeProps: ButtonProps = {
-      colorScheme: method === "EXISTING" ? "blue" : "blackAlpha",
-    };
+const ResumeTemplateDropdown: React.FC<Props> = ({
+  data,
+  selectedHandlers,
+  method,
+}) => {
+  const { value, setValue } = selectedHandlers;
 
-    const buttonDarkModeProps: ButtonProps = {
-      colorScheme: method === "EXISTING" ? "blue" : "inherit",
-    };
+  const buttonLightModeProps: ButtonProps = {
+    colorScheme: method === "EXISTING" ? "blue" : "blackAlpha",
+  };
 
-    const buttonProps = useColorModeValue(
-      buttonLightModeProps,
-      buttonDarkModeProps
-    );
+  const buttonDarkModeProps: ButtonProps = {
+    colorScheme: method === "EXISTING" ? "blue" : "inherit",
+  };
 
-    return (
-      <Menu>
-        <MenuButton
-          as={Button}
-          size="sm"
-          isDisabled={!data.active.length}
-          variant="outline"
-          rightIcon={<FiChevronDown />}
-          _focus={{ outline: "none" }}
-          mb="2"
-          {...buttonProps}
-        >
-          <HStack>
-            <Text>{selectedResume.icon}</Text>
-            <Text>{selectedResume.profileName}</Text>
-          </HStack>
-        </MenuButton>
-        <MenuList>
-          {data.active.map((item) => (
-            <MenuItem key={item._id} onClick={() => setSelectedResume(item)}>
-              <HStack>
-                <Text>{item.icon}</Text>
-                <Text>{item.profileName}</Text>
-              </HStack>
-            </MenuItem>
-          ))}
-        </MenuList>
-      </Menu>
-    );
-  }
-);
+  const buttonProps = useColorModeValue(
+    buttonLightModeProps,
+    buttonDarkModeProps
+  );
 
-ResumeTemplateDropdown.displayName = "ResumeTemplateDropdown";
+  return (
+    <Menu>
+      <MenuButton
+        as={Button}
+        size="sm"
+        isDisabled={!data.active.length}
+        variant="outline"
+        rightIcon={<FiChevronDown />}
+        _focus={{ outline: "none" }}
+        mb="2"
+        {...buttonProps}
+      >
+        <HStack>
+          <Text>{value.icon}</Text>
+          <Text>{value.profileName}</Text>
+        </HStack>
+      </MenuButton>
+      <MenuList>
+        {data.active.map((item) => (
+          <MenuItem key={item._id} onClick={() => setValue(item)}>
+            <HStack>
+              <Text>{item.icon}</Text>
+              <Text>{item.profileName}</Text>
+            </HStack>
+          </MenuItem>
+        ))}
+      </MenuList>
+    </Menu>
+  );
+};
+
 export default ResumeTemplateDropdown;

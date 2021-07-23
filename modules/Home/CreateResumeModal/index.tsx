@@ -11,10 +11,11 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 import getCloneResume from "../../../apis/getCloneResume";
 import getNewResume from "../../../apis/getNewResume";
+import { resumeMetaPlaceholder } from "../../../data/placeholderData";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { Status } from "../../../utils/constants";
 import useUserStore from "../../User/store";
-import { UserObject } from "../../User/types";
+import { ResumeMetadata, UserObject } from "../../User/types";
 import CreateResumeBody from "./CreateResumeBody";
 import CreateResumeFooter from "./CreateResumeFooter";
 
@@ -36,8 +37,12 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
   const { setProperty } = useUserStore();
   const token = Cookies.get("token");
 
+  const [selectedResume, setSelectedResume] = useState<ResumeMetadata>(() =>
+    data.active.length ? data.active[0] : resumeMetaPlaceholder
+  );
+
   const createResume = async (
-    apiCallback: (params: any) => Promise<any>,
+    apiCallback: (...params: any) => Promise<any>,
     token = null
   ) => {
     setStatus(Status.loading);
@@ -69,15 +74,15 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
       });
   };
 
-  const createNewResume = async (method: Method, sourceResumeId = "") => {
-    console.log(method);
+  const createNewResume = async (method: Method) => {
     switch (method) {
       case "SCRATCH":
         return await createResume(getNewResume, token).then(() => onClose());
       case "EXISTING":
-        return await createResume(getCloneResume(""), token).then(
-          () => onClose()
-        );
+        return await createResume(
+          getCloneResume(selectedResume._id),
+          token
+        ).then(() => onClose());
     }
   };
 
@@ -96,7 +101,15 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
             Select one to get started
           </Text>
         </ModalHeader>
-        <CreateResumeBody data={data} method={method} callback={setMethod} />
+        <CreateResumeBody
+          data={data}
+          method={method}
+          callback={setMethod}
+          selectedHandlers={{
+            value: selectedResume,
+            setValue: setSelectedResume,
+          }}
+        />
         <CreateResumeFooter
           method={method}
           onCloseCallback={onClose}

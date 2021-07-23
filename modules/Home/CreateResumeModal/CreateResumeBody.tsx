@@ -4,8 +4,9 @@ import {
   TextProps,
   useColorModeValue
 } from "@chakra-ui/react";
+import { SetStateAction } from "react";
 import BoxHeader from "../../../components/common/BoxHeader";
-import { UserObject } from "../../User/types";
+import { ResumeMetadata, UserObject } from "../../User/types";
 import { Method } from "./index";
 import ResumeTemplateDropdown from "./ResumeTemplateMenu";
 import ToggleCard from "./ToggleCard";
@@ -14,13 +15,19 @@ interface CreateResumeBodyProps {
   data: UserObject;
   method: Method;
   callback: (value: Method) => void;
+  selectedHandlers: {
+    value: ResumeMetadata;
+    setValue: React.Dispatch<SetStateAction<ResumeMetadata>>;
+  };
 }
 
 const CreateResumeBody: React.FC<CreateResumeBodyProps> = ({
   data,
   method,
   callback,
+  selectedHandlers,
 }) => {
+  const { value, setValue } = selectedHandlers;
   const titleLightModeProps = (id: Method): TextProps => ({
     color: method === id ? "blue.500" : "inherit",
   });
@@ -60,7 +67,11 @@ const CreateResumeBody: React.FC<CreateResumeBodyProps> = ({
         >
           Select a resume to use as template
         </Text>
-        <ResumeTemplateDropdown data={data} method={method} />
+        <ResumeTemplateDropdown
+          data={data}
+          method={method}
+          selectedHandlers={{ value, setValue }}
+        />
       </ToggleCard>
       <ToggleCard id="SCRATCH" method={method} callback={callback}>
         <BoxHeader
