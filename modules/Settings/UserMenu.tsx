@@ -48,7 +48,7 @@ const UserMenu = () => {
     firebaseSDK
       .auth()
       .signOut()
-      .then(() => nookies.destroy({}, "token"))
+      .then(() => nookies.destroy(undefined, "token", { path: "/" }))
       .then(() => router.push("/login"))
       .then(() => {
         return createToast("You have been successfully logged out", "success");
