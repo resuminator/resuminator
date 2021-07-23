@@ -18,9 +18,7 @@ const useUserStore = create<UserStore>(
       updateActive: (id, key, value) =>
         set((state) =>
           produce(state, (draftState) => {
-            const current = draftState.active.filter(
-              (item) => item.id === id
-            )[0];
+            const current = draftState.active.find((item) => item._id === id);
             current[key] = value;
           })
         ),
