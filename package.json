@@ -26,6 +26,7 @@
     "@tiptap/extension-typography": "^2.0.0-beta.10",
     "@tiptap/react": "^2.0.0-beta.33",
     "@tiptap/starter-kit": "^2.0.0-beta.51",
+    "@types/js-cookie": "^2.2.7",
     "@types/react-beautiful-dnd": "^13.0.0",
     "axios": "^0.21.1",
     "chrome-aws-lambda": "^9.1.0",
