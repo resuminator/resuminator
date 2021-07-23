@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const interval = setInterval(async () => {
       const user = firebaseSDK.auth().currentUser;
-      if (user && user.emailVerified) await user.getIdToken(true);
+      if (user && user.emailVerified) return await user.getIdToken(true);
     }, 30 * 60 * 1000);
 
     // clean up setInterval
