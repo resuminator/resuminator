@@ -66,10 +66,6 @@ const Create: NextPage<CreateProps> = ({ token, id }) => {
     placeholderData: userPlaceholder,
   });
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   return (
     <>
       <InitStore data={data} status={status} id={id} />
