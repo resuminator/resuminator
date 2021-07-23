@@ -11,6 +11,7 @@ import Header from "../components/layouts/Header";
 import { userPlaceholder } from "../data/placeholderData";
 import ResumeList from "../modules/Home/ResumeList";
 import Sidebar from "../modules/Home/Sidebar";
+import useUserStore from "../modules/User/store";
 import { UserObject } from "../modules/User/types";
 import InitUserStore from "../store/InitUserStore";
 
@@ -28,6 +29,7 @@ const Home: NextPage<HomePageProps> = ({ token }) => {
     () => getUserData(token),
     { placeholderData: userPlaceholder }
   );
+  const { _id, isBanned, active } = useUserStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -49,7 +51,10 @@ const Home: NextPage<HomePageProps> = ({ token }) => {
         {/* Will be uncommented when we'll launch the template gallery */}
         {/* <TemplateList /> */}
       </Grid>
-      <CreateResumeModal data={data} options={{ isOpen, onClose }} />
+      <CreateResumeModal
+        data={{ _id, isBanned, active }}
+        options={{ isOpen, onClose }}
+      />
       <Footer />
     </>
   );
