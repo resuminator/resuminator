@@ -15,7 +15,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({ dataObject, callback }) => {
     : `${dataObject.color}.500`;
 
   return (
-    <Center key={dataObject.id} flexDirection="column">
+    <Center key={dataObject._id} flexDirection="column">
       <Center
         h="10rem"
         w="10rem"
@@ -23,7 +23,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({ dataObject, callback }) => {
         _hover={{ shadow: "md", filter: "brightness(80%)" }}
         borderRadius="10px"
         cursor="pointer"
-        onClick={() => callback(dataObject.id)}
+        onClick={() => callback(dataObject._id)}
         transition="all 0.2s"
       >
         <Text fontSize="4xl">{dataObject.icon}</Text>

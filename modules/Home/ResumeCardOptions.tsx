@@ -8,6 +8,7 @@ import {
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
+  PopoverFooter,
   PopoverHeader,
   PopoverTrigger,
   SimpleGrid,
@@ -18,6 +19,7 @@ import {
 import Emoticons from "../../data/Emoticons";
 import useUserStore from "../User/store";
 import { ResumeMetadata } from "../User/types";
+import DeleteResumeModal from "./DeleteResumeModal";
 
 interface ResumeCardOptionProps {
   dataObject: ResumeMetadata;
@@ -26,16 +28,16 @@ interface ResumeCardOptionProps {
 const ResumeCardOptions: React.FC<ResumeCardOptionProps> = ({ dataObject }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const updateActive = useUserStore((state) => state.updateActive);
-  
+
   const handleInput = (
     dataObject: ResumeMetadata,
     key: string,
     value: string
   ) => {
     if (key === "profileName" && value === "")
-      return updateActive(dataObject.id, key, "Untitled Resume");
+      return updateActive(dataObject._id, key, "Untitled Resume");
 
-    return updateActive(dataObject.id, key, value);
+    return updateActive(dataObject._id, key, value);
   };
 
   return (
@@ -86,6 +88,9 @@ const ResumeCardOptions: React.FC<ResumeCardOptionProps> = ({ dataObject }) => {
             ))}
           </SimpleGrid>
         </PopoverBody>
+        <PopoverFooter display="flex" justifyContent="flex-end">
+          <DeleteResumeModal resumeObject={dataObject}/>
+        </PopoverFooter>
       </PopoverContent>
     </Popover>
   );
