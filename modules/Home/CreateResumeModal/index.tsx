@@ -5,9 +5,14 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
+import getNewResume from "../../../apis/getNewResume";
+import { useCustomToast } from "../../../hooks/useCustomToast";
+import { Status } from "../../../utils/constants";
+import useUserStore from "../../User/store";
 import { UserObject } from "../../User/types";
 import CreateResumeBody from "./CreateResumeBody";
 import CreateResumeFooter from "./CreateResumeFooter";
@@ -24,7 +29,37 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
   options,
 }) => {
   const [method, setMethod] = useState<Method>(null);
+  const [status, setStatus] = useState<Status>(Status.idle);
   const { isOpen, onClose } = options;
+  const { createToast } = useCustomToast();
+  const { setProperty } = useUserStore();
+  const token = Cookies.get("token");
+
+  const createFromScratch = async (token: string) => {
+    setStatus(Status.loading);
+    return await getNewResume(token)
+      .then((res) => {
+        setStatus(Status.success);
+        setProperty("active", res.active);
+        createToast(
+          "New resume created!",
+          "success",
+          "Click on the resume card to start editing"
+        );
+      })
+      .catch((err) => {
+        setStatus(Status.error);
+        createToast("Couldn't create new resume", "error", err.message);
+      });
+  };
+
+  const createNewResume = async (method: Method) => {
+    console.log(method);
+    switch (method) {
+      case "SCRATCH":
+        return await createFromScratch(token).then(() => onClose());
+    }
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -42,7 +77,12 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
           </Text>
         </ModalHeader>
         <CreateResumeBody data={data} method={method} callback={setMethod} />
-        <CreateResumeFooter method={method} onCloseCallback={onClose} />
+        <CreateResumeFooter
+          method={method}
+          onCloseCallback={onClose}
+          actionCallback={createNewResume}
+          status={status}
+        />
       </ModalContent>
     </Modal>
   );
