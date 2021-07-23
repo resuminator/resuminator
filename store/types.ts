@@ -6,6 +6,7 @@ import { ExperienceDataObject } from "../modules/UserInput/Experience/types";
 import { ProjectDataObject } from "../modules/UserInput/Projects/types";
 import { PublicationDataObject } from "../modules/UserInput/Publications/types";
 import { SkillDataObject } from "../modules/UserInput/Skills/types";
+import { Status } from "../utils/constants";
 
 export type UpdateAction = (index: number, key: string, value: any) => void;
 
@@ -74,9 +75,11 @@ export interface GlobalStore {
   init?: boolean;
   isLoading?: boolean;
   grayscaleFilter: boolean;
+  saveStatus?: Status;
   setInit?: (value: boolean) => void;
   setLoading?: (value: boolean) => void;
   toggleGrayscaleFilter?: () => void;
+  setSaveStatus?: (status: Status) => void;
 }
 
 export interface ResumeStore {
