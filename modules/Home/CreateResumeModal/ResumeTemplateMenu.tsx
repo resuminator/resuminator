@@ -56,7 +56,7 @@ const ResumeTemplateDropdown: React.FC<Props> = React.memo(
         </MenuButton>
         <MenuList>
           {data.active.map((item) => (
-            <MenuItem key={item.id} onClick={() => setSelectedResume(item)}>
+            <MenuItem key={item._id} onClick={() => setSelectedResume(item)}>
               <HStack>
                 <Text>{item.icon}</Text>
                 <Text>{item.profileName}</Text>

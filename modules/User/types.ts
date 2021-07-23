@@ -1,5 +1,5 @@
 export interface ResumeMetadata {
-  id: string;
+  _id: string;
   profileName?: string;
   webId?: string;
   icon?: string;
