@@ -1,5 +1,5 @@
 import { Grid, useDisclosure } from "@chakra-ui/react";
-import { NextPage } from "next";
+import { GetServerSidePropsContext, NextPage } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
 import { QueryClient, useQuery } from "react-query";
@@ -9,21 +9,26 @@ import Footer from "../components/layouts/Footer";
 import Header from "../components/layouts/Header";
 import {
   resumeMetaPlaceholder,
-  userPlaceholder
+  userPlaceholder,
 } from "../data/placeholderData";
 import ResumeList from "../modules/Home/ResumeList";
 import Sidebar from "../modules/Home/Sidebar";
 import { UserObject } from "../modules/User/types";
 import InitUserStore from "../store/InitUserStore";
+import nookies from "nookies";
 
 const CreateResumeModal = dynamic(
   () => import("../modules/Home/CreateResumeModal")
 );
 
-const Home: NextPage = () => {
+interface HomePageProps {
+  token: string;
+}
+
+const Home: NextPage<HomePageProps> = ({ token }) => {
   const { data, status } = useQuery<UserObject, Error>(
     "getUserData",
-    getUserData,
+    () => getUserData(token),
     { placeholderData: userPlaceholder }
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -60,14 +65,23 @@ const Home: NextPage = () => {
 
 export default Home;
 
-export async function getServerSideProps() {
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const queryClient = new QueryClient();
+  try {
+    const cookies = nookies.get(ctx);
+    const token = cookies.token;
 
-  await queryClient.prefetchQuery("getUserData", getUserData);
+    await queryClient.prefetchQuery("getUserData", () => getUserData(token));
+    return {
+      props: {
+        token,
+        dehydratedState: dehydrate(queryClient),
+      },
+    };
+  } catch (err) {
+    ctx.res.writeHead(401, { Location: "/login" });
+    ctx.res.end();
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
+    return { props: {} as never };
+  }
+};
