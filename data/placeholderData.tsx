@@ -4,14 +4,11 @@ import { Result } from "../store/types";
 export const userPlaceholder: UserObject = {
   _id: "",
   isBanned: 0,
-  fullName: "",
-  email: "",
-  avatar: "",
   active: [],
 }
 
 export const resumeMetaPlaceholder =   {
-  id: "",
+  _id: "",
   profileName: "",
   webId: "",
   icon: "",
