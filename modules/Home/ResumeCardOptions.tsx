@@ -16,7 +16,10 @@ import {
   Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
+import Cookies from "js-cookie";
+import patchResumeMeta from "../../apis/patchResumeMeta";
 import Emoticons from "../../data/Emoticons";
+import { useCustomToast } from "../../hooks/useCustomToast";
 import useUserStore from "../User/store";
 import { ResumeMetadata } from "../User/types";
 import DeleteResumeModal from "./DeleteResumeModal";
@@ -28,16 +31,27 @@ interface ResumeCardOptionProps {
 const ResumeCardOptions: React.FC<ResumeCardOptionProps> = ({ dataObject }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const updateActive = useUserStore((state) => state.updateActive);
+  const setProperty = useUserStore((state) => state.setProperty);
+  const { createToast } = useCustomToast();
 
-  const handleInput = (
+  const handleInput = async (
     dataObject: ResumeMetadata,
     key: string,
     value: string
   ) => {
-    if (key === "profileName" && value === "")
-      return updateActive(dataObject._id, key, "Untitled Resume");
+    if (key === "profileName" && value === "") {
+      updateActive(dataObject._id, key, "Untitled Resume");
+    } else updateActive(dataObject._id, key, value);
 
-    return updateActive(dataObject._id, key, value);
+    const token = Cookies.get("token");
+    return await patchResumeMeta(token, dataObject._id, { [key]: value })
+      .then((res) => {
+        setProperty("active", res.active);
+        return createToast("Changes Saved", "success");
+      })
+      .catch((err) =>
+        createToast("Could not save changes", "error", err.message)
+      );
   };
 
   return (
@@ -89,7 +103,7 @@ const ResumeCardOptions: React.FC<ResumeCardOptionProps> = ({ dataObject }) => {
           </SimpleGrid>
         </PopoverBody>
         <PopoverFooter display="flex" justifyContent="flex-end">
-          <DeleteResumeModal resumeObject={dataObject}/>
+          <DeleteResumeModal resumeObject={dataObject} />
         </PopoverFooter>
       </PopoverContent>
     </Popover>
