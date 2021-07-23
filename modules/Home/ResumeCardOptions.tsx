@@ -14,7 +14,7 @@ import {
   SimpleGrid,
   Text,
   Tooltip,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import patchResumeMeta from "../../apis/patchResumeMeta";
@@ -49,9 +49,7 @@ const ResumeCardOptions: React.FC<ResumeCardOptionProps> = ({ dataObject }) => {
         setProperty("active", res.active);
         return createToast("Changes Saved", "success");
       })
-      .catch((err) =>
-        createToast("Could not save changes", "error", err.message)
-      );
+      .catch(() => createToast("Could not save changes", "error"));
   };
 
   return (

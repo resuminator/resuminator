@@ -7,7 +7,6 @@ const patchResumeMeta = async (
   _id: string,
   body: any
 ) => {
-  console.log(token, _id, body);
   const res = await axios.patch(`${API_URL}/${API_VERSION}/meta/${_id}`, body, {
     headers: getHeaders(token),
   });
