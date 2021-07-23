@@ -5,17 +5,12 @@ import nookies from "nookies";
 import React from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
-import getNewResume from "../apis/getNewResume";
 import getUserData from "../apis/getUserData";
 import Footer from "../components/layouts/Footer";
 import Header from "../components/layouts/Header";
-import {
-  userPlaceholder
-} from "../data/placeholderData";
-import { useCustomToast } from "../hooks/useCustomToast";
+import { userPlaceholder } from "../data/placeholderData";
 import ResumeList from "../modules/Home/ResumeList";
 import Sidebar from "../modules/Home/Sidebar";
-import useUserStore from "../modules/User/store";
 import { UserObject } from "../modules/User/types";
 import InitUserStore from "../store/InitUserStore";
 
@@ -34,26 +29,6 @@ const Home: NextPage<HomePageProps> = ({ token }) => {
     { placeholderData: userPlaceholder }
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { active, setProperty } = useUserStore();
-  const { createToast } = useCustomToast();
-
-  const handleNewResumeButton = async () => {
-    if (!data.active.length)
-      return await getNewResume(token)
-        .then((res) => {
-          setProperty("active", res.active);
-          createToast(
-            "New resume created!",
-            "success",
-            "Click on the resume card to start editing"
-          );
-        })
-        .catch((err) => {
-          console.log(err);
-          createToast("Couldn't create new resume", "error", err.message);
-        });
-    return onOpen();
-  };
 
   return (
     <>
@@ -69,7 +44,7 @@ const Home: NextPage<HomePageProps> = ({ token }) => {
       >
         {/**Each component under Grid must be wrapped inside a GridItem component */}
         <Sidebar />
-        <ResumeList handleNew={handleNewResumeButton} />
+        <ResumeList handleNew={onOpen} />
 
         {/* Will be uncommented when we'll launch the template gallery */}
         {/* <TemplateList /> */}
