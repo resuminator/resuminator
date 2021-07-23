@@ -1,21 +1,23 @@
 import { Grid, useDisclosure } from "@chakra-ui/react";
 import { GetServerSidePropsContext, NextPage } from "next";
 import dynamic from "next/dynamic";
+import nookies from "nookies";
 import React from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
+import getNewResume from "../apis/getNewResume";
 import getUserData from "../apis/getUserData";
 import Footer from "../components/layouts/Footer";
 import Header from "../components/layouts/Header";
 import {
-  resumeMetaPlaceholder,
-  userPlaceholder,
+  userPlaceholder
 } from "../data/placeholderData";
+import { useCustomToast } from "../hooks/useCustomToast";
 import ResumeList from "../modules/Home/ResumeList";
 import Sidebar from "../modules/Home/Sidebar";
+import useUserStore from "../modules/User/store";
 import { UserObject } from "../modules/User/types";
 import InitUserStore from "../store/InitUserStore";
-import nookies from "nookies";
 
 const CreateResumeModal = dynamic(
   () => import("../modules/Home/CreateResumeModal")
@@ -32,9 +34,24 @@ const Home: NextPage<HomePageProps> = ({ token }) => {
     { placeholderData: userPlaceholder }
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { active, setProperty } = useUserStore();
+  const { createToast } = useCustomToast();
 
-  const handleNewResumeButton = () => {
-    if (!data.active.length) return console.log(resumeMetaPlaceholder);
+  const handleNewResumeButton = async () => {
+    if (!data.active.length)
+      return await getNewResume(token)
+        .then((res) => {
+          setProperty("active", res.active);
+          createToast(
+            "New resume created!",
+            "success",
+            "Click on the resume card to start editing"
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+          createToast("Couldn't create new resume", "error", err.message);
+        });
     return onOpen();
   };
 
