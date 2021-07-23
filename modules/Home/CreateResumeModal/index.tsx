@@ -49,7 +49,19 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
       })
       .catch((err) => {
         setStatus(Status.error);
-        createToast("Couldn't create new resume", "error", err.message);
+        //If the resume limit has been hit, return a different toast.
+        if (err.response.status === 409) {
+          return createToast(
+            "Couldn't create new resume",
+            "error",
+            "You already have the maximum resumes which can be created on this plan."
+          );
+        }
+        return createToast(
+          "Couldn't create new resume",
+          "error",
+          "Some unexpected error occured while creating your resume. Try again, and if this persists, please contact us over email"
+        );
       });
   };
 
