@@ -1,17 +1,16 @@
 import axios from "axios";
 import API_URL, { API_VERSION } from "../config/server";
-import { EducationDataObject } from "../modules/UserInput/Education/types";
+import { ExperienceDataObject } from "../modules/UserInput/Experience/types";
 import getHeaders from "../utils/headers";
 
-const patchEducation = async (
+const patchExperience = async (
   token: string = null,
   resumeId: string,
-  body: Array<EducationDataObject>
+  body: Array<ExperienceDataObject>
 ) => {
-  console.log("Saving Education");
-
+  console.log("Saving Experience")
   const res = await axios.patch(
-    `${API_URL}/${API_VERSION}/resume/education/${resumeId}`,
+    `${API_URL}/${API_VERSION}/resume/experience/${resumeId}`,
     body,
     {
       headers: getHeaders(token),
@@ -20,4 +19,4 @@ const patchEducation = async (
   return res.data;
 };
 
-export default patchEducation;
+export default patchExperience;

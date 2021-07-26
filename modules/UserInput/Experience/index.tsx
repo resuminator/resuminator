@@ -1,5 +1,6 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
+import patchExperience from "../../../apis/patchExperience";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
@@ -9,13 +10,14 @@ import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
+import Autosave from "../Autosave";
 import {
   handleChange,
   handleDateChange,
   handleDragEnd,
   handleEditorChange,
   handlePresentCheckbox,
-  handleTagsInput,
+  handleTagsInput
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import useExperienceStore from "./store";
@@ -67,6 +69,7 @@ const Experience = () => {
         mb: "2",
       }}
     >
+      <Autosave data={data} patchFn={patchExperience} />
       <SectionControls layoutKey="EXPERIENCE">
         <TooltipIconButton
           label="Add new experience"

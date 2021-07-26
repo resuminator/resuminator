@@ -1,6 +1,6 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
-import patchData from "../../../apis/patchData";
+import patchEducation from "../../../apis/patchEducation";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
@@ -16,7 +16,7 @@ import {
   handleDateChange,
   handleDragEnd,
   handleEditorChange,
-  handlePresentCheckbox,
+  handlePresentCheckbox
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import GradeInput from "./GradeInput";
@@ -70,7 +70,7 @@ const Education = () => {
         mb: "2",
       }}
     >
-      <Autosave data={data} patchFn={patchData("education")} />
+      <Autosave data={data} patchFn={patchEducation} />
       <SectionControls layoutKey="EDUCATION">
         <TooltipIconButton
           label="Add new education"
