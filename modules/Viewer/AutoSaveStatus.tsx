@@ -1,4 +1,5 @@
 import { HStack, Spinner, Text, TextProps } from "@chakra-ui/react";
+import TimeDiff from "js-time-diff";
 import React from "react";
 import { FiAlertTriangle, FiCheck } from "react-icons/fi";
 import useGlobalStore from "../../store/global.store";
@@ -29,22 +30,28 @@ const SavingChanges = () => (
   </HStack>
 );
 
-const Error = () => (
-  <HStack>
-    <FiAlertTriangle color="gray" />
-    <Message message="Couldn't save last changes" />
-  </HStack>
-);
+const Error = () => {
+  const { lastSavedAt } = useGlobalStore();
+  const diff = TimeDiff(lastSavedAt);
+
+  const text = parseInt(diff.split(" ")[0]) <= 0 ? "just now" : diff;
+  return (
+    <HStack>
+      <FiAlertTriangle color="gray" />
+      <Message message={`Couldn't save last changes. Last saved ${text}`} />
+    </HStack>
+  );
+};
 
 const LastSaved = () => {
-//   const lastSavedAt = useGlobalStore((state) => state.lastSavedAt);
-//   const timeAgo = new TimeAgo('en-US');
+  const { lastSavedAt } = useGlobalStore();
+  const diff = TimeDiff(lastSavedAt);
 
-//   const diff = timeAgo.format((Date.now() - lastSavedAt.getDate()), 'round')
+  const text = parseInt(diff.split(" ")[0]) <= 0 ? "just now" : diff;
   return (
     <HStack>
       <FiCheck color="gray" />
-      <Message message={`Changes Saved ${new Date()}`} />
+      <Message message={`Changes saved ${text}`} />
     </HStack>
   );
 };

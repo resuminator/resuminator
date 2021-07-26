@@ -76,10 +76,12 @@ export interface GlobalStore {
   isLoading?: boolean;
   grayscaleFilter: boolean;
   saveStatus?: Status;
+  lastSavedAt?: Date;
   setInit?: (value: boolean) => void;
   setLoading?: (value: boolean) => void;
   toggleGrayscaleFilter?: () => void;
   setSaveStatus?: (status: Status) => void;
+  setLastSavedAt?: (date: Date) => void;
 }
 
 export interface ResumeStore {

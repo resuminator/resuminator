@@ -10,7 +10,7 @@ interface AutosaveProps<T> {
 }
 
 const Autosave: React.FC<AutosaveProps<any>> = ({ data, patchFn }) => {
-  const { setSaveStatus } = useGlobalStore();
+  const { setSaveStatus, setLastSavedAt } = useGlobalStore();
   const resumeId = useResumeStore((state) => state._id);
 
   useEffect(() => {
@@ -19,14 +19,17 @@ const Autosave: React.FC<AutosaveProps<any>> = ({ data, patchFn }) => {
     const res = async () => {
       setSaveStatus(Status.loading);
       return await patchFn(token, resumeId, data)
-        .then(() => setSaveStatus(Status.success))
+        .then(() => {
+          setLastSavedAt(new Date());
+          return setSaveStatus(Status.success);
+        })
         .catch(() => setSaveStatus(Status.error));
     };
 
     const timeout = setTimeout(res, 3000);
     setSaveStatus(Status.idle);
     return () => clearTimeout(timeout);
-  }, [data, resumeId, setSaveStatus, patchFn]);
+  }, [data, resumeId, setSaveStatus, patchFn, setLastSavedAt]);
 
   return null;
 };
