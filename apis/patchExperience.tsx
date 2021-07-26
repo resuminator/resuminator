@@ -8,7 +8,6 @@ const patchExperience = async (
   resumeId: string,
   body: Array<ExperienceDataObject>
 ) => {
-  console.log("Saving Experience")
   const res = await axios.patch(
     `${API_URL}/${API_VERSION}/resume/experience/${resumeId}`,
     body,

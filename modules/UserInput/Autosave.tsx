@@ -1,15 +1,23 @@
 import Cookies from "js-cookie";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import useGlobalStore from "../../store/global.store";
 import useResumeStore from "../../store/resume.store";
 import { Status } from "../../utils/constants";
+
+// type ServerKeys =
+//   | "education"
+//   | "experience"
+//   | "projects"
+//   | "certifications"
+//   | "customSections"
+//   | "publications";
 
 interface AutosaveProps<T> {
   data: T;
   patchFn: (token: string, resumeId: string, body: T) => Promise<any>;
 }
 
-const Autosave: React.FC<AutosaveProps<any>> = ({ data, patchFn }) => {
+const Autosave: React.FC<AutosaveProps<any>> = memo(({ data, patchFn }) => {
   const { setSaveStatus, setLastSavedAt } = useGlobalStore();
   const resumeId = useResumeStore((state) => state._id);
 
@@ -32,6 +40,7 @@ const Autosave: React.FC<AutosaveProps<any>> = ({ data, patchFn }) => {
   }, [data, resumeId, setSaveStatus, patchFn, setLastSavedAt]);
 
   return null;
-};
+});
 
+Autosave.displayName = "Autosave";
 export default Autosave;

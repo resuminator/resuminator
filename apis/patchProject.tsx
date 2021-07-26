@@ -1,15 +1,15 @@
 import axios from "axios";
 import API_URL, { API_VERSION } from "../config/server";
-import { EducationDataObject } from "../modules/UserInput/Education/types";
+import { ProjectDataObject } from "../modules/UserInput/Projects/types";
 import getHeaders from "../utils/headers";
 
-const patchEducation = async (
+const patchProjects = async (
   token: string = null,
   resumeId: string,
-  body: Array<EducationDataObject>
+  body: Array<ProjectDataObject>
 ) => {
   const res = await axios.patch(
-    `${API_URL}/${API_VERSION}/resume/education/${resumeId}`,
+    `${API_URL}/${API_VERSION}/resume/project/${resumeId}`,
     body,
     {
       headers: getHeaders(token),
@@ -18,4 +18,4 @@ const patchEducation = async (
   return res.data;
 };
 
-export default patchEducation;
+export default patchProjects;

@@ -17,7 +17,7 @@ import {
   handleDragEnd,
   handleEditorChange,
   handlePresentCheckbox,
-  handleTagsInput
+  handleTagsInput,
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import useExperienceStore from "./store";
