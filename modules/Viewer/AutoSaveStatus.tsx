@@ -1,6 +1,7 @@
 import { HStack, Spinner, Text, TextProps } from "@chakra-ui/react";
 import TimeDiff from "js-time-diff";
 import React from "react";
+import { FaAsterisk } from "react-icons/fa";
 import { FiAlertTriangle, FiCheck } from "react-icons/fi";
 import useGlobalStore from "../../store/global.store";
 import { Status } from "../../utils/constants";
@@ -16,10 +17,10 @@ const Message: React.FC<TextProps & { message: string }> = ({
   </Text>
 );
 
-const AllChangesSaved = () => (
+const UnsavedChanges = () => (
   <HStack>
-    <FiCheck color="gray" />
-    <Message message="All Changes Saved" />
+    <FaAsterisk color="gray" />
+    <Message message="Unsaved Changes" />
   </HStack>
 );
 
@@ -59,7 +60,7 @@ const AutoSaveStatus = (props: Props) => {
 
   switch (saveStatus) {
     case Status.idle:
-      return <AllChangesSaved />;
+      return <UnsavedChanges />;
     case Status.loading:
       return <SavingChanges />;
     case Status.error:
