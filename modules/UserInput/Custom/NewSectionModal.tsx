@@ -35,7 +35,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
     max: 2,
   });
   const initialSectionState: CustomSectionObject = {
-    _id: "",
+    _id: getUniqueID(),
     header: "",
     hasTitleRow: true,
     inputs: [],
