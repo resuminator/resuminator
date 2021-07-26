@@ -1,5 +1,4 @@
-import Cookies from "js-cookie";
-import React, { useEffect } from "react";
+import React from "react";
 import { FiPlus } from "react-icons/fi";
 import patchEducation from "../../../apis/patchEducation";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
@@ -10,10 +9,8 @@ import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { useCustomToast } from "../../../hooks/useCustomToast";
-import useGlobalStore from "../../../store/global.store";
-import useResumeStore from "../../../store/resume.store";
 import { getUniqueID } from "../../../utils";
-import { Status } from "../../../utils/constants";
+import Autosave from "../Autosave";
 import {
   handleChange,
   handleDateChange,
@@ -31,8 +28,6 @@ const Education = () => {
   const setData = useEducationStore((state) => state.setData);
   const addData = useEducationStore((state) => state.add);
   const updateData = useEducationStore((state) => state.update);
-  const resumeId = useResumeStore((state) => state._id);
-  const { setSaveStatus } = useGlobalStore();
   const { createToast } = useCustomToast();
 
   //This will be removed when server is connected. For mock purposes only.
@@ -67,20 +62,6 @@ const Education = () => {
     return createToast("Deleted Successfully", "success");
   };
 
-  useEffect(() => {
-    const timeout = setTimeout(async () => {
-      setSaveStatus(Status.loading);
-      const token = Cookies.get("token");
-      const state = useEducationStore.getState().data;
-      return await patchEducation(token, resumeId, state)
-        .then(() => setSaveStatus(Status.success))
-        .catch(() => setSaveStatus(Status.error));
-    }, 3000);
-
-    setSaveStatus(Status.idle);
-    return () => clearTimeout(timeout);
-  }, [resumeId, setSaveStatus]);
-
   return (
     <Section
       header={{
@@ -89,6 +70,7 @@ const Education = () => {
         mb: "2",
       }}
     >
+      <Autosave data={data} patchFn={patchEducation} />
       <SectionControls layoutKey="EDUCATION">
         <TooltipIconButton
           label="Add new education"
