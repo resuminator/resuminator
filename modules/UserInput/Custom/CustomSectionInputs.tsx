@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import { FiPlus } from "react-icons/fi";
+import patchCustomSections from "../../../apis/patchCustomSection";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
@@ -9,13 +10,14 @@ import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { getUniqueID, truncateString } from "../../../utils";
+import Autosave from "../Autosave";
 import SectionControls from "../SectionControls";
 import { useCustomSectionStore } from "./store";
 import {
   CustomSectionDataObject,
   CustomSectionInputObject,
   CustomSectionObject,
-  DateValue
+  DateValue,
 } from "./types";
 
 const CustomSectionInputs = () => {
@@ -136,6 +138,7 @@ const CustomSectionInputs = () => {
 
   return (
     <Fragment>
+      <Autosave data={customSections} patchFn={patchCustomSections} />
       {customSections.map((section) => (
         <Section
           key={section.header}
@@ -163,7 +166,7 @@ const CustomSectionInputs = () => {
                   index: index,
                   title: getCardTitle(dataItem),
                   titlePlaceholder: `New ${section.header.toLowerCase()}`,
-                  isHidden: dataItem.isHidden
+                  isHidden: dataItem.isHidden,
                 }}
                 InputCardProps={{
                   itemType: section.header.toLowerCase(),
