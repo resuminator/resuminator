@@ -9,8 +9,6 @@ export interface SkillDataObject {
 
 export interface SkillStore<T> {
   format: "CATEGORIES" | "TAGS";
-  isDisabled: boolean;
-  toggleDisabled: () => void;
   toggleFormat: () => void;
   data: Array<T>;
   setData?: (list: Array<T>) => void;
