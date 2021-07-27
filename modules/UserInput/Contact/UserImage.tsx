@@ -2,10 +2,11 @@ import { Button, ButtonGroup, useDisclosure } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { FiUpload } from "react-icons/fi";
+import patchContact from "../../../apis/patchContact";
 import Section from "../../../components/layouts/Section";
 import { useCustomToast } from "../../../hooks/useCustomToast";
+import { usePatchParams } from "../../../hooks/usePatchParams";
 import firebaseSDK from "../../../services/firebase";
-import useResumeStore from "../../../store/resume.store";
 import { Status } from "../../../utils/constants";
 import { useAuth } from "../../Auth/AuthContext";
 import useContactStore from "./store";
@@ -17,12 +18,20 @@ const UserImage = () => {
   const { createToast } = useCustomToast();
   const [status, setStatus] = useState<Status>(Status.idle);
   const userImage = useContactStore((state) => state.userImage);
-  const setUserImage = useContactStore((state) => state.setUserImage);
-  const resumeId = useResumeStore((state) => state._id);
+  const setProperty = useContactStore((state) => state.setProperty);
+  const setUserImage = (value: string) => setProperty("userImage", value);
+  const { resumeId, setSaveStatus, setLastSavedAt, token } = usePatchParams();
 
-  const saveToDb = (url: string) => {
-    //Make a POST request to Server
-    return createToast("Photo Uploaded Successfully", "success");
+  const saveToDb = async (url: string) => {
+    const key = "userImage";
+
+    setSaveStatus(Status.loading);
+    return await patchContact(key)(token, resumeId, { [key]: url })
+      .then(() => {
+        setLastSavedAt(new Date());
+        return setSaveStatus(Status.success);
+      })
+      .catch(() => setSaveStatus(Status.error));
   };
 
   const clearImage = async () => {
@@ -34,6 +43,7 @@ const UserImage = () => {
       .child(auth.user.uid)
       .child(resumeId)
       .delete()
+      .then(() => saveToDb(""))
       .then(() => {
         setUserImage("");
         setStatus(Status.success);
