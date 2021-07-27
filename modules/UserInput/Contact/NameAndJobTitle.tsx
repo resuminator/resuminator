@@ -6,8 +6,12 @@ import useContactStore from "./store";
 const NameAndJobTitle = () => {
   const fullName = useContactStore((state) => state.fullName);
   const jobTitle = useContactStore((state) => state.jobTitle);
-  const setFullName = useContactStore((state) => state.setFullName);
-  const setJobTitle = useContactStore((state) => state.setJobTitle);
+  const setProperty = useContactStore((state) => state.setProperty);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const [key, value] = [e.target.name, e.target.value];
+    setProperty(key, value);
+  };
 
   return (
     <Section
@@ -21,14 +25,16 @@ const NameAndJobTitle = () => {
       <InputField
         labelProps={{ fontSize: "sm" }}
         label="Full Name"
+        name="fullName"
         value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
+        onChange={handleChange}
       />
       <InputField
         labelProps={{ fontSize: "sm" }}
         label="Job Title"
+        name="jobTitle"
         value={jobTitle}
-        onChange={(e) => setJobTitle(e.target.value)}
+        onChange={handleChange}
       />
     </Section>
   );
