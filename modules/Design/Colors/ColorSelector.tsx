@@ -5,10 +5,13 @@ import { Tooltip } from "@chakra-ui/tooltip";
 import React from "react";
 import { FaCheck } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi";
+import { patchColor } from "../../../apis/patchTemplate";
 import ColorPicker from "../../../components/elements/ColorPicker";
 import Section from "../../../components/layouts/Section";
+import { useCustomToast } from "../../../hooks/useCustomToast";
+import { usePatchParams } from "../../../hooks/usePatchParams";
 import useResumeStore from "../../../store/resume.store";
-import { ColorProfiles } from "../../../store/types";
+import { ColorProfiles, Result } from "../../../store/types";
 import ColorModeWarning from "./ColorModeWarning";
 import GrayscalePreviewCheckbox from "./GrayscalePreviewCheckbox";
 
@@ -25,6 +28,24 @@ export const isCustom = (color: ColorProfiles) => !profiles.includes(color);
 const ColorSelector = () => {
   const color = useResumeStore((state) => state.color);
   const setColorProfile = useResumeStore((state) => state.setColorProfile);
+  const { token, resumeId } = usePatchParams();
+  const { createToast } = useCustomToast();
+
+  const handleSubmit = async (item: ColorProfiles) => {
+    setColorProfile(item);
+    return await patchColor(token, resumeId, { color: item })
+      .then((res: Result) => {
+        setColorProfile(res.template.color);
+        return createToast("Resume color scheme updated", "success");
+      })
+      .catch(() =>
+        createToast(
+          "Couldn't update resume color scheme",
+          "error",
+          "Please try again in sometime"
+        )
+      );
+  };
 
   return (
     <Section
@@ -42,13 +63,14 @@ const ColorSelector = () => {
             key={item}
             isRound
             colorScheme={item}
-            onClick={() => setColorProfile(item)}
+            onClick={() => handleSubmit(item)}
             _focus={{ boxShadow: `0 0 2px 3px ${item}` }}
           />
         ))}
         <ColorPicker
           value={color}
           handler={setColorProfile}
+          handleSubmit={() => handleSubmit(color)}
           isActive={isCustom(color)}
         />
       </HStack>
