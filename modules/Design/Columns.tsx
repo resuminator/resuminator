@@ -1,36 +1,71 @@
 import { Button, ButtonGroup, ButtonProps } from "@chakra-ui/react";
 import React from "react";
+import { patchLayout } from "../../apis/patchTemplate";
 import Section from "../../components/layouts/Section";
+import { useCustomToast } from "../../hooks/useCustomToast";
+import { usePatchParams } from "../../hooks/usePatchParams";
 import useResumeStore from "../../store/resume.store";
+import { Result, ResumeLayoutObject } from "../../store/types";
 
 const Columns = () => {
-  const { body } = useResumeStore((state) => state.properties.layout);
+  const layout = useResumeStore((state) => state.properties.layout);
+  const { body } = layout;
   const updateLayout = useResumeStore((state) => state.updateLayout);
+  const { token, resumeId } = usePatchParams();
+  const { createToast } = useCustomToast();
+
+  /**
+   * Saves the layout to DB
+   * @param nextBody Resume Layout Body array
+   * @param columnType String - "single column" or "two-column"
+   * @returns toast on success and error
+   */
+  const handleSubmit = async (
+    nextBody: ResumeLayoutObject["body"],
+    columnType: string
+  ) => {
+    updateLayout("body", nextBody);
+
+    return await patchLayout(token, resumeId, {
+      layout: { ...layout, body: nextBody },
+    })
+      .then((res: Result) => {
+        updateLayout("body", res.template.layout.body);
+        return createToast(`Resume converted to ${columnType}`, "success");
+      })
+      .catch(() =>
+        createToast(
+          `Couldn't convert resume to ${columnType}`,
+          "error",
+          "Please try again in sometime"
+        )
+      );
+  };
 
   /**
    * Converts the two column body format to compatible single column format
    * @returns void
    */
-  const convertToSingleColumn = () => {
+  const convertToSingleColumn = async () => {
     //To prevent unintended side-effects if the body is already one-column
     if (body.length === 1) return;
 
     const nextBody = body.reduce((initial, item) => [...initial, ...item]);
-    updateLayout("body", [nextBody]);
+    return await handleSubmit([nextBody], "single column");
   };
 
   /**
    * Converts the single row body to two column format
    * @returns void
    */
-  const convertToTwoColumn = () => {
+  const convertToTwoColumn = async () => {
     //To prevent unintended side-effects if the body is already two-column
     if (body.length === 2) return;
 
     const mid = Math.ceil(body[0].length / 2);
     const [col1, col2] = [body[0].slice(0, mid), body[0].slice(mid)];
     const nextBody = [col1, col2];
-    updateLayout("body", nextBody);
+    return await handleSubmit(nextBody, "two-column");
   };
 
   /**
