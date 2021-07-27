@@ -5,11 +5,32 @@ import React from "react";
 import { AiFillTags } from "react-icons/ai";
 import { BsGridFill } from "react-icons/bs";
 import { FaChevronDown } from "react-icons/fa";
+import { patchSkillFormat } from "../../../apis/patchSkills";
+import { useCustomToast } from "../../../hooks/useCustomToast";
+import { usePatchParams } from "../../../hooks/usePatchParams";
+import { Result } from "../../../store/types";
 import useSkillStore from "./store";
 
 const FormatMenu = () => {
-const format = useSkillStore(state => state.format); 
-const toggleFormat = useSkillStore((state) => state.toggleFormat);
+  const { format, setFormat } = useSkillStore();
+  const { token, resumeId } = usePatchParams();
+  const { createToast } = useCustomToast();
+
+  const handleSubmit = async () => {
+    return await patchSkillFormat(token, resumeId, { format: format === "CATEGORIES" ? "TAGS" : "CATEGORIES" })
+      .then((res: Result) => {
+        setFormat(res.skills.format);
+        return createToast("Skill display style updated", "success");
+      })
+      .catch(() =>
+        createToast(
+          "Couldn't update display style",
+          "error",
+          "Please try again in sometime"
+        )
+      );
+  };
+
   return (
     <Menu>
       <MenuButton
@@ -31,10 +52,10 @@ const toggleFormat = useSkillStore((state) => state.toggleFormat);
         )}
       </MenuButton>
       <MenuList>
-        <MenuItem icon={<BsGridFill />} onClick={() => toggleFormat()}>
+        <MenuItem icon={<BsGridFill />} onClick={handleSubmit}>
           Categories
         </MenuItem>
-        <MenuItem icon={<AiFillTags />} onClick={() => toggleFormat()}>
+        <MenuItem icon={<AiFillTags />} onClick={handleSubmit}>
           Tags
         </MenuItem>
       </MenuList>
