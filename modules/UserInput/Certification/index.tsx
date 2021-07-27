@@ -1,6 +1,6 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
-import patchCertifications from "../../../apis/patchCertifications";
+import { patchCertifications } from "../../../apis/patchSection";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";

@@ -1,6 +1,6 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
-import patchEducation from "../../../apis/patchEducation";
+import { patchEducation } from "../../../apis/patchSection";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
@@ -16,7 +16,7 @@ import {
   handleDateChange,
   handleDragEnd,
   handleEditorChange,
-  handlePresentCheckbox
+  handlePresentCheckbox,
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import GradeInput from "./GradeInput";

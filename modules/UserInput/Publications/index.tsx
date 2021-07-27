@@ -1,7 +1,7 @@
 import { HStack } from "@chakra-ui/layout";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
-import patchPublication from "../../../apis/patchPublications";
+import { patchPublication } from "../../../apis/patchSection";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";

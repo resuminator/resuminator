@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import { FiPlus } from "react-icons/fi";
-import patchCustomSections from "../../../apis/patchCustomSection";
+import { patchCustomSections } from "../../../apis/patchSection";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
@@ -17,7 +17,7 @@ import {
   CustomSectionDataObject,
   CustomSectionInputObject,
   CustomSectionObject,
-  DateValue,
+  DateValue
 } from "./types";
 
 const CustomSectionInputs = () => {

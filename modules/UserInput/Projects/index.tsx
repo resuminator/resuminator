@@ -1,6 +1,6 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
-import patchProjects from "../../../apis/patchProject";
+import { patchProjects } from "../../../apis/patchSection";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
@@ -17,7 +17,7 @@ import {
   handleDragEnd,
   handleEditorChange,
   handlePresentCheckbox,
-  handleTagsInput,
+  handleTagsInput
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import useProjectStore from "./store";
