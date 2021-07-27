@@ -5,7 +5,10 @@ import { EducationDataObject } from "../modules/UserInput/Education/types";
 import { ExperienceDataObject } from "../modules/UserInput/Experience/types";
 import { ProjectDataObject } from "../modules/UserInput/Projects/types";
 import { PublicationDataObject } from "../modules/UserInput/Publications/types";
-import { SkillDataObject, SkillDisplayStyle } from "../modules/UserInput/Skills/types";
+import {
+  SkillDataObject,
+  SkillDisplayStyle
+} from "../modules/UserInput/Skills/types";
 import { Status } from "../utils/constants";
 
 export type UpdateAction = (index: number, key: string, value: any) => void;
@@ -37,14 +40,15 @@ export type ColorProfiles =
   | "pink"
   | string;
 
+export type ResumeInputsArray = Array<Sections | CustomSectionObject["header"]>;
 export interface ResumeLayoutObject {
   header: Array<Array<HeaderElements>>;
-  body: Array<Array<Sections | CustomSectionObject["header"]>>;
+  body: Array<ResumeInputsArray>;
   footer: Array<FooterElements>;
 }
 
 export interface ResumeStyleObject {
-  inputs: Array<Sections | CustomSectionObject["header"]>;
+  inputs: ResumeInputsArray;
   layout: ResumeLayoutObject;
   fontProfile?: FontProfile;
   spacing?: number;
