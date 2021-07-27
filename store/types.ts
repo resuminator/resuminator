@@ -5,7 +5,7 @@ import { EducationDataObject } from "../modules/UserInput/Education/types";
 import { ExperienceDataObject } from "../modules/UserInput/Experience/types";
 import { ProjectDataObject } from "../modules/UserInput/Projects/types";
 import { PublicationDataObject } from "../modules/UserInput/Publications/types";
-import { SkillDataObject } from "../modules/UserInput/Skills/types";
+import { SkillDataObject, SkillDisplayStyle } from "../modules/UserInput/Skills/types";
 import { Status } from "../utils/constants";
 
 export type UpdateAction = (index: number, key: string, value: any) => void;
@@ -60,7 +60,7 @@ export interface Result {
   projects?: Array<ProjectDataObject>;
   certifications?: Array<CertificationDataObject>;
   publications?: Array<PublicationDataObject>;
-  skills?: { hasCategories: boolean; data: Array<SkillDataObject> };
+  skills?: { format: SkillDisplayStyle; data: Array<SkillDataObject> };
   customSections?: Array<CustomSectionObject>;
 }
 

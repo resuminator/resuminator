@@ -1,5 +1,7 @@
 import { UpdateAction } from "../../../store/types";
 
+export type SkillDisplayStyle = "CATEGORIES" | "TAGS"
+
 export interface SkillDataObject {
   _id: string;
   isHidden: boolean;
@@ -8,11 +10,11 @@ export interface SkillDataObject {
 }
 
 export interface SkillStore<T> {
-  format: "CATEGORIES" | "TAGS";
+  format: SkillDisplayStyle;
   toggleFormat: () => void;
+  setFormat: (value: SkillDisplayStyle) => void;
   data: Array<T>;
   setData?: (list: Array<T>) => void;
   add: (obj: T) => void;
   update: UpdateAction;
 }
-
