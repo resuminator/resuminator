@@ -14,9 +14,8 @@ const NameAndJobTitle = () => {
 
   const handleSubmit = async (key: string, value: any) => {
     const res = async () => {
-      console.log("Request Fired", key)
       setSaveStatus(Status.loading);
-      return await patchContact(token, resumeId, "name", { [key]: value })
+      return await patchContact(key)(token, resumeId, { [key]: value })
         .then(() => {
           setLastSavedAt(new Date());
           return setSaveStatus(Status.success);
