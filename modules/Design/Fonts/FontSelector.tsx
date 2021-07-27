@@ -2,9 +2,12 @@ import { Button } from "@chakra-ui/button";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
 import React from "react";
 import { FaChevronCircleDown } from "react-icons/fa";
+import { patchFont } from "../../../apis/patchTemplate";
 import Section from "../../../components/layouts/Section";
+import { useCustomToast } from "../../../hooks/useCustomToast";
+import { usePatchParams } from "../../../hooks/usePatchParams";
 import useResumeStore from "../../../store/resume.store";
-import { FontProfile } from "../../../store/types";
+import { FontProfile, Result } from "../../../store/types";
 import { toCamelCase } from "../../../utils";
 import Fonts from "./legend";
 
@@ -13,6 +16,24 @@ const profiles: Array<FontProfile> = ["CLASSIC", "MAGAZINE", "POISE", "SENIOR"];
 const FontSelector = () => {
   const fontProfile = useResumeStore((state) => state.fontProfile);
   const setFontProfile = useResumeStore((state) => state.setFontProfile);
+  const { token, resumeId } = usePatchParams();
+  const { createToast } = useCustomToast();
+
+  const handleSubmit = async (item: FontProfile) => {
+    setFontProfile(item);
+    return await patchFont(token, resumeId, { fontProfile: item })
+      .then((res: Result) => {
+        setFontProfile(res.template.fontProfile);
+        return createToast("Resume font updated", "success");
+      })
+      .catch(() =>
+        createToast(
+          "Couldn't update resume font",
+          "error",
+          "Please try again in sometime"
+        )
+      );
+  };
 
   return (
     <Section
@@ -38,7 +59,7 @@ const FontSelector = () => {
             <MenuItem
               key={item}
               fontFamily={Fonts[item].primary.fontFamily}
-              onClick={() => setFontProfile(item)}
+              onClick={() => handleSubmit(item)}
             >
               {toCamelCase(item)}
             </MenuItem>
