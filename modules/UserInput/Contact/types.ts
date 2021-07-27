@@ -40,8 +40,5 @@ export interface ContactStore<T> {
   contact: Array<T>;
   add: (obj: T) => void;
   update: (index: number, key: string, value: any) => void;
-  setContact: (value: Array<T>) => void;
-  setUserImage: (value: string) => void;
-  setFullName: (value: string) => void;
-  setJobTitle: (value: string) => void;
+  setProperty: (key: string, value: string | Array<ContactDataObject>) => void;
 }

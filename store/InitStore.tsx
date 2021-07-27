@@ -26,8 +26,7 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
   const projectInit = useProjectStore((state) => state.setData);
   const publicationsInit = usePublicationStore((state) => state.setData);
   const skillsInit = useSkillStore((state) => state.setData);
-  const { setFullName, setContact, setJobTitle, setUserImage } =
-    useContactStore();
+  const setContactProperty = useContactStore((state) => state.setProperty);
   const customSectionInit = useCustomSectionStore((state) => state.setSections);
   const { setInit, setLoading } = useGlobalStore();
   const setProperty = useResumeStore((state) => state.setProperty);
@@ -35,12 +34,12 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
 
   const initUserInfo = useCallback(
     (userInfo: Result["contact"]) => {
-      setFullName(userInfo.fullName);
-      setJobTitle(userInfo.jobTitle);
-      setUserImage(userInfo.userImage);
-      setContact(userInfo.contact);
+      setContactProperty("fullName", userInfo.fullName);
+      setContactProperty("jobTitle", userInfo.jobTitle);
+      setContactProperty("userImage", userInfo.userImage);
+      setContactProperty("contact", userInfo.contact);
     },
-    [setContact, setFullName, setJobTitle, setUserImage]
+    [setContactProperty]
   );
 
   const initResume = useCallback(

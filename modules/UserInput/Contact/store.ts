@@ -1,3 +1,4 @@
+import produce from "immer";
 import create, { GetState, SetState } from "zustand";
 import { devtools } from "zustand/middleware";
 import { updateArray } from "../../../utils";
@@ -16,10 +17,12 @@ const contactStore = <T>(
     const obj = { ...get().contact[index], [key]: value };
     set((state) => ({ contact: updateArray(state.contact, index, obj) }));
   },
-  setContact: (value) => set({ contact: value }),
-  setUserImage: (value) => set({ userImage: value }),
-  setFullName: (value) => set({ fullName: value }),
-  setJobTitle: (value) => set({ jobTitle: value }),
+  setProperty: (key, value) =>
+    set((state) =>
+      produce(state, (draftState) => {
+        draftState[key] = value;
+      })
+    ),
 });
 
 const useContactStore = create<ContactStore<ContactDataObject>>(
