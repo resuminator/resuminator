@@ -1,6 +1,7 @@
 import { GridItem } from "@chakra-ui/react";
-import { NextPage } from "next";
-import React from "react";
+import { GetServerSidePropsContext, NextPage } from "next";
+import nookies from "nookies";
+import React, { useEffect } from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import getUserData from "../../apis/getUserData";
@@ -15,12 +16,18 @@ import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import { UserObject } from "../../modules/User/types";
 import InitUserStore from "../../store/InitUserStore";
 
-const Settings: NextPage = () => {
+export interface SettingsPageProps {
+  token: string;
+}
+
+const Settings: NextPage<SettingsPageProps> = ({ token }) => {
   const { data, status } = useQuery<UserObject, Error>(
     "getUserData",
-    getUserData,
+    () => getUserData(token),
     { placeholderData: userPlaceholder }
   );
+
+  useEffect(() => console.log(data), [data]);
 
   return (
     <>
@@ -48,14 +55,29 @@ const Settings: NextPage = () => {
 
 export default Settings;
 
-export async function getStaticProps() {
-  const queryClient = new QueryClient();
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  //Try to get token from cookies.
+  const cookies = nookies.get(ctx);
+  const token = cookies.token;
 
-  await queryClient.prefetchQuery("getUserData", getUserData);
+  //If the token does not exist or is cleared then redirect to login page.
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+  }
+
+  //If token is present, pass it to the query to fetch data from API
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery("getUserData", () => getUserData(token));
 
   return {
     props: {
+      token,
       dehydratedState: dehydrate(queryClient),
     },
   };
-}
+};
