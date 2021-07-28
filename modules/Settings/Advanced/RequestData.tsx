@@ -26,7 +26,7 @@ const RequestData: React.FC<RequestDataProps> = ({ data }) => {
 
   //User cannot place request if either the buffer has not ended
   //or the previous request is incomplete
-  const isDisabled = !data.isCompleted && DUE_BY > NOW;
+  const isDisabled = !data.isCompleted || DUE_BY > NOW;
 
   useEffect(() => {
     if (auth.user) {
