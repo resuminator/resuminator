@@ -17,7 +17,7 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
-import patchResumeMeta from "../../apis/patchResumeMeta";
+import { patchResumeMeta } from "../../apis/meta";
 import Emoticons from "../../data/Emoticons";
 import { useCustomToast } from "../../hooks/useCustomToast";
 import useUserStore from "../User/store";

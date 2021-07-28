@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/layout";
 import { GetServerSidePropsContext, NextPage } from "next";
 import nookies from "nookies";
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
-import getResumeData from "../../apis/getResumeData";
-import getUserData from "../../apis/getUserData";
+import { getUserData } from "../../apis/meta";
+import { getResumeData } from "../../apis/resume";
 import Layout from "../../components/layouts";
 import placeholderData, { userPlaceholder } from "../../data/placeholderData";
 import { UserObject } from "../../modules/User/types";

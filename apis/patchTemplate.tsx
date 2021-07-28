@@ -1,5 +1,5 @@
 import axios from "axios";
-import API_URL, { API_VERSION } from "../config/server";
+import { baseUrl } from "../config/apis";
 import {
   ColorProfiles,
   FontProfile,
@@ -7,9 +7,6 @@ import {
   ResumeLayoutObject,
 } from "../store/types";
 import getHeaders from "../utils/headers";
-
-//Base URL for the API server.
-const baseUrl = `${API_URL}/${API_VERSION}`;
 
 const patchTemplate =
   <T extends unknown>(key: string) =>

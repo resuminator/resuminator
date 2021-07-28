@@ -1,21 +1,10 @@
 import axios from "axios";
-import API_URL, { API_VERSION } from "../config/server";
+import { baseUrl } from "../config/apis";
 import { CustomSectionObject } from "../modules/UserInput/Custom/types";
 import { EducationDataObject } from "../modules/UserInput/Education/types";
 import { ExperienceDataObject } from "../modules/UserInput/Experience/types";
 import { ProjectDataObject } from "../modules/UserInput/Projects/types";
 import getHeaders from "../utils/headers";
-
-// type ServerKeys =
-//   | "education"
-//   | "experience"
-//   | "projects"
-//   | "certifications"
-//   | "customSections"
-//   | "publications";
-
-//Base URL for the API server.
-const baseUrl = `${API_URL}/${API_VERSION}`;
 
 //Higher order function to perform PATCH requests on different sections.
 const patchSection =

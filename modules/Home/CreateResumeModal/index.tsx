@@ -5,12 +5,11 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
-import getCloneResume from "../../../apis/getCloneResume";
-import getNewResume from "../../../apis/getNewResume";
+import { getCloneResume, getNewResume } from "../../../apis/resume";
 import { resumeMetaPlaceholder } from "../../../data/placeholderData";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { Status } from "../../../utils/constants";

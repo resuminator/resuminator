@@ -5,7 +5,7 @@ import nookies from "nookies";
 import React from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
-import getUserData from "../apis/getUserData";
+import { getUserData } from "../apis/meta";
 import Footer from "../components/layouts/Footer";
 import Header from "../components/layouts/Header";
 import { userPlaceholder } from "../data/placeholderData";

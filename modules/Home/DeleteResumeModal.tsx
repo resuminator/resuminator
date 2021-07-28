@@ -1,13 +1,12 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
-import React from "react";
-import { useState } from "react";
-import deleteResume from "../../apis/deleteResume";
-import ActionModal from "../../components/common/ActionModal";
-import { Status } from "../../utils/constants";
-import { ResumeMetadata } from "../User/types";
 import Cookies from "js-cookie";
-import useUserStore from "../User/store";
+import React, { useState } from "react";
+import { deleteResume } from "../../apis/resume";
+import ActionModal from "../../components/common/ActionModal";
 import { useCustomToast } from "../../hooks/useCustomToast";
+import { Status } from "../../utils/constants";
+import useUserStore from "../User/store";
+import { ResumeMetadata } from "../User/types";
 
 interface Props {
   resumeObject: ResumeMetadata;
