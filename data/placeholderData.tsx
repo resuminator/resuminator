@@ -1,4 +1,4 @@
-import { UserObject } from "../modules/User/types";
+import { ResumeMetadata, UserObject } from "../modules/User/types";
 import { Result } from "../store/types";
 
 export const userPlaceholder: UserObject = {
@@ -7,7 +7,7 @@ export const userPlaceholder: UserObject = {
   active: [],
 }
 
-export const resumeMetaPlaceholder =   {
+export const resumeMetaPlaceholder: ResumeMetadata =   {
   _id: "",
   profileName: "",
   webId: "",
@@ -53,7 +53,7 @@ const placeholderData: Result = {
   certifications: [],
   publications: [],
   skills: {
-    hasCategories: true,
+    format: 'CATEGORIES',
     data: [],
   },
   customSections: [],
