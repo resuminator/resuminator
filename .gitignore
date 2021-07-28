@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+#performace scripts
+stress.sh
