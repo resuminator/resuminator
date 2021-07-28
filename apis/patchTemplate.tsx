@@ -26,7 +26,7 @@ const patchTemplate =
     return res.data;
   };
 
-export const patchInput = patchTemplate<ResumeInputsArray>("layout");
+export const patchInput = patchTemplate<ResumeInputsArray>("input");
 export const patchLayout = patchTemplate<ResumeLayoutObject>("layout");
 export const patchFont = patchTemplate<FontProfile>("font");
 export const patchSpacing = patchTemplate<number>("spacing");
