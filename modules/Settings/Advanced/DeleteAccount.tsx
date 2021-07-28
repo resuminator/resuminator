@@ -1,19 +1,26 @@
 import { Box, Button, Text, useDisclosure } from "@chakra-ui/react";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import ActionModal from "../../../components/common/ActionModal";
 import BoxHeader from "../../../components/common/BoxHeader";
 import InputWithLabel from "../../../components/common/InputWithLabel";
-import useUserStore from "../../User/store";
+import { useAuth } from "../../Auth/AuthContext";
 
 const DeleteAccount = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { email } = useUserStore();
+  const auth = useAuth();
+  const [email, setEmail] = useState("");
   const [confirmInput, setConfirmInput] = useState("");
   const Highlight: React.FC = ({ children }) => (
     <Text as="span" color="red.500">
       {children}
     </Text>
   );
+
+  useEffect(() => {
+    if (auth.user) {
+      setEmail(auth.user.email);
+    }
+  }, [auth.user]);
 
   const handleAccountDelete = () => {
     console.log("Request Sent");
@@ -58,8 +65,8 @@ const DeleteAccount = () => {
         </Text>
         <Text fontSize="sm" mb="4">
           This action cannot be undone. This will PERMANENTLY delete your
-          account linked to {email} including all data and shareable resume links
-          associated with this account.
+          account linked to {email} including all data and shareable resume
+          links associated with this account.
         </Text>
         <InputWithLabel
           label={`Please enter your email "${email}" below to confirm this action`}
