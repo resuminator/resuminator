@@ -12,7 +12,7 @@ const ModalStep2: React.FC<Props> = ({ section }) => {
   const { layout, inputs, hasTitleRow } = section;
 
   const getInputFieldFromId = (id: string) =>
-    inputs.filter((item) => item._id === id)[0];
+    inputs.find((item) => item._id === id);
 
   return (
     <Fragment>
@@ -38,9 +38,7 @@ const ModalStep2: React.FC<Props> = ({ section }) => {
           {layout.map((row, index) => (
             <DataRow key={index}>
               {row.map((inputId) => (
-                <Text key={inputId}>
-                  {getInputFieldFromId(inputId).name}
-                </Text>
+                <Text key={inputId}>{getInputFieldFromId(inputId).name}</Text>
               ))}
             </DataRow>
           ))}

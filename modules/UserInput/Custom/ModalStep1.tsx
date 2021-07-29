@@ -51,6 +51,36 @@ const getPlaceholder = (type: CustomSectionInputObject["type"]) => {
   }
 };
 
+const InputFieldButtonGroup: React.FC<{
+  addHandler: Props["addHandler"];
+  checkDisabled: (type: CustomSectionInputObject["type"]) => boolean;
+}> = ({ addHandler, checkDisabled }) => (
+  <Fragment>
+    <Text mt="4" mb="2" color="gray.500">
+      Click on the section type to add
+    </Text>
+    <ButtonGroup mb="2">
+      <Button onClick={() => addHandler("TEXT")} leftIcon={<MdTextFields />}>
+        Text Field
+      </Button>
+      <Button
+        isDisabled={checkDisabled("DATE")}
+        onClick={() => addHandler("DATE")}
+        leftIcon={<MdDateRange />}
+      >
+        Date Range
+      </Button>
+      <Button
+        isDisabled={checkDisabled("DESC")}
+        onClick={() => addHandler("DESC")}
+        leftIcon={<BsTextareaT />}
+      >
+        Text Area
+      </Button>
+    </ButtonGroup>
+  </Fragment>
+);
+
 const ModalStep1: React.FC<Props> = ({
   section,
   onChangeHandlers,
@@ -59,33 +89,6 @@ const ModalStep1: React.FC<Props> = ({
 }) => {
   const checkDisabled = (type: CustomSectionInputObject["type"]) =>
     section.inputs.filter((item) => item.type === type).length > 0;
-
-  const InputFieldButtonGroup = () => (
-    <Fragment>
-      <Text mt="4" mb="2" color="gray.500">
-        Click on the section type to add
-      </Text>
-      <ButtonGroup mb="2">
-        <Button onClick={() => addHandler("TEXT")} leftIcon={<MdTextFields />}>
-          Text Field
-        </Button>
-        <Button
-          isDisabled={checkDisabled("DATE")}
-          onClick={() => addHandler("DATE")}
-          leftIcon={<MdDateRange />}
-        >
-          Date Range
-        </Button>
-        <Button
-          isDisabled={checkDisabled("DESC")}
-          onClick={() => addHandler("DESC")}
-          leftIcon={<BsTextareaT />}
-        >
-          Text Area
-        </Button>
-      </ButtonGroup>
-    </Fragment>
-  );
 
   return (
     <Fragment>
@@ -100,7 +103,10 @@ const ModalStep1: React.FC<Props> = ({
         value={section.header}
         onChange={onChangeHandlers.header}
       />
-      <InputFieldButtonGroup />
+      <InputFieldButtonGroup
+        addHandler={addHandler}
+        checkDisabled={checkDisabled}
+      />
       {section.inputs.map((field) => (
         <Box key={field._id}>
           <Text fontSize="md" pb="2" color="gray.500">

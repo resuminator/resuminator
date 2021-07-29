@@ -159,7 +159,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
               <Button
                 colorScheme="green"
                 rightIcon={<FiCheck />}
-                onClick={() => performConfirmActions()}
+                onClick={performConfirmActions}
               >
                 Confirm
               </Button>
