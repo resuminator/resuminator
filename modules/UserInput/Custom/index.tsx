@@ -1,52 +1,51 @@
-import { Button, ButtonGroup, useDisclosure, useToast } from "@chakra-ui/react";
+import { Button, ButtonGroup, useDisclosure } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import React from "react";
-import { FiPlus, FiSettings } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import Section from "../../../components/layouts/Section";
-import NewSectionModal from "./NewSectionModal";
+import { useCustomToast } from "../../../hooks/useCustomToast";
 import { useCustomSectionStore } from "./store";
+const NewSectionModal = dynamic(() => import("./NewSectionModal"));
 
 const CustomSections = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const customSections = useCustomSectionStore((state) => state.sections);
-  const toast = useToast();
+  const { createToast } = useCustomToast();
+
+  const isDisabled = customSections.length >= 3;
 
   const handleCreateButton = () => {
-    if (customSections.length < 3) {
-      onOpen();
-    } else {
-      return toast({
-        title: "Maximum Limit Reached!",
-        description:
-          "You can add a maximum of 3 custom sections. Try modifying or deleting existing sections.",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-    }
+    if (isDisabled)
+      return createToast(
+        "Maximum Limit Reached!",
+        "error",
+        "You can add a maximum of 3 custom sections. Try modifying or deleting existing sections."
+      );
+
+    return onOpen();
   };
 
   return (
-    <Section
-      header={{
-        title: "Custom Sections",
-        subtitle: "Create and manage your custom sections for this resume",
-        mb: "2",
-      }}
-    >
-      <ButtonGroup my="2">
-        <Button
-          colorScheme="purple"
-          leftIcon={<FiPlus />}
-          onClick={handleCreateButton}
-        >
-          Create new section
-        </Button>
-        <Button colorScheme="purple" variant="ghost" leftIcon={<FiSettings />}>
-          Manage
-        </Button>
-      </ButtonGroup>
+    <>
+      <Section
+        header={{
+          title: "Custom Sections",
+          subtitle: "Create and manage your custom sections for this resume",
+          mb: "2",
+        }}
+      >
+        <ButtonGroup my="2">
+          <Button
+            colorScheme="purple"
+            leftIcon={<FiPlus />}
+            onClick={handleCreateButton}
+          >
+            Create new section
+          </Button>
+        </ButtonGroup>
+      </Section>
       <NewSectionModal isOpen={isOpen} onClose={onClose} />
-    </Section>
+    </>
   );
 };
 
