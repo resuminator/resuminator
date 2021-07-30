@@ -1,4 +1,0 @@
-[[redirects]]
- from = "/"
- to = "/login"
- status = 200
