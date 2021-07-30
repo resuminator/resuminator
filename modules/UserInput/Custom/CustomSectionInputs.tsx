@@ -81,7 +81,12 @@ const getInputFieldComponent = (
 const getCardTitle = (data: CustomSectionDataObject) => {
   const firstField = Object.keys(data.values)[0];
   if (typeof firstField !== "string") return "";
-  return truncateString(data.values[firstField].toString(), 40);
+
+  const HTML_REGEX = /(<([^>]+)>)/gi;
+  const returnString = data.values[firstField]
+    .replace(HTML_REGEX, "")
+    .toString();
+  return truncateString(returnString, 40);
 };
 
 const CustomSectionInputs = () => {
