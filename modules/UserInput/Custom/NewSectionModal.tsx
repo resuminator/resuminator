@@ -9,7 +9,7 @@ import {
   ModalOverlay,
   Text,
   useCounter,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
 import produce from "immer";
 import { useState } from "react";
@@ -45,8 +45,17 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
 
   const [section, setSection] =
     useState<CustomSectionObject>(initialSectionState);
+  const sections = useCustomSectionStore((state) => state.sections);
   const addSection = useCustomSectionStore((state) => state.addSection);
   const toast = useToast();
+
+  const isValidHeader = (value: string) =>
+    /^[ A-Za-z]+$/.test(value) &&
+    !sections
+      .map((item) => item.header.toUpperCase())
+      .includes(value.toUpperCase());
+
+  const isDisabled = !isValidHeader(section.header) || !section.inputs.length;
 
   const getDefaultName = (type: CustomSectionInputObject["type"]) => {
     switch (type) {
@@ -164,7 +173,11 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
                 Confirm
               </Button>
             ) : (
-              <Button rightIcon={<FiArrowRight />} onClick={() => increment()}>
+              <Button
+                rightIcon={<FiArrowRight />}
+                isDisabled={isDisabled}
+                onClick={() => increment()}
+              >
                 Next Step
               </Button>
             )}

@@ -43,10 +43,8 @@ export const useDisabled = (
     })
       .then((res: Result) => {
         updateLayout("body", res.template.layout.body);
-        return createToast(
-          `Toggled visibility for ${layoutKey.toLowerCase()}`,
-          "success"
-        );
+        const message = `Toggled visibility for ${layoutKey.toLowerCase()}`;
+        return createToast(message, "success");
       })
       .catch(() =>
         createToast(

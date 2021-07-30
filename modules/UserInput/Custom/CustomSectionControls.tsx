@@ -2,13 +2,15 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 import RemoveItemButton from "../../../components/common/RemoveItem";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
+import { useCustomToast } from "../../../hooks/useCustomToast";
+import { useDisabled } from "../../../hooks/useDisabled";
 import { getUniqueID, toCamelCase } from "../../../utils";
 import SectionControls from "../SectionControls";
 import { useCustomSectionStore } from "./store";
 import {
   CustomSectionDataObject,
   CustomSectionInputObject,
-  CustomSectionObject,
+  CustomSectionObject
 } from "./types";
 
 interface CustomSectionControlsProps {
@@ -52,10 +54,22 @@ const CustomSectionControls: React.FC<CustomSectionControlsProps> = ({
   section,
 }) => {
   const { addData, sections, setSections } = useCustomSectionStore();
+  const { toggleDisabled } = useDisabled(section.header.toUpperCase());
+  const { createToast } = useCustomToast();
 
-  const handleDelete = (id: string) => {
-    const nextSections = sections.filter((item) => item._id !== id);
-    setSections(nextSections);
+  const handleDelete = async (id: string) => {
+    return await toggleDisabled()
+      .then(() => {
+        const nextSections = sections.filter((item) => item._id !== id);
+        setSections(nextSections);
+      })
+      .catch(() =>
+        createToast(
+          "Couldn't delete the section",
+          "error",
+          "Please try again in sometime"
+        )
+      );
   };
 
   return (
