@@ -32,8 +32,8 @@ const CustomSectionLayout: React.FC<
   const data = rawData.filter((item) => !item.isHidden);
 
   const getSection = (itemId: string, inputId: string) => {
-    const { type } = inputs.filter((input) => input._id === inputId)[0];
-    const { values } = data.filter((item) => item._id === itemId)[0];
+    const { type } = inputs.find((input) => input._id === inputId);
+    const { values } = data.find((item) => item._id === itemId);
 
     switch (type) {
       case "TEXT":
