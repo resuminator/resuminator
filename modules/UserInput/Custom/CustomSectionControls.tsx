@@ -1,13 +1,14 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
+import RemoveItemButton from "../../../components/common/RemoveItem";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
-import { getUniqueID } from "../../../utils";
+import { getUniqueID, toCamelCase } from "../../../utils";
 import SectionControls from "../SectionControls";
 import { useCustomSectionStore } from "./store";
 import {
-    CustomSectionDataObject,
-    CustomSectionInputObject,
-    CustomSectionObject
+  CustomSectionDataObject,
+  CustomSectionInputObject,
+  CustomSectionObject,
 } from "./types";
 
 interface CustomSectionControlsProps {
@@ -50,10 +51,23 @@ const createDataObject = (
 const CustomSectionControls: React.FC<CustomSectionControlsProps> = ({
   section,
 }) => {
-  const { addData } = useCustomSectionStore();
+  const { addData, sections, setSections } = useCustomSectionStore();
+
+  const handleDelete = (id: string) => {
+    const nextSections = sections.filter((item) => item._id !== id);
+    setSections(nextSections);
+  };
 
   return (
-    <SectionControls layoutKey={section.header.toUpperCase()}>
+    <SectionControls
+      layoutKey={section.header.toUpperCase()}
+      extraChildren={
+        <RemoveItemButton
+          itemType={`${toCamelCase(section.header)} section`}
+          handleDelete={() => handleDelete(section._id)}
+        />
+      }
+    >
       <TooltipIconButton
         label={`Add new ${section.header.toLocaleLowerCase()}`}
         aria-label={`New-${section.header}`}
