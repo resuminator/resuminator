@@ -32,9 +32,10 @@ export const useDisabled = (
   const { token, resumeId } = usePatchParams();
   const { createToast } = useCustomToast();
 
-  const handleSubmit = async (
+  const handleLayoutUpdate = async (
     nextBody: ResumeLayoutObject["body"],
-    layoutKey: Sections | CustomSectionObject["header"]
+    layoutKey: Sections | CustomSectionObject["header"],
+    successMessage = `Toggled visibility for ${layoutKey.toLowerCase()}`
   ) => {
     updateLayout("body", nextBody);
 
@@ -43,8 +44,7 @@ export const useDisabled = (
     })
       .then((res: Result) => {
         updateLayout("body", res.template.layout.body);
-        const message = `Toggled visibility for ${layoutKey.toLowerCase()}`;
-        return createToast(message, "success");
+        return createToast(successMessage, "success");
       })
       .catch(() =>
         createToast(
@@ -64,7 +64,7 @@ export const useDisabled = (
       const nextBody = produce(body, (draftState) => {
         draftState[i].splice(j, 0, layoutKey);
       });
-      return await handleSubmit(nextBody, layoutKey);
+      return await handleLayoutUpdate(nextBody, layoutKey);
     } else {
       //Saving last position of the element
       const row = body.findIndex((row) => row.includes(layoutKey));
@@ -74,9 +74,9 @@ export const useDisabled = (
       const nextBody = body.map((row) =>
         row.filter((key) => key !== layoutKey)
       );
-      return await handleSubmit(nextBody, layoutKey);
+      return await handleLayoutUpdate(nextBody, layoutKey);
     }
   };
 
-  return { isDisabled, toggleDisabled };
+  return { isDisabled, toggleDisabled, handleLayoutUpdate };
 };

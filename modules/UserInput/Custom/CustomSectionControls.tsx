@@ -1,16 +1,18 @@
+import produce from "immer";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import RemoveItemButton from "../../../components/common/RemoveItem";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { useDisabled } from "../../../hooks/useDisabled";
+import useResumeStore from "../../../store/resume.store";
 import { getUniqueID, toCamelCase } from "../../../utils";
 import SectionControls from "../SectionControls";
 import { useCustomSectionStore } from "./store";
 import {
   CustomSectionDataObject,
   CustomSectionInputObject,
-  CustomSectionObject
+  CustomSectionObject,
 } from "./types";
 
 interface CustomSectionControlsProps {
@@ -53,12 +55,22 @@ const createDataObject = (
 const CustomSectionControls: React.FC<CustomSectionControlsProps> = ({
   section,
 }) => {
+  const layout = useResumeStore((state) => state.properties.layout);
   const { addData, sections, setSections } = useCustomSectionStore();
-  const { toggleDisabled } = useDisabled(section.header.toUpperCase());
+  const layoutKey = section.header.toUpperCase();
+  const { handleLayoutUpdate } = useDisabled(layoutKey);
   const { createToast } = useCustomToast();
 
   const handleDelete = async (id: string) => {
-    return await toggleDisabled()
+    const { body } = layout;
+    const nextBody = body.map((row) =>
+      row.filter((item) => item !== layoutKey)
+    );
+    return await handleLayoutUpdate(
+      nextBody,
+      layoutKey,
+      "Section Deleted Successfully"
+    )
       .then(() => {
         const nextSections = sections.filter((item) => item._id !== id);
         setSections(nextSections);
