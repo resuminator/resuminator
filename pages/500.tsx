@@ -1,4 +1,10 @@
-import { Box, Button, ButtonGroup, Center, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Center,
+  Text
+} from "@chakra-ui/react";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -67,7 +73,7 @@ const Custom500: NextPage = () => {
         <Center flexBasis={{ md: "50%" }}>
           <Image
             src="/500.png"
-            alt="404 Not Found"
+            alt="500 Internal Error"
             width="365"
             height="456"
             layout="intrinsic"
