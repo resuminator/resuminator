@@ -1,6 +1,5 @@
-import { Box, Button, Center, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Center, Image, Text, VStack } from "@chakra-ui/react";
 import { NextPage } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FiArrowLeft } from "react-icons/fi";
@@ -48,9 +47,7 @@ const Custom404: NextPage = () => {
             <Image
               src="/404.png"
               alt="404 Not Found"
-              width="456"
-              height="456"
-              layout="intrinsic"
+              boxSize={{ base: "183", md: "228", lg: "304", xl: "456" }}
             />
             <ImageCredit
               author={{

@@ -1,9 +1,6 @@
-import { Box, Button, Center, Text, VStack } from "@chakra-ui/react";
+import { Box, Center, Image, Text, VStack } from "@chakra-ui/react";
 import { NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
-import { FiArrowLeft } from "react-icons/fi";
 import ImageCredit from "../components/common/ImageCredit";
 import TextLink from "../components/common/TextLink";
 import Layout from "../components/layouts";
@@ -33,20 +30,13 @@ const Maintenance: NextPage = () => {
             join us on <TextLink link={DISCORD_INVITE} text="Discord" /> for
             promt updates and support.
           </Text>
-          <Link href="/home">
-            <Button colorScheme="purple" leftIcon={<FiArrowLeft />} mb="8">
-              Return Home
-            </Button>
-          </Link>
         </Box>
         <Center flexBasis={{ md: "50%" }}>
           <VStack>
             <Image
               src="/maintenance.png"
               alt="H8 Under Maintenence"
-              width="450"
-              height="450"
-              layout="intrinsic"
+              boxSize={{ base: "150px", md: "225px", lg: "300px", xl: "450px" }}
             />
             <ImageCredit
               author={{
