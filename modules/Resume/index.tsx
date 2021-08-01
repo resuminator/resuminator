@@ -15,6 +15,7 @@ import BodyBox from "./components/BodyBox";
 import HeaderBox from "./components/HeaderBox";
 import HeaderRow from "./components/HeaderRow";
 import Paper from "./components/Paper";
+import ResumeFooter from "./components/ResumeFooter";
 import { getHeaderLayout, getLayout } from "./legend";
 
 const ResumePaper = () => {
@@ -86,6 +87,7 @@ const ResumePaper = () => {
   return (
     <StylePropsProvider>
       <Paper>
+        <Box aria-label="Resume Content" flex="1">
         <HeaderBox>
           {header.map((row, index) => (
             <HeaderRow key={index} index={index}>
@@ -138,6 +140,8 @@ const ResumePaper = () => {
             ))}
           </BodyBox>
         </DragDropContext>
+        </Box>
+        <ResumeFooter />
       </Paper>
     </StylePropsProvider>
   );

@@ -10,7 +10,6 @@ import placeholderData, { userPlaceholder } from "../../data/placeholderData";
 import ColorSelector from "../../modules/Design/Colors/ColorSelector";
 import Columns from "../../modules/Design/Columns";
 import FontSelector from "../../modules/Design/Fonts/FontSelector";
-import FooterSelector from "../../modules/Design/FooterSelector";
 import Spacing from "../../modules/Design/Spacing";
 import { UserObject } from "../../modules/User/types";
 import Viewer from "../../modules/Viewer";
@@ -55,7 +54,6 @@ const Design: NextPage<DesignProps> = ({ token, id }) => {
             <Spacing />
             <FontSelector />
             <ColorSelector />
-            <FooterSelector />
           </Box>
           <Box aria-label="Resume Preview" flexBasis="50%">
             <Viewer />
