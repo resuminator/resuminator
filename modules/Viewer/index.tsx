@@ -4,12 +4,14 @@ import React from "react";
 import ResumePaper from "../Resume";
 import AutoSaveStatus from "./AutoSaveStatus";
 
-interface Props {}
+interface ViewerProps {
+  withStatus?: boolean;
+}
 
-const Viewer = (props: Props) => {
+const Viewer: React.FC<ViewerProps> = ({ withStatus }) => {
   return (
     <>
-      <AutoSaveStatus />
+      {withStatus ? <AutoSaveStatus /> : null}
       <Box
         borderRadius="10px"
         bg={useColorModeValue("white", "inherit")}

@@ -95,7 +95,7 @@ const Create: NextPage<CreateProps> = ({ token, id }) => {
             <CustomSectionInputs />
           </Box>
           <Box aria-label="Resume Preview" flexBasis="50%">
-            <Viewer />
+            <Viewer withStatus />
           </Box>
         </Box>
       </Layout>
