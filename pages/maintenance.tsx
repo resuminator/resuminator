@@ -8,9 +8,9 @@ import ImageCredit from "../components/common/ImageCredit";
 import TextLink from "../components/common/TextLink";
 import Layout from "../components/layouts";
 import ScreenCenter from "../components/layouts/ScreenCenter";
-import { DISCORD_INVITE, GITHUB_ISSUE, SUPPORT_EMAIL } from "../data/RefLinks";
+import { DISCORD_INVITE, RESUMINATOR_TWITTER } from "../data/RefLinks";
 
-const Custom404: NextPage = () => {
+const Maintenance: NextPage = () => {
   return (
     <Layout hasHeaderHidden>
       <ScreenCenter py="8" flexWrap={{ base: "wrap-reverse", lg: "nowrap" }}>
@@ -22,40 +22,36 @@ const Custom404: NextPage = () => {
             letterSpacing="tight"
             mb="2"
           >
-            It&rsquo;s void out here!
+            Beep Boop!
           </Text>
           <Text fontSize={{ base: "lg", lg: "2xl" }} fontWeight="medium" mb="8">
-            Error 404: We could not find the page you were looking for.
+            503: Resuminator is down for maintenance
           </Text>
           <Text mb="4" fontSize={{ base: "sm", lg: "md" }}>
-            This may happen if the page you&lsquo;re looking for either does not
-            exist or has been moved to a different location.
+            This is temporary though, we&lsquo;ll be back soon. Meanwhile follow
+            us on <TextLink text="Twitter" link={RESUMINATOR_TWITTER} />, and
+            join us on <TextLink link={DISCORD_INVITE} text="Discord" /> for
+            promt updates and support.
           </Text>
           <Link href="/home">
             <Button colorScheme="purple" leftIcon={<FiArrowLeft />} mb="8">
               Return Home
             </Button>
           </Link>
-          <Text mb="4" fontSize="sm">
-            If you feel this was a mistake, feel free to reach out to us on{" "}
-            <TextLink link={DISCORD_INVITE} text="Discord" />, or raise an issue
-            on <TextLink link={GITHUB_ISSUE} text="GitHub" />, or else send us
-            an <TextLink link={SUPPORT_EMAIL} text="email" />.
-          </Text>
         </Box>
         <Center flexBasis={{ md: "50%" }}>
           <VStack>
             <Image
-              src="/404.png"
-              alt="404 Not Found"
-              width="456"
-              height="456"
+              src="/maintenance.png"
+              alt="H8 Under Maintenence"
+              width="450"
+              height="450"
               layout="intrinsic"
             />
             <ImageCredit
               author={{
-                name: "Ekaterina Rogova",
-                link: "https://icons8.com/illustrations/author/5d1f49459e78e00011dbe817",
+                name: "Bogdan Magenta",
+                link: "https://icons8.com/illustrations/author/5dd5075701d03600114d621f",
               }}
               source={{
                 name: "Ouch",
@@ -69,4 +65,4 @@ const Custom404: NextPage = () => {
   );
 };
 
-export default Custom404;
+export default Maintenance;

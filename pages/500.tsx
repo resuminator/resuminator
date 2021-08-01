@@ -3,7 +3,8 @@ import {
   Button,
   ButtonGroup,
   Center,
-  Text
+  Text,
+  VStack,
 } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Image from "next/image";
@@ -11,6 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { FiHome, FiRefreshCw } from "react-icons/fi";
+import ImageCredit from "../components/common/ImageCredit";
 import TextLink from "../components/common/TextLink";
 import Layout from "../components/layouts";
 import ScreenCenter from "../components/layouts/ScreenCenter";
@@ -71,13 +73,25 @@ const Custom500: NextPage = () => {
           </Text>
         </Box>
         <Center flexBasis={{ md: "50%" }}>
-          <Image
-            src="/500.png"
-            alt="500 Internal Error"
-            width="365"
-            height="456"
-            layout="intrinsic"
-          />
+          <VStack>
+            <Image
+              src="/500.png"
+              alt="500 Internal Error"
+              width="365"
+              height="456"
+              layout="intrinsic"
+            />
+            <ImageCredit
+              author={{
+                name: "Icons 8",
+                link: "https://icons8.com/illustrations/author/5c07e68d82bcbc0092519bb6",
+              }}
+              source={{
+                name: "Ouch",
+                link: "https://icons8.com/illustrations",
+              }}
+            />
+          </VStack>
         </Center>
       </ScreenCenter>
     </Layout>
