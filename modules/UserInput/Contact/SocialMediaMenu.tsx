@@ -18,7 +18,7 @@ export const SocialHandles: Array<SocialHandleObject> = [
   { label: "Phone" },
   { label: "Portfolio" },
   { label: "Behance" },
-  { label: "Dribble" },
+  { label: "Dribbble" },
   { label: "YouTube" },
 ];
 

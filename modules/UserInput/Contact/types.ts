@@ -9,7 +9,7 @@ export type Services =
   | "Phone"
   | "Portfolio"
   | "Behance"
-  | "Dribble"
+  | "Dribbble"
   | "YouTube"
   | "Custom";
 export interface SocialHandleObject {

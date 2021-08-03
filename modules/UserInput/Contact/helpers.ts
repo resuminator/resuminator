@@ -28,7 +28,7 @@ export const getIconForService = (label: Services) => {
       return FaPhoneAlt;
     case "Portfolio":
       return FaUserAlt;
-    case "Dribble":
+    case "Dribbble":
       return FaDribbble;
     case "Behance":
       return FaBehance;
@@ -61,7 +61,7 @@ export const getColorSchemeForService = (
       return "orange.500";
     case "Behance":
       return "blue.500";
-    case "Dribble":
+    case "Dribbble":
       return "pink.500";
     case "YouTube":
       return "red.500";
@@ -93,7 +93,7 @@ export const generateLinkForLabel = (label: Services | string, link: string) => 
       return `https://${link}`;
     case "Behance":
       return `https://behance.net/${link}`;
-    case "Dribble":
+    case "Dribbble":
       return `https://dribbble.com/${link}`;
     case "YouTube":
       return `https://www.youtube.com/c/${link}`;
