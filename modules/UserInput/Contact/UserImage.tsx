@@ -29,6 +29,7 @@ const UserImage = () => {
     return await patchContact(key)(token, resumeId, { [key]: url })
       .then(() => {
         setLastSavedAt(new Date());
+        createToast("Image uploaded successfully", "success")
         return setSaveStatus(Status.success);
       })
       .catch(() => setSaveStatus(Status.error));
