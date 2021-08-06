@@ -19,11 +19,13 @@ import TooltipIconButton from "../common/TooltipIconButton";
 interface ColorPickerProps extends Omit<IconButtonProps, "aria-label"> {
   value: string;
   handler: (value: string) => void;
+  handleSubmit: () => Promise<string | number>;
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
   value,
   handler,
+  handleSubmit,
   isActive,
   ...props
 }) => {
@@ -43,7 +45,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   };
 
   return (
-    <Popover matchWidth placement="bottom-end">
+    <Popover matchWidth placement="bottom-end" onClose={handleSubmit}>
       <PopoverTrigger>
         <TooltipIconButton
           label="Custom Color"

@@ -40,7 +40,7 @@ const PersonalDetails = () => {
   };
 
   return (
-    <Fragment>
+    <Box mb="8">
       <Box mb="8">
         <BoxHeader
           title="Full Name"
@@ -84,8 +84,8 @@ const PersonalDetails = () => {
       >
         Save Changes
       </Button>
-      <Divider />
-    </Fragment>
+      <Divider/>
+    </Box>
   );
 };
 

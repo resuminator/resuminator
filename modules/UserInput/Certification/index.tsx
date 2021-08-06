@@ -1,5 +1,6 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
+import { patchCertifications } from "../../../apis/patchSection";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
@@ -8,11 +9,12 @@ import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
+import Autosave from "../Autosave";
 import {
   handleChange,
   handleDateChange,
   handleDragEnd,
-  handlePresentCheckbox
+  handlePresentCheckbox,
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import useCertificationStore from "./store";
@@ -62,6 +64,7 @@ const Certification = () => {
         mb: "2",
       }}
     >
+      <Autosave data={data} patchFn={patchCertifications} />
       <SectionControls layoutKey="CERTIFICATIONS">
         <TooltipIconButton
           label="Add new certificate"

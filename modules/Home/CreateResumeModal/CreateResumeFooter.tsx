@@ -1,14 +1,17 @@
 import { Button, HStack, ModalFooter } from "@chakra-ui/react";
 import React from "react";
 import { FiArrowRight, FiExternalLink } from "react-icons/fi";
+import { Status } from "../../../utils/constants";
 import { Method } from "../CreateResumeModal";
 
 interface Props {
   method: Method;
+  actionCallback: (method: Method) => Promise<void>;
   onCloseCallback: () => void;
+  status?: Status;
 }
 
-const CreateResumeFooter: React.FC<Props> = ({ method, onCloseCallback }) => {
+const CreateResumeFooter: React.FC<Props> = ({ method, onCloseCallback, actionCallback, status }) => {
   return (
     <ModalFooter display="flex" justifyContent="space-between">
       <Button
@@ -25,7 +28,9 @@ const CreateResumeFooter: React.FC<Props> = ({ method, onCloseCallback }) => {
           colorScheme="purple"
           rightIcon={<FiArrowRight />}
           isDisabled={method === null}
-          onClick={() => console.log(method)}
+          isLoading={status===Status.loading}
+          loadingText="Creating new resume"
+          onClick={() => actionCallback(method)}
         >
           Get Started
         </Button>

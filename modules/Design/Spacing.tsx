@@ -6,14 +6,20 @@ import {
 } from "@chakra-ui/slider";
 import { Tooltip } from "@chakra-ui/tooltip";
 import React from "react";
+import { patchSpacing } from "../../apis/patchTemplate";
 import Section from "../../components/layouts/Section";
+import { useCustomToast } from "../../hooks/useCustomToast";
+import { usePatchParams } from "../../hooks/usePatchParams";
 import useResumeStore from "../../store/resume.store";
+import { Result } from "../../store/types";
 
 interface Props {}
 
 const Spacing = (props: Props) => {
   const spacing = useResumeStore((state) => state.spacing);
   const setSpacing = useResumeStore((state) => state.setSpacing);
+  const { token, resumeId } = usePatchParams();
+  const { createToast } = useCustomToast();
 
   const getTooltipLabel = (value: number) => {
     switch (value) {
@@ -28,6 +34,27 @@ const Spacing = (props: Props) => {
     }
   };
 
+  const handleSubmit = (value: number) => {
+    setSpacing(value);
+
+    const res = async () =>
+      await patchSpacing(token, resumeId, { spacing: value })
+        .then((res: Result) => {
+          setSpacing(res.template.spacing);
+          return createToast("Resume spacing updated", "success");
+        })
+        .catch(() =>
+          createToast(
+            "Couldn't update resume spacing",
+            "error",
+            "Please try again in sometime"
+          )
+        );
+
+    const timeout = setTimeout(res, 3000);
+    return () => clearTimeout(timeout);
+  };
+
   return (
     <Section
       header={{
@@ -40,7 +67,7 @@ const Spacing = (props: Props) => {
         my="4"
         colorScheme="cyan"
         value={spacing}
-        onChange={(value) => setSpacing(value)}
+        onChange={(value) => handleSubmit(value)}
         w="60%"
         min={0.5}
         max={2}

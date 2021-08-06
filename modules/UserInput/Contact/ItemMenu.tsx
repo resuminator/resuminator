@@ -25,7 +25,7 @@ const ItemMenu: React.FC<Props> = ({ item, index, handlers }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Menu>
+    <Menu isLazy placement="auto">
       <MenuButton
         as={IconButton}
         label="Options"

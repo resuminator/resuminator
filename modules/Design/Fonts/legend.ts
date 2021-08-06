@@ -30,6 +30,7 @@ const Fonts: FontsObject = {
     body: {
       fontFamily: "Inter",
       fontSize: "0.9em",
+      fontWeight: "normal"
     },
   },
   MAGAZINE: {
@@ -61,6 +62,7 @@ const Fonts: FontsObject = {
     body: {
       fontFamily: "Nunito",
       fontSize: "0.9em",
+      fontWeight: "normal"
     },
   },
   POISE: {
@@ -94,6 +96,7 @@ const Fonts: FontsObject = {
     body: {
       fontFamily: "Poppins",
       fontSize: "0.85em",
+      fontWeight: "normal"
     },
   },
   SENIOR: {
@@ -128,6 +131,7 @@ const Fonts: FontsObject = {
     body: {
       fontFamily: "Georgia",
       fontSize: "0.9em",
+      fontWeight: "normal"
     },
   },
 };

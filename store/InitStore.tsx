@@ -25,9 +25,9 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
   const certificationInit = useCertificationStore((state) => state.setData);
   const projectInit = useProjectStore((state) => state.setData);
   const publicationsInit = usePublicationStore((state) => state.setData);
-  const skillsInit = useSkillStore((state) => state.setData);
-  const { setFullName, setContact, setJobTitle, setUserImage } =
-    useContactStore();
+  const { setData: setSkillsData, setFormat: setSkillsFormat } =
+    useSkillStore();
+  const setContactProperty = useContactStore((state) => state.setProperty);
   const customSectionInit = useCustomSectionStore((state) => state.setSections);
   const { setInit, setLoading } = useGlobalStore();
   const setProperty = useResumeStore((state) => state.setProperty);
@@ -35,12 +35,20 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
 
   const initUserInfo = useCallback(
     (userInfo: Result["contact"]) => {
-      setFullName(userInfo.fullName);
-      setJobTitle(userInfo.jobTitle);
-      setUserImage(userInfo.userImage);
-      setContact(userInfo.contact);
+      setContactProperty("fullName", userInfo.fullName);
+      setContactProperty("jobTitle", userInfo.jobTitle);
+      setContactProperty("userImage", userInfo.userImage);
+      setContactProperty("contact", userInfo.contact);
     },
-    [setContact, setFullName, setJobTitle, setUserImage]
+    [setContactProperty]
+  );
+
+  const initSkills = useCallback(
+    (skills: Result["skills"]) => {
+      setSkillsData(skills.data);
+      setSkillsFormat(skills.format);
+    },
+    [setSkillsData, setSkillsFormat]
   );
 
   const initResume = useCallback(
@@ -66,7 +74,7 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
       certificationInit(data.certifications);
       projectInit(data.projects);
       publicationsInit(data.publications);
-      skillsInit(data.skills.data);
+      initSkills(data.skills);
       initUserInfo(data.contact);
       customSectionInit(data.customSections);
       initResume(id);
@@ -79,7 +87,7 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
       certificationInit,
       projectInit,
       publicationsInit,
-      skillsInit,
+      initSkills,
       customSectionInit,
       setInit,
       initUserInfo,

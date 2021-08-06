@@ -8,16 +8,21 @@ import {
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
+  PopoverFooter,
   PopoverHeader,
   PopoverTrigger,
   SimpleGrid,
   Text,
   Tooltip,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
+import Cookies from "js-cookie";
+import { patchResumeMeta } from "../../apis/meta";
 import Emoticons from "../../data/Emoticons";
+import { useCustomToast } from "../../hooks/useCustomToast";
 import useUserStore from "../User/store";
 import { ResumeMetadata } from "../User/types";
+import DeleteResumeModal from "./DeleteResumeModal";
 
 interface ResumeCardOptionProps {
   dataObject: ResumeMetadata;
@@ -26,16 +31,25 @@ interface ResumeCardOptionProps {
 const ResumeCardOptions: React.FC<ResumeCardOptionProps> = ({ dataObject }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const updateActive = useUserStore((state) => state.updateActive);
-  
-  const handleInput = (
+  const setProperty = useUserStore((state) => state.setProperty);
+  const { createToast } = useCustomToast();
+
+  const handleInput = async (
     dataObject: ResumeMetadata,
     key: string,
     value: string
   ) => {
-    if (key === "profileName" && value === "")
-      return updateActive(dataObject.id, key, "Untitled Resume");
+    if (key === "profileName" && value === "") {
+      updateActive(dataObject._id, key, "Untitled Resume");
+    } else updateActive(dataObject._id, key, value);
 
-    return updateActive(dataObject.id, key, value);
+    const token = Cookies.get("token");
+    return await patchResumeMeta(token, dataObject._id, { [key]: value })
+      .then((res) => {
+        setProperty("active", res.active);
+        return createToast("Changes Saved", "success");
+      })
+      .catch(() => createToast("Could not save changes", "error"));
   };
 
   return (
@@ -86,6 +100,9 @@ const ResumeCardOptions: React.FC<ResumeCardOptionProps> = ({ dataObject }) => {
             ))}
           </SimpleGrid>
         </PopoverBody>
+        <PopoverFooter display="flex" justifyContent="flex-end">
+          <DeleteResumeModal resumeObject={dataObject} />
+        </PopoverFooter>
       </PopoverContent>
     </Popover>
   );

@@ -1,18 +1,17 @@
 import { Grid, useDisclosure } from "@chakra-ui/react";
-import { NextPage } from "next";
+import { GetServerSidePropsContext, NextPage } from "next";
 import dynamic from "next/dynamic";
+import nookies from "nookies";
 import React from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
-import getUserData from "../apis/getUserData";
+import { getUserData } from "../apis/meta";
 import Footer from "../components/layouts/Footer";
 import Header from "../components/layouts/Header";
-import {
-  resumeMetaPlaceholder,
-  userPlaceholder
-} from "../data/placeholderData";
+import { userPlaceholder } from "../data/placeholderData";
 import ResumeList from "../modules/Home/ResumeList";
 import Sidebar from "../modules/Home/Sidebar";
+import useUserStore from "../modules/User/store";
 import { UserObject } from "../modules/User/types";
 import InitUserStore from "../store/InitUserStore";
 
@@ -20,18 +19,18 @@ const CreateResumeModal = dynamic(
   () => import("../modules/Home/CreateResumeModal")
 );
 
-const Home: NextPage = () => {
+interface HomePageProps {
+  token: string;
+}
+
+const Home: NextPage<HomePageProps> = ({ token }) => {
   const { data, status } = useQuery<UserObject, Error>(
     "getUserData",
-    getUserData,
+    () => getUserData(token),
     { placeholderData: userPlaceholder }
   );
+  const { _id, isBanned, active } = useUserStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const handleNewResumeButton = () => {
-    if (!data.active.length) return console.log(resumeMetaPlaceholder);
-    return onOpen();
-  };
 
   return (
     <>
@@ -47,12 +46,15 @@ const Home: NextPage = () => {
       >
         {/**Each component under Grid must be wrapped inside a GridItem component */}
         <Sidebar />
-        <ResumeList handleNew={handleNewResumeButton} />
+        <ResumeList handleNew={onOpen} />
 
         {/* Will be uncommented when we'll launch the template gallery */}
         {/* <TemplateList /> */}
       </Grid>
-      <CreateResumeModal data={data} options={{ isOpen, onClose }} />
+      <CreateResumeModal
+        data={{ _id, isBanned, active }}
+        options={{ isOpen, onClose }}
+      />
       <Footer />
     </>
   );
@@ -60,14 +62,28 @@ const Home: NextPage = () => {
 
 export default Home;
 
-export async function getServerSideProps() {
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  //Try to get token from cookies.
+  const cookies = nookies.get(ctx);
+  const token = cookies.token;
+
+  //If the token does not exist or is cleared then redirect to login page.
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+  }
+
+  //If token is present, pass it to the query to fetch data from API
   const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery("getUserData", getUserData);
-
+  await queryClient.prefetchQuery("getUserData", () => getUserData(token));
   return {
     props: {
+      token,
       dehydratedState: dehydrate(queryClient),
     },
   };
-}
+};

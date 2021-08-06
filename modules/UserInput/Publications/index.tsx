@@ -1,6 +1,7 @@
 import { HStack } from "@chakra-ui/layout";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
+import { patchPublication } from "../../../apis/patchSection";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
@@ -8,6 +9,7 @@ import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
+import Autosave from "../Autosave";
 import { handleChange, handleDragEnd } from "../handlers";
 import SectionControls from "../SectionControls";
 import FormatRadioGroup from "./FormatRadioGroup";
@@ -61,6 +63,7 @@ const Publications = () => {
         mb: "2",
       }}
     >
+      <Autosave data={data} patchFn={patchPublication} />
       <SectionControls layoutKey="PUBLICATIONS">
         <TooltipIconButton
           label="Add new publication"
@@ -81,7 +84,7 @@ const Publications = () => {
               title: item.articleTitle,
               subtitle: item.authorNames,
               titlePlaceholder: "Publication Article Title",
-              isHidden: item.isHidden
+              isHidden: item.isHidden,
             }}
             InputCardProps={{
               itemType: "publication",

@@ -68,6 +68,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
             //If email verified, then perform all the email success actions
             setStatus(Status.success);
             createToast("Logged in successfully", "success");
+            router.push("/home")
           })
           .catch((e) => {
             setStatus(Status.error);

@@ -3,8 +3,12 @@ import { BoxProps, useColorModeValue } from "@chakra-ui/react";
 import produce from "immer";
 import React from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { patchLayout } from "../../apis/patchTemplate";
 import ColoredDivider from "../../components/common/ColoredDivider";
+import { useCustomToast } from "../../hooks/useCustomToast";
+import { usePatchParams } from "../../hooks/usePatchParams";
 import useResumeStore from "../../store/resume.store";
+import { Result, ResumeLayoutObject } from "../../store/types";
 import { isCustom } from "../Design/Colors/ColorSelector";
 import StylePropsProvider from "../Design/StylePropsProvider";
 import BodyBox from "./components/BodyBox";
@@ -14,21 +18,43 @@ import Paper from "./components/Paper";
 import { getHeaderLayout, getLayout } from "./legend";
 
 const ResumePaper = () => {
-  const { header, body } = useResumeStore((state) => state.properties.layout);
+  const layout = useResumeStore((state) => state.properties.layout);
+  const { header, body } = layout;
   const updateLayout = useResumeStore((state) => state.updateLayout);
   const spacing = useResumeStore((state) => state.spacing);
   const color = useResumeStore((state) => state.color);
   const primaryColor = isCustom(color) ? color : `${color}.600`;
+  const { token, resumeId } = usePatchParams();
+
+  const { createToast } = useCustomToast();
 
   const lightModeProps: BoxProps = {
-    bg: "gray.100"
-  }
+    bg: "gray.100",
+  };
   const darkModeProps: BoxProps = {
-    bg: "whiteAlpha.100"
-  }
+    bg: "whiteAlpha.100",
+  };
   const dndProps = useColorModeValue(lightModeProps, darkModeProps);
 
-  const handleOnDragEnd = (result: DropResult) => {
+  const saveBodyToDB = async (nextBody: ResumeLayoutObject["body"]) => {
+    updateLayout("body", nextBody);
+    return await patchLayout(token, resumeId, {
+      layout: { ...layout, body: nextBody },
+    })
+      .then((res: Result) => {
+        updateLayout("body", res.template.layout.body);
+        return createToast("Resume layout updated", "success");
+      })
+      .catch(() =>
+        createToast(
+          "Couldn't update resume layout",
+          "error",
+          "Please try again in sometime"
+        )
+      );
+  };
+
+  const handleOnDragEnd = async (result: DropResult) => {
     const { destination, source } = result;
     if (!destination) return;
 
@@ -37,23 +63,23 @@ const ResumePaper = () => {
       const parts = Array.from(body[source.droppableId]);
       const [reorderedPart] = parts.splice(source.index, 1);
       parts.splice(destination.index, 0, reorderedPart);
-      
-      const nextBody = produce(body, draft => {
+
+      const nextBody = produce(body, (draft) => {
         draft[source.droppableId] = parts;
-      })
-      updateLayout("body", nextBody)
+      });
+      return await saveBodyToDB(nextBody);
     } else {
       const sourceParts = Array.from(body[source.droppableId]);
       const destinationParts = Array.from(body[destination.droppableId]);
       const [reorderedPart] = sourceParts.splice(source.index, 1);
       destinationParts.splice(destination.index, 0, reorderedPart);
 
-      const nextBody = produce(body, draft => {
+      const nextBody = produce(body, (draft) => {
         draft[source.droppableId] = sourceParts;
         draft[destination.droppableId] = destinationParts;
-      })
+      });
 
-      updateLayout("body", nextBody)
+      return await saveBodyToDB(nextBody);
     }
   };
 
@@ -87,7 +113,7 @@ const ResumePaper = () => {
                     px={spacing * 4 - 1}
                     py={spacing * 2 - 1}
                     flexBasis={`${(1 / body.length) * 100}%`}
-                    bg={snapshot.isDraggingOver ? dndProps.bg : 'inherit'}
+                    bg={snapshot.isDraggingOver ? dndProps.bg : "inherit"}
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >

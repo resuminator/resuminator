@@ -1,5 +1,6 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
+import { patchEducation } from "../../../apis/patchSection";
 import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
@@ -9,6 +10,7 @@ import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
+import Autosave from "../Autosave";
 import {
   handleChange,
   handleDateChange,
@@ -68,6 +70,7 @@ const Education = () => {
         mb: "2",
       }}
     >
+      <Autosave data={data} patchFn={patchEducation} />
       <SectionControls layoutKey="EDUCATION">
         <TooltipIconButton
           label="Add new education"

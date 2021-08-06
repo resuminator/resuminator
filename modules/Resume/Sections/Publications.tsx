@@ -53,28 +53,26 @@ const PublicationsLayout = (props) => {
   return (
     <SectionBox aria-label="Publication Layout" {...props}>
       <SectionTitle>Publications</SectionTitle>
-      <SectionContent>
-        {data.map((item) => (
-          <Fragment key={item._id}>
-            <DataRow mb="1" key={item._id}>
-              <TextItem as="li">
-                {item.format === "MLA" ? (
-                  <MLAStyle item={item} />
-                ) : (
-                  <APAStyle item={item} />
-                )}
-              </TextItem>
-            </DataRow>
-            <DataRow>
-              <ExternalLink
-                as="a"
-                pb="0"
-                href={item.doi && `https://doi.org/${item.doi}`}
-              />
-            </DataRow>
-          </Fragment>
-        ))}
-      </SectionContent>
+      {data.map((item) => (
+        <SectionContent key={item._id}>
+          <DataRow mb="1" key={item._id}>
+            <TextItem as="li">
+              {item.format === "MLA" ? (
+                <MLAStyle item={item} />
+              ) : (
+                <APAStyle item={item} />
+              )}
+            </TextItem>
+          </DataRow>
+          <DataRow>
+            <ExternalLink
+              as="a"
+              pb="0"
+              href={item.doi && `https://doi.org/${item.doi}`}
+            />
+          </DataRow>
+        </SectionContent>
+      ))}
     </SectionBox>
   );
 };

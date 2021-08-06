@@ -8,12 +8,11 @@ const skillStore = <T>(
   get: GetState<SkillStore<T>>
 ): SkillStore<T> => ({
   format: "CATEGORIES",
-  isDisabled: false,
-  toggleDisabled: () => set((state) => ({ isDisabled: !state.isDisabled })),
   toggleFormat: () =>
     set((state) => ({
       format: state.format === "CATEGORIES" ? "TAGS" : "CATEGORIES",
     })),
+  setFormat: (value) => set({format: value}),
   data: [],
   setData: (list) => set({ data: list }),
   add: (obj) => set((state) => ({ data: [...state.data, obj] })),

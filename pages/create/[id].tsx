@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/layout";
-import { NextPage } from "next";
+import { GetServerSidePropsContext, NextPage } from "next";
+import nookies from "nookies";
 import React, { Fragment } from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
-import getResumeData from "../../apis/getResumeData";
-import getUserData from "../../apis/getUserData";
+import { getUserData } from "../../apis/meta";
+import { getResumeData } from "../../apis/resume";
 import Layout from "../../components/layouts";
 import placeholderData, { userPlaceholder } from "../../data/placeholderData";
 import { UserObject } from "../../modules/User/types";
@@ -16,7 +17,7 @@ import {
   NameAndJobTitle,
   Projects,
   Publications,
-  Skills
+  Skills,
 } from "../../modules/UserInput";
 import UserImage from "../../modules/UserInput/Contact/UserImage";
 import CustomSections from "../../modules/UserInput/Custom";
@@ -45,18 +46,23 @@ const getInputSection = (key: InputSectionKeys) => {
 };
 
 interface CreateProps {
+  token: string;
   id: string;
 }
 
-const Create: NextPage<CreateProps> = ({ id }) => {
+const Create: NextPage<CreateProps> = ({ token, id }) => {
   const inputs = useResumeStore((state) => state.properties.inputs);
-  const { data, status } = useQuery("getResumeData", () => getResumeData(id), {
-    placeholderData,
-  });
+  const { data, status } = useQuery(
+    "getResumeData",
+    () => getResumeData(token, id),
+    {
+      placeholderData,
+    }
+  );
   const { data: userData, status: userQueryStatus } = useQuery<
     UserObject,
     Error
-  >("getUserData", getUserData, {
+  >("getUserData", () => getUserData(token), {
     placeholderData: userPlaceholder,
   });
 
@@ -99,14 +105,30 @@ const Create: NextPage<CreateProps> = ({ id }) => {
 
 export default Create;
 
-export const getServerSideProps = async (context) => {
-  const { id } = context.params;
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  //Try to get token from cookies.
+  const cookies = nookies.get(ctx);
+  const token = cookies.token;
+
+  //If the token does not exist or is cleared then redirect to login page.
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+  }
+
+  //If token is present, pass it to the query to fetch data from API
+  const { id } = ctx.params;
   const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery("getResumeData", () => getResumeData(id));
-
+  await queryClient.prefetchQuery("getResumeData", () =>
+    getResumeData(token, id.toString())
+  );
   return {
     props: {
+      token,
       id,
       dehydratedState: dehydrate(queryClient),
     },

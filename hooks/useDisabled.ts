@@ -1,8 +1,11 @@
 import produce from "immer";
 import { useState } from "react";
+import { patchLayout } from "../apis/patchTemplate";
 import { CustomSectionObject } from "../modules/UserInput/Custom/types";
 import useResumeStore from "../store/resume.store";
-import { ResumeLayoutObject, Sections } from "../store/types";
+import { Result, ResumeLayoutObject, Sections } from "../store/types";
+import { useCustomToast } from "./useCustomToast";
+import { usePatchParams } from "./usePatchParams";
 
 /**
  * Returns the disabled status of a section using its layout key.
@@ -21,21 +24,47 @@ export const getDisabledStatus = (
 export const useDisabled = (
   layoutKey: Sections | CustomSectionObject["header"] = ""
 ) => {
-  const body = useResumeStore((state) => state.properties.layout.body);
+  const layout = useResumeStore((state) => state.properties.layout);
+  const { body } = layout;
   const isDisabled = getDisabledStatus(body, layoutKey);
   const updateLayout = useResumeStore((state) => state.updateLayout);
   const [pos, setPos] = useState([0, 0]);
+  const { token, resumeId } = usePatchParams();
+  const { createToast } = useCustomToast();
+
+  const handleLayoutUpdate = async (
+    nextBody: ResumeLayoutObject["body"],
+    layoutKey: Sections | CustomSectionObject["header"],
+    successMessage = `Toggled visibility for ${layoutKey.toLowerCase()}`
+  ) => {
+    updateLayout("body", nextBody);
+
+    return await patchLayout(token, resumeId, {
+      layout: { ...layout, body: nextBody },
+    })
+      .then((res: Result) => {
+        updateLayout("body", res.template.layout.body);
+        return createToast(successMessage, "success");
+      })
+      .catch(() =>
+        createToast(
+          `Couldn't update resume layout`,
+          "error",
+          "Please try again in sometime"
+        )
+      );
+  };
 
   /**
    * Toggles the presence of `layoutKey` of an element in the `body` array.
    */
-  const toggleDisabled = () => {
+  const toggleDisabled = async () => {
     if (getDisabledStatus(body, layoutKey)) {
       const [i, j] = pos;
       const nextBody = produce(body, (draftState) => {
         draftState[i].splice(j, 0, layoutKey);
       });
-      updateLayout("body", nextBody);
+      return await handleLayoutUpdate(nextBody, layoutKey);
     } else {
       //Saving last position of the element
       const row = body.findIndex((row) => row.includes(layoutKey));
@@ -45,9 +74,9 @@ export const useDisabled = (
       const nextBody = body.map((row) =>
         row.filter((key) => key !== layoutKey)
       );
-      updateLayout("body", nextBody);
+      return await handleLayoutUpdate(nextBody, layoutKey);
     }
   };
 
-  return { isDisabled, toggleDisabled };
+  return { isDisabled, toggleDisabled, handleLayoutUpdate };
 };

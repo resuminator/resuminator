@@ -5,21 +5,26 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { GrDrag } from "react-icons/gr";
+import patchContact from "../../../apis/patchContact";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { useCustomToast } from "../../../hooks/useCustomToast";
+import Autosave from "../Autosave";
 import { handleDragEnd } from "../handlers";
 import SectionControls from "../SectionControls";
 import { getColorSchemeForService, getIconForService } from "./helpers";
 import ItemMenu from "./ItemMenu";
 import SocialMediaMenu from "./SocialMediaMenu";
 import useContactStore from "./store";
+import { ContactDataObject } from "./types";
 
 const Contact = () => {
   const data = useContactStore((state) => state.contact);
+  const setProperty = useContactStore((state) => state.setProperty);
   const update = useContactStore((state) => state.update);
   const add = useContactStore((state) => state.add);
-  const set = useContactStore((state) => state.setContact);
+  const set = (state: Array<ContactDataObject>) =>
+    setProperty("contact", state);
   const { createToast } = useCustomToast();
 
   const handleDelete = (itemIndex: number) => {
@@ -27,6 +32,9 @@ const Contact = () => {
     set(nextState);
     return createToast("Deleted Successfully", "success");
   };
+
+  //Partially applied patchContact function for Autosave
+  const patchFn = patchContact("contact");
 
   return (
     <Section
@@ -36,6 +44,7 @@ const Contact = () => {
         mb: "2",
       }}
     >
+      <Autosave data={{ contact: data }} patchFn={patchFn} />
       <SectionControls hasToggleButton={false}>
         <SocialMediaMenu handler={{ data, add }} />
       </SectionControls>

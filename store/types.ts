@@ -5,7 +5,11 @@ import { EducationDataObject } from "../modules/UserInput/Education/types";
 import { ExperienceDataObject } from "../modules/UserInput/Experience/types";
 import { ProjectDataObject } from "../modules/UserInput/Projects/types";
 import { PublicationDataObject } from "../modules/UserInput/Publications/types";
-import { SkillDataObject } from "../modules/UserInput/Skills/types";
+import {
+  SkillDataObject,
+  SkillDisplayStyle
+} from "../modules/UserInput/Skills/types";
+import { Status } from "../utils/constants";
 
 export type UpdateAction = (index: number, key: string, value: any) => void;
 
@@ -36,14 +40,15 @@ export type ColorProfiles =
   | "pink"
   | string;
 
+export type ResumeInputsArray = Array<Sections | CustomSectionObject["header"]>;
 export interface ResumeLayoutObject {
   header: Array<Array<HeaderElements>>;
-  body: Array<Array<Sections | CustomSectionObject["header"]>>;
+  body: Array<ResumeInputsArray>;
   footer: Array<FooterElements>;
 }
 
 export interface ResumeStyleObject {
-  inputs: Array<Sections | CustomSectionObject["header"]>;
+  inputs: ResumeInputsArray;
   layout: ResumeLayoutObject;
   fontProfile?: FontProfile;
   spacing?: number;
@@ -59,7 +64,7 @@ export interface Result {
   projects?: Array<ProjectDataObject>;
   certifications?: Array<CertificationDataObject>;
   publications?: Array<PublicationDataObject>;
-  skills?: { hasCategories: boolean; data: Array<SkillDataObject> };
+  skills?: { format: SkillDisplayStyle; data: Array<SkillDataObject> };
   customSections?: Array<CustomSectionObject>;
 }
 
@@ -74,9 +79,13 @@ export interface GlobalStore {
   init?: boolean;
   isLoading?: boolean;
   grayscaleFilter: boolean;
+  saveStatus?: Status;
+  lastSavedAt?: Date;
   setInit?: (value: boolean) => void;
   setLoading?: (value: boolean) => void;
   toggleGrayscaleFilter?: () => void;
+  setSaveStatus?: (status: Status) => void;
+  setLastSavedAt?: (date: Date) => void;
 }
 
 export interface ResumeStore {

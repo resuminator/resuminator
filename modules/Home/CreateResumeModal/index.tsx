@@ -7,8 +7,14 @@ import {
   Text,
   useColorModeValue
 } from "@chakra-ui/react";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
-import { UserObject } from "../../User/types";
+import { getCloneResume, getNewResume } from "../../../apis/resume";
+import { resumeMetaPlaceholder } from "../../../data/placeholderData";
+import { useCustomToast } from "../../../hooks/useCustomToast";
+import { Status } from "../../../utils/constants";
+import useUserStore from "../../User/store";
+import { ResumeMetadata, UserObject } from "../../User/types";
 import CreateResumeBody from "./CreateResumeBody";
 import CreateResumeFooter from "./CreateResumeFooter";
 
@@ -24,7 +30,60 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
   options,
 }) => {
   const [method, setMethod] = useState<Method>(null);
+  const [status, setStatus] = useState<Status>(Status.idle);
   const { isOpen, onClose } = options;
+  const { createToast } = useCustomToast();
+  const { setProperty } = useUserStore();
+  const token = Cookies.get("token");
+
+  const [selectedResume, setSelectedResume] = useState<ResumeMetadata>(() =>
+    data.active.length ? data.active[0] : resumeMetaPlaceholder
+  );
+
+  const createResume = async (
+    apiCallback: (...params: any) => Promise<any>,
+    token = null
+  ) => {
+    setStatus(Status.loading);
+    return await apiCallback(token)
+      .then((res) => {
+        setStatus(Status.success);
+        setProperty("active", res.active);
+        createToast(
+          "New resume created!",
+          "success",
+          "Click on the resume card to start editing"
+        );
+      })
+      .catch((err) => {
+        setStatus(Status.error);
+        //If the resume limit has been hit, return a different toast.
+        if (err.response.status === 409) {
+          return createToast(
+            "Couldn't create new resume",
+            "error",
+            "You already have the maximum resumes which can be created on this plan."
+          );
+        }
+        return createToast(
+          "Couldn't create new resume",
+          "error",
+          "Some unexpected error occured while creating your resume. Try again, and if this persists, please contact us over email"
+        );
+      });
+  };
+
+  const createNewResume = async (method: Method) => {
+    switch (method) {
+      case "SCRATCH":
+        return await createResume(getNewResume, token).then(() => onClose());
+      case "EXISTING":
+        return await createResume(
+          getCloneResume(selectedResume._id),
+          token
+        ).then(() => onClose());
+    }
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -41,8 +100,21 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
             Select one to get started
           </Text>
         </ModalHeader>
-        <CreateResumeBody data={data} method={method} callback={setMethod} />
-        <CreateResumeFooter method={method} onCloseCallback={onClose} />
+        <CreateResumeBody
+          data={data}
+          method={method}
+          callback={setMethod}
+          selectedHandlers={{
+            value: selectedResume,
+            setValue: setSelectedResume,
+          }}
+        />
+        <CreateResumeFooter
+          method={method}
+          onCloseCallback={onClose}
+          actionCallback={createNewResume}
+          status={status}
+        />
       </ModalContent>
     </Modal>
   );

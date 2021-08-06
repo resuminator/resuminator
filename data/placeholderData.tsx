@@ -1,17 +1,14 @@
-import { UserObject } from "../modules/User/types";
+import { ResumeMetadata, UserObject } from "../modules/User/types";
 import { Result } from "../store/types";
 
 export const userPlaceholder: UserObject = {
   _id: "",
   isBanned: 0,
-  fullName: "",
-  email: "",
-  avatar: "",
   active: [],
 }
 
-export const resumeMetaPlaceholder =   {
-  id: "",
+export const resumeMetaPlaceholder: ResumeMetadata =   {
+  _id: "",
   profileName: "",
   webId: "",
   icon: "",
@@ -33,7 +30,7 @@ const placeholderData: Result = {
         "SKILLS",
       ],
       layout: {
-        header: [["USER_IMAGE", "NAME_AND_JT"], ["SOCIAL_HANDLES"]], //BFS
+        header: [["NAME_AND_JT", "USER_IMAGE"], ["SOCIAL_HANDLES"]], //BFS
         body: [
           ["EXPERIENCE", "PROJECTS", "EDUCATION"],
           ["SKILLS", "PUBLICATIONS"],
@@ -56,7 +53,7 @@ const placeholderData: Result = {
   certifications: [],
   publications: [],
   skills: {
-    hasCategories: true,
+    format: 'CATEGORIES',
     data: [],
   },
   customSections: [],

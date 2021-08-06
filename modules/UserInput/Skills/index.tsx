@@ -1,5 +1,6 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
+import { patchSkillData } from "../../../apis/patchSkills";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import TextAreaWithLabel from "../../../components/common/TextAreaWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
@@ -8,6 +9,7 @@ import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
+import Autosave from "../Autosave";
 import { handleChange, handleDragEnd, handleTagsInput } from "../handlers";
 import SectionControls from "../SectionControls";
 import FormatMenu from "./FormatMenu";
@@ -52,6 +54,7 @@ const Skills = () => {
         mb: "2",
       }}
     >
+      <Autosave data={{data: data}} patchFn={patchSkillData}/>
       <SectionControls layoutKey="SKILLS" extraChildren={<FormatMenu />}>
         <TooltipIconButton
           label="Add new skillset"

@@ -1,9 +1,10 @@
 import { Box } from "@chakra-ui/layout";
-import { NextPage } from "next";
+import { GetServerSidePropsContext, NextPage } from "next";
+import nookies from "nookies";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
-import getResumeData from "../../apis/getResumeData";
-import getUserData from "../../apis/getUserData";
+import { getUserData } from "../../apis/meta";
+import { getResumeData } from "../../apis/resume";
 import Layout from "../../components/layouts";
 import placeholderData, { userPlaceholder } from "../../data/placeholderData";
 import ColorSelector from "../../modules/Design/Colors/ColorSelector";
@@ -18,15 +19,21 @@ import InitUserStore from "../../store/InitUserStore";
 
 interface DesignProps {
   id: string;
+  token: string;
 }
-const Design: NextPage<DesignProps> = ({ id }) => {
-  const { data, status } = useQuery("getResumeData", () => getResumeData(id), {
-    placeholderData,
-  });
+
+const Design: NextPage<DesignProps> = ({ token, id }) => {
+  const { data, status } = useQuery(
+    "getResumeData",
+    () => getResumeData(token, id),
+    {
+      placeholderData,
+    }
+  );
   const { data: userData, status: userQueryStatus } = useQuery<
     UserObject,
     Error
-  >("getUserData", getUserData, {
+  >("getUserData", () => getUserData(token), {
     placeholderData: userPlaceholder,
   });
 
@@ -61,14 +68,29 @@ const Design: NextPage<DesignProps> = ({ id }) => {
 
 export default Design;
 
-export const getServerSideProps = async (context) => {
-  const { id } = context.params;
-  const queryClient = new QueryClient();
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  //Try to get token from cookies.
+  const cookies = nookies.get(ctx);
+  const token = cookies.token;
 
-  await queryClient.prefetchQuery("getResumeData", () => getResumeData(id));
+  //If the token does not exist or is cleared then redirect to login page.
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+  }
+  const { id } = ctx.params;
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery("getResumeData", () =>
+    getResumeData(token, id.toString())
+  );
 
   return {
     props: {
+      token,
       id,
       dehydratedState: dehydrate(queryClient),
     },
