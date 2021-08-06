@@ -2,7 +2,9 @@ import { Box } from "@chakra-ui/layout";
 import { AnimatePresence } from "framer-motion";
 import { GetServerSidePropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
+import nookies from "nookies";
 import React, { useState } from "react";
+import { coldStartServer } from "../apis/server";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
 import { LogoWithText } from "../components/layouts/Logos";
@@ -13,8 +15,6 @@ import LogInWithEmail from "../modules/Auth/LoginWithEmail";
 import PageToggle from "../modules/Auth/PageToggle";
 import PrivacyNotice from "../modules/Auth/PrivacyNotice";
 import firebaseSDK from "../services/firebase";
-import nookies from "nookies";
-import { coldStartServer } from "../apis/server";
 
 const Login: NextPage = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
@@ -87,11 +87,11 @@ const Login: NextPage = () => {
 export default Login;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  //Try to get token from cookies.
-  const cookies = nookies.get(ctx);
-  const token = cookies.token;
-
+  //Heroku servers generally take time to boot up
+  //so this helps in cold starting the server.
   const serverRes = await coldStartServer();
+
+  //If the server returns 503, it means website is down for maintenance mode.
   if (serverRes === 503)
     return {
       redirect: {
@@ -99,6 +99,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         destination: "/maintenance",
       },
     };
+
+  //Try to get token from cookies.
+  const cookies = nookies.get(ctx);
+  const token = cookies.token;
 
   //If the token exists always route to /home page.
   if (token) {

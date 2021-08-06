@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/layout";
 import { AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
+import { coldStartServer } from "../apis/server";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
 import { LogoWithText } from "../components/layouts/Logos";
@@ -80,3 +81,18 @@ const Signup = () => {
 };
 
 export default Signup;
+
+export const getStaticProps = async () => {
+  //Heroku servers generally take time to boot up
+  //so this helps in cold starting the server.
+  const serverRes = await coldStartServer();
+
+  //If the server returns 503, it means website is down for maintenance mode.
+  if (serverRes === 503)
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/maintenance",
+      },
+    };
+};
