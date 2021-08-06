@@ -13,7 +13,8 @@ import LogInWithEmail from "../modules/Auth/LoginWithEmail";
 import PageToggle from "../modules/Auth/PageToggle";
 import PrivacyNotice from "../modules/Auth/PrivacyNotice";
 import firebaseSDK from "../services/firebase";
-import nookies from 'nookies';
+import nookies from "nookies";
+import { coldStartServer } from "../apis/server";
 
 const Login: NextPage = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
@@ -90,6 +91,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const cookies = nookies.get(ctx);
   const token = cookies.token;
 
+  await coldStartServer();
+
   //If the token exists always route to /home page.
   if (token) {
     return {
@@ -102,6 +105,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   //If no token then don't do anything
   return {
-    props: {} as never
-  }
+    props: {} as never,
+  };
 };
