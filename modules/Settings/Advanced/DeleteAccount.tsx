@@ -15,6 +15,8 @@ const DeleteAccount = () => {
       {children}
     </Text>
   );
+  //FIXME: Remove in Prod
+  const isDisabled = true;
 
   useEffect(() => {
     if (auth.user) {
@@ -46,7 +48,7 @@ const DeleteAccount = () => {
           <Highlight> metadata</Highlight>. This action is irreversible. Proceed
           with caution.
         </Text>
-        <Button colorScheme="red" size="sm" mb="4" onClick={onOpen}>
+        <Button colorScheme="red" size="sm" mb="4" onClick={onOpen} isDisabled={isDisabled}>
           Delete My Account
         </Button>
       </Box>
