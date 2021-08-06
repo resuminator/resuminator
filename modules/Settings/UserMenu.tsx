@@ -37,8 +37,8 @@ const UserMenu = () => {
   useEffect(() => {
     if (auth.user) {
       setUser({
-        displayName: auth.user.displayName,
-        photoUrl: auth.user.photoURL,
+        displayName: auth.user.displayName || "",
+        photoUrl: auth.user.photoURL || "",
         email: auth.user.email,
       });
     }
