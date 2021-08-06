@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 module.exports = {
-  target: "serverless",
   async redirects() {
     return [
       {
@@ -8,6 +7,11 @@ module.exports = {
         destination: "/login",
         permanent: true,
       },
+      {
+        source: "/signup",
+        destination: "/login",
+        permanent: true
+      }
     ];
   },
 };

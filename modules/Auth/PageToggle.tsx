@@ -6,13 +6,14 @@ interface Props {
   page: "LOGIN" | "SIGNUP";
 }
 
+//FIXME: In prod, fix the route for the users.
 const PageToggle: React.FC<Props> = ({ page }) => {
   switch (page) {
     case "LOGIN":
       return (
         <Text>
           Don&apos;t have an account?{" "}
-          <LinkText href="/signup" fontWeight="medium" color="blue.600">
+          <LinkText href="#" fontWeight="medium" color="blue.600">
             Create one
           </LinkText>
         </Text>
