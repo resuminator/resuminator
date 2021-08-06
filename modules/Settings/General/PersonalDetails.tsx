@@ -14,7 +14,7 @@ const PersonalDetails = () => {
 
   useEffect(() => {
     if (auth.user) {
-      setUser({ displayName: auth.user.displayName, email: auth.user.email });
+      setUser({ displayName: auth.user.displayName || "", email: auth.user.email });
     }
   }, [auth.user]);
 

@@ -14,7 +14,7 @@ const ProfilePhoto = () => {
 
   useEffect(() => {
     if (auth.user) {
-      setAvatar(auth.user.photoURL);
+      setAvatar(auth.user.photoURL || "");
     }
   }, [auth]);
 
