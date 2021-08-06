@@ -70,7 +70,7 @@ export default AuthAction;
 export const getServerSideProps = async ({ query }) => {
   const mode = query.mode || "";
   const oobCode = query.oobCode || "";
-  const continueUrl = query.continueUrl || "";
+  const continueUrl = query.continueUrl || "/login";
   return {
     props: { mode, oobCode, continueUrl },
   };
