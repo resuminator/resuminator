@@ -91,7 +91,14 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const cookies = nookies.get(ctx);
   const token = cookies.token;
 
-  await coldStartServer();
+  const serverRes = await coldStartServer();
+  if (serverRes === 503)
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/maintenance",
+      },
+    };
 
   //If the token exists always route to /home page.
   if (token) {
