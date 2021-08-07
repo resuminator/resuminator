@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { GetServerSidePropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
 import nookies from "nookies";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { coldStartServer } from "../apis/server";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
@@ -20,6 +20,10 @@ const Login: NextPage = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
   const { createToast } = useCustomToast();
   const router = useRouter();
+
+  useEffect(() => {
+    coldStartServer();
+  }, []);
 
   const getProvider = (c: AuthProviderProps["client"]) => {
     switch (c) {
@@ -87,19 +91,6 @@ const Login: NextPage = () => {
 export default Login;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  //Heroku servers generally take time to boot up
-  //so this helps in cold starting the server.
-  const serverRes = await coldStartServer();
-
-  //If the server returns 503, it means website is down for maintenance mode.
-  if (serverRes === 503)
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/maintenance",
-      },
-    };
-
   //Try to get token from cookies.
   const cookies = nookies.get(ctx);
   const token = cookies.token;
