@@ -55,9 +55,9 @@ const Share: NextPage<ShareProps> = ({ token, id }) => {
             height="29.7cm"
             overflowY="scroll"
           >
-            <DownloadResume />
+            <DownloadResume id={id} />
             <ShareLink />
-            <ShareSocial/>
+            <ShareSocial />
           </Box>
           <Box aria-label="Resume Preview" flexBasis="50%">
             <Viewer withStatus />
