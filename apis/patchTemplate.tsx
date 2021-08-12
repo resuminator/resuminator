@@ -8,27 +8,47 @@ import {
 } from "../store/types";
 import getHeaders from "../utils/headers";
 
+/**
+ * HOC to update the given section of the template object inside the resume data.
+ * @param key Key to update inside the template object
+ * @returns Resume data object.
+ */
 const patchTemplate =
   <T extends unknown>(key: string) =>
-  async (
-    token: string = null,
-    resumeId: string,
-    body: { [key: string]: T }
-  ) => {
-    const res = await axios.patch(
-      `${baseUrl}/resume/template/${key}/${resumeId}`,
-      body,
-      {
-        headers: getHeaders(token),
-      }
-    );
+    async (
+      token: string = null,
+      resumeId: string,
+      body: { [key: string]: T }
+    ) => {
+      const res = await axios.patch(
+        `${baseUrl}/resume/template/${key}/${resumeId}`,
+        body,
+        {
+          headers: getHeaders(token),
+        }
+      );
 
-    return res.data;
-  };
+      return res.data;
+    };
 
+/**
+ * Updates the `input` key of the template
+ */
 export const patchInput = patchTemplate<ResumeInputsArray>("input");
+
+/**
+ * Updates the `layout` key of the template
+ */
 export const patchLayout = patchTemplate<ResumeLayoutObject>("layout");
+
+/**
+ * Updates the `font` key of the template
+ */
 export const patchFont = patchTemplate<FontProfile>("font");
+
+/**
+ * Updates the `spacing` key of the template
+ */
 export const patchSpacing = patchTemplate<number>("spacing");
 
 /**
