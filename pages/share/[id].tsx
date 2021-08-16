@@ -9,8 +9,6 @@ import { getResumeData } from "../../apis/resume";
 import Layout from "../../components/layouts";
 import placeholderData, { userPlaceholder } from "../../data/placeholderData";
 import DownloadResume from "../../modules/Share/Download";
-import ShareLink from "../../modules/Share/ShareLink";
-import ShareSocial from "../../modules/Share/ShareSocial";
 import { UserObject } from "../../modules/User/types";
 import Viewer from "../../modules/Viewer";
 import InitStore from "../../store/InitStore";
@@ -56,8 +54,6 @@ const Share: NextPage<ShareProps> = ({ token, id }) => {
             overflowY="scroll"
           >
             <DownloadResume id={id} />
-            <ShareLink />
-            <ShareSocial />
           </Box>
           <Box aria-label="Resume Preview" flexBasis="50%">
             <Viewer withStatus />
