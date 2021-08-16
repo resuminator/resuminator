@@ -13,8 +13,8 @@ export const getBrowserInstance = async (): Promise<Browser> => {
     });
   }
 
-  await chromium.font(`/fonts/Inter-Regular.ttf`)
-  await chromium.font(`/fonts/Inter-Medium.ttf`)
+  await chromium.font(`${__dirname}/public/fonts/Inter-Regular.ttf`)
+  await chromium.font(`${__dirname}/public/fonts/Inter-Medium.ttf`)
   return await chromium.puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
