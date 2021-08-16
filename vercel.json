@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/download.js": {
+      "memory": 576
+    }
+  }
+}

@@ -32,11 +32,19 @@ const Resume: NextPage<ResumeProps> = ({ token, id }) => {
 export default Resume;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  //Try to get token from cookies.
-  const cookies = nookies.get(ctx);
-  const token = cookies.token;
+  //If token is present, pass it to the query to fetch data from API
+  const { id } = ctx.params;
+  let token: string;
+  
+  const userAgent = ctx.req.headers['user-agent'];
+  if(userAgent.split(' ').includes('R8')){
+    token = ctx.req.headers['token'].toString();
+    console.log("Request from Puppeteer", token.substr(0, 25))
+  } else {
+    token = nookies.get(ctx).token;
+    console.log("Request from NextJS")
+  }
 
-  //If the token does not exist or is cleared then redirect to login page.
   if (!token) {
     return {
       redirect: {
@@ -45,12 +53,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
   }
-
-  //If token is present, pass it to the query to fetch data from API
-  const { id } = ctx.params;
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery("getResumeData", () =>
-    getResumeData(token, id.toString())
+    getResumeData(token.toString(), id.toString())
   );
   return {
     props: {

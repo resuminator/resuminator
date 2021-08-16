@@ -1,5 +1,8 @@
 /* eslint-disable no-undef */
 module.exports = {
+  images: {
+    domains: ['firebasestorage.googleapis.com']
+  },
   async redirects() {
     return [
       {
