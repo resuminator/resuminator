@@ -50,6 +50,7 @@
     "zustand": "^3.5.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^11.1.0",
     "@types/css-font-loading-module": "0.0.6",
     "@types/express": "^4.17.12",
     "@types/node": "^15.0.2",

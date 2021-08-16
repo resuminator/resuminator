@@ -1,5 +1,9 @@
 /* eslint-disable no-undef */
-module.exports = {
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+const nextConfig = {
   async redirects() {
     return [
       {
@@ -10,8 +14,10 @@ module.exports = {
       {
         source: "/signup",
         destination: "/login",
-        permanent: true
-      }
+        permanent: true,
+      },
     ];
   },
 };
+
+module.exports = withBundleAnalyzer(nextConfig);
