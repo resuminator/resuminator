@@ -1,13 +1,14 @@
 import { Text } from "@chakra-ui/layout";
+import dynamic from "next/dynamic";
 import React, { Fragment } from "react";
 import DataRow from "../../../components/elements/DataRow";
 import { parseDate } from "../../../utils";
 import { useCustomSectionStore } from "../../UserInput/Custom/store";
-import BodyText from "../components/BodyText";
 import SectionBox, { SectionBoxProps } from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import TitleRow from "../components/TitleRow";
+const BodyText = dynamic(() => import('../components/BodyText'))
 
 interface CustomSectionLayoutProps {
   sectionKey: string;

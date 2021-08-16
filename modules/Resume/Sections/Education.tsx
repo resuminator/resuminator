@@ -1,13 +1,14 @@
+import dynamic from "next/dynamic";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
 import { parseDate } from "../../../utils";
 import useEducationStore from "../../UserInput/Education/store";
-import BodyText from "../components/BodyText";
 import SectionBox, { SectionBoxProps } from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
 import TitleRow from "../components/TitleRow";
+const BodyText = dynamic(() => import('../components/BodyText'))
 
 const EducationLayout: React.FC<SectionBoxProps> = (props) => {
   const data = useEducationStore((state) => state.data).filter(
