@@ -14,8 +14,8 @@ export const getBrowserInstance = async (): Promise<Browser> => {
   }
 
   //{__dirname} in prod = /var/task/.next/server/pages/api
-  await chromium.font(`${__dirname}/_fonts/Inter-Regular.ttf`)
-  await chromium.font(`${__dirname}/_fonts/Inter-Medium.ttf`)
+  await chromium.font(`${__dirname}/_fonts/Inter-Regular.woff2`)
+  await chromium.font(`${__dirname}/_fonts/Inter-Medium.woff2`)
   return await chromium.puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
