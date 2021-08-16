@@ -1,8 +1,8 @@
 import { HStack } from "@chakra-ui/layout";
+import dynamic from "next/dynamic";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { patchPublication } from "../../../apis/patchSection";
-import InputWithLabel from "../../../components/common/InputWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
@@ -15,6 +15,7 @@ import SectionControls from "../SectionControls";
 import FormatRadioGroup from "./FormatRadioGroup";
 import usePublicationStore from "./store";
 import { PublicationDataObject } from "./types";
+const InputWithLabel = dynamic(() => import("../../../components/common/InputWithLabel"));
 
 const Publications = () => {
   const data = usePublicationStore((state) => state.data);

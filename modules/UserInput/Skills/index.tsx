@@ -1,8 +1,7 @@
+import dynamic from "next/dynamic";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { patchSkillData } from "../../../apis/patchSkills";
-import InputWithLabel from "../../../components/common/InputWithLabel";
-import TextAreaWithLabel from "../../../components/common/TextAreaWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
@@ -15,6 +14,12 @@ import SectionControls from "../SectionControls";
 import FormatMenu from "./FormatMenu";
 import useSkillStore from "./store";
 import { SkillDataObject } from "./types";
+const InputWithLabel = dynamic(
+  () => import("../../../components/common/InputWithLabel")
+);
+const TextAreaWithLabel = dynamic(
+  () => import("../../../components/common/TextAreaWithLabel")
+);
 
 const Skills = () => {
   const data = useSkillStore((state) => state.data);
@@ -54,7 +59,7 @@ const Skills = () => {
         mb: "2",
       }}
     >
-      <Autosave data={{data: data}} patchFn={patchSkillData}/>
+      <Autosave data={{ data: data }} patchFn={patchSkillData} />
       <SectionControls layoutKey="SKILLS" extraChildren={<FormatMenu />}>
         <TooltipIconButton
           label="Add new skillset"

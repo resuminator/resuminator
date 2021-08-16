@@ -1,9 +1,6 @@
 import React, { Fragment } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import { patchCustomSections } from "../../../apis/patchSection";
-import EditorWithLabel from "../../../components/common/EditorWithLabel";
-import InputWithLabel from "../../../components/common/InputWithLabel";
-import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
@@ -17,6 +14,10 @@ import {
   CustomSectionObject,
   DateValue
 } from "./types";
+import dynamic from "next/dynamic";
+const EditorWithLabel = dynamic(() => import('../../../components/common/EditorWithLabel'))
+const StartEndDatePicker = dynamic(() => import('../../../components/common/StartEndDatePicker'))
+const InputWithLabel = dynamic(() => import("../../../components/common/InputWithLabel"));
 
 type updateFn = (
   sectionId: string,

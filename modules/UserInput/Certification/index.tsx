@@ -1,8 +1,7 @@
+import dynamic from "next/dynamic";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { patchCertifications } from "../../../apis/patchSection";
-import InputWithLabel from "../../../components/common/InputWithLabel";
-import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
@@ -19,6 +18,10 @@ import {
 import SectionControls from "../SectionControls";
 import useCertificationStore from "./store";
 import { CertificationDataObject } from "./types";
+const StartEndDatePicker = dynamic(
+  () => import("../../../components/common/StartEndDatePicker")
+);
+const InputWithLabel = dynamic(() => import("../../../components/common/InputWithLabel"));
 
 const Certification = () => {
   const data = useCertificationStore((state) => state.data);

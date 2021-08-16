@@ -1,9 +1,7 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { patchProjects } from "../../../apis/patchSection";
-import EditorWithLabel from "../../../components/common/EditorWithLabel";
 import InputWithLabel from "../../../components/common/InputWithLabel";
-import StartEndDatePicker from "../../../components/common/StartEndDatePicker";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
@@ -22,6 +20,9 @@ import {
 import SectionControls from "../SectionControls";
 import useProjectStore from "./store";
 import { ProjectDataObject } from "./types";
+import dynamic from "next/dynamic";
+const EditorWithLabel = dynamic(() => import('../../../components/common/EditorWithLabel'))
+const StartEndDatePicker = dynamic(() => import('../../../components/common/StartEndDatePicker'))
 
 const Projects = () => {
   const data = useProjectStore((state) => state.data);
