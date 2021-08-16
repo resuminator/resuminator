@@ -2,11 +2,11 @@ import { IconButton } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
 import { Box, HStack } from "@chakra-ui/layout";
 import { Tooltip } from "@chakra-ui/tooltip";
+import dynamic from "next/dynamic";
 import React from "react";
 import { FaCheck } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi";
 import { patchColor } from "../../../apis/patchTemplate";
-import ColorPicker from "../../../components/elements/ColorPicker";
 import Section from "../../../components/layouts/Section";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { usePatchParams } from "../../../hooks/usePatchParams";
@@ -14,6 +14,9 @@ import useResumeStore from "../../../store/resume.store";
 import { ColorProfiles, Result } from "../../../store/types";
 import ColorModeWarning from "./ColorModeWarning";
 import GrayscalePreviewCheckbox from "./GrayscalePreviewCheckbox";
+const ColorPicker = dynamic(
+  () => import("../../../components/elements/ColorPicker")
+);
 
 export const profiles: Array<ColorProfiles> = [
   "blue",
