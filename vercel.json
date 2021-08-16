@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/download.js": {
+    "pages/api/download.js": {
       "memory": 576
     }
   }
