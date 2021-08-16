@@ -1,5 +1,6 @@
 import chromium from "chrome-aws-lambda";
 import { Browser } from "puppeteer-core";
+import loadFonts from "./fontLoader";
 
 export const getBrowserInstance = async (): Promise<Browser> => {
   const executablePath = await chromium.executablePath;
@@ -14,8 +15,7 @@ export const getBrowserInstance = async (): Promise<Browser> => {
   }
 
   //{__dirname} in prod = /var/task/.next/server/pages/api
-  await chromium.font(`${__dirname}/_fonts/Inter-Regular.woff2`)
-  await chromium.font(`${__dirname}/_fonts/Inter-Medium.woff2`)
+  await loadFonts(chromium);
   return await chromium.puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
