@@ -10,7 +10,7 @@ const UserImageLayout = () => {
   const spacing = useResumeStore((state) => state.spacing);
 
   return (
-    <Center px={spacing * 8} py={spacing * 4}>
+    <Center px={spacing * 8} py={spacing * 4} borderRadius="50%">
       <Avatar size="lg" name={fullName} src={userImage} />
     </Center>
   );
