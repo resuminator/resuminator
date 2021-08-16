@@ -1,9 +1,12 @@
 import { Box, Button, Text, useDisclosure } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import React, { Fragment, useEffect, useState } from "react";
-import ActionModal from "../../../components/common/ActionModal";
 import BoxHeader from "../../../components/common/BoxHeader";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import { useAuth } from "../../Auth/AuthContext";
+const ActionModal = dynamic(
+  () => import("../../../components/common/ActionModal")
+);
 
 const DeleteAccount = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,7 +51,13 @@ const DeleteAccount = () => {
           <Highlight> metadata</Highlight>. This action is irreversible. Proceed
           with caution.
         </Text>
-        <Button colorScheme="red" size="sm" mb="4" onClick={onOpen} isDisabled={isDisabled}>
+        <Button
+          colorScheme="red"
+          size="sm"
+          mb="4"
+          onClick={onOpen}
+          isDisabled={isDisabled}
+        >
           Delete My Account
         </Button>
       </Box>

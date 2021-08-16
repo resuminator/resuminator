@@ -1,13 +1,16 @@
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Text } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import ActionModal from "../../../components/common/ActionModal";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import { getIconForService, labelIsPresent } from "./helpers";
 import { ContactData, ContactDataObject, SocialHandleObject } from "./types";
+const ActionModal = dynamic(
+  () => import("../../../components/common/ActionModal")
+);
 
 export const SocialHandles: Array<SocialHandleObject> = [
   { label: "LinkedIn" },

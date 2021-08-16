@@ -1,12 +1,15 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
 import Cookies from "js-cookie";
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { deleteResume } from "../../apis/resume";
-import ActionModal from "../../components/common/ActionModal";
 import { useCustomToast } from "../../hooks/useCustomToast";
 import { Status } from "../../utils/constants";
 import useUserStore from "../User/store";
 import { ResumeMetadata } from "../User/types";
+const ActionModal = dynamic(
+  () => import("../../components/common/ActionModal")
+);
 
 interface Props {
   resumeObject: ResumeMetadata;

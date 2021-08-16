@@ -24,7 +24,7 @@ const WithQuotes = ({ text = "" }) =>
  * @returns Null if text is not present, {prefix}{text}{suffix} in all other cases
  */
 const withSpecialCharacters = (prefix = "", text = "", suffix = "") =>
-  text.length ? `${prefix}${text}${suffix}` : null;
+  text && text.length ? `${prefix}${text}${suffix}` : null;
 
 const MLAStyle: React.FC<{ item: PublicationDataObject }> = ({ item }) => (
   <Fragment>

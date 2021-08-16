@@ -2,11 +2,12 @@ import { useColorModeValue } from "@chakra-ui/color-mode";
 import { useDisclosure } from "@chakra-ui/hooks";
 import Icon from "@chakra-ui/icon";
 import { Text } from "@chakra-ui/layout";
+import dynamic from "next/dynamic";
 import React, { Fragment } from "react";
 import { FiEye } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import ActionModal from "./ActionModal";
 import TooltipIconButton from "./TooltipIconButton";
+const ActionModal = dynamic(() => import("./ActionModal"));
 
 interface Props {
   itemType?: string;

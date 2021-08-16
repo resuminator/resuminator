@@ -2,13 +2,16 @@ import { IconButton } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Text } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
+import dynamic from "next/dynamic";
 import React from "react";
 import { CgOptions } from "react-icons/cg";
 import { FiEdit, FiEye } from "react-icons/fi";
 import { IoMdRemoveCircle } from "react-icons/io";
-import ActionModal from "../../../components/common/ActionModal";
 import InputWithLabel from "../../../components/common/InputWithLabel";
 import { ContactDataObject } from "./types";
+const ActionModal = dynamic(
+  () => import("../../../components/common/ActionModal")
+);
 
 interface Props {
   item?: ContactDataObject;

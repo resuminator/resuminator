@@ -51,11 +51,11 @@ const Home: NextPage<HomePageProps> = ({ token }) => {
         {/* Will be uncommented when we'll launch the template gallery */}
         {/* <TemplateList /> */}
       </Grid>
+      <Footer />
       <CreateResumeModal
         data={{ _id, isBanned, active }}
         options={{ isOpen, onClose }}
       />
-      <Footer />
     </>
   );
 };
