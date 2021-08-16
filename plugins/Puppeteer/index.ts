@@ -3,9 +3,7 @@ import { Browser } from "puppeteer-core";
 
 export const getBrowserInstance = async (): Promise<Browser> => {
   const executablePath = await chromium.executablePath;
-  await chromium.font(`${__dirname}/../_fonts/Inter-Regular.ttf`)
-  await chromium.font(`${__dirname}/../_fonts/Inter-Medium.ttf`)
-
+  
   if (!executablePath) {
     const puppeteer = require("puppeteer");
     return await puppeteer.launch({
@@ -15,6 +13,8 @@ export const getBrowserInstance = async (): Promise<Browser> => {
     });
   }
 
+  await chromium.font(`/fonts/Inter-Regular.ttf`)
+  await chromium.font(`/fonts/Inter-Medium.ttf`)
   return await chromium.puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
