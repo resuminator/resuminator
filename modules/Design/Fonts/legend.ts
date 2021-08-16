@@ -102,7 +102,7 @@ const Fonts: FontsObject = {
   SENIOR: {
     //✅ Final
     headerTitle: {
-      fontFamily: "Georgia",
+      fontFamily: "PT Serif",
       fontSize: "4xl",
       fontWeight: "light",
     },
@@ -119,18 +119,18 @@ const Fonts: FontsObject = {
       letterSpacing: "wide",
     },
     primary: {
-      fontFamily: "Georgia",
-      fontSize: "1.05em",
+      fontFamily: "PT Serif",
+      fontSize: "1em",
       fontWeight: "normal",
     },
     secondary: {
-      fontFamily: "Georgia",
+      fontFamily: "PT Serif",
       fontSize: "0.8em",
       fontStyle: "italic",
     },
     body: {
-      fontFamily: "Georgia",
-      fontSize: "0.9em",
+      fontFamily: "PT Serif",
+      fontSize: "0.8em",
       fontWeight: "normal"
     },
   },
