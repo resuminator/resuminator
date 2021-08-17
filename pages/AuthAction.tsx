@@ -32,7 +32,7 @@ const getPageTitle = (mode: ActionProps["mode"]) => {
     case "verifyEmail":
       return "Verify your email";
     default:
-      return "Area 51 Restricted";
+      return "Auth Action";
   }
 };
 
