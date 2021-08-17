@@ -7,6 +7,7 @@ import Footer from "../components/layouts/Footer";
 import ScreenCenter from "../components/layouts/ScreenCenter";
 import ResetPassword from "../modules/Auth/ResetPassword";
 import VerifyEmail from "../modules/Auth/VerifyEmail";
+import SEO from "../modules/SEO";
 
 interface ActionProps {
   mode?: string;
@@ -24,9 +25,21 @@ const Action: React.FC<ActionProps> = ({ mode, oobCode, continueUrl }) => {
   }
 };
 
+const getPageTitle = (mode: ActionProps["mode"]) => {
+  switch (mode) {
+    case "resetPassword":
+      return "Reset your password";
+    case "verifyEmail":
+      return "Verify your email";
+    default:
+      return "Area 51 Restricted";
+  }
+};
+
 const AuthAction: NextPage<ActionProps> = ({ mode, oobCode, continueUrl }) => {
   return (
     <>
+      <SEO title={getPageTitle(mode)} />
       <ScreenCenter>
         <Box
           display="flex"

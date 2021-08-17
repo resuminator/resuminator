@@ -8,6 +8,7 @@ import { getUserData } from "../../apis/meta";
 import { getResumeData } from "../../apis/resume";
 import Layout from "../../components/layouts";
 import placeholderData, { userPlaceholder } from "../../data/placeholderData";
+import SEO from "../../modules/SEO";
 import DownloadResume from "../../modules/Share/Download";
 import { UserObject } from "../../modules/User/types";
 import Viewer from "../../modules/Viewer";
@@ -36,6 +37,7 @@ const Share: NextPage<ShareProps> = ({ token, id }) => {
 
   return (
     <>
+      <SEO title="Share Resume" />
       <InitStore data={data} status={status} id={id} />
       <InitUserStore data={userData} status={userQueryStatus} />
       <Layout display="flex" flexDir="column" alignItems="center" w="100%">

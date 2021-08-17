@@ -11,6 +11,7 @@ import Header from "../components/layouts/Header";
 import { userPlaceholder } from "../data/placeholderData";
 import ResumeList from "../modules/Home/ResumeList";
 import Sidebar from "../modules/Home/Sidebar";
+import SEO from "../modules/SEO";
 import useUserStore from "../modules/User/store";
 import { UserObject } from "../modules/User/types";
 import InitUserStore from "../store/InitUserStore";
@@ -34,6 +35,7 @@ const Home: NextPage<HomePageProps> = ({ token }) => {
 
   return (
     <>
+      <SEO title="Create new resume" />
       <InitUserStore data={data} status={status} />
       <Header />
       <Grid

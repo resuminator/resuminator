@@ -8,6 +8,7 @@ import { getUserData } from "../../apis/meta";
 import { getResumeData } from "../../apis/resume";
 import Layout from "../../components/layouts";
 import placeholderData, { userPlaceholder } from "../../data/placeholderData";
+import SEO from "../../modules/SEO";
 import { UserObject } from "../../modules/User/types";
 import {
   Certification,
@@ -26,7 +27,7 @@ import Viewer from "../../modules/Viewer";
 import InitStore from "../../store/InitStore";
 import InitUserStore from "../../store/InitUserStore";
 import useResumeStore from "../../store/resume.store";
-import { InputSectionKeys } from "../../store/types";
+import { InputSectionKeys, Result } from "../../store/types";
 
 const getInputSection = (key: InputSectionKeys) => {
   switch (key) {
@@ -52,7 +53,7 @@ interface CreateProps {
 
 const Create: NextPage<CreateProps> = ({ token, id }) => {
   const inputs = useResumeStore((state) => state.properties.inputs);
-  const { data, status } = useQuery(
+  const { data, status } = useQuery<Result>(
     "getResumeData",
     () => getResumeData(token, id),
     {
@@ -68,6 +69,7 @@ const Create: NextPage<CreateProps> = ({ token, id }) => {
 
   return (
     <>
+      <SEO title="Edit Resume" />
       <InitStore data={data} status={status} id={id} />
       <InitUserStore data={userData} status={userQueryStatus} />
       <Layout display="flex" flexDir="column" alignItems="center" w="100%">

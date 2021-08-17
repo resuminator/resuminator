@@ -4,6 +4,7 @@ import React from "react";
 import BoxHeader from "../../components/common/BoxHeader";
 import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
+import SEO from "../../modules/SEO";
 import ChangePassword from "../../modules/Settings/Account/ChangePassword";
 import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
@@ -11,6 +12,7 @@ import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 const SecuritySettings: NextPage = () => {
   return (
     <>
+      <SEO title="Account Settings" />
       <Header />
       <SettingsLayoutGrid>
         <GridItem rowSpan={1} colSpan={4}>

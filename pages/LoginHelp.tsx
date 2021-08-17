@@ -12,6 +12,7 @@ import InputField from "../components/common/InputField";
 import Footer from "../components/layouts/Footer";
 import ScreenCenter from "../components/layouts/ScreenCenter";
 import { useEmailValidation } from "../hooks/useEmailValidation";
+import SEO from "../modules/SEO";
 import firebaseSDK from "../services/firebase";
 import { Status } from "../utils/constants";
 
@@ -60,6 +61,7 @@ const LoginHelp: NextPage = () => {
 
   return (
     <>
+      <SEO title="Forgot Password" />
       <ScreenCenter>
         <Box
           display="flex"

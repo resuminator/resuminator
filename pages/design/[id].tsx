@@ -11,6 +11,7 @@ import ColorSelector from "../../modules/Design/Colors/ColorSelector";
 import Columns from "../../modules/Design/Columns";
 import FontSelector from "../../modules/Design/Fonts/FontSelector";
 import Spacing from "../../modules/Design/Spacing";
+import SEO from "../../modules/SEO";
 import { UserObject } from "../../modules/User/types";
 import Viewer from "../../modules/Viewer";
 import InitStore from "../../store/InitStore";
@@ -38,6 +39,7 @@ const Design: NextPage<DesignProps> = ({ token, id }) => {
 
   return (
     <>
+      <SEO title="Customize Resume" />
       <InitStore data={data} status={status} id={id} />
       <InitUserStore data={userData} status={userQueryStatus} />
       <Layout display="flex" flexDir="column" alignItems="center" w="100%">

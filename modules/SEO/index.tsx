@@ -9,7 +9,7 @@ const SEO: React.FC<NextSeoProps> = ({
 }) => {
   return (
     <NextSeo
-      title={title}
+      title={`${title} | ${defaultSeoConfig.title}`}
       description={description}
       openGraph={{ title, description, ...config.openGraph }}
       {...config}

@@ -8,6 +8,7 @@ import { getAccountSettings } from "../../apis/settings";
 import BoxHeader from "../../components/common/BoxHeader";
 import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
+import SEO from "../../modules/SEO";
 import DeleteAccount from "../../modules/Settings/Advanced/DeleteAccount";
 import RequestData from "../../modules/Settings/Advanced/RequestData";
 import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
@@ -25,6 +26,7 @@ const AdvancedSettings: NextPage<SettingsPageProps> = ({ token }) => {
 
   return (
     <>
+      <SEO title="Advanced Settings" />
       <Header />
       <SettingsLayoutGrid>
         <GridItem rowSpan={1} colSpan={4}>

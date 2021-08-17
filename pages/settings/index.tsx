@@ -4,6 +4,7 @@ import React from "react";
 import BoxHeader from "../../components/common/BoxHeader";
 import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
+import SEO from "../../modules/SEO";
 import PersonalDetails from "../../modules/Settings/General/PersonalDetails";
 import ProfilePhoto from "../../modules/Settings/General/ProfilePhoto";
 import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
@@ -12,6 +13,7 @@ import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 const Settings: NextPage = () => {
   return (
     <>
+      <SEO title="General Settings" />
       <Header />
       <SettingsLayoutGrid>
         <GridItem rowSpan={1} colSpan={4}>
