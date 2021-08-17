@@ -125,12 +125,12 @@ const Fonts: FontsObject = {
     },
     secondary: {
       fontFamily: "PT Serif",
-      fontSize: "0.8em",
+      fontSize: "0.85em",
       fontStyle: "italic",
     },
     body: {
       fontFamily: "PT Serif",
-      fontSize: "0.8em",
+      fontSize: "0.85em",
       fontWeight: "normal"
     },
   },
