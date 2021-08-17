@@ -19,6 +19,7 @@ import { useRef } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { AuthProvider } from "../modules/Auth/AuthContext";
+import SEO from "../modules/SEO";
 import "../styles/globals.css";
 import DefaultTheme from "../styles/theme";
 import progress from "../widgets/ProgressBar";
@@ -43,6 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ChakraProvider theme={DefaultTheme}>
         <QueryClientProvider client={queryClientRef.current}>
           <Hydrate state={pageProps.dehydratedState}>
+            <SEO />
             <Component {...pageProps} />
           </Hydrate>
         </QueryClientProvider>
