@@ -2,13 +2,13 @@ import { Text } from "@chakra-ui/layout";
 import dynamic from "next/dynamic";
 import React, { Fragment } from "react";
 import DataRow from "../../../components/elements/DataRow";
-import { parseDate } from "../../../utils";
+import { parseDate, sanitizeHTML } from "../../../utils";
 import { useCustomSectionStore } from "../../UserInput/Custom/store";
 import SectionBox, { SectionBoxProps } from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import TitleRow from "../components/TitleRow";
-const BodyText = dynamic(() => import('../components/BodyText'))
+const BodyText = dynamic(() => import("../components/BodyText"));
 
 interface CustomSectionLayoutProps {
   sectionKey: string;
@@ -23,6 +23,8 @@ const CustomSectionLayout: React.FC<
         (item) => item.header.toUpperCase() === sectionKey
       )[0]
   );
+
+  const showBodyText = (content: string) => sanitizeHTML(content).length > 0;
 
   if (!section) return null;
   /*If the sectionKey mismatches then don't show section on resume
@@ -47,8 +49,12 @@ const CustomSectionLayout: React.FC<
           </Text>
         );
       }
-      case "DESC":
-        return <BodyText content={values[inputId].toString()} />;
+      case "DESC": {
+        const content = values[inputId].toString();
+        return showBodyText(content) ? (
+          <BodyText content={values[inputId].toString()} />
+        ) : null;
+      }
     }
   };
 

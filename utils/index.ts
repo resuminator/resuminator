@@ -1,6 +1,16 @@
 import { format } from "date-fns";
 
 /**
+ * Sanitize HTML elements out of a string input.
+ * @param htmlString HTML markup in string format
+ * @returns Santized string without the HTML elements
+ */
+export const sanitizeHTML = (htmlString: string) => {
+  const HTML_REGEX = /(<([^>]+)>)/gi;
+  return htmlString.replace(HTML_REGEX, "").toString();
+};
+
+/**
  * Generate a unique ID for objects locally.
  * @returns unique ID as a string.
  * @description NOTE: To be used for testing, DON'T USE IN PROD.

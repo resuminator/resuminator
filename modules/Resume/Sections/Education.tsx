@@ -1,19 +1,22 @@
 import dynamic from "next/dynamic";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
-import { parseDate } from "../../../utils";
+import { parseDate, sanitizeHTML } from "../../../utils";
 import useEducationStore from "../../UserInput/Education/store";
+import { EducationDataObject } from "../../UserInput/Education/types";
 import SectionBox, { SectionBoxProps } from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
 import TitleRow from "../components/TitleRow";
-const BodyText = dynamic(() => import('../components/BodyText'))
+const BodyText = dynamic(() => import("../components/BodyText"));
 
 const EducationLayout: React.FC<SectionBoxProps> = (props) => {
   const data = useEducationStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
+  const showBodyText = (item: EducationDataObject) =>
+    sanitizeHTML(item.description.toString()).length > 0;
 
   /**
    * Create a string from obtained and max grade depending on if the max grade is 100 or not
@@ -49,7 +52,7 @@ const EducationLayout: React.FC<SectionBoxProps> = (props) => {
             <SubtitleRow textAlign="right">{item.location}</SubtitleRow>
           </DataRow>
           <DataRow>
-            <BodyText content={item.description} />
+            {showBodyText(item) && <BodyText content={item.description} />}
           </DataRow>
         </SectionContent>
       ))}

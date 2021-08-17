@@ -1,8 +1,9 @@
 import dynamic from "next/dynamic";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
-import { parseDate } from "../../../utils";
+import { parseDate, sanitizeHTML } from "../../../utils";
 import useProjectStore from "../../UserInput/Projects/store";
+import { ProjectDataObject } from "../../UserInput/Projects/types";
 import SectionBox from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
 import SectionTitle from "../components/SectionTitle";
@@ -15,6 +16,7 @@ const ProjectLayout = (props) => {
   const data = useProjectStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
+  const showBodyText = (item: ProjectDataObject) => sanitizeHTML(item.description.toString()).length > 0;
 
   return (
     <SectionBox aria-label="Project Layout" {...props}>
@@ -33,7 +35,7 @@ const ProjectLayout = (props) => {
             <SubtitleRow>{item.additionalInfo}</SubtitleRow>
           </DataRow>
           <DataRow>
-            <BodyText content={item.description} />
+            {showBodyText(item) && <BodyText content={item.description} />}
           </DataRow>
           <DataRow justifyContent="flex-start">
             <Tags list={item.tags} />

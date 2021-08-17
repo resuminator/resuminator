@@ -1,8 +1,9 @@
 import dynamic from "next/dynamic";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
-import { parseDate } from "../../../utils";
+import { parseDate, sanitizeHTML } from "../../../utils";
 import useExperienceStore from "../../UserInput/Experience/store";
+import { ExperienceDataObject } from "../../UserInput/Experience/types";
 import ExternalLink from "../components/ExternalLink";
 import SectionBox from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
@@ -16,6 +17,7 @@ const ExperienceLayout = (props) => {
   const data = useExperienceStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
+  const showBodyText = (item: ExperienceDataObject) => sanitizeHTML(item.description.toString()).length > 0;
 
   return (
     <SectionBox aria-label="Experience Layout" {...props}>
@@ -33,7 +35,7 @@ const ExperienceLayout = (props) => {
             <SubtitleRow textAlign="right">{item.location}</SubtitleRow>
           </DataRow>
           <DataRow>
-            <BodyText content={item.description} />
+            {showBodyText(item) && <BodyText content={item.description} />}
           </DataRow>
           <DataRow>
             <ExternalLink as="a" href={item.link} />
