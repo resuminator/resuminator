@@ -32,6 +32,12 @@ const config: NextSeoProps = {
     handle: defaultSeoConfig.twitter,
     cardType: "summary_large_image",
   },
+  additionalLinkTags: [
+    {
+      rel: "icon",
+      href: "/logo.png",
+    },
+  ],
 };
 
 export default config;
