@@ -1,10 +1,11 @@
+import dynamic from "next/dynamic";
 import React, { Fragment } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import { patchCustomSections } from "../../../apis/patchSection";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
-import { truncateString } from "../../../utils";
+import { sanitizeHTML, truncateString } from "../../../utils";
 import Autosave from "../Autosave";
 import CustomSectionControls from "./CustomSectionControls";
 import { useCustomSectionStore } from "./store";
@@ -12,12 +13,17 @@ import {
   CustomSectionDataObject,
   CustomSectionInputObject,
   CustomSectionObject,
-  DateValue
+  DateValue,
 } from "./types";
-import dynamic from "next/dynamic";
-const EditorWithLabel = dynamic(() => import('../../../components/common/EditorWithLabel'))
-const StartEndDatePicker = dynamic(() => import('../../../components/common/StartEndDatePicker'))
-const InputWithLabel = dynamic(() => import("../../../components/common/InputWithLabel"));
+const EditorWithLabel = dynamic(
+  () => import("../../../components/common/EditorWithLabel")
+);
+const StartEndDatePicker = dynamic(
+  () => import("../../../components/common/StartEndDatePicker")
+);
+const InputWithLabel = dynamic(
+  () => import("../../../components/common/InputWithLabel")
+);
 
 type updateFn = (
   sectionId: string,
@@ -83,10 +89,7 @@ const getCardTitle = (data: CustomSectionDataObject) => {
   const firstField = Object.keys(data.values)[0];
   if (typeof firstField !== "string") return "";
 
-  const HTML_REGEX = /(<([^>]+)>)/gi;
-  const returnString = data.values[firstField]
-    .replace(HTML_REGEX, "")
-    .toString();
+  const returnString = sanitizeHTML(data.values[firstField]);
   return truncateString(returnString, 40);
 };
 
