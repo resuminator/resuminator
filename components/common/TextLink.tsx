@@ -5,11 +5,16 @@ interface TextLinkProps extends TextProps {
   text: string;
 }
 
-const TextLink: React.FC<TextLinkProps> = ({ link, text, ...rest }) => (
+const TextLink: React.FC<TextLinkProps> = ({
+  link,
+  text,
+  color = "blue.500",
+  ...rest
+}) => (
   <Text
     as="a"
     href={link}
-    color="blue.500"
+    color={color}
     target="_blank"
     _hover={{ textDecoration: "underline" }}
     {...rest}
