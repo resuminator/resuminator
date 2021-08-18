@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, isSameMonth, isSameYear } from "date-fns";
 
 /**
  * Sanitize HTML elements out of a string input.
@@ -53,6 +53,22 @@ export const parseDate = (date: Date, view: "Y" | "YM" = "Y") => {
   if (view === "Y") return format(parsedDate, "yyyy");
   if (view === "YM") return format(parsedDate, "MMM yyyy");
   // `${parsedDate.getMonth()} ${parsedDate.getFullYear()}`;
+};
+
+/**
+ * Returns the string for date range display
+ * @param start Start Date
+ * @param end End Date
+ * @returns Single Date if Start Date's month and year and same as End Date's month and year.
+ * Else returns the string for date range
+ */
+export const dateDisplay = (start: Date, end: Date, view: "Y" | "YM" = "Y") => {
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+
+  if (isSameMonth(startDate, endDate) && isSameYear(startDate, endDate))
+    return parseDate(start, view);
+  return `${parseDate(start, view)} - ${parseDate(end, view)}`;
 };
 
 /**

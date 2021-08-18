@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
-import { parseDate, sanitizeHTML } from "../../../utils";
+import { dateDisplay, sanitizeHTML } from "../../../utils";
 import useExperienceStore from "../../UserInput/Experience/store";
 import { ExperienceDataObject } from "../../UserInput/Experience/types";
 import ExternalLink from "../components/ExternalLink";
@@ -11,13 +11,14 @@ import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
 import Tags from "../components/Tags";
 import TitleRow from "../components/TitleRow";
-const BodyText = dynamic(() => import('../components/BodyText'))
+const BodyText = dynamic(() => import("../components/BodyText"));
 
 const ExperienceLayout = (props) => {
   const data = useExperienceStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
-  const showBodyText = (item: ExperienceDataObject) => sanitizeHTML(item.description.toString()).length > 0;
+  const showBodyText = (item: ExperienceDataObject) =>
+    sanitizeHTML(item.description.toString()).length > 0;
 
   return (
     <SectionBox aria-label="Experience Layout" {...props}>
@@ -27,7 +28,7 @@ const ExperienceLayout = (props) => {
           <DataRow>
             <TitleRow>{item.company}</TitleRow>
             <TitleRow textAlign="right">
-              {parseDate(item.start, "YM")} - {parseDate(item.end, "YM")}
+              {dateDisplay(item.start, item.end, "YM")}
             </TitleRow>
           </DataRow>
           <DataRow mb="1">

@@ -2,7 +2,7 @@ import { Text } from "@chakra-ui/layout";
 import dynamic from "next/dynamic";
 import React, { Fragment } from "react";
 import DataRow from "../../../components/elements/DataRow";
-import { parseDate, sanitizeHTML } from "../../../utils";
+import { dateDisplay, parseDate, sanitizeHTML } from "../../../utils";
 import { useCustomSectionStore } from "../../UserInput/Custom/store";
 import SectionBox, { SectionBoxProps } from "../components/SectionBox";
 import SectionContent from "../components/SectionContent";
@@ -43,11 +43,7 @@ const CustomSectionLayout: React.FC<
         return <Text>{values[inputId]}</Text>;
       case "DATE": {
         const { start, end } = values[inputId];
-        return (
-          <Text>
-            {parseDate(start, "Y")} - {parseDate(end, "Y")}
-          </Text>
-        );
+        return <Text>{dateDisplay(start, end)}</Text>;
       }
       case "DESC": {
         const content = values[inputId].toString();

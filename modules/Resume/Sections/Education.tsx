@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
-import { parseDate, sanitizeHTML } from "../../../utils";
+import { dateDisplay, sanitizeHTML } from "../../../utils";
 import useEducationStore from "../../UserInput/Education/store";
 import { EducationDataObject } from "../../UserInput/Education/types";
 import SectionBox, { SectionBoxProps } from "../components/SectionBox";
@@ -41,7 +41,7 @@ const EducationLayout: React.FC<SectionBoxProps> = (props) => {
           <DataRow>
             <TitleRow>{item.institute}</TitleRow>
             <TitleRow textAlign="right">
-              {parseDate(item.start)} - {parseDate(item.end)}
+              {dateDisplay(item.start, item.end)}
             </TitleRow>
           </DataRow>
           <DataRow mb="1">

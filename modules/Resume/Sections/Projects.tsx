@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import React from "react";
 import DataRow from "../../../components/elements/DataRow";
-import { parseDate, sanitizeHTML } from "../../../utils";
+import { dateDisplay, sanitizeHTML } from "../../../utils";
 import useProjectStore from "../../UserInput/Projects/store";
 import { ProjectDataObject } from "../../UserInput/Projects/types";
 import SectionBox from "../components/SectionBox";
@@ -10,13 +10,20 @@ import SectionTitle from "../components/SectionTitle";
 import SubtitleRow from "../components/SubtitleRow";
 import Tags from "../components/Tags";
 import TitleRow from "../components/TitleRow";
-const BodyText = dynamic(() => import('../components/BodyText'))
+const BodyText = dynamic(() => import("../components/BodyText"));
 
 const ProjectLayout = (props) => {
   const data = useProjectStore((state) => state.data).filter(
     (item) => !item.isHidden
   );
-  const showBodyText = (item: ProjectDataObject) => sanitizeHTML(item.description.toString()).length > 0;
+
+  /**
+   * Filters HTML elements from description and returns boolean if any string content is present
+   * @param item Project Data Object
+   * @returns True if there is some content in the description
+   */
+  const showBodyText = (item: ProjectDataObject) =>
+    sanitizeHTML(item.description.toString()).length > 0;
 
   return (
     <SectionBox aria-label="Project Layout" {...props}>
@@ -28,7 +35,7 @@ const ProjectLayout = (props) => {
               {item.projectName}
             </TitleRow>
             <TitleRow textAlign="right">
-              {parseDate(item.start, "YM")} - {parseDate(item.end, "YM")}
+              {dateDisplay(item.start, item.end, "YM")}
             </TitleRow>
           </DataRow>
           <DataRow mb="1">
