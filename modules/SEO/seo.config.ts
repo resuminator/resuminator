@@ -12,7 +12,7 @@ const config: NextSeoProps = {
     url: defaultSeoConfig.url,
     images: [
       {
-        url: "/og.png",
+        url: "/og1.png",
         width: 1200,
         height: 628,
         alt: defaultSeoConfig.title,
