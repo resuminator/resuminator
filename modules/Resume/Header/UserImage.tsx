@@ -9,11 +9,11 @@ const UserImageLayout = () => {
   const userImage = useContactStore((state) => state.userImage);
   const spacing = useResumeStore((state) => state.spacing);
 
-  return (
+  return userImage.length ? (
     <Center px={spacing * 8} py={spacing * 4} borderRadius="50%">
       <Avatar size="lg" name={fullName} src={userImage} />
     </Center>
-  );
+  ) : null;
 };
 
 export default UserImageLayout;
