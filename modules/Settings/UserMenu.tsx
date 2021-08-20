@@ -8,6 +8,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -75,6 +76,7 @@ const UserMenu = () => {
             textTransform="uppercase"
             fontWeight="semibold"
             mb="2"
+            color={useColorModeValue("blue.500", "blue.200")}
           >
             Logged in as
           </Text>
