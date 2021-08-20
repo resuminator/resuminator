@@ -6,6 +6,7 @@ import "@fontsource/lora";
 import "@fontsource/manrope";
 import "@fontsource/manrope/600.css";
 import "@fontsource/manrope/700.css";
+import "@fontsource/manrope/800.css";
 import "@fontsource/nunito";
 import "@fontsource/poppins";
 import "@fontsource/poppins/500.css";
