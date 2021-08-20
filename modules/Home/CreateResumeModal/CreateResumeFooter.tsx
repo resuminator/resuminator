@@ -13,8 +13,9 @@ interface Props {
 
 const CreateResumeFooter: React.FC<Props> = ({ method, onCloseCallback, actionCallback, status }) => {
   return (
-    <ModalFooter display="flex" justifyContent="space-between">
-      <Button
+    <ModalFooter display="flex" justifyContent="flex-end">
+      {/* Available when template gallery implemented */}
+      {/* <Button
         variant="link"
         rightIcon={<FiExternalLink />}
         _focus={{ outline: "none" }}
@@ -22,7 +23,7 @@ const CreateResumeFooter: React.FC<Props> = ({ method, onCloseCallback, actionCa
         size="sm"
       >
         Browse template gallery for more
-      </Button>
+      </Button> */}
       <HStack>
         <Button
           colorScheme="purple"
