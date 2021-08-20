@@ -23,14 +23,6 @@ const SocialButtons: React.FC<Props> = ({ data }) => {
             href={item.link}
             target="_blank"
           />
-          {index !== data.length - 1 ? (
-            <Divider
-              orientation="vertical"
-              alignSelf="center"
-              height="60%"
-              color="whiteAlpha.900"
-            />
-          ) : null}
         </Fragment>
       ))}
     </ButtonGroup>

@@ -18,6 +18,7 @@ const TextLink: React.FC<TextLinkProps> = ({
     target="_blank"
     _hover={{ textDecoration: "underline" }}
     {...rest}
+    width="fit-content"
   >
     {text}
   </Text>

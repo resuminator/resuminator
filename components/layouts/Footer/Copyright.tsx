@@ -11,7 +11,7 @@ const Copyright: React.FC<Props & TextProps> = ({
 }) => {
   const date = new Date();
   return (
-    <Text alignSelf="center" fontSize="sm" color="whiteAlpha.900" {...props}>
+    <Text fontSize="sm" color="whiteAlpha.900" {...props}>
       Copyright &copy; {date.getFullYear()} {owner}
     </Text>
   );

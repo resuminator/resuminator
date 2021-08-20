@@ -22,4 +22,42 @@ const FooterLinks: Array<FooterLinkObject> = [
   // },
 ];
 
-export default FooterLinks
+export const ProductLinks = [
+  {
+    text: "Features",
+    link: "#",
+  },
+  {
+    text: "Tutorials",
+    link: "#",
+  },
+  {
+    text: "Sponsor",
+    link: "#",
+  },
+  {
+    text: "About Us",
+    link: "#",
+  },
+];
+
+export const SupportLinks = [
+  {
+    text: "Help Center",
+    link: "#",
+  },
+  {
+    text: "License",
+    link: "#",
+  },
+  {
+    text: "Privacy Policy",
+    link: "#",
+  },
+  {
+    text: "Cookie Policy",
+    link: "#",
+  },
+];
+
+export default FooterLinks;
