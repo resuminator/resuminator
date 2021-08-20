@@ -6,22 +6,23 @@ const Fonts: FontsObject = {
     headerTitle: {
       fontFamily: "Inter",
       fontSize: "4xl",
-      fontWeight: "light",
+      fontWeight: "normal",
+      letterSpacing: "tight"
     },
     headerSubtitle: {
       fontFamily: "Inter",
       fontSize: "xl",
-      fontWeight: "semibold",
+      fontWeight: "medium",
     },
     heading: {
       fontFamily: "Inter", //✅ Final
       fontSize: "1.3em",
-      fontWeight: "regular",
+      fontWeight: "normal",
     },
     primary: {
       fontFamily: "Inter",
       fontSize: "1em",
-      fontWeight: "semibold",
+      fontWeight: "medium",
     },
     secondary: {
       fontFamily: "Inter",
