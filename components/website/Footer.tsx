@@ -30,7 +30,7 @@ const Footer = () => {
   return (
     <Box
       px={{ base: "1rem", md: "4rem", lg: "7rem" }}
-      backgroundColor={useColorModeValue("darkblue", "#002171")}
+      backgroundColor={useColorModeValue("darkblue", "gray.900")}
     >
       <Stack maxW="6xl" py="10">
         <SimpleGrid
