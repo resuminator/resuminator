@@ -15,6 +15,13 @@ const Broadmap = () => {
 
   const handleSubscribe = (e) => {
     e.preventDefault();
+    if (!email.length)
+      return createToast(
+        "Please enter an email to subscribe",
+        "error",
+        "This will be your primary email where we will send you the newsletter."
+      );
+
     if (!isValidEmail)
       return createToast(
         "This email seems invalid",
@@ -32,7 +39,7 @@ const Broadmap = () => {
   return (
     <Center m="8" p="4" bgGradient={gradient} borderRadius="xl">
       <Box bg="white" borderRadius="xl" p="8" minH="100%" minW="100%">
-        <Heading mb="8">
+        <Heading mb="8" letterSpacing="tight">
           Say hello to <s>roadmaps</s> broadmaps!
         </Heading>
         <Text mb="8">

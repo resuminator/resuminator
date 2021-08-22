@@ -4,7 +4,7 @@ import { LongFeatureDetails } from "./features.data";
 const FullFeatures = () => {
   return (
     <Box px="8" py="16">
-      <Box textAlign="center">
+      <Box>
         <Text
           as="h1"
           fontSize="4xl"
