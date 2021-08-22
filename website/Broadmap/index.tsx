@@ -1,4 +1,11 @@
-import { Box, Button, Center, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Heading,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FiMail } from "react-icons/fi";
 import InputField from "../../components/common/InputField";
@@ -38,7 +45,13 @@ const Broadmap = () => {
 
   return (
     <Center m="8" p="4" bgGradient={gradient} borderRadius="xl">
-      <Box bg="white" borderRadius="xl" p="8" minH="100%" minW="100%">
+      <Box
+        bg={useColorModeValue("white", "blackAlpha.600")}
+        borderRadius="xl"
+        p="8"
+        minH="100%"
+        minW="100%"
+      >
         <Heading mb="8" letterSpacing="tight">
           Say hello to <s>roadmaps</s> broadmaps!
         </Heading>
