@@ -4,12 +4,12 @@ import {
   Image,
   SimpleGrid,
   Text,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React from "react";
-import FeatureDetails from "./features.data";
+import { FeatureDetails } from "./features.data";
 
-const FeatureBox = ({ title, description, graphic }) => (
+const FeatureBox = ({ title, description, graphic, color }) => (
   <Box py="4">
     <Text
       as="h2"
@@ -17,7 +17,7 @@ const FeatureBox = ({ title, description, graphic }) => (
       fontSize="2xl"
       letterSpacing="tighter"
       mb="4"
-      color={useColorModeValue("purple.600", "purple.400")}
+      color={useColorModeValue(color[0], color[1])}
     >
       {title}
     </Text>

@@ -1,10 +1,20 @@
-import { Box, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  Heading,
+  Icon,
+  Stack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import React from "react";
+import { FiGrid } from "react-icons/fi";
+import { LongFeatureDetails } from "./features.data";
 
 const FullFeatures = () => {
   return (
-    <Box>
-      <Box px="8" py="4" textAlign="center">
+    <Box px="8" py="4">
+      <Box textAlign="center">
         <Text
           as="h1"
           fontSize="4xl"
@@ -20,6 +30,26 @@ const FullFeatures = () => {
           A tool built for productivity
         </Text>
       </Box>
+      <Grid gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}>
+        {LongFeatureDetails.map((feat, index) => (
+          <Stack
+            key={feat.title + index}
+            minWidth="100%"
+            minH="16"
+            borderRadius="10px"
+            shadow="md"
+            p="8"
+          >
+            <Icon as={feat.icon} w={6} h={6} />
+            <Heading fontWeight="semibold" fontSize="lg" letterSpacing="tigher">
+              {feat.title}
+            </Heading>
+            <Text fontWeight="normal" fontSize="sm">
+              {feat.details}
+            </Text>
+          </Stack>
+        ))}
+      </Grid>
     </Box>
   );
 };
