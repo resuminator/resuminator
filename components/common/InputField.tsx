@@ -38,12 +38,12 @@ const InputField: React.FC<Props & InputProps> = ({
       </Text>
       <InputGroup>
         <Input
-          {...rest}
           variant="outline"
           shadow="sm"
           colorScheme="gray"
           mb="2"
           type={handleType(type)}
+          {...rest}
         />
         <InputRightIcon
           forPassword={type === "password"}
