@@ -1,19 +1,9 @@
-import {
-  Box,
-  Grid,
-  Heading,
-  Icon,
-  Stack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import React from "react";
-import { FiGrid } from "react-icons/fi";
+import { Box, Grid, Heading, Icon, Stack, Text } from "@chakra-ui/react";
 import { LongFeatureDetails } from "./features.data";
 
 const FullFeatures = () => {
   return (
-    <Box px="8" py="4">
+    <Box px="8" py="16">
       <Box textAlign="center">
         <Text
           as="h1"

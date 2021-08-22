@@ -1,15 +1,20 @@
-import { Box, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Text,
+  useColorModeValue
+} from "@chakra-ui/react";
 import React from "react";
+import { FiAlertCircle, FiGithub } from "react-icons/fi";
 
-interface Props {}
-
-const OpenSource = (props: Props) => {
+const OpenSource = () => {
   return (
     <Box
       px="8"
       py="16"
       bgColor={useColorModeValue("blackAlpha.900", "blackAlpha.500")}
-      minH="100vh"
+      minH="50vh"
     >
       <Box mb="4">
         <Text
@@ -32,19 +37,24 @@ const OpenSource = (props: Props) => {
           Backed by open-source.
         </Text>
       </Box>
-      <Text fontSize="lg" lineHeight="tall" color="teal.200">
-        Cupcake ipsum dolor sit amet soufflé pastry jujubes lollipop. Muffin
-        jelly beans jelly pastry brownie pudding jujubes jelly beans carrot
-        cake. Jujubes jujubes I love candy I love toffee toffee jelly beans.
-        Lollipop donut chupa chups I love danish chocolate. Pie jujubes
-        chocolate bar pie toffee chocolate. Carrot cake powder jelly beans
-        dragée soufflé marshmallow muffin jelly icing. Cotton candy pastry sugar
-        plum pastry sweet roll liquorice candy. Chocolate bar sugar plum bonbon
-        powder toffee I love sesame snaps halvah topping. Dessert halvah sugar
-        plum powder powder powder sugar plum sweet cookie. Icing powder I love
-        muffin candy. Pie I love danish I love caramels donut sweet roll. I love
-        wafer I love cupcake tootsie roll lemon drops marshmallow topping.
+      <Text fontSize="lg" lineHeight="tall" color="teal.200" pb="4">
+        We are big time open-source fans because of its collaborative nature and
+        growth-for-all persona. We built Resuminator for a community of folks
+        just like us and wanted to give something back to place we have learnt
+        so much from. ♥
       </Text>
+      <Text fontSize="lg" lineHeight="tall" color="teal.200" pb="8">
+        You can be a part of this journey by helping us improve Resuminator for
+        thousands of people around the world.
+      </Text>
+      <ButtonGroup>
+        <Button leftIcon={<FiGithub />} colorScheme="teal">
+          Contribute on GitHub
+        </Button>
+        <Button leftIcon={<FiAlertCircle />} colorScheme="teal">
+          Open an issue
+        </Button>
+      </ButtonGroup>
     </Box>
   );
 };
