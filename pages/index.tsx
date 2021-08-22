@@ -1,8 +1,11 @@
 import { Box } from "@chakra-ui/react";
 import { NextPage } from "next";
-import Footer from "../components/website/Footer";
-import Header from "../components/website/Header";
-import Hero from "../components/website/Hero";
+import Champions from "../website/Features/Champions";
+import OpenSource from "../website/Features/OpenSource";
+import FourGrid from "../website/Features/SweetSpot";
+import Footer from "../website/Footer";
+import Header from "../website/Header";
+import Hero from "../website/Hero";
 
 const Index: NextPage = () => {
   return (
@@ -14,6 +17,9 @@ const Index: NextPage = () => {
   >
       <Header />
       <Hero/>
+      <FourGrid/>
+      <Champions/>
+      <OpenSource/>
       <Footer/>
     </Box>
   );
