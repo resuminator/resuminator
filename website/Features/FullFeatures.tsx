@@ -1,9 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 
-interface Props {}
-
-const Champions = (props: Props) => {
+const FullFeatures = () => {
   return (
     <Box>
       <Box px="8" py="4" textAlign="center">
@@ -19,11 +17,11 @@ const Champions = (props: Props) => {
           For people who care about their time!
         </Text>
         <Text fontWeight="medium" fontSize="2xl" letterSpacing="tight">
-          ~A tool built for champions.~ //Change
+          A tool built for productivity
         </Text>
       </Box>
     </Box>
   );
 };
 
-export default Champions;
+export default FullFeatures;

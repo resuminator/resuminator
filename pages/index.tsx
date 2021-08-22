@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import { NextPage } from "next";
-import Champions from "../website/Features/Champions";
+import Champions from "../website/Features/FullFeatures";
 import OpenSource from "../website/Features/OpenSource";
-import FourGrid from "../website/Features/SweetSpot";
+import FourGrid from "../website/Features/FeaturesGrid";
 import Footer from "../website/Footer";
 import Header from "../website/Nav";
 import Hero from "../website/Hero";
