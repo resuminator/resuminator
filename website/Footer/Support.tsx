@@ -20,6 +20,10 @@ const SupportLinks = [
     text: "Cookie Policy",
     link: "#",
   },
+  {
+    text: "GDPR",
+    link: "#",
+  },
 ];
 
 const Support = () => {

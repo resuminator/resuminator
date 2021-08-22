@@ -20,6 +20,10 @@ const ProductLinks = [
     text: "About Us",
     link: "#",
   },
+  {
+    text: "Newsletter",
+    link: "#",
+  },
 ];
 
 const Product = () => {
