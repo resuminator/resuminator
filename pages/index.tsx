@@ -4,7 +4,7 @@ import Champions from "../website/Features/Champions";
 import OpenSource from "../website/Features/OpenSource";
 import FourGrid from "../website/Features/SweetSpot";
 import Footer from "../website/Footer";
-import Header from "../website/Header";
+import Header from "../website/Nav";
 import Hero from "../website/Hero";
 
 const Index: NextPage = () => {

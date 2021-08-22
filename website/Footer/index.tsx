@@ -1,22 +1,22 @@
 import {
-    Box,
-    HStack,
-    IconButton,
-    Input,
-    SimpleGrid,
-    Stack,
-    Text,
-    useColorModeValue
+  Box,
+  HStack,
+  IconButton,
+  Input,
+  SimpleGrid,
+  Stack,
+  Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import { FiSend } from "react-icons/fi";
-import { ProductLinks, SupportLinks } from "../data/FooterLinks";
-import SocialLinks from "../data/SocialLinks";
-import LinkText from "../components/common/LinkText";
-import TextLink from "../components/common/TextLink";
-import Copyright from "../components/layouts/Footer/Copyright";
-import SocialButtons from "../components/layouts/Footer/SocialButtons";
-import { LogoWithText } from "../components/layouts/Logos";
+import LinkText from "../../components/common/LinkText";
+import TextLink from "../../components/common/TextLink";
+import Copyright from "../../components/layouts/Footer/Copyright";
+import SocialButtons from "../../components/layouts/Footer/SocialButtons";
+import { LogoWithText } from "../../components/layouts/Logos";
+import { ProductLinks, SupportLinks } from "../../data/FooterLinks";
+import SocialLinks from "../../data/SocialLinks";
 
 const ListHeader: React.FC = ({ children }) => {
   return (

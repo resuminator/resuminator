@@ -1,13 +1,13 @@
 import {
-  Button,
-  Center,
-  Text,
-  useBreakpointValue,
-  useColorModeValue,
+    Button,
+    Center,
+    Text,
+    useBreakpointValue,
+    useColorModeValue
 } from "@chakra-ui/react";
 import React from "react";
 import { FiArrowRight } from "react-icons/fi";
-import MotionBox from "../components/layouts/MotionBox";
+import MotionBox from "../../components/layouts/MotionBox";
 
 const Hero = () => {
   return (

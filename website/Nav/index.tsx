@@ -9,9 +9,9 @@ import {
 import React from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
-import { LogoWithText } from "../components/layouts/Logos";
+import { LogoWithText } from "../../components/layouts/Logos";
 
-const Header = () => {
+const Nav = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -47,4 +47,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Nav;
