@@ -7,6 +7,7 @@ import Footer from "../website/Footer";
 import Header from "../website/Nav";
 import Hero from "../website/Hero";
 import Broadmap from "../website/Broadmap";
+import Sponsor from "../website/Sponsor";
 
 const Index: NextPage = () => {
   return (
@@ -21,6 +22,7 @@ const Index: NextPage = () => {
       <FourGrid />
       <Champions />
       <OpenSource />
+      <Sponsor />
       <Broadmap />
       <Footer />
     </Box>

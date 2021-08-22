@@ -3,10 +3,11 @@ import {
   Button,
   ButtonGroup,
   Text,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
-import { FiAlertCircle, FiGithub } from "react-icons/fi";
+import { FiGithub, FiStar } from "react-icons/fi";
+import { GITHUB_REPO } from "../../data/RefLinks";
 
 const OpenSource = () => {
   return (
@@ -49,10 +50,15 @@ const OpenSource = () => {
       </Text>
       <ButtonGroup>
         <Button leftIcon={<FiGithub />} colorScheme="teal">
-          Contribute on GitHub
+          Contribute
         </Button>
-        <Button leftIcon={<FiAlertCircle />} colorScheme="teal">
-          Open an issue
+        <Button
+          as="a"
+          href={GITHUB_REPO}
+          leftIcon={<FiStar />}
+          colorScheme="teal"
+        >
+          Star on GitHub
         </Button>
       </ButtonGroup>
     </Box>
