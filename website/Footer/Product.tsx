@@ -3,7 +3,7 @@ import React from "react";
 import LinkText from "../../components/common/LinkText";
 import ListHeader from "./ListHeader";
 
-export const ProductLinks = [
+const ProductLinks = [
   {
     text: "Features",
     link: "#",

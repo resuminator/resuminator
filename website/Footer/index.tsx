@@ -2,6 +2,7 @@ import { Box, SimpleGrid, Stack, useColorModeValue } from "@chakra-ui/react";
 import Branding from "./Branding";
 import Newsletter from "./Newsletter";
 import Product from "./Product";
+import Support from "./Support";
 
 const Footer = () => {
   return (
@@ -20,6 +21,7 @@ const Footer = () => {
         >
           <Branding />
           <Product />
+          <Support />
           <Newsletter />
         </SimpleGrid>
       </Stack>

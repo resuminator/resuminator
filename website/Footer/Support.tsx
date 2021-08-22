@@ -3,7 +3,7 @@ import React from "react";
 import TextLink from "../../components/common/TextLink";
 import ListHeader from "./ListHeader";
 
-export const SupportLinks = [
+const SupportLinks = [
   {
     text: "Help Center",
     link: "#",
