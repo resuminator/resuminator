@@ -1,30 +1,7 @@
-import {
-  Box,
-  HStack,
-  IconButton,
-  Input,
-  SimpleGrid,
-  Stack,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import React from "react";
-import { FiSend } from "react-icons/fi";
-import LinkText from "../../components/common/LinkText";
-import TextLink from "../../components/common/TextLink";
-import Copyright from "../../components/layouts/Footer/Copyright";
-import SocialButtons from "../../components/layouts/Footer/SocialButtons";
-import { LogoWithText } from "../../components/layouts/Logos";
-import { ProductLinks, SupportLinks } from "../../data/FooterLinks";
-import SocialLinks from "../../data/SocialLinks";
-
-const ListHeader: React.FC = ({ children }) => {
-  return (
-    <Text fontWeight="500" fontSize="lg" mb={1} color="blue.100">
-      {children}
-    </Text>
-  );
-};
+import { Box, SimpleGrid, Stack, useColorModeValue } from "@chakra-ui/react";
+import Branding from "./Branding";
+import Newsletter from "./Newsletter";
+import Product from "./Product";
 
 const Footer = () => {
   return (
@@ -41,69 +18,9 @@ const Footer = () => {
           }}
           spacing={8}
         >
-          <Stack spacing="4" alignItems="flex-start">
-            <LogoWithText
-              mb="0"
-              LogoProps={{ fontSize: "xl", color: "blue.50" }}
-            />
-            <Copyright />
-            <SocialButtons data={SocialLinks} />
-          </Stack>
-          <Stack>
-            <ListHeader>Product</ListHeader>
-            {ProductLinks.map((item) => (
-              <LinkText
-                key={item.text}
-                href={item.link}
-                color="blue.100"
-                fontSize="sm"
-              >
-                {item.text}
-              </LinkText>
-            ))}
-          </Stack>
-          <Stack>
-            <ListHeader>Support</ListHeader>
-            {SupportLinks.map((item) => (
-              <TextLink
-                key={item.text}
-                text={item.text}
-                link={item.link}
-                color="blue.100"
-                fontSize="sm"
-              />
-            ))}
-          </Stack>
-          <Stack
-            align="flex-start"
-            gridColumnStart={{ base: "1", lg: "4" }}
-            gridColumnEnd={{ base: "1", md: "3", lg: "5" }}
-          >
-            <ListHeader>Subscribe to Broadmap</ListHeader>
-            <Text fontSize="sm" color="blue.100" mb="2">
-              A broadmap is a collection of handpicked resources sent as a
-              newsletter every Monday.{" "}
-              <LinkText href="#" color="blue.400">
-                Know More
-              </LinkText>
-            </Text>
-            <HStack>
-              <Input
-                placeholder={"Your email address"}
-                color="whiteAlpha.900"
-                bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
-                border={0}
-                _focus={{
-                  bg: "whiteAlpha.300",
-                }}
-              />
-              <IconButton
-                colorScheme="blue"
-                aria-label="Subscribe"
-                icon={<FiSend />}
-              />
-            </HStack>
-          </Stack>
+          <Branding />
+          <Product />
+          <Newsletter />
         </SimpleGrid>
       </Stack>
     </Box>
