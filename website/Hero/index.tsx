@@ -9,7 +9,6 @@ const Hero = () => {
     <Center
       flexDir="column"
       minH="sm"
-      px={{ base: "0.5rem" }}
       py={{ base: "8" }}
     >
       <MainHeading />
