@@ -9,14 +9,15 @@ interface Props {
 const LogoWithText: React.FC<Props & BoxProps> = ({
   hasTagline = false,
   LogoProps,
+  fontSize = "2xl",
   ...props
 }) => {
   return (
     <Box display="flex" flexDir="column" mb="8" {...props}>
       <Text
-        fontSize="2xl"
         fontWeight="semibold"
         color={useColorModeValue("brand.600", "brand.400")}
+        fontSize={fontSize}
         {...LogoProps}
       >
         Resuminator

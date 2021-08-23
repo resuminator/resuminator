@@ -3,6 +3,7 @@ import {
   Button,
   HStack,
   IconButton,
+  useBreakpointValue,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -16,13 +17,16 @@ const Nav = () => {
 
   return (
     <Box
-      px={{ base: "1rem", md: "4rem", lg: "7rem" }}
       py="4"
       display="flex"
       alignItems="center"
       justifyContent="space-between"
     >
-      <LogoWithText mb="0" letterSpacing="tighter" />
+      <LogoWithText
+        mb="0"
+        letterSpacing={useBreakpointValue({ base: -1, md: -1.5, lg: -2 })}
+        fontSize={{ base: "xl", md: "2xl", xl: "3xl" }}
+      />
       <HStack>
         <IconButton
           aria-label="Color-Toggle"
@@ -31,16 +35,31 @@ const Nav = () => {
           variant="ghost"
           colorScheme={useColorModeValue("gray", "blue")}
         />
-        <Button colorScheme="blue" size="sm" variant="outline">
+        <Button
+          colorScheme="blue"
+          size={useBreakpointValue({ base: "sm", lg: "md" })}
+          variant="outline"
+          display={{ base: "none", md: "initial" }}
+        >
           Log in
+        </Button>
+        <Button
+          colorScheme="blue"
+          size={useBreakpointValue({ base: "sm", lg: "md" })}
+          variant="solid"
+          rightIcon={<FiArrowRight />}
+          display={{ base: "none", md: "initial" }}
+        >
+          Sign up
         </Button>
         <Button
           colorScheme="blue"
           size="sm"
           variant="solid"
           rightIcon={<FiArrowRight />}
+          display={{ md: "none" }}
         >
-          Sign up
+          Get Started
         </Button>
       </HStack>
     </Box>
