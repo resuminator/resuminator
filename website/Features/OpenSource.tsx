@@ -1,6 +1,7 @@
 import {
   Box,
-  Button, Stack,
+  Button,
+  Stack,
   Text,
   useBreakpointValue,
   useColorModeValue
@@ -16,7 +17,7 @@ const OpenSource = () => {
       px="8"
       py="16"
       bgColor={useColorModeValue("blackAlpha.900", "blackAlpha.500")}
-      minH="50vh"
+      minH="100vh"
     >
       <HeadingBox
         title="Proudly Community Driven"
@@ -25,18 +26,38 @@ const OpenSource = () => {
         subtitleProps={{ color: "teal.500" }}
       />
 
-      <Text fontSize="lg" lineHeight="tall" color="teal.200" pb="4">
-        We are big time open-source fans because of its collaborative nature and
-        growth-for-all persona. We built Resuminator for a community of folks
-        just like us and wanted to give something back to place we have learnt
-        so much from. ♥
-      </Text>
-      <Text fontSize="lg" lineHeight="tall" color="teal.200" pb="8">
-        You can be a part of this journey by helping us improve Resuminator for
-        thousands of people around the world.
-      </Text>
-      <Stack isInline={useBreakpointValue({sm: true})}>
-        <Button leftIcon={<FiGithub />} colorScheme="teal">
+      <Box px={["0", "4", "16", "24", "72"]}>
+        <Text
+          fontSize={{ base: "lg", md: "xl", lg: "2xl" }}
+          lineHeight="tall"
+          color="teal.200"
+          pb="4"
+        >
+          We are big time open-source fans because of its collaborative nature
+          and growth-for-all persona. We built Resuminator for a community of
+          folks just like us because we wanted to give something back to place
+          we have learnt so much from. ♥
+        </Text>
+        <Text
+          fontSize={{ base: "lg", md: "xl", lg: "2xl" }}
+          lineHeight="tall"
+          color="teal.200"
+          pb="8"
+        >
+          You can be a part of this journey by helping us improve Resuminator
+          for thousands of people around the world.
+        </Text>
+      </Box>
+      <Stack
+        px={["0", "4", "16", "24", "72"]}
+        justifyContent={{ base: "center", sm: "flex-start", lg: "center" }}
+        isInline={useBreakpointValue({ sm: true })}
+      >
+        <Button
+          leftIcon={<FiGithub />}
+          colorScheme="teal"
+          size={useBreakpointValue({ md: "lg" })}
+        >
           Contribute
         </Button>
         <Button
@@ -44,8 +65,9 @@ const OpenSource = () => {
           href={GITHUB_REPO}
           leftIcon={<FiStar />}
           colorScheme="teal"
+          size={useBreakpointValue({ md: "lg" })}
         >
-          Star on GitHub
+          Star us on GitHub
         </Button>
       </Stack>
     </Box>
