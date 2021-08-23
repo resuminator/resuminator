@@ -10,11 +10,11 @@ import React from "react";
 import { FiGithub, FiStar } from "react-icons/fi";
 import { GITHUB_REPO } from "../../data/RefLinks";
 import HeadingBox from "../common/HeadingBox";
+import SectionLayout from "../common/SectionLayout";
 
 const OpenSource = () => {
   return (
-    <Box
-      px="8"
+    <SectionLayout
       py="16"
       bgColor={useColorModeValue("blackAlpha.900", "blackAlpha.500")}
       minH="100vh"
@@ -50,7 +50,7 @@ const OpenSource = () => {
       </Box>
       <Stack
         px={["0", "4", "16", "24", "72"]}
-        justifyContent={{ base: "center", sm: "flex-start", lg: "center" }}
+        justifyContent="center"
         isInline={useBreakpointValue({ sm: true })}
       >
         <Button
@@ -70,7 +70,7 @@ const OpenSource = () => {
           Star us on GitHub
         </Button>
       </Stack>
-    </Box>
+    </SectionLayout>
   );
 };
 
