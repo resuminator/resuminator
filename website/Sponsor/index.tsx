@@ -16,19 +16,12 @@ const Sponsor = () => {
   return (
     <SectionLayout py="16" minH="100vh">
       <HeadingBox
-        title="Sponsor this project"
+        title="Sponsor this project 💛"
         subtitle="Your support will help this project grow and impact the lives of thousands of job seekers"
         subtitleProps={{
           fontSize: { base: "lg", sm: "xl", md: "2xl", lg: "3xl" },
         }}
-      >
-        <Icon
-          as={FaHeart}
-          color="red"
-          fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
-          mx="2"
-        />
-      </HeadingBox>
+      />
 
       <Box px={["0", "4", "16", "24", "72"]}  pb="8">
         <Text mb="8" fontSize={{ base: "lg", md: "xl", lg: "2xl" }}>
