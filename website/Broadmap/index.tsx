@@ -7,60 +7,18 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { FiExternalLink, FiMail } from "react-icons/fi";
-import { addSubscriber } from "../../apis/broadmap";
-import InputField from "../../components/common/InputField";
+import { FiExternalLink } from "react-icons/fi";
 import { BROADMAP_HOMEPAGE, BROADMAP_TWITTER } from "../../data/RefLinks";
-import { useCustomToast } from "../../hooks/useCustomToast";
-import { useEmailValidation } from "../../hooks/useEmailValidation";
 import { Status } from "../../utils/constants";
 import SectionLayout from "../common/SectionLayout";
-import RevuePolicy from "./RevuePolicy";
+import SubscribeForm from "./SubscribeForm";
+import SubscribeSuccess from "./SubscribeSuccess";
 
 const gradient =
   "linear-gradient(90deg, rgba(0,0,139,1) 0%, rgba(148,0,116,1) 21%, rgba(215,0,92,1) 41%, rgba(251,105,69,1) 61%, rgba(255,179,67,1) 82%, rgba(249,248,113,1) 100%)";
 
 const Broadmap = () => {
-  const [email, setEmail] = useState("");
-  const [isValidEmail] = useEmailValidation(email);
-  const { createToast } = useCustomToast();
   const [status, setStatus] = useState<Status>(Status.idle);
-
-  const handleSubscribe = async (e) => {
-    e.preventDefault();
-    if (!email.length)
-      return createToast(
-        "Please enter an email to subscribe",
-        "error",
-        "This will be your primary email where we will send you the newsletter."
-      );
-
-    if (!isValidEmail)
-      return createToast(
-        "This email seems invalid",
-        "error",
-        "Please check the email and try again."
-      );
-
-    setStatus(Status.loading);
-    return await addSubscriber({ email })
-      .then(() => {
-        setStatus(Status.success);
-        createToast(
-          "Successully subscribed you to Broadmap",
-          "success",
-          "Enjoy handpicked resouces every Monday right from your inbox!"
-        );
-      })
-      .catch(() => {
-        setStatus(Status.error);
-        createToast(
-          "Could not subscribe you to Broadmap",
-          "warning",
-          "This error can mean that either you're already subscribed or you have not confirmed your Broadmap subscription."
-        );
-      });
-  };
 
   return (
     <SectionLayout mx={{ xl: "20" }} mb="16">
@@ -96,7 +54,6 @@ const Broadmap = () => {
               curated from all over the internet, which we ship as a newsletter
               to your inbox every Monday morning.
             </Text>
-
             <Button
               as="a"
               href={BROADMAP_HOMEPAGE}
@@ -109,36 +66,11 @@ const Broadmap = () => {
               Read previous Broadmaps
             </Button>
           </Box>
-          <Box
-            as="form"
-            flexBasis={{ md: "50%", lg: "40%" }}
-            alignSelf="center"
-          >
-            <InputField
-              label="Subscribe to Broadmap"
-              placeholder="Your email address"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              isValid={isValidEmail}
-              variant="filled"
-              labelProps={{
-                color: useColorModeValue("blackAlpha.700", "whiteAlpha.600"),
-              }}
-            />
-            <Button
-              type="submit"
-              rightIcon={<FiMail />}
-              isFullWidth
-              colorScheme="pink"
-              loadingText="Subscribing"
-              isLoading={status === Status.loading}
-              onClick={handleSubscribe}
-            >
-              Sign me up
-            </Button>
-            <RevuePolicy />
-          </Box>
+          {status === Status.success ? (
+            <SubscribeSuccess />
+          ) : (
+            <SubscribeForm status={status} setStatus={setStatus} />
+          )}
         </Box>
       </Center>
     </SectionLayout>
