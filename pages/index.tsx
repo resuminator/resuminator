@@ -17,6 +17,7 @@ const Index: NextPage = () => {
       flexDir="column"
       justifyContent="space-between"
       minH="100vh"
+      px={{ base: "4", md: "8", lg: "16" }}
     >
       <Header />
       <Hero />
