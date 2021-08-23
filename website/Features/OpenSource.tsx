@@ -26,7 +26,7 @@ const OpenSource = () => {
         subtitleProps={{ color: "teal.500" }}
       />
 
-      <Box px={["0", "4", "16", "24", "72"]}>
+      <Box px={["0", "4", "16", "24", "72"]} pb="16">
         <Text
           fontSize={{ base: "lg", md: "xl", lg: "2xl" }}
           lineHeight="tall"

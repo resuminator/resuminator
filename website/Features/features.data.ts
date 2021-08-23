@@ -4,7 +4,6 @@ import {
   FiCopy,
   FiImage,
   FiMoon,
-  FiSliders,
   FiTarget,
   FiType,
 } from "react-icons/fi";

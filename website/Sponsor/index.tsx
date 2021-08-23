@@ -30,7 +30,7 @@ const Sponsor = () => {
         />
       </HeadingBox>
 
-      <Box px={["0", "4", "16", "24", "72"]} pt="4" pb="8">
+      <Box px={["0", "4", "16", "24", "72"]}  pb="8">
         <Text mb="8" fontSize={{ base: "lg", md: "xl", lg: "2xl" }}>
           Resuminator is a free and open source project built and maintained by
           a duo from India, and is backed by our community and contributors. You

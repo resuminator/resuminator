@@ -16,7 +16,8 @@ const FeatureBox = ({ title, description, graphic, color }) => (
     py="4"
     mb={{ base: "4", md: "8" }}
     display={{ md: "flex" }}
-    alignItems="flex-start"
+    alignItems="center"
+    minH="80vh"
   >
     <Box flexBasis={{ md: "40%" }} pb={{ base: "8" }} pr={{ md: "4", lg: "8" }}>
       <Text
@@ -54,7 +55,7 @@ const FeatureBox = ({ title, description, graphic, color }) => (
 
 const FeaturesGrid = () => {
   return (
-    <SectionLayout>
+    <SectionLayout py="16">
       <HeadingBox
         title="How we do this?"
         subtitle="What makes Resuminator land this sweet spot between customization and ease"

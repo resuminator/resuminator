@@ -26,7 +26,7 @@ const HeadingBox: React.FC<BoxProps & HeadingBoxProps> = ({
 }) => {
   return (
     <Box
-      py="4"
+      py="16"
       mb={{ base: 0, md: "8" }}
       d={{ md: "flex" }}
       flexDir="column"
