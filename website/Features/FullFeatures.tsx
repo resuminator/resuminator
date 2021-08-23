@@ -1,26 +1,21 @@
-import { Box, Grid, Heading, Icon, Stack, Text } from "@chakra-ui/react";
+import { Grid, Heading, Icon, Stack, Text } from "@chakra-ui/react";
+import HeadingBox from "../common/HeadingBox";
+import SectionLayout from "../common/SectionLayout";
 import { LongFeatureDetails } from "./features.data";
 
 const FullFeatures = () => {
   return (
-    <Box px="8" py="16">
-      <Box>
-        <Text
-          as="h1"
-          fontSize="4xl"
-          fontWeight="bold"
-          letterSpacing={-2}
-          mb="2"
-          lineHeight="short"
-          color="purple.500"
-        >
-          For people who care about their time!
-        </Text>
-        <Text fontWeight="medium" fontSize="2xl" letterSpacing="tight">
-          A tool built for productivity
-        </Text>
-      </Box>
-      <Grid gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}>
+    <SectionLayout>
+      <HeadingBox
+        title="For people who care about their time!"
+        subtitle="A tool built for productivity"
+        titleProps={{ color: "purple.500" }}
+      />
+      <Grid
+        gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}
+        gridGap="4"
+        mb="16"
+      >
         {LongFeatureDetails.map((feat, index) => (
           <Stack
             key={feat.title + index}
@@ -40,7 +35,7 @@ const FullFeatures = () => {
           </Stack>
         ))}
       </Grid>
-    </Box>
+    </SectionLayout>
   );
 };
 

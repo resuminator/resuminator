@@ -4,9 +4,10 @@ import {
   Image,
   SimpleGrid,
   Text,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React from "react";
+import HeadingBox from "../common/HeadingBox";
 import SectionLayout from "../common/SectionLayout";
 import { FeatureDetails } from "./features.data";
 
@@ -54,34 +55,11 @@ const FeatureBox = ({ title, description, graphic, color }) => (
 const FeaturesGrid = () => {
   return (
     <SectionLayout>
-      <Box
-        py="4"
-        mb={{ base: 0, md: "8" }}
-        d={{ md: "flex" }}
-        flexDir="column"
-        alignItems="center"
-        justifyContent="center"
-        textAlign={{ sm: "center" }}
-      >
-        <Text
-          as="h1"
-          fontSize={{ base: "4xl", lg: "5xl" }}
-          fontWeight="bold"
-          letterSpacing={-2}
-        >
-          How we do this?
-        </Text>
-        <Text
-          as="p"
-          fontWeight="medium"
-          fontSize={{ md: "xl", lg: "2xl" }}
-          letterSpacing={{ base: "tight", md: "tighter" }}
-          maxW={{ md: "80%", lg: "60%" }}
-        >
-          What makes Resuminator land this sweet spot between customization and
-          ease
-        </Text>
-      </Box>
+      <HeadingBox
+        title="How we do this?"
+        subtitle="What makes Resuminator land this sweet spot between customization and ease"
+        subtitleProps={{ fontSize: { md: "xl", lg: "2xl" } }}
+      />
       <SimpleGrid templateColumns={{ base: "1fr", md: "1fr" }}>
         {FeatureDetails.map((feat) => (
           <FeatureBox key={feat.title} {...feat} />

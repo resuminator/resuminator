@@ -1,13 +1,14 @@
 import {
   Box,
-  Button,
-  ButtonGroup,
+  Button, Stack,
   Text,
-  useColorModeValue,
+  useBreakpointValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React from "react";
 import { FiGithub, FiStar } from "react-icons/fi";
 import { GITHUB_REPO } from "../../data/RefLinks";
+import HeadingBox from "../common/HeadingBox";
 
 const OpenSource = () => {
   return (
@@ -17,27 +18,13 @@ const OpenSource = () => {
       bgColor={useColorModeValue("blackAlpha.900", "blackAlpha.500")}
       minH="50vh"
     >
-      <Box mb="4">
-        <Text
-          as="h1"
-          fontSize="4xl"
-          fontWeight="bold"
-          letterSpacing={-2}
-          mb="1"
-          lineHeight="short"
-          color={useColorModeValue("teal.200", "teal.400")}
-        >
-          Proudly Community Driven
-        </Text>
-        <Text
-          fontWeight="medium"
-          fontSize="2xl"
-          letterSpacing="tight"
-          color="teal.500"
-        >
-          Backed by open-source.
-        </Text>
-      </Box>
+      <HeadingBox
+        title="Proudly Community Driven"
+        subtitle="Backed by open-source."
+        titleProps={{ color: useColorModeValue("teal.200", "teal.400") }}
+        subtitleProps={{ color: "teal.500" }}
+      />
+
       <Text fontSize="lg" lineHeight="tall" color="teal.200" pb="4">
         We are big time open-source fans because of its collaborative nature and
         growth-for-all persona. We built Resuminator for a community of folks
@@ -48,7 +35,7 @@ const OpenSource = () => {
         You can be a part of this journey by helping us improve Resuminator for
         thousands of people around the world.
       </Text>
-      <ButtonGroup>
+      <Stack isInline={useBreakpointValue({sm: true})}>
         <Button leftIcon={<FiGithub />} colorScheme="teal">
           Contribute
         </Button>
@@ -60,7 +47,7 @@ const OpenSource = () => {
         >
           Star on GitHub
         </Button>
-      </ButtonGroup>
+      </Stack>
     </Box>
   );
 };
