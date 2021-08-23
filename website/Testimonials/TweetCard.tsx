@@ -5,6 +5,7 @@ import {
   Icon,
   Link,
   Text,
+  TextProps,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FaTwitter } from "react-icons/fa";
@@ -27,9 +28,29 @@ const TweetCard: React.FC<TweetCardProps> = ({
   content,
   url,
 }) => {
+  const tweetMetaProps: TextProps = {
+    fontSize: { base: "sm", md: "md" },
+  };
+
+  const tweetContentProps: TextProps = {
+    fontSize: { base: "sm", md: "md" },
+  };
+
   return (
     <Link href={url} target="_blank" _hover={{ textDecoration: "none" }}>
-      <Box padding="4" my="2" borderRadius="10px" shadow="md">
+      <Box
+        padding="4"
+        my="2"
+        borderRadius="10px"
+        shadow="md"
+        transition="0.2s all"
+        _hover={{
+          backgroundColor: useColorModeValue(
+            "blackAlpha.100",
+            "whiteAlpha.100"
+          ),
+        }}
+      >
         <Box
           display="flex"
           alignItems="center"
@@ -49,13 +70,21 @@ const TweetCard: React.FC<TweetCardProps> = ({
         <HStack alignItems="flex-start">
           <Avatar src={image} size="sm" my="1" />
           <Box>
-            <HStack spacing="1" mb="2">
-              <Text fontWeight="medium">{name}</Text>
-              <Text color="gray">{handle}</Text>
-              <Text color="gray">•</Text>
-              <Text color="gray">{date}</Text>
+            <HStack spacing="1" mb="2" flexWrap="wrap">
+              <Text fontWeight="medium" {...tweetMetaProps}>
+                {name}
+              </Text>
+              <Text color="gray" {...tweetMetaProps}>
+                {handle}
+              </Text>
+              <Text color="gray" {...tweetMetaProps}>
+                •
+              </Text>
+              <Text color="gray" {...tweetMetaProps}>
+                {date}
+              </Text>
             </HStack>
-            <Text>{content}</Text>
+            <Text {...tweetContentProps}>{content}</Text>
           </Box>
         </HStack>
       </Box>
