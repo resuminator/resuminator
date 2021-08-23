@@ -108,7 +108,7 @@ const Broadmap = () => {
               rightIcon={<FiExternalLink />}
               pb="4"
             >
-              Know more about Broadmaps
+              Read previous Broadmaps
             </Button>
           </Box>
           <Box
