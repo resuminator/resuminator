@@ -44,8 +44,7 @@ const Broadmap = () => {
 
     setStatus(Status.loading);
     return await addSubscriber({ email })
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
         setStatus(Status.success);
         createToast(
           "Successully subscribed you to Broadmap",
@@ -53,13 +52,12 @@ const Broadmap = () => {
           "Enjoy handpicked resouces every Monday right from your inbox!"
         );
       })
-      .catch((e) => {
-        console.log(e);
+      .catch(() => {
         setStatus(Status.error);
         createToast(
           "Could not subscribe you to Broadmap",
-          "error",
-          "Please try again in a while, contact us if the problem persists."
+          "warning",
+          "This error can mean that either you're already subscribed or you have not confirmed your Broadmap subscription."
         );
       });
   };
@@ -135,6 +133,7 @@ const Broadmap = () => {
               colorScheme="pink"
               loadingText="Subscribing"
               isLoading={status === Status.loading}
+              onClick={handleSubscribe}
             >
               Sign me up
             </Button>

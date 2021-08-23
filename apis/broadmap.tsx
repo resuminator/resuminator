@@ -1,7 +1,7 @@
 import axios from "axios";
-import { baseUrl } from "../config/apis";
+import API_URL from "../config/server";
 
 export const addSubscriber = async (details: { email: string }) => {
-  const res = await axios.post(`${baseUrl}`, { body: details });
+  const res = await axios.post(`${API_URL}/broadmap/subscribe`, details);
   return res.data;
 };
