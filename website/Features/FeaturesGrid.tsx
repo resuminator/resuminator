@@ -17,7 +17,7 @@ const FeatureBox = ({ title, description, graphic, color }) => (
     mb={{ base: "4", md: "8" }}
     display={{ md: "flex" }}
     alignItems="center"
-    minH="80vh"
+    minH={{xl:"80vh"}}
   >
     <Box flexBasis={{ md: "40%" }} pb={{ base: "8" }} pr={{ md: "4", lg: "8" }}>
       <Text
