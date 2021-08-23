@@ -10,3 +10,5 @@ export const RESUMINATOR_TWITTER = "https://twitter.com/resuminator";
 export const WEBSITE = "https://resuminator.in"
 export const BUY_ME_A_COFFEE = "https://www.buymeacoffee.com/resuminator"
 export const GITHUB_REPO = "https://github.com/resuminator/resuminator"
+export const BROADMAP_HOMEPAGE = "https://broadmap.resuminator.in/"
+export const BROADMAP_TWITTER = "https://twitter.com/broadmaps"

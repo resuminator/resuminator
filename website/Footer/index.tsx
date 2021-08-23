@@ -1,6 +1,5 @@
 import { Box, SimpleGrid, Stack, useColorModeValue } from "@chakra-ui/react";
 import Branding from "./Branding";
-import Newsletter from "./Newsletter";
 import Product from "./Product";
 import Support from "./Support";
 
@@ -15,14 +14,13 @@ const Footer = () => {
           templateColumns={{
             base: "1fr",
             md: "1fr 1fr 1fr",
-            lg: "2fr 1fr 1fr 2fr",
+            lg: "4fr 1fr 1fr",
           }}
           spacing={8}
         >
           <Branding />
           <Product />
           <Support />
-          <Newsletter />
         </SimpleGrid>
       </Stack>
     </Box>
