@@ -1,8 +1,11 @@
 import {
-    Box,
-    BoxProps,
-    Heading,
-    HeadingProps, Text, TextProps
+  Box,
+  BoxProps,
+  Heading,
+  HeadingProps,
+  Text,
+  TextProps,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -33,7 +36,7 @@ const HeadingBox: React.FC<BoxProps & HeadingBoxProps> = ({
       {...rest}
     >
       <Heading
-        fontSize={{ base: "4xl", lg: "5xl" }}
+        fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
         fontWeight="bold"
         letterSpacing={-2}
         mb="2"
@@ -45,9 +48,10 @@ const HeadingBox: React.FC<BoxProps & HeadingBoxProps> = ({
       </Heading>
       <Text
         fontWeight="medium"
-        fontSize={{ base: "2xl", md: "xl", lg: "2xl" }}
-        letterSpacing={{ base: "tight", md: "tighter" }}
-        maxW={{ md: "80%", lg: "60%" }}
+        fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
+        letterSpacing="tight"
+        maxW={{ md: "80%", lg: "60%", xl: "50%" }}
+        color={useColorModeValue("blackAlpha.800", "whiteAlpha.800")}
         {...subtitleProps}
       >
         {subtitle}

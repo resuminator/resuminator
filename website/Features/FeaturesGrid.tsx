@@ -4,7 +4,7 @@ import {
   Image,
   SimpleGrid,
   Text,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import HeadingBox from "../common/HeadingBox";
@@ -58,9 +58,12 @@ const FeaturesGrid = () => {
       <HeadingBox
         title="How we do this?"
         subtitle="What makes Resuminator land this sweet spot between customization and ease"
-        subtitleProps={{ fontSize: { md: "xl", lg: "2xl" } }}
+        subtitleProps={{ fontSize: { base: "xl", lg: "2xl" } }}
       />
-      <SimpleGrid templateColumns={{ base: "1fr", md: "1fr" }}>
+      <SimpleGrid
+        templateColumns={{ base: "1fr", md: "1fr" }}
+        mx={{ xl: "20" }}
+      >
         {FeatureDetails.map((feat) => (
           <FeatureBox key={feat.title} {...feat} />
         ))}

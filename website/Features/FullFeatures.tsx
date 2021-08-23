@@ -15,6 +15,7 @@ const FullFeatures = () => {
         gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}
         gridGap="4"
         mb="16"
+        mx={{ xl: "20" }}
       >
         {LongFeatureDetails.map((feat, index) => (
           <Stack
@@ -24,12 +25,25 @@ const FullFeatures = () => {
             borderRadius="10px"
             shadow="md"
             p="8"
+            spacing={{ base: 4, sm: 6 }}
           >
-            <Icon as={feat.icon} w={6} h={6} />
-            <Heading fontWeight="semibold" fontSize="lg" letterSpacing="tigher">
+            <Icon
+              as={feat.icon}
+              w={{ base: 6, sm: 8, lg: 10 }}
+              h={{ base: 6, sm: 8, lg: 10 }}
+            />
+            <Heading
+              fontWeight="semibold"
+              fontSize={{ base: "lg", sm: "xl", lg: "2xl" }}
+              letterSpacing="tigher"
+            >
               {feat.title}
             </Heading>
-            <Text fontWeight="normal" fontSize="sm">
+            <Text
+              fontWeight="normal"
+              fontSize={{ base: "sm", sm: "md", lg: "lg" }}
+              letterSpacing={{ md: "tight" }}
+            >
               {feat.details}
             </Text>
           </Stack>
