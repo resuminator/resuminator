@@ -4,9 +4,9 @@ import React from "react";
 const Subtext = () => {
   return (
     <Text
-      maxW={{ base: "80%", md: "60%", xl: "40%" }}
+      maxW={{ base: "100%", md: "80%", lg: "60%", xl: "50%" }}
       textAlign="center"
-      fontSize={{ base: "lg", md: "lg", xl: "xl" }}
+      fontSize={{ base: "md", sm: "lg", lg: "xl", xl: "2xl" }}
       fontWeight="medium"
       letterSpacing="tight"
       lineHeight="tall"
