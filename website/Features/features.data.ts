@@ -5,7 +5,7 @@ import {
   FiImage,
   FiMoon,
   FiTarget,
-  FiType,
+  FiType
 } from "react-icons/fi";
 import { RiPaletteLine } from "react-icons/ri";
 

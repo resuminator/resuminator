@@ -3,7 +3,7 @@ import React from "react";
 
 const SectionLayout: React.FC<BoxProps> = ({ children, ...rest }) => {
   return (
-    <Box px={{ base: "6", md: "8", lg: "16" }} {...rest}>
+    <Box px={{ base: "6", md: "8", lg: "16", xl: "0" }} {...rest}>
       {children}
     </Box>
   );
