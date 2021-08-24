@@ -19,7 +19,7 @@ import TooltipIconButton from "../common/TooltipIconButton";
 interface ColorPickerProps extends Omit<IconButtonProps, "aria-label"> {
   value: string;
   handler: (value: string) => void;
-  handleSubmit: () => Promise<string | number>;
+  handleSubmit: () => Promise<any>;
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = ({

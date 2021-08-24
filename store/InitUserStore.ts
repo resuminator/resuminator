@@ -1,5 +1,5 @@
-import { useToast } from "@chakra-ui/react";
 import React, { useEffect } from "react";
+import { useCustomToast } from "../hooks/useCustomToast";
 import useUserStore from "../modules/User/store";
 import { UserObject } from "../modules/User/types";
 
@@ -10,18 +10,16 @@ interface InitUserStoreProps {
 
 const InitUserStore: React.FC<InitUserStoreProps> = ({ data, status }) => {
   const setProperty = useUserStore((state) => state.setProperty);
-  const toast = useToast();
+  const { createToast } = useCustomToast();
 
   if (status === "error")
-    toast({
-      title: "Cannot connect to server.",
-      variant: "subtle",
-      description:
-        "Try checking your network connection while we try to reconnect.",
-      status: "error",
-      duration: 3500,
-      isClosable: true,
-    });
+    createToast(
+      "Cannot connect to server.",
+      "error",
+      "Try checking your network connection while we try to reconnect.",
+      "network-error",
+      { variant: "subtle" }
+    );
 
   useEffect(() => {
     if (status === "success") {

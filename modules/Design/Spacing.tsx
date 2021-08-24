@@ -3,7 +3,7 @@ import {
   Slider,
   SliderFilledTrack,
   SliderThumb,
-  SliderTrack
+  SliderTrack,
 } from "@chakra-ui/slider";
 import React from "react";
 import { patchSpacing } from "../../apis/patchTemplate";
@@ -34,13 +34,19 @@ const Spacing = () => {
     return await patchSpacing(token, resumeId, { spacing: value })
       .then((res: Result) => {
         setSpacing(res.template.spacing);
-        return createToast("Resume spacing updated", "success");
+        return createToast(
+          "Resume spacing updated",
+          "success",
+          null,
+          "spacing-success"
+        );
       })
       .catch(() =>
         createToast(
           "Couldn't update resume spacing",
           "error",
-          "Please try again in sometime"
+          "Please try again in sometime",
+          "spacing-error"
         )
       );
   };

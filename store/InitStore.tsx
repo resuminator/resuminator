@@ -1,6 +1,7 @@
 import { useToast } from "@chakra-ui/toast";
 import React, { useCallback, useEffect } from "react";
 import { QueryStatus } from "react-query";
+import { useCustomToast } from "../hooks/useCustomToast";
 import useCertificationStore from "../modules/UserInput/Certification/store";
 import useContactStore from "../modules/UserInput/Contact/store";
 import { useCustomSectionStore } from "../modules/UserInput/Custom/store";
@@ -31,7 +32,7 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
   const customSectionInit = useCustomSectionStore((state) => state.setSections);
   const { setInit, setLoading } = useGlobalStore();
   const setProperty = useResumeStore((state) => state.setProperty);
-  const toast = useToast();
+  const { createToast } = useCustomToast();
 
   const initUserInfo = useCallback(
     (userInfo: Result["contact"]) => {
@@ -95,15 +96,13 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
   );
 
   if (status === "error")
-    toast({
-      title: "Cannot connect to server.",
-      variant: "subtle",
-      description:
-        "Try checking your network connection while we try to reconnect.",
-      status: "error",
-      duration: 3500,
-      isClosable: true,
-    });
+    createToast(
+      "Cannot connect to server.",
+      "error",
+      "Try checking your network connection while we try to reconnect.",
+      "network-error",
+      { variant: "subtle" }
+    );
 
   if (status === "loading") setLoading(true);
 

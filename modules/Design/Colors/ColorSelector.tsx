@@ -39,15 +39,21 @@ const ColorSelector = () => {
     return await patchColor(token, resumeId, { color: item })
       .then((res: Result) => {
         setColorProfile(res.template.color);
-        return createToast("Resume color scheme updated", "success");
+        createToast(
+          "Resume color scheme updated",
+          "success",
+          null,
+          "color-success"
+        );
       })
-      .catch(() =>
+      .catch(() => {
         createToast(
           "Couldn't update resume color scheme",
           "error",
-          "Please try again in sometime"
-        )
-      );
+          "Please try again in sometime",
+          "color-error"
+        );
+      });
   };
 
   return (

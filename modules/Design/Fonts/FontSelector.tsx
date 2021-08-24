@@ -24,13 +24,14 @@ const FontSelector = () => {
     return await patchFont(token, resumeId, { fontProfile: item })
       .then((res: Result) => {
         setFontProfile(res.template.fontProfile);
-        return createToast("Resume font updated", "success");
+        return createToast("Resume font updated", "success", null, "font-success");
       })
       .catch(() =>
         createToast(
           "Couldn't update resume font",
           "error",
-          "Please try again in sometime"
+          "Please try again in sometime",
+          "font-error"
         )
       );
   };
