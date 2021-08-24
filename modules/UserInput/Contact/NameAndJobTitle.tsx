@@ -16,8 +16,8 @@ const NameAndJobTitle = () => {
     const res = async () => {
       setSaveStatus(Status.loading);
       return await patchContact(key)(token, resumeId, { [key]: value })
-        .then(() => {
-          setLastSavedAt(new Date());
+        .then((res) => {
+          setLastSavedAt(new Date(res.updatedAt));
           return setSaveStatus(Status.success);
         })
         .catch(() => setSaveStatus(Status.error));

@@ -7,7 +7,11 @@ interface Props {
   hasHeaderHidden?: boolean;
 }
 
-const Layout: React.FC<Props & BoxProps> = ({ hasHeaderHidden = false, children, ...props }) => {
+const Layout: React.FC<Props & BoxProps> = ({
+  hasHeaderHidden = false,
+  children,
+  ...props
+}) => {
   return (
     <Box
       display="flex"

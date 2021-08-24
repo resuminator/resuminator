@@ -27,8 +27,8 @@ const Autosave: React.FC<AutosaveProps<any>> = memo(({ data, patchFn }) => {
     const res = async () => {
       setSaveStatus(Status.loading);
       return await patchFn(token, resumeId, data)
-        .then(() => {
-          setLastSavedAt(new Date());
+        .then((res) => {
+          setLastSavedAt(new Date(res.updatedAt));
           return setSaveStatus(Status.success);
         })
         .catch(() => setSaveStatus(Status.error));
