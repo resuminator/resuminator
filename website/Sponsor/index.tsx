@@ -1,13 +1,6 @@
-import {
-  Box,
-  Button,
-  Icon,
-  Stack,
-  Text,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Box, Button, Stack, Text, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
-import { FaHeart, FaPizzaSlice } from "react-icons/fa";
+import { FaPizzaSlice } from "react-icons/fa";
 import { BUY_ME_A_COFFEE } from "../../data/RefLinks";
 import HeadingBox from "../common/HeadingBox";
 import SectionLayout from "../common/SectionLayout";
@@ -23,7 +16,7 @@ const Sponsor = () => {
         }}
       />
 
-      <Box px={["0", "4", "16", "24", "72"]}  pb="8">
+      <Box px={["0", "4", "16", "24", "72"]} pb="8">
         <Text mb="8" fontSize={{ base: "lg", md: "xl", lg: "2xl" }}>
           Resuminator is a free and open source project built and maintained by
           a duo from India, and is backed by our community and contributors. You
