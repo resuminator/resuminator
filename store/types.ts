@@ -81,11 +81,13 @@ export interface GlobalStore {
   grayscaleFilter: boolean;
   saveStatus?: Status;
   lastSavedAt?: Date;
+  contentOverflow?: boolean;
   setInit?: (value: boolean) => void;
   setLoading?: (value: boolean) => void;
   toggleGrayscaleFilter?: () => void;
   setSaveStatus?: (status: Status) => void;
   setLastSavedAt?: (date: Date) => void;
+  setContentOverflow?: (value: boolean) => void;
 }
 
 export interface ResumeStore {

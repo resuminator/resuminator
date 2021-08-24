@@ -11,12 +11,14 @@ const useGlobalStore = create<GlobalStore>(
       grayscaleFilter: false,
       saveStatus: Status.idle,
       lastSavedAt: new Date(),
+      contentOverflow: false,
       setLoading: (value) => set({ isLoading: value }),
       setInit: (value) => set({ init: value }),
       toggleGrayscaleFilter: () =>
         set((state) => ({ grayscaleFilter: !state.grayscaleFilter })),
       setSaveStatus: (status) => set({ saveStatus: status }),
       setLastSavedAt: (date) => set({ lastSavedAt: date }),
+      setContentOverflow: (value) => set({ contentOverflow: value }),
     }),
     "Global"
   )
