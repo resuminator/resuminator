@@ -8,7 +8,7 @@ import SocialLinks from "../../data/SocialLinks";
 const Branding = () => {
   return (
     <Stack spacing="4" alignItems="flex-start">
-      <LogoWithText mb="0" LogoProps={{ fontSize: "xl", color: "blue.50" }} />
+      <LogoWithText mb="0" variant="light" />
       <Copyright />
       <SocialButtons data={SocialLinks} />
     </Stack>

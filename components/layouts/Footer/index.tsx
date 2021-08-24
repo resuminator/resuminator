@@ -25,7 +25,6 @@ const Footer = () => {
       >
         <LogoWithText
           width={{ base: "100%", md: "fit-content" }}
-          LogoProps={{ fontSize: "xl", color: "blue.50" }}
           mb="0"
         />
         <LinkStack links={FooterLinks} />
