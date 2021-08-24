@@ -1,6 +1,7 @@
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box } from "@chakra-ui/layout";
 import React from "react";
+import ColoredDivider from "../../components/common/ColoredDivider";
 import ResumePaper from "../Resume";
 import AutoSaveStatus from "./AutoSaveStatus";
 
@@ -20,8 +21,15 @@ const Viewer: React.FC<ViewerProps> = ({ withStatus }) => {
         height="29.7cm"
         overflowY="auto"
         className="viewer"
+        position="relative"
       >
         <ResumePaper />
+        <ColoredDivider
+          color="yellow.500"
+          position="absolute"
+          zIndex="1"
+          top="29.7cm"
+        />
       </Box>
     </>
   );

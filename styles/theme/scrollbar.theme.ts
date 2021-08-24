@@ -5,15 +5,7 @@ const ScrollBarTheme = (props) => ({
     display: "none",
   },
   ".viewer::-webkit-scrollbar": {
-    width: "4px",
-  },
-  ".viewer::-webkit-scrollbar-thumb": {
-    transition: "0.2s all",
-    background: mode("rgba(150,150,150,0.2)", "rgba(255,255,255,0.2)")(props),
-    borderRadius: "10px",
-  },
-  ".viewer::-webkit-scrollbar-track": {
-    background: mode("rgba(150,150,150,0.1)", "rgba(150,150,150,0.1)")(props),
+    display: "none",
   },
   "::-webkit-scrollbar": {
     width: "10px",

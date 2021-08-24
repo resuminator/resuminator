@@ -53,7 +53,7 @@ const Share: NextPage<ShareProps> = ({ token, id }) => {
             aria-label="Share Options"
             flexBasis="50%"
             height="29.7cm"
-            overflowY="scroll"
+            overflowY="auto"
           >
             <DownloadResume id={id} />
           </Box>

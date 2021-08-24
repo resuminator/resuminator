@@ -85,7 +85,7 @@ const Create: NextPage<CreateProps> = ({ token, id }) => {
             aria-label="Resume Inputs"
             flexBasis="50%"
             height="29.7cm"
-            overflowY="scroll"
+            overflowY="auto"
             className="resume-inputs"
           >
             <NameAndJobTitle />
