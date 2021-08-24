@@ -24,7 +24,7 @@ const Footer = () => {
         flexWrap={{ base: "wrap", md: "nowrap" }}
       >
         <LogoWithText
-          width={{ base: "100%", md: "fit-content" }}
+          variant="light"
           mb="0"
         />
         <LinkStack links={FooterLinks} />
