@@ -19,6 +19,7 @@ const Viewer: React.FC<ViewerProps> = ({ withStatus }) => {
         width="21cm"
         height="29.7cm"
         overflowY="auto"
+        className="viewer"
       >
         <ResumePaper />
       </Box>

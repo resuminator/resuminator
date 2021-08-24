@@ -86,6 +86,7 @@ const Create: NextPage<CreateProps> = ({ token, id }) => {
             flexBasis="50%"
             height="29.7cm"
             overflowY="scroll"
+            className="resume-inputs"
           >
             <NameAndJobTitle />
             <UserImage />
