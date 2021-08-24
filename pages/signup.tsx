@@ -1,5 +1,8 @@
 import { Box } from "@chakra-ui/layout";
 import { AnimatePresence } from "framer-motion";
+import { GetServerSidePropsContext, NextPage } from "next";
+import { useRouter } from "next/router";
+import nookies from "nookies";
 import React, { useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
@@ -14,9 +17,10 @@ import SEO from "../modules/SEO";
 import { signupSeo } from "../modules/SEO/pages.config";
 import firebaseSDK from "../services/firebase";
 
-const Signup = () => {
+const Signup: NextPage = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
   const { createToast } = useCustomToast();
+  const router = useRouter();
 
   const getProvider = (c: AuthProviderProps["client"]) => {
     switch (c) {
@@ -36,7 +40,10 @@ const Signup = () => {
     firebaseSDK
       .auth()
       .signInWithPopup(provider)
-      .then(() => createToast("Account created successfully", "success"))
+      .then(() => {
+        createToast("Account created successfully", "success");
+        return router.push("/home");
+      })
       .catch((e) =>
         createToast(`Couldn't sign up with ${client}`, "error", e.message)
       );
@@ -85,3 +92,24 @@ const Signup = () => {
 };
 
 export default Signup;
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  //Try to get token from cookies.
+  const cookies = nookies.get(ctx);
+  const token = cookies.token;
+
+  //If the token exists always route to /home page.
+  if (token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/home",
+      },
+    };
+  }
+
+  //If no token then don't do anything
+  return {
+    props: {} as never,
+  };
+};
