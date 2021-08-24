@@ -7,6 +7,7 @@ import {
   Link,
   Text,
   useBreakpointValue,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import {
   generateLinkForLabel,
@@ -30,18 +31,10 @@ const TeamCard: React.FC<TeamMember> = ({
         name={fullName}
       />
       <Box d="flex" flexDir="column" alignItems="flex-start" px="4">
-        <Text
-          fontSize={{ base: "lg", md: "xl", lg: "2xl" }}
-          fontWeight="semibold"
-          mb="1"
-        >
+        <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="semibold" mb="1">
           {fullName}
         </Text>
-        <Text
-          fontSize={{ base: "sm", md: "md", lg: "lg" }}
-          fontWeight="medium"
-          mb="1"
-        >
+        <Text fontSize={{ base: "sm", md: "md" }} fontWeight="medium" mb="1">
           {jobTitle}
         </Text>
         <HStack mb="4" spacing={{ base: "1" }}>
@@ -63,8 +56,9 @@ const TeamCard: React.FC<TeamMember> = ({
           ))}
         </HStack>
         <Text
-          fontSize={{ base: "sm", md: "md", xl: "lg" }}
+          fontSize={{ base: "sm", md: "md" }}
           letterSpacing="tight"
+          color={useColorModeValue("blackAlpha.800", "whiteAlpha.800")}
         >
           {bio}
         </Text>

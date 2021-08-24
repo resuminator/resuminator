@@ -8,10 +8,10 @@ const Team = () => {
   return (
     <SectionLayout
       p={{
-        base: "1rem 2rem 0 2rem",
-        md: "4rem 8rem 0 8rem",
-        lg: "4rem 8rem 0 8rem",
-        xl: "8rem 14rem 0 14rem",
+        base: "1rem 2rem 2rem 2rem",
+        md: "4rem 8rem 8rem 8rem",
+        lg: "4rem 8rem 8rem 8rem",
+        xl: "8rem 14rem 8rem 14rem",
       }}
     >
       <HeadingBox

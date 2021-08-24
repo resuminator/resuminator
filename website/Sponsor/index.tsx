@@ -28,9 +28,13 @@ const Sponsor = () => {
           justifyContent="center"
           isInline={useBreakpointValue({ md: true })}
         >
-          {/* <Button leftIcon={<FaHeart />} colorScheme="purple">
-          Become a supporter
-        </Button> */}
+          {/* <Button
+              leftIcon={<FaHeart />}
+              colorScheme="purple"
+              size={useBreakpointValue({ md: "lg" })}
+            >
+              Become a supporter
+            </Button> */}
           <Button
             as="a"
             href={BUY_ME_A_COFFEE}
