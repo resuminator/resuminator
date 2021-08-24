@@ -8,6 +8,6 @@ import { baseUrl } from "../config/apis";
 export const coldStartServer = async () => {
   return await axios
     .get(`${baseUrl}`)
-    .then((res) => res.status || 200)
-    .catch((err) => err.response.status || 500);
+    .then((res) => res)
+    .catch((err) => err);
 };
