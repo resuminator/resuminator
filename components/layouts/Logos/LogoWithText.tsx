@@ -2,16 +2,20 @@ import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box, BoxProps, Text, TextProps } from "@chakra-ui/layout";
 import Link from "next/link";
 import Image from "next/image";
+import { useBreakpointValue } from "@chakra-ui/react";
 
 interface Props {
   hasTagline?: boolean;
+  width?: string;
+  height?: string;
   variant?: "light" | "dark";
 }
 
 const LogoWithText: React.FC<Props & BoxProps> = ({
   hasTagline = false,
-  fontSize = "2xl",
   variant,
+  width = "160px",
+  height = "32px",
   ...props
 }) => {
   const colorModeDefaultLogo = useColorModeValue(
@@ -26,14 +30,14 @@ const LogoWithText: React.FC<Props & BoxProps> = ({
       : colorModeDefaultLogo;
 
   return (
-    <Box display="flex" flexDir="column" mb="8" {...props}>
-      <Link href="/">
+    <Box display="flex" flexDir="column" {...props}>
+      <Link href="/" scroll={false}>
         <a>
           <Image
             layout="fixed"
             src={src}
-            width="160px"
-            height="32px"
+            width={width}
+            height={height}
             placeholder="blur"
           />
         </a>

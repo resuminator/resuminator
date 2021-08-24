@@ -5,7 +5,7 @@ import {
   IconButton,
   useBreakpointValue,
   useColorMode,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
@@ -27,7 +27,8 @@ const Nav = () => {
         <LogoWithText
           mb="0"
           letterSpacing={useBreakpointValue({ base: -1, md: -1.5, lg: -2 })}
-          fontSize={{ base: "xl", md: "2xl", xl: "3xl" }}
+          width={useBreakpointValue({ base: "128px", md: "160px" })}
+          height={useBreakpointValue({ base: "25.6px", md: "32px" })}
         />
         <HStack>
           <IconButton
