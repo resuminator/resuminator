@@ -10,8 +10,15 @@ import Hero from "../website/Hero";
 import Header from "../website/Nav";
 import Sponsor from "../website/Sponsor";
 import Testimonials from "../website/Testimonials";
+import Cookies from "js-cookie";
+import dynamic from "next/dynamic";
+const CookieBanner = dynamic(() => import("../website/Cookies/CookieBanner"), {
+  ssr: false,
+});
 
 const Index: NextPage = () => {
+  const acceptedCookie = Cookies.get("user-accepted-cookies");
+
   return (
     <Box
       display="flex"
@@ -28,6 +35,7 @@ const Index: NextPage = () => {
       <Testimonials />
       <Broadmap />
       <GetStarted />
+      {!acceptedCookie && <CookieBanner />}
       <Footer />
     </Box>
   );
