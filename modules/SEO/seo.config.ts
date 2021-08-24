@@ -1,5 +1,6 @@
 import { NextSeoProps } from "next-seo";
 import { defaultSeoConfig } from "./default.config";
+import { OGImage, OGLogo } from "./ogImages";
 
 /**
  * Config object defines a lot of properties
@@ -12,13 +13,13 @@ const config: NextSeoProps = {
     url: defaultSeoConfig.url,
     images: [
       {
-        url: "/og.png",
+        url: OGImage,
         width: 1200,
         height: 628,
         alt: defaultSeoConfig.title,
       },
       {
-        url: "/logo.png",
+        url: OGLogo,
         width: 500,
         height: 500,
         alt: defaultSeoConfig.title,

@@ -7,9 +7,13 @@ const SEO: React.FC<NextSeoProps> = ({
   description = defaultSeoConfig.description,
   ...rest
 }) => {
+  const effectiveTitle =
+    title === defaultSeoConfig.title
+      ? title
+      : `${title} | ${defaultSeoConfig.title}`;
   return (
     <NextSeo
-      title={`${title} | ${defaultSeoConfig.title}`}
+      title={effectiveTitle}
       description={description}
       openGraph={{ title, description, ...config.openGraph }}
       {...config}
