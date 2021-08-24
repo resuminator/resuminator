@@ -22,7 +22,7 @@ export const FeatureDetails = [
     description:
       "Keep the data, but hide the content OR simply convert your single column resume into a two-column one with a click. Easy toggle support allows you to put your best foot forward.",
     graphic: "/web/DnDR8.jpg",
-    color: ["orange.600", "orange.400"],
+    color: ["#F3CD46", "#F3CD46"],
   },
   {
     title: "Enhanced Design Controls",
@@ -36,7 +36,7 @@ export const FeatureDetails = [
     description:
       "STOP paying to add certain sections on your resume. Create your own custom section in few clicks and use it like any native section for your resume. Add your achievements, contributions, hobbies, anything!",
     graphic: "/web/DnDR8.jpg",
-    color: ["green.600", "green.400"],
+    color: ["#26DF82", "#26DF82"],
   },
 ];
 

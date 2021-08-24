@@ -45,6 +45,7 @@ const Sponsor = () => {
             leftIcon={<FaPizzaSlice />}
             colorScheme="yellow"
             size={useBreakpointValue({ md: "lg" })}
+            color="#1A202C"
           >
             Buy us a pizza
           </Button>
