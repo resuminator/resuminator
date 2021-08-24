@@ -12,6 +12,9 @@ const DefaultTheme: ChakraTheme = extendTheme({
     useSystemColorMode: false,
   },
   colors: {
+    gray: {
+      800: "#1A202C",
+    },
     brand: {
       400: "#4cc9f0",
       500: "#4361ee",
