@@ -1,16 +1,15 @@
 import { Button, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
 import { FiArrowRight } from "react-icons/fi";
-import MotionBox from "../../components/layouts/MotionBox";
+import MotionBox, { MotionBoxProps } from "../../components/layouts/MotionBox";
 
-interface Props {}
-
-const PrimaryCTA = (props: Props) => {
+const PrimaryCTA: React.FC<MotionBoxProps> = ({ ...rest }) => {
   return (
     <MotionBox
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ duration: 0.15 }}
+      {...rest}
     >
       <Button
         variant="solid"

@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { NextPage } from "next";
+import GetStarted from "../website/Banners/GetStarted";
 import Broadmap from "../website/Broadmap";
 import FourGrid from "../website/Features/FeaturesGrid";
 import Champions from "../website/Features/FullFeatures";
@@ -26,6 +27,7 @@ const Index: NextPage = () => {
       <Sponsor />
       <Testimonials />
       <Broadmap />
+      <GetStarted />
       <Footer />
     </Box>
   );

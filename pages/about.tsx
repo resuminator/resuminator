@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { NextPage } from "next";
 import AboutUs from "../website/About";
 import Team from "../website/About/Team";
+import GetStarted from "../website/Banners/GetStarted";
 import OpenSource from "../website/Features/OpenSource";
 import Footer from "../website/Footer";
 import Header from "../website/Nav";
@@ -18,6 +19,7 @@ const AboutPage: NextPage = () => {
       <AboutUs />
       <Team />
       <OpenSource />
+      <GetStarted />
       <Footer />
     </Box>
   );
