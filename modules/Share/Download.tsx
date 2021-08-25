@@ -22,13 +22,18 @@ const DownloadResume: React.FC<DownloadResumeProps> = ({ id }) => {
   const handleDownload = async () => {
     mp.time_event("Download");
     setStatus(Status.loading);
+
+    //Triggering the download microservice API
     return await downloadPdf(token, id)
       .then((res) => {
+        //Generating a File from the Blob recieved
         const blob = new Blob([res.data], { type: "application/pdf" });
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
         link.download = `${fullName}-Resume.pdf`;
         link.click();
+
+        //Finishing Events
         mp.track("Download", { status: "success", id });
         createToast("PDF Generated Successfully", "success");
         setStatus(Status.success);
