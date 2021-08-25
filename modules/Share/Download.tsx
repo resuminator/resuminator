@@ -5,6 +5,7 @@ import { FiDownload } from "react-icons/fi";
 import { downloadPdf } from "../../apis/download";
 import Section from "../../components/layouts/Section";
 import { useCustomToast } from "../../hooks/useCustomToast";
+import mp from "../../services/mixpanel";
 import { Status } from "../../utils/constants";
 import useContactStore from "../UserInput/Contact/store";
 
@@ -19,6 +20,7 @@ const DownloadResume: React.FC<DownloadResumeProps> = ({ id }) => {
   const token = Cookies.get("token");
 
   const handleDownload = async () => {
+    mp.time_event("Download");
     setStatus(Status.loading);
     return await downloadPdf(token, id)
       .then((res) => {
@@ -27,11 +29,13 @@ const DownloadResume: React.FC<DownloadResumeProps> = ({ id }) => {
         link.href = window.URL.createObjectURL(blob);
         link.download = `${fullName}-Resume.pdf`;
         link.click();
+        mp.track("Download", { status: "success", id });
         createToast("PDF Generated Successfully", "success");
         setStatus(Status.success);
       })
       .catch(() => {
         setStatus(Status.error);
+        mp.track("Download", { status: "error", id });
         createToast(
           "PDF Generation Failed",
           "error",
