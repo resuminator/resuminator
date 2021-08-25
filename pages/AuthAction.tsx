@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/layout";
 import { Center, Icon, useColorModeValue } from "@chakra-ui/react";
 import { NextPage } from "next";
+import { useEffect } from "react";
 import { FiAlertTriangle } from "react-icons/fi";
 import BoxHeader from "../components/common/BoxHeader";
 import Footer from "../components/layouts/Footer";
@@ -8,6 +9,7 @@ import ScreenCenter from "../components/layouts/ScreenCenter";
 import ResetPassword from "../modules/Auth/ResetPassword";
 import VerifyEmail from "../modules/Auth/VerifyEmail";
 import SEO from "../modules/SEO";
+import mp from "../services/mixpanel";
 
 interface ActionProps {
   mode?: string;
@@ -37,6 +39,10 @@ const getPageTitle = (mode: ActionProps["mode"]) => {
 };
 
 const AuthAction: NextPage<ActionProps> = ({ mode, oobCode, continueUrl }) => {
+  useEffect(() => {
+    mp.track("Auth Action Page View");
+  }, []);
+
   return (
     <>
       <SEO title={getPageTitle(mode)} />

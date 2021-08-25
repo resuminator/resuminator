@@ -14,6 +14,7 @@ import Sidebar from "../modules/Home/Sidebar";
 import SEO from "../modules/SEO";
 import useUserStore from "../modules/User/store";
 import { UserObject } from "../modules/User/types";
+import mp from "../services/mixpanel";
 import InitUserStore from "../store/InitUserStore";
 
 const CreateResumeModal = dynamic(
@@ -32,6 +33,10 @@ const Home: NextPage<HomePageProps> = ({ token }) => {
   );
   const { _id, isBanned, active } = useUserStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  React.useEffect(() => {
+    mp.track("Home Page View");
+  }, []);
 
   return (
     <>

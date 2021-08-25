@@ -26,6 +26,7 @@ const Login: NextPage = () => {
 
   useEffect(() => {
     coldStartServer();
+    mp.track("Login Page View");
   }, []);
 
   const getProvider = (c: AuthProviderProps["client"]) => {
@@ -52,15 +53,22 @@ const Login: NextPage = () => {
       })
       .then((res) => {
         mp.identify(res.user.email);
-        mp.track("Log In", { status: "success", provider: client, source: "Firebase" });
+        mp.track("Log In", {
+          status: "success",
+          provider: client,
+          source: "Firebase",
+        });
         createToast("Logged in successfully", "success");
         return router.push("/home");
       })
       .catch((e) => {
-        mp.track("Log In", { status: "error", provider: client, source: "Firebase" });
-        createToast(`Couldn't sign in with ${client}`, "error", e.message)
-      }
-      );
+        mp.track("Log In", {
+          status: "error",
+          provider: client,
+          source: "Firebase",
+        });
+        createToast(`Couldn't sign in with ${client}`, "error", e.message);
+      });
   };
 
   return (

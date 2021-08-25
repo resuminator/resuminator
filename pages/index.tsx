@@ -22,8 +22,8 @@ const Index: NextPage = () => {
   const acceptedCookie = Cookies.get("user-accepted-cookies");
 
   useEffect(() => {
-    mp.track('Home_Page_Visited')
-  }, [])
+    mp.track("Landing Page View");
+  }, []);
 
   return (
     <Box

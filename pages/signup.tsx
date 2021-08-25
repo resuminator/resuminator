@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { GetServerSidePropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
 import nookies from "nookies";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BoxHeader from "../components/common/BoxHeader";
 import Layout from "../components/layouts";
 import { LogoWithText } from "../components/layouts/Logos";
@@ -22,6 +22,10 @@ const Signup: NextPage = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
   const { createToast } = useCustomToast();
   const router = useRouter();
+
+  useEffect(() => {
+    mp.track("Sign Up Page View");
+  }, []);
 
   const getProvider = (c: AuthProviderProps["client"]) => {
     switch (c) {

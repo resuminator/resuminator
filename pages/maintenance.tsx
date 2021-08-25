@@ -1,14 +1,19 @@
 import { Box, Center, Image, Text, VStack } from "@chakra-ui/react";
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import ImageCredit from "../components/common/ImageCredit";
 import TextLink from "../components/common/TextLink";
 import Layout from "../components/layouts";
 import ScreenCenter from "../components/layouts/ScreenCenter";
 import { DISCORD_INVITE, RESUMINATOR_TWITTER } from "../data/RefLinks";
 import SEO from "../modules/SEO";
+import mp from "../services/mixpanel";
 
 const Maintenance: NextPage = () => {
+  useEffect(() => {
+    mp.track("Maintenance Error Page View");
+  }, []);
+
   return (
     <>
       <SEO title="We're under maintenance" />

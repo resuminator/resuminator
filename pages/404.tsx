@@ -1,7 +1,7 @@
 import { Box, Button, Center, Image, Text, VStack } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import ImageCredit from "../components/common/ImageCredit";
 import TextLink from "../components/common/TextLink";
@@ -9,8 +9,13 @@ import Layout from "../components/layouts";
 import ScreenCenter from "../components/layouts/ScreenCenter";
 import { DISCORD_INVITE, GITHUB_ISSUE, SUPPORT_EMAIL } from "../data/RefLinks";
 import SEO from "../modules/SEO";
+import mp from "../services/mixpanel";
 
 const Custom404: NextPage = () => {
+  useEffect(() => {
+    mp.track("404 Error Page View");
+  }, []);
+
   return (
     <>
       <SEO title="404 Not Found" />

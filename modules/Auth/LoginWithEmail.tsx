@@ -30,9 +30,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
   const router = useRouter();
 
   useEffect(() => {
-    mp.track("Login Page View", { provider: "Email" });
-
-    () => mp.track("Login Page View", { provider: "Email" });
+    mp.track("Login Email View", { provider: "Email" });
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

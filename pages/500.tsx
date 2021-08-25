@@ -11,6 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { useEffect } from "react";
 import { FiHome, FiRefreshCw } from "react-icons/fi";
 import ImageCredit from "../components/common/ImageCredit";
 import TextLink from "../components/common/TextLink";
@@ -18,9 +19,15 @@ import Layout from "../components/layouts";
 import ScreenCenter from "../components/layouts/ScreenCenter";
 import { DISCORD_INVITE, GITHUB_ISSUE, SUPPORT_EMAIL } from "../data/RefLinks";
 import SEO from "../modules/SEO";
+import mp from "../services/mixpanel";
 
 const Custom500: NextPage = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    mp.track('500 Error Page View')
+  }, [])
+
 
   const reload = () => {
     router.reload();

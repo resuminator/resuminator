@@ -4,7 +4,7 @@ import { useColorModeValue } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/toast";
 import { NextPage } from "next";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { FaChevronLeft } from "react-icons/fa";
 import BoxHeader from "../components/common/BoxHeader";
@@ -14,6 +14,7 @@ import ScreenCenter from "../components/layouts/ScreenCenter";
 import { useEmailValidation } from "../hooks/useEmailValidation";
 import SEO from "../modules/SEO";
 import firebaseSDK from "../services/firebase";
+import mp from "../services/mixpanel";
 import { Status } from "../utils/constants";
 
 const LoginHelp: NextPage = () => {
@@ -22,6 +23,10 @@ const LoginHelp: NextPage = () => {
   const [status, setStatus] = useState<Status>(Status.idle);
   const [showError, setShowError] = useState(false);
   const toast = useToast();
+
+  useEffect(() => {
+    mp.track('Login Help Page View')
+  }, [])
 
   const handleInputField = (e) => {
     setEmail(e.target.value);
