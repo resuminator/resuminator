@@ -18,7 +18,7 @@ const Footer = () => {
     >
       <Box
         display="flex"
-        alignContent="center"
+        alignItems="center"
         justifyContent="space-between"
         mb={{ base: "2", md: "8" }}
         flexWrap={{ base: "wrap", md: "nowrap" }}
