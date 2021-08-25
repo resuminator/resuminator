@@ -12,7 +12,6 @@ const Paper: React.FC<BoxProps> = ({ children, ...props }) => {
   const { height, ref } = useResizeDetector();
 
   useEffect(() => {
-    console.log(height);
     if (height > 1123) {
       setContentOverflow(true);
     } else {

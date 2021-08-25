@@ -1,12 +1,10 @@
 import { GetServerSidePropsContext, NextPage } from "next";
 import nookies from "nookies";
-import { useEffect } from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import { getResumeData } from "../../apis/resume";
 import placeholderData from "../../data/placeholderData";
 import ResumePaper from "../../modules/Resume";
-import mp from "../../services/mixpanel";
 import InitStore from "../../store/InitStore";
 
 interface ResumeProps {
@@ -22,10 +20,6 @@ const Resume: NextPage<ResumeProps> = ({ token, id }) => {
       placeholderData,
     }
   );
-
-  useEffect(() => {
-    mp.track("Puppeteer Resume Page View", { id });
-  }, [id]);
 
   return (
     <>
