@@ -7,7 +7,7 @@ import Subtext from "./Subtext";
 
 const Hero = () => {
   return (
-    <SectionLayout as={Center} flexDir="column">
+    <SectionLayout as={Center} flexDir="column" aria-label="Hero">
       <MainHeading />
       <Subtext />
       <PrimaryCTA mb="2"/>

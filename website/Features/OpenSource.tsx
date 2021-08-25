@@ -18,6 +18,7 @@ const OpenSource = () => {
       pb={{ base: "16", sm: "24", md: "36", lg: "40" }}
       bgColor={useColorModeValue("blackAlpha.900", "blackAlpha.500")}
       minH="100vh"
+      aria-label="Open Source"
     >
       <HeadingBox
         title="Proudly Community Driven"

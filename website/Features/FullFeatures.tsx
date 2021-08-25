@@ -5,7 +5,7 @@ import { LongFeatureDetails } from "./features.data";
 
 const FullFeatures = () => {
   return (
-    <SectionLayout>
+    <SectionLayout aria-label="Full-Features">
       <HeadingBox
         title="For people who care about their time!"
         subtitle="A tool built for productivity"

@@ -56,7 +56,7 @@ const FeatureBox = ({ title, description, graphic, color }) => (
 
 const FeaturesGrid = () => {
   return (
-    <SectionLayout>
+    <SectionLayout aria-label="Features 2x2">
       <HeadingBox
         title="How we do this?"
         subtitle="What makes Resuminator land this sweet spot between customization and ease"
