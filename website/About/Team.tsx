@@ -7,6 +7,7 @@ import TeamCard from "./TeamCard";
 const Team = () => {
   return (
     <SectionLayout
+      id="team"
       p={{
         base: "1rem 2rem 2rem 2rem",
         md: "4rem 8rem 8rem 8rem",
