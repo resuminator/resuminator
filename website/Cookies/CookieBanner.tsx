@@ -10,20 +10,41 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 import React from "react";
 import { FaCookieBite } from "react-icons/fa";
 import LinkText from "../../components/common/LinkText";
+import mp from "../../services/mixpanel";
 
 const CookieBanner = () => {
+  const router = useRouter();
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
   const handleAccept = () => {
-    Cookies.set("user-accepted-cookies", "true", { path: "/" });
+    mp.opt_in_tracking();
+    Cookies.set("user-accepted-cookies", "true", {
+      path: "/",
+      expires: 365,
+      sameSite: "strict",
+      secure: true,
+    });
     onClose();
   };
 
+  const handleReject = () => {
+    mp.track("Rejected_Cookies");
+    mp.opt_out_tracking();
+    Cookies.set("user-accepted-cookies", "false", {
+      path: "/",
+      expires: 365,
+      sameSite: "strict",
+      secure: true,
+    });
+    router.reload();
+  };
+
   return (
-    <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }} unmountOnExit>
+    <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
       <Box
         p={{ base: "1rem", xl: "1rem 10rem" }}
         bg={useColorModeValue("purple.100", "purple.900")}
@@ -63,8 +84,8 @@ const CookieBanner = () => {
             <Button size="sm" colorScheme="purple" onClick={handleAccept}>
               Accept All
             </Button>
-            <Button size="sm" variant="ghost">
-              Manage
+            <Button size="sm" variant="ghost" onClick={handleReject}>
+              Reject
             </Button>
           </Stack>
         </HStack>
@@ -76,7 +97,7 @@ const CookieBanner = () => {
           <Button size="sm" colorScheme="purple" onClick={handleAccept}>
             Accept All
           </Button>
-          <Button size="sm" variant="ghost">
+          <Button size="sm" variant="ghost" onClick={handleReject}>
             Manage
           </Button>
         </Stack>
