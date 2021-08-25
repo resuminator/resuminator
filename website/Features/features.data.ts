@@ -5,9 +5,10 @@ import {
   FiImage,
   FiMoon,
   FiTarget,
-  FiType
+  FiType,
 } from "react-icons/fi";
 import { RiPaletteLine } from "react-icons/ri";
+import { FeatureCardProps } from "./types";
 
 export const FeatureDetails = [
   {
@@ -40,53 +41,61 @@ export const FeatureDetails = [
   },
 ];
 
-export const LongFeatureDetails = [
+export const LongFeatureDetails: Array<FeatureCardProps> = [
   {
     icon: FiCopy,
     title: "Multiple Resumes",
     details:
       "Put your best foot forward with multiple resumes which duplicate in a click. Use your account data to create different resume for different job profiles.",
+    external: "",
   },
   {
     icon: FiColumns,
     title: "One/Two Columns",
     details:
       "Toggle your resume layout between one or two column depending on your details or your recruiter's requirements.",
+    external: "",
   },
   {
     icon: FiAtSign,
     title: "Social Handles",
     details:
       "Add social links for your LinkedIn, GitHub, Twitter, Portfolio, Behance and others to your resume. Create custom contact links if your don't find the one you're looking for!",
+    external: "",
   },
   {
     icon: FiTarget,
     title: "Detailed Sections",
     details:
       "Carefully drafted sections to help you organize and display all the useful information. Easily create custom sections, if you need something else.",
+    external: "",
   },
   {
     icon: RiPaletteLine,
     title: "Powerful Design Controls",
     details:
       "Design your resume with handpicked font pairings, custom colors, and flexible spacing. With grayscale preview to assist you in selecting print-safe colors.",
+    external: "",
   },
   {
     icon: FiType,
     title: "Rich Text Editor",
     details:
-      "Edit your resume with ease using our Rich Text Editor with Markdown shortcut support. Integrate with Grammarly to fix errors without leaving Resuminator.",
+      "Edit your resume with ease using our Rich Text Editor with Markdown shortcut support. Integrate with Grammarly® to fix errors without leaving Resuminator.",
+    external: "",
   },
   {
     icon: FiImage,
     title: "Profile Images",
     details:
       "Put a face to that resume. Add separate profile pictures to your resume (or don't) for the job applications that need it.",
+    external: "",
   },
   {
     icon: FiMoon,
     title: "Dark Mode",
     details:
       "Smooth and accessible dark mode support for the late night, last minute resume building sessions. Your eyes will thank you for this.",
+    external: "",
   },
 ];
