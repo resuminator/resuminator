@@ -24,7 +24,7 @@ const SubscribeForm: React.FC<Props> = ({ status, setStatus }) => {
     if (!email.length) {
       mp.track("Broadmap", {
         action: "Subscribe CTA Trigger",
-        status: "success",
+        status: "error",
         reason: "invalid email",
       });
       return createToast(
@@ -37,7 +37,7 @@ const SubscribeForm: React.FC<Props> = ({ status, setStatus }) => {
     if (!isValidEmail) {
       mp.track("Broadmap", {
         action: "Subscribe CTA Trigger",
-        status: "success",
+        status: "error",
         reason: "invalid email",
       });
       return createToast(
