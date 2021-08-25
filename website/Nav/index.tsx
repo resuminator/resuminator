@@ -13,6 +13,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
 import { LogoWithText } from "../../components/layouts/Logos";
 import SectionLayout from "../common/SectionLayout";
+import NavButton from "./NavButton";
 import NavLinks from "./NavLinks";
 
 const Nav = () => {
@@ -85,16 +86,7 @@ const Nav = () => {
           >
             Sign up
           </Button>
-          <Button
-            colorScheme="blue"
-            size="sm"
-            variant="solid"
-            rightIcon={<FiArrowRight />}
-            display={{ md: "none" }}
-            onClick={routeToSignup}
-          >
-            Get Started
-          </Button>
+          <NavButton />
         </HStack>
       </Box>
     </SectionLayout>

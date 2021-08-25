@@ -1,35 +1,23 @@
-import { Box, Button, ButtonGroup, HStack } from "@chakra-ui/react";
+import { Button, ButtonGroup, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
+import { navLinkDetails, navLinkDetailsSmall } from "./links";
 
 interface Props {}
 
-const navLinkDetails = [
-  {
-    label: "Features",
-    link: "/#features",
-  },
-  {
-    label: "Open Source",
-    link: "/#open-source",
-  },
-  {
-    label: "Sponsor",
-    link: "/#sponsor",
-  },
-  {
-    label: "Broadmap",
-    link: "/#broadmap",
-  },
-  {
-    label: "About Us",
-    link: "/about",
-  },
-];
-
 const NavLinks = (props: Props) => {
+  const links =
+    useBreakpointValue({
+      sm: navLinkDetailsSmall,
+      xl: navLinkDetails,
+    }) || [];
+
   return (
-    <ButtonGroup spacing="4" isAttached alignSelf="center">
-      {navLinkDetails.map((item) => (
+    <ButtonGroup
+      isAttached
+      alignSelf="center"
+      display={{ base: "none", lg: "initial" }}
+    >
+      {links.map((item) => (
         <Button
           key={item.label}
           as="a"
