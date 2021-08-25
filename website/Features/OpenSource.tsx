@@ -27,7 +27,7 @@ const OpenSource = () => {
         subtitleProps={{ color: "teal.500" }}
       />
 
-      <Box px={["0", "4", "16", "24", "72"]} pb="16">
+      <Box px={["0", "4", "16", "24", "56"]} pb="16">
         <Text
           fontSize={{ base: "lg", md: "xl", lg: "2xl" }}
           lineHeight="tall"
@@ -43,7 +43,6 @@ const OpenSource = () => {
           fontSize={{ base: "lg", md: "xl", lg: "2xl" }}
           lineHeight="tall"
           color="teal.200"
-          pb="8"
         >
           You can be a part of this journey by helping us improve Resuminator
           for thousands of people around the world.

@@ -14,7 +14,6 @@ import { FeatureDetails } from "./features.data";
 const FeatureBox = ({ title, description, graphic, color }) => (
   <Box
     py="4"
-    px={{ xl: "36" }}
     mb={{ base: "4", md: "8", xl: "0" }}
     display={{ md: "flex" }}
     alignItems="center"

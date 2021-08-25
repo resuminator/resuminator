@@ -16,15 +16,17 @@ const Sponsor = () => {
         }}
       />
 
-      <Box px={["0", "4", "16", "24", "72"]} pb="8">
-        <Text mb="8" fontSize={{ base: "lg", md: "xl", lg: "2xl" }}>
+      <Box px={["0", "4", "16", "24", "56"]} pb="16">
+        <Text fontSize={{ base: "lg", md: "xl", lg: "2xl" }}>
           Resuminator is a free and open source project built and maintained by
           a duo from India, and is backed by our community and contributors. You
           can support the development of this project if you believe this
           project added value to your life or could potentially add value to the
           lives of others.
         </Text>
-        <Stack
+        
+      </Box>
+      <Stack
           justifyContent="center"
           isInline={useBreakpointValue({ md: true })}
         >
@@ -47,7 +49,6 @@ const Sponsor = () => {
             Buy us a pizza
           </Button>
         </Stack>
-      </Box>
     </SectionLayout>
   );
 };

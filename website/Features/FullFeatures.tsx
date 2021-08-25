@@ -15,7 +15,6 @@ const FullFeatures = () => {
         gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}
         gridGap="4"
         mb="16"
-        mx={{ xl: "20" }}
       >
         {LongFeatureDetails.map((feat, index) => (
           <Stack
