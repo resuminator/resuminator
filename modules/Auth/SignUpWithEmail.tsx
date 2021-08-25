@@ -9,6 +9,7 @@ import { useCustomToast } from "../../hooks/useCustomToast";
 import { useEmailValidation } from "../../hooks/useEmailValidation";
 import { usePasswordValidation } from "../../hooks/usePasswordValidation";
 import firebaseSDK from "../../services/firebase";
+import mp from "../../services/mixpanel";
 import { Status } from "../../utils/constants";
 import PasswordHints from "./PasswordHints";
 
@@ -57,6 +58,9 @@ const SignUpWithEmail: React.FC<Props> = ({ resetClient }) => {
         return response;
       })
       .then(async (response) => {
+        //Assigning an alias to the user on Mixpanel
+        mp.alias(response.user.email);
+        
         //Sending verification email with redirecting url
         response.user.sendEmailVerification({
           url: `${BASE_URL}/login`,

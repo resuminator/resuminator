@@ -16,6 +16,7 @@ import SignUpWithEmail from "../modules/Auth/SignUpWithEmail";
 import SEO from "../modules/SEO";
 import { signupSeo } from "../modules/SEO/pages.config";
 import firebaseSDK from "../services/firebase";
+import mp from "../services/mixpanel";
 
 const Signup: NextPage = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
@@ -40,7 +41,8 @@ const Signup: NextPage = () => {
     firebaseSDK
       .auth()
       .signInWithPopup(provider)
-      .then(() => {
+      .then((credentials) => {
+        mp.alias(credentials.user.email);
         createToast("Account created successfully", "success");
         return router.push("/home");
       })
