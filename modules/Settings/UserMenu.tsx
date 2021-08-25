@@ -1,10 +1,8 @@
 import {
   Avatar,
   Divider,
-  HStack,
   Menu,
   MenuButton,
-  MenuGroup,
   MenuItem,
   MenuList,
   Text,
@@ -19,6 +17,7 @@ import { FiLogOut, FiSettings } from "react-icons/fi";
 import { DISCORD_INVITE } from "../../data/RefLinks";
 import { useCustomToast } from "../../hooks/useCustomToast";
 import firebaseSDK from "../../services/firebase";
+import mp from "../../services/mixpanel";
 import { useAuth } from "../Auth/AuthContext";
 
 const UserMenu = () => {
@@ -30,6 +29,10 @@ const UserMenu = () => {
     email: "",
   });
   const { createToast } = useCustomToast();
+
+  const trackMetric = (from: string, to: string) => {
+    mp.track("External Link Trigger", { from, to });
+  };
 
   const routeTo = (path: string) => {
     router.push(path);
@@ -52,7 +55,16 @@ const UserMenu = () => {
       .then(() => nookies.destroy(undefined, "token", { path: "/" }))
       .then(() => router.push("/login"))
       .then(() => {
+        mp.track("Log Out", {
+          status: "success",
+        });
         return createToast("You have been successfully logged out", "success");
+      })
+      .catch(() => {
+        mp.track("Log Out", {
+          status: "error",
+          source: "Internal",
+        });
       });
   };
 
@@ -97,6 +109,7 @@ const UserMenu = () => {
           as="a"
           href={DISCORD_INVITE}
           target="_blank"
+          onClick={() => trackMetric("User Menu", DISCORD_INVITE)}
         >
           Join Discord Server
         </MenuItem>

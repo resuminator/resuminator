@@ -14,11 +14,11 @@ const SupportLinks = [
   },
   {
     text: "Privacy Policy",
-    link: "#",
+    link: "/privacy-policy",
   },
   {
     text: "Cookie Policy",
-    link: "#",
+    link: "/cookie-policy",
   },
   {
     text: "Guides",
