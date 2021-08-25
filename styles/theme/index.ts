@@ -1,6 +1,7 @@
 import { ChakraTheme, extendTheme } from "@chakra-ui/react";
 import ProseMirror from "../../plugins/Tiptap/theme";
 import ScrollBarTheme from "./scrollbar.theme";
+import Frost from "./glass.theme";
 
 const DefaultTheme: ChakraTheme = extendTheme({
   fonts: {
@@ -25,6 +26,7 @@ const DefaultTheme: ChakraTheme = extendTheme({
     global: (props) => ({
       ...ProseMirror(props),
       ...ScrollBarTheme(props),
+      ...Frost(props),
     }),
   },
 });
