@@ -7,15 +7,13 @@ import Subtext from "./Subtext";
 
 const Hero = () => {
   return (
-    <SectionLayout>
-      <Center flexDir="column" minH="sm" py={{ base: "8" }}>
-        <MainHeading />
-        <Subtext />
-        <PrimaryCTA />
-        <Text my="2" fontSize="xs" color="blue.600">
-          Yes, this button bounces on clicking!
-        </Text>
-      </Center>
+    <SectionLayout as={Center} flexDir="column">
+      <MainHeading />
+      <Subtext />
+      <PrimaryCTA mb="2"/>
+      <Text mb="4" fontSize="xs" color="blue.600">
+        Yes, this button bounces on clicking!
+      </Text>
     </SectionLayout>
   );
 };
