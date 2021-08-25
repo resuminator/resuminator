@@ -6,23 +6,23 @@ import ListHeader from "./ListHeader";
 const ProductLinks = [
   {
     text: "Features",
-    link: "#",
+    link: "/#features",
   },
   {
-    text: "Tutorials",
-    link: "#",
+    text: "Open Source",
+    link: "/#open-source",
   },
   {
     text: "Sponsor",
-    link: "#",
-  },
-  {
-    text: "About Us",
-    link: "#",
+    link: "/#sponsor",
   },
   {
     text: "Newsletter",
-    link: "#",
+    link: "/#broadmap",
+  },
+  {
+    text: "About Us",
+    link: "/about",
   },
 ];
 

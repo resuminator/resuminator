@@ -89,7 +89,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 
 const FullFeatures = () => {
   return (
-    <SectionLayout aria-label="Full-Features">
+    <SectionLayout id="features" aria-label="Full-Features">
       <HeadingBox
         title="For people who care about their time!"
         subtitle="A tool built for productivity"

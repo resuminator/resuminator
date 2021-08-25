@@ -13,7 +13,7 @@ const Sponsor = () => {
   };
 
   return (
-    <SectionLayout minH="100vh" aria-label="Sponsor Project">
+    <SectionLayout id="sponsor" minH="100vh" aria-label="Sponsor Project">
       <HeadingBox
         title="Sponsor this project 💛"
         subtitle="Your support will help this project grow and impact the lives of thousands of job seekers"

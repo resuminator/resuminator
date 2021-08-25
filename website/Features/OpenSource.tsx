@@ -20,6 +20,7 @@ const OpenSource = () => {
 
   return (
     <SectionLayout
+      id="open-source"
       pb={{ base: "16", sm: "24", md: "36", lg: "40" }}
       bgColor={useColorModeValue("blackAlpha.900", "blackAlpha.500")}
       minH="100vh"

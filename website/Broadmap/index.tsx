@@ -27,6 +27,7 @@ const Broadmap = () => {
 
   return (
     <SectionLayout
+      id="broadmap"
       aria-label="Broadmap"
       pb={{ base: "8", sm: "16", lg: "24", xl: "36" }}
     >

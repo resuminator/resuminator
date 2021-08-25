@@ -21,7 +21,7 @@ const SupportLinks = [
     link: "#",
   },
   {
-    text: "GDPR",
+    text: "Guides",
     link: "#",
   },
 ];
