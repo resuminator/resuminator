@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/layout";
 import { GetServerSidePropsContext, NextPage } from "next";
 import nookies from "nookies";
-import React from "react";
+import React, { useEffect } from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import { getUserData } from "../../apis/meta";
@@ -12,6 +12,7 @@ import SEO from "../../modules/SEO";
 import DownloadResume from "../../modules/Share/Download";
 import { UserObject } from "../../modules/User/types";
 import Viewer from "../../modules/Viewer";
+import mp from "../../services/mixpanel";
 import InitStore from "../../store/InitStore";
 import InitUserStore from "../../store/InitUserStore";
 
@@ -34,6 +35,10 @@ const Share: NextPage<ShareProps> = ({ token, id }) => {
   >("getUserData", () => getUserData(token), {
     placeholderData: userPlaceholder,
   });
+
+  useEffect(() => {
+    mp.track("Share Page View", { id });
+  }, [id]);
 
   return (
     <>

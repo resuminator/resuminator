@@ -1,10 +1,12 @@
 import { GetServerSidePropsContext, NextPage } from "next";
 import nookies from "nookies";
+import { useEffect } from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import { getResumeData } from "../../apis/resume";
 import placeholderData from "../../data/placeholderData";
 import ResumePaper from "../../modules/Resume";
+import mp from "../../services/mixpanel";
 import InitStore from "../../store/InitStore";
 
 interface ResumeProps {
@@ -21,6 +23,10 @@ const Resume: NextPage<ResumeProps> = ({ token, id }) => {
     }
   );
 
+  useEffect(() => {
+    mp.track("Puppeteer Resume Page View", { id });
+  }, [id]);
+
   return (
     <>
       <InitStore data={data} status={status} />
@@ -35,14 +41,14 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   //If token is present, pass it to the query to fetch data from API
   const { id } = ctx.params;
   let token: string;
-  
-  const userAgent = ctx.req.headers['user-agent'];
-  if(userAgent.split(' ').includes('R8')){
-    token = ctx.req.headers['token'].toString();
-    console.log("Request from Puppeteer", token.substr(0, 25))
+
+  const userAgent = ctx.req.headers["user-agent"];
+  if (userAgent.split(" ").includes("R8")) {
+    token = ctx.req.headers["token"].toString();
+    console.log("Request from Puppeteer", token.substr(0, 25));
   } else {
     token = nookies.get(ctx).token;
-    console.log("Request from NextJS")
+    console.log("Request from NextJS");
   }
 
   if (!token) {

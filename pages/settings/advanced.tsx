@@ -1,7 +1,7 @@
 import { GridItem } from "@chakra-ui/react";
 import { GetServerSidePropsContext, NextPage } from "next";
 import nookies from "nookies";
-import React from "react";
+import React, { useEffect } from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import { getAccountSettings } from "../../apis/settings";
@@ -14,6 +14,7 @@ import RequestData from "../../modules/Settings/Advanced/RequestData";
 import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import { AccountSettings } from "../../modules/Settings/types";
+import mp from "../../services/mixpanel";
 
 interface SettingsPageProps {
   token: string;
@@ -23,6 +24,10 @@ const AdvancedSettings: NextPage<SettingsPageProps> = ({ token }) => {
   const { data } = useQuery<AccountSettings, Error>("getAccountSettings", () =>
     getAccountSettings(token)
   );
+
+  useEffect(() => {
+    mp.track("Advanced Settings Page View");
+  }, []);
 
   return (
     <>

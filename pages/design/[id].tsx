@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/layout";
 import { GetServerSidePropsContext, NextPage } from "next";
 import nookies from "nookies";
+import { useEffect } from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import { getUserData } from "../../apis/meta";
@@ -14,6 +15,7 @@ import Spacing from "../../modules/Design/Spacing";
 import SEO from "../../modules/SEO";
 import { UserObject } from "../../modules/User/types";
 import Viewer from "../../modules/Viewer";
+import mp from "../../services/mixpanel";
 import InitStore from "../../store/InitStore";
 import InitUserStore from "../../store/InitUserStore";
 
@@ -36,6 +38,10 @@ const Design: NextPage<DesignProps> = ({ token, id }) => {
   >("getUserData", () => getUserData(token), {
     placeholderData: userPlaceholder,
   });
+
+  useEffect(() => {
+    mp.track("Design Page View", { id });
+  }, [id]);
 
   return (
     <>

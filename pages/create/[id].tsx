@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/layout";
 import { GetServerSidePropsContext, NextPage } from "next";
 import nookies from "nookies";
 import React, { Fragment } from "react";
+import { useEffect } from "react";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import { getUserData } from "../../apis/meta";
@@ -24,6 +25,7 @@ import UserImage from "../../modules/UserInput/Contact/UserImage";
 import CustomSections from "../../modules/UserInput/Custom";
 import CustomSectionInputs from "../../modules/UserInput/Custom/CustomSectionInputs";
 import Viewer from "../../modules/Viewer";
+import mp from "../../services/mixpanel";
 import InitStore from "../../store/InitStore";
 import InitUserStore from "../../store/InitUserStore";
 import useResumeStore from "../../store/resume.store";
@@ -66,6 +68,10 @@ const Create: NextPage<CreateProps> = ({ token, id }) => {
   >("getUserData", () => getUserData(token), {
     placeholderData: userPlaceholder,
   });
+
+  useEffect(() => {
+    mp.track("Create Page View", { id });
+  }, [id]);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { GridItem } from "@chakra-ui/react";
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import BoxHeader from "../../components/common/BoxHeader";
 import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
@@ -9,8 +9,13 @@ import PersonalDetails from "../../modules/Settings/General/PersonalDetails";
 import ProfilePhoto from "../../modules/Settings/General/ProfilePhoto";
 import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
+import mp from "../../services/mixpanel";
 
 const Settings: NextPage = () => {
+  useEffect(() => {
+    mp.track("General Settings Page View");
+  }, []);
+
   return (
     <>
       <SEO title="General Settings" />
