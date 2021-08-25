@@ -7,6 +7,7 @@ import Section from "../../../components/layouts/Section";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { usePatchParams } from "../../../hooks/usePatchParams";
 import firebaseSDK from "../../../services/firebase";
+import mp from "../../../services/mixpanel";
 import { Status } from "../../../utils/constants";
 import { useAuth } from "../../Auth/AuthContext";
 import useContactStore from "./store";
@@ -29,10 +30,21 @@ const UserImage = () => {
     return await patchContact(key)(token, resumeId, { [key]: url })
       .then(() => {
         setLastSavedAt(new Date());
-        createToast("Image uploaded successfully", "success")
+        mp.track("Photo Uploaded", {
+          target: `resume-${resumeId}`,
+          status: "success",
+        });
+        createToast("Image uploaded successfully", "success");
         return setSaveStatus(Status.success);
       })
-      .catch(() => setSaveStatus(Status.error));
+      .catch(() => {
+        mp.track("Photo Uploaded", {
+          target: `resume-${resumeId}`,
+          status: "error",
+          source: "Internal",
+        });
+        setSaveStatus(Status.error);
+      });
   };
 
   const clearImage = async () => {
@@ -46,12 +58,21 @@ const UserImage = () => {
       .delete()
       .then(() => saveToDb(""))
       .then(() => {
+        mp.track("Photo Delete", {
+          target: `resume-${resumeId}`,
+          status: "success",
+        });
         setUserImage("");
         setStatus(Status.success);
         return createToast("Photo Removed", "success");
       })
       .catch(() => {
         setStatus(Status.error);
+        mp.track("Photo Delete", {
+          target: `resume-${resumeId}`,
+          status: "error",
+          source: "Firebase",
+        });
         return createToast(
           "Couldn't remove image",
           "error",
