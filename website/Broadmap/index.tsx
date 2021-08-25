@@ -9,6 +9,7 @@ import {
 import React, { useState } from "react";
 import { FiExternalLink } from "react-icons/fi";
 import { BROADMAP_HOMEPAGE, BROADMAP_TWITTER } from "../../data/RefLinks";
+import mp from "../../services/mixpanel";
 import { Status } from "../../utils/constants";
 import SectionLayout from "../common/SectionLayout";
 import SubscribeForm from "./SubscribeForm";
@@ -20,8 +21,15 @@ const gradient =
 const Broadmap = () => {
   const [status, setStatus] = useState<Status>(Status.idle);
 
+  const trackMetric = (from: string, to: string) => {
+    mp.track("Broadmap", { action: "External CTA Trigger", from, to });
+  };
+
   return (
-    <SectionLayout aria-label="Broadmap" pb={{base: "8", sm: "16", lg: "24", xl: "36"}}>
+    <SectionLayout
+      aria-label="Broadmap"
+      pb={{ base: "8", sm: "16", lg: "24", xl: "36" }}
+    >
       <Center p="4" bgGradient={gradient} borderRadius="xl">
         <Box
           bg={useColorModeValue("white", "blackAlpha.600")}
@@ -45,6 +53,7 @@ const Broadmap = () => {
                 target="_blank"
                 color={useColorModeValue("pink.400", "pink")}
                 _hover={{ textDecoration: "underline" }}
+                onClick={() => trackMetric("Broadmap Handle", BROADMAP_TWITTER)}
               >
                 @broadmaps
               </Text>
@@ -62,6 +71,9 @@ const Broadmap = () => {
               colorScheme="pink"
               rightIcon={<FiExternalLink />}
               pb="4"
+              onClick={() =>
+                trackMetric("Read Previous Broadmap", BROADMAP_HOMEPAGE)
+              }
             >
               Read previous Broadmaps
             </Button>

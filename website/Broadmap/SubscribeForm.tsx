@@ -5,6 +5,7 @@ import { addSubscriber } from "../../apis/broadmap";
 import InputField from "../../components/common/InputField";
 import { useCustomToast } from "../../hooks/useCustomToast";
 import { useEmailValidation } from "../../hooks/useEmailValidation";
+import mp from "../../services/mixpanel";
 import { Status } from "../../utils/constants";
 import RevuePolicy from "./RevuePolicy";
 
@@ -20,24 +21,41 @@ const SubscribeForm: React.FC<Props> = ({ status, setStatus }) => {
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (!email.length)
+    if (!email.length) {
+      mp.track("Broadmap", {
+        action: "Subscribe CTA Trigger",
+        status: "success",
+        reason: "invalid email",
+      });
       return createToast(
         "Please enter an email to subscribe",
         "error",
         "This will be your primary email where we will send you the newsletter."
       );
+    }
 
-    if (!isValidEmail)
+    if (!isValidEmail) {
+      mp.track("Broadmap", {
+        action: "Subscribe CTA Trigger",
+        status: "success",
+        reason: "invalid email",
+      });
       return createToast(
         "This email seems invalid",
         "error",
         "Please check the email and try again."
       );
+    }
 
+    mp.track("Broadmap", {
+      action: "Subscribe CTA Trigger",
+      status: "success",
+    });
     setStatus(Status.loading);
     return await addSubscriber({ email })
       .then(() => {
         setStatus(Status.success);
+        mp.track("Broadmap", { action: "Add Subscriber", status: "success" });
         createToast(
           `Subscription confirmation email sent to ${email}`,
           "success",
@@ -46,6 +64,7 @@ const SubscribeForm: React.FC<Props> = ({ status, setStatus }) => {
       })
       .catch(() => {
         setStatus(Status.error);
+        mp.track("Broadmap", { action: "Add Subscriber", status: "error" });
         createToast(
           "Could not subscribe you to Broadmap",
           "warning",

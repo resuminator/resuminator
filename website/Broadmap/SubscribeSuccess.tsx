@@ -3,13 +3,18 @@ import {
   Button,
   Text,
   useBreakpointValue,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React from "react";
 import { FaTwitter } from "react-icons/fa";
 import { BROADMAP_SHARE_TWITTER } from "../../data/RefLinks";
+import mp from "../../services/mixpanel";
 
 const SubscribeSuccess = () => {
+  const trackMetric = () => {
+    mp.track("Broadmap", { action: "Share CTA Trigger" });
+  };
+
   return (
     <Box flexBasis={{ md: "50%", lg: "40%" }} alignSelf="center">
       <Text
@@ -43,6 +48,7 @@ const SubscribeSuccess = () => {
         colorScheme="twitter"
         leftIcon={<FaTwitter />}
         size={useBreakpointValue({ base: "sm", lg: "md" })}
+        onClick={trackMetric}
       >
         Share on Twitter
       </Button>
