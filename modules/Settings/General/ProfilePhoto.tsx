@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import { useCustomToast } from "../../../hooks/useCustomToast";
+import mp from "../../../services/mixpanel";
 import { useAuth } from "../../Auth/AuthContext";
 const PhotoUploadModal = dynamic(() => import("../../Shared/PhotoUploadModal"));
 
@@ -19,9 +20,22 @@ const ProfilePhoto = () => {
   }, [auth]);
 
   const setUserPhotoUrl = (url: string) => {
-    auth.user.updateProfile({ photoURL: url }).then(() => {
-      return createToast("Image Uploaded Successfully", "success");
-    });
+    auth.user
+      .updateProfile({ photoURL: url })
+      .then(() => {
+        mp.track("Photo Uploaded", {
+          target: "user profile",
+          status: "success",
+        });
+        return createToast("Image Uploaded Successfully", "success");
+      })
+      .catch(() => {
+        mp.track("Photo Uploaded", {
+          target: "user profile",
+          status: "error",
+          source: "Firebase",
+        });
+      });
   };
 
   return (

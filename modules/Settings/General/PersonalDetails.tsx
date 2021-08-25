@@ -2,6 +2,7 @@ import { Box, Button, Divider, Input } from "@chakra-ui/react";
 import React, { Fragment, useEffect, useState } from "react";
 import BoxHeader from "../../../components/common/BoxHeader";
 import { useCustomToast } from "../../../hooks/useCustomToast";
+import mp from "../../../services/mixpanel";
 import { Status } from "../../../utils/constants";
 import { useAuth } from "../../Auth/AuthContext";
 
@@ -14,7 +15,10 @@ const PersonalDetails = () => {
 
   useEffect(() => {
     if (auth.user) {
-      setUser({ displayName: auth.user.displayName || "", email: auth.user.email });
+      setUser({
+        displayName: auth.user.displayName || "",
+        email: auth.user.email,
+      });
     }
   }, [auth.user]);
 
@@ -29,11 +33,20 @@ const PersonalDetails = () => {
     return await auth.user
       .updateProfile({ displayName: user.displayName })
       .then(() => {
+        mp.track("General Settings", {
+          action: "name change",
+          status: "success",
+        });
         setUnsavedChanges(false);
         setStatus(Status.success);
         createToast("Changes Saved", "success");
       })
       .catch((err) => {
+        mp.track("General Settings", {
+          action: "name change",
+          status: "error",
+          source: "Firebase",
+        });
         setStatus(Status.error);
         createToast("Couldn't save changes", "error", err.message);
       });
@@ -84,7 +97,7 @@ const PersonalDetails = () => {
       >
         Save Changes
       </Button>
-      <Divider/>
+      <Divider />
     </Box>
   );
 };

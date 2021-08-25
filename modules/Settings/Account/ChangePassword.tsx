@@ -5,6 +5,7 @@ import BoxHeader from "../../../components/common/BoxHeader";
 import InputField from "../../../components/common/InputField";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { usePasswordValidation } from "../../../hooks/usePasswordValidation";
+import mp from "../../../services/mixpanel";
 import { Status } from "../../../utils/constants";
 import { useAuth } from "../../Auth/AuthContext";
 import PasswordHints from "../../Auth/PasswordHints";
@@ -38,8 +39,12 @@ const ChangePassword = () => {
       return await auth.user
         .updatePassword(password.new)
         .then(() => {
+          mp.track("Account Settings", {
+            action: "password update",
+            status: "success",
+          });
           setStatus(Status.success);
-          setPassword({new: "", confirm: ""})
+          setPassword({ new: "", confirm: "" });
           return createToast(
             "Password updated successfully",
             "success",
@@ -47,6 +52,11 @@ const ChangePassword = () => {
           );
         })
         .catch((err) => {
+          mp.track("Account Settings", {
+            action: "password update",
+            status: "error",
+            source: "Firebase",
+          });
           setStatus(Status.error);
           return createToast("Couldn't update password", "error", err.message);
         });
