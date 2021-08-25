@@ -8,11 +8,16 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { FiGithub, FiStar } from "react-icons/fi";
-import { GITHUB_REPO } from "../../data/RefLinks";
+import { GITHUB_REPO, GITHUB_REPO_GFI } from "../../data/RefLinks";
+import mp from "../../services/mixpanel";
 import HeadingBox from "../common/HeadingBox";
 import SectionLayout from "../common/SectionLayout";
 
 const OpenSource = () => {
+  const trackMetric = (from: string, to: string) => {
+    mp.track("External Link Trigger", { from, to });
+  };
+
   return (
     <SectionLayout
       pb={{ base: "16", sm: "24", md: "36", lg: "40" }}
@@ -54,9 +59,12 @@ const OpenSource = () => {
         isInline={useBreakpointValue({ sm: true })}
       >
         <Button
+          as="a"
+          href={GITHUB_REPO_GFI}
           leftIcon={<FiGithub />}
           colorScheme="teal"
           size={useBreakpointValue({ md: "lg" })}
+          onClick={() => trackMetric("Contribute CTA", GITHUB_REPO_GFI)}
         >
           Contribute
         </Button>
@@ -66,6 +74,7 @@ const OpenSource = () => {
           leftIcon={<FiStar />}
           colorScheme="teal"
           size={useBreakpointValue({ md: "lg" })}
+          onClick={() => trackMetric("Star Us on GitHub CTA", GITHUB_REPO_GFI)}
         >
           Star us on GitHub
         </Button>

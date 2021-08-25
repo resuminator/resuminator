@@ -7,10 +7,11 @@ import {
   Stack,
   Text,
   useBreakpointValue,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FiExternalLink } from "react-icons/fi";
+import mp from "../../services/mixpanel";
 import HeadingBox from "../common/HeadingBox";
 import SectionLayout from "../common/SectionLayout";
 import { LongFeatureDetails } from "./features.data";
@@ -25,6 +26,10 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   const [hovering, setHovering] = useState(false);
   const textColors = useColorModeValue("purple.900", "purple.100");
   const buttonSizes = useBreakpointValue({ base: "sm", md: "md" });
+
+  const trackMetric = () => {
+    mp.track("External Link Trigger", { from: title, to: external });
+  };
 
   return (
     <Box
@@ -73,6 +78,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
           color={textColors}
           rightIcon={<FiExternalLink />}
           size={buttonSizes}
+          onClick={trackMetric}
         >
           Learn More
         </Button>
