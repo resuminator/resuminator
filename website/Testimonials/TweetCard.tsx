@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { FaTwitter } from "react-icons/fa";
 import { ImQuotesLeft } from "react-icons/im";
+import mp from "../../services/mixpanel";
 
 export interface TweetCardProps {
   name: string;
@@ -36,6 +37,10 @@ const TweetCard: React.FC<TweetCardProps> = ({
     fontSize: { base: "sm", md: "md" },
   };
 
+  const trackMetric = () => {
+    mp.track("Twitter Card Trigger", { handle, date, url });
+  };
+
   return (
     <Link href={url} target="_blank" _hover={{ textDecoration: "none" }}>
       <Box
@@ -50,6 +55,7 @@ const TweetCard: React.FC<TweetCardProps> = ({
             "whiteAlpha.100"
           ),
         }}
+        onClick={trackMetric}
       >
         <Box
           display="flex"
