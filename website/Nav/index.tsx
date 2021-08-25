@@ -17,9 +17,8 @@ const Nav = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <SectionLayout>
+    <SectionLayout pt="4" pb="0">
       <Box
-        py="4"
         display="flex"
         alignItems="center"
         justifyContent="space-between"
