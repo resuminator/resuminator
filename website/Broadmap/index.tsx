@@ -21,7 +21,7 @@ const Broadmap = () => {
   const [status, setStatus] = useState<Status>(Status.idle);
 
   return (
-    <SectionLayout mx={{ xl: "20" }} mb="16" aria-label="Broadmap">
+    <SectionLayout aria-label="Broadmap" pb={{base: "8", sm: "16", lg: "24", xl: "36"}}>
       <Center p="4" bgGradient={gradient} borderRadius="xl">
         <Box
           bg={useColorModeValue("white", "blackAlpha.600")}

@@ -11,7 +11,7 @@ const Testimonials = () => {
   const CHUNK_SIZE = Math.floor(tweets.length / ROWS);
 
   return (
-    <SectionLayout aria-label="Testimonials">
+    <SectionLayout aria-label="Testimonials" pb={{base: "8", sm: "16", lg: "24", xl: "36"}}>
       <HeadingBox
         title="What's buzzing?"
         titleProps={{ color: "twitter.500" }}

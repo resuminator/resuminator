@@ -12,7 +12,7 @@ const GetStarted = () => {
       d="flex"
       flexDir="column"
       alignItems="center"
-      pb="16"
+      pb={{ base: "8", sm: "16", lg: "24", xl: "36" }}
       bg={useColorModeValue("blackAlpha.900", "gray.900")}
     >
       <HeadingBox
