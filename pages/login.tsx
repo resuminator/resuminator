@@ -17,6 +17,7 @@ import PrivacyNotice from "../modules/Auth/PrivacyNotice";
 import SEO from "../modules/SEO";
 import { loginSeo } from "../modules/SEO/pages.config";
 import firebaseSDK from "../services/firebase";
+import mp from "../services/mixpanel";
 
 const Login: NextPage = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
@@ -45,12 +46,20 @@ const Login: NextPage = () => {
     firebaseSDK
       .auth()
       .signInWithPopup(provider)
-      .then(() => {
+      .then((res) => {
+        mp.alias(res.user.email);
+        return res;
+      })
+      .then((res) => {
+        mp.identify(res.user.email);
+        mp.track("Log In", { status: "success", provider: client, source: "Firebase" });
         createToast("Logged in successfully", "success");
         return router.push("/home");
       })
-      .catch((e) =>
+      .catch((e) => {
+        mp.track("Log In", { status: "error", provider: client, source: "Firebase" });
         createToast(`Couldn't sign in with ${client}`, "error", e.message)
+      }
       );
   };
 

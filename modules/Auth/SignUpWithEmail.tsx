@@ -53,18 +53,22 @@ const SignUpWithEmail: React.FC<Props> = ({ resetClient }) => {
       .auth()
       .createUserWithEmailAndPassword(formValues.email, formValues.password)
       .then(async (response) => {
+        //Assigning an alias to the user on Mixpanel
+        mp.alias(response.user.email);
+        mp.track("Sign Up", { provider: "Email", status: "success" });
+
         //Update display name of user
         await response.user.updateProfile({ displayName: formValues.fullName });
         return response;
       })
       .then(async (response) => {
-        //Assigning an alias to the user on Mixpanel
-        mp.alias(response.user.email);
-        
         //Sending verification email with redirecting url
-        response.user.sendEmailVerification({
-          url: `${BASE_URL}/login`,
-        });
+        response.user
+          .sendEmailVerification({
+            url: `${BASE_URL}/login`,
+          })
+          .then(() => mp.track("Verification Email", { status: "send_success" }))
+          .catch(() => mp.track("Verification Email", { status: "send_error" }));
 
         //when done set status to success and create toast
         setStatus(Status.success);

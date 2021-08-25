@@ -41,14 +41,20 @@ const Signup: NextPage = () => {
     firebaseSDK
       .auth()
       .signInWithPopup(provider)
+      .then((res) => {
+        mp.alias(res.user.email);
+        return res;
+      })
       .then((credentials) => {
-        mp.alias(credentials.user.email);
+        mp.identify(credentials.user.email);
+        mp.track("Sign Up", { status: "success", provider: client });
         createToast("Account created successfully", "success");
         return router.push("/home");
       })
-      .catch((e) =>
-        createToast(`Couldn't sign up with ${client}`, "error", e.message)
-      );
+      .catch((e) => {
+        mp.track("Sign Up", { status: "error", provider: client });
+        createToast(`Couldn't sign up with ${client}`, "error", e.message);
+      });
   };
 
   return (
