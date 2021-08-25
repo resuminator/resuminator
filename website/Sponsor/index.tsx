@@ -7,7 +7,7 @@ import SectionLayout from "../common/SectionLayout";
 
 const Sponsor = () => {
   return (
-    <SectionLayout py="16" minH="100vh">
+    <SectionLayout pb="0" pt={{ base: "8", sm: "16", md: "20" }} minH="100vh">
       <HeadingBox
         title="Sponsor this project 💛"
         subtitle="Your support will help this project grow and impact the lives of thousands of job seekers"
