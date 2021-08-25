@@ -4,7 +4,7 @@ import {
   Stack,
   Text,
   useBreakpointValue,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import { FiGithub, FiStar } from "react-icons/fi";
@@ -15,7 +15,7 @@ import SectionLayout from "../common/SectionLayout";
 const OpenSource = () => {
   return (
     <SectionLayout
-      py="16"
+      pb={{ base: "16", sm: "24", md: "36", lg: "40" }}
       bgColor={useColorModeValue("blackAlpha.900", "blackAlpha.500")}
       minH="100vh"
     >

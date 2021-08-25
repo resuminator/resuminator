@@ -26,21 +26,21 @@ const HeadingBox: React.FC<BoxProps & HeadingBoxProps> = ({
 }) => {
   return (
     <Box
-      py={{base: "8", lg: "16"}}
-      mb={{ base: 0, lg: "8" }}
+      py={{ base: "8", sm: "10", md: "16", lg: "20" }}
       d={{ md: "flex" }}
       flexDir="column"
       alignItems="center"
       justifyContent="center"
       textAlign={{ sm: "center" }}
+      aria-label="Section Headings"
       {...rest}
     >
       <Heading
         fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
         fontWeight="bold"
         letterSpacing={-2}
-        mb="2"
         lineHeight="short"
+        mb="2"
         {...titleProps}
       >
         {title}
