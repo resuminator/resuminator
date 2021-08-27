@@ -2,12 +2,11 @@ import { Button } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import { FiDownload } from "react-icons/fi";
-import { downloadPdf } from "../../apis/download";
 import Section from "../../components/layouts/Section";
 import { useCustomToast } from "../../hooks/useCustomToast";
-import mp from "../../services/mixpanel";
 import { Status } from "../../utils/constants";
 import useContactStore from "../UserInput/Contact/store";
+import { handleDownload } from "./downloadHandler";
 
 interface DownloadResumeProps {
   id: string;
@@ -18,39 +17,10 @@ const DownloadResume: React.FC<DownloadResumeProps> = ({ id }) => {
   const { fullName } = useContactStore();
   const { createToast } = useCustomToast();
   const token = Cookies.get("token");
+  const RESUME_NAME = `${fullName} Resume.pdf`;
 
-  const handleDownload = async () => {
-    mp.time_event("Download");
-    setStatus(Status.loading);
-
-    //Triggering the download microservice API
-    return await downloadPdf(token, id)
-      .then((res) => {
-        //Generating a File from the Blob recieved
-        const blob = new Blob([res.data], { type: "application/pdf" });
-        const link = document.createElement("a");
-        link.href = window.URL.createObjectURL(blob);
-        link.download = `${fullName}-Resume.pdf`;
-        link.click();
-
-        //Finishing Events
-        mp.track("Download", { status: "success", id });
-        createToast("PDF Generated Successfully", "success");
-        setStatus(Status.success);
-      })
-      .catch(() => {
-        setStatus(Status.error);
-        mp.track("Download", { status: "error", id });
-        createToast(
-          "PDF Generation Failed",
-          "error",
-          "Please try again later. If the problem persists, contact us."
-        );
-      })
-      .finally(() => {
-        setStatus(Status.idle);
-      });
-  };
+  const download = () =>
+    handleDownload(token, id, RESUME_NAME, setStatus, createToast);
 
   return (
     <Section
@@ -64,7 +34,7 @@ const DownloadResume: React.FC<DownloadResumeProps> = ({ id }) => {
         variant="solid"
         colorScheme="blue"
         rightIcon={<FiDownload />}
-        onClick={handleDownload}
+        onClick={download}
         isLoading={status === Status.loading}
         loadingText="Generating PDF"
       >
