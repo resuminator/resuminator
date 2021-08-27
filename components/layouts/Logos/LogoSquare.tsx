@@ -1,21 +1,34 @@
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, BoxProps, Text } from "@chakra-ui/layout";
+import { Box, BoxProps } from "@chakra-ui/layout";
+import Image from "next/image";
+import Link from "next/link";
 
-const LogoSquare: React.FC<BoxProps> = ({ ...props }) => {
+interface Props {
+  width?: string;
+  height?: string;
+  href?: string;
+}
+
+const LogoSquare: React.FC<Props & BoxProps> = ({
+  width = "36px",
+  height = "36px",
+  href = "/home",
+  ...props
+}) => {
+  const src = "/logos/logo_sq_dark.svg";
+
   return (
-    <Box
-      w="2.5rem"
-      h="2.5rem"
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      borderRadius="4px"
-      bgColor={useColorModeValue("brand.600", "blue.500")}
-      {...props}
-    >
-      <Text fontSize="xl" fontWeight="semibold" color="white">
-        Re
-      </Text>
+    <Box display="flex" flexDir="column" {...props}>
+      <Link href={href} scroll={false}>
+        <a>
+          <Image
+            layout="fixed"
+            src={src}
+            width={width}
+            height={height}
+            placeholder="blur"
+          />
+        </a>
+      </Link>
     </Box>
   );
 };

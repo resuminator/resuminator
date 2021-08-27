@@ -1,8 +1,7 @@
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, BoxProps, Text, TextProps } from "@chakra-ui/layout";
-import Link from "next/link";
+import { Box, BoxProps, Text } from "@chakra-ui/layout";
 import Image from "next/image";
-import { useBreakpointValue } from "@chakra-ui/react";
+import Link from "next/link";
 
 interface Props {
   hasTagline?: boolean;
@@ -19,14 +18,14 @@ const LogoWithText: React.FC<Props & BoxProps> = ({
   ...props
 }) => {
   const colorModeDefaultLogo = useColorModeValue(
-    "/logos/text_dark.png",
-    "/logos/text_light.png"
+    "/logos/text_dark.svg",
+    "/logos/text_light.svg"
   );
   const src =
     variant === "light"
-      ? "/logos/text_light.png"
+      ? "/logos/text_light.svg"
       : variant === "dark"
-      ? "/logos/text_dark.png"
+      ? "/logos/text_dark.svg"
       : colorModeDefaultLogo;
 
   return (
