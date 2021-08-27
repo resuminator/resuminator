@@ -10,6 +10,7 @@ import FourGrid from "../website/Features/FeaturesGrid";
 import Champions from "../website/Features/FullFeatures";
 import OpenSource from "../website/Features/OpenSource";
 import Footer from "../website/Footer";
+import Graph from "../website/Graph";
 import Hero from "../website/Hero";
 import Header from "../website/Nav";
 import Sponsor from "../website/Sponsor";
@@ -35,6 +36,7 @@ const Index: NextPage = () => {
     >
       <Header />
       <Hero />
+      <Graph />
       <FourGrid />
       <Champions />
       <OpenSource />

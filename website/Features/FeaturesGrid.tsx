@@ -1,6 +1,7 @@
 import {
   AspectRatio,
   Box,
+  Center,
   Image,
   SimpleGrid,
   Text,
@@ -54,7 +55,7 @@ const FeatureBox = ({ title, description, graphic, color }) => (
 
 const FeaturesGrid = () => {
   return (
-    <SectionLayout aria-label="Features 2x2">
+    <SectionLayout pt="0" aria-label="Features 2x2">
       <HeadingBox
         title="How we do this?"
         subtitle="What makes Resuminator land this sweet spot between customization and ease"
