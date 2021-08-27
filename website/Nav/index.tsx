@@ -1,24 +1,24 @@
 import {
   Box,
-  Button,
   HStack,
   IconButton,
   useBreakpointValue,
   useColorMode,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import React from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
-import { FiArrowRight } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import { LogoWithText } from "../../components/layouts/Logos";
 import SectionLayout from "../common/SectionLayout";
-import NavButton from "./NavButton";
+import CollapseMenu from "./CollapseMenu";
+import LoginSignupButtons from "./LoginSignupButtons";
 import NavLinks from "./NavLinks";
 
 const Nav = () => {
-  const router = useRouter();
   const { colorMode, toggleColorMode } = useColorMode();
+  const { isOpen, onToggle } = useDisclosure();
 
   const afterElement = {
     zIndex: "-1",
@@ -29,14 +29,6 @@ const Nav = () => {
     bottom: 0,
     left: 0,
     right: 0,
-  };
-
-  const routeToLogin = () => {
-    router.push("/login");
-  };
-
-  const routeToSignup = () => {
-    router.push("/signup");
   };
 
   return (
@@ -67,28 +59,19 @@ const Nav = () => {
             variant="ghost"
             colorScheme={useColorModeValue("gray", "blue")}
           />
-          <Button
-            colorScheme="blue"
-            size={useBreakpointValue({ base: "sm", lg: "md" })}
-            variant="outline"
-            display={{ base: "none", md: "initial" }}
-            onClick={routeToLogin}
-          >
-            Log in
-          </Button>
-          <Button
-            colorScheme="blue"
-            size={useBreakpointValue({ base: "sm", lg: "md" })}
-            variant="solid"
-            rightIcon={<FiArrowRight />}
-            display={{ base: "none", md: "initial" }}
-            onClick={routeToSignup}
-          >
-            Sign up
-          </Button>
-          <NavButton />
+          <LoginSignupButtons display={{ base: "none", md: "initial" }} />
+          <Box display={{ lg: "none" }}>
+            <IconButton
+              aria-label="Nav Menu Button"
+              icon={<FiMenu />}
+              variant="ghost"
+              colorScheme={useColorModeValue("gray", "blue")}
+              onClick={onToggle}
+            />
+          </Box>
         </HStack>
       </Box>
+      <CollapseMenu onToggle={onToggle} isOpen={isOpen} />
     </SectionLayout>
   );
 };
