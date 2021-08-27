@@ -1,45 +1,40 @@
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box } from "@chakra-ui/layout";
+import { GridItem, SimpleGrid, Stack } from "@chakra-ui/react";
 import React from "react";
-import FooterLinks from "../../../data/FooterLinks";
 import SocialLinks from "../../../data/SocialLinks";
 import ColorModeMenu from "../../common/ColorModeMenu";
 import { LogoWithText } from "../Logos";
 import Copyright from "./Copyright";
-import LinkStack from "./LinkStack";
 import SocialButtons from "./SocialButtons";
 
 const Footer = () => {
   return (
-    <Box
+    <Stack
+      spacing="4"
       as="footer"
       backgroundColor={useColorModeValue("darkblue", "gray.900")}
-      p={{ base: "2rem", md: "4rem", lg: "2rem 8rem" }}
+      p={{ base: "4", md: "8", lg: "2rem 8rem" }}
     >
-      <Box
-        display="flex"
+      <SimpleGrid
         alignItems="center"
-        justifyContent="space-between"
-        mb={{ base: "2", md: "8" }}
-        flexWrap={{ base: "wrap", md: "nowrap" }}
+        templateColumns={{
+          base: "1fr",
+          md: "1fr 1fr 1fr",
+          lg: "1fr 1fr 1fr",
+        }}
       >
-        <LogoWithText
-          variant="light"
-          mb="0"
-        />
-        <LinkStack links={FooterLinks} />
-      </Box>
-      <Box
-        display="flex"
-        alignContent="center"
-        justifyContent="space-between"
-        flexWrap={{ base: "wrap", md: "nowrap" }}
-      >
-        <Copyright />
-        <SocialButtons data={SocialLinks} />
-        <ColorModeMenu />
-      </Box>
-    </Box>
+        <GridItem>
+          <LogoWithText variant="light" />
+          <Copyright py="4" />
+        </GridItem>
+        <GridItem justifySelf={{ md: "center" }}>
+          <SocialButtons data={SocialLinks} />
+        </GridItem>
+        <GridItem justifySelf={{ md: "end" }}>
+          <ColorModeMenu />
+        </GridItem>
+      </SimpleGrid>
+    </Stack>
   );
 };
 

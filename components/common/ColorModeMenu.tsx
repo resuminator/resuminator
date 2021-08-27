@@ -13,6 +13,7 @@ const ColorModeMenu = () => {
         as={Button}
         rightIcon={<FaChevronUp />}
         my={{ base: "4", md: "0" }}
+        maxW="fit-content"
       >
         {colorMode === "light" ? (
           <HStack>
