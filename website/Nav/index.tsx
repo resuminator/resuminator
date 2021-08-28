@@ -5,7 +5,7 @@ import {
   useBreakpointValue,
   useColorMode,
   useColorModeValue,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import React from "react";
 import { FaMoon, FaSun } from "react-icons/fa";

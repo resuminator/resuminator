@@ -4,6 +4,7 @@ import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import mp from "../services/mixpanel";
+import Announcement from "../website/Banners/Announcement";
 import GetStarted from "../website/Banners/GetStarted";
 import Broadmap from "../website/Broadmap";
 import FourGrid from "../website/Features/FeaturesGrid";
@@ -12,7 +13,7 @@ import OpenSource from "../website/Features/OpenSource";
 import Footer from "../website/Footer";
 import Graph from "../website/Graph";
 import Hero from "../website/Hero";
-import Header from "../website/Nav";
+import Nav from "../website/Nav";
 import Sponsor from "../website/Sponsor";
 import Testimonials from "../website/Testimonials";
 const CookieBanner = dynamic(() => import("../website/Cookies/CookieBanner"), {
@@ -34,7 +35,8 @@ const Index: NextPage = () => {
       minH="100vh"
       mt="16"
     >
-      <Header />
+      <Nav />
+      <Announcement isHidden/>
       <Hero />
       <Graph />
       <FourGrid />
