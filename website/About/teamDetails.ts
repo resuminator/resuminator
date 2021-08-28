@@ -5,8 +5,8 @@ export const teamDetails: Array<TeamMember> = [
     image:
       "https://pbs.twimg.com/profile_images/1391650308384714754/KuDab1ek_400x400.jpg",
     fullName: "Vivek Nigam",
-    jobTitle: "Creator, Lead Frontend",
-    bio: "Sweet roll bear claw cheesecake chocolate bar I love wafer croissant I love",
+    jobTitle: "Creator, Lead Developer",
+    bio: "Collects dozens of typefaces, uses only two. Part-time mentor. Frontend and Design, execution and strategy.",
     social: [
       {
         label: "Twitter",
@@ -31,7 +31,7 @@ export const teamDetails: Array<TeamMember> = [
       "https://pbs.twimg.com/profile_images/1325455177491439616/wdypU20s_400x400.jpg",
     fullName: "Himanshu Garg",
     jobTitle: "Creator, Backend Wizard",
-    bio: "Sweet roll bear claw cheesecake chocolate bar I love wafer croissant I love",
+    bio: "The guy senior devs tell you not to worry about. Handles everything system design, dev-ops and backend.",
     social: [
       {
         label: "Twitter",
