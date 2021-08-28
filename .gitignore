@@ -35,3 +35,6 @@ yarn-error.log*
 
 #performace scripts
 stress.sh
+
+#Sentry
+sentry.properties

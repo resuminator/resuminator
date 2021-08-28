@@ -1,8 +1,9 @@
+import { withSentry } from "@sentry/nextjs";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { SELF } from "../../config/lambda";
 import { getBrowserInstance } from "../../plugins/Puppeteer";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   /** Load the required browser instance
    * Headless Chrome for Prod
    * Puppeteer for Dev
@@ -64,3 +65,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 };
+
+export default withSentry(handler);
