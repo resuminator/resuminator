@@ -36,7 +36,7 @@ const Index: NextPage = () => {
       mt="16"
     >
       <Nav />
-      <Announcement isHidden/>
+      <Announcement />
       <Hero />
       <Graph />
       <FourGrid />

@@ -17,6 +17,7 @@ import SEO from "../modules/SEO";
 import { signupSeo } from "../modules/SEO/pages.config";
 import firebaseSDK from "../services/firebase";
 import mp from "../services/mixpanel";
+import Announcement from "../website/Banners/Announcement";
 
 const Signup: NextPage = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
@@ -64,6 +65,7 @@ const Signup: NextPage = () => {
   return (
     <>
       <SEO {...signupSeo} />
+      <Announcement/>
       <Layout hasHeaderHidden>
         <Box
           display="flex"

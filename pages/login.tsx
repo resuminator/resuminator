@@ -18,6 +18,7 @@ import SEO from "../modules/SEO";
 import { loginSeo } from "../modules/SEO/pages.config";
 import firebaseSDK from "../services/firebase";
 import mp from "../services/mixpanel";
+import Announcement from "../website/Banners/Announcement";
 
 const Login: NextPage = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
@@ -74,6 +75,7 @@ const Login: NextPage = () => {
   return (
     <>
       <SEO {...loginSeo} />
+      <Announcement />
       <Layout hasHeaderHidden>
         <Box
           display={{ base: "none", lg: "inherit" }}
