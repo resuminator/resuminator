@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { patchExperience } from "../../../apis/patchSection";
@@ -6,6 +7,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import ExperienceHints from "../../../data/Hints/experience";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
 import Autosave from "../Autosave";
@@ -20,9 +22,12 @@ import {
 import SectionControls from "../SectionControls";
 import useExperienceStore from "./store";
 import { ExperienceDataObject } from "./types";
-import dynamic from "next/dynamic";
-const EditorWithLabel = dynamic(() => import('../../../components/common/EditorWithLabel'))
-const StartEndDatePicker = dynamic(() => import('../../../components/common/StartEndDatePicker'))
+const EditorWithLabel = dynamic(
+  () => import("../../../components/common/EditorWithLabel")
+);
+const StartEndDatePicker = dynamic(
+  () => import("../../../components/common/StartEndDatePicker")
+);
 
 const Experience = () => {
   const data = useExperienceStore((state) => state.data);
@@ -71,7 +76,7 @@ const Experience = () => {
       }}
     >
       <Autosave data={data} patchFn={patchExperience} />
-      <SectionControls layoutKey="EXPERIENCE">
+      <SectionControls layoutKey="EXPERIENCE" hintData={ExperienceHints}>
         <TooltipIconButton
           label="Add new experience"
           aria-label="New-Experience"

@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { patchEducation } from "../../../apis/patchSection";
@@ -5,6 +6,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import EducationHints from "../../../data/Hints/education";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
 import Autosave from "../Autosave";
@@ -13,16 +15,21 @@ import {
   handleDateChange,
   handleDragEnd,
   handleEditorChange,
-  handlePresentCheckbox,
+  handlePresentCheckbox
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import GradeInput from "./GradeInput";
 import useEducationStore from "./store";
 import { EducationDataObject } from "./types";
-import dynamic from "next/dynamic";
-const EditorWithLabel = dynamic(() => import('../../../components/common/EditorWithLabel'))
-const StartEndDatePicker = dynamic(() => import('../../../components/common/StartEndDatePicker'))
-const InputWithLabel = dynamic(() => import("../../../components/common/InputWithLabel"));
+const EditorWithLabel = dynamic(
+  () => import("../../../components/common/EditorWithLabel")
+);
+const StartEndDatePicker = dynamic(
+  () => import("../../../components/common/StartEndDatePicker")
+);
+const InputWithLabel = dynamic(
+  () => import("../../../components/common/InputWithLabel")
+);
 
 const Education = () => {
   const data = useEducationStore((state) => state.data);
@@ -72,7 +79,7 @@ const Education = () => {
       }}
     >
       <Autosave data={data} patchFn={patchEducation} />
-      <SectionControls layoutKey="EDUCATION">
+      <SectionControls layoutKey="EDUCATION" hintData={EducationHints}>
         <TooltipIconButton
           label="Add new education"
           aria-label="New-Education"

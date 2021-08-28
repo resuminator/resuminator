@@ -6,6 +6,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import SkillsHints from "../../../data/Hints/skills";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
 import Autosave from "../Autosave";
@@ -60,7 +61,11 @@ const Skills = () => {
       }}
     >
       <Autosave data={{ data: data }} patchFn={patchSkillData} />
-      <SectionControls layoutKey="SKILLS" extraChildren={<FormatMenu />}>
+      <SectionControls
+        layoutKey="SKILLS"
+        extraChildren={<FormatMenu />}
+        hintData={SkillsHints}
+      >
         <TooltipIconButton
           label="Add new skillset"
           aria-label="New-Skillset"

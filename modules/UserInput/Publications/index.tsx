@@ -7,6 +7,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import PublicationHints from "../../../data/Hints/publication";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
 import Autosave from "../Autosave";
@@ -15,7 +16,9 @@ import SectionControls from "../SectionControls";
 import FormatRadioGroup from "./FormatRadioGroup";
 import usePublicationStore from "./store";
 import { PublicationDataObject } from "./types";
-const InputWithLabel = dynamic(() => import("../../../components/common/InputWithLabel"));
+const InputWithLabel = dynamic(
+  () => import("../../../components/common/InputWithLabel")
+);
 
 const Publications = () => {
   const data = usePublicationStore((state) => state.data);
@@ -65,7 +68,7 @@ const Publications = () => {
       }}
     >
       <Autosave data={data} patchFn={patchPublication} />
-      <SectionControls layoutKey="PUBLICATIONS">
+      <SectionControls layoutKey="PUBLICATIONS" hintData={PublicationHints}>
         <TooltipIconButton
           label="Add new publication"
           aria-label="New-Publication"

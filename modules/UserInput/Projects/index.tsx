@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { patchProjects } from "../../../apis/patchSection";
@@ -6,6 +7,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import ProjectHints from "../../../data/Hints/projects";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
 import Autosave from "../Autosave";
@@ -20,9 +22,12 @@ import {
 import SectionControls from "../SectionControls";
 import useProjectStore from "./store";
 import { ProjectDataObject } from "./types";
-import dynamic from "next/dynamic";
-const EditorWithLabel = dynamic(() => import('../../../components/common/EditorWithLabel'))
-const StartEndDatePicker = dynamic(() => import('../../../components/common/StartEndDatePicker'))
+const EditorWithLabel = dynamic(
+  () => import("../../../components/common/EditorWithLabel")
+);
+const StartEndDatePicker = dynamic(
+  () => import("../../../components/common/StartEndDatePicker")
+);
 
 const Projects = () => {
   const data = useProjectStore((state) => state.data);
@@ -70,7 +75,7 @@ const Projects = () => {
       }}
     >
       <Autosave data={data} patchFn={patchProjects} />
-      <SectionControls layoutKey="PROJECTS">
+      <SectionControls layoutKey="PROJECTS" hintData={ProjectHints}>
         <TooltipIconButton
           label="Add new project"
           aria-label="New-Project"

@@ -8,6 +8,7 @@ import { GrDrag } from "react-icons/gr";
 import patchContact from "../../../apis/patchContact";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import ContactHints from "../../../data/Hints/contact";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import Autosave from "../Autosave";
 import { handleDragEnd } from "../handlers";
@@ -45,7 +46,7 @@ const Contact = () => {
       }}
     >
       <Autosave data={{ contact: data }} patchFn={patchFn} />
-      <SectionControls hasToggleButton={false}>
+      <SectionControls hasToggleButton={false} hintData={ContactHints}>
         <SocialMediaMenu handler={{ data, add }} />
       </SectionControls>
 

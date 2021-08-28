@@ -6,6 +6,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
+import CertificationHints from "../../../data/Hints/certification";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { getUniqueID } from "../../../utils";
 import Autosave from "../Autosave";
@@ -13,7 +14,7 @@ import {
   handleChange,
   handleDateChange,
   handleDragEnd,
-  handlePresentCheckbox,
+  handlePresentCheckbox
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import useCertificationStore from "./store";
@@ -21,7 +22,9 @@ import { CertificationDataObject } from "./types";
 const StartEndDatePicker = dynamic(
   () => import("../../../components/common/StartEndDatePicker")
 );
-const InputWithLabel = dynamic(() => import("../../../components/common/InputWithLabel"));
+const InputWithLabel = dynamic(
+  () => import("../../../components/common/InputWithLabel")
+);
 
 const Certification = () => {
   const data = useCertificationStore((state) => state.data);
@@ -68,7 +71,7 @@ const Certification = () => {
       }}
     >
       <Autosave data={data} patchFn={patchCertifications} />
-      <SectionControls layoutKey="CERTIFICATIONS">
+      <SectionControls layoutKey="CERTIFICATIONS" hintData={CertificationHints}>
         <TooltipIconButton
           label="Add new certificate"
           aria-label="New-Certificate"

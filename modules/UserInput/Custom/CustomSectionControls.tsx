@@ -1,4 +1,3 @@
-import produce from "immer";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import RemoveItemButton from "../../../components/common/RemoveItem";
@@ -12,7 +11,7 @@ import { useCustomSectionStore } from "./store";
 import {
   CustomSectionDataObject,
   CustomSectionInputObject,
-  CustomSectionObject,
+  CustomSectionObject
 } from "./types";
 
 interface CustomSectionControlsProps {
@@ -86,6 +85,7 @@ const CustomSectionControls: React.FC<CustomSectionControlsProps> = ({
 
   return (
     <SectionControls
+      hasHintsHidden
       layoutKey={section.header.toUpperCase()}
       extraChildren={
         <RemoveItemButton
