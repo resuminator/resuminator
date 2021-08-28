@@ -17,6 +17,7 @@ const LogoWithText: React.FC<Props & BoxProps> = ({
   height = "32px",
   ...props
 }) => {
+  const taglineColor = useColorModeValue("gray.500", "whiteAlpha.700");
   const colorModeDefaultLogo = useColorModeValue(
     "/logos/text_dark.svg",
     "/logos/text_light.svg"
@@ -42,7 +43,7 @@ const LogoWithText: React.FC<Props & BoxProps> = ({
         </a>
       </Link>
       {hasTagline && (
-        <Text fontSize="sm" color="InactiveCaptionText">
+        <Text fontSize="sm" fontWeight="medium" color={taglineColor}>
           Build beautiful single-page resumes within minutes
         </Text>
       )}
