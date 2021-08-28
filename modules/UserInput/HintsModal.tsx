@@ -8,12 +8,13 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalProps,
-  Text,
+  Text
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { FiExternalLink, FiThumbsUp } from "react-icons/fi";
 import { SectionHints } from "../../data/Hints/types";
 import { CONTRIBUTE_HINTS } from "../../data/RefLinks";
+import mp from "../../services/mixpanel";
 import { getUniqueID } from "../../utils";
 
 interface Props {
@@ -25,6 +26,17 @@ const HintsModal: React.FC<Props & Omit<ModalProps, "children">> = ({
   onClose,
   hintsData,
 }) => {
+  useEffect(() => {
+    mp.track("Hints Modal Open", { title: hintsData.title });
+  }, [hintsData.title]);
+
+  const trackMetric = () => {
+    mp.track("External Link Trigger", {
+      from: hintsData.title,
+      to: CONTRIBUTE_HINTS,
+    });
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -48,6 +60,7 @@ const HintsModal: React.FC<Props & Omit<ModalProps, "children">> = ({
             variant="link"
             size="sm"
             fontWeight="normal"
+            onClick={trackMetric}
           >
             Know some more tips? Contribute them here
           </Button>
