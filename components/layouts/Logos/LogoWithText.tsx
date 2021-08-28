@@ -30,7 +30,7 @@ const LogoWithText: React.FC<Props & BoxProps> = ({
       : colorModeDefaultLogo;
 
   return (
-    <Box display="flex" flexDir="column" {...props}>
+    <Box display="flex" flexDir="column" w="fit-content" {...props}>
       <Link href="/" scroll={false}>
         <a>
           <Image

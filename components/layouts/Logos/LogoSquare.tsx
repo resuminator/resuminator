@@ -17,7 +17,7 @@ const LogoSquare: React.FC<Props & BoxProps> = ({
   const src = "/logos/logo_sq_dark.svg";
 
   return (
-    <Box display="flex" flexDir="column" {...props}>
+    <Box display="flex" flexDir="column" w="fit-content" {...props}>
       <Link href={href} scroll={false}>
         <a>
           <Image
