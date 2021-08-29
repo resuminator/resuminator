@@ -9,6 +9,7 @@
  */
 
 import React, { Fragment } from "react";
+import Announcement from "../App/Announcement";
 import WelcomeDialog from "../App/WelcomeDialog";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
@@ -17,6 +18,7 @@ import PolicyBanner from "../components/Privacy/PolicyBanner";
 const Layout = ({children}) => {
   return (
     <Fragment>
+      <Announcement />
       <Header />
       <WelcomeDialog />
       <PolicyBanner />

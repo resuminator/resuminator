@@ -11,12 +11,12 @@
 import { Box, makeStyles, TextField, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
+import Announcement from "../../App/Announcement";
 import ServerCheck from "../../App/ServerCheck";
 import firebaseSDK, { authOptions } from "../../Services/firebaseSDK";
 import { CustomCheckbox } from "../common/CustomCheckbox";
 import ForgotPasswordText from "./ForgotPasswordText";
 import LoginButton from "./LoginButton";
-import SecondaryAction from "./SecondaryAction";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -92,7 +92,7 @@ const LoginScreen = () => {
       );
   };
 
-  return (
+  return (   
     <Box
       display="flex"
       flexDirection="column"
@@ -101,6 +101,7 @@ const LoginScreen = () => {
       width="100%"
       textAlign="center"
     >
+      <Announcement/>
       <Box p={2} mt={12}>
         <Typography variant="h1" className={classes.title}>
           Resuminator

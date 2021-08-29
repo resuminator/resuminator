@@ -11,6 +11,7 @@
 import { Box, Button, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import { FiArrowLeft } from "react-icons/fi";
+import Announcement from "../../App/Announcement";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -64,6 +65,7 @@ const SignoutScreen = () => {
       width="100%"
       textAlign="center"
     >
+      <Announcement/>
       <Box p={2} mt={12}>
         <Typography variant="h1" className={classes.title}>
           Resuminator
