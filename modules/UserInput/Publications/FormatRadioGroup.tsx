@@ -13,7 +13,7 @@ const FormatRadioGroup: React.FC<Props> = ({...props}) => {
       <RadioGroup {...props} defaultValue="MLA">
         <Stack spacing={4} direction="row">
           <Radio value="MLA">MLA</Radio>
-          <Radio value="AMA">AMA</Radio>
+          <Radio value="APA">APA</Radio>
         </Stack>
       </RadioGroup>
     </Box>
