@@ -151,7 +151,7 @@ const LoginScreen = () => {
         <LoginButton isLoading={loading} handleSubmit={handleSubmit} />
       </Box>
       <ForgotPasswordText />
-      <SecondaryAction page="LOGIN" />
+      {/* <SecondaryAction page="LOGIN" /> */}
       <ServerCheck />
     </Box>
   );
