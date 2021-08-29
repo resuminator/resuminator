@@ -45,7 +45,7 @@ const DownloadConfirmDialog = ({ open, setOpen }) => {
   const performAfterActions = () => {
     setOpen(false);
     analyticsEvent("download_complete");
-    logKPI({ uid: auth.uid, event: true }).then((res) => {
+    logKPI({ uid: auth.user.uid, event: true }).then((res) => {
       return res === 200 ? successAction() : null;
     });
   };
@@ -53,7 +53,7 @@ const DownloadConfirmDialog = ({ open, setOpen }) => {
   const performFailureActions = () => {
     setOpen(false);
     setSuccess(false);
-    logKPI({ uid: auth.uid, event: false }).then((res) =>
+    logKPI({ uid: auth.user.uid, event: false }).then((res) =>
       res === 200 ? failedAction() : null
     );
   };
