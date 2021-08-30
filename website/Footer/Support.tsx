@@ -1,6 +1,7 @@
 import { Stack } from "@chakra-ui/react";
 import React from "react";
 import TextLink from "../../components/common/TextLink";
+import { PRIVACY_POLICY } from "../../data/DocLinks";
 import ListHeader from "./ListHeader";
 
 const SupportLinks = [
@@ -14,7 +15,7 @@ const SupportLinks = [
   },
   {
     text: "Privacy Policy",
-    link: "/privacy-policy",
+    link: PRIVACY_POLICY,
   },
   {
     text: "Cookie Policy",

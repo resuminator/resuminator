@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { FaCookieBite } from "react-icons/fa";
 import LinkText from "../../components/common/LinkText";
+import { PRIVACY_POLICY } from "../../data/DocLinks";
 import mp from "../../services/mixpanel";
 
 const CookieBanner = () => {
@@ -74,7 +75,7 @@ const CookieBanner = () => {
             <LinkText
               color="inherit"
               textDecoration="underline"
-              href="/privacy-policy"
+              href={PRIVACY_POLICY}
             >
               privacy
             </LinkText>{" "}
