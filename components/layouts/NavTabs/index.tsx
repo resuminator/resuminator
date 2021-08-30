@@ -25,7 +25,7 @@ const NavTabs: React.FC<Props> = ({ id, currentRoute }) => {
   const tabs = getDefaultTabs(id);
 
   return (
-    <Box>
+    <Box pos="relative" left="40px">
       <ButtonGroup isAttached px="4">
         {tabs.map((tabitem) => (
           <TabButton
