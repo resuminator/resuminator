@@ -66,6 +66,7 @@ const FeatureBox = ({ title, description, graphic, color }) => {
       </Box>
       <AspectRatio maxW="1080px" ratio={16 / 9} flexBasis={{ md: "60%" }}>
         <video
+          style={{ borderRadius: "10px" }}
           ref={videoRef}
           src={useColorModeValue(graphic[0], graphic[1])}
           loop
