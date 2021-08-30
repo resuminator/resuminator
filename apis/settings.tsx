@@ -53,7 +53,7 @@ export const getAccountSettings = async (token: string = null) => {
  * @param token Firebase ID Token
  * @returns User Account Data Object
  */
-export const deleteAccount = async (token: string = null) => {
+export const deleteAccountRequest = async (token: string = null) => {
   const res = await axios.delete(`${baseUrl}/settings/account`, {
     headers: getHeaders(token),
   });
