@@ -13,6 +13,28 @@ Resuminator allows you to build beautiful single-page resumes; without the hassl
 
 </div>
 
+## Version 2 Alpha Program! 🎉
+🆕[10-08-2021] Resuminator V2 Alpha Program has launched for our Discord Community Members! People can now try it out and let us know their feedback on it! Join our Resuminator Discord Community Server for creating a new account. [Invite Link Here](https://discord.gg/uJRFbDHHAJ)
+
+**Reasons why you should try it out**
+
+⭐ Create multiple resumes on a single account!
+
+⭐ What you see is what you get editor for hassle free resume building
+
+⭐ Single and Two Column Resumes
+
+⭐ Customize fonts, spacing, and resume colors
+
+⭐ Arrange your resume layout with drag-n-drop.
+
+⭐ Dark Mode Support for all the late night last moment resumes!
+
+---
+[Old] Resuminator: Version 2 is currently in development and we're working on an even smoother expereince for Resuminator. You'll soon be able to use it and make the most stunning resumes even faster 🚀. We can proudly say that it has a user/community driven roadmap, and we have picked up some important issues to be fixed gracefully. There a lot of things improving in the next version, although for now you can have a glimpse of what we're fixing in V2 [here](https://github.com/resuminator/resuminator/issues?q=is%3Aopen+is%3Aissue+label%3A%22Coming+to+v2+%F0%9F%8E%89%22)
+
+Like we did with version 1, we'll be rolling out early-access of v2 to our Discord Community memebers. To get more insights and an early hands on to test out v2, join - [Resuminator Discord Server](https://discord.gg/uJRFbDHHAJ).
+
 ## 💻 Features
 *  __Build by form input__: Create resumes with simple form-input format. No fuss about writing LaTeX code for making a ATS compliant resume.
 
@@ -37,8 +59,7 @@ Resuminator is a constantly evolving piece of software. We are currently buildin
 Things we're working on -
 
 - [X] Updating the application design. Have a look at it [here](https://bit.ly/resuminator-figma).
-- [ ] Taking the application from client side rendering to server side rendering. Join the discussions on our Discord server.
-- [ ] A new UI Library ([resuminator/motif](https://github.com/resuminator/motif)) for Resuminator products.
+- [X] Taking the application from client side rendering to server side rendering. Join the discussions on our Discord server.
 - [ ] Updating the website. You can contribute to it [here](https://github.com/resuminator/resuminator-landing).
 
 ## 🤗 Community and Support
