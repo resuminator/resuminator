@@ -5,7 +5,7 @@ import {
   FiImage,
   FiMoon,
   FiTarget,
-  FiType,
+  FiType
 } from "react-icons/fi";
 import { RiPaletteLine } from "react-icons/ri";
 import { FeatureCardProps } from "./types";
@@ -17,7 +17,7 @@ export const FeatureDetails = [
       "Each element inside your resume can be rearranged using simple drag and drop. Updating layouts would become a breeze when you are editing your resume!",
     graphic: [
       "https://res.cloudinary.com/resuminator/video/upload/v1630318815/videos/dnd_light_qs17l1.mp4",
-      "https://res.cloudinary.com/resuminator/video/upload/v1630320059/videos/dnd_dark_uxpgke.mp4",
+      "https://res.cloudinary.com/resuminator/video/upload/v1630321552/videos/dnd_dark_vsjzri.mp4",
     ],
     color: ["purple.600", "purple.400"],
   },
@@ -26,8 +26,8 @@ export const FeatureDetails = [
     description:
       "Keep the data, but hide the content OR simply convert your single column resume into a two-column one with a click. Easy toggle support allows you to put your best foot forward.",
     graphic: [
-      "https://res.cloudinary.com/resuminator/video/upload/v1630318815/videos/dnd_light_qs17l1.mp4",
-      "https://res.cloudinary.com/resuminator/video/upload/v1630320059/videos/dnd_dark_uxpgke.mp4",
+      "https://res.cloudinary.com/resuminator/video/upload/v1630321549/videos/toggle_light_r5dsoz.mp4",
+      "https://res.cloudinary.com/resuminator/video/upload/v1630321539/videos/toggle_dark_uoodji.mp4",
     ],
     color: ["#F3CD46", "#F3CD46"],
   },
@@ -36,8 +36,8 @@ export const FeatureDetails = [
     description:
       "With a dedicated design panel, you get to control the look and feel of your resume. Add a color which matches your personality. Alter spacing to fit it more content.",
     graphic: [
-      "https://res.cloudinary.com/resuminator/video/upload/v1630318815/videos/dnd_light_qs17l1.mp4",
-      "https://res.cloudinary.com/resuminator/video/upload/v1630320059/videos/dnd_dark_uxpgke.mp4",
+      "https://res.cloudinary.com/resuminator/video/upload/v1630321551/videos/design_light_xaucxp.mp4",
+      "https://res.cloudinary.com/resuminator/video/upload/v1630321553/videos/design_dark_ohlido.mp4",
     ],
     color: ["cyan.600", "cyan.400"],
   },
@@ -46,8 +46,8 @@ export const FeatureDetails = [
     description:
       "STOP paying to add certain sections on your resume. Create your own custom section in few clicks and use it like any native section for your resume. Add your achievements, contributions, hobbies, anything!",
     graphic: [
-      "https://res.cloudinary.com/resuminator/video/upload/v1630318815/videos/dnd_light_qs17l1.mp4",
-      "https://res.cloudinary.com/resuminator/video/upload/v1630320059/videos/dnd_dark_uxpgke.mp4",
+      "https://res.cloudinary.com/resuminator/video/upload/v1630321968/videos/custom_section_light_owg0gi.mp4",
+      "https://res.cloudinary.com/resuminator/video/upload/v1630321948/videos/custom_section_dark_a0r9zh.mp4",
     ],
     color: ["#26DF82", "#26DF82"],
   },
