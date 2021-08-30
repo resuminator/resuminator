@@ -78,35 +78,23 @@ const Create: NextPage<CreateProps> = ({ token, id }) => {
       <SEO title="Edit Resume" />
       <InitStore data={data} status={status} id={id} />
       <InitUserStore data={userData} status={userQueryStatus} />
-      <Layout display="flex" flexDir="column" alignItems="center" w="100%">
+
+      <Layout py="5">
         <Box
-          display="flex"
-          alignItems="flex-start"
-          justifyContent="space-between"
-          width="100%"
-          px="0"
-          py="5"
+          aria-label="Resume Inputs"
+          flexBasis="50%"
+          className="resume-inputs"
         >
-          <Box
-            aria-label="Resume Inputs"
-            flexBasis="50%"
-            height="29.7cm"
-            overflowY="auto"
-            className="resume-inputs"
-          >
-            <NameAndJobTitle />
-            <UserImage />
-            <Contact />
-            {inputs.map((key) => (
-              <Fragment key={key}>{getInputSection(key)}</Fragment>
-            ))}
-            <CustomSections />
-            <CustomSectionInputs />
-          </Box>
-          <Box aria-label="Resume Preview" flexBasis="50%">
-            <Viewer withStatus />
-          </Box>
+          <NameAndJobTitle />
+          <UserImage />
+          <Contact />
+          {inputs.map((key) => (
+            <Fragment key={key}>{getInputSection(key)}</Fragment>
+          ))}
+          <CustomSections />
+          <CustomSectionInputs />
         </Box>
+        <Viewer aria-label="Resume Preview" flexBasis="50%" withStatus />
       </Layout>
     </>
   );

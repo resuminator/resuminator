@@ -16,7 +16,6 @@ const Layout: React.FC<Props & BoxProps> = ({
     <Box
       display="flex"
       flexDir="column"
-      minH="100vh"
       justifyContent="space-between"
     >
       {!hasHeaderHidden && <Header />}

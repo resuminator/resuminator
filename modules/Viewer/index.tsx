@@ -1,6 +1,6 @@
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box } from "@chakra-ui/layout";
-import { Flex } from "@chakra-ui/react";
+import { BoxProps, Flex } from "@chakra-ui/react";
 import React from "react";
 import ColoredDivider from "../../components/common/ColoredDivider";
 import useGlobalStore from "../../store/global.store";
@@ -12,11 +12,11 @@ interface ViewerProps {
   withStatus?: boolean;
 }
 
-const Viewer: React.FC<ViewerProps> = ({ withStatus }) => {
+const Viewer: React.FC<ViewerProps & BoxProps> = ({ withStatus, ...props }) => {
   const contentOverflow = useGlobalStore((state) => state.contentOverflow);
 
   return (
-    <>
+    <Box {...props}>
       <Flex justifyContent="space-between">
         {withStatus ? <AutoSaveStatus /> : null}
         {contentOverflow ? <OverflowWarning /> : null}
@@ -29,7 +29,6 @@ const Viewer: React.FC<ViewerProps> = ({ withStatus }) => {
         height="29.7cm"
         overflowY="auto"
         className="viewer"
-        position="relative"
       >
         <ResumePaper />
         {contentOverflow ? (
@@ -41,7 +40,7 @@ const Viewer: React.FC<ViewerProps> = ({ withStatus }) => {
           />
         ) : null}
       </Box>
-    </>
+    </Box>
   );
 };
 
