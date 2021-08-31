@@ -44,7 +44,7 @@ const GradeInput: React.FC<Props> = ({
       <NumberInputWithLabel
         value={gradeObtained}
         placeholder="9.5"
-        min={1}
+        min={0}
         step={0.1}
         max={gradeMax}
         name="gradeObtained"
