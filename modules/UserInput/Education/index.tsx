@@ -142,7 +142,7 @@ const Education = () => {
             <InputWithLabel
               label="Location"
               name="location"
-              placeholder="Start typing to search location"
+              placeholder="City, State"
               value={item.location}
               onChange={(e) => handleChange(e, index, updateData)}
             />

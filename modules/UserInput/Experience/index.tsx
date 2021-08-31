@@ -145,7 +145,7 @@ const Experience = () => {
             <InputWithLabel
               label="Location"
               name="location"
-              placeholder="Start typing to search location"
+              placeholder="City or Remote"
               value={item.location}
               onChange={(e) => handleChange(e, index, updateData)}
             />
