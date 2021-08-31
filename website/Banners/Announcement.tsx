@@ -21,6 +21,7 @@
 import { Box, useColorModeValue } from "@chakra-ui/react";
 import React, { Fragment } from "react";
 import TextLink from "../../components/common/TextLink";
+import { VERSION_1_FAQ } from "../../data/DocLinks";
 
 interface Props {
   isHidden?: boolean;
@@ -36,7 +37,7 @@ export const Content = () => (
       textDecor="underline"
     />{" "}
     is going away on 30th September 2021. Switch to Version 2 today to continue
-    using Resuminator. <TextLink text="Learn more" link="#" />
+    using Resuminator. <TextLink text="Learn more" link={VERSION_1_FAQ} />
   </Fragment>
 );
 
