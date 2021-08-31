@@ -35,7 +35,7 @@ const AuthProvidersList: React.FC<AuthProvidersListProps> = ({
     transition={{ duration: 0.5 }}
   >
     <AuthProviderCard client="Google" onClick={() => handleSignIn("Google")} />
-    <AuthProviderCard client="GitHub" onClick={() => handleSignIn("GitHub")} />
+    {/* <AuthProviderCard client="GitHub" onClick={() => handleSignIn("GitHub")} /> */}
     <AuthProviderCard client="Email" onClick={() => handleSignIn("Email")} />
   </MotionBox>
 );

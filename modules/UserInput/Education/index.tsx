@@ -18,9 +18,10 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { Icon, Text } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import React from "react";
-import { FiPlus } from "react-icons/fi";
+import { FiAlertTriangle, FiEyeOff, FiPlus } from "react-icons/fi";
 import { patchEducation } from "../../../apis/patchSection";
 import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
@@ -35,7 +36,7 @@ import {
   handleDateChange,
   handleDragEnd,
   handleEditorChange,
-  handlePresentCheckbox
+  handlePresentCheckbox,
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import GradeInput from "./GradeInput";
@@ -142,7 +143,7 @@ const Education = () => {
             <InputWithLabel
               label="Location"
               name="location"
-              placeholder="Start typing to search location"
+              placeholder="City, State"
               value={item.location}
               onChange={(e) => handleChange(e, index, updateData)}
             />
@@ -173,6 +174,17 @@ const Education = () => {
               gradeMax={item.gradeMax}
               onChangeHandler={(key, value) => updateData(index, key, value)}
             />
+            {isNaN(item.gradeObtained) ? (
+              <Text fontSize="sm" color="red.500" mb="4">
+                <Icon as={FiAlertTriangle} /> Set a valid number (&gt;0). Use 0
+                to hide the grade.
+              </Text>
+            ) : null}
+            {item.gradeObtained < 1 ? (
+              <Text fontSize="sm" color="gray.500" mb="4">
+                <Icon as={FiEyeOff} /> Grade Hidden
+              </Text>
+            ) : null}
             <EditorWithLabel
               onChange={(output) =>
                 handleEditorChange(index, output, updateData)

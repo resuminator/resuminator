@@ -45,8 +45,9 @@ const EducationLayout: React.FC<SectionBoxProps> = (props) => {
    * @returns String to render according to max grade
    */
   const parseGrade = (obtained: number, max: number) => {
-    if (max === 100) return `${obtained}%`;
-    else return `${obtained}/${max}`;
+    if (obtained < 1 || isNaN(obtained)) return "";
+    if (max === 100) return `, ${obtained}%`;
+    else return `, ${obtained}/${max}`;
   };
 
   return (
@@ -66,7 +67,7 @@ const EducationLayout: React.FC<SectionBoxProps> = (props) => {
           </DataRow>
           <DataRow mb="1">
             <SubtitleRow>
-              {item.degree} {item.stream},{" "}
+              {item.degree} {item.stream}
               {parseGrade(item.gradeObtained, item.gradeMax)}
             </SubtitleRow>
             <SubtitleRow textAlign="right">{item.location}</SubtitleRow>
