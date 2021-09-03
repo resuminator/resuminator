@@ -35,7 +35,7 @@
     "express": "^4.17.1",
     "firebase": "^8.7.1",
     "framer-motion": "^4.1.11",
-    "immer": "^9.0.3",
+    "immer": "^9.0.6",
     "js-cookie": "^2.2.1",
     "js-time-diff": "^1.0.0",
     "mixpanel-browser": "^2.41.0",
