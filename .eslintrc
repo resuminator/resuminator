@@ -13,13 +13,18 @@
         "react",
         "react-hooks"
     ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
-        "plugin:@next/next/recommended"
+        "plugin:react/jsx-runtime"
     ],
     "rules": {
         "@typescript-eslint/no-unused-vars": "off",
