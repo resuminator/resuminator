@@ -33,9 +33,11 @@ Resuminator is a completely free and open source project built and maintained by
 
 You can support the development of this project if you believe this project added value to your life or could potentially add value to the lives of others. Your support helps us keep the servers and domain running and covers the maintenance budget for the project.
 
-[**Buy us a pizza**](https://www.buymeacoffee.com/resuminator)
+### [🍕 Buy us a pizza](https://www.buymeacoffee.com/resuminator)
 
 ## 🙋🏻‍♂️ Contributing to Resuminator
+💯⭐ **We'll start accepting contributions once we reach 100 stars on this project**
+
 It's so exciting to see developers, designers, and product enthusiasts willing to contribute to Resuminator! We will soon be open for accepting code contributions to the repository, but this doesn't mean you cannot help us in developing the most efficient and elegant resume builder out there.
 
 There are a few ways you can contribute to Resuminator and its community which you can find in our [Contribution Guide](CONTRIBUTING.md).
