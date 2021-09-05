@@ -30,7 +30,7 @@
     "@types/js-cookie": "^2.2.7",
     "@types/react-beautiful-dnd": "^13.0.0",
     "axios": "^0.21.1",
-    "chrome-aws-lambda": "^9.1.0",
+    "chrome-aws-lambda": "^10.1.0",
     "date-fns": "^2.21.3",
     "express": "^4.17.1",
     "firebase": "^8.7.1",
