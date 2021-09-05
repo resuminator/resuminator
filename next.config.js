@@ -23,9 +23,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-const nextConfig = {
-  webpack5: false,
-}
+const nextConfig = {}
 
 
 module.exports = withBundleAnalyzer(nextConfig);
