@@ -29,7 +29,7 @@
     "@tiptap/starter-kit": "^2.0.0-beta.51",
     "@types/js-cookie": "^2.2.7",
     "@types/react-beautiful-dnd": "^13.0.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.3",
     "chrome-aws-lambda": "^6.0.0",
     "date-fns": "^2.21.3",
     "express": "^4.17.1",
