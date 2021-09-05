@@ -58,7 +58,6 @@ const LogoWithText: React.FC<Props & BoxProps> = ({
             src={src}
             width={width}
             height={height}
-            placeholder="blur"
           />
         </a>
       </Link>
