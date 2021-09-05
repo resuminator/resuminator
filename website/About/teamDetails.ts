@@ -58,6 +58,10 @@ export const teamDetails: Array<TeamMember> = [
         link: "@_mercurybuddy",
       },
       {
+        label: "LinkedIn",
+        link: "garg-himanshu",
+      },
+      {
         label: "GitHub",
         link: "merrcury",
       },
