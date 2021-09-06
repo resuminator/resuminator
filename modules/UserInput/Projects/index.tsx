@@ -33,6 +33,7 @@ import { getUniqueID } from "../../../utils";
 import Autosave from "../Autosave";
 import {
   handleChange,
+  handleClearDate,
   handleDateChange,
   handleDragEnd,
   handleEditorChange,
@@ -149,6 +150,10 @@ const Projects = () => {
               checkboxHandler={() =>
                 handlePresentCheckbox(index, data[index].end, updateData)
               }
+              clearDateHandler={() =>
+                handleClearDate(index, data[index].start, updateData)
+              }
+              startClearable
             />
             <EditorWithLabel
               onChange={(output) =>
