@@ -86,6 +86,7 @@ export const dateDisplay = (start: Date, end: Date, view: "Y" | "YM" = "Y") => {
   const startDate = new Date(start);
   const endDate = new Date(end);
 
+  if(!start) return null;
   if (isSameMonth(startDate, endDate) && isSameYear(startDate, endDate))
     return parseDate(start, view);
   return `${parseDate(start, view)} - ${parseDate(end, view)}`;

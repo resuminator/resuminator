@@ -85,6 +85,30 @@ export const handlePresentCheckbox = (
 };
 
 /**
+ * Toggles the checkbox by controlling the value of the `end` date.
+ * @param index Index of the current object.
+ * @param value Value of "end" or Key to update. Toggles between `null` and Present Date
+ * @param action Callback action to perform. TypeOf `(index: number, key: string, value: any)`
+ * @param key Optional argument to change the key for which the value needs to be updated. Default = "end"
+ * @returns void
+ */
+export const handleClearDate = (
+  index: number,
+  value: Date,
+  action: UpdateAction
+) => {
+  const K1 = "start";
+  const K2 = "end";
+  if (value) {
+    action(index, K1, null);
+    action(index, K2, null);
+  } else {
+    action(index, K1, new Date());
+    action(index, K2, new Date());
+  }
+};
+
+/**
  * Uses string input separated by comma(',') and saves an array as tags.
  * @param e Event Object
  * @param index Index of the current object.
