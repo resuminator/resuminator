@@ -12,6 +12,9 @@ Resuminator allows you to build beautiful single-page resumes; without the hassl
 
 </div>
 
+## 📣 Latest Announcements
+[07-09-2021] **We'll start accepting contributions once we reach 100 stars on this project** 💯🌟
+
 ## Reasons why you should try it out
 
 ⭐ Create multiple resumes on a single account!
@@ -36,7 +39,6 @@ You can support the development of this project if you believe this project adde
 ### [🍕 Buy us a pizza](https://www.buymeacoffee.com/resuminator)
 
 ## 🙋🏻‍♂️ Contributing to Resuminator
-💯⭐ **We'll start accepting contributions once we reach 100 stars on this project**
 
 It's so exciting to see developers, designers, and product enthusiasts willing to contribute to Resuminator! We will soon be open for accepting code contributions to the repository, but this doesn't mean you cannot help us in developing the most efficient and elegant resume builder out there.
 
