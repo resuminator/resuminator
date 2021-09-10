@@ -29,7 +29,6 @@ const ProseMirror = (props) => ({
     paddingInlineEnd: "0",
     WebkitPaddingEnd: "0",
     minHeight: "4",
-    maxHeight: "xs",
     minWidth: "0px",
     border: "none",
     borderRadius: "none",
@@ -42,6 +41,13 @@ const ProseMirror = (props) => ({
       bg: "transparent",
       border: "none",
     },
+    maxHeight: "100%"
+  },
+  ".ProseMirror.viewer p": {
+    paddingBottom: "2"
+  },
+  ".ProseMirror.viewer P:last-child": {
+    paddingBottom: "0"
   },
   ".ProseMirror": {
     bg: props.colorMode === "light" ? "gray.100" : "whiteAlpha.50",
