@@ -57,6 +57,7 @@ const Viewer: React.FC<ViewerProps & BoxProps> = ({ withStatus, ...props }) => {
             position="absolute"
             zIndex="1"
             top="29.7cm"
+            width="21cm"
           />
         ) : null}
       </Box>
