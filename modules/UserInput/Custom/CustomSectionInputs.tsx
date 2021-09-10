@@ -171,7 +171,7 @@ const CustomSectionInputs = () => {
                   },
                   deleteHandler: () => deleteData(section._id, dataItem._id),
                 }}
-                key={index}
+                key={dataItem._id}
               >
                 {section.inputs.map((field) => (
                   <Fragment key={field._id}>

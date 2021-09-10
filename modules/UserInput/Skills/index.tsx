@@ -116,7 +116,7 @@ const Skills = () => {
               },
               deleteHandler: () => handleDelete(item._id),
             }}
-            key={index}
+            key={item._id}
           >
             <InputWithLabel
               label="Category"
