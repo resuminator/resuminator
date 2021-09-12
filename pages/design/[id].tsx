@@ -36,6 +36,7 @@ import SEO from "../../modules/SEO";
 import { UserObject } from "../../modules/User/types";
 import Viewer from "../../modules/Viewer";
 import mp from "../../services/mixpanel";
+import Papercups from "../../services/papercups";
 import InitStore from "../../store/InitStore";
 import InitUserStore from "../../store/InitUserStore";
 
@@ -88,6 +89,7 @@ const Design: NextPage<DesignProps> = ({ token, id }) => {
           </Box>
         </Box>
       </Layout>
+      <Papercups />
     </>
   );
 };

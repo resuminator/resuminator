@@ -46,6 +46,7 @@ import CustomSections from "../../modules/UserInput/Custom";
 import CustomSectionInputs from "../../modules/UserInput/Custom/CustomSectionInputs";
 import Viewer from "../../modules/Viewer";
 import mp from "../../services/mixpanel";
+import Papercups from "../../services/papercups";
 import InitStore from "../../store/InitStore";
 import InitUserStore from "../../store/InitUserStore";
 import useResumeStore from "../../store/resume.store";
@@ -116,6 +117,7 @@ const Create: NextPage<CreateProps> = ({ token, id }) => {
         </Box>
         <Viewer aria-label="Resume Preview" flexBasis="50%" withStatus />
       </Layout>
+      <Papercups />
     </>
   );
 };
