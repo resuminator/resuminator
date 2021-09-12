@@ -30,6 +30,7 @@ import ChangePassword from "../../modules/Settings/Account/ChangePassword";
 import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import mp from "../../services/mixpanel";
+import Papercups from "../../services/papercups";
 
 const SecuritySettings: NextPage = () => {
   
@@ -54,6 +55,7 @@ const SecuritySettings: NextPage = () => {
         </GridItem>
       </SettingsLayoutGrid>
       <Footer />
+      <Papercups />
     </>
   );
 };
