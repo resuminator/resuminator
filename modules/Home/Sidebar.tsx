@@ -20,9 +20,12 @@
 
 import { Box, GridItem, useColorModeValue, VStack } from "@chakra-ui/react";
 import React from "react";
-import { FiMap, FiSettings } from "react-icons/fi";
+import { FiHelpCircle, FiMap, FiSettings } from "react-icons/fi";
 import SidebarSection from "./SidebarSection";
 import SponsorCard from './SponsorCard';
+import { HELP_CENTER } from "../../data/DocLinks";
+import { FaDiscord } from "react-icons/fa";
+import { BROADMAP_HOMEPAGE, DISCORD_INVITE } from "../../data/RefLinks";
 
 const Sidebar = () => {
   const workspace = [
@@ -49,21 +52,21 @@ const Sidebar = () => {
   ];
 
   const resources = [
-    // {
-    //   title: "Guide to Resuminator",
-    //   icon: FiBook,
-    //   link: "", // /docs/getting-started
-    // },
     {
       title: "Broadmap",
       icon: FiMap,
-      link: "http://broadmap.resuminator.in",
+      link: BROADMAP_HOMEPAGE,
     },
-    // {
-    //   title: "Help Center",
-    //   icon: FiHelpCircle,
-    //   link: "", // /support
-    // },
+    {
+      title: "Help & Support",
+      icon: FiHelpCircle,
+      link: HELP_CENTER, // /support
+    },
+    {
+      title: "Join Discord Server",
+      icon: FaDiscord,
+      link: DISCORD_INVITE, // /support
+    },
   ];
 
   return (
