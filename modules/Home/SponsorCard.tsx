@@ -32,7 +32,7 @@ const SponsorCard = () => {
   };
 
   return (
-    <Box width="100%" p="4" bg={useColorModeValue("yellow.100", "gray.700")} borderRadius="16px">
+    <Box width="100%" p="4" bg={useColorModeValue("#FEF3C7", "gray.700")} borderRadius="16px">
       <Heading fontSize="md" mb="4">Sponsor this project 💛</Heading>
       <Text fontSize="sm" mb="2">We wish to keep Resuminator free. Forever. But it will be impossible without your support.</Text>
       <Text fontSize="sm" mb="4">You can support <LinkText href="/about#team" textDecoration="underline">our team</LinkText> if Resuminator has made your life easier.</Text>
