@@ -75,7 +75,7 @@ const Sidebar = () => {
         height="100%"
         width="100%"
         aria-label="section"
-        px={{ base: "1rem" }}
+        pr={{ base: "2rem" }}
       >
         <VStack
           alignItems="flex-start"
