@@ -19,6 +19,7 @@
 */
 
 import { Button } from '@chakra-ui/button'
+import { useColorModeValue } from '@chakra-ui/color-mode'
 import { Box, Heading, Text } from '@chakra-ui/layout'
 import React from 'react'
 import { BUY_ME_A_COFFEE } from '../../data/RefLinks'
@@ -30,7 +31,7 @@ const SponsorCard = () => {
   };
 
   return (
-    <Box width="100%" py="4">
+    <Box width="100%" p="4" bg={useColorModeValue("yellow.100", "gray.700")} borderRadius="16px">
       <Heading fontSize="md" mb="4">Sponsor this project 💛</Heading>
       <Text fontSize="sm" mb="2">We wish to keep Resuminator free. Forever. Buy it will be impossible without your support.</Text>
       <Text fontSize="sm" mb="4">You can support us project if this software makes your life easier.</Text>
