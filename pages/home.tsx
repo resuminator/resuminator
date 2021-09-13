@@ -66,8 +66,8 @@ const Home: NextPage<HomePageProps> = ({ token }) => {
       <Header />
       <Grid
         height="100vh"
-        templateColumns="repeat(4, 1fr)"
-        gap={4}
+        templateColumns="1fr 4fr"
+        gap={16}
         mx={{ md: "4rem", lg: "7rem" }}
         my={{ base: "2rem" }}
       >

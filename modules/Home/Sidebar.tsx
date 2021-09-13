@@ -70,7 +70,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <GridItem rowSpan={2} colSpan={1}>
+    <GridItem colSpan={1}>
       <Box
         alignItems="flex-start"
         flexDir="column"
@@ -78,7 +78,7 @@ const Sidebar = () => {
         height="100%"
         width="100%"
         aria-label="section"
-        pr={{ base: "2rem" }}
+        // pr={{ base: "2rem" }}
       >
         <VStack
           alignItems="flex-start"

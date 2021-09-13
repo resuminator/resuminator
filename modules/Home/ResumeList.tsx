@@ -38,7 +38,7 @@ const ResumeList: React.FC<ResumeListProps> = ({ handleNew }) => {
   const data = useUserStore((state) => state.active);
 
   return (
-    <GridItem colSpan={3}>
+    <GridItem colStart={2}>
       <BoxHeader
         title="My Resumes"
         subtitle="Select a resume to start editing"
