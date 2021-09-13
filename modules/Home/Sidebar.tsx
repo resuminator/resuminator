@@ -22,6 +22,7 @@ import { Box, GridItem, useColorModeValue, VStack } from "@chakra-ui/react";
 import React from "react";
 import { FiMap, FiSettings } from "react-icons/fi";
 import SidebarSection from "./SidebarSection";
+import SponsorCard from './SponsorCard';
 
 const Sidebar = () => {
   const workspace = [
@@ -86,6 +87,7 @@ const Sidebar = () => {
           <SidebarSection sectionTitle="Workspace" items={workspace} />
           <SidebarSection sectionTitle="Resources" items={resources} />
         </VStack>
+        <SponsorCard />
       </Box>
     </GridItem>
   );
