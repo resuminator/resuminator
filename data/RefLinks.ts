@@ -18,14 +18,14 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export const DISCORD_INVITE = "https://discord.gg/m8knsUfU5R";
+export const DISCORD_INVITE = "https://discord.resuminator.in";
 export const BASE_URL =
   process.env.NODE_ENV === "production"
     ? process.env.NEXT_PUBLIC_APP_PROD
     : "http://localhost:3000";
 export const SUPPORT_EMAIL = "mailto:support@resuminator.in";
 export const GITHUB_ISSUE =
-  "https://github.com/resuminator/resuminator/issues/new?assignees=&labels=&template=bug_report.md&title=%F0%9F%90%9B+BUG%3A+Give+appropriate+title+to+your+bug";
+  "https://github.com/resuminator/resuminator/issues/new?assignees=&labels=bug&template=BUG-REPORT.yml&title=%F0%9F%90%9B+Bug%3A+";
 export const RESUMINATOR_TWITTER = "https://twitter.com/resuminator";
 export const WEBSITE = "https://resuminator.in";
 export const BUY_ME_A_COFFEE = "https://www.buymeacoffee.com/resuminator";

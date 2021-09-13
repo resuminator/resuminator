@@ -44,7 +44,7 @@ It's so exciting to see developers, designers, and product enthusiasts willing t
 
 There are a few ways you can contribute to Resuminator and its community which you can find in our [Contribution Guide](CONTRIBUTING.md).
 
-You can also join our [Discord Server](https://discord.gg/KmXmJUJJMj) and participate in [GitHub Discussions](https://github.com/resuminator/resuminator/discussions).
+You can also join our [Discord Server](https://discord.resuminator.in) and participate in [GitHub Discussions](https://github.com/resuminator/resuminator/discussions).
 
 ## 📔 Documentation
 You can find the documentation, wiki, and guides at [docs.resuminator.in](https://docs.resuminator.in)
@@ -56,7 +56,7 @@ To contribute to the documentation see [resuminator/docs](https://github.com/res
 We're a budding community of developers and designers. 
 Resuminator believes in building in public and thrives through a community who are willing to support and contribute to Resuminator and its products. 
 
-* Join the [Resuminator Discord Server](https://discord.gg/KmXmJUJJMj) where we discuss design, development, product roadmaps, provide one-on-one support, and help each other out.
+* Join the [Resuminator Discord Server](https://discord.resuminator.in) where we discuss design, development, product roadmaps, provide one-on-one support, and help each other out.
 
 * Join our [GitHub Discussions](https://github.com/resuminator/resuminator/discussions) Community for feedback and support on Resuminator or its products.
 
