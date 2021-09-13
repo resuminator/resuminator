@@ -22,14 +22,19 @@ import { Button } from '@chakra-ui/button'
 import { Box, Heading, Text } from '@chakra-ui/layout'
 import React from 'react'
 import { BUY_ME_A_COFFEE } from '../../data/RefLinks'
+import mp from '../../services/mixpanel'
 
 const SponsorCard = () => {
+  const trackMetric = (from: string, to: string) => {
+    mp.track("Sponsor CTA Trigger", { from, to });
+  };
+
   return (
     <Box width="100%" py="4">
       <Heading fontSize="md" mb="4">Sponsor this project 💛</Heading>
       <Text fontSize="sm" mb="2">We wish to keep Resuminator free. Forever. Buy it will be impossible without your support.</Text>
       <Text fontSize="sm" mb="4">You can support us project if this software makes your life easier.</Text>
-      <Button as="a" href={BUY_ME_A_COFFEE} target="_blank" size="sm" colorScheme="yellow">Buy us a pizza 🍕</Button>
+      <Button as="a" href={BUY_ME_A_COFFEE} target="_blank" size="sm" colorScheme="yellow" onClick={() => trackMetric("Home Page", BUY_ME_A_COFFEE)}>Buy us a pizza 🍕</Button>
     </Box>
   )
 }
