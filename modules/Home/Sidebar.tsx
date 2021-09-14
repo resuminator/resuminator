@@ -20,8 +20,12 @@
 
 import { Box, GridItem, useColorModeValue, VStack } from "@chakra-ui/react";
 import React from "react";
-import { FiMap, FiSettings } from "react-icons/fi";
+import { FiHelpCircle, FiMap, FiSettings } from "react-icons/fi";
 import SidebarSection from "./SidebarSection";
+import SponsorCard from './SponsorCard';
+import { HELP_CENTER } from "../../data/DocLinks";
+import { FaDiscord } from "react-icons/fa";
+import { BROADMAP_HOMEPAGE, DISCORD_INVITE } from "../../data/RefLinks";
 
 const Sidebar = () => {
   const workspace = [
@@ -48,25 +52,25 @@ const Sidebar = () => {
   ];
 
   const resources = [
-    // {
-    //   title: "Guide to Resuminator",
-    //   icon: FiBook,
-    //   link: "", // /docs/getting-started
-    // },
     {
       title: "Broadmap",
       icon: FiMap,
-      link: "http://broadmap.resuminator.in",
+      link: BROADMAP_HOMEPAGE,
     },
-    // {
-    //   title: "Help Center",
-    //   icon: FiHelpCircle,
-    //   link: "", // /support
-    // },
+    {
+      title: "Help & Support",
+      icon: FiHelpCircle,
+      link: HELP_CENTER, // /support
+    },
+    {
+      title: "Join Discord Server",
+      icon: FaDiscord,
+      link: DISCORD_INVITE, // /support
+    },
   ];
 
   return (
-    <GridItem rowSpan={2} colSpan={1}>
+    <GridItem colSpan={1}>
       <Box
         alignItems="flex-start"
         flexDir="column"
@@ -74,7 +78,7 @@ const Sidebar = () => {
         height="100%"
         width="100%"
         aria-label="section"
-        px={{ base: "1rem" }}
+        // pr={{ base: "2rem" }}
       >
         <VStack
           alignItems="flex-start"
@@ -86,6 +90,7 @@ const Sidebar = () => {
           <SidebarSection sectionTitle="Workspace" items={workspace} />
           <SidebarSection sectionTitle="Resources" items={resources} />
         </VStack>
+        <SponsorCard />
       </Box>
     </GridItem>
   );

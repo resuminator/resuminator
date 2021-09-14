@@ -132,7 +132,7 @@ const ResumePaper = () => {
                     flexDir="column"
                     aria-label={`Column-${index + 1}`}
                     index={index}
-                    px={spacing * 4 - 1}
+                    px={spacing >= 1 ? spacing * 4 - 1 : 3}
                     py={spacing * 2 - 1}
                     flexBasis={`${(1 / body.length) * 100}%`}
                     bg={snapshot.isDraggingOver ? dndProps.bg : "inherit"}
