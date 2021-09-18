@@ -39,9 +39,9 @@ const config: NextSeoProps = {
         alt: defaultSeoConfig.title,
       },
       {
-        url: OGImage_Twitter,
-        width: 800,
-        height: 418,
+        url: OGImage,
+        width: 1200,
+        height: 600,
         alt: defaultSeoConfig.title,
       },
       {
