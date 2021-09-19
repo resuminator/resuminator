@@ -34,7 +34,7 @@ const Subtext = () => {
       color={useColorModeValue("blackAlpha.800", "whiteAlpha.800")}
     >
       Resuminator gives you fastest and the simplest resume building experience.
-      Save hours of frustation, seize the day.
+      Apply to your dream job, 2x faster!
     </Text>
   );
 };
