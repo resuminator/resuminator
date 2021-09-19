@@ -34,7 +34,7 @@ export const GITHUB_REPO_GFI = "https://github.com/resuminator/resuminator/issue
 export const BROADMAP_HOMEPAGE = "https://broadmap.resuminator.in/";
 export const BROADMAP_TWITTER = "https://twitter.com/broadmaps";
 export const BROADMAP_SHARE_TWITTER =
-  "https://www.twitter.com/share?url=http%3A%2F%2Fbroadmap.resuminator.in%2F&via=revue&text=I%20just%20discovered%20%40broadmaps%20by%20%40resuminator.%20The%20concept%20of%20getting%20a%20%22playlist%22%20of%20resources%20every%20week%20seems%20exciting%20to%20me%21%20Calling%20all%20curious%20folks%20to%20give%20it%20a%20try%20for%20sure.&related=revue";
+  "https://www.twitter.com/share?url=https%3A%2F%2Fbroadmap.xyz&text=I%20just%20discovered%20%40broadmaps%20by%20%40_viveknigam_%20%26%20%40_mercurybuddy.%20It%27s%20like%20a%20high-signal%20information%20diet%20about%20products%2C%20tech%2C%20and%20growth%21%20Calling%20all%20curious%20folks%20to%20give%20it%20a%20try%20for%20sure.";
 export const RESUMINATOR_SHARE_TWITTER =
   "https://www.twitter.com/share?url=https%3A%2F%2Fresuminator.in%2F&text=I%20just%20signed%20up%20for%20%40resuminator%20and%20I%27m%20excited%20to%20try%20it%20out%21%20Calling%20out%20all%20job%20seekers%20to%20give%20it%20a%20try%20this%20season.%20%23ResuminatorResume%20";
 export const CONTRIBUTE_HINTS="";
