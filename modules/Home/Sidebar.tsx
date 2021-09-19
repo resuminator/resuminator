@@ -20,12 +20,13 @@
 
 import { Box, GridItem, useColorModeValue, VStack } from "@chakra-ui/react";
 import React from "react";
-import { FiHelpCircle, FiMap, FiSettings } from "react-icons/fi";
-import SidebarSection from "./SidebarSection";
-import SponsorCard from './SponsorCard';
-import { HELP_CENTER } from "../../data/DocLinks";
 import { FaDiscord } from "react-icons/fa";
+import { FiHelpCircle, FiSettings } from "react-icons/fi";
+import BroadmapIcon from "../../components/layouts/Logos/Broadmap";
+import { HELP_CENTER } from "../../data/DocLinks";
 import { BROADMAP_HOMEPAGE, DISCORD_INVITE } from "../../data/RefLinks";
+import SidebarSection from "./SidebarSection";
+import SponsorCard from "./SponsorCard";
 
 const Sidebar = () => {
   const workspace = [
@@ -54,7 +55,7 @@ const Sidebar = () => {
   const resources = [
     {
       title: "Broadmap",
-      icon: FiMap,
+      icon: BroadmapIcon,
       link: BROADMAP_HOMEPAGE,
     },
     {
@@ -63,7 +64,7 @@ const Sidebar = () => {
       link: HELP_CENTER, // /support
     },
     {
-      title: "Join Discord Server",
+      title: "Discord Server",
       icon: FaDiscord,
       link: DISCORD_INVITE, // /support
     },
