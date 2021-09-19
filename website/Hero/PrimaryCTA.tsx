@@ -47,7 +47,7 @@ const PrimaryCTA: React.FC<MotionBoxProps> = ({ ...rest }) => {
         rightIcon={<FiArrowRight />}
         onClick={routeToSignup}
       >
-        Get Started Today
+        Start building your resume
       </Button>
     </MotionBox>
   );
