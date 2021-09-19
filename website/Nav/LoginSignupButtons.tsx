@@ -48,7 +48,6 @@ const LoginSignupButtons: React.FC<ButtonGroupProps> = ({ ...props }) => {
         colorScheme="blue"
         size="md"
         variant="solid"
-        rightIcon={<FiArrowRight />}
         onClick={routeToSignup}
       >
         Sign up
