@@ -30,9 +30,9 @@ const Hero = () => {
     <SectionLayout as={Center} flexDir="column" aria-label="Hero">
       <MainHeading />
       <Subtext />
-      <PrimaryCTA mb="2"/>
-      <Text mb="4" fontSize="xs" color="blue.600">
-        Yes, this button bounces on clicking!
+      <PrimaryCTA mb="2" />
+      <Text mb="4" fontSize="sm" color="blue.600">
+        Yes, all features are completely free!
       </Text>
     </SectionLayout>
   );
