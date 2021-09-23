@@ -29,6 +29,7 @@ export const GITHUB_ISSUE =
 export const RESUMINATOR_TWITTER = "https://twitter.com/resuminator";
 export const WEBSITE = "https://resuminator.in";
 export const BUY_ME_A_COFFEE = "https://www.buymeacoffee.com/resuminator";
+export const OPEN_COLLECTIVE = "https://opencollective.com/resuminator";
 export const GITHUB_REPO = "https://github.com/resuminator/resuminator";
 export const GITHUB_REPO_GFI = "https://github.com/resuminator/resuminator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22";
 export const BROADMAP_HOMEPAGE = "https://broadmap.resuminator.in/";

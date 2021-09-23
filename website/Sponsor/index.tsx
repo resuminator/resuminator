@@ -21,8 +21,9 @@
 import { Box, Button, Stack, Text, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
 import { FaPizzaSlice } from "react-icons/fa";
+import { SiOpencollective } from "react-icons/si";
 import LinkText from "../../components/common/LinkText";
-import { BUY_ME_A_COFFEE } from "../../data/RefLinks";
+import { BUY_ME_A_COFFEE, OPEN_COLLECTIVE } from "../../data/RefLinks";
 import mp from "../../services/mixpanel";
 import HeadingBox from "../common/HeadingBox";
 import SectionLayout from "../common/SectionLayout";
@@ -59,13 +60,18 @@ const Sponsor = () => {
         justifyContent="center"
         isInline={useBreakpointValue({ md: true })}
       >
-        {/* <Button
-              leftIcon={<FaHeart />}
-              colorScheme="purple"
-              size={useBreakpointValue({ md: "lg" })}
-            >
-              Become a supporter
-            </Button> */}
+        <Button
+          as="a"
+          href={OPEN_COLLECTIVE}
+          target="_blank"
+          leftIcon={<SiOpencollective />}
+          colorScheme="yellow"
+          color="#1A202C"
+          size={useBreakpointValue({ md: "lg" })}
+          onClick={() => trackMetric("Open Collective", OPEN_COLLECTIVE)}
+        >
+          Become a supporter
+        </Button>
         <Button
           as="a"
           href={BUY_ME_A_COFFEE}
