@@ -18,7 +18,12 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { SimpleGrid, Stack, useBreakpointValue } from "@chakra-ui/react";
+import {
+  SimpleGrid,
+  HStack,
+  Stack,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { chunk } from "@chakra-ui/utils";
 import { getUniqueID } from "../../utils";
 import HeadingBox from "../common/HeadingBox";
@@ -44,7 +49,11 @@ const Testimonials = () => {
         }}
       />
       <SimpleGrid
-        templateColumns={{ base: "1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr" }}
+        templateColumns={{
+          base: "repeat(1, minmax(0, 1fr))",
+          md: "repeat(2, minmax(0, 1fr))",
+          lg: "repeat(3, minmax(0, 1fr))",
+        }}
         gridColumnGap={{ md: "4" }}
       >
         {chunk(tweets, CHUNK_SIZE).map((tweetList, index) => (

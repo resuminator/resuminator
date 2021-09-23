@@ -23,7 +23,7 @@ import { TeamMember } from "./types";
 export const teamDetails: Array<TeamMember> = [
   {
     image:
-      "https://pbs.twimg.com/profile_images/1391650308384714754/KuDab1ek_400x400.jpg",
+      "https://pbs.twimg.com/profile_images/1438358493799452672/vNWqLAHP_400x400.jpg",
     fullName: "Vivek Nigam",
     jobTitle: "Creator, Lead Developer",
     bio: "Collects dozens of typefaces, uses only two. Part-time mentor. Frontend and Design, execution and strategy.",
