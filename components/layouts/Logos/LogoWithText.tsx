@@ -19,14 +19,15 @@
 */
 
 import { useColorModeValue } from "@chakra-ui/color-mode";
+import { Image, ImageProps } from "@chakra-ui/image";
 import { Box, BoxProps, Text } from "@chakra-ui/layout";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
   hasTagline?: boolean;
-  width?: string;
-  height?: string;
+  width?: ImageProps["width"];
+  height?: ImageProps["height"];
   variant?: "light" | "dark";
 }
 
@@ -53,12 +54,7 @@ const LogoWithText: React.FC<Props & BoxProps> = ({
     <Box display="flex" flexDir="column" w="fit-content" {...props}>
       <Link href="/" scroll={false}>
         <a>
-          <Image
-            layout="fixed"
-            src={src}
-            width={width}
-            height={height}
-          />
+          <Image layout="fixed" src={src} width={width} height={height} />
         </a>
       </Link>
       {hasTagline && (
