@@ -19,15 +19,14 @@
 */
 
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Image, ImageProps } from "@chakra-ui/image";
 import { Box, BoxProps, Text } from "@chakra-ui/layout";
-// import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
   hasTagline?: boolean;
-  width?: ImageProps["width"];
-  height?: ImageProps["height"];
+  width?: string;
+  height?: string;
   variant?: "light" | "dark";
 }
 
