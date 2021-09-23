@@ -8,8 +8,8 @@ const BroadmapIcon = () =>
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="500" cy="500" r="475" stroke="#151515" stroke-width="50" />
-      <circle cx="500" cy="500" r="325" stroke="#151515" stroke-width="50" />
+      <circle cx="500" cy="500" r="475" stroke="#151515" strokeWidth="50" />
+      <circle cx="500" cy="500" r="325" stroke="#151515" strokeWidth="50" />
       <circle cx="500" cy="500" r="200" fill="#151515" />
     </Icon>,
     <Icon
@@ -17,8 +17,8 @@ const BroadmapIcon = () =>
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="500" cy="500" r="475" stroke="#FFFAFA" stroke-width="50" />
-      <circle cx="500" cy="500" r="325" stroke="#FFFAFA" stroke-width="50" />
+      <circle cx="500" cy="500" r="475" stroke="#FFFAFA" strokeWidth="50" />
+      <circle cx="500" cy="500" r="325" stroke="#FFFAFA" strokeWidth="50" />
       <circle cx="500" cy="500" r="200" fill="#FFFAFA" />
     </Icon>
   );
