@@ -2,6 +2,7 @@ import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box } from "@chakra-ui/layout";
 import React from "react";
 import HfHero from "../website/Hacktoberfest/HfHero";
+import { HFColors } from "../website/Hacktoberfest/hf_colors";
 import Nav from "../website/Nav";
 
 interface Props {}
@@ -9,7 +10,7 @@ interface Props {}
 const Hacktoberfest = (props: Props) => {
   return (
     <Box
-      backgroundColor="#FFEDD5"
+      backgroundColor={HFColors.bg.primary}
       width="100%"
       minH="100vh"
       backgroundImage={useColorModeValue(
@@ -21,7 +22,7 @@ const Hacktoberfest = (props: Props) => {
       backgroundSize="cover"
     >
       <Nav />
-      <HfHero/>
+      <HfHero />
     </Box>
   );
 };
