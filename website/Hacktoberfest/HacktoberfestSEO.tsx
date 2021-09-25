@@ -18,9 +18,15 @@ const HacktoberfestSEO = (props: Props) => {
         {
           url: OG_IMAGE,
           width: 1200,
-          height: 600,
+          height: 628,
           alt: "Contribute to Resuminator | Hacktoberfest 2021",
         },
+        {
+            url: OG_IMAGE,
+            width: 1200,
+            height: 600,
+            alt: "Contribute to Resuminator | Hacktoberfest 2021",
+          },
       ],
       site_name: "Contribute to Resuminator | Hacktoberfest 2021",
     },
@@ -29,7 +35,7 @@ const HacktoberfestSEO = (props: Props) => {
       cardType: "summary_large_image",
     },
   };
-  
+
   return (
     <NextSeo
       openGraph={{
