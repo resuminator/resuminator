@@ -21,6 +21,7 @@
 export const HFColors = {
   bg: {
     primary: "#FFEDD5",
+    secondary: "#34403A"
   },
   text: {
     primary: "#F74700",
