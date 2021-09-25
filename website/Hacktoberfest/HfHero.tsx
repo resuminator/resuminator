@@ -25,9 +25,9 @@ import { useBreakpointValue } from "@chakra-ui/media-query";
 import dynamic from "next/dynamic";
 import React from "react";
 import { HFColors } from "./hf_colors";
-const CountdownTimer = dynamic(() => import("./CountdownTimer"), {
-  ssr: false,
-});
+// const CountdownTimer = dynamic(() => import("./CountdownTimer"), {
+//   ssr: false,
+// });
 
 interface Props {}
 
@@ -70,7 +70,7 @@ const HfHero = (props: Props) => {
       >
         1st October 2021 to 31st October 2021
       </Text>
-      <CountdownTimer />
+      {/* <CountdownTimer /> */}
     </Center>
   );
 };
