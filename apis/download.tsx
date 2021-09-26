@@ -26,7 +26,7 @@ import axios from "axios";
  * @returns A Resume PDF
  */
 export const downloadPdf = async (token: string, id: string) => {
-  return await axios.get(`/api/download?id=${id}`, {
+  return await axios.get(`${process.env.NEXT_PUBLIC_PAPYRUS}/api?id=${id}`, {
     responseType: "arraybuffer",
     headers: {
       authorization: token,
