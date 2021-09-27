@@ -65,7 +65,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ChakraProvider theme={DefaultTheme}>
         <QueryClientProvider client={queryClientRef.current}>
           <Hydrate state={pageProps.dehydratedState}>
-            <SEO />
             <Component {...pageProps} />
           </Hydrate>
         </QueryClientProvider>

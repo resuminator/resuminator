@@ -23,6 +23,7 @@ import Cookies from "js-cookie";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
+import SEO from "../modules/SEO";
 import mp from "../services/mixpanel";
 import Announcement from "../website/Banners/Announcement";
 import GetStarted from "../website/Banners/GetStarted";
@@ -48,27 +49,30 @@ const Index: NextPage = () => {
   }, []);
 
   return (
-    <Box
-      display="flex"
-      flexDir="column"
-      justifyContent="space-between"
-      minH="100vh"
-      mt="16"
-    >
-      <Nav />
-      <Announcement />
-      <Hero />
-      <Graph />
-      <FourGrid />
-      <Champions />
-      <OpenSource />
-      <Sponsor />
-      <Testimonials />
-      <Broadmap />
-      <GetStarted />
-      {!acceptedCookie && <CookieBanner />}
-      <Footer />
-    </Box>
+    <>
+      <SEO />
+      <Box
+        display="flex"
+        flexDir="column"
+        justifyContent="space-between"
+        minH="100vh"
+        mt="16"
+      >
+        <Nav />
+        <Announcement />
+        <Hero />
+        <Graph />
+        <FourGrid />
+        <Champions />
+        <OpenSource />
+        <Sponsor />
+        <Testimonials />
+        <Broadmap />
+        <GetStarted />
+        {!acceptedCookie && <CookieBanner />}
+        <Footer />
+      </Box>
+    </>
   );
 };
 
