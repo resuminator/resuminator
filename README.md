@@ -2,7 +2,7 @@
     <img alt="Resuminator" src="https://user-images.githubusercontent.com/30192068/130635620-7d41f775-151a-4f00-9899-e891224870dd.png" width=100% />
 </div>
 
-<h1 align="center"> Resuminator V2</h1>
+<h1 align="center"> Resuminator</h1>
 <div align="center">
 
 Resuminator allows you to build beautiful single-page resumes; without the hassle. Resuminator gives you fastest and the simplest resume building experience. Save hours of frustation, seize the day.
@@ -13,7 +13,8 @@ Resuminator allows you to build beautiful single-page resumes; without the hassl
 </div>
 
 ## 📣 Latest Announcements
-[07-09-2021] **We'll start accepting contributions once we reach 100 stars on this project** 💯🌟
+🆕 [27-09-2021] Resuminator is participating in [Hacktoberfest 2021](https://hacktoberfest.digitalocean.com) 🥳
+[07-09-2021] We'll start accepting contributions once we reach 100 stars on this project 💯🌟
 
 ## Reasons why you should try it out
 
