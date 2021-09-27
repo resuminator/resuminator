@@ -13,7 +13,7 @@ const HacktoberfestSEO = (props: Props) => {
       "Participate in Hacktoberfest 2021 Hosted by DigitalOcean with Resuminator. Contribute to our codebase and earn your PR towards completing the Hacktoberfest challenge.",
     canonical: "https://www.resuminator.in",
     openGraph: {
-      url: "https://www.resuminator.in",
+      url: "https://www.resuminator.in/hacktoberfest",
       images: [
         {
           url: OG_IMAGE,
