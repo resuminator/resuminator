@@ -23,6 +23,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../modules/Auth/AuthContext';
 
 const Papercups = () => {
+  const KEY = process.env.NEXT_PUBLIC_PAPERCUPS;
   const auth = useAuth();
   const [user, setUser] = useState({
     uid: "",
@@ -40,9 +41,13 @@ const Papercups = () => {
     }
   }, [auth]);
 
+  //Handling case when Papercups Account key is not present.
+  //In that case do not load papercups at all.
+  if(!KEY) return null;
+
   return (
     <ChatWidget
-      accountId={process.env.NEXT_PUBLIC_PAPERCUPS}
+      accountId={KEY}
       title="Welcome to Resuminator"
       subtitle="If you have any query, just drop us a message here 🤙🏻"
       primaryColor="#3182CE"
