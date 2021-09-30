@@ -19,7 +19,12 @@
 */
 
 import mixpanel from "mixpanel-browser";
-mixpanel.init(process.env.NEXT_PUBLIC_MIXPANEL);
+
+//If there is no token in the env variables, the TEST_TOKEN will initialize Mixpanel
+//It does not throw error just that nothing will be logged.
+const KEY = process.env.NEXT_PUBLIC_MIXPANEL || 'TEST_TOKEN';
+
+mixpanel.init(KEY);
 
 const mp = mixpanel;
 export default mp;
