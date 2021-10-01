@@ -61,7 +61,9 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
     setRemember(e.target.checked);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     if (!(credentials.email && credentials.password))
       return createToast("Please enter valid email and password", "warning");
     setStatus(Status.loading);
@@ -159,32 +161,34 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
       transition={{ duration: 0.5 }}
     >
       <VerifyEmailNotice onClick={handleEmailVerification} />
-      <InputField
-        label="Email"
-        name="email"
-        value={credentials.email}
-        type="email"
-        onChange={handleChange}
-      />
-      <InputField
-        label="Password"
-        name="password"
-        value={credentials.password}
-        type="password"
-        onChange={handleChange}
-      />
-      <Button
-        isFullWidth
-        variant="solid"
-        colorScheme="blue"
-        textAlign="center"
-        mb="4"
-        isLoading={status === Status.loading}
-        loadingText="Logging in"
-        onClick={handleSubmit}
-      >
-        Log In
-      </Button>
+      <form onSubmit={handleSubmit}>
+        <InputField
+          label="Email"
+          name="email"
+          value={credentials.email}
+          type="email"
+          onChange={handleChange}
+        />
+        <InputField
+          label="Password"
+          name="password"
+          value={credentials.password}
+          type="password"
+          onChange={handleChange}
+        />
+        <Button
+          type="submit"
+          isFullWidth
+          variant="solid"
+          colorScheme="blue"
+          textAlign="center"
+          mb="4"
+          isLoading={status === Status.loading}
+          loadingText="Logging in"
+        >
+          Log In
+        </Button>
+      </form>
       <Box
         display="flex"
         alignItems="center"
