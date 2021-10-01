@@ -40,7 +40,7 @@ const Renderer: React.FC<CountdownRenderProps> = ({
       <ButtonGroup my="4">
         <Button
           as="a"
-          href="#issues"
+          href="https://github.com/resuminator/resuminator/issues/95"
           colorScheme="orange"
           rightIcon={<FiGitPullRequest />}
         >
@@ -48,7 +48,7 @@ const Renderer: React.FC<CountdownRenderProps> = ({
         </Button>
         <Button
           as="a"
-          href={""}
+          href="https://docs.resuminator.in/docs/hacktoberfest"
           colorScheme="black"
           variant="outline"
           rightIcon={<FiBook />}
