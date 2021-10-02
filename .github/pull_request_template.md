@@ -42,7 +42,7 @@ Please delete options that are not relevant. -->
 - [ ] I have read and agree with [Code of Conduct](https://docs.resuminator.in/docs/legal/code-of-conduct)
 - [ ] I am a registered user of Resuminator. 
 
-**Email Registered on Resuminator: ** 
+**Email Registered on Resuminator:** 
 
 <!-- This will help us tag contribution to your profile if we planned to do so it in future. -->
 
