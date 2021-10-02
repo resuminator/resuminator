@@ -1,8 +1,8 @@
 
 newIssueWelcomeComment: |
-  Thanks for digging in and opening an Issue here. Resuminator is awesome because of people like. 
+  Thanks for digging in and opening an Issue here. Resuminator is awesome because of people like you. 
   
-  ![INVESTIGATE](https://media.giphy.com/media/y9NdYQ4ddDq4WbtkGc/giphy.gif)
+  
   
   Make sure to follow Issue Template & Contributing Guidelines! 
 
@@ -12,13 +12,12 @@ newPRWelcomeComment: |
   
   Make sure to complete PR Template and read our contributing guidelines. 
   
-  ![Thanks](https://media.giphy.com/media/8Iv5lqKwKsZ2g/giphy.gif)
 
 
 firstPRMergeComment: |
   Congrats on merging your first pull request! We here at Resuminator are proud of you! 
   
-  ![Congrats](https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif)
+  
 
 
 
