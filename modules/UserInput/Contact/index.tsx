@@ -39,6 +39,19 @@ import SocialMediaMenu from "./SocialMediaMenu";
 import useContactStore from "./store";
 import { ContactDataObject } from "./types";
 
+const SocialHandles: Record<string, string> = {
+  LinkedIn: "(https://www.)?linkedin.com/in/([A-z0-9_-]+)/?",
+  Twitter: "(https://www.)?twitter.com/([A-z0-9_-]+)/?",
+  GitHub: "(https://www.)?github.com/([A-z0-9_-]+)/?",
+  GitLab: "(https://www.)?githlab.com/([A-z0-9_-]+)/?",
+  Email: "",
+  Phone: "",
+  Portfolio: "(https://)?([\\w+]+)/?",
+  Behance: "(https://www.)?behance.com/([A-z0-9_-]+)/?",
+  Dribbble: "(https://www.)?dribbble.com/([A-z0-9_-]+)/?",
+  YouTube: "(https://www.)?youtube.com/([A-z0-9_-]+)/?",
+};
+
 const Contact = () => {
   const data = useContactStore((state) => state.contact);
   const setProperty = useContactStore((state) => state.setProperty);
@@ -96,6 +109,17 @@ const Contact = () => {
                     isDisabled={item.isHidden}
                     fontSize="sm"
                     onChange={(e) => update(index, "link", e.target.value)}
+                    onBlur={() => {
+                      const regex = new RegExp(
+                        SocialHandles[item.label] || "//",
+                        "i"
+                      );
+                      console.log(regex);
+                      const username = item.link?.match(regex)?.[2];
+                      console.log(item.link?.match(regex), username);
+                      if (!username) return;
+                      update(index, "link", username);
+                    }}
                   />
                 </InputGroup>
                 <ItemMenu
