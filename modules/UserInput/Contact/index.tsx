@@ -110,13 +110,10 @@ const Contact = () => {
                     fontSize="sm"
                     onChange={(e) => update(index, "link", e.target.value)}
                     onBlur={() => {
-                      const regex = new RegExp(
-                        SocialHandles[item.label] || "//",
-                        "i"
-                      );
-                      console.log(regex);
+                      const regexText = SocialHandles[item.label];
+                      if (!regexText) return;
+                      const regex = new RegExp(regexText || "//", "i");
                       const username = item.link?.match(regex)?.[2];
-                      console.log(item.link?.match(regex), username);
                       if (!username) return;
                       update(index, "link", username);
                     }}
