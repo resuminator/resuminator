@@ -18,16 +18,12 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import {
-  Box,
-  Button,
-  ButtonProps,
-  HStack, Text
-} from "@chakra-ui/react";
+import { Box, Button, ButtonProps, HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { IconType } from "react-icons/lib";
+import { useColorModeValue } from "@chakra-ui/react";
 
 export type SideBarItems = Array<{
   title: string;
@@ -45,9 +41,10 @@ const SidebarSection: React.FC<SidebarOptionsProps> = ({
   items,
   itemProps = { size: "sm" },
 }) => {
+  const colorScheme = useColorModeValue("blue", "blue.200");
   const router = useRouter();
   const pathname = router.pathname;
-  
+
   return (
     <Box mb="4" width="100%">
       <Text
@@ -61,11 +58,7 @@ const SidebarSection: React.FC<SidebarOptionsProps> = ({
         {sectionTitle}
       </Text>
       {items.map((item) => (
-        <HStack
-          key={item.title}
-          transition="0.2s all"
-          width="inherit"
-        >
+        <HStack key={item.title} transition="0.2s all" width="inherit">
           <Link href={item.link}>
             <Button
               {...itemProps}
@@ -75,7 +68,7 @@ const SidebarSection: React.FC<SidebarOptionsProps> = ({
               justifyContent="left"
               fontWeight={item.link === pathname ? "semibold" : "normal"}
               leftIcon={<item.icon />}
-              color={item.link === pathname ? "blue" : "inherit"}
+              color={item.link === pathname ? colorScheme : "inherit"}
             >
               {item.title}
             </Button>
