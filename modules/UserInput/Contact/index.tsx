@@ -44,12 +44,10 @@ const SocialHandles: Record<string, string> = {
   Twitter: "(https://www.)?twitter.com/([A-z0-9_-]+)/?",
   GitHub: "(https://www.)?github.com/([A-z0-9_-]+)/?",
   GitLab: "(https://www.)?githlab.com/([A-z0-9_-]+)/?",
-  Email: "",
-  Phone: "",
   Portfolio: "(https://)?([\\w+]+)/?",
   Behance: "(https://www.)?behance.com/([A-z0-9_-]+)/?",
   Dribbble: "(https://www.)?dribbble.com/([A-z0-9_-]+)/?",
-  YouTube: "(https://www.)?youtube.com/([A-z0-9_-]+)/?",
+  YouTube: "(https://www.)?youtube.com/c/([A-z0-9_-]+)/?",
 };
 
 const Contact = () => {
