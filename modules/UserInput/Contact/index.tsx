@@ -39,11 +39,11 @@ import SocialMediaMenu from "./SocialMediaMenu";
 import useContactStore from "./store";
 import { ContactDataObject } from "./types";
 
-const SocialHandles: Record<string, string> = {
+const SocialHandleRegexRecord: Record<string, string> = {
   LinkedIn: "(https://www.)?linkedin.com/in/([A-z0-9_-]+)/?",
   Twitter: "(https://www.)?twitter.com/([A-z0-9_-]+)/?",
   GitHub: "(https://www.)?github.com/([A-z0-9_-]+)/?",
-  GitLab: "(https://www.)?githlab.com/([A-z0-9_-]+)/?",
+  GitLab: "(https://www.)?gitlab.com/([A-z0-9_-]+)/?",
   Portfolio: "(https://)?([\\w+]+)/?",
   Behance: "(https://www.)?behance.com/([A-z0-9_-]+)/?",
   Dribbble: "(https://www.)?dribbble.com/([A-z0-9_-]+)/?",
@@ -106,15 +106,17 @@ const Contact = () => {
                     value={item.link}
                     isDisabled={item.isHidden}
                     fontSize="sm"
-                    onChange={(e) => update(index, "link", e.target.value)}
-                    onBlur={() => {
-                      const regexText = SocialHandles[item.label];
-                      if (!regexText) return;
-                      const regex = new RegExp(regexText || "//", "i");
+                    onChange={React.useCallback((e) =>
+                      update(index, "link", e.target.value)
+                    )}
+                    onBlur={React.useCallback(() => {
+                      const regexPattern = SocialHandleRegexRecord[item.label];
+                      if (!regexPattern) return;
+                      const regex = new RegExp(regexPattern || "//", "i");
                       const username = item.link?.match(regex)?.[2];
                       if (!username) return;
                       update(index, "link", username);
-                    }}
+                    })}
                   />
                 </InputGroup>
                 <ItemMenu
