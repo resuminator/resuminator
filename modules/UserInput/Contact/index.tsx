@@ -68,6 +68,15 @@ const Contact = () => {
   //Partially applied patchContact function for Autosave
   const patchFn = patchContact("contact");
 
+  const sanitizeSocialHandleInput = (index, update, item) => {
+    const regexPattern = SocialHandleRegexRecord[item.label];
+    if (!regexPattern) return;
+    const regex = new RegExp(regexPattern || "//", "i");
+    const username = item.link?.match(regex)?.[2];
+    if (!username) return;
+    update(index, "link", username);
+  };
+
   return (
     <Section
       header={{
@@ -106,17 +115,10 @@ const Contact = () => {
                     value={item.link}
                     isDisabled={item.isHidden}
                     fontSize="sm"
-                    onChange={React.useCallback((e) =>
-                      update(index, "link", e.target.value)
-                    )}
-                    onBlur={React.useCallback(() => {
-                      const regexPattern = SocialHandleRegexRecord[item.label];
-                      if (!regexPattern) return;
-                      const regex = new RegExp(regexPattern || "//", "i");
-                      const username = item.link?.match(regex)?.[2];
-                      if (!username) return;
-                      update(index, "link", username);
-                    })}
+                    onChange={(e) => update(index, "link", e.target.value)}
+                    onBlur={() =>
+                      sanitizeSocialHandleInput(index, update, item)
+                    }
                   />
                 </InputGroup>
                 <ItemMenu
