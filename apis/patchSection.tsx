@@ -33,13 +33,13 @@ import getHeaders from "../utils/headers";
  */
 const patchSection =
   <T extends unknown>(endpoint: string) =>
-    async (token: string = null, resumeId: string, body: Array<T>) => {
-      const res = await axios.patch(`${baseUrl}/${endpoint}/${resumeId}`, body, {
-        headers: getHeaders(token),
-      });
+  async (token: string = null, resumeId: string, body: Array<T>) => {
+    const res = await axios.patch(`${baseUrl}/${endpoint}/${resumeId}`, body, {
+      headers: getHeaders(token)
+    });
 
-      return res.data;
-    };
+    return res.data;
+  };
 
 /**
  * Updates Education Array
