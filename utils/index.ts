@@ -57,7 +57,7 @@ export const truncateString = (str: string, limit: number) =>
 export const updateArray = <T>(array: Array<T>, index: number, obj: T) => [
   ...array.slice(0, index),
   obj,
-  ...array.slice(index + 1),
+  ...array.slice(index + 1)
 ];
 
 /**
@@ -86,7 +86,7 @@ export const dateDisplay = (start: Date, end: Date, view: "Y" | "YM" = "Y") => {
   const startDate = new Date(start);
   const endDate = new Date(end);
 
-  if(!start) return null;
+  if (!start) return null;
   if (isSameMonth(startDate, endDate) && isSameYear(startDate, endDate))
     return parseDate(start, view);
   return `${parseDate(start, view)} - ${parseDate(end, view)}`;
