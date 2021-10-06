@@ -36,7 +36,7 @@ const store = <ObjectType>(
   update: (index, key, value) => {
     const obj = { ...get().data[index], [key]: value };
     set((state) => ({ data: updateArray(state.data, index, obj) }));
-  },
+  }
   //TODO: Add delete action for server.
 });
 

@@ -29,7 +29,7 @@ const useResumeStore = create<ResumeStore>(
       _id: "",
       properties: {
         inputs: [],
-        layout: { header: [[]], body: [[]], footer: [] },
+        layout: { header: [[]], body: [[]], footer: [] }
       },
       fontProfile: "CLASSIC",
       spacing: 1,
@@ -38,15 +38,15 @@ const useResumeStore = create<ResumeStore>(
         set((state) => ({
           properties: {
             ...state.properties,
-            inputs: arr,
-          },
+            inputs: arr
+          }
         })),
       updateLayout: (key: string, value: any) =>
         set((state) => ({
           properties: {
             ...state.properties,
-            layout: { ...state.properties.layout, [key]: value },
-          },
+            layout: { ...state.properties.layout, [key]: value }
+          }
         })),
       setProperty: (key, value) =>
         set((state) =>
@@ -56,7 +56,7 @@ const useResumeStore = create<ResumeStore>(
         ),
       setColorProfile: (value) => set({ color: value }),
       setFontProfile: (value) => set({ fontProfile: value }),
-      setSpacing: (value) => set({ spacing: value }),
+      setSpacing: (value) => set({ spacing: value })
     }),
     "Resume"
   )
