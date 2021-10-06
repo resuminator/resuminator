@@ -29,4 +29,3 @@ export const SELF =
   process.env.NODE_ENV === "production"
     ? process.env.NEXT_PUBLIC_APP_PROD
     : "http://localhost:3000";
-
