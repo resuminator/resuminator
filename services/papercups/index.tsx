@@ -19,8 +19,8 @@
 */
 
 import { ChatWidget } from "@papercups-io/chat-widget";
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../modules/Auth/AuthContext';
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../modules/Auth/AuthContext";
 
 const Papercups = () => {
   const KEY = process.env.NEXT_PUBLIC_PAPERCUPS;
@@ -28,7 +28,7 @@ const Papercups = () => {
   const [user, setUser] = useState({
     uid: "",
     displayName: "",
-    email: "",
+    email: ""
   });
 
   useEffect(() => {
@@ -36,14 +36,14 @@ const Papercups = () => {
       setUser({
         uid: auth.user.uid || "",
         displayName: auth.user.displayName || "",
-        email: auth.user.email,
+        email: auth.user.email
       });
     }
   }, [auth]);
 
   //Handling case when Papercups Account key is not present.
   //In that case do not load papercups at all.
-  if(!KEY) return null;
+  if (!KEY) return null;
 
   return (
     <ChatWidget
@@ -62,10 +62,10 @@ const Papercups = () => {
       customer={{
         name: user.displayName,
         email: user.email,
-        external_id: user.uid,
+        external_id: user.uid
       }}
     />
-  )
-}
+  );
+};
 
-export default Papercups
+export default Papercups;
