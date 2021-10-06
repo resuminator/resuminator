@@ -26,7 +26,11 @@ interface Props {
   header?: BoxHeaderProps & BoxProps;
 }
 
-const Section: React.FC<Props & BoxProps> = ({ children, header, ...props }) => {
+const Section: React.FC<Props & BoxProps> = ({
+  children,
+  header,
+  ...props
+}) => {
   return (
     <Box mb="8">
       <BoxHeader size={{ title: "lg", subtitle: "sm" }} {...header} />

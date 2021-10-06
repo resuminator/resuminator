@@ -25,7 +25,7 @@ import {
   NumberInput,
   NumberInputField,
   NumberInputProps,
-  NumberInputStepper,
+  NumberInputStepper
 } from "@chakra-ui/number-input";
 import React from "react";
 

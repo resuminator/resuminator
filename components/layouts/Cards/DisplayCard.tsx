@@ -24,7 +24,7 @@ import {
   BoxProps,
   TextProps,
   useColorModeValue,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { Draggable } from "react-beautiful-dnd";
@@ -55,22 +55,22 @@ const DisplayCard: React.FC<DisplayCardProps> = ({
     shadow: isHidden ? "none" : "md",
     bg: isHidden ? "gray.100" : "white",
     _hover: {
-      bg: isHidden ? "gray.200" : "gray.100",
-    },
+      bg: isHidden ? "gray.200" : "gray.100"
+    }
   };
 
   const darkProps: BoxProps = {
     shadow: isHidden ? "none" : "2xl",
     bg: isHidden ? "whiteAlpha.100" : "gray.800",
-    _hover: { bg: isHidden ? "whiteAlpha.200" : "whiteAlpha.100" },
+    _hover: { bg: isHidden ? "whiteAlpha.200" : "whiteAlpha.100" }
   };
 
   const textLight: TextProps = {
-    color: isHidden ? "gray.500" : "gray.800",
+    color: isHidden ? "gray.500" : "gray.800"
   };
 
   const textDark: TextProps = {
-    color: isHidden ? "gray.600" : "inherit",
+    color: isHidden ? "gray.600" : "inherit"
   };
 
   const rest = useColorModeValue(lightProps, darkProps);

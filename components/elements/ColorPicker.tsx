@@ -56,11 +56,11 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
       return {
         icon: hovering ? <MdColorLens /> : <FaCheck />,
         color: !hovering && value,
-        colorScheme: hovering && "gray",
+        colorScheme: hovering && "gray"
       };
     return {
       icon: <MdColorLens />,
-      colorScheme: "gray",
+      colorScheme: "gray"
     };
   };
 

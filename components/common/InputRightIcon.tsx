@@ -33,7 +33,7 @@ interface RightIconProps {
 const InputRightIcon: React.FC<RightIconProps> = ({
   forPassword,
   onClick,
-  options,
+  options
 }) => {
   const colorScheme = useColorModeValue("blackAlpha", "gray");
 
