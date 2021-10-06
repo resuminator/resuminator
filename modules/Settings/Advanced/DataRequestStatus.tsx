@@ -79,7 +79,7 @@ interface DataRequestStatusProps {
 
 const DataRequestStatus: React.FC<DataRequestStatusProps> = ({
   email,
-  data,
+  data
 }) => {
   const NOW = new Date().getTime();
   const DUE_BY = new Date(data.completedBy).getTime();

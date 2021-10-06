@@ -28,7 +28,7 @@ interface CreateResumeCardProps {
 const CreateResumeCard: React.FC<CreateResumeCardProps> = ({ onClick }) => {
   const hoverProps = {
     bg: useColorModeValue("gray.100", "whiteAlpha.100"),
-    color: useColorModeValue("blue.500", "blue.300"),
+    color: useColorModeValue("blue.500", "blue.300")
   };
 
   return (

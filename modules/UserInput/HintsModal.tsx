@@ -44,7 +44,7 @@ interface Props {
 const HintsModal: React.FC<Props & Omit<ModalProps, "children">> = ({
   isOpen,
   onClose,
-  hintsData,
+  hintsData
 }) => {
   useEffect(() => {
     mp.track("Hints Modal Open", { title: hintsData.title });
@@ -53,7 +53,7 @@ const HintsModal: React.FC<Props & Omit<ModalProps, "children">> = ({
   const trackMetric = () => {
     mp.track("External Link Trigger", {
       from: hintsData.title,
-      to: CONTRIBUTE_HINTS,
+      to: CONTRIBUTE_HINTS
     });
   };
 

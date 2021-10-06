@@ -20,7 +20,7 @@
 
 import { UpdateAction } from "../../../store/types";
 
-export type SkillDisplayStyle = "CATEGORIES" | "TAGS"
+export type SkillDisplayStyle = "CATEGORIES" | "TAGS";
 
 export interface SkillDataObject {
   _id: string;

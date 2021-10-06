@@ -32,7 +32,7 @@ const VerifyEmailNotice: React.FC<Props> = ({ onClick }) => {
 
   const props = {
     bg: useColorModeValue("orange.50", "orange.900"),
-    color: useColorModeValue("orange.500", "orange.200"),
+    color: useColorModeValue("orange.500", "orange.200")
   };
 
   return (

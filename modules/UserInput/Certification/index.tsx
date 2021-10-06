@@ -62,7 +62,7 @@ const Certification = () => {
     credentialNumber: "",
     start: new Date(),
     end: new Date(),
-    link: "",
+    link: ""
   };
 
   //mocking data from DB.
@@ -87,7 +87,7 @@ const Certification = () => {
       header={{
         title: "Certifications",
         subtitle: "Add relevant professional certifications",
-        mb: "2",
+        mb: "2"
       }}
     >
       <Autosave data={data} patchFn={patchCertifications} />
@@ -111,15 +111,15 @@ const Certification = () => {
               title: item.certificateName,
               subtitle: item.credentialNumber,
               titlePlaceholder: "Certificate Name",
-              isHidden: item.isHidden,
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "certification",
               visibilityHandler: {
                 value: item.isHidden,
-                setValue: () => updateData(index, "isHidden", !item.isHidden),
+                setValue: () => updateData(index, "isHidden", !item.isHidden)
               },
-              deleteHandler: () => handleDelete(item._id),
+              deleteHandler: () => handleDelete(item._id)
             }}
             key={item._id}
           >
@@ -147,7 +147,7 @@ const Certification = () => {
               labels={{
                 started: "Obtained",
                 ended: "Expires",
-                checkbox: "Never Expires",
+                checkbox: "Never Expires"
               }}
               values={{ start: item.start, end: item.end }}
               onChangeHandler={(key) =>

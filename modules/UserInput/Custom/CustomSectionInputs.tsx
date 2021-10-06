@@ -33,7 +33,7 @@ import {
   CustomSectionDataObject,
   CustomSectionInputObject,
   CustomSectionObject,
-  DateValue,
+  DateValue
 } from "./types";
 const EditorWithLabel = dynamic(
   () => import("../../../components/common/EditorWithLabel")
@@ -79,12 +79,12 @@ const getInputFieldComponent = (
           onChangeHandler={(key) => (date) =>
             updateData(sectionId, dataItem._id, field._id, {
               ...(dateObj as DateValue),
-              [key]: date,
+              [key]: date
             })}
           checkboxHandler={(e) =>
             updateData(sectionId, dataItem._id, field._id, {
               ...(dateObj as DateValue),
-              end: dateObj.end === null ? new Date() : null,
+              end: dateObj.end === null ? new Date() : null
             })
           }
         />
@@ -119,7 +119,7 @@ const CustomSectionInputs = () => {
     updateSections,
     deleteData,
     updateData,
-    toggleDataVisibility,
+    toggleDataVisibility
   } = useCustomSectionStore();
 
   const handleDragEnd = (result: DropResult, section: CustomSectionObject) => {
@@ -145,7 +145,7 @@ const CustomSectionInputs = () => {
           key={section.header}
           header={{
             title: section.header,
-            mb: "2",
+            mb: "2"
           }}
         >
           <CustomSectionControls section={section} />
@@ -160,16 +160,16 @@ const CustomSectionInputs = () => {
                   index: index,
                   title: getCardTitle(dataItem),
                   titlePlaceholder: `New ${section.header.toLowerCase()}`,
-                  isHidden: dataItem.isHidden,
+                  isHidden: dataItem.isHidden
                 }}
                 InputCardProps={{
                   itemType: section.header.toLowerCase(),
                   visibilityHandler: {
                     value: dataItem.isHidden,
                     setValue: () =>
-                      toggleDataVisibility(section._id, dataItem._id),
+                      toggleDataVisibility(section._id, dataItem._id)
                   },
-                  deleteHandler: () => deleteData(section._id, dataItem._id),
+                  deleteHandler: () => deleteData(section._id, dataItem._id)
                 }}
                 key={dataItem._id}
               >

@@ -26,7 +26,7 @@ interface AuthProvidersListProps {
 }
 
 const AuthProvidersList: React.FC<AuthProvidersListProps> = ({
-  handleSignIn,
+  handleSignIn
 }) => (
   <MotionBox
     initial={{ opacity: 0 }}

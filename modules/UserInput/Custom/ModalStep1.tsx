@@ -27,7 +27,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightAddon,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import React, { Fragment } from "react";
 import { BsTextareaT } from "react-icons/bs";
@@ -105,7 +105,7 @@ const ModalStep1: React.FC<Props> = ({
   section,
   onChangeHandlers,
   addHandler,
-  deleteHandler,
+  deleteHandler
 }) => {
   const checkDisabled = (type: CustomSectionInputObject["type"]) =>
     section.inputs.filter((item) => item.type === type).length > 0;

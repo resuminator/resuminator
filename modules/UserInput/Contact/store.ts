@@ -42,7 +42,7 @@ const contactStore = <T>(
       produce(state, (draftState) => {
         draftState[key] = value;
       })
-    ),
+    )
 });
 
 const useContactStore = create<ContactStore<ContactDataObject>>(

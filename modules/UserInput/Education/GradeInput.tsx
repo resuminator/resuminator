@@ -31,7 +31,7 @@ interface Props {
 const GradeInput: React.FC<Props> = ({
   gradeObtained,
   gradeMax,
-  onChangeHandler,
+  onChangeHandler
 }) => {
   const getRestrictedStep = () => {
     if (gradeMax >= 3 && gradeMax < 5) return 0.1;

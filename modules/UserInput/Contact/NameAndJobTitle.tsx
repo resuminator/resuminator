@@ -58,7 +58,7 @@ const NameAndJobTitle = () => {
     <Section
       header={{
         title: "Let's go over some basic info",
-        subtitle: "Provide your name, email, and where to contact you",
+        subtitle: "Provide your name, email, and where to contact you"
       }}
       flexDir="row"
       flexWrap="wrap"

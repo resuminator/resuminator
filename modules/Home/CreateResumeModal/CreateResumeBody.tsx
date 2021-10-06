@@ -45,23 +45,23 @@ const CreateResumeBody: React.FC<CreateResumeBodyProps> = ({
   data,
   method,
   callback,
-  selectedHandlers,
+  selectedHandlers
 }) => {
   const { value, setValue } = selectedHandlers;
   const titleLightModeProps = (id: Method): TextProps => ({
-    color: method === id ? "blue.500" : "inherit",
+    color: method === id ? "blue.500" : "inherit"
   });
 
   const titleDarkModeProps = (id: Method): TextProps => ({
-    color: method === id ? "blue.100" : "inherit",
+    color: method === id ? "blue.100" : "inherit"
   });
 
   const subtitleLightModeProps = (id: Method): TextProps => ({
-    color: method === id ? "blue.500" : "inherit",
+    color: method === id ? "blue.500" : "inherit"
   });
 
   const subtitleDarkModeProps = (id: Method): TextProps => ({
-    color: "whiteAlpha.800",
+    color: "whiteAlpha.800"
   });
 
   return (

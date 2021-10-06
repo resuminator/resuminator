@@ -69,7 +69,7 @@ const DeleteResumeModal: React.FC<Props> = ({ resumeObject }) => {
         onClick={handleDeleteResume}
         actionButtonProps={{
           isLoading: status === Status.loading,
-          loadingText: "Deleting",
+          loadingText: "Deleting"
         }}
       >
         Are you sure you want to delete this{" "}

@@ -47,7 +47,7 @@ const Columns = () => {
     updateLayout("body", nextBody);
 
     return await patchLayout(token, resumeId, {
-      layout: { ...layout, body: nextBody },
+      layout: { ...layout, body: nextBody }
     })
       .then((res: Result) => {
         updateLayout("body", res.template.layout.body);
@@ -97,18 +97,18 @@ const Columns = () => {
     const baseProps: ButtonProps = {
       colorScheme: "blue",
       _focus: {
-        border: "none",
-      },
+        border: "none"
+      }
     };
 
     const selectedProps: ButtonProps = {
       variant: "solid",
-      ...baseProps,
+      ...baseProps
     };
 
     const defaultProps: ButtonProps = {
       variant: "outline",
-      ...baseProps,
+      ...baseProps
     };
 
     return isSelected ? selectedProps : defaultProps;
@@ -119,7 +119,7 @@ const Columns = () => {
       header={{
         title: "Body Style",
         subtitle: "Select between one or two column resume",
-        mb: "2",
+        mb: "2"
       }}
     >
       <ButtonGroup my="2" isAttached>

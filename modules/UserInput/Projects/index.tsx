@@ -67,7 +67,7 @@ const Projects = () => {
     end: new Date(),
     description: "",
     link: "",
-    tags: [],
+    tags: []
   };
 
   //mocking data from DB.
@@ -92,7 +92,7 @@ const Projects = () => {
       header={{
         title: "Projects",
         subtitle: "Add relevant personal projects",
-        mb: "2",
+        mb: "2"
       }}
     >
       <Autosave data={data} patchFn={patchProjects} />
@@ -116,15 +116,15 @@ const Projects = () => {
               title: item.projectName,
               subtitle: item.link,
               titlePlaceholder: "Project Name",
-              isHidden: item.isHidden,
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "project",
               visibilityHandler: {
                 value: item.isHidden,
-                setValue: () => updateData(index, "isHidden", !item.isHidden),
+                setValue: () => updateData(index, "isHidden", !item.isHidden)
               },
-              deleteHandler: () => handleDelete(item._id),
+              deleteHandler: () => handleDelete(item._id)
             }}
             key={item._id}
           >

@@ -45,16 +45,16 @@ interface Props {
 const ResumeTemplateDropdown: React.FC<Props> = ({
   data,
   selectedHandlers,
-  method,
+  method
 }) => {
   const { value, setValue } = selectedHandlers;
 
   const buttonLightModeProps: ButtonProps = {
-    colorScheme: method === "EXISTING" ? "blue" : "blackAlpha",
+    colorScheme: method === "EXISTING" ? "blue" : "blackAlpha"
   };
 
   const buttonDarkModeProps: ButtonProps = {
-    colorScheme: method === "EXISTING" ? "blue" : "inherit",
+    colorScheme: method === "EXISTING" ? "blue" : "inherit"
   };
 
   const buttonProps = useColorModeValue(

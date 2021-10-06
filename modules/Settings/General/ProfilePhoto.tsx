@@ -45,7 +45,7 @@ const ProfilePhoto = () => {
       .then(() => {
         mp.track("Photo Uploaded", {
           target: "user profile",
-          status: "success",
+          status: "success"
         });
         return createToast("Image Uploaded Successfully", "success");
       })
@@ -53,7 +53,7 @@ const ProfilePhoto = () => {
         mp.track("Photo Uploaded", {
           target: "user profile",
           status: "error",
-          source: "Firebase",
+          source: "Firebase"
         });
       });
   };
