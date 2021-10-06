@@ -32,7 +32,7 @@ const Team = () => {
         base: "1rem 2rem 2rem 2rem",
         md: "4rem 8rem 8rem 8rem",
         lg: "4rem 8rem 8rem 8rem",
-        xl: "8rem 14rem 8rem 14rem",
+        xl: "8rem 14rem 8rem 14rem"
       }}
     >
       <HeadingBox
@@ -43,7 +43,7 @@ const Team = () => {
         subtitleProps={{
           fontSize: { base: "xl", lg: "xl", xl: "2xl" },
           maxW: "100%",
-          pl: "0.5rem",
+          pl: "0.5rem"
         }}
         py={{ base: "8" }}
         textAlign="left"

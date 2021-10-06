@@ -28,7 +28,7 @@ const NavLinks = (props: Props) => {
   const links =
     useBreakpointValue({
       sm: navLinkDetailsSmall,
-      xl: navLinkDetails,
+      xl: navLinkDetails
     }) || [];
 
   return (

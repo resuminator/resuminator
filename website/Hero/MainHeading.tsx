@@ -45,7 +45,7 @@ const MainHeading = () => {
       letterSpacing={useBreakpointValue({ base: -3, lg: -4, xl: -4.5 })}
       color="#000051"
       mb="8"
-      maxW={{xl: "80%"}}
+      maxW={{ xl: "80%" }}
       lineHeight={{ base: "short", md: "shorter" }}
     >
       {colorMode === "light" ? <LightHeading /> : <DarkHeading />}

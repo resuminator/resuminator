@@ -27,7 +27,7 @@ import {
   Stack,
   Text,
   useColorModeValue,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
@@ -47,7 +47,7 @@ const CookieBanner = () => {
       path: "/",
       expires: 365,
       sameSite: "strict",
-      secure: true,
+      secure: true
     });
     onClose();
   };
@@ -59,7 +59,7 @@ const CookieBanner = () => {
       path: "/",
       expires: 365,
       sameSite: "strict",
-      secure: true,
+      secure: true
     });
     router.reload();
   };

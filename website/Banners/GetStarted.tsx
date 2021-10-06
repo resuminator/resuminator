@@ -40,11 +40,11 @@ const GetStarted = () => {
         subtitle="Build a stunning single-page resume for your next job"
         subtitleProps={{
           maxW: "100%",
-          color: "blue.100",
+          color: "blue.100"
         }}
         titleProps={{
           bgGradient: darkGradient,
-          bgClip: "text",
+          bgClip: "text"
         }}
         mb="0"
         py={{ base: "8" }}

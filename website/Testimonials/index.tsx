@@ -22,7 +22,7 @@ import {
   SimpleGrid,
   HStack,
   Stack,
-  useBreakpointValue,
+  useBreakpointValue
 } from "@chakra-ui/react";
 import { chunk } from "@chakra-ui/utils";
 import { getUniqueID } from "../../utils";
@@ -45,14 +45,14 @@ const Testimonials = () => {
         titleProps={{ color: "twitter.500" }}
         subtitle="Hear our whispers across the internet"
         subtitleProps={{
-          fontSize: { base: "lg", sm: "xl", md: "2xl", lg: "3xl" },
+          fontSize: { base: "lg", sm: "xl", md: "2xl", lg: "3xl" }
         }}
       />
       <SimpleGrid
         templateColumns={{
           base: "repeat(1, minmax(0, 1fr))",
           md: "repeat(2, minmax(0, 1fr))",
-          lg: "repeat(3, minmax(0, 1fr))",
+          lg: "repeat(3, minmax(0, 1fr))"
         }}
         gridColumnGap={{ md: "4" }}
       >
