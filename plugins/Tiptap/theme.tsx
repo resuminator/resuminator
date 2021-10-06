@@ -35,11 +35,11 @@ const ProseMirror = (props) => ({
     color: props.colorMode === "light" ? "gray.600" : "gray.400",
     overflow: "hidden",
     ":hover": {
-      bg: "transparent",
+      bg: "transparent"
     },
     ":focus": {
       bg: "transparent",
-      border: "none",
+      border: "none"
     },
     maxHeight: "100%"
   },
@@ -81,26 +81,26 @@ const ProseMirror = (props) => ({
     WebkitTransition: "all 0.2s",
     wordWrap: "break-word",
     ul: {
-      marginLeft: "4",
+      marginLeft: "4"
     },
     ol: {
-      marginLeft: "4",
+      marginLeft: "4"
     },
     ":hover": {
-      bg: props.colorMode === "light" ? "gray.200" : "whiteAlpha.100",
+      bg: props.colorMode === "light" ? "gray.200" : "whiteAlpha.100"
     },
     ":focus": {
       bg: "transparent",
-      borderColor: props.colorMode === "light" ? "blue.500" : "blue.300",
+      borderColor: props.colorMode === "light" ? "blue.500" : "blue.300"
     },
     "p.is-editor-empty:first-of-type::before": {
       content: "attr(data-placeholder)",
       float: "left",
       color: props.colorMode === "light" ? "gray.400" : "whiteAlpha.400",
       pointerEvents: "none",
-      height: 0,
-    },
-  },
+      height: 0
+    }
+  }
 });
 
 export default ProseMirror;
