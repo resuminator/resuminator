@@ -22,7 +22,7 @@ import {
   AiFillInstagram,
   AiFillLinkedin,
   AiOutlineGithub,
-  AiOutlineTwitter,
+  AiOutlineTwitter
 } from "react-icons/ai";
 import { IconType } from "react-icons/lib";
 
@@ -36,23 +36,23 @@ const SocialLinks: Array<SocialDataObject> = [
   {
     ariaLabel: "Resuminator-Github",
     icon: AiOutlineGithub,
-    link: "https://github.com/resuminator/resuminator",
+    link: "https://github.com/resuminator/resuminator"
   },
   {
     ariaLabel: "Resuminator-Twitter",
     icon: AiOutlineTwitter,
-    link: "https://twitter.com/resuminator",
+    link: "https://twitter.com/resuminator"
   },
   {
     ariaLabel: "Resuminator-LinkedIn",
     icon: AiFillLinkedin,
-    link: "https://www.linkedin.com/company/resuminator",
+    link: "https://www.linkedin.com/company/resuminator"
   },
   {
     ariaLabel: "Resuminator-Instagram",
     icon: AiFillInstagram,
-    link: "https://www.instagram.com/resuminator",
-  },
+    link: "https://www.instagram.com/resuminator"
+  }
 ];
 
 export default SocialLinks;
