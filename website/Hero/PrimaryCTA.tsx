@@ -30,8 +30,8 @@ const PrimaryCTA: React.FC<MotionBoxProps> = ({ ...rest }) => {
 
   const routeToSignup = () => {
     router.push("/signup");
-    mp.track("Signup Page CTA Trigger")
-  }
+    mp.track("Signup Page CTA Trigger");
+  };
 
   return (
     <MotionBox

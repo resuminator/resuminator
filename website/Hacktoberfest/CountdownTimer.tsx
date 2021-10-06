@@ -33,7 +33,7 @@ const Renderer: React.FC<CountdownRenderProps> = ({
   hours,
   minutes,
   seconds,
-  completed,
+  completed
 }) => {
   if (completed) {
     return (
@@ -76,7 +76,9 @@ const Renderer: React.FC<CountdownRenderProps> = ({
 };
 
 const CountdownTimer = () => {
-  return <Countdown date={new Date(DATE_OF_HACKTOBERFEST)} renderer={Renderer} />
+  return (
+    <Countdown date={new Date(DATE_OF_HACKTOBERFEST)} renderer={Renderer} />
+  );
 };
 
 export default CountdownTimer;

@@ -27,7 +27,7 @@ import {
   Stack,
   Text,
   useBreakpointValue,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FiExternalLink } from "react-icons/fi";
@@ -41,7 +41,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   title,
   icon,
   details,
-  external,
+  external
 }) => {
   const [hovering, setHovering] = useState(false);
   const textColors = useColorModeValue("purple.900", "purple.100");
@@ -61,7 +61,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       transition="0.2s all"
       _hover={{
         bg: useColorModeValue("purple.200", "purple.800"),
-        color: textColors,
+        color: textColors
       }}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}

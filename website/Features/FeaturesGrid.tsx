@@ -23,7 +23,7 @@ import {
   Box,
   SimpleGrid,
   Text,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React, { useEffect, useRef } from "react";
 import HeadingBox from "../common/HeadingBox";
@@ -36,7 +36,7 @@ const FeatureBox = ({ title, description, graphic, color }) => {
   useEffect(() => {
     const options = {
       rootMargin: "0px",
-      threshold: 0.9,
+      threshold: 0.9
     };
 
     const handlePlay = (entries, observer) => {

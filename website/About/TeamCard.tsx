@@ -27,11 +27,11 @@ import {
   Link,
   Text,
   useBreakpointValue,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import {
   generateLinkForLabel,
-  getIconForService,
+  getIconForService
 } from "../../modules/UserInput/Contact/helpers";
 import { TeamMember } from "./types";
 
@@ -40,7 +40,7 @@ const TeamCard: React.FC<TeamMember> = ({
   jobTitle,
   social,
   bio,
-  image,
+  image
 }) => {
   const iconSizes = useBreakpointValue({ base: "sm", md: "md", xl: "lg" });
   return (

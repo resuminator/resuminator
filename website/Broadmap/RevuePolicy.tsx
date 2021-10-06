@@ -23,7 +23,11 @@ import React from "react";
 
 const RevuePolicy = () => {
   return (
-    <Text fontSize={{ base: "xs", lg: "sm" }} color={useColorModeValue("blackAlpha.700", "whiteAlpha.600")} py="4">
+    <Text
+      fontSize={{ base: "xs", lg: "sm" }}
+      color={useColorModeValue("blackAlpha.700", "whiteAlpha.600")}
+      py="4"
+    >
       By subscribing, you agree with Revue’s{" "}
       <Text
         color="blue.500"

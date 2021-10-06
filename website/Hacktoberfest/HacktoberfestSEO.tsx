@@ -19,21 +19,21 @@ const HacktoberfestSEO = (props: Props) => {
           url: OG_IMAGE,
           width: 1200,
           height: 628,
-          alt: "Contribute to Resuminator | Hacktoberfest 2021",
+          alt: "Contribute to Resuminator | Hacktoberfest 2021"
         },
         {
           url: OG_IMAGE,
           width: 1200,
           height: 600,
-          alt: "Contribute to Resuminator | Hacktoberfest 2021",
-        },
+          alt: "Contribute to Resuminator | Hacktoberfest 2021"
+        }
       ],
-      site_name: "Contribute to Resuminator | Hacktoberfest 2021",
+      site_name: "Contribute to Resuminator | Hacktoberfest 2021"
     },
     twitter: {
       handle: "@resuminator",
-      cardType: "summary_large_image",
-    },
+      cardType: "summary_large_image"
+    }
   };
 
   return (
@@ -41,7 +41,7 @@ const HacktoberfestSEO = (props: Props) => {
       openGraph={{
         title: config.title,
         description: config.description,
-        ...config.openGraph,
+        ...config.openGraph
       }}
       {...config}
     />

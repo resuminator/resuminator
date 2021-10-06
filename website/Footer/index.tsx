@@ -34,7 +34,7 @@ const Footer = () => {
           templateColumns={{
             base: "1fr",
             md: "1fr 1fr 1fr",
-            lg: "4fr 1fr 1fr",
+            lg: "4fr 1fr 1fr"
           }}
           spacing={8}
         >

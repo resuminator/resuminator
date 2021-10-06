@@ -25,7 +25,7 @@ import {
   HeadingProps,
   Text,
   TextProps,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React from "react";
 

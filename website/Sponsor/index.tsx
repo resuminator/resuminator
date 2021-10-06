@@ -39,7 +39,7 @@ const Sponsor = () => {
         title="Sponsor this project 💛"
         subtitle="Your support will help this project grow and impact the lives of thousands of job seekers"
         subtitleProps={{
-          fontSize: { base: "lg", sm: "xl", md: "2xl", lg: "3xl" },
+          fontSize: { base: "lg", sm: "xl", md: "2xl", lg: "3xl" }
         }}
       />
 

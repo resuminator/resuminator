@@ -26,7 +26,7 @@ import {
   Link,
   Text,
   TextProps,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import { FaTwitter } from "react-icons/fa";
 import { ImQuotesLeft } from "react-icons/im";
@@ -47,14 +47,14 @@ const TweetCard: React.FC<TweetCardProps> = ({
   date,
   handle,
   content,
-  url,
+  url
 }) => {
   const tweetMetaProps: TextProps = {
-    fontSize: { base: "sm", md: "md" },
+    fontSize: { base: "sm", md: "md" }
   };
 
   const tweetContentProps: TextProps = {
-    fontSize: { base: "sm", md: "md" },
+    fontSize: { base: "sm", md: "md" }
   };
 
   const trackMetric = () => {
@@ -70,10 +70,7 @@ const TweetCard: React.FC<TweetCardProps> = ({
         shadow="md"
         transition="0.2s all"
         _hover={{
-          backgroundColor: useColorModeValue(
-            "blackAlpha.100",
-            "whiteAlpha.100"
-          ),
+          backgroundColor: useColorModeValue("blackAlpha.100", "whiteAlpha.100")
         }}
         onClick={trackMetric}
       >

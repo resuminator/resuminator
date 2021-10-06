@@ -31,8 +31,7 @@ const HeadingGradient: React.FC = ({ children }) => {
       bgGradient={useColorModeValue(lightGradient, darkGradient)}
       bgClip="text"
     >
-      {children}
-      {" "}
+      {children}{" "}
     </Text>
   );
 };

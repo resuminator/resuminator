@@ -24,7 +24,7 @@ import {
   Center,
   Heading,
   Text,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FiExternalLink } from "react-icons/fi";
