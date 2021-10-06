@@ -43,7 +43,7 @@ export const useCustomToast = () => {
         variant: "solid",
         duration: 5000,
         isClosable: true,
-        ...options,
+        ...options
       });
     }
   };
