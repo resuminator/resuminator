@@ -30,9 +30,9 @@ const skillStore = <T>(
   format: "CATEGORIES",
   toggleFormat: () =>
     set((state) => ({
-      format: state.format === "CATEGORIES" ? "TAGS" : "CATEGORIES",
+      format: state.format === "CATEGORIES" ? "TAGS" : "CATEGORIES"
     })),
-  setFormat: (value) => set({format: value}),
+  setFormat: (value) => set({ format: value }),
   data: [],
   setData: (list) => set({ data: list }),
   add: (obj) => set((state) => ({ data: [...state.data, obj] })),
@@ -40,7 +40,7 @@ const skillStore = <T>(
   update: (index, key, value) => {
     const obj = { ...get().data[index], [key]: value };
     set((state) => ({ data: updateArray(state.data, index, obj) }));
-  },
+  }
 });
 
 const useSkillStore = create<SkillStore<SkillDataObject>>(

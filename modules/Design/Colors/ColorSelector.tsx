@@ -43,7 +43,7 @@ export const profiles: Array<ColorProfiles> = [
   "purple",
   "teal",
   "pink",
-  "yellow",
+  "yellow"
 ];
 
 export const isCustom = (color: ColorProfiles) => !profiles.includes(color);
@@ -81,7 +81,7 @@ const ColorSelector = () => {
       header={{
         title: "Colors",
         subtitle: "Choose one from below or enter a custom HEX",
-        mb: "2",
+        mb: "2"
       }}
     >
       <HStack my="4" spacing="4">

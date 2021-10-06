@@ -29,10 +29,16 @@ const NameAndJobTitleLayout = () => {
   const jobTitle = useContactStore((state) => state.jobTitle);
   const { headerTitleProps, headerSubtitleProps } =
     useContext(StylePropsContext);
-  const spacing = useResumeStore(state => state.spacing);
+  const spacing = useResumeStore((state) => state.spacing);
 
   return (
-    <Box display="flex" flexDir="column" justifyContent="center" px={spacing * 8} py={spacing * 4}>
+    <Box
+      display="flex"
+      flexDir="column"
+      justifyContent="center"
+      px={spacing * 8}
+      py={spacing * 4}
+    >
       <Text {...headerTitleProps}>{fullName}</Text>
       <Text {...headerSubtitleProps}>{jobTitle}</Text>
     </Box>

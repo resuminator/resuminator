@@ -47,7 +47,8 @@ const RequestData: React.FC<RequestDataProps> = ({ data }) => {
   //For first time users, data.isCompleted is null, so isDisabled should be false.
   //User cannot place request if either the buffer has not ended
   //or the previous request is incomplete
-  const isDisabled = data.isCompleted !== null && (!data.isCompleted || DUE_BY > NOW);
+  const isDisabled =
+    data.isCompleted !== null && (!data.isCompleted || DUE_BY > NOW);
 
   useEffect(() => {
     if (auth.user) {

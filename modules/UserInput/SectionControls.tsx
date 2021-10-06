@@ -52,11 +52,11 @@ const SectionControls: React.FC<Props> = ({
     content: [
       {
         type: "p",
-        body: "We don't seem to have any tips on improving this section",
-      },
-    ],
+        body: "We don't seem to have any tips on improving this section"
+      }
+    ]
   },
-  hasHintsHidden = false,
+  hasHintsHidden = false
 }) => {
   const { isDisabled, toggleDisabled } = useDisabled(layoutKey);
   const { isOpen, onClose, onToggle } = useDisclosure();

@@ -97,7 +97,7 @@ const ResumeCardOptions: React.FC<ResumeCardOptionProps> = ({ dataObject }) => {
                 borderBottomRadius: "0px",
                 borderBottom: "1px",
                 borderBottomStyle: "dotted",
-                color: "blue.500",
+                color: "blue.500"
               }}
             />
             <EditableInput my="1" />

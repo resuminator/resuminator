@@ -22,8 +22,8 @@ import { Box, BoxProps } from "@chakra-ui/react";
 import React from "react";
 
 interface BodySectionBoxProps {
-    label: string;
-    ref?: React.Ref<HTMLDivElement>
+  label: string;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
 const BodySectionBox: React.FC<BoxProps & BodySectionBoxProps> = ({

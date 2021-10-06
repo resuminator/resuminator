@@ -56,14 +56,14 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
   auth,
   setAvatarCallback,
   dbCallback,
-  fileName,
+  fileName
 }) => {
   const { createToast } = useCustomToast();
   const [status, setStatus] = useState<Status>(Status.idle);
   const [progress, setProgress] = useState<number>(0);
   const [image, setImage] = useState<{ file: File; url: string }>({
     file: null,
-    url: "",
+    url: ""
   });
 
   const handleModalClose = () => {

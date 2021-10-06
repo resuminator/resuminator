@@ -49,7 +49,7 @@ const SignUpWithEmail: React.FC<Props> = ({ resetClient }) => {
     fullName: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: ""
   });
   const [validLength, hasNumber, upperCase, lowerCase, match] =
     usePasswordValidation(formValues.password, formValues.confirmPassword);
@@ -85,10 +85,14 @@ const SignUpWithEmail: React.FC<Props> = ({ resetClient }) => {
         //Sending verification email with redirecting url
         response.user
           .sendEmailVerification({
-            url: `${BASE_URL}/login`,
+            url: `${BASE_URL}/login`
           })
-          .then(() => mp.track("Verification Email", { status: "send_success" }))
-          .catch(() => mp.track("Verification Email", { status: "send_error" }));
+          .then(() =>
+            mp.track("Verification Email", { status: "send_success" })
+          )
+          .catch(() =>
+            mp.track("Verification Email", { status: "send_error" })
+          );
 
         //when done set status to success and create toast
         setStatus(Status.success);

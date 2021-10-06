@@ -33,7 +33,7 @@ const TemplateList = () => {
         titleProps={{
           as: "h1",
           letterSpacing: "tight",
-          color: "InactiveCaptionText",
+          color: "InactiveCaptionText"
         }}
         spacing="0"
       />

@@ -44,7 +44,12 @@ const FontSelector = () => {
     return await patchFont(token, resumeId, { fontProfile: item })
       .then((res: Result) => {
         setFontProfile(res.template.fontProfile);
-        return createToast("Resume font updated", "success", null, "font-success");
+        return createToast(
+          "Resume font updated",
+          "success",
+          null,
+          "font-success"
+        );
       })
       .catch(() =>
         createToast(
@@ -61,7 +66,7 @@ const FontSelector = () => {
       header={{
         title: "Font & Feel",
         subtitle: "Select from the available fonts to change the feel",
-        mb: "2",
+        mb: "2"
       }}
     >
       <Menu>

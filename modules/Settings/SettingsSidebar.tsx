@@ -20,10 +20,7 @@
 
 import { Box, GridItem, useColorModeValue, VStack } from "@chakra-ui/react";
 import React from "react";
-import {
-  FiAlertCircle, FiSettings,
-  FiUser
-} from "react-icons/fi";
+import { FiAlertCircle, FiSettings, FiUser } from "react-icons/fi";
 import SidebarSection, { SideBarItems } from "../Home/SidebarSection";
 
 const SettingsSidebar = () => {
@@ -31,12 +28,12 @@ const SettingsSidebar = () => {
     {
       title: "General",
       icon: FiSettings,
-      link: "/settings",
+      link: "/settings"
     },
     {
       title: "Account",
       icon: FiUser,
-      link: "/settings/account",
+      link: "/settings/account"
     },
     // {
     //   title: "Preferences",
@@ -46,8 +43,8 @@ const SettingsSidebar = () => {
     {
       title: "Advanced",
       icon: FiAlertCircle,
-      link: "/settings/advanced",
-    },
+      link: "/settings/advanced"
+    }
   ];
   return (
     <GridItem colSpan={1}>
@@ -70,7 +67,7 @@ const SettingsSidebar = () => {
           <SidebarSection
             items={general}
             itemProps={{
-              size: "md",
+              size: "md"
             }}
           />
         </VStack>

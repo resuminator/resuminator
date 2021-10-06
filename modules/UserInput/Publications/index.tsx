@@ -59,7 +59,7 @@ const Publications = () => {
     pages: "",
     year: "",
     format: "MLA",
-    doi: "",
+    doi: ""
   };
 
   //mocking data from DB.
@@ -84,7 +84,7 @@ const Publications = () => {
       header={{
         title: "Publications",
         subtitle: "Showcase your academic publications",
-        mb: "2",
+        mb: "2"
       }}
     >
       <Autosave data={data} patchFn={patchPublication} />
@@ -108,15 +108,15 @@ const Publications = () => {
               title: item.articleTitle,
               subtitle: item.authorNames,
               titlePlaceholder: "Publication Article Title",
-              isHidden: item.isHidden,
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "publication",
               visibilityHandler: {
                 value: item.isHidden,
-                setValue: () => updateData(index, "isHidden", !item.isHidden),
+                setValue: () => updateData(index, "isHidden", !item.isHidden)
               },
-              deleteHandler: () => handleDelete(item._id),
+              deleteHandler: () => handleDelete(item._id)
             }}
             key={item._id}
           >

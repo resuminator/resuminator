@@ -38,16 +38,16 @@ interface Props {
 const DefaultHints = ({ validLength, hasNumber, upperCase, lowerCase }) => [
   {
     message: "Minimum 8 Characters",
-    validator: validLength,
+    validator: validLength
   },
   {
     message: "At least one number 0-9",
-    validator: hasNumber,
+    validator: hasNumber
   },
   {
     message: "1 uppercase and 1 lowercase character",
-    validator: upperCase && lowerCase,
-  },
+    validator: upperCase && lowerCase
+  }
 ];
 
 const PasswordHints: React.FC<Props> = ({ validators, hints }) => {

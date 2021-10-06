@@ -36,7 +36,7 @@ import {
   handleDateChange,
   handleDragEnd,
   handleEditorChange,
-  handlePresentCheckbox,
+  handlePresentCheckbox
 } from "../handlers";
 import SectionControls from "../SectionControls";
 import GradeInput from "./GradeInput";
@@ -71,7 +71,7 @@ const Education = () => {
     gradeMax: 10,
     start: new Date(),
     end: new Date(),
-    description: "",
+    description: ""
   };
 
   //mocking data from DB.
@@ -96,7 +96,7 @@ const Education = () => {
       header={{
         title: "Education",
         subtitle: "Where did you last attend college/school?",
-        mb: "2",
+        mb: "2"
       }}
     >
       <Autosave data={data} patchFn={patchEducation} />
@@ -120,15 +120,15 @@ const Education = () => {
               title: item.institute,
               subtitle: item.degree,
               titlePlaceholder: "Institute Name",
-              isHidden: item.isHidden,
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "education",
               visibilityHandler: {
                 value: item.isHidden,
-                setValue: () => updateData(index, "isHidden", !item.isHidden),
+                setValue: () => updateData(index, "isHidden", !item.isHidden)
               },
-              deleteHandler: () => handleDelete(item._id),
+              deleteHandler: () => handleDelete(item._id)
             }}
             key={item._id}
             id={item._id}

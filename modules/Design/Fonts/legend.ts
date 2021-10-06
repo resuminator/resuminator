@@ -32,59 +32,59 @@ const Fonts: FontsObject = {
     headerSubtitle: {
       fontFamily: "Inter",
       fontSize: "xl",
-      fontWeight: "medium",
+      fontWeight: "medium"
     },
     heading: {
       fontFamily: "Inter", //✅ Final
       fontSize: "1.3em",
-      fontWeight: "normal",
+      fontWeight: "normal"
     },
     primary: {
       fontFamily: "Inter",
       fontSize: "1em",
-      fontWeight: "medium",
+      fontWeight: "medium"
     },
     secondary: {
       fontFamily: "Inter",
-      fontSize: "0.8em",
+      fontSize: "0.8em"
     },
     body: {
       fontFamily: "Inter",
       fontSize: "0.9em",
       fontWeight: "normal"
-    },
+    }
   },
   MAGAZINE: {
     //✅ Final
     headerTitle: {
       fontFamily: "Lora",
       fontSize: "4xl",
-      fontWeight: "light",
+      fontWeight: "light"
     },
     headerSubtitle: {
       fontFamily: "Nunito",
       fontSize: "xl",
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     heading: {
       fontFamily: "Lora",
       fontSize: "xl",
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     primary: {
       fontFamily: "Lora",
       fontSize: "1.1em",
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     secondary: {
       fontFamily: "Nunito",
-      fontSize: "0.85em",
+      fontSize: "0.85em"
     },
     body: {
       fontFamily: "Nunito",
       fontSize: "0.9em",
       fontWeight: "normal"
-    },
+    }
   },
   POISE: {
     //✅ Final
@@ -92,69 +92,69 @@ const Fonts: FontsObject = {
     headerTitle: {
       fontFamily: "Poppins",
       fontSize: "4xl",
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     headerSubtitle: {
       fontFamily: "Poppins",
       fontSize: "xl",
-      fontWeight: "medium",
+      fontWeight: "medium"
     },
     heading: {
       fontFamily: "Poppins",
       fontSize: "lg",
       fontWeight: "extrabold",
-      textTransform: "uppercase",
+      textTransform: "uppercase"
     },
     primary: {
       fontFamily: "Poppins", //Final
       fontSize: "1.05em",
-      fontWeight: 500,
+      fontWeight: 500
     },
     secondary: {
       fontFamily: "Poppins",
-      fontSize: "0.8em",
+      fontSize: "0.8em"
     },
     body: {
       fontFamily: "Poppins",
       fontSize: "0.85em",
       fontWeight: "normal"
-    },
+    }
   },
   SENIOR: {
     //✅ Final
     headerTitle: {
       fontFamily: "PT Serif",
       fontSize: "4xl",
-      fontWeight: "light",
+      fontWeight: "light"
     },
     headerSubtitle: {
       fontFamily: "Inter",
       fontSize: "xl",
-      fontWeight: "semibold",
+      fontWeight: "semibold"
     },
     heading: {
       fontFamily: "Inter",
       fontSize: "md",
       fontWeight: "bold",
       textTransform: "uppercase",
-      letterSpacing: "wide",
+      letterSpacing: "wide"
     },
     primary: {
       fontFamily: "PT Serif",
       fontSize: "1em",
-      fontWeight: "normal",
+      fontWeight: "normal"
     },
     secondary: {
       fontFamily: "PT Serif",
       fontSize: "0.85em",
-      fontStyle: "italic",
+      fontStyle: "italic"
     },
     body: {
       fontFamily: "PT Serif",
       fontSize: "0.85em",
       fontWeight: "normal"
-    },
-  },
+    }
+  }
 };
 
 export default Fonts;

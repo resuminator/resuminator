@@ -35,7 +35,7 @@ const ChangePassword = () => {
   const [status, setStatus] = useState<Status>(Status.idle);
   const [password, setPassword] = useState({
     new: "",
-    confirm: "",
+    confirm: ""
   });
   const [validLength, hasNumber, upperCase, lowerCase, match] =
     usePasswordValidation(password.new, password.confirm);
@@ -61,7 +61,7 @@ const ChangePassword = () => {
         .then(() => {
           mp.track("Account Settings", {
             action: "password update",
-            status: "success",
+            status: "success"
           });
           setStatus(Status.success);
           setPassword({ new: "", confirm: "" });
@@ -75,7 +75,7 @@ const ChangePassword = () => {
           mp.track("Account Settings", {
             action: "password update",
             status: "error",
-            source: "Firebase",
+            source: "Firebase"
           });
           setStatus(Status.error);
           return createToast("Couldn't update password", "error", err.message);

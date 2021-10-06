@@ -32,7 +32,7 @@ const OverflowWarning = () => {
         Warning: Some content on your resume might be hidden
       </Text>
     </HStack>
-  ) 
+  );
 };
 
 export default OverflowWarning;

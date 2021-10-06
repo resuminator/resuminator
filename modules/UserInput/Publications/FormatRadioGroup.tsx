@@ -24,7 +24,7 @@ import React from "react";
 
 interface Props extends Omit<RadioGroupProps, "children"> {}
 
-const FormatRadioGroup: React.FC<Props> = ({...props}) => {
+const FormatRadioGroup: React.FC<Props> = ({ ...props }) => {
   return (
     <Box mt="2" mb="8">
       <Text fontSize="md" pb="2" color="gray.500">

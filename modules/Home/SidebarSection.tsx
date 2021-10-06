@@ -39,7 +39,7 @@ interface SidebarOptionsProps {
 const SidebarSection: React.FC<SidebarOptionsProps> = ({
   sectionTitle,
   items,
-  itemProps = { size: "sm" },
+  itemProps = { size: "sm" }
 }) => {
   const colorScheme = useColorModeValue("blue", "blue.200");
   const router = useRouter();

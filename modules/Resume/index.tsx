@@ -50,17 +50,17 @@ const ResumePaper = () => {
   const { createToast } = useCustomToast();
 
   const lightModeProps: BoxProps = {
-    bg: "gray.100",
+    bg: "gray.100"
   };
   const darkModeProps: BoxProps = {
-    bg: "whiteAlpha.100",
+    bg: "whiteAlpha.100"
   };
   const dndProps = useColorModeValue(lightModeProps, darkModeProps);
 
   const saveBodyToDB = async (nextBody: ResumeLayoutObject["body"]) => {
     updateLayout("body", nextBody);
     return await patchLayout(token, resumeId, {
-      layout: { ...layout, body: nextBody },
+      layout: { ...layout, body: nextBody }
     })
       .then((res: Result) => {
         updateLayout("body", res.template.layout.body);
@@ -108,60 +108,60 @@ const ResumePaper = () => {
     <StylePropsProvider>
       <Paper>
         <Box aria-label="Resume Content" flex="1">
-        <HeaderBox>
-          {header.map((row, index) => (
-            <HeaderRow key={index} index={index}>
-              {row.map((layoutKey) => (
-                <Box display="flex" aria-label={layoutKey} key={layoutKey}>
-                  {getHeaderLayout(layoutKey)}
-                </Box>
-              ))}
-            </HeaderRow>
-          ))}
-        </HeaderBox>
-        <ColoredDivider color={primaryColor} mb="2" />
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <BodyBox py={spacing * 2}>
-            {body.map((rowAsColumn, index) => (
-              <Droppable key={index} droppableId={`${index}`}>
-                {/*The 'provided' argument gives props to make columns as droppable areas*/}
-                {(provided, snapshot) => (
-                  <Box
-                    height="100%"
-                    display="flex"
-                    flexDir="column"
-                    aria-label={`Column-${index + 1}`}
-                    index={index}
-                    px={spacing >= 1 ? spacing * 4 - 1 : 3}
-                    py={spacing * 2 - 1}
-                    flexBasis={`${(1 / body.length) * 100}%`}
-                    bg={snapshot.isDraggingOver ? dndProps.bg : "inherit"}
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    {rowAsColumn.map((layoutKey, index) => (
-                      <Box
-                        display="flex"
-                        aria-label={layoutKey}
-                        width="100%"
-                        key={layoutKey}
-                      >
-                        {/*These extra props are drilled to SectionBox component to enable dragging*/}
-                        {getLayout(layoutKey, {
-                          draggableId: layoutKey,
-                          index: index,
-                        })}
-                      </Box>
-                    ))}
-                    {provided.placeholder}
+          <HeaderBox>
+            {header.map((row, index) => (
+              <HeaderRow key={index} index={index}>
+                {row.map((layoutKey) => (
+                  <Box display="flex" aria-label={layoutKey} key={layoutKey}>
+                    {getHeaderLayout(layoutKey)}
                   </Box>
-                )}
-              </Droppable>
+                ))}
+              </HeaderRow>
             ))}
-          </BodyBox>
-        </DragDropContext>
+          </HeaderBox>
+          <ColoredDivider color={primaryColor} mb="2" />
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <BodyBox py={spacing * 2}>
+              {body.map((rowAsColumn, index) => (
+                <Droppable key={index} droppableId={`${index}`}>
+                  {/*The 'provided' argument gives props to make columns as droppable areas*/}
+                  {(provided, snapshot) => (
+                    <Box
+                      height="100%"
+                      display="flex"
+                      flexDir="column"
+                      aria-label={`Column-${index + 1}`}
+                      index={index}
+                      px={spacing >= 1 ? spacing * 4 - 1 : 3}
+                      py={spacing * 2 - 1}
+                      flexBasis={`${(1 / body.length) * 100}%`}
+                      bg={snapshot.isDraggingOver ? dndProps.bg : "inherit"}
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                      {rowAsColumn.map((layoutKey, index) => (
+                        <Box
+                          display="flex"
+                          aria-label={layoutKey}
+                          width="100%"
+                          key={layoutKey}
+                        >
+                          {/*These extra props are drilled to SectionBox component to enable dragging*/}
+                          {getLayout(layoutKey, {
+                            draggableId: layoutKey,
+                            index: index
+                          })}
+                        </Box>
+                      ))}
+                      {provided.placeholder}
+                    </Box>
+                  )}
+                </Droppable>
+              ))}
+            </BodyBox>
+          </DragDropContext>
         </Box>
-        <ResumeFooter color={primaryColor}/>
+        <ResumeFooter color={primaryColor} />
       </Paper>
     </StylePropsProvider>
   );

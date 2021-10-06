@@ -39,7 +39,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ actionCode }) => {
   const [status, setStatus] = useState<Status>(Status.idle);
   const [password, setPassword] = useState({
     new: "",
-    confirm: "",
+    confirm: ""
   });
   const [validLength, hasNumber, upperCase, lowerCase, match] =
     usePasswordValidation(password.new, password.confirm);
@@ -125,7 +125,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ actionCode }) => {
             validLength,
             hasNumber,
             upperCase,
-            lowerCase,
+            lowerCase
           }}
         />
       ) : null}

@@ -42,7 +42,7 @@ export const SocialHandles: Array<SocialHandleObject> = [
   { label: "Portfolio" },
   { label: "Behance" },
   { label: "Dribbble" },
-  { label: "YouTube" },
+  { label: "YouTube" }
 ];
 
 interface Props {
@@ -81,7 +81,7 @@ const SocialMediaMenu: React.FC<Props> = ({ handler }) => {
                 add({
                   label: item.label,
                   link: "",
-                  isHidden: false,
+                  isHidden: false
                 })
               }
             >
@@ -105,7 +105,7 @@ const SocialMediaMenu: React.FC<Props> = ({ handler }) => {
               label: "Custom",
               link: modalValues.link,
               isHidden: false,
-              identifier: modalValues.identifier,
+              identifier: modalValues.identifier
             });
             setModalValues({ link: "", identifier: "" });
             onClose();

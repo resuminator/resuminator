@@ -25,7 +25,7 @@ import {
   FiAlertCircle,
   FiArrowLeft,
   FiArrowRight,
-  FiCheckCircle,
+  FiCheckCircle
 } from "react-icons/fi";
 import BoxHeader from "../../components/common/BoxHeader";
 import firebaseSDK from "../../services/firebase";
@@ -100,7 +100,7 @@ const Verifying: React.FC = () => (
 
 const VerifyEmail: React.FC<VerifyEmailProps> = ({
   actionCode,
-  continueUrl,
+  continueUrl
 }) => {
   const [status, setStatus] = useState<Status>(Status.idle);
 

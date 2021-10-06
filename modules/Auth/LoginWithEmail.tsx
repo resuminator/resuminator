@@ -105,7 +105,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
             mp.track("Log In", {
               status: "error",
               provider: "Email",
-              source: "Internal",
+              source: "Internal"
             });
             setStatus(Status.error);
             createToast("Error while logging in", "error", e.message);
@@ -115,7 +115,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
         mp.track("Log In", {
           status: "error",
           provider: "Email",
-          source: "Firebase",
+          source: "Firebase"
         });
         createToast("Error while logging in", "error", e.message);
       });
@@ -128,7 +128,7 @@ const LogInWithEmail: React.FC<Props> = ({ resetClient }) => {
         //Send verification email with redirect url
         user
           .sendEmailVerification({
-            url: `${BASE_URL}/login`,
+            url: `${BASE_URL}/login`
           })
           .then(() =>
             mp.track("Verification Email", { status: "re-send_success" })

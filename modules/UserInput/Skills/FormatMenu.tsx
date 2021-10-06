@@ -37,7 +37,9 @@ const FormatMenu = () => {
   const { createToast } = useCustomToast();
 
   const handleSubmit = async () => {
-    return await patchSkillFormat(token, resumeId, { format: format === "CATEGORIES" ? "TAGS" : "CATEGORIES" })
+    return await patchSkillFormat(token, resumeId, {
+      format: format === "CATEGORIES" ? "TAGS" : "CATEGORIES"
+    })
       .then((res: Result) => {
         setFormat(res.skills.format);
         return createToast("Skill display style updated", "success");

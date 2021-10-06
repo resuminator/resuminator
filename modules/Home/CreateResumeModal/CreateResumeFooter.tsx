@@ -35,7 +35,7 @@ const CreateResumeFooter: React.FC<Props> = ({
   method,
   onCloseCallback,
   actionCallback,
-  status,
+  status
 }) => {
   return (
     <ModalFooter display="flex" justifyContent="flex-end">

@@ -47,7 +47,7 @@ export type Method = "EXISTING" | "SCRATCH" | null;
 
 const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
   data,
-  options,
+  options
 }) => {
   const [method, setMethod] = useState<Method>(null);
   const [status, setStatus] = useState<Status>(Status.idle);
@@ -126,7 +126,7 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
           callback={setMethod}
           selectedHandlers={{
             value: selectedResume,
-            setValue: setSelectedResume,
+            setValue: setSelectedResume
           }}
         />
         <CreateResumeFooter

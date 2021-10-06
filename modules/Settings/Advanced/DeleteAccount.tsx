@@ -67,14 +67,14 @@ const DeleteAccount = () => {
       .then(() => {
         mp.track("Log Out", {
           status: "success",
-          source: "Account Deleted",
+          source: "Account Deleted"
         });
         return createToast("You have been successfully logged out", "success");
       })
       .catch(() => {
         mp.track("Log Out", {
           status: "error",
-          source: "Internal",
+          source: "Internal"
         });
       });
   };
@@ -134,7 +134,7 @@ const DeleteAccount = () => {
         actionButtonProps={{
           isDisabled: confirmInput !== email,
           isLoading: status === Status.loading,
-          loadingText: "Deleting Account",
+          loadingText: "Deleting Account"
         }}
       >
         <Text fontWeight="medium" color="red.500" mb="2">
