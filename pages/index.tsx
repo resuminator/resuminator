@@ -38,7 +38,7 @@ import Nav from "../website/Nav";
 import Sponsor from "../website/Sponsor";
 import Testimonials from "../website/Testimonials";
 const CookieBanner = dynamic(() => import("../website/Cookies/CookieBanner"), {
-  ssr: false,
+  ssr: false
 });
 
 const Index: NextPage = () => {

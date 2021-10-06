@@ -45,8 +45,8 @@ const LoginHelp: NextPage = () => {
   const toast = useToast();
 
   useEffect(() => {
-    mp.track('Login Help Page View')
-  }, [])
+    mp.track("Login Help Page View");
+  }, []);
 
   const handleInputField = (e) => {
     setEmail(e.target.value);
@@ -69,7 +69,7 @@ const LoginHelp: NextPage = () => {
           description: `Check your inbox for further instructions. You may return to log in page now.`,
           status: "success",
           duration: 5000,
-          isClosable: true,
+          isClosable: true
         });
       })
       .catch((err) => {
@@ -79,7 +79,7 @@ const LoginHelp: NextPage = () => {
           description: err.message,
           status: "error",
           duration: 5000,
-          isClosable: true,
+          isClosable: true
         });
       });
   };

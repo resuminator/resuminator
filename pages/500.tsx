@@ -24,7 +24,7 @@ import {
   ButtonGroup,
   Center,
   Text,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Image from "next/image";
@@ -45,9 +45,8 @@ const Custom500: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    mp.track('500 Error Page View')
-  }, [])
-
+    mp.track("500 Error Page View");
+  }, []);
 
   const reload = () => {
     router.reload();
@@ -118,11 +117,11 @@ const Custom500: NextPage = () => {
               <ImageCredit
                 author={{
                   name: "Icons 8",
-                  link: "https://icons8.com/illustrations/author/5c07e68d82bcbc0092519bb6",
+                  link: "https://icons8.com/illustrations/author/5c07e68d82bcbc0092519bb6"
                 }}
                 source={{
                   name: "Ouch",
-                  link: "https://icons8.com/illustrations",
+                  link: "https://icons8.com/illustrations"
                 }}
               />
             </VStack>
