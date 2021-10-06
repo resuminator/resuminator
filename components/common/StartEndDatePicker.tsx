@@ -41,7 +41,7 @@ const StartEndDatePicker: React.FC<Props> = ({
   checkboxHandler,
   clearDateHandler,
   startClearable,
-  views = ["year", "month"],
+  views = ["year", "month"]
 }) => {
   return (
     <>

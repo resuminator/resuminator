@@ -35,7 +35,7 @@ export interface DisclosureContextProps {
 }
 
 export const DisclosureContext = createContext<DisclosureContextProps>({
-  isOpen: false,
+  isOpen: false
 });
 
 const ExpandableCard: React.FC<Props & BoxProps> = ({
@@ -49,9 +49,7 @@ const ExpandableCard: React.FC<Props & BoxProps> = ({
   return (
     <DisclosureContext.Provider value={{ isOpen, onToggle }}>
       {!isOpen ? <DisplayCard {...DisplayCardProps} {...props} /> : null}
-      <InputCard {...InputCardProps}>
-        {children}
-      </InputCard>
+      <InputCard {...InputCardProps}>{children}</InputCard>
     </DisclosureContext.Provider>
   );
 };

@@ -26,7 +26,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay,
+  ModalOverlay
 } from "@chakra-ui/modal";
 import { ButtonProps } from "@chakra-ui/react";
 import { ThemingProps } from "@chakra-ui/system";
@@ -50,7 +50,7 @@ const ActionModal: React.FC<Props> = ({
   buttonText,
   color = "red",
   actionButtonProps,
-  children,
+  children
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
