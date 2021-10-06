@@ -44,7 +44,7 @@ export const useTiptap = (
   content: Content,
   options: { outputFormat?: OutputFormat; placeholder: string } = {
     outputFormat: "HTML",
-    placeholder: "",
+    placeholder: ""
   },
   onChange: (value: Content) => void
 ) => {
@@ -54,11 +54,11 @@ export const useTiptap = (
       Typography,
       Placeholder.configure({ placeholder: options.placeholder }),
       TextAlign,
-      Link,
+      Link
     ],
     content,
     onUpdate: ({ editor }) =>
-      onChange(getFormattedOutput(editor, options.outputFormat)),
+      onChange(getFormattedOutput(editor, options.outputFormat))
   });
 
   return editor;

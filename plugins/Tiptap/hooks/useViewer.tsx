@@ -38,7 +38,7 @@ export const useViewer = (content: Content) => {
       attributes: {
         class: "viewer"
       }
-    },
+    }
   });
 
   return editor;

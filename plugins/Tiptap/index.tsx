@@ -33,14 +33,14 @@ const Tiptap: React.FC<TiptapProps> = ({
   defaultValue,
   placeholder = "",
   onChange,
-  outputFormat = "HTML",
+  outputFormat = "HTML"
 }) => {
   const content = defaultValue;
   const editor = useTiptap(
     content,
     {
       outputFormat,
-      placeholder,
+      placeholder
     },
     onChange
   );
