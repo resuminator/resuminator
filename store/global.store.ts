@@ -38,7 +38,7 @@ const useGlobalStore = create<GlobalStore>(
         set((state) => ({ grayscaleFilter: !state.grayscaleFilter })),
       setSaveStatus: (status) => set({ saveStatus: status }),
       setLastSavedAt: (date) => set({ lastSavedAt: date }),
-      setContentOverflow: (value) => set({ contentOverflow: value }),
+      setContentOverflow: (value) => set({ contentOverflow: value })
     }),
     "Global"
   )
