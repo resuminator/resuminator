@@ -23,7 +23,7 @@ import {
   createTheme,
   makeStyles,
   TextField,
-  ThemeProvider,
+  ThemeProvider
 } from "@material-ui/core";
 import { DatePickerProps, MobileDatePicker } from "@material-ui/lab";
 import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
@@ -35,21 +35,21 @@ interface Props {
 
 const theme = createTheme({
   typography: {
-    fontFamily: "Inter",
+    fontFamily: "Inter"
   },
   palette: {
     primary: {
       light: "#4299e1",
       main: "#3182ce",
-      dark: "#2b6cb0",
-    },
-  },
+      dark: "#2b6cb0"
+    }
+  }
 });
 
 const useStyles = makeStyles(() => ({
   noBorder: {
-    border: "none",
-  },
+    border: "none"
+  }
 }));
 
 const MUIDatePicker: React.FC<Props & DatePickerProps> = ({
@@ -88,38 +88,38 @@ const MUIDatePicker: React.FC<Props & DatePickerProps> = ({
                 bgcolor: useColorModeValue(
                   "var(--chakra-colors-gray-200)",
                   "var(--chakra-colors-whiteAlpha-100)"
-                ),
-              },
-            },
+                )
+              }
+            }
           }}
           DialogProps={{
             PaperProps: {
               sx: {
-                "& .MuiTypography-overline":{
+                "& .MuiTypography-overline": {
                   fontWeight: "600",
                   fontSize: "14px",
                   color: useColorModeValue(
                     "var(--chakra-colors-gray-500)",
                     "var(--chakra-colors-whiteAlpha-500)"
-                  ),
+                  )
                 },
                 "& .MuiIconButton-label": {
                   color: useColorModeValue(
                     "var(--chakra-colors-gray-500)",
                     "var(--chakra-colors-whiteAlpha-500)"
-                  ),
+                  )
                 },
                 "& .MuiCalendarPicker-root": {
-                  maxHeight: "16rem",
+                  maxHeight: "16rem"
                 },
                 borderRadius: "var(--chakra-radii-lg)",
                 color: "inherit",
                 bgcolor: useColorModeValue(
                   "var(--chakra-colors-gray-50)",
                   "var(--chakra-colors-gray-800)"
-                ),
-              },
-            },
+                )
+              }
+            }
           }}
         />
       </LocalizationProvider>
