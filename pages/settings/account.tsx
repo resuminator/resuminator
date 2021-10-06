@@ -33,7 +33,6 @@ import mp from "../../services/mixpanel";
 import Papercups from "../../services/papercups";
 
 const SecuritySettings: NextPage = () => {
-  
   useEffect(() => {
     mp.track("Account Settings Page View");
   }, []);

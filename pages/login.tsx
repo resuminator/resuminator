@@ -77,7 +77,7 @@ const Login: NextPage = () => {
         mp.track("Log In", {
           status: "success",
           provider: client,
-          source: "Firebase",
+          source: "Firebase"
         });
         createToast("Logged in successfully", "success");
         return router.push("/home");
@@ -86,7 +86,7 @@ const Login: NextPage = () => {
         mp.track("Log In", {
           status: "error",
           provider: client,
-          source: "Firebase",
+          source: "Firebase"
         });
         createToast(`Couldn't sign in with ${client}`, "error", e.message);
       });
@@ -147,13 +147,13 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       redirect: {
         permanent: false,
-        destination: "/home",
-      },
+        destination: "/home"
+      }
     };
   }
 
   //If no token then don't do anything
   return {
-    props: {} as never,
+    props: {} as never
   };
 };

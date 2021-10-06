@@ -73,17 +73,17 @@ const Maintenance: NextPage = () => {
                   base: "150px",
                   md: "225px",
                   lg: "300px",
-                  xl: "450px",
+                  xl: "450px"
                 }}
               />
               <ImageCredit
                 author={{
                   name: "Bogdan Magenta",
-                  link: "https://icons8.com/illustrations/author/5dd5075701d03600114d621f",
+                  link: "https://icons8.com/illustrations/author/5dd5075701d03600114d621f"
                 }}
                 source={{
                   name: "Ouch",
-                  link: "https://icons8.com/illustrations",
+                  link: "https://icons8.com/illustrations"
                 }}
               />
             </VStack>

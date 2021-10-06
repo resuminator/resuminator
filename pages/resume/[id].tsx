@@ -37,7 +37,7 @@ const Resume: NextPage<ResumeProps> = ({ token, id }) => {
     "getResumeData",
     () => getResumeData(token, id),
     {
-      placeholderData,
+      placeholderData
     }
   );
 
@@ -69,8 +69,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       redirect: {
         permanent: false,
-        destination: "/login",
-      },
+        destination: "/login"
+      }
     };
   }
   const queryClient = new QueryClient();
@@ -81,7 +81,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       token,
       id,
-      dehydratedState: dehydrate(queryClient),
-    },
+      dehydratedState: dehydrate(queryClient)
+    }
   };
 };
