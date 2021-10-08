@@ -53,9 +53,9 @@ const Papercups = () => {
       primaryColor="#3182CE"
       awayMessage="Our team is currently offine, but feel free to drop your message. Either Vivek or Himanshu will get back to you soon."
       newMessagePlaceholder="Start typing..."
-      showAgentAvailability={false}
+      showAgentAvailability={true}
       agentAvailableText="We're online right now!"
-      agentUnavailableText="We're away at the moment."
+      agentUnavailableText="We're away at the moment. Feel free to drop a message, we'll respond asap"
       requireEmailUpfront={false}
       iconVariant="filled"
       baseUrl="https://app.papercups.io"
