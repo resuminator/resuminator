@@ -38,7 +38,7 @@ const CollapseMenu = ({ isOpen, onToggle }) => {
         flexDir="column"
         justifyContent="space-between"
         minH="90vh"
-        bg={useColorModeValue("whiteAlpha.800", "blackAlpha.800")}
+        bg={useColorModeValue("white", "#1A202C")}
       >
         <Stack alignItems="flex-start" pt="4">
           {navLinkDetails.map((item) => (
