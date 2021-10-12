@@ -32,11 +32,13 @@ const CollapseMenu = ({ isOpen, onToggle }) => {
   return (
     <Collapse in={isOpen}>
       <Box
+        mt="1"
+        borderRadius="md"
         d="flex"
         flexDir="column"
         justifyContent="space-between"
         minH="90vh"
-        bg={useColorModeValue("whiteAlpha.800", "blackAlpha")}
+        bg={useColorModeValue("whiteAlpha.800", "blackAlpha.800")}
       >
         <Stack alignItems="flex-start" pt="4">
           {navLinkDetails.map((item) => (
@@ -48,6 +50,7 @@ const CollapseMenu = ({ isOpen, onToggle }) => {
               size="md"
               fontWeight="normal"
               onClick={onToggle}
+              colorScheme="blue"
             >
               {item.label}
             </Button>
@@ -56,7 +59,7 @@ const CollapseMenu = ({ isOpen, onToggle }) => {
         <LoginSignupButtons
           display={{ md: "none" }}
           justifyContent="center"
-          mb="8"
+          mb="8"ml="8"
         />
       </Box>
     </Collapse>

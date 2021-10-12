@@ -77,15 +77,15 @@ const Nav = () => {
             onClick={toggleColorMode}
             icon={colorMode === "light" ? <FaSun /> : <FaMoon />}
             variant="ghost"
-            colorScheme={useColorModeValue("gray", "blue")}
+            colorScheme="blue"
           />
           <LoginSignupButtons display={{ base: "none", md: "initial" }} />
           <Box display={{ lg: "none" }}>
             <IconButton
               aria-label="Nav Menu Button"
               icon={<FiMenu />}
-              variant="ghost"
-              colorScheme={useColorModeValue("gray", "blue")}
+              variant="outline"
+              colorScheme="blue"
               onClick={onToggle}
             />
           </Box>
