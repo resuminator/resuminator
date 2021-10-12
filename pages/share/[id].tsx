@@ -47,14 +47,14 @@ const Share: NextPage<ShareProps> = ({ token, id }) => {
     "getResumeData",
     () => getResumeData(token, id),
     {
-      placeholderData,
+      placeholderData
     }
   );
   const { data: userData, status: userQueryStatus } = useQuery<
     UserObject,
     Error
   >("getUserData", () => getUserData(token), {
-    placeholderData: userPlaceholder,
+    placeholderData: userPlaceholder
   });
 
   useEffect(() => {
@@ -105,8 +105,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       redirect: {
         permanent: false,
-        destination: "/login",
-      },
+        destination: "/login"
+      }
     };
   }
 
@@ -120,7 +120,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       token,
       id,
-      dehydratedState: dehydrate(queryClient),
-    },
+      dehydratedState: dehydrate(queryClient)
+    }
   };
 };

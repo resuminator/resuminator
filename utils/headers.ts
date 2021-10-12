@@ -20,7 +20,7 @@
 
 const getHeaders = (token: string = null) => {
   return {
-    authorization: `Bearer ${token}`,
+    authorization: `Bearer ${token}`
   };
 };
 

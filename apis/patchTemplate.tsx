@@ -24,7 +24,7 @@ import {
   ColorProfiles,
   FontProfile,
   ResumeInputsArray,
-  ResumeLayoutObject,
+  ResumeLayoutObject
 } from "../store/types";
 import getHeaders from "../utils/headers";
 
@@ -35,21 +35,21 @@ import getHeaders from "../utils/headers";
  */
 const patchTemplate =
   <T extends unknown>(key: string) =>
-    async (
-      token: string = null,
-      resumeId: string,
-      body: { [key: string]: T }
-    ) => {
-      const res = await axios.patch(
-        `${baseUrl}/resume/template/${key}/${resumeId}`,
-        body,
-        {
-          headers: getHeaders(token),
-        }
-      );
+  async (
+    token: string = null,
+    resumeId: string,
+    body: { [key: string]: T }
+  ) => {
+    const res = await axios.patch(
+      `${baseUrl}/resume/template/${key}/${resumeId}`,
+      body,
+      {
+        headers: getHeaders(token)
+      }
+    );
 
-      return res.data;
-    };
+    return res.data;
+  };
 
 /**
  * Updates the `input` key of the template
@@ -85,11 +85,11 @@ export const patchColor = async (
 ) => {
   const [res] = await axios.all([
     await axios.patch(`${baseUrl}/resume/template/color/${resumeId}`, body, {
-      headers: getHeaders(token),
+      headers: getHeaders(token)
     }),
     await axios.patch(`${baseUrl}/meta/${resumeId}`, body, {
-      headers: getHeaders(token),
-    }),
+      headers: getHeaders(token)
+    })
   ]);
 
   return res.data;

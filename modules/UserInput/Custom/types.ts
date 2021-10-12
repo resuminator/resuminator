@@ -26,7 +26,7 @@ export type CustomSectionInputObject = {
   name: string;
 };
 
-export type DateValue = {start: Date, end: Date};
+export type DateValue = { start: Date; end: Date };
 type valueTypes = string & DateValue;
 
 export type CustomSectionDataObject = {

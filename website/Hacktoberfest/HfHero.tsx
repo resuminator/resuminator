@@ -26,7 +26,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { HFColors } from "./hf_colors";
 const CountdownTimer = dynamic(() => import("./CountdownTimer"), {
-  ssr: false,
+  ssr: false
 });
 
 interface Props {}

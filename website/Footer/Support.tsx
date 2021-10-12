@@ -33,24 +33,24 @@ import ListHeader from "./ListHeader";
 const SupportLinks = [
   {
     text: "Help Center",
-    link: HELP_CENTER,
+    link: HELP_CENTER
   },
   {
     text: "License",
-    link: LICENSE,
+    link: LICENSE
   },
   {
     text: "Privacy Policy",
-    link: PRIVACY_POLICY,
+    link: PRIVACY_POLICY
   },
   {
     text: "Cookie Policy",
-    link: COOKIE_POLICY,
+    link: COOKIE_POLICY
   },
   {
     text: "Guides",
-    link: GUIDES,
-  },
+    link: GUIDES
+  }
 ];
 
 const Support = () => {

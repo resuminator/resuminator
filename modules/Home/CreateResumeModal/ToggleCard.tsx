@@ -32,22 +32,22 @@ const ToggleCard: React.FC<Props & BoxProps> = ({
   id,
   method,
   callback,
-  children,
+  children
 }) => {
   const darkModeProps: BoxProps = {
     bg: method === id ? "blue.800" : "inherit",
     borderColor: method === id ? "blue.200" : "gray.200",
     _hover: {
-      bg: method === id ? "blue.800" : "whiteAlpha.200",
-    },
+      bg: method === id ? "blue.800" : "whiteAlpha.200"
+    }
   };
 
   const lightModeProps: BoxProps = {
     bg: method === id ? "blue.50" : "inherit",
     borderColor: method === id ? "blue.500" : "gray.200",
     _hover: {
-      bg: method === id ? "blue.50" : "gray.100",
-    },
+      bg: method === id ? "blue.50" : "gray.100"
+    }
   };
 
   const props = useColorModeValue(lightModeProps, darkModeProps);

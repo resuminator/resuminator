@@ -41,7 +41,7 @@ const useUserStore = create<UserStore>(
             const current = draftState.active.find((item) => item._id === id);
             current[key] = value;
           })
-        ),
+        )
     }),
     "User"
   )

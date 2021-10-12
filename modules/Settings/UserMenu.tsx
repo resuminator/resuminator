@@ -27,7 +27,7 @@ import {
   MenuList,
   Text,
   useColorModeValue,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import nookies from "nookies";
@@ -46,7 +46,7 @@ const UserMenu = () => {
   const [user, setUser] = useState({
     photoUrl: "",
     displayName: "",
-    email: "",
+    email: ""
   });
   const { createToast } = useCustomToast();
 
@@ -63,7 +63,7 @@ const UserMenu = () => {
       setUser({
         displayName: auth.user.displayName || "",
         photoUrl: auth.user.photoURL || "",
-        email: auth.user.email,
+        email: auth.user.email
       });
     }
   }, [auth]);
@@ -76,14 +76,14 @@ const UserMenu = () => {
       .then(() => router.push("/login"))
       .then(() => {
         mp.track("Log Out", {
-          status: "success",
+          status: "success"
         });
         return createToast("You have been successfully logged out", "success");
       })
       .catch(() => {
         mp.track("Log Out", {
           status: "error",
-          source: "Internal",
+          source: "Internal"
         });
       });
   };

@@ -47,7 +47,7 @@ const SocialHandleRegexRecord: Record<string, string> = {
   Portfolio: "(https://)?([\\w+]+)/?",
   Behance: "(https://www.)?behance.com/([A-z0-9_-]+)/?",
   Dribbble: "(https://www.)?dribbble.com/([A-z0-9_-]+)/?",
-  YouTube: "(https://www.)?youtube.com/c/([A-z0-9_-]+)/?",
+  YouTube: "(https://www.)?youtube.com/c/([A-z0-9_-]+)/?"
 };
 
 const Contact = () => {
@@ -82,7 +82,7 @@ const Contact = () => {
       header={{
         title: "Where can people contact you",
         subtitle: "Select the service and enter your social handle",
-        mb: "2",
+        mb: "2"
       }}
     >
       <Autosave data={{ contact: data }} patchFn={patchFn} />
@@ -127,7 +127,7 @@ const Contact = () => {
                   handlers={{
                     hide: (index) => update(index, "isHidden", !item.isHidden),
                     remove: handleDelete,
-                    update,
+                    update
                   }}
                 />
                 <Box

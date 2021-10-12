@@ -23,7 +23,7 @@ import React from "react";
 import {
   DragDropContext,
   DragDropContextProps,
-  Droppable,
+  Droppable
 } from "react-beautiful-dnd";
 
 interface Props {

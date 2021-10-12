@@ -47,7 +47,7 @@ const DownloadResume: React.FC<DownloadResumeProps> = ({ id }) => {
       header={{
         title: "Download Resume",
         subtitle: "PDFs can be used to upload to any job portal easily.",
-        mb: "4",
+        mb: "4"
       }}
     >
       <Button

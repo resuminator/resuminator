@@ -45,7 +45,7 @@ const SubscribeForm: React.FC<Props> = ({ status, setStatus }) => {
       mp.track("Broadmap", {
         action: "Subscribe CTA Trigger",
         status: "error",
-        reason: "invalid email",
+        reason: "invalid email"
       });
       return createToast(
         "Please enter an email to subscribe",
@@ -58,7 +58,7 @@ const SubscribeForm: React.FC<Props> = ({ status, setStatus }) => {
       mp.track("Broadmap", {
         action: "Subscribe CTA Trigger",
         status: "error",
-        reason: "invalid email",
+        reason: "invalid email"
       });
       return createToast(
         "This email seems invalid",
@@ -69,7 +69,7 @@ const SubscribeForm: React.FC<Props> = ({ status, setStatus }) => {
 
     mp.track("Broadmap", {
       action: "Subscribe CTA Trigger",
-      status: "success",
+      status: "success"
     });
     setStatus(Status.loading);
     return await addSubscriber({ email })
@@ -104,7 +104,7 @@ const SubscribeForm: React.FC<Props> = ({ status, setStatus }) => {
         isValid={isValidEmail}
         variant="filled"
         labelProps={{
-          color: useColorModeValue("blackAlpha.700", "whiteAlpha.600"),
+          color: useColorModeValue("blackAlpha.700", "whiteAlpha.600")
         }}
       />
       <Button

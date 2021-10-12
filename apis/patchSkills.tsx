@@ -39,7 +39,7 @@ export const patchSkillData = async (
     `${API_URL}/${API_VERSION}/resume/skill/data/${resumeId}`,
     body,
     {
-      headers: getHeaders(token),
+      headers: getHeaders(token)
     }
   );
   return res.data;
@@ -61,7 +61,7 @@ export const patchSkillFormat = async (
     `${API_URL}/${API_VERSION}/resume/skill/format/${resumeId}`,
     body,
     {
-      headers: getHeaders(token),
+      headers: getHeaders(token)
     }
   );
   return res.data;

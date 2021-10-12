@@ -29,7 +29,7 @@ import {
   FaPhoneAlt,
   FaTwitter,
   FaUserAlt,
-  FaYoutube,
+  FaYoutube
 } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { ContactData, Services } from "./types";
@@ -95,7 +95,10 @@ export const labelIsPresent = (data: ContactData, label: Services): boolean => {
   return keys.includes(label);
 };
 
-export const generateLinkForLabel = (label: Services | string, link: string) => {
+export const generateLinkForLabel = (
+  label: Services | string,
+  link: string
+) => {
   switch (label) {
     case "LinkedIn":
       return `https://linkedin.com/in/${link}`;

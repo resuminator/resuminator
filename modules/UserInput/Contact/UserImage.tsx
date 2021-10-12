@@ -52,7 +52,7 @@ const UserImage = () => {
         setLastSavedAt(new Date());
         mp.track("Photo Uploaded", {
           target: `resume-${resumeId}`,
-          status: "success",
+          status: "success"
         });
         createToast("Image uploaded successfully", "success");
         return setSaveStatus(Status.success);
@@ -61,7 +61,7 @@ const UserImage = () => {
         mp.track("Photo Uploaded", {
           target: `resume-${resumeId}`,
           status: "error",
-          source: "Internal",
+          source: "Internal"
         });
         setSaveStatus(Status.error);
       });
@@ -80,7 +80,7 @@ const UserImage = () => {
       .then(() => {
         mp.track("Photo Delete", {
           target: `resume-${resumeId}`,
-          status: "success",
+          status: "success"
         });
         setUserImage("");
         setStatus(Status.success);
@@ -91,7 +91,7 @@ const UserImage = () => {
         mp.track("Photo Delete", {
           target: `resume-${resumeId}`,
           status: "error",
-          source: "Firebase",
+          source: "Firebase"
         });
         return createToast(
           "Couldn't remove image",
@@ -106,7 +106,7 @@ const UserImage = () => {
       header={{
         title: "Resume Photo",
         subtitle: "Click on the button below to upload your photo",
-        mb: "2",
+        mb: "2"
       }}
     >
       <ButtonGroup my="4">

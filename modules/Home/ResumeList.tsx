@@ -48,7 +48,11 @@ const ResumeList: React.FC<ResumeListProps> = ({ handleNew }) => {
       />
       <HStack spacing="8" alignItems="flex-start">
         {data.map((item) => (
-          <ResumeCard key={item._id} dataObject={item} callback={handleSelect} />
+          <ResumeCard
+            key={item._id}
+            dataObject={item}
+            callback={handleSelect}
+          />
         ))}
         <CreateResumeCard onClick={handleNew} />
       </HStack>

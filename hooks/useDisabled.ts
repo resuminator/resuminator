@@ -60,7 +60,7 @@ export const useDisabled = (
     updateLayout("body", nextBody);
 
     return await patchLayout(token, resumeId, {
-      layout: { ...layout, body: nextBody },
+      layout: { ...layout, body: nextBody }
     })
       .then((res: Result) => {
         updateLayout("body", res.template.layout.body);

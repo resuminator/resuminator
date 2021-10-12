@@ -40,12 +40,7 @@ const LogoSquare: React.FC<Props & BoxProps> = ({
     <Box display="flex" flexDir="column" w="fit-content" {...props}>
       <Link href={href} scroll={false}>
         <a>
-          <Image
-            layout="fixed"
-            src={src}
-            width={width}
-            height={height}
-          />
+          <Image layout="fixed" src={src} width={width} height={height} />
         </a>
       </Link>
     </Box>

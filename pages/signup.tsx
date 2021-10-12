@@ -85,7 +85,7 @@ const Signup: NextPage = () => {
   return (
     <>
       <SEO {...signupSeo} />
-      <Announcement/>
+      <Announcement />
       <Layout hasHeaderHidden>
         <Box
           display="flex"
@@ -137,13 +137,13 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       redirect: {
         permanent: false,
-        destination: "/home",
-      },
+        destination: "/home"
+      }
     };
   }
 
   //If no token then don't do anything
   return {
-    props: {} as never,
+    props: {} as never
   };
 };

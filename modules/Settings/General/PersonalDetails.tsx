@@ -37,7 +37,7 @@ const PersonalDetails = () => {
     if (auth.user) {
       setUser({
         displayName: auth.user.displayName || "",
-        email: auth.user.email,
+        email: auth.user.email
       });
     }
   }, [auth.user]);
@@ -55,7 +55,7 @@ const PersonalDetails = () => {
       .then(() => {
         mp.track("General Settings", {
           action: "name change",
-          status: "success",
+          status: "success"
         });
         setUnsavedChanges(false);
         setStatus(Status.success);
@@ -65,7 +65,7 @@ const PersonalDetails = () => {
         mp.track("General Settings", {
           action: "name change",
           status: "error",
-          source: "Firebase",
+          source: "Firebase"
         });
         setStatus(Status.error);
         createToast("Couldn't save changes", "error", err.message);

@@ -21,41 +21,41 @@
 export const navLinkDetails = [
   {
     label: "Features",
-    link: "/#features",
+    link: "/#features"
   },
   {
     label: "Open Source",
-    link: "/#open-source",
+    link: "/#open-source"
   },
   {
     label: "Sponsor",
-    link: "/#sponsor",
+    link: "/#sponsor"
   },
   {
     label: "Broadmap",
-    link: "/#broadmap",
+    link: "/#broadmap"
   },
   {
     label: "About Us",
-    link: "/about",
-  },
+    link: "/about"
+  }
 ];
 
 export const navLinkDetailsSmall = [
   {
     label: "Features",
-    link: "/#features",
+    link: "/#features"
   },
   {
     label: "Sponsor",
-    link: "/#sponsor",
+    link: "/#sponsor"
   },
   {
     label: "Broadmap",
-    link: "/#broadmap",
+    link: "/#broadmap"
   },
   {
     label: "About Us",
-    link: "/about",
-  },
+    link: "/about"
+  }
 ];

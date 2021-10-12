@@ -24,7 +24,12 @@ import useResumeStore from "../../../store/resume.store";
 import { LogoSquare } from "../Logos";
 import NavTabs from "../NavTabs";
 import UserMenu from "../../../modules/Settings/UserMenu";
-import { HStack, IconButton, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import {
+  HStack,
+  IconButton,
+  useColorMode,
+  useColorModeValue
+} from "@chakra-ui/react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 const Header = () => {

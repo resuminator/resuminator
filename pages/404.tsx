@@ -84,11 +84,11 @@ const Custom404: NextPage = () => {
               <ImageCredit
                 author={{
                   name: "Ekaterina Rogova",
-                  link: "https://icons8.com/illustrations/author/5d1f49459e78e00011dbe817",
+                  link: "https://icons8.com/illustrations/author/5d1f49459e78e00011dbe817"
                 }}
                 source={{
                   name: "Ouch",
-                  link: "https://icons8.com/illustrations",
+                  link: "https://icons8.com/illustrations"
                 }}
               />
             </VStack>

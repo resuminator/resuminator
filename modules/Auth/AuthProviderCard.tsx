@@ -25,7 +25,7 @@ import React from "react";
 import {
   AiOutlineGithub,
   AiOutlineGoogle,
-  AiOutlineMail,
+  AiOutlineMail
 } from "react-icons/ai";
 
 export interface AuthProviderProps {

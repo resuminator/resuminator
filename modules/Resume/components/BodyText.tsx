@@ -34,7 +34,7 @@ const BodyText: React.FC<TiptapProps & BoxProps> = ({ content, ...props }) => {
   const bodyTextProps: BoxProps = {
     "aria-label": "Body Text",
     my: spacing * 2,
-    ...props,
+    ...props
   };
 
   return (

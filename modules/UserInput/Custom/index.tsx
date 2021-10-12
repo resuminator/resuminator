@@ -51,7 +51,7 @@ const CustomSections = () => {
         header={{
           title: "Custom Sections",
           subtitle: "Create and manage your custom sections for this resume",
-          mb: "2",
+          mb: "2"
         }}
       >
         <ButtonGroup my="2">

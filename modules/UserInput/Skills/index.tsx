@@ -53,7 +53,7 @@ const Skills = () => {
     _id: getUniqueID(),
     isHidden: false,
     category: "",
-    skillsList: [],
+    skillsList: []
   };
 
   const getNewObject = async () => {
@@ -77,7 +77,7 @@ const Skills = () => {
       header={{
         title: "Skills",
         subtitle: "Add relevant skills and categorize them.",
-        mb: "2",
+        mb: "2"
       }}
     >
       <Autosave data={{ data: data }} patchFn={patchSkillData} />
@@ -106,15 +106,15 @@ const Skills = () => {
               index: index,
               title: item.category,
               titlePlaceholder: "Untitled category",
-              isHidden: item.isHidden,
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "category",
               visibilityHandler: {
                 value: item.isHidden,
-                setValue: () => updateData(index, "isHidden", !item.isHidden),
+                setValue: () => updateData(index, "isHidden", !item.isHidden)
               },
-              deleteHandler: () => handleDelete(item._id),
+              deleteHandler: () => handleDelete(item._id)
             }}
             key={item._id}
           >

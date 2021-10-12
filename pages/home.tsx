@@ -100,8 +100,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       redirect: {
         permanent: false,
-        destination: "/login",
-      },
+        destination: "/login"
+      }
     };
   }
 
@@ -111,7 +111,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return {
     props: {
       token,
-      dehydratedState: dehydrate(queryClient),
-    },
+      dehydratedState: dehydrate(queryClient)
+    }
   };
 };

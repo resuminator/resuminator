@@ -23,7 +23,7 @@ import {
   Slider,
   SliderFilledTrack,
   SliderThumb,
-  SliderTrack,
+  SliderTrack
 } from "@chakra-ui/slider";
 import React from "react";
 import { patchSpacing } from "../../apis/patchTemplate";
@@ -76,7 +76,7 @@ const Spacing = () => {
       header={{
         title: "Resume spacing",
         subtitle: "Adjust the slider to increase/decrease white space.",
-        mb: "2",
+        mb: "2"
       }}
     >
       <Slider

@@ -47,12 +47,12 @@ interface NewSectionModalProps {
 
 const NewSectionModal: React.FC<NewSectionModalProps> = ({
   isOpen,
-  onClose,
+  onClose
 }) => {
   const { valueAsNumber, increment, decrement, reset } = useCounter({
     defaultValue: 1,
     min: 1,
-    max: 2,
+    max: 2
   });
   const initialSectionState: CustomSectionObject = {
     _id: getUniqueID(),
@@ -60,7 +60,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
     hasTitleRow: true,
     inputs: [],
     data: [],
-    layout: [],
+    layout: []
   };
 
   const [section, setSection] =
@@ -94,9 +94,9 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
       ...nextSection,
       inputs: [
         ...nextSection.inputs,
-        { _id: id, type, name: getDefaultName(type) },
+        { _id: id, type, name: getDefaultName(type) }
       ],
-      layout: [...nextSection.layout, [id]],
+      layout: [...nextSection.layout, [id]]
     }));
   };
 
@@ -111,7 +111,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
     setSection((nextSection) => ({
       ...nextSection,
       inputs: nextInputs,
-      layout: nextLayout,
+      layout: nextLayout
     }));
   };
 
@@ -141,7 +141,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
         "Manage section properties in user settings. You can add a maximum of 3 custom sections",
       status: "info",
       isClosable: true,
-      duration: 3000,
+      duration: 3000
     });
   };
 
@@ -153,7 +153,7 @@ const NewSectionModal: React.FC<NewSectionModalProps> = ({
             section={section}
             onChangeHandlers={{
               header: handleHeaderInput,
-              field: handleFieldInput,
+              field: handleFieldInput
             }}
             addHandler={addInputField}
             deleteHandler={deleteInputField}

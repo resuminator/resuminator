@@ -37,10 +37,10 @@ const SectionBox: React.FC<BoxProps & SectionBoxProps> = ({
 }) => {
   const spacing = useResumeStore((state) => state.spacing);
   const lightModeProps: BoxProps = {
-    bg: "white",
+    bg: "white"
   };
   const darkModeProps: BoxProps = {
-    bg: "gray.800",
+    bg: "gray.800"
   };
   const draggingLight: BoxProps = {
     bg: "white",
@@ -58,12 +58,12 @@ const SectionBox: React.FC<BoxProps & SectionBoxProps> = ({
   const draggingProps = useColorModeValue(draggingLight, draggingDark);
 
   const hoverPropsLight: BoxProps = {
-    bg: "gray.100",
-  }
+    bg: "gray.100"
+  };
 
   const hoverPropsDark: BoxProps = {
     bg: "whiteAlpha.100"
-  }
+  };
 
   const hoverProps = useColorModeValue(hoverPropsLight, hoverPropsDark);
 
@@ -71,7 +71,7 @@ const SectionBox: React.FC<BoxProps & SectionBoxProps> = ({
     <Draggable key={draggableId} draggableId={draggableId} index={index}>
       {(provided, snapshot) => (
         <Box
-        {...props}
+          {...props}
           w="inherit"
           p="1"
           pb="0"

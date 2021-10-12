@@ -36,7 +36,7 @@ interface Props {
 
 const RemoveItemButton: React.FC<Props> = ({
   itemType = "item",
-  handleDelete,
+  handleDelete
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (

@@ -26,24 +26,24 @@ import ListHeader from "./ListHeader";
 const ProductLinks = [
   {
     text: "Features",
-    link: "/#features",
+    link: "/#features"
   },
   {
     text: "Open Source",
-    link: "/#open-source",
+    link: "/#open-source"
   },
   {
     text: "Sponsor",
-    link: "/#sponsor",
+    link: "/#sponsor"
   },
   {
     text: "Newsletter",
-    link: "/#broadmap",
+    link: "/#broadmap"
   },
   {
     text: "About Us",
-    link: "/about",
-  },
+    link: "/about"
+  }
 ];
 
 const Product = () => {

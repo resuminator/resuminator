@@ -28,7 +28,7 @@ import {
   ExperienceLayout,
   ProjectLayout,
   PublicationsLayout,
-  SkillsLayout,
+  SkillsLayout
 } from "./Sections";
 import CustomSectionLayout from "./Sections/CustomSection";
 import { SectionBoxProps } from "./components/SectionBox";
@@ -36,19 +36,19 @@ import { SectionBoxProps } from "./components/SectionBox";
 export const getLayout = (key: InputSectionKeys, props: SectionBoxProps) => {
   switch (key) {
     case "EDUCATION":
-      return <EducationLayout {...props}/>;
+      return <EducationLayout {...props} />;
     case "EXPERIENCE":
-      return <ExperienceLayout {...props}/>;
+      return <ExperienceLayout {...props} />;
     case "PROJECTS":
-      return <ProjectLayout {...props}/>;
+      return <ProjectLayout {...props} />;
     case "CERTIFICATIONS":
-      return <CertificationsLayout {...props}/>;
+      return <CertificationsLayout {...props} />;
     case "PUBLICATIONS":
-      return <PublicationsLayout {...props}/>;
+      return <PublicationsLayout {...props} />;
     case "SKILLS":
-      return <SkillsLayout {...props}/>;
-    default: 
-      return <CustomSectionLayout sectionKey={key} {...props}/>;
+      return <SkillsLayout {...props} />;
+    default:
+      return <CustomSectionLayout sectionKey={key} {...props} />;
   }
 };
 

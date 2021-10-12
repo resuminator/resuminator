@@ -35,7 +35,7 @@ const AboutUs = () => {
         base: "8",
         md: "8rem 8rem 0 8rem",
         lg: "10rem 8rem 0 8rem",
-        xl: "12rem 14rem 0px 14rem",
+        xl: "12rem 14rem 0px 14rem"
       }}
     >
       <HeadingBox

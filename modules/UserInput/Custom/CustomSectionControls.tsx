@@ -59,7 +59,7 @@ const createDataObject = (
   const values = fieldIds.reduce(
     (o, key) => ({
       ...o,
-      [key]: getDefaultValue(getTypeFromId(section, key)),
+      [key]: getDefaultValue(getTypeFromId(section, key))
     }),
     {}
   );
@@ -67,12 +67,12 @@ const createDataObject = (
   return {
     _id: getUniqueID(),
     isHidden: false,
-    values,
+    values
   };
 };
 
 const CustomSectionControls: React.FC<CustomSectionControlsProps> = ({
-  section,
+  section
 }) => {
   const layout = useResumeStore((state) => state.properties.layout);
   const { addData, sections, setSections } = useCustomSectionStore();

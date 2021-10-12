@@ -26,7 +26,7 @@ import firebaseSDK from "../../services/firebase";
 const REFRESH_INTERVAL = 30 * 60 * 1000; //30 Mins
 
 const AuthContext = createContext<{ user: firebase.default.User | null }>({
-  user: null,
+  user: null
 });
 
 export const AuthProvider = ({ children }) => {

@@ -18,11 +18,11 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import { Text } from "@chakra-ui/layout";
 import React, { Fragment } from "react";
 import { TiptapProps } from "../../plugins/Tiptap";
-const Tiptap = dynamic(() => import("../../plugins/Tiptap"))
+const Tiptap = dynamic(() => import("../../plugins/Tiptap"));
 
 interface Props extends TiptapProps {
   label: string;
@@ -33,7 +33,7 @@ const EditorWithLabel: React.FC<Props> = ({
   defaultValue,
   placeholder,
   outputFormat,
-  onChange,
+  onChange
 }) => {
   return (
     <Fragment>

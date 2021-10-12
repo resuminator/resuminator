@@ -18,14 +18,20 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
-import { resetServerContext } from 'react-beautiful-dnd'
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext
+} from "next/document";
+import { resetServerContext } from "react-beautiful-dnd";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
     resetServerContext();
-    return { ...initialProps }
+    return { ...initialProps };
   }
 
   render() {
@@ -37,8 +43,8 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
-export default MyDocument
+export default MyDocument;

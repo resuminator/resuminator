@@ -33,8 +33,8 @@ const Sidebar = () => {
     {
       title: "Settings",
       icon: FiSettings,
-      link: "/settings",
-    },
+      link: "/settings"
+    }
     // {
     //   title: "Favorites",
     //   icon: FiStar,
@@ -56,18 +56,18 @@ const Sidebar = () => {
     {
       title: "Broadmap",
       icon: BroadmapIcon,
-      link: BROADMAP_HOMEPAGE,
+      link: BROADMAP_HOMEPAGE
     },
     {
       title: "Help & Support",
       icon: FiHelpCircle,
-      link: HELP_CENTER, // /support
+      link: HELP_CENTER // /support
     },
     {
       title: "Discord Server",
       icon: FaDiscord,
-      link: DISCORD_INVITE, // /support
-    },
+      link: DISCORD_INVITE // /support
+    }
   ];
 
   return (

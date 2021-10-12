@@ -29,9 +29,9 @@ const TitleRow: ComponentWithAs<"p", TextProps> = ({ children, ...props }) => {
   const titleRowProps = useContext(StylePropsContext).titleRowProps;
   const hoverProps = props.href && {
     _hover: { textDecoration: "underline" },
-    transition: "0.2s all",
+    transition: "0.2s all"
   };
-  
+
   return (
     <Text aria-label="Title Row" {...titleRowProps} {...props} {...hoverProps}>
       {children}

@@ -40,9 +40,9 @@ export interface IStylePropsContext {
 export const StylePropsContext = createContext<IStylePropsContext>({
   font: {
     primary: {
-      fontFamily: "inherit",
-    },
-  },
+      fontFamily: "inherit"
+    }
+  }
 });
 
 const StylePropsProvider: React.FC = ({ children }) => {
@@ -55,30 +55,30 @@ const StylePropsProvider: React.FC = ({ children }) => {
     font: Fonts[fontProfile],
     headerTitleProps: {
       color: "gray.600",
-      ...Fonts[fontProfile].headerTitle,
+      ...Fonts[fontProfile].headerTitle
     },
     headerSubtitleProps: {
       color: primaryColor,
-      ...Fonts[fontProfile].headerSubtitle,
+      ...Fonts[fontProfile].headerSubtitle
     },
     sectionTitleProps: {
       color: primaryColor,
-      ...Fonts[fontProfile].heading,
+      ...Fonts[fontProfile].heading
     },
     titleRowProps: {
       color: primaryColor,
-      ...Fonts[fontProfile].primary,
+      ...Fonts[fontProfile].primary
     },
     subtitleRowProps: {
       color: "gray.500",
-      ...Fonts[fontProfile].secondary,
+      ...Fonts[fontProfile].secondary
     },
     bodyProps: {
       sx: {
-        ".ProseMirror.viewer": { ...Fonts[fontProfile].body },
-      },
+        ".ProseMirror.viewer": { ...Fonts[fontProfile].body }
+      }
     },
-    primaryColor,
+    primaryColor
   };
 
   return (

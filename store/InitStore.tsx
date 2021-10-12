@@ -78,7 +78,7 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
       setProperty("_id", id);
       setProperty("properties", {
         inputs: object.inputs, //default
-        layout: object.layout, //default
+        layout: object.layout //default
       });
       setProperty("fontProfile", object.fontProfile);
       setProperty("color", object.color);
@@ -110,7 +110,7 @@ const InitStore: React.FC<Props> = ({ data, status, id = "" }) => {
       initSkills,
       customSectionInit,
       setInit,
-      initUserInfo,
+      initUserInfo
     ]
   );
 

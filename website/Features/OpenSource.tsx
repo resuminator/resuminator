@@ -24,7 +24,7 @@ import {
   Stack,
   Text,
   useBreakpointValue,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React from "react";
 import { FiGithub, FiStar } from "react-icons/fi";

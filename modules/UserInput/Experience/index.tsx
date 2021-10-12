@@ -67,7 +67,7 @@ const Experience = () => {
     tags: [],
     start: new Date(),
     end: new Date(),
-    isHidden: false,
+    isHidden: false
   };
 
   //mocking data from DB.
@@ -92,7 +92,7 @@ const Experience = () => {
       header={{
         title: "Work Experience",
         subtitle: "Add your recent work experiences and internships.",
-        mb: "2",
+        mb: "2"
       }}
     >
       <Autosave data={data} patchFn={patchExperience} />
@@ -116,15 +116,15 @@ const Experience = () => {
               title: item.company,
               subtitle: item.jobTitle,
               titlePlaceholder: "Organization Name",
-              isHidden: item.isHidden,
+              isHidden: item.isHidden
             }}
             InputCardProps={{
               itemType: "experience",
               visibilityHandler: {
                 value: item.isHidden,
-                setValue: () => updateData(index, "isHidden", !item.isHidden),
+                setValue: () => updateData(index, "isHidden", !item.isHidden)
               },
-              deleteHandler: () => handleDelete(item._id),
+              deleteHandler: () => handleDelete(item._id)
             }}
             key={item._id}
           >

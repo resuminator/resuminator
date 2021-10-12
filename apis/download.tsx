@@ -30,7 +30,7 @@ export const downloadPdf = async (token: string, id: string) => {
     responseType: "arraybuffer",
     headers: {
       authorization: token,
-      Accept: "application/pdf",
-    },
+      Accept: "application/pdf"
+    }
   });
 };

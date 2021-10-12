@@ -55,11 +55,7 @@ const SocialHandlesLayout = () => {
             key={item.label}
             pb="1"
           >
-            <Icon
-              as={getIconForService(item.label)}
-              color="gray.600"
-              mr="1"
-            />
+            <Icon as={getIconForService(item.label)} color="gray.600" mr="1" />
             {item.identifier ? (
               <TextItem
                 aria-label={item.identifier}

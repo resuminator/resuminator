@@ -28,10 +28,10 @@ const ColoredDivider: React.FC<DividerProps> = ({ color, ...rest }) => {
     border: "none",
     borderTop: "1px solid",
     borderTopColor: color,
-    padding: 0,
+    padding: 0
   };
 
-  return <Divider {...hrProps} {...rest}/>;
+  return <Divider {...hrProps} {...rest} />;
 };
 
 export default ColoredDivider;

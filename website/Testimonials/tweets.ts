@@ -21,7 +21,6 @@
 import { TweetCardProps } from "./TweetCard";
 
 const tweets: Array<TweetCardProps> = [
-  
   // {
   //   name: "Vivek Nigam",
   //   handle: "@_viveknigam_",
@@ -39,7 +38,7 @@ const tweets: Array<TweetCardProps> = [
     image:
       "https://pbs.twimg.com/profile_images/1403918463668654083/ay89gwyB_400x400.jpg",
     content: `Hi Team @resuminator I admire your Resumé service. But, how about developing up similar applications for CV/Biodata (multiple page), SOP, LOR etc.`,
-    url: "https://twitter.com/DEV__Ankur/status/1429666028066271233",
+    url: "https://twitter.com/DEV__Ankur/status/1429666028066271233"
   },
   {
     name: "Manav Kashyap",
@@ -49,7 +48,7 @@ const tweets: Array<TweetCardProps> = [
       "https://pbs.twimg.com/profile_images/1402685737649115136/j4jHnBhh_400x400.jpg",
     content:
       "Hardwork is appreciated. I did checkout v1 and now v2 is definitely an improvement. The UI is very impressive. The light and dark modes are smooth as  whiskey. I want you and the team to deliver highest level of sophistication. \n Cheers 🥂",
-    url: "https://twitter.com/manavkashyap24/status/1432668624179720194",
+    url: "https://twitter.com/manavkashyap24/status/1432668624179720194"
   },
   {
     name: "🌈 Himanshu (He/Him) #SaveWildlife",
@@ -58,9 +57,8 @@ const tweets: Array<TweetCardProps> = [
     image:
       "https://pbs.twimg.com/profile_images/1325455177491439616/wdypU20s_400x400.jpg",
     content: `Go check out and experience #ResuminatorV2`,
-    url: "https://twitter.com/_mercurybuddy/status/1423986566582571014",
-  },
-  
+    url: "https://twitter.com/_mercurybuddy/status/1423986566582571014"
+  }
 ];
 
 export default tweets;

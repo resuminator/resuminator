@@ -111,6 +111,6 @@ export const getServerSideProps = async ({ query }) => {
   const oobCode = query.oobCode || "";
   const continueUrl = query.continueUrl || "/login";
   return {
-    props: { mode, oobCode, continueUrl },
+    props: { mode, oobCode, continueUrl }
   };
 };

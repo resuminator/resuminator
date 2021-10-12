@@ -32,7 +32,7 @@ const Graph = () => {
 
   const author = {
     name: "Apoorva Agrawal",
-    website: "https://pixelkanya.com",
+    website: "https://pixelkanya.com"
   };
 
   return (
@@ -45,7 +45,7 @@ const Graph = () => {
         pt={{ base: "8", sm: "10", md: "16", lg: "20" }}
         subtitleProps={{
           fontSize: { base: "xl", sm: "2xl", lg: "3xl", xl: "4xl" },
-          maxW: { md: "80%", lg: "70%" },
+          maxW: { md: "80%", lg: "70%" }
         }}
       />
       <AspectRatio ratio={1} maxW="600px" margin="0 auto">

@@ -40,7 +40,7 @@ const InputCard: React.FC<InputCardProps> = ({
   children,
   visibilityHandler = { value: false },
   itemType,
-  deleteHandler,
+  deleteHandler
 }) => {
   const { isOpen, onToggle } = useContext(DisclosureContext);
 

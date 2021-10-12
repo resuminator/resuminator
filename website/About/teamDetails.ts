@@ -30,21 +30,21 @@ export const teamDetails: Array<TeamMember> = [
     social: [
       {
         label: "Twitter",
-        link: "@_viveknigam_",
+        link: "@_viveknigam_"
       },
       {
         label: "LinkedIn",
-        link: "viveknigam3003",
+        link: "viveknigam3003"
       },
       {
         label: "GitHub",
-        link: "viveknigam3003",
+        link: "viveknigam3003"
       },
       {
         label: "Email",
-        link: "vivek@resuminator.in",
-      },
-    ],
+        link: "vivek@resuminator.in"
+      }
+    ]
   },
   {
     image:
@@ -55,20 +55,20 @@ export const teamDetails: Array<TeamMember> = [
     social: [
       {
         label: "Twitter",
-        link: "@_mercurybuddy",
+        link: "@_mercurybuddy"
       },
       {
         label: "LinkedIn",
-        link: "garg-himanshu",
+        link: "garg-himanshu"
       },
       {
         label: "GitHub",
-        link: "merrcury",
+        link: "merrcury"
       },
       {
         label: "Email",
-        link: "himanshu@resuminator.in",
-      },
-    ],
-  },
+        link: "himanshu@resuminator.in"
+      }
+    ]
+  }
 ];

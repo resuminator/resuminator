@@ -91,7 +91,7 @@ const customSectionStore = (
         )[0];
         currentDataObject.isHidden = !currentDataObject.isHidden;
       })
-    ),
+    )
 });
 
 export const useCustomSectionStore = create<Store>(
