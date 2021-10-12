@@ -39,6 +39,7 @@ const NavLinks = (props: Props) => {
     >
       {links.map((item) => (
         <Button
+          colorScheme="blue"
           key={item.label}
           as="a"
           href={item.link}
