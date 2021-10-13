@@ -59,7 +59,8 @@ const CollapseMenu = ({ isOpen, onToggle }) => {
         <LoginSignupButtons
           display={{ md: "none" }}
           justifyContent="center"
-          mb="8"ml="8"
+          mb="8"
+          ml="8"
         />
       </Box>
     </Collapse>
