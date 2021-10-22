@@ -28,10 +28,12 @@ interface Props {
   list: Array<string>;
 }
 
-const hexToRgba = (hex, alpha = 1) => {
-  const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
+const hexToRgba = (color, alpha = 1) => {
+  const isHex = color.length === 6 && !isNaN(Number('0x' + color));
+  if (!isHex) return color;
+  const [r, g, b] = color.match(/\w\w/g).map(x => parseInt(x, 16));
   return `rgba(${r},${g},${b},${alpha})`;
-});
+};
 
 const Tags: React.FC<Props> = ({ list }) => {
   const color = useResumeStore((state) => state.color);
@@ -42,7 +44,7 @@ const Tags: React.FC<Props> = ({ list }) => {
       {list.map((tag) =>
         tag.trim().length ? (
           <Tag
-	    background={hexToRgba(color, 0.4)}
+            backgroundColor={hexToRgba(color, 0.4)}
             color={color}
             {...font.body}
             borderRadius="full"
