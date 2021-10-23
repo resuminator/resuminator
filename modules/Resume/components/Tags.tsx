@@ -28,10 +28,17 @@ interface Props {
   list: Array<string>;
 }
 
-const hexToRgba = (color, alpha = 1) => {
-  const isHex = color.length === 6 && !isNaN(Number('0x' + color));
-  if (!isHex) return color;
-  const [r, g, b] = color.match(/\w\w/g).map(x => parseInt(x, 16));
+const createColorScheme = (color) => {
+  const isCustomColor = color.length === 6 && !isNaN(Number('0x' + color));
+  if (!isCustomColor) return { colorScheme: color };
+  return {
+    backgroundColor: hexToRgba(color, 0.4),
+    color: hexToRgba(color)
+  };
+};
+
+const hexToRgba = (hex, alpha = 1) => {
+  const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
   return `rgba(${r},${g},${b},${alpha})`;
 };
 
@@ -44,8 +51,7 @@ const Tags: React.FC<Props> = ({ list }) => {
       {list.map((tag) =>
         tag.trim().length ? (
           <Tag
-            backgroundColor={hexToRgba(color, 0.4)}
-            color={color}
+            {...createColorScheme(color)}
             {...font.body}
             borderRadius="full"
             variant="subtle"
