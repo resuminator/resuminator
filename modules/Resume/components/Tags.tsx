@@ -29,7 +29,7 @@ interface Props {
 }
 
 const createColorScheme = (color) => {
-  const isCustomColor = color.startsWith('#');
+  const isCustomColor = color.startsWith('#') && color.length > 1;
   if (!isCustomColor) return { colorScheme: color };
   return {
     backgroundColor: hexToRgba(color, 0.2),
