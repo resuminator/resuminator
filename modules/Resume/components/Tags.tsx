@@ -29,10 +29,10 @@ interface Props {
 }
 
 const createColorScheme = (color) => {
-  const isCustomColor = color.length === 6 && !isNaN(Number('0x' + color));
+  const isCustomColor = color.startsWith('#');
   if (!isCustomColor) return { colorScheme: color };
   return {
-    backgroundColor: hexToRgba(color, 0.4),
+    backgroundColor: hexToRgba(color, 0.2),
     color: hexToRgba(color)
   };
 };
