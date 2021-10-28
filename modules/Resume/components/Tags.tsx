@@ -29,7 +29,7 @@ interface Props {
 }
 
 const createColorScheme = (color) => {
-  const isCustomColor = color.startsWith('#') && color.length > 1;
+  const isCustomColor = color.length === 6 && !isNaN(Number('0x' + color));
   if (!isCustomColor) return { colorScheme: color };
   return {
     backgroundColor: hexToRgba(color, 0.2),
@@ -43,7 +43,7 @@ const hexToRgba = (hex, alpha = 1) => {
 };
 
 const Tags: React.FC<Props> = ({ list }) => {
-  const color = useResumeStore((state) => state.color);
+  const color = useResumeStore((state) => state.color).replace('#', '');
   const font = useContext(StylePropsContext).font;
 
   return (
