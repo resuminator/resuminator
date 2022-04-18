@@ -64,35 +64,39 @@ const CreateResumeBody: React.FC<CreateResumeBodyProps> = ({
     color: "whiteAlpha.800"
   });
 
+  const titleProps = useColorModeValue(
+    titleLightModeProps("EXISTING"),
+    titleDarkModeProps("EXISTING")
+  );
+
+  const subtitleProps = useColorModeValue(
+    subtitleLightModeProps("EXISTING"),
+    subtitleDarkModeProps("EXISTING")
+  );
+
+  const textColor = useColorModeValue("gray", "whiteAlpha.800");
+
   return (
     <ModalBody display="flex" flexWrap={{ base: "wrap", md: "nowrap" }}>
-      <ToggleCard id="EXISTING" method={method} callback={callback}>
-        <BoxHeader
-          title="Start with existing resume"
-          subtitle="Duplicate an existing resume to get started quickly than ever."
-          size={{ title: "md", subtitle: "sm" }}
-          titleProps={useColorModeValue(
-            titleLightModeProps("EXISTING"),
-            titleDarkModeProps("EXISTING")
-          )}
-          subtitleProps={useColorModeValue(
-            subtitleLightModeProps("EXISTING"),
-            subtitleDarkModeProps("EXISTING")
-          )}
-        />
-        <Text
-          color={useColorModeValue("gray", "whiteAlpha.800")}
-          fontSize="sm"
-          mb="2"
-        >
-          Select a resume to use as template
-        </Text>
-        <ResumeTemplateDropdown
-          data={data}
-          method={method}
-          selectedHandlers={{ value, setValue }}
-        />
-      </ToggleCard>
+      {data.active.length ? (
+        <ToggleCard id="EXISTING" method={method} callback={callback}>
+          <BoxHeader
+            title="Start with existing resume"
+            subtitle="Duplicate an existing resume to get started quickly than ever."
+            size={{ title: "md", subtitle: "sm" }}
+            titleProps={titleProps}
+            subtitleProps={subtitleProps}
+          />
+          <Text color={textColor} fontSize="sm" mb="2">
+            Select a resume to use as template
+          </Text>
+          <ResumeTemplateDropdown
+            data={data}
+            method={method}
+            selectedHandlers={{ value, setValue }}
+          />
+        </ToggleCard>
+      ) : null}
       <ToggleCard id="SCRATCH" method={method} callback={callback}>
         <BoxHeader
           title="Start from scratch"
