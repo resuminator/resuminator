@@ -48,7 +48,7 @@ export const teamDetails: Array<TeamMember> = [
   },
   {
     image:
-      "https://pbs.twimg.com/profile_images/1325455177491439616/wdypU20s_400x400.jpg",
+      "https://user-images.githubusercontent.com/30192068/163839269-85bb12b2-74b7-4d4e-9972-f44dfa00b19b.png",
     fullName: "Himanshu Garg",
     jobTitle: "Creator, Backend Wizard",
     bio: "The guy senior devs tell you not to worry about. Handles everything system design, dev-ops and backend.",
