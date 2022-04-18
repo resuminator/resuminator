@@ -63,7 +63,7 @@ const Share: NextPage<ShareProps> = ({ token, id }) => {
 
   return (
     <>
-      <SEO title="Share Resume" />
+      <SEO title="Download Resume" />
       <InitStore data={data} status={status} id={id} />
       <InitUserStore data={userData} status={userQueryStatus} />
       <Layout display="flex" flexDir="column" alignItems="center" w="100%">

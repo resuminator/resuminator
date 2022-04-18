@@ -59,7 +59,7 @@ const Index: NextPage = () => {
         mt="16"
       >
         <Nav />
-        <Announcement />
+        {/* <Announcement /> */}
         <Hero />
         <Graph />
         <FourGrid />
@@ -67,7 +67,7 @@ const Index: NextPage = () => {
         <OpenSource />
         <Sponsor />
         <Testimonials />
-        <Broadmap />
+        {/* <Broadmap /> */}
         <GetStarted />
         {!acceptedCookie && <CookieBanner />}
         <Footer />

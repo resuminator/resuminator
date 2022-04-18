@@ -47,10 +47,10 @@ const SupportLinks = [
     text: "Cookie Policy",
     link: COOKIE_POLICY
   },
-  {
-    text: "Guides",
-    link: GUIDES
-  }
+  // {
+  //   text: "Guides",
+  //   link: GUIDES
+  // }
 ];
 
 const Support = () => {

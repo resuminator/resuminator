@@ -39,7 +39,7 @@ const NavTabs: React.FC<Props> = ({ id, currentRoute }) => {
     { key: "home", label: "Home", link: "/home" },
     { key: "create", label: "Create", link: `/create/${id}` },
     { key: "design", label: "Design", link: `/design/${id}` },
-    { key: "share", label: "Share", link: `/share/${id}` }
+    { key: "share", label: "Download", link: `/share/${id}` }
   ];
 
   const tabs = getDefaultTabs(id);

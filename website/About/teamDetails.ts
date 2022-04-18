@@ -23,7 +23,7 @@ import { TeamMember } from "./types";
 export const teamDetails: Array<TeamMember> = [
   {
     image:
-      "https://pbs.twimg.com/profile_images/1438358493799452672/vNWqLAHP_400x400.jpg",
+      "https://user-images.githubusercontent.com/30192068/163840746-0747b937-4dc8-443a-a367-c8df7afa6afd.png",
     fullName: "Vivek Nigam",
     jobTitle: "Creator, Lead Developer",
     bio: "Collects dozens of typefaces, uses only two. Part-time mentor. Frontend and Design, execution and strategy.",
@@ -48,7 +48,7 @@ export const teamDetails: Array<TeamMember> = [
   },
   {
     image:
-      "https://pbs.twimg.com/profile_images/1325455177491439616/wdypU20s_400x400.jpg",
+      "https://user-images.githubusercontent.com/30192068/163839269-85bb12b2-74b7-4d4e-9972-f44dfa00b19b.png",
     fullName: "Himanshu Garg",
     jobTitle: "Creator, Backend Wizard",
     bio: "The guy senior devs tell you not to worry about. Handles everything system design, dev-ops and backend.",

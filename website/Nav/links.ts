@@ -31,10 +31,10 @@ export const navLinkDetails = [
     label: "Sponsor",
     link: "/#sponsor"
   },
-  {
-    label: "Broadmap",
-    link: "/#broadmap"
-  },
+  // {
+  //   label: "Broadmap",
+  //   link: "/#broadmap"
+  // },
   {
     label: "About Us",
     link: "/about"
@@ -47,13 +47,17 @@ export const navLinkDetailsSmall = [
     link: "/#features"
   },
   {
+    label: "Open Source",
+    link: "/#open-source"
+  },
+  {
     label: "Sponsor",
     link: "/#sponsor"
   },
-  {
-    label: "Broadmap",
-    link: "/#broadmap"
-  },
+  // {
+  //   label: "Broadmap",
+  //   link: "/#broadmap"
+  // },
   {
     label: "About Us",
     link: "/about"

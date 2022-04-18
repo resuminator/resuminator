@@ -31,22 +31,11 @@ interface Props {
 }
 
 export const Content = () => (
-  // <Fragment>
-  //   Resuminator{" "}
-  //   <TextLink
-  //     text="Version 1"
-  //     link="https://app.resuminator.in"
-  //     color="inherit"
-  //     textDecor="underline"
-  //   />{" "}
-  //   is going away on 30th September 2021. Switch to Version 2 today to continue
-  //   using Resuminator. <TextLink text="Learn more" link={VERSION_1_FAQ} />
-  // </Fragment>
   <Fragment>
     <Tag colorScheme="orange" variant="solid" mx="2" size="sm">
       New
     </Tag>
-    We are participating in Hacktoberfest 2021. Contribute to Resuminator's
+    We are participating in Hacktoberfest 2021. Contribute to Resuminator&apos;s
     codebase{" "}
     <LinkText
       href="/hacktoberfest"
