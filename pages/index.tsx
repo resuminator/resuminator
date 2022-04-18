@@ -59,7 +59,7 @@ const Index: NextPage = () => {
         mt="16"
       >
         <Nav />
-        <Announcement />
+        {/* <Announcement /> */}
         <Hero />
         <Graph />
         <FourGrid />
