@@ -67,7 +67,7 @@ const Index: NextPage = () => {
         <OpenSource />
         <Sponsor />
         <Testimonials />
-        <Broadmap />
+        {/* <Broadmap /> */}
         <GetStarted />
         {!acceptedCookie && <CookieBanner />}
         <Footer />
