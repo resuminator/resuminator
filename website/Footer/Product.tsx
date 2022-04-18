@@ -36,10 +36,10 @@ const ProductLinks = [
     text: "Sponsor",
     link: "/#sponsor"
   },
-  {
-    text: "Newsletter",
-    link: "/#broadmap"
-  },
+  // {
+  //   text: "Newsletter",
+  //   link: "/#broadmap"
+  // },
   {
     text: "About Us",
     link: "/about"
