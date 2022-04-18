@@ -85,7 +85,7 @@ const Signup: NextPage = () => {
   return (
     <>
       <SEO {...signupSeo} />
-      <Announcement />
+      {/* <Announcement /> */}
       <Layout hasHeaderHidden>
         <Box
           display="flex"

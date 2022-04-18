@@ -95,7 +95,7 @@ const Login: NextPage = () => {
   return (
     <>
       <SEO {...loginSeo} />
-      <Announcement />
+      {/* <Announcement /> */}
       <Layout hasHeaderHidden>
         <Box
           display={{ base: "none", lg: "inherit" }}
