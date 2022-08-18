@@ -67,9 +67,9 @@ const ResumeCardOptions: React.FC<ResumeCardOptionProps> = ({ dataObject }) => {
     return await patchResumeMeta(token, dataObject._id, { [key]: value })
       .then((res) => {
         setProperty("active", res.active);
-        return createToast("Changes Saved", "success");
+        return createToast("Changes Saved", "success", "", "id:resumeCardChangesSaved");
       })
-      .catch(() => createToast("Could not save changes", "error"));
+      .catch(() => createToast("Could not save changes", "error", "", "id:resumeCardChangesNotSaved"));
   };
 
   return (
