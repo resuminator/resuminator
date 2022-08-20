@@ -25,7 +25,7 @@ import { patchCustomSections } from "../../../apis/patchSection";
 import ExpandableCard from "../../../components/layouts/Cards/ExpandableCard";
 import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
-import { sanitizeHTML, truncateString } from "../../../utils";
+import { getMidMonthDate, sanitizeHTML, truncateString } from "../../../utils";
 import Autosave from "../Autosave";
 import CustomSectionControls from "./CustomSectionControls";
 import { useCustomSectionStore } from "./store";
@@ -76,15 +76,16 @@ const getInputFieldComponent = (
       return (
         <StartEndDatePicker
           values={{ start, end }}
-          onChangeHandler={(key) => (date) =>
+          onChangeHandler={(key) => (date) => {
             updateData(sectionId, dataItem._id, field._id, {
               ...(dateObj as DateValue),
-              [key]: date
+              [key]: getMidMonthDate(date)
             })}
+          }
           checkboxHandler={(e) =>
             updateData(sectionId, dataItem._id, field._id, {
               ...(dateObj as DateValue),
-              end: dateObj.end === null ? new Date() : null
+              end: dateObj.end === null ? getMidMonthDate() : null
             })
           }
         />
@@ -107,7 +108,8 @@ const getInputFieldComponent = (
 
 const getCardTitle = (data: CustomSectionDataObject) => {
   const firstField = Object.keys(data.values)[0];
-  if (typeof firstField !== "string") return "";
+
+  if (typeof data.values[firstField] !== "string") return "";
 
   const returnString = sanitizeHTML(data.values[firstField]);
   return truncateString(returnString, 40);
