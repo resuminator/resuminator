@@ -22,6 +22,7 @@ import { Content } from "@tiptap/core";
 import React from "react";
 import { DropResult } from "react-beautiful-dnd";
 import { UpdateAction } from "../../store/types";
+import { getMidMonthDate } from "../../utils";
 
 /**
  * Handles the input element change for the current object using `key:value` pair
@@ -81,7 +82,7 @@ export const handlePresentCheckbox = (
 ) => {
   const K = key || "end";
   if (value) return action(index, K, null);
-  else return action(index, K, new Date());
+  else return action(index, K, getMidMonthDate());
 };
 
 /**
@@ -103,8 +104,8 @@ export const handleClearDate = (
     action(index, K1, null);
     action(index, K2, null);
   } else {
-    action(index, K1, new Date());
-    action(index, K2, new Date());
+    action(index, K1, getMidMonthDate());
+    action(index, K2, getMidMonthDate());
   }
 };
 
