@@ -28,7 +28,7 @@ import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import CertificationHints from "../../../data/Hints/certification";
 import { useCustomToast } from "../../../hooks/useCustomToast";
-import { getUniqueID } from "../../../utils";
+import { getMidMonthDate, getUniqueID } from "../../../utils";
 import Autosave from "../Autosave";
 import {
   handleChange,
@@ -60,8 +60,8 @@ const Certification = () => {
     certificateName: "",
     authority: "",
     credentialNumber: "",
-    start: new Date(),
-    end: new Date(),
+    start: getMidMonthDate(),
+    end: getMidMonthDate(),
     link: ""
   };
 

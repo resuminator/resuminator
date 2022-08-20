@@ -29,7 +29,7 @@ import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import EducationHints from "../../../data/Hints/education";
 import { useCustomToast } from "../../../hooks/useCustomToast";
-import { getUniqueID } from "../../../utils";
+import { getMidMonthDate, getUniqueID } from "../../../utils";
 import Autosave from "../Autosave";
 import {
   handleChange,
@@ -69,8 +69,8 @@ const Education = () => {
     stream: "",
     gradeObtained: 1,
     gradeMax: 10,
-    start: new Date(),
-    end: new Date(),
+    start: getMidMonthDate(),
+    end: getMidMonthDate(),
     description: ""
   };
 

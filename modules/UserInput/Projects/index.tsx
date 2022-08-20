@@ -29,7 +29,7 @@ import DndWrapper from "../../../components/layouts/DndWrapper";
 import Section from "../../../components/layouts/Section";
 import ProjectHints from "../../../data/Hints/projects";
 import { useCustomToast } from "../../../hooks/useCustomToast";
-import { getUniqueID } from "../../../utils";
+import { getMidMonthDate, getUniqueID } from "../../../utils";
 import Autosave from "../Autosave";
 import {
   handleChange,
@@ -63,8 +63,8 @@ const Projects = () => {
     isHidden: false,
     projectName: "",
     additionalInfo: "",
-    start: new Date(),
-    end: new Date(),
+    start: getMidMonthDate(),
+    end: getMidMonthDate(),
     description: "",
     link: "",
     tags: []
