@@ -25,7 +25,7 @@ import TooltipIconButton from "../../../components/common/TooltipIconButton";
 import { useCustomToast } from "../../../hooks/useCustomToast";
 import { useDisabled } from "../../../hooks/useDisabled";
 import useResumeStore from "../../../store/resume.store";
-import { getUniqueID, toCamelCase } from "../../../utils";
+import { getMidMonthDate, getUniqueID, toCamelCase } from "../../../utils";
 import SectionControls from "../SectionControls";
 import { useCustomSectionStore } from "./store";
 import {
@@ -45,7 +45,7 @@ const getDefaultValue = (type: CustomSectionInputObject["type"]) => {
     case "DESC":
       return "";
     case "DATE":
-      return { start: new Date(), end: new Date() };
+      return { start: getMidMonthDate(), end: getMidMonthDate() };
   }
 };
 
