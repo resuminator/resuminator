@@ -110,3 +110,17 @@ export const isValidColorHex = (hexCode: string) => {
 export const toCamelCase = (str: string) => {
   return str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
 };
+
+/**
+ * Get the UTC date for 15th of the current month. ONLY USE FOR INITIALIZING THE DATEPICKER.
+ * @param currentDate Current Date returned from new Date() or JS date object. Pass this param to modify a custom date.
+ * @returns Returns the date in the format of "YYYY-MM-DD" but with 15th of that month and UTC 00:00:00.000 time.
+ */
+export const getMidMonthDate = (currentDate = new Date()): Date => {
+  const now = currentDate;
+
+  const month = now.getMonth() + 1;
+  const year = now.getFullYear();
+
+  return new Date(`${month}/15/${year} 00:00:00.000Z`);
+};
