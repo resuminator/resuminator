@@ -24,7 +24,7 @@ import { LICENSE, PRIVACY_POLICY } from "../../data/DocLinks";
 
 const PrivacyNotice = () => {
   return (
-    <Text align="center" color="InactiveCaptionText" fontSize="smaller" my="4">
+    <Text align="left" color="InactiveCaptionText" fontSize="smaller" my="4">
       Continue to agree to Resuminator’s{" "}
       <LinkText href={LICENSE} textDecoration="underline">
         Terms of Service
