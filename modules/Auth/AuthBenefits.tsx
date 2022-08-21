@@ -40,10 +40,9 @@ const Benefit: React.FC<BenefitProps> = ({ iconSrc, text }) => {
 };
 
 const InfoGraphic: React.FC<{
-  isTall?: boolean;
   benefitList: BenefitList;
   title: string;
-}> = ({ isTall, benefitList, title }) => {
+}> = ({ benefitList, title }) => {
   const bg = useColorModeValue("#341BCA", "gray.900");
   return (
     <Box
@@ -51,11 +50,7 @@ const InfoGraphic: React.FC<{
       flexBasis="60%"
       p={{ base: "2rem", md: "4rem", lg: "12rem 6rem", "2xl": "14rem 10rem" }}
       background={bg}
-      height={
-        isTall
-          ? { base: "auto", md: "auto", lg: "135vh", "2xl": "auto" }
-          : { base: "auto", md: "auto", lg: "125vh", "2xl": "auto" }
-      }
+      height={{ base: "auto", md: "auto", lg: "115vh", "2xl": "auto" }}
       alignItems="center"
       justifyContent="center"
       width={"100%"}

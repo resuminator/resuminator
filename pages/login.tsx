@@ -117,8 +117,9 @@ const Login: NextPage = () => {
         <AuthFormHeader
           title="Welcome Back! Craft your resume &amp; apply to your dream job 2x
           faster!"
+          hideTitle={withEmail}
         />
-        <div className={divider.separator}>Login with Google or email</div>
+        {!withEmail && <div className={divider.separator}>Login with Google or email</div>}
         <LoginOptions />
         <AuthFormFooter page="LOGIN" />
       </Box>
@@ -133,7 +134,6 @@ const Login: NextPage = () => {
         <InfoGraphic
           title="Log in to craft your resume and boost productivity with Resuminator"
           benefitList={loginBenefits}
-          isTall={withEmail}
         />
         <LoginForm />
       </WideLayout>
