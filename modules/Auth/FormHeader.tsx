@@ -22,7 +22,10 @@ import { HStack } from "@chakra-ui/layout";
 import { Text } from "@chakra-ui/react";
 import { LogoSquare, LogoWithText } from "../../components/layouts/Logos";
 
-const AuthFormHeader: React.FC<{ title: string }> = ({ title }) => {
+const AuthFormHeader: React.FC<{ title: string; hideTitle: boolean }> = ({
+  title,
+  hideTitle
+}) => {
   return (
     <>
       <HStack
@@ -35,9 +38,11 @@ const AuthFormHeader: React.FC<{ title: string }> = ({ title }) => {
         <LogoSquare href="/" />
         <LogoWithText />
       </HStack>
-      <Text fontSize={"36px"} mb="2rem" letterSpacing={"tight"}>
-        {title}
-      </Text>
+      {!hideTitle && (
+        <Text fontSize={"36px"} mb="2rem" letterSpacing={"tight"}>
+          {title}
+        </Text>
+      )}
     </>
   );
 };
