@@ -48,9 +48,10 @@ const AuthProviderCard: React.FC<AuthProviderProps & BoxProps> = ({
       justifyContent="center"
       border="solid"
       borderWidth="1px"
-      borderRadius="10px"
+      borderRadius="4px"
       p="2"
       m="2"
+      mb="1.5rem"
       color={getColor(client)}
       transition="color 0.15s ease, background-color 0.15s ease"
       _hover={{ bg: getColor(client), color: "white" }}
@@ -58,7 +59,7 @@ const AuthProviderCard: React.FC<AuthProviderProps & BoxProps> = ({
       {...rest}
     >
       <ClientIcon client={client} m="2" />
-      <Text fontSize="sm" fontWeight="medium">
+      <Text fontSize="sm" fontWeight="600">
         Continue with {client}
       </Text>
     </Box>
