@@ -22,6 +22,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 /* <--- Resume Font Imports ---> */
 import "@fontsource/inter";
 import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
 import "@fontsource/lora";
 import "@fontsource/manrope";
 import "@fontsource/manrope/600.css";
