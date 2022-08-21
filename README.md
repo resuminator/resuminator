@@ -12,11 +12,6 @@ Resuminator allows you to build beautiful single-page resumes; without the hassl
 
 </div>
 
-## 📣 Latest Announcements
-**🆕 27-09-2021**: Resuminator is participating in [Hacktoberfest 2021](https://hacktoberfest.digitalocean.com) 🥳
-
-**07-09-2021**: We'll start accepting contributions once we reach 100 stars on this project 💯🌟
-
 ## Reasons why you should try it out
 
 ⭐ Create multiple resumes on a single account!
