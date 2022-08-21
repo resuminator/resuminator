@@ -23,21 +23,22 @@ import { AnimatePresence } from "framer-motion";
 import { GetServerSidePropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
 import nookies from "nookies";
-import React, { useEffect, useState } from "react";
-import BoxHeader from "../components/common/BoxHeader";
-import Layout from "../components/layouts";
-import { LogoWithText } from "../components/layouts/Logos";
+import { useEffect, useState } from "react";
 import { useCustomToast } from "../hooks/useCustomToast";
 import { AuthProviderProps } from "../modules/Auth/AuthProviderCard";
 import AuthProvidersList from "../modules/Auth/AuthProvidersList";
-import PageToggle from "../modules/Auth/PageToggle";
-import PrivacyNotice from "../modules/Auth/PrivacyNotice";
+import AuthFormHeader from "../modules/Auth/FormHeader";
 import SignUpWithEmail from "../modules/Auth/SignUpWithEmail";
 import SEO from "../modules/SEO";
 import { signupSeo } from "../modules/SEO/pages.config";
 import firebaseSDK from "../services/firebase";
 import mp from "../services/mixpanel";
-import Announcement from "../website/Banners/Announcement";
+
+import WideLayout from "../components/layouts/WideLayout";
+import { signupBenefits } from "../data/SignupBenefits";
+import InfoGraphic from "../modules/Auth/AuthBenefits";
+import AuthFormFooter from "../modules/Auth/FormFooter";
+import divider from "../styles/dividerWithText.module.css";
 
 const Signup: NextPage = () => {
   const [withEmail, setWithEmail] = useState<boolean>(false);
@@ -82,45 +83,51 @@ const Signup: NextPage = () => {
       });
   };
 
+  const SignupOptions = () => {
+    return (
+      <AnimatePresence>
+        {withEmail ? (
+          <SignUpWithEmail resetClient={() => setWithEmail(false)} />
+        ) : (
+          <AuthProvidersList handleSignIn={handleSignIn} />
+        )}
+      </AnimatePresence>
+    );
+  };
+
+  const SignupForm = () => {
+    return (
+      <Box
+        display="flex"
+        flexDir="column"
+        p={{ base: "2rem", md: "4rem", lg: "3rem 6.5rem" }}
+        flex="1 0"
+        flexBasis="40%"
+      >
+        <AuthFormHeader
+          title="Create, customize &amp; download single page resumes within minutes for free"
+          hideTitle={withEmail}
+        />
+        {!withEmail && (
+          <div className={divider.separator}>Sign up with Google or email</div>
+        )}
+        <SignupOptions />
+        <AuthFormFooter page="SIGNUP" />
+      </Box>
+    );
+  };
+
   return (
     <>
       <SEO {...signupSeo} />
       {/* <Announcement /> */}
-      <Layout hasHeaderHidden>
-        <Box
-          display="flex"
-          flexDir="column"
-          p={{ base: "2rem", md: "4rem", lg: "4rem 2rem" }}
-          flex="1 0"
-          flexBasis="40%"
-        >
-          <LogoWithText display={{ base: "inherit", lg: "none" }} />
-          <BoxHeader
-            title={"Hi, nice to see you 👋🏻"}
-            subtitle="Create a new account"
-          />
-          <AnimatePresence>
-            {withEmail ? (
-              <SignUpWithEmail resetClient={() => setWithEmail(false)} />
-            ) : (
-              <AuthProvidersList handleSignIn={handleSignIn} />
-            )}
-          </AnimatePresence>
-          <Box textAlign="center" my="4" fontSize={{ base: "sm", md: "md" }}>
-            <PageToggle page="SIGNUP" />
-            <PrivacyNotice />
-          </Box>
-        </Box>
-        <Box
-          display={{ base: "none", lg: "inherit" }}
-          flexDir="column"
-          flex="1 0"
-          flexBasis="60%"
-          p={{ base: "2rem", md: "4rem", lg: "4rem 2rem" }}
-        >
-          <LogoWithText hasTagline />
-        </Box>
-      </Layout>
+      <WideLayout>
+        <SignupForm />
+        <InfoGraphic
+          title="Sign up to craft your resume with the unique features of Resuminator"
+          benefitList={signupBenefits}
+        />
+      </WideLayout>
     </>
   );
 };
