@@ -22,8 +22,10 @@ import { Text } from "@chakra-ui/layout";
 import React from "react";
 import LinkText from "../../components/common/LinkText";
 
+export type PageOptions = "LOGIN" | "SIGNUP"
+
 interface Props {
-  page: "LOGIN" | "SIGNUP";
+  page: PageOptions;
 }
 
 const PageToggle: React.FC<Props> = ({ page }) => {
