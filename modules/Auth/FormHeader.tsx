@@ -29,7 +29,6 @@ const AuthFormHeader: React.FC<{ title: string; hideTitle: boolean }> = ({
   return (
     <>
       <HStack
-        display={{ base: "none", lg: "inherit" }}
         flex="1 0"
         flexBasis="60%"
         marginBottom={"1.5rem"}
