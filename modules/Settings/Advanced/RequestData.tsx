@@ -18,13 +18,10 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Box, Button, Text } from "@chakra-ui/react";
-import Cookies from "js-cookie";
+import { Box, Link, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { placeAccountDataRequest } from "../../../apis/settings";
 import BoxHeader from "../../../components/common/BoxHeader";
-import { useCustomToast } from "../../../hooks/useCustomToast";
-import { Status } from "../../../utils/constants";
+import { SUPPORT_EMAIL } from "../../../data/RefLinks";
 import { useAuth } from "../../Auth/AuthContext";
 import { AccountSettings } from "../types";
 import DataRequestStatus from "./DataRequestStatus";
@@ -36,19 +33,19 @@ interface RequestDataProps {
 const RequestData: React.FC<RequestDataProps> = ({ data }) => {
   const auth = useAuth();
   const [email, setEmail] = useState("");
-  const token = Cookies.get("token");
-  const { createToast } = useCustomToast();
-  const [status, setStatus] = useState<Status>(Status.idle);
+  // const token = Cookies.get("token");
+  // const { createToast } = useCustomToast();
+  // const [status, setStatus] = useState<Status>(Status.idle);
 
   //Constants
-  const NOW = new Date().getTime();
-  const DUE_BY = new Date(data.completedBy).getTime();
+  // const NOW = new Date().getTime();
+  // const DUE_BY = new Date(data.completedBy).getTime();
 
   //For first time users, data.isCompleted is null, so isDisabled should be false.
   //User cannot place request if either the buffer has not ended
   //or the previous request is incomplete
-  const isDisabled =
-    data.isCompleted !== null && (!data.isCompleted || DUE_BY > NOW);
+  // const isDisabled =
+  //   data.isCompleted !== null && (!data.isCompleted || DUE_BY > NOW);
 
   useEffect(() => {
     if (auth.user) {
@@ -56,26 +53,26 @@ const RequestData: React.FC<RequestDataProps> = ({ data }) => {
     }
   }, [auth.user]);
 
-  const handleRequest = async () => {
-    setStatus(Status.loading);
-    return placeAccountDataRequest(token)
-      .then(() => {
-        setStatus(Status.success);
-        createToast(
-          "Account data request placed",
-          "success",
-          "We shall contact you over your primary email. It takes upto 14 days to process the request."
-        );
-      })
-      .catch(() => {
-        setStatus(Status.error);
-        createToast(
-          "Couldn't place account data request",
-          "error",
-          "This service might be temporarily down, or your previous request has not been completed. For any queries, contact us on our email."
-        );
-      });
-  };
+  // const handleRequest = async () => {
+  //   setStatus(Status.loading);
+  //   return placeAccountDataRequest(token)
+  //     .then(() => {
+  //       setStatus(Status.success);
+  //       createToast(
+  //         "Account data request placed",
+  //         "success",
+  //         "We shall contact you over your primary email. It takes upto 14 days to process the request."
+  //       );
+  //     })
+  //     .catch(() => {
+  //       setStatus(Status.error);
+  //       createToast(
+  //         "Couldn't place account data request",
+  //         "error",
+  //         "This service might be temporarily down, or your previous request has not been completed. For any queries, contact us on our email."
+  //       );
+  //     });
+  // };
 
   return (
     <Box mb="8">
@@ -90,7 +87,11 @@ const RequestData: React.FC<RequestDataProps> = ({ data }) => {
         resume, and all metadata for your account linked to
         <strong> {email} </strong> by raising a request.
       </Text>
-      <Button
+
+      <Text fontSize="sm" mb="4">
+        To raise a request, please drop us a mail at <Link fontWeight={600} textDecoration={"underline"} href={SUPPORT_EMAIL}>support@resuminator.in</Link>.
+      </Text>
+      {/* <Button
         colorScheme="purple"
         size="sm"
         mb="4"
@@ -100,7 +101,7 @@ const RequestData: React.FC<RequestDataProps> = ({ data }) => {
         isDisabled={isDisabled}
       >
         Request Account Data
-      </Button>
+      </Button> */}
       <DataRequestStatus data={data} email={email} />
     </Box>
   );
