@@ -122,5 +122,5 @@ export const getMidMonthDate = (currentDate = new Date()): Date => {
   const month = now.getMonth() + 1;
   const year = now.getFullYear();
 
-  return new Date(`${month}/15/${year} 00:00:00.000Z`);
+  return new Date(`${month}/15/${year} 00:00:00 UTC`);
 };
