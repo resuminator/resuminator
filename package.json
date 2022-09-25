@@ -22,6 +22,7 @@
     "@material-ui/core": "^5.0.0-alpha.33",
     "@material-ui/lab": "^5.0.0-alpha.33",
     "@papercups-io/chat-widget": "^1.1.12",
+    "@papercups-io/storytime": "^1.0.6",
     "@tiptap/extension-link": "^2.0.0-beta.15",
     "@tiptap/extension-placeholder": "^2.0.0-beta.15",
     "@tiptap/extension-text-align": "^2.0.0-beta.15",
@@ -66,6 +67,5 @@
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "typescript": "^4.4.2"
-  },
-  "optionalDependencies": {}
+  }
 }
