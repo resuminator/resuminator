@@ -32,6 +32,10 @@ const CountdownTimer = dynamic(() => import("./CountdownTimer"), {
 interface Props {}
 
 const HfHero = (props: Props) => {
+  const hfLogoColorMode = useColorModeValue(
+    "/web/Logo-2-Color-Light.svg",
+    "/web/Logo-2-Color-Dark.svg"
+  );
   const colorModeDefaultLogo = useColorModeValue(
     "/logos/text_dark.svg",
     "/logos/text_light.svg"
@@ -41,19 +45,20 @@ const HfHero = (props: Props) => {
       <Stack
         alignItems="center"
         isInline={useBreakpointValue({ base: false, md: true })}
+        spacing='5'
       >
         <Image
-          src="/web/hf_logo_light.svg"
-          boxSize={{ base: "16rem", md: "18rem", xl: "20rem" }}
+          src={hfLogoColorMode}
+          boxSize={{ base: "12rem", md: "16rem", xl: "18rem" }}
         />
         <Text
           display={{ base: "none", md: "initial" }}
           fontWeight="bold"
           fontSize={{ base: "4xl", xl: "5xl" }}
-          position="relative"
-          right={{ md: "1rem" }}
+          // position="relative"
+          // right={{ md: "0rem" }}
           bottom={{ base: "1rem", md: 0 }}
-          color="#F74700"
+          color="#9092ff"
         >
           +
         </Text>
@@ -68,7 +73,7 @@ const HfHero = (props: Props) => {
         fontSize={{ base: "lg", md: "xl", lg: "xl", xl: "2xl" }}
         color={useColorModeValue(HFColors.text.secondary, HFColors.text.light)}
       >
-        1st October 2021 to 31st October 2021
+        1st October 2022 to 31st October 2022
       </Text>
       <CountdownTimer />
     </Center>

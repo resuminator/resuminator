@@ -26,7 +26,7 @@ import { FiBook, FiGitPullRequest } from "react-icons/fi";
 import { HFColors } from "./hf_colors";
 
 //Date of Hacktoberfest (MM/DD/YYYY HH:MM AM/PM)
-const DATE_OF_HACKTOBERFEST = "10/01/2021 10:30 AM";
+const DATE_OF_HACKTOBERFEST = "10/01/2022 10:30 AM";
 
 const Renderer: React.FC<CountdownRenderProps> = ({
   days,
@@ -40,8 +40,8 @@ const Renderer: React.FC<CountdownRenderProps> = ({
       <ButtonGroup my="4">
         <Button
           as="a"
-          href="https://github.com/resuminator/resuminator/issues/95"
-          colorScheme="orange"
+          href="https://github.com/resuminator/resuminator/issues/149"
+          colorScheme="purple"
           rightIcon={<FiGitPullRequest />}
         >
           Find issues to contribute
@@ -49,7 +49,7 @@ const Renderer: React.FC<CountdownRenderProps> = ({
         <Button
           as="a"
           href="https://docs.resuminator.in/docs/hacktoberfest"
-          colorScheme="black"
+          colorScheme="purple"
           variant="outline"
           rightIcon={<FiBook />}
         >
@@ -62,7 +62,7 @@ const Renderer: React.FC<CountdownRenderProps> = ({
   return (
     <VStack>
       <Text fontSize={{ base: "md", xl: "xl" }} fontWeight="normal">
-        Hacktoberfest &apos;21 with Resuminator will be live in
+        Hacktoberfest &apos;22 with Resuminator will be live in
       </Text>
       <Text
         fontSize={{ base: "3xl", xl: "5xl" }}

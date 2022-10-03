@@ -24,7 +24,7 @@ export const HFColors = {
     secondary: "#34403A"
   },
   text: {
-    primary: "#F74700",
+    primary: "#64E3FF",
     secondary: "#2B3531",
     light: "#F0FDF4"
   }
