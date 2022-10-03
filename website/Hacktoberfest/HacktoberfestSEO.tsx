@@ -4,13 +4,13 @@ import React from "react";
 interface Props {}
 
 const OG_IMAGE =
-  "https://user-images.githubusercontent.com/30192068/134771473-14c8e259-5012-4c2c-a4d1-efe7fdd44ca8.png";
+  "https://user-images.githubusercontent.com/30192068/193661835-69ee41c3-5c31-4aa2-8757-afaf204afc78.png";
 
 const HacktoberfestSEO = (props: Props) => {
   const config = {
-    title: "Contribute to Resuminator | Hacktoberfest 2021",
+    title: "Contribute to Resuminator's Open Source Codebase | Hacktoberfest 2022",
     description:
-      "Participate in Hacktoberfest 2021 Hosted by DigitalOcean with Resuminator. Contribute to our codebase and earn your PR towards completing the Hacktoberfest challenge.",
+      "Participate in Hacktoberfest 2022 Hosted by DigitalOcean, AppWrite, and Docker with Resuminator. Contribute to our codebase and earn your PR towards completing the Hacktoberfest challenge.",
     canonical: "https://www.resuminator.in",
     openGraph: {
       url: "https://www.resuminator.in/hacktoberfest",
@@ -19,16 +19,16 @@ const HacktoberfestSEO = (props: Props) => {
           url: OG_IMAGE,
           width: 1200,
           height: 628,
-          alt: "Contribute to Resuminator | Hacktoberfest 2021"
+          alt: "Contribute to Resuminator's Open Source Codebase | Hacktoberfest 2022"
         },
         {
           url: OG_IMAGE,
           width: 1200,
           height: 600,
-          alt: "Contribute to Resuminator | Hacktoberfest 2021"
+          alt: "Contribute to Resuminator's Open Source Codebase | Hacktoberfest 2022"
         }
       ],
-      site_name: "Contribute to Resuminator | Hacktoberfest 2021"
+      site_name: "Contribute to Resuminator's Open Source Codebase | Hacktoberfest 2022"
     },
     twitter: {
       handle: "@resuminator",
