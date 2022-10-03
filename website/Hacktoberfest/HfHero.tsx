@@ -71,7 +71,7 @@ const HfHero = (props: Props) => {
       <Text
         fontWeight="semibold"
         fontSize={{ base: "lg", md: "xl", lg: "xl", xl: "2xl" }}
-        color={useColorModeValue(HFColors.text.secondary, HFColors.text.light)}
+        color={useColorModeValue(HFColors.text.secondary, 'white')}
       >
         1st October 2022 to 31st October 2022
       </Text>
