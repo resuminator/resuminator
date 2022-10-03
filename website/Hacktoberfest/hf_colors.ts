@@ -20,12 +20,12 @@
 
 export const HFColors = {
   bg: {
-    primary: "#FFEDD5",
-    secondary: "#34403A"
+    primary: "#E5E1E6",
+    secondary: "#170F1E"
   },
   text: {
-    primary: "#64E3FF",
-    secondary: "#2B3531",
-    light: "#F0FDF4"
+    primary: "#170F1E",
+    secondary: "#170F1E",
+    light: "#170F1E"
   }
 };

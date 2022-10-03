@@ -32,15 +32,16 @@ interface Props {
 
 export const Content = () => (
   <Fragment>
-    <Tag colorScheme="orange" variant="solid" mx="2" size="sm">
+    <Tag colorScheme={"cyan"} variant="solid" mx="2" size="sm">
       New
     </Tag>
-    We are participating in Hacktoberfest 2021. Contribute to Resuminator&apos;s
-    codebase{" "}
+    We are participating in Hacktoberfest 2022. Contribute to Resuminator&apos;s
+    open source codebase{" "}
     <LinkText
       href="/hacktoberfest"
       color={HFColors.text.primary}
       textDecoration="underline"
+      fontWeight={"bold"}
     >
       Learn more
     </LinkText>
@@ -67,6 +68,7 @@ const Announcement: React.FC<Props> = ({ isHidden = false, children }) => {
         color={textColor}
         textAlign="center"
         fontSize="sm"
+        bgGradient={`linear(to-r, #FFE27D, #64E3FF, #9092FF)`}
       >
         <Content />
       </Box>
