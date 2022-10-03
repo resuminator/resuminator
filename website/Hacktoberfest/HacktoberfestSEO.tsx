@@ -4,7 +4,7 @@ import React from "react";
 interface Props {}
 
 const OG_IMAGE =
-  "https://user-images.githubusercontent.com/30192068/193661835-69ee41c3-5c31-4aa2-8757-afaf204afc78.png";
+  "https://user-images.githubusercontent.com/30192068/193665536-b3687b01-7aab-4635-93ad-36db56445e69.png";
 
 const HacktoberfestSEO = (props: Props) => {
   const config = {
