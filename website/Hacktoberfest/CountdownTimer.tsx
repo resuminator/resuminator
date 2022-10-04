@@ -37,7 +37,7 @@ const Renderer: React.FC<CountdownRenderProps> = ({
 }) => {
   if (completed) {
     return (
-      <ButtonGroup my="4">
+      <ButtonGroup my="4" flexWrap={'wrap'} sx={{gap: '1rem'}} justifyContent='center'>
         <Button
           as="a"
           href="https://github.com/resuminator/resuminator/issues/149"

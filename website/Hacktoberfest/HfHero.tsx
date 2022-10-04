@@ -41,7 +41,7 @@ const HfHero = (props: Props) => {
     "/logos/text_light.svg"
   );
   return (
-    <Center minHeight="100vh" flexDir="column">
+    <Center minHeight="100vh" flexDir="column" width={'100%'}>
       <Stack
         alignItems="center"
         isInline={useBreakpointValue({ base: false, md: true })}
@@ -72,6 +72,8 @@ const HfHero = (props: Props) => {
         fontWeight="semibold"
         fontSize={{ base: "lg", md: "xl", lg: "xl", xl: "2xl" }}
         color={useColorModeValue(HFColors.text.secondary, 'white')}
+        margin={'1rem 0'}
+        textAlign='center'
       >
         1st October 2022 to 31st October 2022
       </Text>
