@@ -25,7 +25,7 @@ const ContactHints: SectionHints = {
   content: [
     {
       type: "p",
-      body: "Having relevant contact info helps recrCuiters and your referrers to contact you and fill out the referral form respectively."
+      body: "Having relevant contact info helps recruiters and your referrers to contact you and fill out the referral form respectively."
     },
     {
       type: "p",
