@@ -39,8 +39,8 @@ const NameAndJobTitleLayout = () => {
       px={spacing * 8}
       py={spacing * 4}
     >
-      <Text {...headerTitleProps}>{fullName}</Text>
-      <Text {...headerSubtitleProps}>{jobTitle}</Text>
+      <Text aria-label="Full Name" {...headerTitleProps}>{fullName}</Text>
+      <Text aria-label="Job Title" {...headerSubtitleProps}>{jobTitle}</Text>
     </Box>
   );
 };

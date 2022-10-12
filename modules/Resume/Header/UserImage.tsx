@@ -31,7 +31,7 @@ const UserImageLayout = () => {
 
   return userImage.length ? (
     <Center px={spacing * 8} py={spacing * 4} borderRadius="50%">
-      <Avatar size="lg" name={fullName} src={userImage} />
+      <Avatar aria-label="Profile Image" size="lg" name={fullName} src={userImage} />
     </Center>
   ) : null;
 };

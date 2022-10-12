@@ -20,6 +20,7 @@
 
 import {
   Button,
+  ListItem,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -28,7 +29,9 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalProps,
-  Text
+  Text,
+  UnorderedList,
+  VStack
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { FiExternalLink, FiThumbsUp } from "react-icons/fi";
@@ -63,12 +66,24 @@ const HintsModal: React.FC<Props & Omit<ModalProps, "children">> = ({
       <ModalContent minW="lg">
         <ModalHeader>{hintsData.title}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          {hintsData.content.map((block) => (
-            <Text as={block.type} key={getUniqueID()}>
-              {block.body}
-            </Text>
-          ))}
+        <ModalBody fontSize={"sm"}>
+          <VStack spacing="4" align="start">
+            {hintsData.content.map((block) =>
+              block.type === "ul" ? (
+                <UnorderedList spacing={"0.5 "} listStylePos="inside">
+                  {(block.body as Array<string>).map((item: string) => (
+                    <ListItem key={item} as={"li"}>
+                      {item}
+                    </ListItem>
+                  ))}
+                </UnorderedList>
+              ) : (
+                <Text as={block.type} key={getUniqueID()}>
+                  {block.body}
+                </Text>
+              )
+            )}
+          </VStack>
         </ModalBody>
         <ModalFooter justifyContent="space-between">
           <Button
