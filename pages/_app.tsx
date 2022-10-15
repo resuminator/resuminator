@@ -41,7 +41,7 @@ import { useRef } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { AuthProvider } from "../modules/Auth/AuthContext";
-import SEO from "../modules/SEO";
+import CohortAccessProvider from "../modules/Cohort/CohortAccessProvider";
 import "../styles/globals.css";
 import DefaultTheme from "../styles/theme";
 import progress from "../widgets/ProgressBar";
@@ -64,11 +64,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
       <ChakraProvider theme={DefaultTheme}>
-        <QueryClientProvider client={queryClientRef.current}>
-          <Hydrate state={pageProps.dehydratedState}>
-            <Component {...pageProps} />
-          </Hydrate>
-        </QueryClientProvider>
+        <CohortAccessProvider>
+          <QueryClientProvider client={queryClientRef.current}>
+            <Hydrate state={pageProps.dehydratedState}>
+              <Component {...pageProps} />
+            </Hydrate>
+          </QueryClientProvider>
+        </CohortAccessProvider>
       </ChakraProvider>
     </AuthProvider>
   );
