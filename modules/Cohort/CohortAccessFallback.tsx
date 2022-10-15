@@ -29,6 +29,7 @@ const CohortAccessFallback: React.FC<{
   cohortData?: CohortProps;
   valueProp: string;
 }> = ({ valueProp, cohortData = { cohort: "pro", color: "purple" } }) => {
+  const subTextColor = useColorModeValue("purple.600", "purple.100");
   return (
     <Box
       width={"100%"}
@@ -53,7 +54,7 @@ const CohortAccessFallback: React.FC<{
           This is a {cohortData.cohort} only feature
         </Text>
         {valueProp && (
-          <Text textAlign={"center"} fontSize="xs" color="purple.100">
+          <Text textAlign={"center"} fontSize="xs" color={subTextColor}>
             {valueProp}
           </Text>
         )}
