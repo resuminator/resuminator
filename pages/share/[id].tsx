@@ -30,6 +30,7 @@ import Layout from "../../components/layouts";
 import placeholderData, { userPlaceholder } from "../../data/placeholderData";
 import SEO from "../../modules/SEO";
 import DownloadResume from "../../modules/Share/Download";
+import PublicLink from "../../modules/Share/PublicLink";
 import { UserObject } from "../../modules/User/types";
 import Viewer from "../../modules/Viewer";
 import mp from "../../services/mixpanel";
@@ -82,6 +83,7 @@ const Share: NextPage<ShareProps> = ({ token, id }) => {
             overflowY="auto"
           >
             <DownloadResume id={id} />
+            <PublicLink/>
           </Box>
           <Box aria-label="Resume Preview" flexBasis="50%">
             <Viewer withStatus />
