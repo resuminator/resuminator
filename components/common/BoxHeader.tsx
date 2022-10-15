@@ -18,9 +18,10 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Box, BoxProps, Text } from "@chakra-ui/layout";
-import { TextProps } from "@chakra-ui/react";
+import { Box, BoxProps, Flex, Text } from "@chakra-ui/layout";
+import { Badge, TextProps } from "@chakra-ui/react";
 import React from "react";
+import { CohortProps } from "../../modules/Cohort/types";
 
 export interface BoxHeaderProps {
   title: string;
@@ -29,6 +30,7 @@ export interface BoxHeaderProps {
   spacing?: string;
   titleProps?: TextProps;
   subtitleProps?: TextProps;
+  cohortData?: CohortProps;
 }
 
 const BoxHeader: React.FC<BoxHeaderProps & BoxProps> = ({
@@ -38,13 +40,25 @@ const BoxHeader: React.FC<BoxHeaderProps & BoxProps> = ({
   spacing = "0.5",
   titleProps,
   subtitleProps = { color: "#808080" },
+  cohortData,
   ...rest
 }) => {
   return (
     <Box mb="8" {...rest}>
-      <Text {...titleProps} fontSize={size.title} fontWeight="semibold">
-        {title}
-      </Text>
+      <Flex alignItems={"center"} gridGap="2">
+        <Text {...titleProps} fontSize={size.title} fontWeight="semibold">
+          {title}
+        </Text>
+        {cohortData && (
+          <Badge
+            borderRadius={"md"}
+            colorScheme={cohortData.color}
+            textTransform="none"
+          >
+            {cohortData.cohort}
+          </Badge>
+        )}
+      </Flex>
       <Box p={spacing} />
       <Text {...subtitleProps} fontSize={size.subtitle}>
         {subtitle}

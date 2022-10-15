@@ -20,20 +20,23 @@
 
 import { Box, BoxProps } from "@chakra-ui/layout";
 import React from "react";
+import { CohortProps } from "../../modules/Cohort/types";
 import BoxHeader, { BoxHeaderProps } from "../common/BoxHeader";
 
 interface Props {
   header?: BoxHeaderProps & BoxProps;
+  cohortData?: CohortProps;
 }
 
 const Section: React.FC<Props & BoxProps> = ({
   children,
   header,
+  cohortData,
   ...props
 }) => {
   return (
     <Box mb="8">
-      <BoxHeader size={{ title: "lg", subtitle: "sm" }} {...header} />
+      <BoxHeader size={{ title: "lg", subtitle: "sm" }} cohortData={cohortData} {...header} />
       <Box
         display="flex"
         flexDir="column"
