@@ -32,10 +32,7 @@ const PublicLink = (props: Props) => {
           "Links are the easiest way to share your resume to recruiters",
         mb: "4"
       }}
-      cohortData={{
-        cohort: "Pro",
-        color: "purple"
-      }}
+      withCohortBadge
     >
       <CreateLink />
     </Section>
