@@ -1,6 +1,6 @@
 /*
     Resuminator, Web App and the Website for Resuminator
-    Copyright (C) 2021 Resuminator Authors
+    Copyright (C) 2022  Resuminator Authors
 
     This file is part of Resuminator.
 
@@ -18,39 +18,28 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Box, BoxProps } from "@chakra-ui/layout";
+import { Badge } from "@chakra-ui/react";
 import React from "react";
-import BoxHeader, { BoxHeaderProps } from "../common/BoxHeader";
+import { CohortProps } from "./types";
 
-interface Props {
-  header?: BoxHeaderProps & BoxProps;
-  withCohortBadge?: boolean;
-}
+interface Props {}
 
-const Section: React.FC<Props & BoxProps> = ({
-  children,
-  header,
-  withCohortBadge,
-  ...props
-}) => {
+const CohortBadge = (props: Props) => {
+  // This will come from the store
+  const cohortData: CohortProps = {
+    cohort: "Pro",
+    color: "purple"
+  };
+  
   return (
-    <Box mb="8">
-      <BoxHeader
-        size={{ title: "lg", subtitle: "sm" }}
-        withCohortBadge={withCohortBadge}
-        {...header}
-      />
-      <Box
-        display="flex"
-        flexDir="column"
-        justifyContent="space-between"
-        w="80%"
-        {...props}
-      >
-        {children}
-      </Box>
-    </Box>
+    <Badge
+      borderRadius={"md"}
+      colorScheme={cohortData.color}
+      textTransform="none"
+    >
+      {cohortData.cohort}
+    </Badge>
   );
 };
 
-export default Section;
+export default CohortBadge;

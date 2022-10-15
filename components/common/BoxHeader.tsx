@@ -19,9 +19,9 @@
 */
 
 import { Box, BoxProps, Flex, Text } from "@chakra-ui/layout";
-import { Badge, TextProps } from "@chakra-ui/react";
+import { TextProps } from "@chakra-ui/react";
 import React from "react";
-import { CohortProps } from "../../modules/Cohort/types";
+import CohortBadge from "../../modules/Cohort/CohortBadge";
 
 export interface BoxHeaderProps {
   title: string;
@@ -30,7 +30,7 @@ export interface BoxHeaderProps {
   spacing?: string;
   titleProps?: TextProps;
   subtitleProps?: TextProps;
-  cohortData?: CohortProps;
+  withCohortBadge?: boolean;
 }
 
 const BoxHeader: React.FC<BoxHeaderProps & BoxProps> = ({
@@ -40,7 +40,7 @@ const BoxHeader: React.FC<BoxHeaderProps & BoxProps> = ({
   spacing = "0.5",
   titleProps,
   subtitleProps = { color: "#808080" },
-  cohortData,
+  withCohortBadge,
   ...rest
 }) => {
   return (
@@ -49,14 +49,8 @@ const BoxHeader: React.FC<BoxHeaderProps & BoxProps> = ({
         <Text {...titleProps} fontSize={size.title} fontWeight="semibold">
           {title}
         </Text>
-        {cohortData && (
-          <Badge
-            borderRadius={"md"}
-            colorScheme={cohortData.color}
-            textTransform="none"
-          >
-            {cohortData.cohort}
-          </Badge>
+        {withCohortBadge && (
+          <CohortBadge/>
         )}
       </Flex>
       <Box p={spacing} />
