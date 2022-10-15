@@ -30,7 +30,7 @@ const CohortAccessProvider = (props) => {
     //Fetch user access level from API
     const accessLevels = {
         free: 'free',
-        // pro: 'pro',
+        pro: 'pro',
     };
 
     setUserAccessLevel(accessLevels);
