@@ -18,22 +18,30 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Button } from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
+import { Fragment } from "react";
 import { FiLink } from "react-icons/fi";
 import withCohortAccess from "../../Cohort/WithCohortAccess";
+import CreateUsername from "./CreateUsername";
 
 interface Props {}
 
 const CreateLink = (props: Props) => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   return (
-    <Button
-      variant="solid"
-      colorScheme="blue"
-      rightIcon={<FiLink />}
-      loadingText="Creating Link"
-    >
-      Create public link
-    </Button>
+    <Fragment>
+      <Button
+        variant="solid"
+        colorScheme="purple"
+        rightIcon={<FiLink />}
+        loadingText="Creating Link"
+        onClick={onOpen}
+      >
+        Create shareable link
+      </Button>
+      <CreateUsername onClose={onClose} open={isOpen} />
+    </Fragment>
   );
 };
 
