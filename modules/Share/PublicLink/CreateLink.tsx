@@ -21,6 +21,7 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { Fragment } from "react";
 import { FiLink } from "react-icons/fi";
+import { FeatureFlags } from "../../Cohort/FeatureFlags";
 import withCohortAccess from "../../Cohort/WithCohortAccess";
 import CreateUsername from "./CreateUsername";
 
@@ -45,4 +46,4 @@ const CreateLink = (props: Props) => {
   );
 };
 
-export default withCohortAccess(CreateLink, "pro");
+export default withCohortAccess(CreateLink, FeatureFlags.SHARE_LINKS);

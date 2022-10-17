@@ -22,30 +22,28 @@ import React, { useContext, useEffect, useState } from "react";
 import CohortAccessFallback from "./CohortAccessFallback";
 import { CohortAccessContext } from "./CohortAccessProvider";
 
-const withCohortAccess = (
-  Component: React.FC,
-  requiredPermission: string,
-  featureFlag?: string
-) => {
+const withCohortAccess = (Component: React.FC, featureFlag: string) => {
   const CohortAccessHandler = (props: any) => {
     const [valueProp, setValueProp] = useState<string | null>(null);
-
-    useEffect(() => {
-      // fetch value prop from api based on feature flag
-      const featureDetails = {
-        valueProp:
-          "Shareable links help Pro users get faster feedback and 4x more views on their resumes."
-      };
-
-      setValueProp(featureDetails.valueProp);
-    }, []);
-
     const { userAccessLevel } = useContext(CohortAccessContext);
 
-    if (!userAccessLevel[requiredPermission])
-      return <CohortAccessFallback valueProp={valueProp} />;
+    useEffect(() => {
+      // fetch feature details from api based on feature flag
+      const featureDetails = {
+        share_links: {
+          valueProp:
+            "Shareable links help Pro users get faster feedback and 4x more views on their resumes."
+        }
+      };
 
-    return <Component {...props} />;
+      setValueProp(featureDetails[featureFlag].valueProp);
+    }, []);
+
+    return userAccessLevel.features.includes(featureFlag) ? (
+      <Component {...props} />
+    ) : (
+      <CohortAccessFallback valueProp={valueProp} />
+    );
   };
 
   return CohortAccessHandler;

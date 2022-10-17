@@ -24,3 +24,9 @@ export interface CohortProps {
   cohort: string;
   color: ThemingProps["colorScheme"];
 }
+
+export interface AccessLevel {
+  id: string;
+  name: string;
+  features: string[];
+}

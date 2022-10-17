@@ -18,32 +18,17 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { createContext, useEffect, useState } from "react";
-import { free_access } from "./data";
+import { FeatureFlags } from "./FeatureFlags";
 import { AccessLevel } from "./types";
 
-export const CohortAccessContext = createContext<{
-  userAccessLevel: AccessLevel;
-}>({
-  userAccessLevel: free_access
-});
-
-const CohortAccessProvider = (props) => {
-  const { children } = props;
-  const [userAccessLevel, setUserAccessLevel] =
-    useState<AccessLevel>(free_access);
-
-  useEffect(() => {
-    //Fetch user access level from API
-    setUserAccessLevel(free_access);
-    // setUserAccessLevel(pro_access);
-  }, []);
-
-  return (
-    <CohortAccessContext.Provider value={{ userAccessLevel }}>
-      {children}
-    </CohortAccessContext.Provider>
-  );
+export const free_access: AccessLevel = {
+  id: "free",
+  name: "Free",
+  features: []
 };
 
-export default CohortAccessProvider;
+export const pro_access: AccessLevel = {
+  id: "pro",
+  name: "Pro",
+  features: [FeatureFlags.SHARE_LINKS]
+};
