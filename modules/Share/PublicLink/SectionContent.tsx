@@ -20,7 +20,7 @@
 
 import { Box, Button, Divider } from "@chakra-ui/react";
 import { FiUploadCloud } from "react-icons/fi";
-import Subsection from "../../../components/layouts/Subsection";
+import SubSection from "../../../components/layouts/SubSection";
 import GeneratedLink from "./GeneratedLink";
 import LinkVisibility from "./LinkVisibility";
 import ShareOnSocialMedia from "./ShareOnSocialMedia";
@@ -36,7 +36,7 @@ const SectionContent: React.FC<Props> = ({ resumeUrl }) => {
     <Box>
       <GeneratedLink resumeUrl={resumeUrl} />
       <Divider my="4" />
-      <Subsection
+      <SubSection
         subtitle=" Any new changes to your resume will be reflected in the link only after
         you publish it."
       />

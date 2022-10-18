@@ -6,7 +6,7 @@ interface Props {
   subtitle?: string;
 }
 
-const Subsection: React.FC<Props> = ({ title, subtitle }) => {
+const SubSection: React.FC<Props> = ({ title, subtitle }) => {
   return (
     <VStack align={"start"} mb="4">
       {title && (
@@ -23,4 +23,4 @@ const Subsection: React.FC<Props> = ({ title, subtitle }) => {
   );
 };
 
-export default Subsection;
+export default SubSection;

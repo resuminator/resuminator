@@ -27,6 +27,7 @@ import Footer from "../../components/layouts/Footer";
 import Header from "../../components/layouts/Header";
 import SEO from "../../modules/SEO";
 import ChangePassword from "../../modules/Settings/Account/ChangePassword";
+import ResumeLinkSettings from "../../modules/Settings/Account/ResumeLinkSettings";
 import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import mp from "../../services/mixpanel";
@@ -51,6 +52,7 @@ const SecuritySettings: NextPage = () => {
         <SettingsSidebar />
         <GridItem rowSpan={2} colSpan={1}>
           <ChangePassword />
+          <ResumeLinkSettings />
         </GridItem>
       </SettingsLayoutGrid>
       <Footer />
