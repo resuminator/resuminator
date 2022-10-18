@@ -23,8 +23,8 @@ import { SectionHints } from "./types";
 const CertificationHints: SectionHints = {
   title: "How to show certifications",
   content: [
-    { type: "p", body: "DOs" },
-    { type: "p", body: "DON'Ts" }
+    { type: "p", body: "Please add any certifications that you have done which involves completing any accredited institutions course and passing it's requirements" },
+    { type: "p", body: "Please don't just describe the course. We recommend you to attach any certification proof(link provided) along with the course details" }
   ]
 };
 
