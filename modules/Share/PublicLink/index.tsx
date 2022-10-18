@@ -29,7 +29,7 @@ const PublicLink = (props: Props) => {
       header={{
         title: "Shareable link",
         subtitle:
-          "Links are the easiest way to share your resume to recruiters",
+          "The easiest way to share your resume to recruiters",
         mb: "4"
       }}
       withCohortBadge
