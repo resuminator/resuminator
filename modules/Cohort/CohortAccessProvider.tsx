@@ -19,7 +19,7 @@
 */
 
 import { createContext, useEffect, useState } from "react";
-import { free_access } from "./data";
+import { free_access, pro_access } from "./data";
 import { AccessLevel } from "./types";
 
 export const CohortAccessContext = createContext<{
@@ -35,8 +35,8 @@ const CohortAccessProvider = (props) => {
 
   useEffect(() => {
     //Fetch user access level from API
-    setUserAccessLevel(free_access);
-    // setUserAccessLevel(pro_access);
+    // setUserAccessLevel(free_access);
+    setUserAccessLevel(pro_access);
   }, []);
 
   return (
