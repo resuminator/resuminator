@@ -19,28 +19,38 @@
 */
 
 import { Button, useDisclosure } from "@chakra-ui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { FiLink } from "react-icons/fi";
 import { FeatureFlags } from "../../Cohort/FeatureFlags";
 import withCohortAccess from "../../Cohort/WithCohortAccess";
 import CreateUsername from "./CreateUsername";
+import SectionContent from "./SectionContent";
 
 interface Props {}
 
 const CreateLink = (props: Props) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const [resumeUrl, setResumeUrl] = useState("");
+
+  useEffect(() => {
+    setResumeUrl("https://resuminator.in/share/r/viveknigam3003-hfi3h4f");
+  }, []);
 
   return (
     <Fragment>
-      <Button
-        variant="solid"
-        colorScheme="purple"
-        rightIcon={<FiLink />}
-        loadingText="Creating Link"
-        onClick={onOpen}
-      >
-        Create shareable link
-      </Button>
+      {resumeUrl ? (
+        <SectionContent resumeUrl={resumeUrl} />
+      ) : (
+        <Button
+          variant="solid"
+          colorScheme="purple"
+          rightIcon={<FiLink />}
+          loadingText="Creating Link"
+          onClick={onOpen}
+        >
+          Create shareable link
+        </Button>
+      )}
       <CreateUsername onClose={onClose} open={isOpen} />
     </Fragment>
   );
