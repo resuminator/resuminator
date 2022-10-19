@@ -22,7 +22,17 @@ import { SectionHints } from "./types";
 
 const ExperienceHints: SectionHints = {
   title: "Hints on adding Experience Info",
-  content: [{ type: "p", body: "" }]
+  content: [{ type: "p", 
+             body: "Having experience and adding it to your resume gives credibility to an application or interview." },
+            {
+              type: "p",
+              body: "You can add your job title including any internships that you have completed along with the job title and the organization. You can also add links along with description of your role."
+            },
+            {
+              type: "p",
+              body: "With resuminator you can also add certain tags and link involving your job/internship. If you are currently doing any internship or working under any organization you can mark it as present instead of mentioning the end date."
+            }
+           ]
 };
 
 export default ExperienceHints;
