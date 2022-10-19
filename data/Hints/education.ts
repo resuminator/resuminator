@@ -22,7 +22,22 @@ import { SectionHints } from "./types";
 
 const EducationHints: SectionHints = {
   title: "Improving education info",
-  content: [{ type: "p", body: "" }]
+  content: [{ type: "p", 
+             body: "Education is one of the most important key sections that recruiters look for in the resume." 
+            },
+            {
+             type: "p",
+             body: "You can add multiple degrees that you have obtained from your colleges as well as including your school degree." 
+            },
+            {
+             type: "p",
+             body: "With resuminator you can add your education in more details and arrange them in whichever way you like by clicking and holding the top right icon of each education section that you are adding!"
+            },
+            {
+             type: "p",
+             body: "For filling your section in details just click the top right icon. After filling the details, you can collapse, hide or even delete them if you wish!"
+            }
+           ]
 };
 
 export default EducationHints;
