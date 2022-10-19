@@ -39,7 +39,7 @@ You can support the development of this project if you believe this project adde
 
 It's so exciting to see developers, designers, and product enthusiasts willing to contribute to Resuminator! We will soon be open for accepting code contributions to the repository, but this doesn't mean you cannot help us in developing the most efficient and elegant resume builder out there.
 
-There are a few ways you can contribute to Resuminator and its community which you can find in our [Contribution Guide](CONTRIBUTING.md).
+There are a few ways you can contribute to Resuminator and its community which you can find in our [Contribution Guide](https://docs.resuminator.in/docs/developer-guide/contributing).
 
 You can also join our [Discord Server](https://discord.resuminator.in) and participate in [GitHub Discussions](https://github.com/resuminator/resuminator/discussions).
 
