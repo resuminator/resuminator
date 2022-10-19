@@ -22,7 +22,18 @@ import { SectionHints } from "./types";
 
 const PublicationHints: SectionHints = {
   title: "Showing Publications on Resume",
-  content: [{ type: "p", body: "" }]
+  content: [{ type: "p", 
+              body: "Having publications proves your experience and knowledge on a particular area. It also shows your good analytical and writing skills." 
+            },
+            {
+              type: "p",
+              body: "You can add any research paper that you have completed along with any other authors who have also done the research and have worked with you."
+            },
+            {
+              type: "p",
+              body: "With Resuminator you can add many more details about your publication paper including your date of issue, and also change your display style. You just have to write the requirements and Resuminator will take care of everything else!" 
+            }
+           ]
 };
 
 export default PublicationHints;
