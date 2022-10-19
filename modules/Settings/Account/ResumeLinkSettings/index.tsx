@@ -19,17 +19,17 @@ const ResumeLinksData = [
   {
     id: "dhajwf",
     resume: "Software Engineer",
-    link: "https://resuminator.in/share/r/viveknigam-3fjas3j"
+    link: "https://resuminator.in/r/viveknigam-3fjas3j"
   },
   {
     id: "dajt93n",
     resume: "Frontend Engineer",
-    link: "https://resuminator.in/share/r/viveknigam-dajt93n"
+    link: "https://resuminator.in/r/viveknigam-dajt93n"
   },
   {
     id: "ahs92hf",
     resume: "Untitled Resume",
-    link: "https://resuminator.in/share/r/viveknigam-ahs92hf"
+    link: "https://resuminator.in/r/viveknigam-ahs92hf"
   }
 ];
 

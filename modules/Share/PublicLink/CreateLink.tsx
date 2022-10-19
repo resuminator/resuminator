@@ -33,7 +33,7 @@ const CreateLink = (props: Props) => {
   const [resumeUrl, setResumeUrl] = useState("");
 
   useEffect(() => {
-    setResumeUrl("https://resuminator.in/share/r/viveknigam3003-hfi3h4f");
+    setResumeUrl("https://resuminator.in/r/viveknigam3003-hfi3h4f");
   }, []);
 
   return (
