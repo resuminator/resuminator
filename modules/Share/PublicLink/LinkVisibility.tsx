@@ -20,7 +20,7 @@
 
 import { Box, HStack, Radio, RadioGroup, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import Subsection from "../../../components/layouts/Subsection";
+import Subsection from "../../../components/layouts/SubSection";
 
 interface Props {}
 

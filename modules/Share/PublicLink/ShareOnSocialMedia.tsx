@@ -21,7 +21,7 @@
 import { Box, HStack, IconButton } from "@chakra-ui/react";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
 import { FiClipboard } from "react-icons/fi";
-import Subsection from "../../../components/layouts/Subsection";
+import Subsection from "../../../components/layouts/SubSection";
 interface Props {}
 
 const ShareOnSocialMedia = (props: Props) => {
