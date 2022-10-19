@@ -18,7 +18,7 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Box, Button, Divider } from "@chakra-ui/react";
+import { Box, Button, Divider, VStack } from "@chakra-ui/react";
 import { FiUploadCloud } from "react-icons/fi";
 import SubSection from "../../../components/layouts/SubSection";
 import GeneratedLink from "./GeneratedLink";
@@ -36,18 +36,20 @@ const SectionContent: React.FC<Props> = ({ resumeUrl }) => {
     <Box>
       <GeneratedLink resumeUrl={resumeUrl} />
       <Divider my="4" />
-      <SubSection
-        subtitle=" Any new changes to your resume will be reflected in the link only after
+      <VStack>
+        <Button
+          isFullWidth
+          colorScheme={"purple"}
+          size="sm"
+          rightIcon={<FiUploadCloud />}
+        >
+          Publish changes
+        </Button>
+        <SubSection
+          subtitle=" Any new changes to your resume will be reflected in the link only after
         you publish it."
-      />
-      <Button
-        isFullWidth
-        colorScheme={"purple"}
-        size="sm"
-        rightIcon={<FiUploadCloud />}
-      >
-        Publish changes
-      </Button>
+        />
+      </VStack>
       <Divider my="4" />
       <LinkVisibility />
       <Divider my="4" />
