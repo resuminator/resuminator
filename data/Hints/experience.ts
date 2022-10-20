@@ -30,7 +30,7 @@ const ExperienceHints: SectionHints = {
             },
             {
               type: "p",
-              body: "With resuminator you can also add certain tags and link involving your job/internship. If you are currently doing any internship or working under any organization you can mark it as present instead of mentioning the end date."
+              body: "With resuminator you can also add certain tags and link(github,gitlab etc.) involving your job/internship. This will help the recruiters to see your past work live which builds credibility as well."
             }
            ]
 };
