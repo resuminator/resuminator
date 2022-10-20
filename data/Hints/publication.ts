@@ -31,7 +31,7 @@ const PublicationHints: SectionHints = {
             },
             {
               type: "p",
-              body: "With Resuminator you can add many more details about your publication paper including your date of issue, and also change your display style. You just have to write the requirements and Resuminator will take care of everything else!" 
+              body: "With Resuminator you can also mention the display style of your publication. MLA (Modern Language Association) is for arts and humanities. It helps you to break down citing paintings, books, and other literature. APA (American Psychological Association) is designed for technical works found in social sciences." 
             }
            ]
 };
