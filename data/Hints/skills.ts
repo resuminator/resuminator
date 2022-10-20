@@ -27,7 +27,7 @@ const SkillsHints: SectionHints = {
             },
             {
               type: "p",
-              body: "With Resuminator you can add those skills in your resume more conveniently. You can mention the category under which your skill belongs. Foe example python belongs to programming language, keras belongs to machine learning framework tool."
+              body: "With Resuminator you can add those skills in your resume more conveniently. You can mention the category under which your skill belongs. For example python belongs to programming language, keras belongs to machine learning framework tool."
             }
            ]
 };
