@@ -36,18 +36,15 @@ import "@fontsource/pt-serif";
 import { enableMapSet } from "immer";
 /* <--- Resume Font Imports ---> */
 import { AppProps } from "next/app";
-import dynamic from "next/dynamic";
 import Router from "next/router";
 import { useRef } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { AuthProvider } from "../modules/Auth/AuthContext";
+import SEO from "../modules/SEO";
 import "../styles/globals.css";
 import DefaultTheme from "../styles/theme";
 import progress from "../widgets/ProgressBar";
-const Storytime = dynamic(() => import("../services/papercups/storytime"), {
-  ssr: false
-});
 
 /*<---Router Events--->*/
 Router.events.on("routeChangeStart", progress.start);
@@ -70,7 +67,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClientRef.current}>
           <Hydrate state={pageProps.dehydratedState}>
             <Component {...pageProps} />
-            <Storytime />
           </Hydrate>
         </QueryClientProvider>
       </ChakraProvider>
