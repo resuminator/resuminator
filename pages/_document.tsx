@@ -19,11 +19,11 @@
 */
 
 import Document, {
-  DocumentContext,
-  Head,
   Html,
+  Head,
   Main,
-  NextScript
+  NextScript,
+  DocumentContext
 } from "next/document";
 import { resetServerContext } from "react-beautiful-dnd";
 
