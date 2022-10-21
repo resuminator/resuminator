@@ -55,6 +55,7 @@ const ColorSelector = () => {
   const { createToast } = useCustomToast();
 
   const handleSubmit = async (item: ColorProfiles) => {
+    if (item == '#') item = '#FFFFFF';
     setColorProfile(item);
     return await patchColor(token, resumeId, { color: item })
       .then((res: Result) => {
@@ -83,7 +84,8 @@ const ColorSelector = () => {
         subtitle: "Choose one from below or enter a custom HEX",
         mb: "2"
       }}
-    >
+      >
+      <p>{color}</p>
       <HStack my="4" spacing="4">
         {profiles.map((item) => (
           <IconButton
