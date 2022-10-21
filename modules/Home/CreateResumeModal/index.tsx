@@ -28,6 +28,7 @@ import {
   useColorModeValue
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { getCloneResume, getNewResume } from "../../../apis/resume";
 import { resumeMetaPlaceholder } from "../../../data/placeholderData";
@@ -49,6 +50,8 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
   data,
   options
 }) => {
+  const router = useRouter();
+
   const [method, setMethod] = useState<Method>(null);
   const [status, setStatus] = useState<Status>(Status.idle);
   const { isOpen, onClose } = options;
@@ -72,8 +75,9 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
         createToast(
           "New resume created!",
           "success",
-          "Click on the resume card to start editing"
+          "You can now start editing your resume"
         );
+        router.push(`/create/${res._id}`);
       })
       .catch((err) => {
         setStatus(Status.error);
