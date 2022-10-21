@@ -85,7 +85,6 @@ const ColorSelector = () => {
         mb: "2"
       }}
       >
-      <p>{color}</p>
       <HStack my="4" spacing="4">
         {profiles.map((item) => (
           <IconButton
