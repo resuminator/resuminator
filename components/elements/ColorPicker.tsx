@@ -35,6 +35,7 @@ import { FaCheck } from "react-icons/fa";
 import { MdColorLens } from "react-icons/md";
 import InputWithLabel from "../common/InputWithLabel";
 import TooltipIconButton from "../common/TooltipIconButton";
+import { useColorMode } from "@chakra-ui/react";
 
 interface ColorPickerProps extends Omit<IconButtonProps, "aria-label"> {
   value: string;
@@ -51,11 +52,16 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
 }) => {
   const [hovering, setHovering] = useState(false);
 
+  const { colorMode } = useColorMode()
+
+  const tooltipColor = value == '#ffffff' && colorMode == 'light' ? 'gray' :
+                        value == '#1A202C' && colorMode == 'dark' ? 'gray' : value
+
   const restConditionalProps = () => {
     if (isActive)
       return {
         icon: hovering ? <MdColorLens /> : <FaCheck />,
-        color: !hovering && value,
+        color: !hovering && tooltipColor,
         colorScheme: hovering && "gray"
       };
     return {
@@ -74,7 +80,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
           size="md"
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={() => setHovering(false)}
-          boxShadow={isActive && `0 0 0 4px ${value}`}
+          boxShadow={isActive && `0 0 0 4px ${tooltipColor}`}
           variant={isActive ? "solid" : "outline"}
           onClick={() => {
             !isActive && handler("#");
