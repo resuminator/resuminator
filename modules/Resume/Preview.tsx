@@ -21,6 +21,7 @@
 import { Box } from "@chakra-ui/layout";
 import ColoredDivider from "../../components/common/ColoredDivider";
 import useResumeStore from "../../store/resume.store";
+import { getXspacing, getYspacing } from "../../utils/spacing";
 import { isCustom } from "../Design/Colors/ColorSelector";
 import StylePropsProvider from "../Design/StylePropsProvider";
 import BodyBox from "./components/BodyBox";
@@ -36,31 +37,6 @@ const ResumePreview = () => {
   const spacing = useResumeStore((state) => state.spacing);
   const color = useResumeStore((state) => state.color);
   const primaryColor = isCustom(color) ? color : `${color}.600`;
-
-  const getXspacing = (spacing: number) => {
-    const BASE_SPACING = 1;
-    const SPACE_FACTOR = 4;
-    const SPACE_ADJUSTMENT = 1;
-    const DEFAULT = 3;
-
-    // These adjustments have been made to return spacing as ["0.125rem", chakra-spacing-1, chakra-spacing-2, chakra-spacing-3]
-
-    return spacing >= BASE_SPACING
-      ? spacing * SPACE_FACTOR - SPACE_ADJUSTMENT
-      : DEFAULT;
-  };
-
-  const getYspacing = (spacing: number) => {
-    const BASE_SPACING = "0.125rem";
-    const SPACE_FACTOR = 2;
-    const SPACE_ADJUSTMENT = 1;
-
-    // These adjustments have been made to return spacing as ["0.125rem", chakra-spacing-1, chakra-spacing-2, chakra-spacing-3]
-
-    const spacingInChakraUnits = spacing * SPACE_FACTOR - SPACE_ADJUSTMENT;
-
-    return spacingInChakraUnits === 0 ? BASE_SPACING : spacingInChakraUnits;
-  };
 
   return (
     <StylePropsProvider>
