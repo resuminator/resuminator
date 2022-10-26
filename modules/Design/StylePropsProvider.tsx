@@ -19,6 +19,7 @@
 */
 
 import { BoxProps, TextProps } from "@chakra-ui/layout";
+import { useColorModeValue } from "@chakra-ui/react";
 import { ColorProps } from "@chakra-ui/styled-system";
 import { createContext } from "react";
 import useResumeStore from "../../store/resume.store";
@@ -54,7 +55,7 @@ const StylePropsProvider: React.FC = ({ children }) => {
   const styleProps: IStylePropsContext = {
     font: Fonts[fontProfile],
     headerTitleProps: {
-      color: "gray.600",
+      color: useColorModeValue("gray.600", "gray.200"),
       ...Fonts[fontProfile].headerTitle
     },
     headerSubtitleProps: {
@@ -70,7 +71,7 @@ const StylePropsProvider: React.FC = ({ children }) => {
       ...Fonts[fontProfile].primary
     },
     subtitleRowProps: {
-      color: "gray.500",
+      color: useColorModeValue("gray.500", "gray.300"),
       ...Fonts[fontProfile].secondary
     },
     bodyProps: {
