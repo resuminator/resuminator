@@ -40,3 +40,4 @@ export const BROADMAP_SHARE_TWITTER =
 export const RESUMINATOR_SHARE_TWITTER =
   "https://www.twitter.com/share?url=https%3A%2F%2Fresuminator.in%2F&text=I%20just%20signed%20up%20for%20%40resuminator%20and%20I%27m%20excited%20to%20try%20it%20out%21%20Calling%20out%20all%20job%20seekers%20to%20give%20it%20a%20try%20this%20season.%20%23ResuminatorResume%20";
 export const CONTRIBUTE_HINTS = "https://github.com/resuminator/resuminator/issues/154";
+export const TWITTER_PROFILE = "https://twitter.com/resuminator";
