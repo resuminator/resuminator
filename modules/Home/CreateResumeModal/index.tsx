@@ -77,7 +77,7 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
           "success",
           "You can now start editing your resume"
         );
-        router.push(`/create/${res._id}`);
+        router.push(`/create/${res.active.at(-1)._id}`);
       })
       .catch((err) => {
         setStatus(Status.error);
