@@ -67,6 +67,21 @@ const SectionBox: React.FC<BoxProps & SectionBoxProps> = ({
 
   const hoverProps = useColorModeValue(hoverPropsLight, hoverPropsDark);
 
+  if (!draggableId) {
+    return (
+      <Box
+        {...props}
+        w="inherit"
+        p="1"
+        pb="0"
+        mb={spacing * 1}
+        borderRadius="10px"
+      >
+        {children}
+      </Box>
+    );
+  }
+  
   return (
     <Draggable key={draggableId} draggableId={draggableId} index={index}>
       {(provided, snapshot) => (
