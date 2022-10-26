@@ -18,25 +18,16 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import {
-  Box,
-  Divider,
-  HStack,
-  Icon,
-  Text,
-  useColorModeValue
-} from "@chakra-ui/react";
+import { Box, Divider } from "@chakra-ui/react";
 import { GetServerSidePropsContext, NextPage } from "next";
-import Link from "next/link";
 import nookies from "nookies";
-import { FiArrowRight } from "react-icons/fi";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import { getResumeData } from "../../apis/resume";
-import ColorModeToggle from "../../components/layouts/Header/ColorModeToggle";
-import { LogoWithText } from "../../components/layouts/Logos";
 import placeholderData from "../../data/placeholderData";
-import ResumePreview from "../../modules/Resume/Preview";
+import PreviewContent from "../../modules/Preview/Content";
+import PreviewFooter from "../../modules/Preview/Footer";
+import PreviewHeader from "../../modules/Preview/Header";
 import SEO from "../../modules/SEO";
 import InitStore from "../../store/InitStore";
 
@@ -53,7 +44,6 @@ const Resume: NextPage<ResumeProps> = ({ token, id }) => {
       placeholderData
     }
   );
-  const fontColor = useColorModeValue("gray.600", "gray.400");
 
   return (
     <>
@@ -67,72 +57,10 @@ const Resume: NextPage<ResumeProps> = ({ token, id }) => {
         bg="blackAlpha.50"
         pb="10"
       >
-        <Box
-          py="4"
-          width={"100%"}
-          px={{ md: "4rem", lg: "7rem" }}
-          display={"flex"}
-          justifyContent="space-between"
-          alignItems={"center"}
-        >
-          <LogoWithText
-            width={"120px"}
-            height={"24px"}
-            filter="grayscale(1)"
-            opacity={"0.5"}
-          />
-          <HStack>
-            <Link href="/">
-              <HStack
-                spacing={"1"}
-                cursor={"pointer"}
-                _hover={{ textDecoration: "underline" }}
-              >
-                <Text fontSize={"sm"} color={fontColor}>
-                  Learn More
-                </Text>
-                <Icon fontSize={"sm"} color={fontColor} as={FiArrowRight} />
-              </HStack>
-            </Link>
-            <ColorModeToggle />
-          </HStack>
-        </Box>
-
-        <Box
-          display={"flex"}
-          w="100%"
-          justifyContent={"center"}
-          alignItems="center"
-        >
-          <Box
-            width={"21cm"}
-            boxShadow={useColorModeValue("xl", "2xl")}
-            bg={useColorModeValue("#fffafa", "gray.800")}
-            borderRadius={"md"}
-          >
-            <ResumePreview />
-          </Box>
-        </Box>
+        <PreviewHeader />
+        <PreviewContent />
         <Divider my="8" />
-        <Box
-          display={"flex"}
-          justifyContent="center"
-          alignItems={"center"}
-          w="100%"
-        >
-          <HStack
-            fontSize={"sm"}
-            color={fontColor}
-            justify="center"
-            spacing={"4"}
-          >
-            <Text>Create a resume</Text>
-            <Text>Report</Text>
-            <Text>About</Text>
-            <Text>GitHub</Text>
-            <Text>Twitter</Text>
-          </HStack>
-        </Box>
+        <PreviewFooter />
       </Box>
     </>
   );
