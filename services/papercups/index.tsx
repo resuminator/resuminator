@@ -21,6 +21,7 @@
 import { ChatWidget } from "@papercups-io/chat-widget";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../modules/Auth/AuthContext";
+import withCohortAccess from "../../modules/Cohort/WithCohortAccess";
 
 const Papercups = () => {
   const KEY = process.env.NEXT_PUBLIC_PAPERCUPS;
@@ -68,4 +69,4 @@ const Papercups = () => {
   );
 };
 
-export default Papercups;
+export default withCohortAccess(Papercups, "chat_support");
