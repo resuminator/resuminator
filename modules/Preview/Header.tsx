@@ -18,16 +18,14 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Box, HStack, Icon, Text, useColorModeValue } from "@chakra-ui/react";
-import Link from "next/link";
-import { FiArrowRight } from "react-icons/fi";
+import { Box, HStack, IconButton } from "@chakra-ui/react";
+import { FiDownload } from "react-icons/fi";
 import ColorModeToggle from "../../components/layouts/Header/ColorModeToggle";
 import { LogoWithText } from "../../components/layouts/Logos";
 
 interface Props {}
 
 const PreviewHeader = (props: Props) => {
-  const fontColor = useColorModeValue("gray.600", "gray.400");
   return (
     <Box
       py="4"
@@ -44,18 +42,13 @@ const PreviewHeader = (props: Props) => {
         opacity={"0.5"}
       />
       <HStack>
-        <Link href="/">
-          <HStack
-            spacing={"1"}
-            cursor={"pointer"}
-            _hover={{ textDecoration: "underline" }}
-          >
-            <Text fontSize={"sm"} color={fontColor}>
-              Learn More
-            </Text>
-            <Icon fontSize={"sm"} color={fontColor} as={FiArrowRight} />
-          </HStack>
-        </Link>
+        <IconButton
+          aria-label="Download Resume"
+          icon={<FiDownload />}
+          size="sm"
+          variant={"ghost"}
+          colorScheme="gray"
+        />
         <ColorModeToggle />
       </HStack>
     </Box>
