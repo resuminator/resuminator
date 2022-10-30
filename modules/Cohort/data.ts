@@ -24,11 +24,18 @@ import { AccessLevel } from "./types";
 export const free_access: AccessLevel = {
   id: "free",
   name: "Free",
-  features: []
+  features: [FeatureFlags.WATERMARK]
 };
 
 export const pro_access: AccessLevel = {
   id: "pro",
   name: "Pro",
   features: [FeatureFlags.SHARE_LINKS]
+};
+
+export const featureDetails = {
+  share_links: {
+    valueProp:
+      "Shareable links help Pro users get faster feedback and 4x more views on their resumes."
+  }
 };
