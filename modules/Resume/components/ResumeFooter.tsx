@@ -19,9 +19,11 @@
 */
 
 import { Text } from "@chakra-ui/react";
-import React from "react";
+import React, { Fragment } from "react";
 import TextLink from "../../../components/common/TextLink";
 import { WEBSITE } from "../../../data/RefLinks";
+import { FeatureFlags } from "../../Cohort/FeatureFlags";
+import withCohortAccess from "../../Cohort/WithCohortAccess";
 
 interface ResumeFooterProps {
   color?: string;
@@ -50,4 +52,8 @@ const ResumeFooter: React.FC<ResumeFooterProps> = ({ color }) => {
   );
 };
 
-export default ResumeFooter;
+export default withCohortAccess(
+  ResumeFooter,
+  FeatureFlags.WATERMARK,
+  <Fragment />
+);
