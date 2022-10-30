@@ -30,7 +30,7 @@ export const free_access: AccessLevel = {
 export const pro_access: AccessLevel = {
   id: "pro",
   name: "Pro",
-  features: [FeatureFlags.SHARE_LINKS]
+  features: [FeatureFlags.SHARE_LINKS, FeatureFlags.CHAT_SUPPORT]
 };
 
 export const featureDetails = {

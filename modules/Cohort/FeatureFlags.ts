@@ -21,5 +21,6 @@
 export enum FeatureFlags {
     SHARE_LINKS = "share_links",
     WATERMARK = "watermark",
+    CHAT_SUPPORT = "chat_support",
     // ...
 }
