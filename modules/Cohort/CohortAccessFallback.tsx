@@ -23,13 +23,23 @@ import React from "react";
 import { FaLock } from "react-icons/fa";
 import { CohortProps } from "./types";
 
-interface Props {}
-
-const CohortAccessFallback: React.FC<{
+interface Props {
   cohortData?: CohortProps;
   valueProp: string;
-}> = ({ valueProp, cohortData = { cohort: "pro", color: "purple" } }) => {
+  render?: React.ReactNode;
+}
+
+const CohortAccessFallback: React.FC<Props> = ({
+  valueProp,
+  cohortData = { cohort: "pro", color: "purple" },
+  render
+}) => {
   const subTextColor = useColorModeValue("purple.600", "purple.100");
+  const boxBg = useColorModeValue("purple.50", "purple.900");
+  const iconColor = useColorModeValue("purple.500", "purple.300");
+
+  if (render) return <>{render}</>;
+
   return (
     <Box
       width={"100%"}
@@ -37,7 +47,7 @@ const CohortAccessFallback: React.FC<{
       borderColor={"purple.500"}
       borderRadius="lg"
       p="1rem"
-      bgColor={useColorModeValue("purple.50", "purple.900")}
+      bgColor={boxBg}
     >
       <Box
         display={"flex"}
@@ -45,11 +55,7 @@ const CohortAccessFallback: React.FC<{
         alignItems={"center"}
         flexDir="column"
       >
-        <Icon
-          as={FaLock}
-          color={useColorModeValue("purple.500", "purple.300")}
-          mb="2.5"
-        />
+        <Icon as={FaLock} color={iconColor} mb="2.5" />
         <Text fontWeight={"bold"} mb="1.5">
           This is a {cohortData.cohort} only feature
         </Text>

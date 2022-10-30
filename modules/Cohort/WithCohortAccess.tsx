@@ -21,29 +21,40 @@
 import React, { useContext, useEffect, useState } from "react";
 import CohortAccessFallback from "./CohortAccessFallback";
 import { CohortAccessContext } from "./CohortAccessProvider";
+import { featureDetails } from "./data";
 
-const withCohortAccess = (Component: React.FC, featureFlag: string) => {
+/**
+ * HOC to check if the user has access to a particular feature
+ * @param Component The component to be rendered (if the user has access)
+ * @param featureFlag The feature flag to check for
+ * @param render Fallback component to be rendered (if the user does not have access)
+ * @returns A component that renders the Component if the user has access, else renders the fallback component
+ */
+const withCohortAccess = (
+  Component: React.FC,
+  featureFlag: string,
+  render: React.ReactNode
+) => {
   const CohortAccessHandler = (props: any) => {
     const [valueProp, setValueProp] = useState<string | null>(null);
     const { userAccessLevel } = useContext(CohortAccessContext);
 
     useEffect(() => {
       // fetch feature details from api based on feature flag
-      const featureDetails = {
-        share_links: {
-          valueProp:
-            "Shareable links help Pro users get faster feedback and 4x more views on their resumes."
-        }
-      };
+      // TODO: Fetch Logic
 
-      setValueProp(featureDetails[featureFlag].valueProp);
+      if (featureDetails[featureFlag]) {
+        setValueProp(featureDetails[featureFlag].valueProp);
+      }
     }, []);
 
-    return userAccessLevel.features.includes(featureFlag) ? (
-      <Component {...props} />
-    ) : (
-      <CohortAccessFallback valueProp={valueProp} />
-    );
+    const hasAccess = userAccessLevel.features.includes(featureFlag);
+
+    if (hasAccess) {
+      return <Component {...props} />;
+    }
+
+    return <CohortAccessFallback valueProp={valueProp} render={render} />;
   };
 
   return CohortAccessHandler;
