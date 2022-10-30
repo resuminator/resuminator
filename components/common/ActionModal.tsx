@@ -53,7 +53,7 @@ const ActionModal: React.FC<Props> = ({
   children
 }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size='xl'>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{title}</ModalHeader>
