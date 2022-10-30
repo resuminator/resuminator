@@ -33,7 +33,7 @@ import { featureDetails } from "./data";
 const withCohortAccess = (
   Component: React.FC,
   featureFlag: string,
-  render: React.ReactNode
+  render?: React.ReactNode
 ) => {
   const CohortAccessHandler = (props: any) => {
     const [valueProp, setValueProp] = useState<string | null>(null);
