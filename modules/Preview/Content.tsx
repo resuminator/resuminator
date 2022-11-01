@@ -33,8 +33,10 @@ const PreviewContent = (props: Props) => {
     >
       <Box
         width={"21cm"}
+        height={'29.7cm'}
+        overflow={'hidden'}
         boxShadow={useColorModeValue("xl", "2xl")}
-        bg={useColorModeValue("#fffafa", "gray.800")}
+        bg={useColorModeValue("#fff", "gray.800")}
         borderRadius={"md"}
       >
         <ResumePreview />
