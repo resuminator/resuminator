@@ -19,7 +19,7 @@
 */
 
 import { ChatWidget } from "@papercups-io/chat-widget";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useAuth } from "../../modules/Auth/AuthContext";
 import { FeatureFlags } from "../../modules/Cohort/FeatureFlags";
 import withCohortAccess from "../../modules/Cohort/WithCohortAccess";
@@ -70,4 +70,8 @@ const Papercups = () => {
   );
 };
 
-export default withCohortAccess(Papercups, FeatureFlags.CHAT_SUPPORT);
+export default withCohortAccess(
+  Papercups,
+  FeatureFlags.CHAT_SUPPORT,
+  <Fragment />
+);
