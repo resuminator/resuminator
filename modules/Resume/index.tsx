@@ -39,7 +39,7 @@ import Paper from "./components/Paper";
 import ResumeFooter from "./components/ResumeFooter";
 import { getHeaderLayout, getLayout } from "./legend";
 
-const ResumePaper = () => {
+const ResumePaper: React.FC<{forceFooter?: boolean}> = ({forceFooter}) => {
   const layout = useResumeStore((state) => state.properties.layout);
   const { header, body } = layout;
   const updateLayout = useResumeStore((state) => state.updateLayout);
@@ -162,7 +162,7 @@ const ResumePaper = () => {
             </BodyBox>
           </DragDropContext>
         </Box>
-        <ResumeFooter color={primaryColor} />
+        <ResumeFooter color={primaryColor} forceFooter={forceFooter} />
       </Paper>
     </StylePropsProvider>
   );

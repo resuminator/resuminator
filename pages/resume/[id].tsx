@@ -44,7 +44,7 @@ const Resume: NextPage<ResumeProps> = ({ token, id }) => {
   return (
     <>
       <InitStore data={data} status={status} />
-      <ResumePaper />
+      <ResumePaper forceFooter />
     </>
   );
 };

@@ -18,7 +18,7 @@
     along with Resuminator.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Text } from "@chakra-ui/react";
+import { Text, TextProps } from "@chakra-ui/react";
 import React, { Fragment } from "react";
 import TextLink from "../../../components/common/TextLink";
 import { WEBSITE } from "../../../data/RefLinks";
@@ -27,9 +27,17 @@ import withCohortAccess from "../../Cohort/WithCohortAccess";
 
 interface ResumeFooterProps {
   color?: string;
+  forceFooter?: boolean;
 }
 
-const ResumeFooter: React.FC<ResumeFooterProps> = ({ color }) => {
+const ResumeFooter: React.FC<ResumeFooterProps> = ({ color, forceFooter }) => {
+  const footerProps: TextProps = forceFooter
+    ? {
+        position: "absolute",
+        top: "29cm"
+      }
+    : {};
+
   return (
     <Text
       as="footer"
@@ -39,6 +47,9 @@ const ResumeFooter: React.FC<ResumeFooterProps> = ({ color }) => {
       textAlign="center"
       p="1"
       flexShrink={0}
+      backgroundColor="#fff"
+      zIndex={1}
+      {...footerProps}
     >
       Built with{" "}
       <TextLink

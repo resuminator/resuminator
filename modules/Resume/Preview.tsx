@@ -85,7 +85,7 @@ const ResumePreview = () => {
             ))}
           </BodyBox>
         </Box>
-        <ResumeFooter color={primaryColor} />
+        <ResumeFooter color={primaryColor} forceFooter/>
       </Paper>
     </StylePropsProvider>
   );

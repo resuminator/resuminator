@@ -47,6 +47,7 @@ const Paper: React.FC<BoxProps> = ({ children, ...props }) => {
       minHeight="29.7cm"
       id="resumePaperContent"
       ref={ref}
+      position='relative'
       // overflowY="clip"
       {...applyFilters}
       {...props}
