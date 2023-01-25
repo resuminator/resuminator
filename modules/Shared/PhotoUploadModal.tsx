@@ -35,7 +35,9 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FiUpload } from "react-icons/fi";
+import { getCompressedFile } from "../../apis/compressor";
 import { useCustomToast } from "../../hooks/useCustomToast";
+import { usePatchParams } from "../../hooks/usePatchParams";
 import firebaseSDK from "../../services/firebase";
 import { Status } from "../../utils/constants";
 
@@ -59,6 +61,7 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
   fileName
 }) => {
   const { createToast } = useCustomToast();
+  const { token } = usePatchParams();
   const [status, setStatus] = useState<Status>(Status.idle);
   const [progress, setProgress] = useState<number>(0);
   const [image, setImage] = useState<{ file: File; url: string }>({
@@ -77,25 +80,11 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     //File is selected from the system.
     const file = e.target.files[0];
-
     if (file) {
-      //If file is successfully loaded but exceeds limit.
-      if (file.size > MAX_FILE_SIZE) {
-        //First set image as null, to prevent uploading the previous image (if any)
-        setImage({ ...image, file: null });
-
-        //Return a warning with message
-        return createToast(
-          "File too large",
-          "warning",
-          "Maximum file size allowed is 512KB"
-        );
-      }
-
-      //If everything is file then set the image as file selected
+      // Setting the image file to state.
       setImage({ ...image, file });
     } else {
-      //Else if anything fails, reset the image file to null
+      // Else if anything fails, reset the image file to null
       setImage({ ...image, file: null });
     }
   };
@@ -110,21 +99,43 @@ const PhotoUploadModal: React.FC<PhotoUploadModalProps> = ({
 
     //If file is present and also the user is authenticated
     if (file && auth) {
+
+      const contentType = file.type;
+      const format = contentType.split("/")[1];
+
+      let finalImageBuffer = await file.arrayBuffer();
+      if (file.size > MAX_FILE_SIZE) {
+        // Compress the image if it exceeds the max file size.
+        const options = {
+          inputFile: file,
+          requiredOutputFormat: format,
+          maxFileSize: MAX_FILE_SIZE,
+        };
+        const { message, buffer: compressedBuffer } = await getCompressedFile(token, options);
+        if (message !== 'success') {
+          createToast("Error while uploading image. Please try again", "error");
+          console.error(message);
+          return;
+        } else {
+          finalImageBuffer = compressedBuffer;
+        }
+      }
+
       //Create a reference to root of the storage bucket.
       const storageRef = firebaseSDK.storage().ref();
       const uid = auth.user.uid || "";
 
-      //Create an upload task and save the image to {uid}/{filename}
-      //Only Auth user can write, any user can read.
+      // Create an upload task and save the image to {uid}/{filename}
+      // Only Auth user can write, any user can read.
       const uploadTask = storageRef
         .child(uid + "/" + fileName)
-        .put(image.file, { contentType: file.type });
+        .put(finalImageBuffer, { contentType });
 
-      //Handle the upload task.
+      // Handle the upload task.
       uploadTask.on(
         "state_change",
         (snapshot) => {
-          //The snapshot here would upadte automatically on "state_change" of upload task.
+          //The snapshot here would update automatically on "state_change" of upload task.
           setStatus(Status.loading);
           setProgress(
             Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
