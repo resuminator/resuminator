@@ -14,6 +14,25 @@ Resuminator allows you to build beautiful single-page resumes; without the hassl
 
 </div>
 
+---
+## ⚠️ Important Update: Resuminator Entering Maintenance-only Phase
+
+**04 June, 2023**
+
+We wish to inform our valued contributors and users that Resuminator will be transitioning into a maintenance-only phase, after running it actively for 2 years now. During this phase, we will continue to provide existing services and address any critical issues, but no new features or updates will be added.
+
+**We're also announcing the closure of our Discord server.** We will only be attending to critical issues reported over email.
+
+We want to take this moment to express our deep gratitude to all who have been part of our journey. Your support has been invaluable and deeply appreciated.
+
+Thank you for your understanding and cooperation.
+
+Best regards,
+
+Vivek & Himanshu
+
+---
+
 ## Reasons why you should try it out
 
 ⭐ Create multiple resumes on a single account!
@@ -35,29 +54,16 @@ Resuminator is a completely free and open source project built and maintained by
 
 You can support the development of this project if you believe this project added value to your life or could potentially add value to the lives of others. Your support helps us keep the servers and domain running and covers the maintenance budget for the project.
 
-### [🍕 Buy us a pizza](https://www.buymeacoffee.com/resuminator)
-
 ## 🙋🏻‍♂️ Contributing to Resuminator
 
 It's so exciting to see developers, designers, and product enthusiasts willing to contribute to Resuminator! We will soon be open for accepting code contributions to the repository, but this doesn't mean you cannot help us in developing the most efficient and elegant resume builder out there.
 
 There are a few ways you can contribute to Resuminator and its community which you can find in our [Contribution Guide](https://docs.resuminator.in/docs/developer-guide/contributing).
 
-You can also join our [Discord Server](https://discord.resuminator.in) and participate in [GitHub Discussions](https://github.com/resuminator/resuminator/discussions).
-
 ## 📔 Documentation
 You can find the documentation, wiki, and guides at [docs.resuminator.in](https://docs.resuminator.in)
 
-To contribute to the documentation see [resuminator/docs](https://github.com/resuminator/docs) repo
-
-
-## 🤗 Community and Support
-We're a budding community of developers and designers. 
-Resuminator believes in building in public and thrives through a community who are willing to support and contribute to Resuminator and its products. 
-
-* Join the [Resuminator Discord Server](https://discord.resuminator.in) where we discuss design, development, product roadmaps, provide one-on-one support, and help each other out.
-
-* Join our [GitHub Discussions](https://github.com/resuminator/resuminator/discussions) Community for feedback and support on Resuminator or its products.
+To contribute to the documentation see [resuminator/docs](https://github.com/resuminator/docs) repository.
 
 ## 💬 Contact Us
 
