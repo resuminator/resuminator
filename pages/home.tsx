@@ -35,7 +35,6 @@ import SEO from "../modules/SEO";
 import useUserStore from "../modules/User/store";
 import { UserObject } from "../modules/User/types";
 import mp from "../services/mixpanel";
-import Papercups from "../services/papercups";
 import InitUserStore from "../store/InitUserStore";
 
 const CreateResumeModal = dynamic(
@@ -83,7 +82,6 @@ const Home: NextPage<HomePageProps> = ({ token }) => {
         data={{ _id, isBanned, active }}
         options={{ isOpen, onClose }}
       />
-      <Papercups />
     </>
   );
 };

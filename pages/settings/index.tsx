@@ -30,7 +30,6 @@ import ProfilePhoto from "../../modules/Settings/General/ProfilePhoto";
 import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import mp from "../../services/mixpanel";
-import Papercups from "../../services/papercups";
 
 const Settings: NextPage = () => {
   useEffect(() => {
@@ -57,7 +56,6 @@ const Settings: NextPage = () => {
         </GridItem>
       </SettingsLayoutGrid>
       <Footer />
-      <Papercups />
     </>
   );
 };

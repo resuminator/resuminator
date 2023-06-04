@@ -35,7 +35,6 @@ import SettingsLayoutGrid from "../../modules/Settings/LayoutGrid";
 import SettingsSidebar from "../../modules/Settings/SettingsSidebar";
 import { AccountSettings } from "../../modules/Settings/types";
 import mp from "../../services/mixpanel";
-import Papercups from "../../services/papercups";
 
 interface SettingsPageProps {
   token: string;
@@ -68,7 +67,6 @@ const AdvancedSettings: NextPage<SettingsPageProps> = ({ token }) => {
         </GridItem>
       </SettingsLayoutGrid>
       <Footer />
-      <Papercups />
     </>
   );
 };
