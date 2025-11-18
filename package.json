@@ -3,8 +3,8 @@
   "version": "2.1.7",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider next dev",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
     "start": "next start",
     "lint": "eslint . --ext .ts"
   },
